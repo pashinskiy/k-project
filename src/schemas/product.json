@@ -1,0 +1,187 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "Уникальный ID",
+        "placeholder": "Уникальный ID"
+      }
+    },
+    "name": {
+      "type": "Text",
+      "config": {
+        "label": "Название товара",
+        "placeholder": "Название товара"
+      }
+    },
+    "brand": {
+      "type": "Text",
+      "config": {
+        "label": "Бренд",
+        "placeholder": "Бренд"
+      }
+    },
+    "color_name": {
+      "type": "Text",
+      "config": {
+        "label": "Название цвета",
+        "placeholder": "Название цвета"
+      }
+    },
+    "color": {
+      "type": "Color",
+      "config": {
+        "label": "Цвет товара"
+      }
+    },
+    "price": {
+      "type": "Number",
+      "config": {
+        "label": "Цена",
+        "placeholder": "Цена"
+      }
+    },
+    "old_price": {
+      "type": "Number",
+      "config": {
+        "label": "Старая цена",
+        "placeholder": "Старая цена"
+      }
+    },
+    "images": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "image": {
+            "type": "Image",
+            "config": {
+              "constraint": {},
+              "thumbnails": [],
+              "label": "фото товара"
+            }
+          }
+        },
+        "label": "Изображения товара"
+      }
+    },
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": {},
+        "choices": {
+          "brand": {
+            "type": "Slice",
+            "fieldset": "brand",
+            "description": "логотип бренда",
+            "icon": "crop_original",
+            "non-repeat": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Изображение"
+                }
+              }
+            },
+            "repeat": {},
+            "display": "list"
+          },
+          "stickers": {
+            "type": "Slice",
+            "fieldset": "stickers",
+            "description": "стикеры к заголовку",
+            "icon": "local_offer",
+            "non-repeat": {},
+            "repeat": {
+              "sticker": {
+                "type": "Link",
+                "config": {
+                  "select": "document",
+                  "customtypes": [
+                    "sticker"
+                  ],
+                  "label": "Стикер",
+                  "placeholder": "Стикер"
+                }
+              }
+            },
+            "display": "list"
+          },
+          "features": {
+            "type": "Slice",
+            "fieldset": "features",
+            "description": "отличительные черты",
+            "icon": "stars",
+            "display": "list",
+            "non-repeat": {},
+            "repeat": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Фото"
+                }
+              },
+              "feature": {
+                "type": "Text",
+                "config": {
+                  "label": "Особенность",
+                  "placeholder": "Особенность"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "Характеристики": {},
+  "Фотогалерея": {
+    "photos": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "image": {
+            "type": "Image",
+            "config": {
+              "constraint": {},
+              "thumbnails": [],
+              "label": "Фото"
+            }
+          }
+        },
+        "label": "Фотографии"
+      }
+    }
+  },
+  "Лэндинг": {},
+  "Доставка": {
+    "delivery": {
+      "type": "Link",
+      "config": {
+        "select": "document",
+        "customtypes": [
+          "delivery"
+        ],
+        "label": "Доставка",
+        "placeholder": "документ"
+      }
+    }
+  },
+  "Кредит и Рассрочка": {
+    "credit": {
+      "type": "Link",
+      "config": {
+        "select": "document",
+        "customtypes": [
+          "credit"
+        ],
+        "label": "Кредит и Рассрочка",
+        "placeholder": "документ"
+      }
+    }
+  }
+}

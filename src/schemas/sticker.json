@@ -1,0 +1,12 @@
+{
+  "Main": {
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Изображение"
+      }
+    }
+  }
+}

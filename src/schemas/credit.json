@@ -1,0 +1,25 @@
+{
+    "Main": {
+      "percent": {
+        "type": "Text",
+        "config": {
+          "label": "Годовая ставка на максимальный срок выплаты",
+          "placeholder": "в процентах"
+        }
+      },
+      "months_1": {
+        "type": "Number",
+        "config": {
+          "label": "Максимальный срок выплаты кредита",
+          "placeholder": "месяцев"
+        }
+      },
+      "months_2": {
+        "type": "Number",
+        "config": {
+          "label": "Максимальный срок выплаты рассрочки",
+          "placeholder": "месяцев"
+        }
+      }
+    }
+  }
