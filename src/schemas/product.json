@@ -262,6 +262,139 @@
               }
             },
             "repeat": {}
+          },
+          "one_image": {
+            "type": "Slice",
+            "fieldset": "one_image",
+            "description": "одно изображение",
+            "icon": "image",
+            "non-repeat": {
+              "order": {
+                "type": "Number",
+                "config": {
+                  "label": "Позиция в документе",
+                  "placeholder": "порядковый номер"
+                }
+              },
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Изображение"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "two_images": {
+            "type": "Slice",
+            "fieldset": "two_images",
+            "description": "два изображения",
+            "icon": "photo_library",
+            "display": "list",
+            "non-repeat": {
+              "order": {
+                "type": "Number",
+                "config": {
+                  "label": "Позиция в документе",
+                  "placeholder": "порядковый номер"
+                }
+              },
+              "big_text_1": {
+                "type": "Text",
+                "config": {
+                  "label": "Большой текст первое изображение",
+                  "placeholder": "Большой текст первое изображение"
+                }
+              },
+              "normal_text_1": {
+                "type": "Text",
+                "config": {
+                  "label": "Обычный текст первое изображение",
+                  "placeholder": "Обычный текст первое изображение"
+                }
+              },
+              "color_text_1": {
+                "type": "Color",
+                "config": {
+                  "label": "Цвет текста первое изображение"
+                }
+              },
+              "vertical_align_1": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "снизу",
+                  "placeholder_true": "сверху",
+                  "default_value": true,
+                  "label": "Положение текстов"
+                }
+              },
+              "priority_1": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "сначала обычный",
+                  "placeholder_true": "сначала большой",
+                  "default_value": true,
+                  "label": "Очередность текстов"
+                }
+              },
+              "image_1": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Левое изображение"
+                }
+              },
+              "big_text_2": {
+                "type": "Text",
+                "config": {
+                  "label": "Большой текст второе изображение",
+                  "placeholder": "Большой текст второе изображение"
+                }
+              },
+              "normal_text_2": {
+                "type": "Text",
+                "config": {
+                  "label": "Обычный текст второе изображение",
+                  "placeholder": "Обычный текст второе изображение"
+                }
+              },
+              "color_text_2": {
+                "type": "Color",
+                "config": {
+                  "label": "Цвет текста второе изображение"
+                }
+              },
+              "vertical_align_2": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "снизу",
+                  "placeholder_true": "сверху",
+                  "default_value": true,
+                  "label": "Положение текстов"
+                }
+              },
+              "priority_2": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "сначала обычный",
+                  "placeholder_true": "сначала большой",
+                  "default_value": true,
+                  "label": "Очередность текстов"
+                }
+              },
+              "image_2": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Правое изображение"
+                }
+              }
+            },
+            "repeat": {}
           }
         }
       }

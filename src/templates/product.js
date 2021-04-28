@@ -141,6 +141,97 @@ export const pageQuery = graphql`
               order
             }
           }
+          ... on PrismicProductBody2OneImage {
+            slice_type
+            primary {
+              order
+              image {
+                alt
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData(
+                      height: 400
+                      width: 1224
+                      transformOptions: { cropFocus: CENTER, fit: COVER }
+                      outputPixelDensities: [
+                        0.25
+                        0.5
+                        0.75
+                        1
+                        1.25
+                        1.5
+                        1.75
+                        2
+                      ]
+                      sizes: "(min-width: 1280px) 1224px, 100vw"
+                    )
+                  }
+                }
+              }
+            }
+          }
+          ... on PrismicProductBody2TwoImages {
+            slice_type
+            primary {
+              order
+              big_text_1
+              big_text_2
+              color_text_1
+              color_text_2
+              normal_text_1
+              normal_text_2
+              priority_1
+              priority_2
+              vertical_align_1
+              vertical_align_2
+              image_1 {
+                alt
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData(
+                      height: 400
+                      width: 598
+                      transformOptions: { cropFocus: CENTER, fit: COVER }
+                      outputPixelDensities: [
+                        0.35
+                        0.5
+                        0.75
+                        1
+                        1.25
+                        1.5
+                        1.75
+                        2
+                      ]
+                      sizes: "(min-width: 1280px) 598px, (max-width: 414px) 100vw, 50vw"
+                    )
+                  }
+                }
+              }
+              image_2 {
+                alt
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData(
+                      height: 400
+                      width: 598
+                      transformOptions: { cropFocus: CENTER, fit: COVER }
+                      outputPixelDensities: [
+                        0.35
+                        0.5
+                        0.75
+                        1
+                        1.25
+                        1.5
+                        1.75
+                        2
+                      ]
+                      sizes: "(min-width: 1280px) 598px, (max-width: 414px) 100vw, 50vw"
+                    )
+                  }
+                }
+              }
+            }
+          }
         }
         delivery {
           document {

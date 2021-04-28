@@ -1,5 +1,4 @@
 import { createMuiTheme } from "@material-ui/core/styles"
-import "./font.css"
 
 const theme = createMuiTheme({
   palette: {
