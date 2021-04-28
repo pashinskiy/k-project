@@ -219,6 +219,13 @@
             "icon": "text_fields",
             "display": "list",
             "non-repeat": {
+              "order": {
+                "type": "Number",
+                "config": {
+                  "label": "Позиция в документе",
+                  "placeholder": "Порядковый номер"
+                }
+              },
               "accent_text": {
                 "type": "Text",
                 "config": {

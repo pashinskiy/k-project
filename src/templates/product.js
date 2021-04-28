@@ -7,7 +7,6 @@ import CardProduct from "../components/productPage/cardProduct"
 import Landing from "../components/productPage/landing"
 
 const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
-
   return (
     <Layout>
       <Seo title="Home" />
@@ -15,7 +14,7 @@ const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
         prismicProduct={prismicProduct}
         allPrismicProduct={allPrismicProduct}
       />
-      <Landing slices={prismicProduct.data.body2}/>
+      <Landing slices={prismicProduct.data.body2} />
     </Layout>
   )
 }
@@ -137,6 +136,7 @@ export const pageQuery = graphql`
               bold_text
               normal_text
               small_text
+              order
             }
           }
         }

@@ -14,7 +14,7 @@ export default function Landing({ slices }) {
   )
 
   return (
-    <Grid container direction="column">
+    <Grid container alignItems="center" direction="column">
       {onlyTextSlices.map(slice => (
         <OnlyText slice={slice} />
       ))}
