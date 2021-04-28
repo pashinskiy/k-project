@@ -22,9 +22,7 @@ const useStyles = makeStyles(theme => ({
   accentText: {
     color: props => (props.color ? props.color : "#681DE1"),
     background: props =>
-      props.color
-        ? props.color
-        : "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",
+      props.color ? props.color : theme.palette.color.accent,
     "-webkit-background-clip": () => "text",
     "-webkit-text-fill-color": "transparent",
 
