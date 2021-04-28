@@ -10,6 +10,8 @@ import Title from "../components/productPage/title"
 import BlockPrice from "../components/productPage/blockPrice"
 import AddInCartAndFav from "../components/button/addInCartAndFav"
 import Features from "../components/productPage/features"
+import DescriptionBlock from "../components/productPage/desciptionBlock"
+import DeliveryCards from "../components/productPage/delivery"
 
 const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
   const mobile = useMediaQuery("(max-width: 834px)")
@@ -49,9 +51,12 @@ const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
           slice => slice.slice_type === "features"
         )}
       />
-      {mobile ? (
+      <DescriptionBlock title="Характеристики и описание" />
+      {/* {mobile ? (
         <AddInCartAndFav text="В корзину" variant="page" fixed={true} />
-      ) : null}
+      ) : null} */}
+      <DescriptionBlock title="Информация о доставке" />
+      <DeliveryCards />
     </Layout>
   )
 }
