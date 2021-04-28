@@ -17,13 +17,14 @@ const useStyles = makeStyles(theme => ({
       padding: "40px 26px",
     },
     "@media(max-width: 834px)": {
-      width: "100%",
+      width: "70%",
       borderRadius: 0,
       background: "transparent",
       padding: 0,
       marginTop: "1.19vw",
     },
     "@media(max-width: 414px)": {
+      width: "100%",
       marginTop: "2.41vw",
     },
   },

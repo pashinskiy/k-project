@@ -43,11 +43,20 @@ const useStyles = makeStyles(theme => ({
     },
     "@media(max-width: 834px)": {
       height: "3.95vw",
-      marginLeft: "1.19vw",
+      marginLeft: 0,
+      marginRight: "1.19vw",
     },
     "@media(max-width: 414px)": {
       height: "7.97vw",
-      marginLeft: "2.41vw",
+      marginLeft: 0,
+      marginRight: "2.41vw",
+    },
+  },
+  stickerWrapperMobile: {
+    width: "auto",
+    marginTop: "1.91vw",
+    "@media(max-width: 414px)": {
+      marginTop: "3.68vw",
     },
   },
 }))
@@ -141,7 +150,7 @@ export default function Title({ logo, text, stickersSlices }) {
       </Grid>
       <Typography className={classes.text}>{text}</Typography>
       {stickersImgArr.length && mobile ? (
-        <Grid container style={{ width: "auto" }}>
+        <Grid container className={classes.stickerWrapperMobile}>
           {stickersImgArr}
         </Grid>
       ) : null}
