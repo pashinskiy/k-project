@@ -120,7 +120,6 @@ export default function Title({ logo, text, stickersSlices }) {
     logoImg !== null && stickersImgArr.length && !mobile
       ? "space-between"
       : "flex-start"
-  console.log(justify)
 
   return (
     <Grid container direction="column">

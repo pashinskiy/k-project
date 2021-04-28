@@ -1,7 +1,7 @@
 import React from "react"
 import { Grid, makeStyles, Typography, useMediaQuery } from "@material-ui/core"
 import { Link } from "gatsby"
-import AddInCartAndFav from "../button/addInCartAndFav"
+import AddInCartAndFav from "../../button/addInCartAndFav"
 import Title from "./title"
 
 const useStyles = makeStyles(theme => ({

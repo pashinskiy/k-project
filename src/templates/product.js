@@ -1,57 +1,21 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { Grid, useMediaQuery } from "@material-ui/core"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import ProductSlider from "../components/productPage/productSlider"
-import BreadCrumbs from "../components/breadCrumbs/breadCrumbs"
-import Title from "../components/productPage/title"
-import BlockPrice from "../components/productPage/blockPrice"
-import AddInCartAndFav from "../components/button/addInCartAndFav"
-import Features from "../components/productPage/features"
+import CardProduct from "../components/productPage/cardProduct"
+import Landing from "../components/productPage/landing"
 
 const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
-  const mobile = useMediaQuery("(max-width: 834px)")
-
-  // массив фото
-  const photos = prismicProduct.data.images.map(
-    photo => photo.image.localFile.childImageSharp.fluid
-  )
-
-  // все продукты данной модели
-  const allColors = allPrismicProduct.edges
-    .filter(node => node.node.data.name === prismicProduct.data.name)
-    .map(node => node.node)
 
   return (
     <Layout>
       <Seo title="Home" />
-      {mobile ? null : (
-        <Title
-          text={prismicProduct.data.name}
-          stickersSlices={prismicProduct.data.body.filter(
-            slice => slice.slice_type === "stickers"
-          )}
-          logo={
-            prismicProduct.data.body.find(slice => slice.slice_type === "brand")
-              ?.primary.image
-          }
-        />
-      )}
-      <BreadCrumbs />
-      <Grid container justify="space-between">
-        <ProductSlider photos={photos} />
-        <BlockPrice product={prismicProduct} allColors={allColors} />
-      </Grid>
-      <Features
-        featuresSlices={prismicProduct.data.body.filter(
-          slice => slice.slice_type === "features"
-        )}
+      <CardProduct
+        prismicProduct={prismicProduct}
+        allPrismicProduct={allPrismicProduct}
       />
-      {mobile ? (
-        <AddInCartAndFav text="В корзину" variant="page" fixed={true} />
-      ) : null}
+      <Landing slices={prismicProduct.data.body2}/>
     </Layout>
   )
 }
@@ -161,6 +125,18 @@ export const pageQuery = graphql`
                 }
                 alt
               }
+            }
+          }
+        }
+        body2 {
+          ... on PrismicProductBody2OnlyText {
+            slice_type
+            primary {
+              accent_color
+              accent_text
+              bold_text
+              normal_text
+              small_text
             }
           }
         }

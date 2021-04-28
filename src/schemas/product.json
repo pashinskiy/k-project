@@ -138,7 +138,55 @@
       }
     }
   },
-  "Характеристики": {},
+  "Характеристики и Описание": {
+    "description": {
+      "type": "Text",
+      "config": {
+        "label": "Описание товара",
+        "placeholder": "Описание товара"
+      }
+    },
+    "body1": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": {},
+        "choices": {
+          "characteristics": {
+            "type": "Slice",
+            "fieldset": "characteristics",
+            "description": "группа характеристик",
+            "icon": "short_text",
+            "non-repeat": {
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "Название группы",
+                  "placeholder": "Название группы"
+                }
+              }
+            },
+            "repeat": {
+              "characteristic": {
+                "type": "Text",
+                "config": {
+                  "label": "Характеристика",
+                  "placeholder": "Характеристика"
+                }
+              },
+              "value": {
+                "type": "Text",
+                "config": {
+                  "label": "Значение",
+                  "placeholder": "Значение"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "Фотогалерея": {
     "photos": {
       "type": "Group",
@@ -157,7 +205,61 @@
       }
     }
   },
-  "Лэндинг": {},
+  "Лэндинг": {
+    "body2": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": {},
+        "choices": {
+          "only_text": {
+            "type": "Slice",
+            "fieldset": "only_text",
+            "description": "текстовый блок",
+            "icon": "text_fields",
+            "display": "list",
+            "non-repeat": {
+              "accent_text": {
+                "type": "Text",
+                "config": {
+                  "label": "Акцентный текст",
+                  "placeholder": "Акцентный текст"
+                }
+              },
+              "accent_color": {
+                "type": "Color",
+                "config": {
+                  "label": "Акцентный цвет"
+                }
+              },
+              "bold_text": {
+                "type": "Text",
+                "config": {
+                  "label": "Жирный текст",
+                  "placeholder": "Жирный текст"
+                }
+              },
+              "normal_text": {
+                "type": "Text",
+                "config": {
+                  "label": "Обычный текст",
+                  "placeholder": "Обычный текст"
+                }
+              },
+              "small_text": {
+                "type": "Text",
+                "config": {
+                  "label": "Маленький текст",
+                  "placeholder": "Маленький текст"
+                }
+              }
+            },
+            "repeat": {}
+          }
+        }
+      }
+    }
+  },
   "Доставка": {
     "delivery": {
       "type": "Link",

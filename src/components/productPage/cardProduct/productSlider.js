@@ -1,6 +1,6 @@
 import React from "react"
 import { Grid, makeStyles, Typography } from "@material-ui/core"
-import Arrow from "../../../static/svg/arrow.svg"
+import Arrow from "../../../../static/svg/arrow.svg"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
