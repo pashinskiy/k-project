@@ -51,12 +51,9 @@ const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
           slice => slice.slice_type === "features"
         )}
       />
-      <DescriptionBlock title="Характеристики и описание" />
-      {/* {mobile ? (
+      {mobile ? (
         <AddInCartAndFav text="В корзину" variant="page" fixed={true} />
-      ) : null} */}
-      <DescriptionBlock title="Информация о доставке" />
-      <DeliveryCards />
+      ) : null}
     </Layout>
   )
 }
