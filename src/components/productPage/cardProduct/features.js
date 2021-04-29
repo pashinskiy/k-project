@@ -49,18 +49,12 @@ const useStyles = makeStyles(theme => ({
     border: "0.15vw solid transparent",
     position: "relative",
 
-    fontWeight: 300,
-    lineHeight: "2.34vw",
-    fontSize: "1.32vw",
-
     "@media(min-width: 1280px)": {
       minWidth: "116px",
       padding: "10px 30px",
       borderRadius: "20px",
       marginRight: "10px",
       border: "2px solid transparent",
-      fontSize: "17px",
-      lineHeight: "30px",
     },
     "@media(max-width: 834px)": {
       minWidth: "13.9vw",
@@ -68,8 +62,6 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "2.39vw",
       marginRight: "0.95vw",
       border: "0.23vw solid transparent",
-      fontSize: "1.43vw",
-      lineHeight: "3.61vw",
     },
     "@media(max-width: 414px)": {
       minWidth: "28.01vw",
@@ -77,8 +69,6 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "4.83vw",
       marginRight: "1.93vw",
       border: "0.48vw solid transparent",
-      fontSize: "2.89vw",
-      lineHeight: "7.25vw",
     },
 
     "&::before": {
@@ -118,20 +108,19 @@ const useStyles = makeStyles(theme => ({
   },
   text: {
     fontWeight: 300,
-    lineHeight: "2.34vw",
+    lineHeight: "2.04vw",
     fontSize: "1.32vw",
-
     "@media(min-width: 1280px)": {
       fontSize: "17px",
-      lineHeight: "30px",
+      lineHeight: "26px",
     },
     "@media(max-width: 834px)": {
       fontSize: "1.43vw",
-      lineHeight: "3.61vw",
+      lineHeight: "3.15vw",
     },
     "@media(max-width: 414px)": {
       fontSize: "2.89vw",
-      lineHeight: "7.25vw",
+      lineHeight: "6.29vw",
     },
   },
 }))
@@ -145,11 +134,11 @@ export default function Features({ featuresSlices }) {
     arr.push(
       ...featuresSlice.items.map((feature, i) => {
         return (
-          <Grid container key={i} className={classes.item}>
+          <Grid container wrap="nowrap" key={i} className={classes.item}>
             {feature.image.localFile ? (
               <GatsbyImage
                 image={feature.image.localFile.childImageSharp.gatsbyImageData}
-                alt={feature.image.alt}
+                alt={feature.image.alt ?? "icon"}
                 className={classes.itemImg}
                 imgStyle={{ objectFit: "contain" }}
               />
@@ -185,12 +174,10 @@ export default function Features({ featuresSlices }) {
     }
 
     function scrollBar(e) {
-      console.log("move")
       let newLeft = left + e.clientX - clientX
       newLeft = newLeft > 0 ? 0 : newLeft
       newLeft = newLeft < minLeft ? minLeft : newLeft
       bar.style.left = newLeft + "px"
-      console.log(newLeft)
     }
   }
 
