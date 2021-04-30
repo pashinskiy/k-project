@@ -7,6 +7,7 @@ import CardProduct from "../components/productPage/cardProduct"
 import Landing from "../components/productPage/landing"
 import DescriptionBlock from "../components/productPage/desciptionBlock"
 import DeliveryCards from "../components/productPage/delivery"
+import Gallery from "../components/productPage/gallery"
 
 const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
   return (
@@ -17,6 +18,9 @@ const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
         allPrismicProduct={allPrismicProduct}
       />
       <Landing slices={prismicProduct.data.body2} />
+      <Gallery
+        imagesArr={prismicProduct.data.photos.map(photo => photo.image)}
+      />
     </Layout>
   )
 }
@@ -64,6 +68,45 @@ export const pageQuery = graphql`
                   src
                   aspectRatio
                 }
+              }
+            }
+          }
+        }
+        photos {
+          image {
+            alt
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
+                  height: 400
+                  width: 1224
+                  transformOptions: { cropFocus: CENTER, fit: COVER }
+                  outputPixelDensities: [0.2, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
+                  sizes: "(min-width: 1280px) 1224px, 95.62vw"
+                )
+              }
+            }
+          }
+        }
+        delivery {
+          document {
+            ... on PrismicDelivery {
+              data {
+                variants {
+                  description
+                  name
+                }
+              }
+            }
+          }
+        }
+        credit {
+          document {
+            ... on PrismicCredit {
+              data {
+                months_1
+                months_2
+                percent
               }
             }
           }
@@ -163,7 +206,7 @@ export const pageQuery = graphql`
                         1.75
                         2
                       ]
-                      sizes: "(min-width: 1280px) 1224px, 100vw"
+                      sizes: "(min-width: 1280px) 1224px, 95.62vw"
                     )
                   }
                 }
@@ -202,7 +245,7 @@ export const pageQuery = graphql`
                         1.75
                         2
                       ]
-                      sizes: "(min-width: 1280px) 598px, (max-width: 414px) 100vw, 50vw"
+                      sizes: "(min-width: 1280px) 598px, (max-width: 414px) 86.47vw, (max-width: 834px) 44.96vw, 50vw"
                     )
                   }
                 }
@@ -225,33 +268,45 @@ export const pageQuery = graphql`
                         1.75
                         2
                       ]
-                      sizes: "(min-width: 1280px) 598px, (max-width: 414px) 100vw, 50vw"
+                      sizes: "(min-width: 1280px) 598px, (max-width: 414px) 86.47vw, (max-width: 834px) 44.96vw, 46.71vw"
                     )
                   }
                 }
               }
             }
           }
-        }
-        delivery {
-          document {
-            ... on PrismicDelivery {
-              data {
-                variants {
-                  description
-                  name
+          ... on PrismicProductBody2ImageAndText {
+            slice_type
+            primary {
+              accent_color
+              accent_text
+              bold_text
+              normal_text
+              order
+              position_text
+              small_text
+              image {
+                alt
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData(
+                      height: 400
+                      width: 700
+                      transformOptions: { cropFocus: CENTER, fit: COVER }
+                      outputPixelDensities: [
+                        0.35
+                        0.5
+                        0.75
+                        1
+                        1.25
+                        1.5
+                        1.75
+                        2
+                      ]
+                      sizes: "(min-width: 1280px) 700px, (max-width: 414px) 86.47vw, (max-width: 834px) 44.96vw, 54.68vw"
+                    )
+                  }
                 }
-              }
-            }
-          }
-        }
-        credit {
-          document {
-            ... on PrismicCredit {
-              data {
-                months_1
-                months_2
-                percent
               }
             }
           }

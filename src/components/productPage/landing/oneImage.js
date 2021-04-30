@@ -1,5 +1,5 @@
 import React from "react"
-import { Grid, makeStyles, Typography } from "@material-ui/core"
+import { Grid, makeStyles } from "@material-ui/core"
 import { GatsbyImage } from "gatsby-plugin-image"
 
 const useStyles = makeStyles(theme => ({
@@ -36,13 +36,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function OneImage({ slice, ...other }) {
   const img =
-    slice.primary.image.localFile.childImageSharp.gatsbyImageData ?? false
-  const alt = slice.primary.image.alt ?? "image"
+    slice.primary.image?.localFile.childImageSharp.gatsbyImageData ?? false
+  const alt = slice.primary.image?.alt ?? "image"
   const order = slice.primary.order ?? false
 
   const classes = useStyles({ order: order })
-
-  console.log(img)
 
   return img ? (
     <Grid {...other} className={classes.wrapper}>

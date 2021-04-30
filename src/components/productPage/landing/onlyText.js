@@ -100,6 +100,7 @@ export default function OnlyText({ slice, ...other }) {
   const bold_text = slice.primary.bold_text ?? false
   const normal_text = slice.primary.normal_text ?? false
   const small_text = slice.primary.small_text ?? false
+  
   const order = slice.primary.order ?? false
 
   const classes = useStyles({ color: accent_color, order: order })
