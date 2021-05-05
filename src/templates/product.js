@@ -5,7 +5,6 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import CardProduct from "../components/productPage/cardProduct"
 import Landing from "../components/productPage/landing"
-import DescriptionBlock from "../components/productPage/desciptionBlock"
 import DeliveryCards from "../components/productPage/delivery"
 import Gallery from "../components/productPage/gallery"
 
@@ -21,6 +20,7 @@ const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
       <Gallery
         imagesArr={prismicProduct.data.photos.map(photo => photo.image)}
       />
+      <DeliveryCards />
     </Layout>
   )
 }

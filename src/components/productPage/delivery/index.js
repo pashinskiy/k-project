@@ -2,6 +2,8 @@ import React from "react"
 import Grid from "@material-ui/core/Grid"
 import DeliveryCard from "./deliveryCard.js"
 import { makeStyles } from "@material-ui/core/styles"
+import HeaderWithIcon from "../../headers/headerWithIcon.js"
+import IconDelivery from "../../../../static/svg/deliveryIcon.svg"
 
 const useStyles = makeStyles({
   root: {
@@ -13,6 +15,11 @@ export default function DeliveryCards() {
   const classes = useStyles()
   return (
     <>
+      <HeaderWithIcon
+        icon={<IconDelivery />}
+        title="Информация о доставке"
+        divider={true}
+      />
       <Grid container spacing="4" className={classes.root}>
         <Grid item>
           <DeliveryCard
