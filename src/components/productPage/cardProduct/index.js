@@ -43,11 +43,13 @@ export default function CardProduct({ prismicProduct, allPrismicProduct }) {
         <BlockPrice product={prismicProduct} allColors={allColors} />
       </Grid>
 
-      <Features
-        featuresSlices={prismicProduct.data.body.filter(
-          slice => slice.slice_type === "features"
-        )}
-      />
+      {mobile ? null : (
+        <Features
+          featuresSlices={prismicProduct.data.body.filter(
+            slice => slice.slice_type === "features"
+          )}
+        />
+      )}
 
       {mobile ? (
         <AddInCartAndFav text="В корзину" variant="page" fixed={true} />

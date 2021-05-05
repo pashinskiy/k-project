@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme => ({
   wrapper: {
     height: "3.9vw",
     width: "calc(100% + 2.18vw)",
-    overflow: "hidden",
+    overflow: "visible",
     position: " relative",
     boxSizing: "border-box",
     marginTop: "4.06vw",
@@ -182,7 +182,7 @@ export default function Features({ featuresSlices }) {
   }
 
   return (
-    <Grid className={classes.wrapper}>
+    <Grid hidden={!featuresArr.length} className={classes.wrapper}>
       <Grid
         className={classes.bar}
         container

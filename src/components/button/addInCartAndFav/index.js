@@ -28,7 +28,7 @@ export default function AddInCartAndFav({ product, text, variant, fixed }) {
       className={classes.wrapper + " " + fixed}
     >
       <ButtonAddCart product={product} text={text} variant={variant} />
-      <ButtonAddFavorites />
+      <ButtonAddFavorites product={product} variant={variant} />
     </Grid>
   )
 }

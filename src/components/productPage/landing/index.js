@@ -38,11 +38,14 @@ export default function Landing({ slices }) {
 
   const classes = useStyles()
 
+  console.log(slices.length)
+
   return (
     <Grid
       container
       alignItems="center"
       direction="column"
+      style={{ display: slices.length ? "flex" : "none" }}
       className={classes.wrapper}
     >
       {onlyTextSlices.map((slice, i) => (

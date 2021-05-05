@@ -3,6 +3,7 @@ import { Grid, makeStyles, Typography, useMediaQuery } from "@material-ui/core"
 import { Link } from "gatsby"
 import AddInCartAndFav from "../../button/addInCartAndFav"
 import Title from "./title"
+import Features from "./features"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles(theme => ({
       padding: "40px 26px",
     },
     "@media(max-width: 834px)": {
-      width: "70%",
+      width: "100%",
       borderRadius: 0,
       background: "transparent",
       padding: 0,
@@ -128,16 +129,31 @@ const useStyles = makeStyles(theme => ({
       marginTop: "40px",
       fontSize: "17px",
     },
+    "@media(max-width: 834px)": {
+      marginTop: "4.79vw",
+      fontSize: "2.03vw",
+    },
+    "@media(max-width: 414px)": {
+      marginTop: "9.66vw",
+      fontSize: "4.1vw",
+    },
   },
   textCredit: {
     fontWeight: 400,
+    lineHeight: 1.21,
     fontSize: "1.09vw",
-    lineHeight: "1.32vw",
     marginTop: "0.62vw",
     "@media(min-width: 1280px)": {
       fontSize: "14px",
-      lineHeight: "17px",
       marginTop: "8px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "1.67vw",
+      marginTop: "0.95vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "3.38vw",
+      marginTop: "1.93vw",
     },
     "& span": {
       fontWeight: 600,
@@ -150,12 +166,19 @@ const useStyles = makeStyles(theme => ({
     color: "#681DE1",
     fontWeight: 700,
     fontSize: "1.09vw",
-    lineHeight: "1.32vw",
+    lineHeight: 1.21,
     marginTop: "0.62vw",
     "@media(min-width: 1280px)": {
       fontSize: "14px",
-      lineHeight: "17px",
       marginTop: "8px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "1.67vw",
+      marginTop: "0.95vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "3.38vw",
+      marginTop: "1.93vw",
     },
     "& span": {
       fontWeight: 400,
@@ -263,7 +286,14 @@ export default function BlockPrice({ product, allColors }) {
           variant="page"
         />
       )}
-      <Grid hidden={mobile}>
+      {mobile ? (
+        <Features
+          featuresSlices={product.data.body.filter(
+            slice => slice.slice_type === "features"
+          )}
+        />
+      ) : null}
+      <Grid>
         {credit ? (
           <>
             <Typography className={classes.title}>
