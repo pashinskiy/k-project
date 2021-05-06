@@ -79,7 +79,7 @@ const useStyles = makeStyles(theme => ({
       bottom: 0,
       top: 0,
       borderRadius: "inherit",
-      background: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",
+      background: theme.palette.background.accent,
       zIndex: -1,
       margin: "-0.15vw",
       "@media(min-width: 1280px)": {

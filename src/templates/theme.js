@@ -21,6 +21,13 @@ const theme = createMuiTheme({
   },
   typography: {
     fontFamily: ["Inter"].join(","),
+    body2: {
+      // текст градиентом
+      background: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",
+      "-webkit-background-clip": "text",
+      "-webkit-text-fill-color": "transparent",
+      color: "#681DE1",
+    },
   },
 })
 

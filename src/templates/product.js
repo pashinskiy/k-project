@@ -323,6 +323,7 @@ export const pageQuery = graphql`
         node {
           data {
             name
+            price
             color_name
             color
             images {

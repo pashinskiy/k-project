@@ -4,7 +4,7 @@ import { Button, makeStyles, Typography } from "@material-ui/core"
 const useStyles = makeStyles(theme => ({
   button: {
     padding: 0,
-    background: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",
+    background: theme.palette.background.accent,
     textTransform: "none",
     color: "#ffffff",
     lineHeight: 1.21,

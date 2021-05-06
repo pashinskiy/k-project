@@ -1,5 +1,5 @@
 import React from "react"
-import { Grid } from "@material-ui/core"
+import { Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import AddInCartAndFav from "../../button/addInCartAndFav"
 import { GatsbyImage } from "gatsby-plugin-image"
@@ -35,12 +35,51 @@ const useStyle = makeStyles(theme => ({
       height: "100%",
     },
   },
+  price: {
+    fontWeight: 700,
+    lineHeight: 1.21,
+    fontSize: "1.56vw",
+    marginTop: "1.56vw",
+    "@media(min-width: 1280px)": {
+      fontSize: "20px",
+      marginTop: "20px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "2.39vw",
+      marginTop: "2.39vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "4.83vw",
+      marginTop: "4.83vw",
+    },
+  },
+  title: {
+    fontWeight: 400,
+    lineHeight: 1.21,
+    height: "3.63em",
+    fontSize: "1.09vw",
+    marginTop: "0.62vw",
+    "@media(min-width: 1280px)": {
+      fontSize: "14px",
+      marginTop: "8px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "1.67vw",
+      marginTop: "0.95vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "3.38vw",
+      marginTop: "1.93vw",
+    },
+  },
 }))
 
 export default function CardSimilarProduct({ product }) {
   const img =
-    product.data.images[0].image.localFile.childImageSharp.gatsbyImageData
+    product.data.images[0].image.localFile?.childImageSharp.gatsbyImageData
   const alt = product.data.images[0].image.alt
+  const title = product.data.name
+  const price = product.data.price
 
   const classes = useStyle()
   return (
@@ -51,6 +90,10 @@ export default function CardSimilarProduct({ product }) {
         className={classes.imageWrapper}
         imgStyle={{ objectFit: "contain" }}
       />
+      <Typography className={classes.price}>{price} ₽</Typography>
+      <Typography variant="body2" className={classes.title}>
+        {title}
+      </Typography>
       <AddInCartAndFav text="В корзину" product={product} />
     </Grid>
   )

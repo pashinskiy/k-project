@@ -92,11 +92,10 @@ const useStyles = makeStyles(theme => ({
       marginRight: "16px",
     },
     "@media(max-width: 834px)": {
+      ...theme.typography.body2,
+      fontWeight: 900,
       fontSize: "5.75vw",
       marginRight: "1.43vw",
-      background: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",
-      "-webkit-background-clip": "text",
-      "-webkit-text-fill-color": "transparent",
       color: "#681DE1",
     },
     "@media(max-width: 414px)": {
@@ -160,10 +159,6 @@ const useStyles = makeStyles(theme => ({
     },
   },
   variantDevilery: {
-    background: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",
-    "-webkit-background-clip": "text",
-    "-webkit-text-fill-color": "transparent",
-    color: "#681DE1",
     fontWeight: 700,
     fontSize: "1.09vw",
     lineHeight: 1.21,
@@ -320,6 +315,7 @@ export default function BlockPrice({ product, allColors }) {
             <Typography className={classes.title}>Способ получения</Typography>
             {devilery.map(variant => (
               <Typography
+                variant="body2"
                 key={variant.name}
                 className={classes.variantDevilery}
               >

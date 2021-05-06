@@ -10,7 +10,7 @@ import { CardContent, Typography } from "@material-ui/core"
 //deliveryCost - стоимость доставки
 //deliveryTime - время доставки
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: "350px",
     "@media (max-width:414px)": {
@@ -45,7 +45,7 @@ const useStyles = makeStyles({
     marginTop: "5px",
     marginLeft: "10px",
     display: "inline-block",
-    background: "-webkit-linear-gradient(#291AD5, #681DE1)",
+    background: theme.palette.background.accent,
     "-webkit-background-clip": "text",
     "-webkit-text-fill-color": "transparent",
   },
@@ -56,7 +56,7 @@ const useStyles = makeStyles({
   time: {
     //fontFamily: "Inter",
     fontSize: 17,
-    background: "-webkit-linear-gradient(#291AD5, #681DE1)",
+    background: theme.palette.background.accent,
     "-webkit-background-clip": "text",
     "-webkit-text-fill-color": "transparent",
     display: "inline-block",
@@ -66,7 +66,7 @@ const useStyles = makeStyles({
     display: "inline-block",
     color: "#5A5A5A",
   },
-})
+}))
 
 export default function DeliveryCard(props) {
   const classes = useStyles()

@@ -14,10 +14,6 @@ const useStyles = makeStyles(theme => ({
     textDecoration: "none",
   },
   text: {
-    background: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",
-    "-webkit-background-clip": "text",
-    "-webkit-text-fill-color": "transparent",
-    color: "#681DE1",
     marginRight: "0.78vw",
     fontWeight: 300,
     lineHeight: 1.21,
@@ -77,13 +73,17 @@ export default function BreadCrumbs({ links }) {
       className={classes.wrapper}
     >
       <Link to="/" className={classes.link}>
-        <Typography className={classes.text}>Главная</Typography>
+        <Typography variant="body2" className={classes.text}>
+          Главная
+        </Typography>
       </Link>
       {links.map(link => (
         <React.Fragment key={link.title}>
           <Icon className={classes.icon} />
           <Link to={link.href} className={classes.link}>
-            <Typography className={classes.text}>{link.title}</Typography>
+            <Typography variant="body2" className={classes.text}>
+              {link.title}
+            </Typography>
           </Link>
         </React.Fragment>
       ))}
