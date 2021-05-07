@@ -5,37 +5,44 @@ import { GatsbyImage } from "gatsby-plugin-image"
 const useStyles = makeStyles(theme => ({
   wrapper: {
     height: "3.9vw",
-    width: "calc(100% + 2.18vw)",
-    overflow: "visible",
+    width: "100vw",
     position: " relative",
     boxSizing: "border-box",
     marginTop: "4.06vw",
+    marginLeft: "-2.18vw",
+    paddingLeft: "2.18vw",
+
+    overflow: "scroll",
+    scrollbarWidth: "none",
+    "-ms-overflow-style": "none",
+    
     "@media(min-width: 1280px)": {
       height: "50px",
-      width: "calc(100% + 28px)",
+      width: "1280px",
       marginTop: "52px",
+      marginLeft: "-28px",
+      paddingLeft: "28px",
     },
     "@media(max-width: 834px)": {
-      width: "calc(100% + 3.35vw)",
       height: "5.99vw",
       marginTop: "1.91vw",
+      marginLeft: "-3.35vw",
+      paddingLeft: "3.35vw",
     },
     "@media(max-width: 414px)": {
-      width: "calc(100% + 6.76vw)",
       height: "12.07vw",
       marginTop: "3.86vw",
+      marginLeft: "-6.76vw",
+      paddingLeft: "6.76vw",
     },
-  },
-  bar: {
-    height: "100%",
-    width: "auto",
-    position: "absolute",
-    left: 0,
-    touchAction: "none",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
   },
   item: {
     height: "100%",
     width: "auto",
+    flexShrink: 0,
     minWidth: "9vw",
     padding: "0.78vw 2.34vw",
     borderRadius: "1.56vw",
@@ -153,44 +160,14 @@ export default function Features({ featuresSlices }) {
     return arr
   }, [])
 
-  function setScrollBar(e) {
-    const bar = e.currentTarget
-    //отмена перехвата браузера
-    bar.ondragstart = () => false
-
-    const clientX = e.clientX
-    const left = +bar.style.left.slice(0, -2)
-    const minLeft =
-      bar.parentElement.offsetWidth > bar.offsetWidth
-        ? 0
-        : bar.parentElement.offsetWidth - bar.offsetWidth - 1
-
-    document.addEventListener("pointermove", scrollBar)
-    document.addEventListener("pointerup", deleteScrollBar)
-
-    function deleteScrollBar() {
-      document.removeEventListener("pointermove", scrollBar)
-      document.removeEventListener("pointerup", deleteScrollBar)
-    }
-
-    function scrollBar(e) {
-      let newLeft = left + e.clientX - clientX
-      newLeft = newLeft > 0 ? 0 : newLeft
-      newLeft = newLeft < minLeft ? minLeft : newLeft
-      bar.style.left = newLeft + "px"
-    }
-  }
-
   return (
-    <Grid hidden={!featuresArr.length} className={classes.wrapper}>
-      <Grid
-        className={classes.bar}
-        container
-        wrap="nowrap"
-        onPointerDown={setScrollBar}
-      >
-        {featuresArr}
-      </Grid>
+    <Grid
+      hidden={!featuresArr.length}
+      container
+      wrap="nowrap"
+      className={classes.wrapper}
+    >
+      {featuresArr}
     </Grid>
   )
 }

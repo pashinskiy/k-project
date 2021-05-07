@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 414px)": {
       borderRadius: "2.89vw",
     },
+    "&:hover": {
+      background: theme.palette.background.accent,
+    },
   },
   buttonPage: {
     width: "27.03vw",
@@ -72,13 +75,17 @@ const useStyles = makeStyles(theme => ({
 export default function ButtonAddCart({ product, text, variant }) {
   const classes = useStyles()
   function addToCart() {
-    alert("add to cart")
+    console.log(`add to cart ${product.uid}`)
   }
   const classText = variant === "page" ? classes.textPage : classes.textCard
   const classButton =
     variant === "page" ? classes.buttonPage : classes.buttonCard
   return (
-    <Button onClick={addToCart} className={classes.button + " " + classButton}>
+    <Button
+      disableRipple
+      onClick={addToCart}
+      className={classes.button + " " + classButton}
+    >
       <Typography align="center" className={classText}>
         {text}
       </Typography>

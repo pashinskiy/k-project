@@ -9,11 +9,37 @@ import Landing from "../components/productPage/landing"
 import Gallery from "../components/productPage/gallery"
 import DeliveryCards from "../components/productPage/delivery"
 import SimilarProduct from "../components/productPage/similarProduct"
+import TabPanel from "../components/productPage/tabPanel"
 
 const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
   return (
     <Layout>
       <Seo title="Home" />
+      <TabPanel
+        links={[
+          {
+            title: "О товаре",
+            href: "#about_product",
+          },
+          {
+            title: "Описание",
+            href: "#description",
+          },
+          {
+            title: "Фото",
+            href: "#photo",
+          },
+          {
+            title: "Характеристики",
+            href: "#characteristics",
+          },
+          {
+            title: "Доставка",
+            href: "#delivery",
+          },
+        ]}
+      />
+      <div id="about_product" />
       <CardProduct
         prismicProduct={prismicProduct}
         allPrismicProduct={allPrismicProduct}
@@ -21,10 +47,13 @@ const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
       <SimilarProduct
         products={allPrismicProduct.edges.map(edge => edge.node)}
       />
+      <div id="description" />
       <Landing slices={prismicProduct.data.body2} />
+      <div id="photo" />
       <Gallery
         imagesArr={prismicProduct.data.photos.map(photo => photo.image)}
       />
+      <div id="delivery" />
       <DeliveryCards />
     </Layout>
   )
@@ -181,7 +210,6 @@ export const pageQuery = graphql`
           ... on PrismicProductBody2OnlyText {
             slice_type
             primary {
-              accent_color
               accent_text
               bold_text
               normal_text
@@ -283,7 +311,6 @@ export const pageQuery = graphql`
           ... on PrismicProductBody2ImageAndText {
             slice_type
             primary {
-              accent_color
               accent_text
               bold_text
               normal_text

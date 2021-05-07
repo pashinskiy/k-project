@@ -3,6 +3,7 @@ import { Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import AddInCartAndFav from "../../button/addInCartAndFav"
 import { GatsbyImage } from "gatsby-plugin-image"
+import { Link } from "gatsby"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -35,7 +36,11 @@ const useStyle = makeStyles(theme => ({
       height: "100%",
     },
   },
+  link:{
+    textDecoration: "none",
+  },
   price: {
+    color: theme.palette.color.main,
     fontWeight: 700,
     lineHeight: 1.21,
     fontSize: "1.56vw",
@@ -90,10 +95,12 @@ export default function CardSimilarProduct({ product }) {
         className={classes.imageWrapper}
         imgStyle={{ objectFit: "contain" }}
       />
-      <Typography className={classes.price}>{price} ₽</Typography>
-      <Typography variant="body2" className={classes.title}>
-        {title}
-      </Typography>
+      <Link to={`/${product.uid}/`} className={classes.link}>
+        <Typography className={classes.price}>{price} ₽</Typography>
+        <Typography variant="body2" className={classes.title}>
+          {title}
+        </Typography>
+      </Link>
       <AddInCartAndFav text="В корзину" product={product} />
     </Grid>
   )

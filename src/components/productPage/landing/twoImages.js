@@ -118,18 +118,18 @@ export default function TwoImages({ slice, ...other }) {
         direction="column"
         justify={vertical_align_1 ? "flex-start" : "flex-end"}
         className={classes.wrapperBlock}
+        style={{ color: color_text_1 ? "" : "#000000" }}
       >
         <Typography
           hidden={!big_text_1}
           className={classes.bigText}
-          style={{ color: color_text_1 ?? "", order: priority_1 ? 0 : 1 }}
+          style={{ order: priority_1 ? 0 : 1 }}
         >
           {big_text_1}
         </Typography>{" "}
         <Typography
           hidden={!normal_text_1}
           className={classes.normalText}
-          style={{ color: color_text_1 ?? "" }}
         >
           {normal_text_1}
         </Typography>
@@ -153,18 +153,17 @@ export default function TwoImages({ slice, ...other }) {
         direction="column"
         justify={vertical_align_2 ? "flex-start" : "flex-end"}
         className={classes.wrapperBlock}
+        style={{ color: color_text_2 ? "" : "#000000" }}
       >
         <Typography
           hidden={!big_text_2}
           className={classes.bigText}
-          style={{ color: color_text_2 ?? "", order: priority_2 ? 0 : 1 }}
+          style={{ order: priority_2 ? 0 : 1 }}
         >
           {big_text_1}
         </Typography>{" "}
         <Typography
           hidden={!normal_text_2}
-          className={classes.normalText}
-          style={{ color: color_text_2 ?? "" }}
         >
           {normal_text_1}
         </Typography>

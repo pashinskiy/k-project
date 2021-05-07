@@ -12,6 +12,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "1.56vw 0 0 1.56vw",
     background: "#EFEFF2",
     padding: "3.12vw 2.03vw",
+    zIndex: 0,
     "@media(min-width: 1280px)": {
       width: "452px",
       borderRadius: "20px 0 0 20px",

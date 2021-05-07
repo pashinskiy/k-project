@@ -20,7 +20,7 @@ export default function DeliveryCards() {
         title="Информация о доставке"
         divider={true}
       />
-      <Grid container spacing="4" className={classes.root}>
+      <Grid container spacing={4} className={classes.root}>
         <Grid item>
           <DeliveryCard
             deliveryCity="Санкт Петербург"

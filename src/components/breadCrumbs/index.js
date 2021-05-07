@@ -9,6 +9,12 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       margin: "14px 0 28px",
     },
+    "@media(max-width: 834px)": {
+      margin: "3.35vw 0",
+    },
+    "@media(max-width: 414px)": {
+      margin: "6.76vw 0",
+    },
   },
   link: {
     textDecoration: "none",

@@ -92,8 +92,8 @@ export default function SimilarProduct({ products }) {
         onPointerDown={setScrollBar}
         className={classes.cardPanel}
       >
-        {products.map(product => (
-          <div className={classes.wrapperCard}>
+        {products.map((product, i) => (
+          <div key={product.uid + i} className={classes.wrapperCard}>
             <CardSimilarProduct product={product} />
           </div>
         ))}

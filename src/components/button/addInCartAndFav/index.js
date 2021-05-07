@@ -2,6 +2,8 @@ import React from "react"
 import { Grid, makeStyles } from "@material-ui/core"
 import ButtonAddCart from "./buttonAddCart"
 import ButtonAddFavorites from "./buttonAddFavorites"
+import ButtonPlusMinus from "./buttonPlusMinus"
+import ButtonDelete from "./buttonDelete"
 const useStyles = makeStyles(theme => ({
   wrapper: {
     marginTop: "1.56vw",
@@ -21,13 +23,22 @@ const useStyles = makeStyles(theme => ({
 export default function AddInCartAndFav({ product, text, variant, fixed }) {
   const classes = useStyles()
   fixed = fixed ? classes.fixed : ""
+
+  const inCart = product.uid === "yandex-col1"
   return (
     <Grid
       container
       justify="space-between"
       className={classes.wrapper + " " + fixed}
     >
-      <ButtonAddCart product={product} text={text} variant={variant} />
+      {inCart ? (
+        <>
+          <ButtonPlusMinus product={product} variant={variant} />
+          <ButtonDelete product={product} variant={variant} />
+        </>
+      ) : (
+        <ButtonAddCart product={product} text={text} variant={variant} />
+      )}
       <ButtonAddFavorites product={product} variant={variant} />
     </Grid>
   )
