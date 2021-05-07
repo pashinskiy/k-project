@@ -37,7 +37,7 @@ export default function Gallery({ imagesArr }) {
   const classes = useStyle()
 
   return (
-    <Box className={classes.wrapper}>
+    <Box hidden={!images.length} className={classes.wrapper}>
       <HeaderWithIcon title="Фото" icon={<IconPhoto />} divider={true} />
       <Grid container justify="space-between">
         {rows.map((row, i) => (

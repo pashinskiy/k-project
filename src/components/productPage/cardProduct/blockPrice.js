@@ -3,6 +3,7 @@ import { Grid, makeStyles, Typography, useMediaQuery } from "@material-ui/core"
 import { Link } from "gatsby"
 import AddInCartAndFav from "../../button/addInCartAndFav"
 import Title from "./title"
+import Features from "./features"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -11,13 +12,14 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "1.56vw 0 0 1.56vw",
     background: "#EFEFF2",
     padding: "3.12vw 2.03vw",
+    zIndex: 0,
     "@media(min-width: 1280px)": {
       width: "452px",
       borderRadius: "20px 0 0 20px",
       padding: "40px 26px",
     },
     "@media(max-width: 834px)": {
-      width: "70%",
+      width: "100%",
       borderRadius: 0,
       background: "transparent",
       padding: 0,
@@ -39,34 +41,36 @@ const useStyles = makeStyles(theme => ({
   },
   item: {
     width: "3.12vw",
-    aspectRatio: 1,
-    borderRadius: "0.78vw",
+    height: "3.12vw",
+    borderRadius: "100%",
     marginRight: "0.78vw",
     marginBottom: "0.78vw",
     overflow: "hidden",
     border: "1px solid #BCBCBC",
+    boxShadow: "inset 0px 2px 4px rgba(0, 0, 0, 0.25)",
     boxSizing: "border-box",
     "@media(min-width: 1280px)": {
       width: "40px",
-      borderRadius: "10px",
+      height: "40px",
       marginRight: "10px",
       marginBottom: "10px",
     },
     "@media(max-width: 834px)": {
       width: "3.59vw",
-      borderRadius: "1.19vw",
+      height: "3.59vw",
       marginRight: "1.19vw",
       marginBottom: "1.19vw",
     },
     "@media(max-width: 414px)": {
       width: "7.24vw",
-      borderRadius: "2.41vw",
+      height: "7.24vw",
       marginRight: "2.41vw",
       marginBottom: "2.41vw",
     },
   },
   active: {
-    border: "2px solid #681DE1",
+    border: "2px solid #EFEFF2",
+    boxShadow: "0px 0px 0 2px #681DE1",
   },
   priceWrapper: {
     marginTop: "1.72vw",
@@ -89,11 +93,10 @@ const useStyles = makeStyles(theme => ({
       marginRight: "16px",
     },
     "@media(max-width: 834px)": {
+      ...theme.typography.body2,
+      fontWeight: 900,
       fontSize: "5.75vw",
       marginRight: "1.43vw",
-      background: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",
-      "-webkit-background-clip": "text",
-      "-webkit-text-fill-color": "transparent",
       color: "#681DE1",
     },
     "@media(max-width: 414px)": {
@@ -126,34 +129,52 @@ const useStyles = makeStyles(theme => ({
       marginTop: "40px",
       fontSize: "17px",
     },
+    "@media(max-width: 834px)": {
+      marginTop: "4.79vw",
+      fontSize: "2.03vw",
+    },
+    "@media(max-width: 414px)": {
+      marginTop: "9.66vw",
+      fontSize: "4.1vw",
+    },
   },
   textCredit: {
     fontWeight: 400,
+    lineHeight: 1.21,
     fontSize: "1.09vw",
-    lineHeight: "1.32vw",
     marginTop: "0.62vw",
     "@media(min-width: 1280px)": {
       fontSize: "14px",
-      lineHeight: "17px",
       marginTop: "8px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "1.67vw",
+      marginTop: "0.95vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "3.38vw",
+      marginTop: "1.93vw",
     },
     "& span": {
       fontWeight: 600,
     },
   },
   variantDevilery: {
-    background: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",
-    "-webkit-background-clip": "text",
-    "-webkit-text-fill-color": "transparent",
-    color: "#681DE1",
     fontWeight: 700,
     fontSize: "1.09vw",
-    lineHeight: "1.32vw",
+    lineHeight: 1.21,
     marginTop: "0.62vw",
     "@media(min-width: 1280px)": {
       fontSize: "14px",
-      lineHeight: "17px",
       marginTop: "8px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "1.67vw",
+      marginTop: "0.95vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "3.38vw",
+      marginTop: "1.93vw",
     },
     "& span": {
       fontWeight: 400,
@@ -261,7 +282,14 @@ export default function BlockPrice({ product, allColors }) {
           variant="page"
         />
       )}
-      <Grid hidden={mobile}>
+      {mobile ? (
+        <Features
+          featuresSlices={product.data.body.filter(
+            slice => slice.slice_type === "features"
+          )}
+        />
+      ) : null}
+      <Grid>
         {credit ? (
           <>
             <Typography className={classes.title}>
@@ -288,6 +316,7 @@ export default function BlockPrice({ product, allColors }) {
             <Typography className={classes.title}>Способ получения</Typography>
             {devilery.map(variant => (
               <Typography
+                variant="body2"
                 key={variant.name}
                 className={classes.variantDevilery}
               >

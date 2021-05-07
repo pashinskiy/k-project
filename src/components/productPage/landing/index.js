@@ -8,12 +8,12 @@ import ImageAndText from "./imageAndText"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
-    padding: "2.18vw 0",
+    padding: "3.12vw 0 2.18vw",
     "@media(min-width: 1280px)": {
-      padding: "28px 0",
+      padding: "40px 0 28px",
     },
     "@media(max-width: 834px)": {
-      padding: "3.35vw 0",
+      padding: "4.79vw 0 3.35vw",
     },
     "@media(max-width: 414px)": {
       padding: "6.76vw 0",
@@ -43,6 +43,7 @@ export default function Landing({ slices }) {
       container
       alignItems="center"
       direction="column"
+      style={{ display: slices.length ? "flex" : "none" }}
       className={classes.wrapper}
     >
       {onlyTextSlices.map((slice, i) => (

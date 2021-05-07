@@ -2,7 +2,7 @@ import * as React from "react"
 import { Grid, useMediaQuery } from "@material-ui/core"
 
 import ProductSlider from "./productSlider"
-import BreadCrumbs from "../../breadCrumbs/breadCrumbs"
+import BreadCrumbs from "../../breadCrumbs"
 import Title from "./title"
 import BlockPrice from "./blockPrice"
 import AddInCartAndFav from "../../button/addInCartAndFav"
@@ -36,21 +36,30 @@ export default function CardProduct({ prismicProduct, allPrismicProduct }) {
         />
       )}
 
-      <BreadCrumbs />
+      <BreadCrumbs
+        links={[
+          {
+            title: prismicProduct.data.name,
+            href: `/${prismicProduct.uid}/`,
+          },
+        ]}
+      />
 
       <Grid container justify="space-between">
         <ProductSlider photos={photos} />
         <BlockPrice product={prismicProduct} allColors={allColors} />
       </Grid>
 
-      <Features
-        featuresSlices={prismicProduct.data.body.filter(
-          slice => slice.slice_type === "features"
-        )}
-      />
+      {mobile ? null : (
+        <Features
+          featuresSlices={prismicProduct.data.body.filter(
+            slice => slice.slice_type === "features"
+          )}
+        />
+      )}
 
       {mobile ? (
-        <AddInCartAndFav text="В корзину" variant="page" fixed={true} />
+        <AddInCartAndFav product={prismicProduct} text="В корзину" variant="page" fixed={true} />
       ) : null}
     </>
   )

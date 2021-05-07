@@ -51,12 +51,6 @@ const useStyle = makeStyles(theme => ({
       height: "100%",
     },
   },
-
-  image: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-  },
 }))
 
 export default function ImagesRow({ images, reverse, ...other }) {
@@ -73,7 +67,6 @@ export default function ImagesRow({ images, reverse, ...other }) {
     >
       {images.map((image, i) => {
         const img = image?.localFile.childImageSharp.gatsbyImageData ?? null
-        console.log(img)
         return img ? (
           <GatsbyImage
             image={img}

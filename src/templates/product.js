@@ -4,23 +4,57 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import CardProduct from "../components/productPage/cardProduct"
+
 import Landing from "../components/productPage/landing"
-import DescriptionBlock from "../components/productPage/desciptionBlock"
-import DeliveryCards from "../components/productPage/delivery"
 import Gallery from "../components/productPage/gallery"
+import DeliveryCards from "../components/productPage/delivery"
+import SimilarProduct from "../components/productPage/similarProduct"
+import TabPanel from "../components/productPage/tabPanel"
 
 const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
   return (
     <Layout>
       <Seo title="Home" />
+      <TabPanel
+        links={[
+          {
+            title: "О товаре",
+            href: "#about_product",
+          },
+          {
+            title: "Описание",
+            href: "#description",
+          },
+          {
+            title: "Фото",
+            href: "#photo",
+          },
+          {
+            title: "Характеристики",
+            href: "#characteristics",
+          },
+          {
+            title: "Доставка",
+            href: "#delivery",
+          },
+        ]}
+      />
+      <div id="about_product" />
       <CardProduct
         prismicProduct={prismicProduct}
         allPrismicProduct={allPrismicProduct}
       />
+      <SimilarProduct
+        products={allPrismicProduct.edges.map(edge => edge.node)}
+      />
+      <div id="description" />
       <Landing slices={prismicProduct.data.body2} />
+      <div id="photo" />
       <Gallery
         imagesArr={prismicProduct.data.photos.map(photo => photo.image)}
       />
+      <div id="delivery" />
+      <DeliveryCards />
     </Layout>
   )
 }
@@ -176,7 +210,6 @@ export const pageQuery = graphql`
           ... on PrismicProductBody2OnlyText {
             slice_type
             primary {
-              accent_color
               accent_text
               bold_text
               normal_text
@@ -278,7 +311,6 @@ export const pageQuery = graphql`
           ... on PrismicProductBody2ImageAndText {
             slice_type
             primary {
-              accent_color
               accent_text
               bold_text
               normal_text
@@ -318,8 +350,24 @@ export const pageQuery = graphql`
         node {
           data {
             name
+            price
             color_name
             color
+            images {
+              image {
+                alt
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData(
+                      width: 250
+                      transformOptions: { fit: CONTAIN }
+                      outputPixelDensities: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
+                      sizes: "(min-width: 1280px) 250px, (max-width: 414px) 49.51vw, (max-width: 834px) 29.97vw, 19.53vw"
+                    )
+                  }
+                }
+              }
+            }
           }
           uid
         }

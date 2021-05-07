@@ -55,8 +55,13 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     zIndex: 2,
     "@media(max-width: 834px)": {
-      width: "100%",
-      overflow: "visible",
+      width: "100vw",
+      marginLeft: "-3.35vw",
+      paddingLeft: "3.35vw",
+    },
+    "@media(max-width: 414px)": {
+      marginLeft: "-6.76vw",
+      paddingLeft: "6.76vw",
     },
   },
   bar: {
@@ -64,7 +69,7 @@ const useStyles = makeStyles(theme => ({
     width: "auto",
     position: "absolute",
     touchAction: "none",
-    left: 0,
+    overflow: "visible",
     transition: "left 1s",
   },
   item: {
@@ -80,15 +85,6 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 834px)": {
       padding: "0 0.6vw",
     },
-    // "&:last-child": {
-    //   paddingRight: 0,
-    // },
-    // "&:first-child": {
-    //   paddingLeft: 0,
-    // },
-  },
-  active: {
-    // border: "1px solid blue",
   },
   nav: {
     position: "absolute",
@@ -271,7 +267,7 @@ export default function SliderProduct({ photos }) {
       bar.parentElement.offsetWidth > bar.offsetWidth
         ? 0
         : bar.parentElement.offsetWidth - bar.offsetWidth - 1
-
+    const maxLeft = getComputedStyle(bar.parentElement).paddingLeft.slice(0, -2)
     document.addEventListener("pointermove", scrollBar, true)
     document.addEventListener("pointerup", deleteScrollBar)
 
@@ -283,7 +279,7 @@ export default function SliderProduct({ photos }) {
 
     function scrollBar(e) {
       let newLeft = left + e.clientX - clientX
-      newLeft = newLeft > 0 ? 0 : newLeft
+      newLeft = newLeft > maxLeft ? maxLeft : newLeft
       newLeft = newLeft < minLeft ? minLeft : newLeft
       bar.style.left = newLeft + "px"
     }

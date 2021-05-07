@@ -3,13 +3,13 @@ import { Button, makeStyles, Typography } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
   button: {
-    borderRadius: "0.93vw",
     padding: 0,
-    background: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",
+    background: theme.palette.background.accent,
     textTransform: "none",
     color: "#ffffff",
     lineHeight: 1.21,
     fontWeight: 700,
+    borderRadius: "0.93vw",
     "@media(min-width: 1280px)": {
       borderRadius: "12px",
     },
@@ -18,6 +18,9 @@ const useStyles = makeStyles(theme => ({
     },
     "@media(max-width: 414px)": {
       borderRadius: "2.89vw",
+    },
+    "&:hover": {
+      background: theme.palette.background.accent,
     },
   },
   buttonPage: {
@@ -36,7 +39,22 @@ const useStyles = makeStyles(theme => ({
       height: "12.07vw",
     },
   },
-  buttonCard: {},
+  buttonCard: {
+    width: "16.09vw",
+    height: "3.12vw",
+    "@media(min-width: 1280px)": {
+      width: "206px",
+      height: "40px",
+    },
+    "@media(max-width: 834px)": {
+      width: "24.7vw",
+      height: "4.79vw",
+    },
+    "@media(max-width: 414px)": {
+      width: "37.92vw",
+      height: "9.66vw",
+    },
+  },
   textPage: {
     fontSize: "1.4vw",
     "@media(min-width: 1280px)": {
@@ -57,13 +75,17 @@ const useStyles = makeStyles(theme => ({
 export default function ButtonAddCart({ product, text, variant }) {
   const classes = useStyles()
   function addToCart() {
-    alert("add to cart")
+    console.log(`add to cart ${product.uid}`)
   }
   const classText = variant === "page" ? classes.textPage : classes.textCard
   const classButton =
     variant === "page" ? classes.buttonPage : classes.buttonCard
   return (
-    <Button onClick={addToCart} className={classes.button + " " + classButton}>
+    <Button
+      disableRipple
+      onClick={addToCart}
+      className={classes.button + " " + classButton}
+    >
       <Typography align="center" className={classText}>
         {text}
       </Typography>

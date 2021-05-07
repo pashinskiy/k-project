@@ -64,12 +64,6 @@ const useStyles = makeStyles(theme => ({
     },
   },
   accentText: {
-    color: props => (props.color ? props.color : "#681DE1"),
-    background: props =>
-      props.color ? props.color : theme.palette.color.accent,
-    "-webkit-background-clip": () => "text",
-    "-webkit-text-fill-color": "transparent",
-
     fontWeight: 700,
     fontSize: "2.81vw",
     marginTop: "2.18vw",
@@ -166,7 +160,6 @@ export default function TwoImages({ slice, ...other }) {
   const alt = slice.primary.image?.alt ?? "image"
 
   const accent_text = slice.primary.accent_text ?? false
-  const accent_color = slice.primary.accent_color ?? false
   const bold_text = slice.primary.bold_text ?? false
   const normal_text = slice.primary.normal_text ?? false
   const small_text = slice.primary.small_text ?? false
@@ -174,7 +167,7 @@ export default function TwoImages({ slice, ...other }) {
 
   const order = slice.primary.order ?? false
 
-  const classes = useStyles({ color: accent_color, order: order })
+  const classes = useStyles({ order: order })
 
   return (
     <Grid
@@ -206,7 +199,7 @@ export default function TwoImages({ slice, ...other }) {
         style={{ order: position_text ? 0 : -1 }}
         className={classes.wrapperBlock + " " + classes.textBlock}
       >
-        <Typography hidden={!accent_text} className={classes.accentText}>
+        <Typography variant="body2" hidden={!accent_text} className={classes.accentText}>
           {accent_text}
         </Typography>
         <Typography hidden={!bold_text} className={classes.boldText}>
