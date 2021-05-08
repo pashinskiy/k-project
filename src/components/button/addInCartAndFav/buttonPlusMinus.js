@@ -53,34 +53,34 @@ const useStyles = makeStyles(theme => ({
     },
   },
   buttonPage: {
-    width: "21.25vw",
+    width: "calc(100% - 8.43vw)",
     height: "3.9vw",
     "@media(min-width: 1280px)": {
-      width: "272px",
+      width: "calc(100% - 108px)",
       height: "50px",
     },
     "@media(max-width: 834px)": {
-      width: "85.13vw",
+      width: "calc(100% - 12.94vw)",
       height: "5.99vw",
     },
     "@media(max-width: 414px)": {
-      width: "69.8vw",
+      width: "calc(100% - 26.08vw)",
       height: "12.07vw",
     },
   },
   buttonCard: {
-    width: "12.65vw",
+    width: "calc(100% - 6.87vw)",
     height: "3.12vw",
     "@media(min-width: 1280px)": {
-      width: "162px",
+      width: "calc(100% - 88px)",
       height: "40px",
     },
     "@media(max-width: 834px)": {
-      width: "19.42VW",
+      width: "calc(100% - 10.55vw)",
       height: "4.79vw",
     },
     "@media(max-width: 414px)": {
-      width: "29.71vw",
+      width: "calc(100% - 21.25vw)",
       height: "9.66vw",
     },
   },
