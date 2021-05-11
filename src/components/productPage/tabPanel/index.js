@@ -56,7 +56,7 @@ const useStyle = makeStyles(theme => ({
     "&:first-child": {
       borderRadius: "1.56vw 0 0 0",
       "@media(min-width: 1280px)": {
-        borderRadius: "40px 0 0 0",
+        borderRadius: "20px 0 0 0",
       },
       "@media(max-width: 834px)": {
         borderRadius: "2.39vw 0 0 0",
@@ -68,7 +68,7 @@ const useStyle = makeStyles(theme => ({
     "&:last-child": {
       borderRadius: "0 1.56vw 0 0",
       "@media(min-width: 1280px)": {
-        borderRadius: "0 40px 0 0",
+        borderRadius: "0 20px 0 0",
       },
       "@media(max-width: 834px)": {
         borderRadius: "0 2.39vw 0 0",

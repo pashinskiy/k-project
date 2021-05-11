@@ -24,34 +24,34 @@ const useStyles = makeStyles(theme => ({
     },
   },
   buttonPage: {
-    width: "27.03vw",
+    width: "calc(100% - 4.21vw)",
     height: "3.9vw",
     "@media(min-width: 1280px)": {
-      width: "346px",
+      width: "calc(100% - 54px)",
       height: "50px",
     },
     "@media(max-width: 834px)": {
-      width: "92.2%",
+      width: "calc(100% - 6.47vw)",
       height: "5.99vw",
     },
     "@media(max-width: 414px)": {
-      width: "84.29%",
+      width: "calc(100% - 13.04vw)",
       height: "12.07vw",
     },
   },
   buttonCard: {
-    width: "16.09vw",
+    width: "calc(100% - 3.43vw)",
     height: "3.12vw",
     "@media(min-width: 1280px)": {
-      width: "206px",
+      width: "calc(100% - 44px)",
       height: "40px",
     },
     "@media(max-width: 834px)": {
-      width: "24.7vw",
+      width: "calc(100% - 5.27vw)",
       height: "4.79vw",
     },
     "@media(max-width: 414px)": {
-      width: "37.92vw",
+      width: "calc(100% - 10.62vw)",
       height: "9.66vw",
     },
   },
