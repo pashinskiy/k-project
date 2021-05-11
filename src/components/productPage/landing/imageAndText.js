@@ -156,8 +156,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function TwoImages({ slice, ...other }) {
   const img =
-    slice.primary.image?.localFile.childImageSharp.gatsbyImageData ?? false
-  const alt = slice.primary.image?.alt ?? "image"
+    slice.primary.image.localFile?.childImageSharp.gatsbyImageData ?? false
+  const alt = slice.primary.image.alt ?? "image"
 
   const accent_text = slice.primary.accent_text ?? false
   const bold_text = slice.primary.bold_text ?? false

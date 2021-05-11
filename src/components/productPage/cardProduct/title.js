@@ -89,7 +89,7 @@ export default function Title({ logo, text, stickersSlices }) {
   // формируем объект для отображения логотипа брэнда при наличии
   const logoImg =
     logo !== null && logo
-      ? { ...logo.localFile.childImageSharp.fluid, alt: logo.alt }
+      ? { ...logo.localFile?.childImageSharp.fluid, alt: logo.alt }
       : null
 
   // достаем стикеры из слайсов и готовим к распечатке
@@ -97,17 +97,17 @@ export default function Title({ logo, text, stickersSlices }) {
     arr.push(
       ...stickersSlice.items.map((sticker, i) => {
         const img =
-          sticker.sticker.document.data.image.localFile.childImageSharp.fluid
+          sticker.sticker.document.data.image.localFile?.childImageSharp.fluid
         return (
           <div className={classes.sticker} key={i}>
             <picture style={{ display: "flex", width: "100%", height: "100%" }}>
-              <source srcSet={img.srcSetWebp} type="image/webp" sizes="" />
+              <source srcSet={img?.srcSetWebp} type="image/webp" sizes="" />
               <img
-                src={img.src}
-                srcSet={img.srcSet}
+                src={img?.src}
+                srcSet={img?.srcSet}
                 alt={sticker.sticker.document.data.image.alt}
                 sizes=""
-                width={img.aspectRatio}
+                width={img?.aspectRatio}
                 height="1"
                 style={{ width: "auto", height: "100%" }}
               />

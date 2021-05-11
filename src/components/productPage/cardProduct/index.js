@@ -13,7 +13,7 @@ export default function CardProduct({ prismicProduct, allPrismicProduct }) {
 
   // массив фото
   const photos = prismicProduct.data.images.map(
-    photo => photo.image.localFile.childImageSharp.fluid
+    photo => photo.image.localFile?.childImageSharp.fluid
   )
 
   // все продукты данной модели

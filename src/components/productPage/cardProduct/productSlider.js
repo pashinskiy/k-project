@@ -155,16 +155,16 @@ export default function SliderProduct({ photos }) {
       key={"фото" + i}
     >
       <source
-        srcSet={photo.srcSetWebp}
+        srcSet={photo?.srcSetWebp}
         type="image/webp"
-        sizes={`${49.37 * photo.aspectRatio * 0.79}vw`}
+        sizes={`${49.37 * photo?.aspectRatio * 0.79}vw`}
       />
       <img
-        src={photo.src}
-        srcSet={photo.srcSet}
-        sizes={`${49.37 * photo.aspectRatio * 0.79}vw`}
+        src={photo?.src}
+        srcSet={photo?.srcSet}
+        sizes={`${49.37 * photo?.aspectRatio * 0.79}vw`}
         alt={"фото" + i}
-        width={photo.aspectRatio}
+        width={photo?.aspectRatio}
         height="1"
         style={{
           objectFit: "contain",
@@ -195,12 +195,12 @@ export default function SliderProduct({ photos }) {
           }}
           className={activeClass}
         >
-          <source srcSet={photo.srcSetWebp} type="image/webp" sizes="15vw" />
+          <source srcSet={photo?.srcSetWebp} type="image/webp" sizes="15vw" />
           <img
-            src={photo.src}
-            srcSet={photo.srcSet}
+            src={photo?.src}
+            srcSet={photo?.srcSet}
             alt={"фото" + i}
-            width={photo.aspectRatio}
+            width={photo?.aspectRatio}
             height="1"
             style={{
               maxWidth: "none",
