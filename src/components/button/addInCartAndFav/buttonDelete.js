@@ -1,13 +1,13 @@
 import React from "react"
 import { Button, makeStyles } from "@material-ui/core"
 
-import Favorites from "../../../../static/svg/favorites.svg"
-import NotFavorites from "../../../../static/svg/notFavorites.svg"
+import Delete from "../../../../static/svg/trash.svg"
 
 const useStyles = makeStyles(theme => ({
   button: {
     minWidth: 0,
     borderRadius: "0.93vw",
+    background: theme.palette.background.accent,
     "@media(min-width: 1280px)": {
       borderRadius: "12px",
     },
@@ -58,40 +58,24 @@ const useStyles = makeStyles(theme => ({
       padding: "2.41vw",
     },
   },
-  notFavorites: {
-    background: "#F1ADAD",
-    "&:hover": {
-      background: "#F1ADAD",
-    },
-  },
-  favorites: {
-    background: "#FF5B5B",
-    "&:hover": {
-      background: "#FF5B5B",
-    },
-  },
 }))
 
-export default function ButtonAddFavorites({ product, variant }) {
+export default function ButtonDelete({ product, variant }) {
   const classes = useStyles()
 
-  function changeToFavorites() {
-    console.log(`change to favorites ${product.uid}`)
+  function deleteInCart() {
+    console.log(`delete in cart ${product.uid}`)
   }
-
-  const favorites = product.uid === "yandex-col1"
-
-  const background = favorites ? classes.favorites : classes.notFavorites
 
   const classButton =
     variant === "page" ? classes.buttonPage : classes.buttonCard
   return (
     <Button
       disableRipple
-      onClick={changeToFavorites}
-      className={classes.button + " " + classButton + " " + background}
+      onClick={deleteInCart}
+      className={classes.button + " " + classButton}
     >
-      {favorites ? <Favorites /> : <NotFavorites />}
+      <Delete />
     </Button>
   )
 }

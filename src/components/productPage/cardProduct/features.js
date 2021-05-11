@@ -5,37 +5,44 @@ import { GatsbyImage } from "gatsby-plugin-image"
 const useStyles = makeStyles(theme => ({
   wrapper: {
     height: "3.9vw",
-    width: "calc(100% + 2.18vw)",
-    overflow: "hidden",
+    width: "100vw",
     position: " relative",
     boxSizing: "border-box",
     marginTop: "4.06vw",
+    marginLeft: "-2.18vw",
+    paddingLeft: "2.18vw",
+
+    overflow: "scroll",
+    scrollbarWidth: "none",
+    "-ms-overflow-style": "none",
+    
     "@media(min-width: 1280px)": {
       height: "50px",
-      width: "calc(100% + 28px)",
+      width: "1280px",
       marginTop: "52px",
+      marginLeft: "-28px",
+      paddingLeft: "28px",
     },
     "@media(max-width: 834px)": {
-      width: "calc(100% + 3.35vw)",
       height: "5.99vw",
       marginTop: "1.91vw",
+      marginLeft: "-3.35vw",
+      paddingLeft: "3.35vw",
     },
     "@media(max-width: 414px)": {
-      width: "calc(100% + 6.76vw)",
       height: "12.07vw",
       marginTop: "3.86vw",
+      marginLeft: "-6.76vw",
+      paddingLeft: "6.76vw",
     },
-  },
-  bar: {
-    height: "100%",
-    width: "auto",
-    position: "absolute",
-    left: 0,
-    touchAction: "none",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
   },
   item: {
     height: "100%",
     width: "auto",
+    flexShrink: 0,
     minWidth: "9vw",
     padding: "0.78vw 2.34vw",
     borderRadius: "1.56vw",
@@ -49,18 +56,12 @@ const useStyles = makeStyles(theme => ({
     border: "0.15vw solid transparent",
     position: "relative",
 
-    fontWeight: 300,
-    lineHeight: "2.34vw",
-    fontSize: "1.32vw",
-
     "@media(min-width: 1280px)": {
       minWidth: "116px",
       padding: "10px 30px",
       borderRadius: "20px",
       marginRight: "10px",
       border: "2px solid transparent",
-      fontSize: "17px",
-      lineHeight: "30px",
     },
     "@media(max-width: 834px)": {
       minWidth: "13.9vw",
@@ -68,8 +69,6 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "2.39vw",
       marginRight: "0.95vw",
       border: "0.23vw solid transparent",
-      fontSize: "1.43vw",
-      lineHeight: "3.61vw",
     },
     "@media(max-width: 414px)": {
       minWidth: "28.01vw",
@@ -77,8 +76,6 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "4.83vw",
       marginRight: "1.93vw",
       border: "0.48vw solid transparent",
-      fontSize: "2.89vw",
-      lineHeight: "7.25vw",
     },
 
     "&::before": {
@@ -89,7 +86,7 @@ const useStyles = makeStyles(theme => ({
       bottom: 0,
       top: 0,
       borderRadius: "inherit",
-      background: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",
+      background: theme.palette.background.accent,
       zIndex: -1,
       margin: "-0.15vw",
       "@media(min-width: 1280px)": {
@@ -118,20 +115,19 @@ const useStyles = makeStyles(theme => ({
   },
   text: {
     fontWeight: 300,
-    lineHeight: "2.34vw",
+    lineHeight: "2.04vw",
     fontSize: "1.32vw",
-
     "@media(min-width: 1280px)": {
       fontSize: "17px",
-      lineHeight: "30px",
+      lineHeight: "26px",
     },
     "@media(max-width: 834px)": {
       fontSize: "1.43vw",
-      lineHeight: "3.61vw",
+      lineHeight: "3.15vw",
     },
     "@media(max-width: 414px)": {
       fontSize: "2.89vw",
-      lineHeight: "7.25vw",
+      lineHeight: "6.29vw",
     },
   },
 }))
@@ -145,11 +141,11 @@ export default function Features({ featuresSlices }) {
     arr.push(
       ...featuresSlice.items.map((feature, i) => {
         return (
-          <Grid container key={i} className={classes.item}>
+          <Grid container wrap="nowrap" key={i} className={classes.item}>
             {feature.image.localFile ? (
               <GatsbyImage
                 image={feature.image.localFile.childImageSharp.gatsbyImageData}
-                alt={feature.image.alt}
+                alt={feature.image.alt ?? "icon"}
                 className={classes.itemImg}
                 imgStyle={{ objectFit: "contain" }}
               />
@@ -164,46 +160,14 @@ export default function Features({ featuresSlices }) {
     return arr
   }, [])
 
-  function setScrollBar(e) {
-    const bar = e.currentTarget
-    //отмена перехвата браузера
-    bar.ondragstart = () => false
-
-    const clientX = e.clientX
-    const left = +bar.style.left.slice(0, -2)
-    const minLeft =
-      bar.parentElement.offsetWidth > bar.offsetWidth
-        ? 0
-        : bar.parentElement.offsetWidth - bar.offsetWidth - 1
-
-    document.addEventListener("pointermove", scrollBar)
-    document.addEventListener("pointerup", deleteScrollBar)
-
-    function deleteScrollBar() {
-      document.removeEventListener("pointermove", scrollBar)
-      document.removeEventListener("pointerup", deleteScrollBar)
-    }
-
-    function scrollBar(e) {
-      console.log("move")
-      let newLeft = left + e.clientX - clientX
-      newLeft = newLeft > 0 ? 0 : newLeft
-      newLeft = newLeft < minLeft ? minLeft : newLeft
-      bar.style.left = newLeft + "px"
-      console.log(newLeft)
-    }
-  }
-
   return (
-    <Grid className={classes.wrapper}>
-      <Grid
-        className={classes.bar}
-        container
-        wrap="nowrap"
-        onPointerDown={setScrollBar}
-      >
-        {featuresArr}
-      </Grid>
+    <Grid
+      hidden={!featuresArr.length}
+      container
+      wrap="nowrap"
+      className={classes.wrapper}
+    >
+      {featuresArr}
     </Grid>
   )
 }

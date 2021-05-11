@@ -7,7 +7,6 @@ const useStyles = makeStyles(theme => ({
     width: "100vw",
     padding: "0 2.18vw",
     margin: "0 auto",
-    overflow: "hidden",
     "@media(min-width: 1280px)": {
       width: "1280px",
       padding: "0 28px",

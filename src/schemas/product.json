@@ -217,7 +217,6 @@
             "fieldset": "only_text",
             "description": "текстовый блок",
             "icon": "text_fields",
-            "display": "list",
             "non-repeat": {
               "order": {
                 "type": "Number",
@@ -231,12 +230,6 @@
                 "config": {
                   "label": "Акцентный текст",
                   "placeholder": "Акцентный текст"
-                }
-              },
-              "accent_color": {
-                "type": "Color",
-                "config": {
-                  "label": "Акцентный цвет"
                 }
               },
               "bold_text": {
@@ -258,6 +251,205 @@
                 "config": {
                   "label": "Маленький текст",
                   "placeholder": "Маленький текст"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "one_image": {
+            "type": "Slice",
+            "fieldset": "one_image",
+            "description": "одно изображение",
+            "icon": "image",
+            "non-repeat": {
+              "order": {
+                "type": "Number",
+                "config": {
+                  "label": "Позиция в документе",
+                  "placeholder": "порядковый номер"
+                }
+              },
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Изображение"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "two_images": {
+            "type": "Slice",
+            "fieldset": "two_images",
+            "description": "два изображения",
+            "icon": "photo_library",
+            "non-repeat": {
+              "order": {
+                "type": "Number",
+                "config": {
+                  "label": "Позиция в документе",
+                  "placeholder": "порядковый номер"
+                }
+              },
+              "big_text_1": {
+                "type": "Text",
+                "config": {
+                  "label": "Большой текст первое изображение",
+                  "placeholder": "Большой текст первое изображение"
+                }
+              },
+              "normal_text_1": {
+                "type": "Text",
+                "config": {
+                  "label": "Обычный текст первое изображение",
+                  "placeholder": "Обычный текст первое изображение"
+                }
+              },
+              "color_text_1": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "черный",
+                  "placeholder_true": "белый",
+                  "default_value": true,
+                  "label": "Цвет текста первое изображение"
+                }
+              },
+              "vertical_align_1": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "снизу",
+                  "placeholder_true": "сверху",
+                  "default_value": true,
+                  "label": "Положение текстов"
+                }
+              },
+              "priority_1": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "сначала обычный",
+                  "placeholder_true": "сначала большой",
+                  "default_value": true,
+                  "label": "Очередность текстов"
+                }
+              },
+              "image_1": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Левое изображение"
+                }
+              },
+              "big_text_2": {
+                "type": "Text",
+                "config": {
+                  "label": "Большой текст второе изображение",
+                  "placeholder": "Большой текст второе изображение"
+                }
+              },
+              "normal_text_2": {
+                "type": "Text",
+                "config": {
+                  "label": "Обычный текст второе изображение",
+                  "placeholder": "Обычный текст второе изображение"
+                }
+              },
+              "color_text_2": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "черный",
+                  "placeholder_true": "белый",
+                  "default_value": true,
+                  "label": "Цвет текста второе изображение"
+                }
+              },
+              "vertical_align_2": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "снизу",
+                  "placeholder_true": "сверху",
+                  "default_value": true,
+                  "label": "Положение текстов"
+                }
+              },
+              "priority_2": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "сначала обычный",
+                  "placeholder_true": "сначала большой",
+                  "default_value": true,
+                  "label": "Очередность текстов"
+                }
+              },
+              "image_2": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Правое изображение"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "image_and_text": {
+            "type": "Slice",
+            "fieldset": "image_and_text",
+            "description": "Изображение и текст",
+            "icon": "art_track",
+            "non-repeat": {
+              "order": {
+                "type": "Number",
+                "config": {
+                  "label": "Позиция в документе",
+                  "placeholder": "порядковый номер"
+                }
+              },
+              "position_text": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "слева",
+                  "placeholder_true": "справа",
+                  "default_value": true,
+                  "label": "Положение текста"
+                }
+              },
+              "accent_text": {
+                "type": "Text",
+                "config": {
+                  "label": "Акцентный текст",
+                  "placeholder": "Акцентный текст"
+                }
+              },
+              "bold_text": {
+                "type": "Text",
+                "config": {
+                  "label": "Жирный текст",
+                  "placeholder": "Жирный текст"
+                }
+              },
+              "normal_text": {
+                "type": "Text",
+                "config": {
+                  "label": "Обычный текст",
+                  "placeholder": "Обычный текст"
+                }
+              },
+              "small_text": {
+                "type": "Text",
+                "config": {
+                  "label": "Маленький текст",
+                  "placeholder": "Маленький текст"
+                }
+              },
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Изображение"
                 }
               }
             },

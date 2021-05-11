@@ -5,29 +5,17 @@ const useStyles = makeStyles(theme => ({
   wrapper: {
     order: props => (props.order ? props.order : 0),
     width: "46.87vw",
-    marginTop: "2.18vw",
     "@media(min-width: 1280px)": {
       width: "600px",
-      marginTop: "28px",
     },
     "@media(max-width: 834px)": {
-      width: "7.19vw",
-      marginTop: "3.35vw",
+      width: "71.94vw",
     },
     "@media(max-width: 414px)": {
       width: "100%",
-      marginTop: "6.76vw",
     },
   },
   accentText: {
-    color: props => (props.color ? props.color : "#681DE1"),
-    background: props =>
-      props.color
-        ? props.color
-        : "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",
-    "-webkit-background-clip": () => "text",
-    "-webkit-text-fill-color": "transparent",
-
     fontWeight: 700,
     fontSize: "2.81vw",
     marginTop: "2.18vw",
@@ -44,40 +32,76 @@ const useStyles = makeStyles(theme => ({
       marginTop: "6.76vw",
     },
   },
-  accentText: {
-    color: props => (props.color ? props.color : "#681DE1"),
-
+  boldText: {
+    color: theme.palette.color.main,
     fontWeight: 700,
-    fontSize: "2.81vw",
+    fontSize: "1.56vw",
     marginTop: "2.18vw",
     "@media(min-width: 1280px)": {
-      fontSize: "36px",
+      fontSize: "20px",
       marginTop: "28px",
     },
     "@media(max-width: 834px)": {
-      fontSize: "4.31vw",
+      fontSize: "2.39vw",
       marginTop: "3.35vw",
     },
     "@media(max-width: 414px)": {
-      fontSize: "8.69vw",
+      fontSize: "4.83vw",
+      marginTop: "6.76vw",
+    },
+  },
+  normalText: {
+    color: theme.palette.color.secondary,
+    fontWeight: 400,
+    fontSize: "1.32vw",
+    marginTop: "2.18vw",
+    "@media(min-width: 1280px)": {
+      fontSize: "17px",
+      marginTop: "28px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "2.03vw",
+      marginTop: "3.35vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "4.1vw",
+      marginTop: "6.76vw",
+    },
+  },
+  smallText: {
+    color: theme.palette.color.secondary,
+    fontWeight: 400,
+    fontSize: "0.93vw",
+    marginTop: "2.18vw",
+    "@media(min-width: 1280px)": {
+      fontSize: "12px",
+      marginTop: "28px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "1.43vw",
+      marginTop: "3.35vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "2.89vw",
       marginTop: "6.76vw",
     },
   },
 }))
 
-export default function OnlyText({ slice }) {
+export default function OnlyText({ slice, ...other }) {
   const accent_text = slice.primary.accent_text ?? false
-  const accent_color = slice.primary.accent_color ?? false
   const bold_text = slice.primary.bold_text ?? false
   const normal_text = slice.primary.normal_text ?? false
   const small_text = slice.primary.small_text ?? false
+
   const order = slice.primary.order ?? false
 
-  const classes = useStyles({ color: accent_color, order: order })
+  const classes = useStyles({ order: order })
 
   return (
-    <Grid className={classes.wrapper}>
+    <Grid {...other} className={classes.wrapper}>
       <Typography
+        variant="body2"
         align="center"
         hidden={!accent_text}
         className={classes.accentText}
