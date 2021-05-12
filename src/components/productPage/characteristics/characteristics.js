@@ -7,12 +7,12 @@ const useStyles = makeStyles({
     display: "block",
     width: "100%",
     fontFamily: "Inter",
-    fontSize: 17,
     color: "#5A5A5A",
-    marginRight: ".52vw",
-    paddingTop: "0.83vw",
     overflow: "hidden",
     verticalAlign: "bottom",
+    "@media(min-width: 1280px)": {
+      fontSize: 17,
+    },
     "@media(min-width: 1025px)": {
       "&::after": {
         content: "''",
@@ -27,41 +27,30 @@ const useStyles = makeStyles({
       },
     },
     "@media(max-width: 834px)": {
-      fontSize: 14,
-      width: "38.84vw",
-      marginRight: "1vw",
-      alignItems: "normal",
+      fontSize: "1.67vw",
     },
     "@media(max-width: 414px)": {
-      width: "42.7vw",
-      maxWidth: "177px",
-      fontSize: 14,
-      margin: "5px 0 5px 0",
-      marginRight: "1.05vw",
+      fontSize: "3.38vw",
     },
   },
   attribValue: {
-    width: "20.83vw",
+    width: "100%",
     fontFamily: "Inter",
     display: "flex",
-    fontSize: 17,
     color: "#5A5A5A",
-    paddingTop: "0.83vw",
+    "@media(min-width: 1280px)": {
+      fontSize: 17,
+    },
     "@media(max-width: 834px)": {
-      fontSize: 14,
-      width: "38.84vw",
-      alignItems: "normal",
+      fontSize: "1.67vw",
     },
     "@media(max-width: 414px)": {
-      width: "42.7vw",
-      maxWidth: "177px",
-      fontSize: 14,
-      alignItems: "normal",
-      margin: "5px 0 5px 0",
+      fontSize: "3.38vw",
+      marginLeft: "1vw",
     },
   },
   wrapper: {
-    width: "46.875vw",
+    // width: "46.875vw",
     "@media(max-width: 834px)": {
       width: "100%",
     },
@@ -104,23 +93,61 @@ const useStyles = makeStyles({
     bottom: "0px",
   },
   characteristicsContainer: {
+    width: "70.31vw",
+    "@media(min-width: 1280px)": {
+      width: "900px",
+    },
     "@media(max-width: 834px)": {
+      width: "94.24vw",
       marginBottom: "10vw",
     },
   },
   wrapperChild: {
-    width: "25.52vw",
+    width: "38.28vw",
     display: "flex",
     alignItems: "flex-end",
+    paddingTop: "1.17vw",
+    marginRight: "0.78vw",
+    "@media(min-width: 1280px)": {
+      width: "480px",
+      marginRight: "10px",
+      paddingTop: "15px",
+    },
     "@media(max-width: 1024px)": {
       alignItems: "normal",
     },
+    "@media(max-width: 834px)": {
+      width: "38.84vw",
+      marginRight: "1.19vw",
+      paddingTop: "1.79vw",
+    },
+    "@media(max-width: 414px)": {
+      width: "42.7vw",
+      marginRight: "1vw",
+      paddingTop: "3.62vw",
+    },
   },
   wrapperAttrib: {
+    width: "31.25vw",
     display: "flex",
     alignItems: "flex-end",
+    paddingTop: "1.17vw",
+    "@media(min-width: 1280px)": {
+      width: "390px",
+      paddingTop: "15px",
+    },
     "@media(max-width: 1024px)": {
       alignItems: "normal",
+    },
+    "@media(max-width: 834px)": {
+      width: "38.84vw",
+      marginRight: "0px",
+      paddingTop: "1.79vw",
+    },
+    "@media(max-width: 414px)": {
+      width: "42.7vw",
+      marginRight: "0px",
+      paddingTop: "3.62vw",
     },
   },
 })
