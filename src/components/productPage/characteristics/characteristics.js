@@ -50,13 +50,7 @@ const useStyles = makeStyles({
     },
   },
   wrapper: {
-    // width: "46.875vw",
-    "@media(max-width: 834px)": {
-      width: "100%",
-    },
-    "@media(max-width: 414px)": {
-      width: "100%",
-    },
+    width: "100%",
   },
   characteristicTitle: {
     fontWeight: 700,
