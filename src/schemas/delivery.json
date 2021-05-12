@@ -1,26 +1,72 @@
 {
-    "Main" : {
-      "variants" : {
-        "type" : "Group",
-        "config" : {
-          "fields" : {
-            "name" : {
-              "type" : "Text",
-              "config" : {
-                "label" : "Название",
-                "placeholder" : "Название"
-              }
-            },
-            "description" : {
-              "type" : "Text",
-              "config" : {
-                "label" : "Описание способа",
-                "placeholder" : "Описание способа"
-              }
+  "Main" : {
+    "variants" : {
+      "type" : "Group",
+      "config" : {
+        "fields" : {
+          "name" : {
+            "type" : "Text",
+            "config" : {
+              "label" : "Название",
+              "placeholder" : "Название"
             }
           },
-          "label" : "Способы"
+          "description" : {
+            "type" : "Text",
+            "config" : {
+              "label" : "Описание способа",
+              "placeholder" : "Описание способа"
+            }
+          }
+        },
+        "label" : "Способы"
+      }
+    },
+    "body" : {
+      "type" : "Slices",
+      "fieldset" : "Slice zone",
+      "config" : {
+        "labels" : { },
+        "choices" : {
+          "_delivery_to_cities" : {
+            "type" : "Slice",
+            "fieldset" : " delivery to cities",
+            "description" : "доставка по городам",
+            "icon" : "local_shipping",
+            "non-repeat" : { },
+            "repeat" : {
+              "city_name" : {
+                "type" : "Text",
+                "config" : {
+                  "label" : "Название города",
+                  "placeholder" : "Название города"
+                }
+              },
+              "delivery_description" : {
+                "type" : "Text",
+                "config" : {
+                  "label" : "Описание доставки",
+                  "placeholder" : "Описание доставки"
+                }
+              },
+              "cost" : {
+                "type" : "Text",
+                "config" : {
+                  "label" : "Стоимость",
+                  "placeholder" : "Стоимость"
+                }
+              },
+              "timing" : {
+                "type" : "Text",
+                "config" : {
+                  "label" : "Сроки",
+                  "placeholder" : "Сроки"
+                }
+              }
+            }
+          }
         }
       }
     }
   }
+}

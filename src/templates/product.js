@@ -10,6 +10,7 @@ import Gallery from "../components/productPage/gallery"
 import DeliveryCards from "../components/productPage/delivery"
 import SimilarProduct from "../components/productPage/similarProduct"
 import TabPanel from "../components/productPage/tabPanel"
+import CharacteristicsBlock from "../components/productPage/characteristics"
 
 const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
   return (
@@ -54,7 +55,8 @@ const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
         imagesArr={prismicProduct.data.photos.map(photo => photo.image)}
       />
       <div id="delivery" />
-      <DeliveryCards />
+      <CharacteristicsBlock />
+      <DeliveryCards prismicProduct={prismicProduct} />
     </Layout>
   )
 }
@@ -126,6 +128,17 @@ export const pageQuery = graphql`
           document {
             ... on PrismicDelivery {
               data {
+                body {
+                  ... on PrismicDeliveryBodyDeliveryToCities {
+                    id
+                    items {
+                      city_name
+                      cost
+                      delivery_description
+                      timing
+                    }
+                  }
+                }
                 variants {
                   description
                   name

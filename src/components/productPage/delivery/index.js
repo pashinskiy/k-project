@@ -11,8 +11,12 @@ const useStyles = makeStyles({
     width: "100%",
   },
 })
-export default function DeliveryCards() {
+export default function DeliveryCards(prismicProduct) {
   const classes = useStyles()
+  const delivery =
+    prismicProduct.prismicProduct.data.delivery.document?.data.body[0].items ??
+    []
+
   return (
     <>
       <HeaderWithIcon
@@ -21,22 +25,18 @@ export default function DeliveryCards() {
         divider={true}
       />
       <Grid container spacing={4} className={classes.root}>
-        <Grid item>
-          <DeliveryCard
-            deliveryCity="Санкт Петербург"
-            deliveryDescription="Доставка осуществляется за счет компании, сразу к вам домой, в течение часа."
-            deliveryCost="бесплатно"
-            deliveryTime="1 час"
-          />
-        </Grid>
-        <Grid item>
-          <DeliveryCard
-            deliveryCity="Другие города в Российской Федерации"
-            deliveryDescription="Услуги доставки во все города России, кроме Санкт-Петербурга, осуществляется компанией СДЭК."
-            deliveryCost="300 руб."
-            deliveryTime="2-7 дней"
-          />
-        </Grid>
+        {delivery.length
+          ? delivery.map(variant => (
+              <Grid item>
+                <DeliveryCard
+                  deliveryCity={variant.city_name}
+                  deliveryDescription={variant.delivery_description}
+                  deliveryCost={variant.cost}
+                  deliveryTime={variant.timing}
+                />
+              </Grid>
+            ))
+          : null}
       </Grid>
     </>
   )
