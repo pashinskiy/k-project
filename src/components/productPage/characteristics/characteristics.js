@@ -4,25 +4,26 @@ import DocumentIcon from "../../../../static/svg/documentIcon.svg"
 
 const useStyles = makeStyles({
   childTitle: {
-    display: "flex",
-    width: "25.52vw",
-    flexBasis: "100%",
-    alignItems: "flex-end",
-    height: "100%",
+    display: "block",
+    width: "100%",
     fontFamily: "Inter",
     fontSize: 17,
     color: "#5A5A5A",
     marginRight: ".52vw",
     paddingTop: "0.83vw",
-    "@media(min-width: 834px)": {
+    overflow: "hidden",
+    verticalAlign: "bottom",
+    "@media(min-width: 1025px)": {
       "&::after": {
         content: "''",
-        flexGrow: "1",
-        background: "#5A5A5A",
+        backgroundColor: "#D6D5DF",
         height: "1px",
-        fontSize: "0px",
-        lineHeight: "0px",
-        margin: "0px 0px 6px 10px",
+        position: "relative",
+        verticalAlign: "baseline",
+        width: "100%",
+        display: "inline-block",
+        left: "0.5em",
+        marginRight: "-100%",
       },
     },
     "@media(max-width: 834px)": {
@@ -34,7 +35,6 @@ const useStyles = makeStyles({
     "@media(max-width: 414px)": {
       width: "42.7vw",
       maxWidth: "177px",
-      alignItems: "normal",
       fontSize: 14,
       margin: "5px 0 5px 0",
       marginRight: "1.05vw",
@@ -44,7 +44,6 @@ const useStyles = makeStyles({
     width: "20.83vw",
     fontFamily: "Inter",
     display: "flex",
-    alignItems: "flex-end",
     fontSize: 17,
     color: "#5A5A5A",
     paddingTop: "0.83vw",
@@ -107,6 +106,21 @@ const useStyles = makeStyles({
   characteristicsContainer: {
     "@media(max-width: 834px)": {
       marginBottom: "10vw",
+    },
+  },
+  wrapperChild: {
+    width: "25.52vw",
+    display: "flex",
+    alignItems: "flex-end",
+    "@media(max-width: 1024px)": {
+      alignItems: "normal",
+    },
+  },
+  wrapperAttrib: {
+    display: "flex",
+    alignItems: "flex-end",
+    "@media(max-width: 1024px)": {
+      alignItems: "normal",
     },
   },
 })
@@ -205,12 +219,12 @@ export default function Characteristics() {
     const attribArr = parentItems.attrib.map(function (childTitles) {
       return (
         <Grid container>
-          <Grid item>
+          <Grid item className={classes.wrapperChild}>
             <Typography className={classes.childTitle}>
               {childTitles.title}
             </Typography>
           </Grid>
-          <Grid item style={{ alignSelf: "flex-end" }}>
+          <Grid item className={classes.wrapperAttrib}>
             <Typography className={classes.attribValue}>
               {childTitles.value}
             </Typography>
