@@ -156,7 +156,7 @@ export default function Characteristics(props) {
   ) {
     const attribArr = parentItems.items.map(function (childTitles) {
       return (
-        <Grid container>
+        <Grid container key={childTitles.characteristic}>
           <Grid item className={classes.wrapperChild}>
             <Typography className={classes.childTitle}>
               {childTitles.characteristic}
@@ -171,7 +171,7 @@ export default function Characteristics(props) {
       )
     })
     return (
-      <Grid container className={classes.wrapper}>
+      <Grid container className={classes.wrapper} key={parentItems.primary.title}>
         <Typography className={classes.characteristicTitle}>
           {parentItems.primary.title}
         </Typography>
@@ -192,6 +192,7 @@ export default function Characteristics(props) {
                 <Grid
                   container
                   spacing={2}
+                  key={variant.doc_title.text}
                   className={classes.documentContainer}
                 >
                   <Grid item style={{ padding: "0" }}>

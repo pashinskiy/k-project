@@ -27,7 +27,7 @@ export default function DeliveryCards(prismicProduct) {
       <Grid container spacing={4} className={classes.root}>
         {delivery.length
           ? delivery.map(variant => (
-              <Grid item>
+              <Grid item key={variant.city_name}>
                 <DeliveryCard
                   deliveryCity={variant.city_name}
                   deliveryDescription={variant.delivery_description}
