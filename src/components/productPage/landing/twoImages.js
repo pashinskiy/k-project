@@ -106,6 +106,20 @@ export default function TwoImages({ slice, ...other }) {
 
   const classes = useStyles({ order: order })
 
+  const gradient_1 = (function () {
+    if (!big_text_1 && !normal_text_1) return ""
+    if (vertical_align_1)
+      return "linear-gradient(139.56deg, rgba(66, 0, 255, 0.47) 13.15%, rgba(128, 0, 255, 0) 50%)"
+    return "linear-gradient(27.62deg, rgba(66, 0, 255, 0.47) 13.15%, rgba(128, 0, 255, 0) 50%)"
+  })()
+
+  const gradient_2 = (function () {
+    if (!big_text_2 && !normal_text_2) return ""
+    if (vertical_align_2)
+      return "linear-gradient(139.56deg, rgba(66, 0, 255, 0.47) 13.15%, rgba(128, 0, 255, 0) 50%)"
+    return "linear-gradient(27.62deg, rgba(66, 0, 255, 0.47) 13.15%, rgba(128, 0, 255, 0) 50%)"
+  })()
+
   return (
     <Grid
       container
@@ -118,7 +132,10 @@ export default function TwoImages({ slice, ...other }) {
         direction="column"
         justify={vertical_align_1 ? "flex-start" : "flex-end"}
         className={classes.wrapperBlock}
-        style={{ color: color_text_1 ? "" : "#000000" }}
+        style={{
+          color: color_text_1 ? "" : "#000000",
+          background: gradient_1,
+        }}
       >
         <Typography
           hidden={!big_text_1}
@@ -127,10 +144,7 @@ export default function TwoImages({ slice, ...other }) {
         >
           {big_text_1}
         </Typography>{" "}
-        <Typography
-          hidden={!normal_text_1}
-          className={classes.normalText}
-        >
+        <Typography hidden={!normal_text_1} className={classes.normalText}>
           {normal_text_1}
         </Typography>
         {img_1 ? (
@@ -153,7 +167,10 @@ export default function TwoImages({ slice, ...other }) {
         direction="column"
         justify={vertical_align_2 ? "flex-start" : "flex-end"}
         className={classes.wrapperBlock}
-        style={{ color: color_text_2 ? "" : "#000000" }}
+        style={{
+          color: color_text_2 ? "" : "#000000",
+          background: gradient_2,
+        }}
       >
         <Typography
           hidden={!big_text_2}
@@ -162,11 +179,7 @@ export default function TwoImages({ slice, ...other }) {
         >
           {big_text_1}
         </Typography>{" "}
-        <Typography
-          hidden={!normal_text_2}
-        >
-          {normal_text_1}
-        </Typography>
+        <Typography hidden={!normal_text_2}>{normal_text_1}</Typography>
         {img_2 ? (
           <GatsbyImage
             image={img_2}
