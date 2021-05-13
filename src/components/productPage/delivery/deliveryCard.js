@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     "@media (max-width:414px)": {
       maxWidth: "366px",
     },
-    background: "#EFEFF2",
+    background: theme.palette.background.secondary,
     borderRadius: "12px",
     boxShadow: "none",
   },
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: 17,
     marginBottom: "15px",
     marginTop: "5px",
-    color: "#5A5A5A",
+    color: theme.palette.color.secondary,
   },
   title: {
     fontSize: 20,
@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: "700",
     marginBottom: "15px",
     marginTop: "5px",
-    color: "#000000",
+    color: theme.palette.color.main,
   },
   cost: {
     //fontFamily: "Inter",
@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
   },
   costStatic: {
     display: "inline-block",
-    color: "#5A5A5A",
+    color: theme.palette.color.secondary,
   },
   time: {
     //fontFamily: "Inter",
@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
   },
   timeStatic: {
     display: "inline-block",
-    color: "#5A5A5A",
+    color: theme.palette.color.secondary,
   },
 }))
 
