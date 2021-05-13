@@ -34,8 +34,9 @@ const useStyles = makeStyles({
   },
 })
 
-export default function CharacteristicsBlock() {
+export default function CharacteristicsBlock(props) {
   const classes = useStyles()
+  const description = props.props.data.description ?? null
   return (
     <div>
       <HeaderWithIcon
@@ -43,21 +44,16 @@ export default function CharacteristicsBlock() {
         title="Характеристики и описание"
         divider={true}
       />
-      <Grid container wrap="nowrap" xs={12}>
+      <Grid container wrap="nowrap">
         <Grid item xs={12}>
           <Card className={classes.cardDescription}>
             <CardContent style={{ padding: "16px" }}>
               <Typography className={classes.cardText}>
-                Динамический микрофон SHURE SM7B создан для применения в
-                телевизионных, звукозаписывающих или радио студиях. Благодаря
-                ультрасовременной системе экранирования, устройство надежно
-                защищено от нежелательного влияния электромагнитных полей,
-                которые создают разнообразные электрические приборы находящиеся
-                в студиях.
+                {description}
               </Typography>
             </CardContent>
           </Card>
-          <Characteristics />
+          <Characteristics props={props.props.data} />
         </Grid>
       </Grid>
     </div>

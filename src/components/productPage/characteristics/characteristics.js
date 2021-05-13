@@ -82,6 +82,8 @@ const useStyles = makeStyles({
   },
   documentLink: {
     fontSize: 12,
+    color: "#5A5A5A",
+    opacity: ".6",
     textDecoration: "underline",
     position: "absolute",
     bottom: "0px",
@@ -146,103 +148,18 @@ const useStyles = makeStyles({
   },
 })
 
-export default function Characteristics() {
+export default function Characteristics(props) {
   const classes = useStyles()
-  const charecteristicsData = [
-    {
-      title: "Общие характеристики",
-      attrib: [
-        {
-          title: "Модель",
-          value: "2021 года",
-        },
-        {
-          title: "Возраст",
-          value: "для взрослых",
-        },
-        {
-          title: "Тип",
-          value: "горный (MTB), кросс-кантри",
-        },
-        {
-          title: "Тип привода",
-          value: "цепной",
-        },
-      ],
-    },
-    {
-      title: "Торможение",
-      attrib: [
-        {
-          title: "Передний тормоз",
-          value: "прогулочный / 160mm",
-        },
-        {
-          title: "Тип переднего тормоза",
-          value: "дисковый механический",
-        },
-        {
-          title: "Задний тормоз",
-          value: "прогулочный / 160mm",
-        },
-        {
-          title: "Тип заднего тормоза",
-          value: "дисковый механический",
-        },
-        {
-          title: "Возможность крепления дискового тормоза",
-          value: "вилка, рама, втулка",
-        },
-      ],
-    },
-    {
-      title: "Дополнительно",
-      attrib: [
-        {
-          title: "Срок службы",
-          value: "1728 дн.",
-        },
-        {
-          title: "Гарантийный срок",
-          value: "12 мес.",
-        },
-        {
-          title: "Страна производства",
-          value: "Китай",
-        },
-        {
-          title: "Дополнительная информация",
-          value:
-            "рабочий диапазон частот 2412-2472 МГц; максимальная выходная мощность 17,41 дБм",
-        },
-        {
-          title: "Экосистема",
-          value: "Умный дом Яндекса",
-        },
-      ],
-    },
-  ]
-  const iconData = [
-    {
-      title: "Гарантийное обслуживание",
-      descript: "Гарантия производителя",
-      link: "# ",
-    },
-    {
-      title: "Инструкция пользования",
-      descript: "Общий мануал",
-      link: "#",
-    },
-  ]
-  const characteristicTitlesArray = charecteristicsData.map(function (
+  const iconData = props.props.documents
+  const characteristicTitlesArray = props.props.body1.map(function (
     parentItems
   ) {
-    const attribArr = parentItems.attrib.map(function (childTitles) {
+    const attribArr = parentItems.items.map(function (childTitles) {
       return (
         <Grid container>
           <Grid item className={classes.wrapperChild}>
             <Typography className={classes.childTitle}>
-              {childTitles.title}
+              {childTitles.characteristic}
             </Typography>
           </Grid>
           <Grid item className={classes.wrapperAttrib}>
@@ -256,7 +173,7 @@ export default function Characteristics() {
     return (
       <Grid container className={classes.wrapper}>
         <Typography className={classes.characteristicTitle}>
-          {parentItems.title}
+          {parentItems.primary.title}
         </Typography>
         {attribArr}
       </Grid>
@@ -289,12 +206,12 @@ export default function Characteristics() {
                     }}
                   >
                     <Typography className={classes.documentTitle}>
-                      {variant.title}
+                      {variant.doc_title.text}
                     </Typography>
                     <Typography className={classes.documentDescrition}>
-                      {variant.descript}
+                      {variant.doc_description.text}
                     </Typography>
-                    <Link href={variant.link} className={classes.documentLink}>
+                    <Link href={variant.file.url} className={classes.documentLink}>
                       Скачать
                     </Link>
                   </Grid>

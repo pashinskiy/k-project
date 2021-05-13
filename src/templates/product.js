@@ -54,8 +54,9 @@ const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
       <Gallery
         imagesArr={prismicProduct.data.photos.map(photo => photo.image)}
       />
+      <div id="characteristics" />
+      <CharacteristicsBlock props={prismicProduct} />
       <div id="delivery" />
-      <CharacteristicsBlock />
       <DeliveryCards prismicProduct={prismicProduct} />
     </Layout>
   )
@@ -217,6 +218,29 @@ export const pageQuery = graphql`
                 alt
               }
             }
+          }
+        }
+        body1 {
+          ... on PrismicProductBody1Characteristics {
+            items {
+              characteristic
+              value
+            }
+            primary {
+              title
+            }
+          }
+        }
+        description
+        documents {
+          doc_title {
+            text
+          }
+          file {
+            url
+          }
+          doc_description {
+            text
           }
         }
         body2 {
