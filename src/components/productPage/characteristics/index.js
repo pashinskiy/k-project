@@ -10,9 +10,9 @@ import HeaderWithIcon from "../../headers/headerWithIcon"
 import Characteristics from "./characteristics"
 import CharacteristicsIcon from "../../../../static/svg/characteristicsIcon.svg"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   cardDescription: {
-    background: "#EFEFF2",
+    background: theme.palette.background.secondary,
     borderRadius: "12px",
     boxShadow: "none",
     width: "57.8125vw",
@@ -32,7 +32,11 @@ const useStyles = makeStyles({
       fontSize: 14,
     },
   },
-})
+  cardContent:{
+    padding: "16px",
+    color: theme.palette.color.main,
+  }
+}))
 
 export default function CharacteristicsBlock(props) {
   const classes = useStyles()
@@ -47,7 +51,7 @@ export default function CharacteristicsBlock(props) {
       <Grid container wrap="nowrap">
         <Grid item xs={12}>
           <Card className={classes.cardDescription}>
-            <CardContent style={{ padding: "16px" }}>
+            <CardContent className={classes.cardContent}>
               <Typography className={classes.cardText}>
                 {description}
               </Typography>

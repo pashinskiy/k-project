@@ -2,12 +2,12 @@ import { Grid, Link, makeStyles, Typography } from "@material-ui/core"
 import React from "react"
 import DocumentIcon from "../../../../static/svg/documentIcon.svg"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   childTitle: {
     display: "block",
     width: "100%",
     fontFamily: "Inter",
-    color: "#5A5A5A",
+    color: theme.palette.color.secondary,
     overflow: "hidden",
     verticalAlign: "bottom",
     "@media(min-width: 1280px)": {
@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     width: "100%",
     fontFamily: "Inter",
     display: "flex",
-    color: "#5A5A5A",
+    color: theme.palette.color.secondary,
     "@media(min-width: 1280px)": {
       fontSize: 17,
     },
@@ -82,7 +82,7 @@ const useStyles = makeStyles({
   },
   documentLink: {
     fontSize: 12,
-    color: "#5A5A5A",
+    color: theme.palette.color.secondary,
     opacity: ".6",
     textDecoration: "underline",
     position: "absolute",
@@ -146,7 +146,7 @@ const useStyles = makeStyles({
       paddingTop: "3.62vw",
     },
   },
-})
+}))
 
 export default function Characteristics(props) {
   const classes = useStyles()
