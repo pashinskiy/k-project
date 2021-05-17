@@ -49,6 +49,16 @@ const useStyle = makeStyles(theme => ({
       paddingRight: "7.24vw",
     },
   },
+  unselect: {
+    "& *": {
+      "-webkit-touch-callout": "none" /* iOS Safari */,
+      "-webkit-user-select": "none" /* Chrome/Safari/Opera */,
+      "-khtml-user-select": "none" /* Konqueror */,
+      "-moz-user-select": "none" /* Firefox */,
+      "-ms-user-select": "none" /* Internet Explorer/Edge */,
+      "user-select": "none",
+    },
+  },
 }))
 
 function setScrollBar(e) {
@@ -93,7 +103,10 @@ export default function SimilarProduct({ products }) {
         className={classes.cardPanel}
       >
         {products.map((product, i) => (
-          <div key={product.uid + i} className={classes.wrapperCard}>
+          <div
+            key={product.uid + i}
+            className={classes.wrapperCard + " " + classes.unsecect}
+          >
             <CardSimilarProduct product={product} />
           </div>
         ))}

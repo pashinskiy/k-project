@@ -68,7 +68,16 @@ const useStyles = makeStyles(theme => ({
     },
   },
   textCard: {
-    fontSize: "14px",
+    fontSize: "1.09vw",
+    "@media(min-width: 1280px)": {
+      fontSize: "14px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "1.67vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "3.38vw",
+    },
   },
 }))
 
