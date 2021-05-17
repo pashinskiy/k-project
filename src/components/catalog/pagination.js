@@ -179,16 +179,18 @@ export default function Pagination({ pageSize, products }) {
 
   function goTo(i) {
     if (i < 1 || i > lastPage || i === page) return
-    const bar = barItem.current
-    let newLeft = +bar.style.marginLeft.slice(0, -2)
-    const step =
-      +getComputedStyle(bar.children[0]).width.slice(0, -2) +
-      +getComputedStyle(bar.children[0]).marginRight.slice(0, -2)
+    if (lastPage > 5) {
+      const bar = barItem.current
+      let newLeft = +bar.style.marginLeft.slice(0, -2)
+      const step =
+        +getComputedStyle(bar.children[0]).width.slice(0, -2) +
+        +getComputedStyle(bar.children[0]).marginRight.slice(0, -2)
 
-    if (i > 3 && i < lastPage - 2) newLeft = -step * (i - 3)
-    else newLeft = i <= 3 ? 0 : -step * (lastPage - 5)
+      if (i > 3 && i < lastPage - 2) newLeft = -step * (i - 3)
+      else newLeft = i <= 3 ? 0 : -step * (lastPage - 5)
 
-    bar.style.marginLeft = newLeft + "px"
+      bar.style.marginLeft = newLeft + "px"
+    }
     setPage(i)
   }
 

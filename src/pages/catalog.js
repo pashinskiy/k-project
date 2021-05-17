@@ -1,5 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
+import { useMediaQuery } from "@material-ui/core"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -8,6 +9,8 @@ import CardProduct from "../components/catalog/catalogCardProduct"
 import Pagination from "../components/catalog/Pagination"
 
 const IndexPage = ({ data }) => {
+  const mobile = useMediaQuery("(max-width: 834px)")
+
   const arrayCards = data.allPrismicProduct.edges.map((edge, i) => (
     <CardProduct product={edge.node} key={edge.node.id} />
   ))
@@ -15,10 +18,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <Seo title="Home" />
-      <Pagination
-        pageSize={5}
-        products={[...arrayCards, ...arrayCards, ...arrayCards]}
-      />
+      <Pagination pageSize={mobile ? 5 : 10} products={arrayCards} />
     </Layout>
   )
 }

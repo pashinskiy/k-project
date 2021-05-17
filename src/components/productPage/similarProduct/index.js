@@ -61,34 +61,33 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-function setScrollBar(e) {
-  const cardPanel = e.currentTarget
-  const transition = cardPanel.style.transition
-  cardPanel.style.transition = "none"
-  //отмена перехвата браузера
-  cardPanel.ondragstart = () => false
-
-  const clientX = e.clientX
-  const scrollLeft = cardPanel.scrollLeft
-
-  document.addEventListener("pointermove", scrollBar)
-  document.addEventListener("pointerup", deleteScrollBar)
-
-  function deleteScrollBar() {
-    cardPanel.style.transition = transition
-    document.removeEventListener("pointermove", scrollBar)
-    document.removeEventListener("pointerup", deleteScrollBar)
-  }
-
-  function scrollBar(e) {
-    let newLeft = scrollLeft - e.clientX + clientX
-    cardPanel.scrollLeft = newLeft
-  }
-}
-
 export default function SimilarProduct({ products }) {
   const classes = useStyle()
-  products = [...products, ...products, ...products]
+  
+  function setScrollBar(e) {
+    const cardPanel = e.currentTarget
+    const transition = cardPanel.style.transition
+    cardPanel.style.transition = "none"
+    //отмена перехвата браузера
+    cardPanel.ondragstart = () => false
+
+    const clientX = e.clientX
+    const scrollLeft = cardPanel.scrollLeft
+
+    document.addEventListener("pointermove", scrollBar)
+    document.addEventListener("pointerup", deleteScrollBar)
+
+    function deleteScrollBar() {
+      cardPanel.style.transition = transition
+      document.removeEventListener("pointermove", scrollBar)
+      document.removeEventListener("pointerup", deleteScrollBar)
+    }
+
+    function scrollBar(e) {
+      let newLeft = scrollLeft - e.clientX + clientX
+      cardPanel.scrollLeft = newLeft
+    }
+  }
   return (
     <Grid className={classes.wrapper}>
       <HeaderWithIcon
