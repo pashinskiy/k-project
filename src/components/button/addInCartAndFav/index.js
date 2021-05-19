@@ -4,6 +4,7 @@ import ButtonAddCart from "./buttonAddCart"
 import ButtonAddFavorites from "./buttonAddFavorites"
 import ButtonPlusMinus from "./buttonPlusMinus"
 import ButtonDelete from "./buttonDelete"
+
 const useStyles = makeStyles(theme => ({
   wrapper: {
     marginTop: "1.56vw",

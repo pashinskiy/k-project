@@ -198,7 +198,7 @@ export default function Pagination({ pageSize, products }) {
   for (let i = 1; i <= lastPage; i++) {
     const active = i === page ? classes.active : ""
     pagination.push(
-      <Grid className={classes.paginationItem + " " + active}>
+      <Grid key={i} className={classes.paginationItem + " " + active}>
         <button onClick={() => goTo(i)}>{i}</button>
       </Grid>
     )

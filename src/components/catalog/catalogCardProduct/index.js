@@ -304,7 +304,7 @@ export default function CardProduct({ product, ...other }) {
         ) : null}
         <GatsbyImage
           image={
-            product.data.images[0]?.image.localFile.childImageSharp
+            product.data.images[0]?.image.localFile?.childImageSharp
               .gatsbyImageData
           }
           alt={product.data.images[0]?.image.alt ?? "product"}

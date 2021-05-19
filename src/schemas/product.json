@@ -168,17 +168,21 @@
             },
             "repeat": {
               "characteristic": {
-                "type": "Text",
+                "type": "Link",
                 "config": {
+                  "select": "document",
+                  "customtypes": [
+                    "characteristic"
+                  ],
                   "label": "Характеристика",
-                  "placeholder": "Характеристика"
+                  "placeholder": "документ"
                 }
               },
               "value": {
                 "type": "Text",
                 "config": {
                   "label": "Значение",
-                  "placeholder": "Значение"
+                  "placeholder": "для maximum и from to  без единиц измерения, для boolean да/нет"
                 }
               }
             }
@@ -485,35 +489,35 @@
       }
     }
   },
-  "Документы" : {
-    "documents" : {
-      "type" : "Group",
-      "config" : {
-        "fields" : {
-          "doc_title" : {
-            "type" : "StructuredText",
-            "config" : {
-              "label" : "Название документа",
-              "placeholder" : "Название документа"
+  "Документы": {
+    "documents": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "doc_title": {
+            "type": "StructuredText",
+            "config": {
+              "label": "Название документа",
+              "placeholder": "Название документа"
             }
           },
-          "doc_description" : {
-            "type" : "StructuredText",
-            "config" : {
-              "label" : "Описание документа",
-              "placeholder" : "Описание документа"
+          "doc_description": {
+            "type": "StructuredText",
+            "config": {
+              "label": "Описание документа",
+              "placeholder": "Описание документа"
             }
           },
-          "file" : {
-            "type" : "Link",
-            "config" : {
-              "select" : "media",
-              "label" : "Документ",
-              "placeholder" : "Документ"
+          "file": {
+            "type": "Link",
+            "config": {
+              "select": "media",
+              "label": "Документ",
+              "placeholder": "Документ"
             }
           }
         },
-        "label" : "Документы"
+        "label": "Документы"
       }
     }
   }
