@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
       paddingTop: "9.66vw",
     },
   },
-  container: {
+  categoryCardItem: {
     "@media(min-width: 1280px)": {
       width: "199.5px",
       height: "140px",
@@ -38,6 +38,12 @@ const useStyles = makeStyles(theme => ({
       height: "30.91vw",
     },
   },
+  storiesCardItem: {
+    width: "136px",
+    height: "136px",
+    padding: "8px",
+  },
+
 }))
 
 export default function CategoryWidget(props) {
@@ -52,13 +58,14 @@ export default function CategoryWidget(props) {
       <Grid container>
         {data.length
           ? data.map((category, i) => (
-              <Grid item key={i} className={classes.container}>
+              <Grid item key={i} className={classes.storiesCardItem}>
                 <CategoryCard
                   cardImage={
                     category.category.document.data.image.localFile
                       .childImageSharp.gatsbyImageData
                   }
                   cardTitle={category.category.document.data.name}
+                  variant="brand2"
                 />
               </Grid>
             ))

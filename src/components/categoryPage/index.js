@@ -4,7 +4,6 @@ import CategoryWidget from "../categoryCard"
 const CategoryPage = (allPrismicCatalog) => {
   return (
     <>
-        {console.log(allPrismicCatalog)}
       <CategoryWidget props= {allPrismicCatalog}/>
     </>
   )
