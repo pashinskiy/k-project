@@ -55,7 +55,7 @@ const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
         imagesArr={prismicProduct.data.photos.map(photo => photo.image)}
       />
       <div id="characteristics" />
-      <CharacteristicsBlock props={prismicProduct} />
+      {/* <CharacteristicsBlock props={prismicProduct} /> */}
       <div id="delivery" />
       <DeliveryCards prismicProduct={prismicProduct} />
     </Layout>
@@ -69,7 +69,37 @@ export const pageQuery = graphql`
     prismicProduct(uid: { eq: $uid }) {
       uid
       data {
-        brand
+        brand {
+          document {
+            ... on PrismicBrand {
+              id
+              data {
+                name
+                body {
+                  ... on PrismicBrandBodyLogo {
+                    id
+                    slice_type
+                    primary {
+                      image {
+                        localFile {
+                          childImageSharp {
+                            fluid(maxHeight: 35) {
+                              aspectRatio
+                              src
+                              srcSet
+                              srcSetWebp
+                            }
+                          }
+                        }
+                        alt
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
         name
         color_name
         color
@@ -160,24 +190,6 @@ export const pageQuery = graphql`
           }
         }
         body {
-          ... on PrismicProductBodyBrand {
-            slice_type
-            primary {
-              image {
-                localFile {
-                  childImageSharp {
-                    fluid(maxHeight: 35) {
-                      aspectRatio
-                      src
-                      srcSet
-                      srcSetWebp
-                    }
-                  }
-                }
-                alt
-              }
-            }
-          }
           ... on PrismicProductBodyStickers {
             slice_type
             items {
@@ -223,7 +235,17 @@ export const pageQuery = graphql`
         body1 {
           ... on PrismicProductBody1Characteristics {
             items {
-              characteristic
+              characteristic {
+                document {
+                  ... on PrismicCharacteristic {
+                    id
+                    data {
+                      name
+                      variant
+                    }
+                  }
+                }
+              }
               value
             }
             primary {

@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Grid, makeStyles, Typography, useMediaQuery } from "@material-ui/core"
 import { GatsbyImage } from "gatsby-plugin-image"
+import { Link } from "gatsby"
 
 import BlockPrice from "./blockPrice"
 import AddInCartAndFav from "../../button/addInCartAndFav"
@@ -84,6 +85,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     fontWeight: 700,
+    color: theme.palette.color.main,
     fontSize: "1.56vw",
     "@media(min-width: 1280px)": {
       fontSize: "20px",
@@ -227,6 +229,14 @@ const useStyles = makeStyles(theme => ({
       width: "100%",
     },
   },
+  link: {
+    textDecoration: "none",
+    display: "contents",
+    "@media(max-width: 414px)": {
+      display: "block",
+      marginTop: "2.89vw",
+    },
+  },
 }))
 
 export default function CardProduct({ product, ...other }) {
@@ -269,11 +279,11 @@ export default function CardProduct({ product, ...other }) {
     .map(item => (
       <Grid
         container
-        key={item.characteristic}
+        key={item.characteristic.document.data.name}
         className={classes.characteristicRow}
       >
         <Typography className={classes.text + " " + classes.characteristic}>
-          {item.characteristic}:
+          {item.characteristic.document.data.name}:
         </Typography>
         <Typography className={classes.text}>{item.value}</Typography>
       </Grid>
@@ -319,12 +329,15 @@ export default function CardProduct({ product, ...other }) {
       >
         <Grid className={classes.wrapperMainBlock}>
           {mobile ? <BlockPrice product={product} /> : null}
-          <Typography className={classes.wrapperRow + " " + classes.title}>
-            {product.data.name} {mobile ? product.data.color_name : null}
-          </Typography>
-          <Typography hidden={mobile} className={classes.title}>
-            {product.data.color_name}
-          </Typography>
+
+          <Link to={`/${product.uid}`} className={classes.link}>
+            <Typography className={classes.title}>
+              {product.data.name} {mobile ? product.data.color_name : null}
+            </Typography>
+            <Typography hidden={mobile} className={classes.title}>
+              {product.data.color_name}
+            </Typography>
+          </Link>
 
           <Grid
             container

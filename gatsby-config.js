@@ -52,6 +52,8 @@ module.exports = {
           sticker: require("./src/schemas/sticker.json"),
           delivery: require("./src/schemas/delivery.json"),
           credit: require("./src/schemas/credit.json"),
+          characteristic: require("./src/schemas/characteristic.json"),
+          brand: require("./src/schemas/brand.json"),
         },
         shouldDownloadImage: () => true,
       },

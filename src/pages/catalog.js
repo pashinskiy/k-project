@@ -12,8 +12,11 @@ import Filter from "../components/filter"
 const IndexPage = ({ data }) => {
   const mobile = useMediaQuery("(max-width: 834px)")
 
-  const arrayCards = data.allPrismicProduct.edges.map((edge, i) => (
-    <CardProduct product={edge.node} key={edge.node.id} />
+  const allProducts = data.allPrismicProduct.edges.map(edge => edge.node)
+  const [filterProducts, setFilterProducts] = React.useState(allProducts)
+
+  const arrayCards = filterProducts.map(product => (
+    <CardProduct product={product} key={product.id} />
   ))
 
   return (
@@ -21,9 +24,7 @@ const IndexPage = ({ data }) => {
       <Seo title="Home" />
       <Grid container justify="space-between">
         <Pagination pageSize={mobile ? 5 : 10} products={arrayCards} />
-        <Filter
-          products={data.allPrismicProduct.edges.map(edge => edge.node)}
-        />
+        <Filter products={allProducts} setFilterProducts={setFilterProducts} />
       </Grid>
     </Layout>
   )
@@ -39,6 +40,16 @@ export const query = graphql`
           id
           uid
           data {
+            brand {
+              document {
+                ... on PrismicBrand {
+                  id
+                  data {
+                    name
+                  }
+                }
+              }
+            }
             name
             price
             old_price
@@ -99,9 +110,20 @@ export const query = graphql`
             }
             body1 {
               ... on PrismicProductBody1Characteristics {
+                id
                 slice_type
                 items {
-                  characteristic
+                  characteristic {
+                    document {
+                      ... on PrismicCharacteristic {
+                        id
+                        data {
+                          name
+                          variant
+                        }
+                      }
+                    }
+                  }
                   value
                 }
               }

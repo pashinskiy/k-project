@@ -2,7 +2,6 @@ import React from "react"
 import { Button, Grid, makeStyles, Typography } from "@material-ui/core"
 
 import Wrapper from "./wrapper"
-import Check from "../../../static/svg/check.svg"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -172,10 +171,7 @@ export default function BlockCheckbox({ title, set, selected, setFilter }) {
   const classes = useStyles({ show })
 
   function change(value) {
-    const index = selected.indexOf(value)
-    if (index !== -1) selected.splice(index, 1)
-    else selected.push(value)
-    setFilter(title, selected)
+    setFilter(title, value)
   }
 
   if (!show) set = set.slice(0, 6)
@@ -200,13 +196,9 @@ export default function BlockCheckbox({ title, set, selected, setFilter }) {
               justify="center"
               alignItems="center"
               className={
-                classes.check +
-                " " +
-                (selected?.includes(value) ? classes.active : "")
+                classes.check + " " + (selected === value ? classes.active : "")
               }
-            >
-              {selected?.includes(value) ? <Check /> : null}
-            </Grid>
+            />
             <Typography align="left" className={classes.text}>
               {value}
             </Typography>

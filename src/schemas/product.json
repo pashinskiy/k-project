@@ -7,18 +7,22 @@
         "placeholder": "Уникальный ID"
       }
     },
+    "brand": {
+      "type": "Link",
+      "config": {
+        "select": "document",
+        "customtypes": [
+          "brand"
+        ],
+        "label": "Производитель",
+        "placeholder": "документ"
+      }
+    },
     "name": {
       "type": "Text",
       "config": {
         "label": "Название товара",
         "placeholder": "Название товара"
-      }
-    },
-    "brand": {
-      "type": "Text",
-      "config": {
-        "label": "Бренд",
-        "placeholder": "Бренд"
       }
     },
     "color_name": {
@@ -70,24 +74,6 @@
       "config": {
         "labels": {},
         "choices": {
-          "brand": {
-            "type": "Slice",
-            "fieldset": "brand",
-            "description": "логотип бренда",
-            "icon": "crop_original",
-            "non-repeat": {
-              "image": {
-                "type": "Image",
-                "config": {
-                  "constraint": {},
-                  "thumbnails": [],
-                  "label": "Изображение"
-                }
-              }
-            },
-            "repeat": {},
-            "display": "list"
-          },
           "stickers": {
             "type": "Slice",
             "fieldset": "stickers",

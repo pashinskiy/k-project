@@ -1,6 +1,12 @@
 import React from "react"
-import { Grid, makeStyles, Typography } from "@material-ui/core"
+import { Grid, makeStyles } from "@material-ui/core"
+
 import BlockFromTo from "./blockFromTo"
+import BlockColors from "./blockColors"
+import BlockCheckbox from "./blockCheckbox"
+import BlockMax from "./blockMax"
+import BlockRatio from "./blockRatio"
+import BlockBoolean from "./blockBoolean"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -18,62 +24,110 @@ const useStyles = makeStyles(theme => ({
       marginTop: "4.83vw",
     },
   },
-  wrapperBlock: {
-    background: theme.palette.background.secondary,
-    width: "100%",
-    padding: "2.18vw",
-    marginBottom: "0.93vw",
-    borderRadius: "0.93vw",
-    "@media(min-width: 1280px)": {
-      width: "280px",
-      padding: "28px",
-      marginBottom: "12px",
-      borderRadius: "12px",
-    },
-    "@media(max-width: 834px)": {
-      width: "49.22%",
-      padding: "3.35vw",
-      marginBottom: "1.43vw",
-      borderRadius: "1.43vw",
-    },
-    "@media(max-width: 414px)": {
-      width: "100%",
-      padding: "6.76vw",
-      marginBottom: "2.89vw",
-      borderRadius: "2.89vw",
-    },
-  },
-  title: {
-    fontWeight: 700,
-    color: "#131313",
-    fontSize: "1.32vw",
-    marginBottom: "1.25vw",
-    "@media(min-width: 1280px)": {
-      fontSize: "17px",
-      marginBottom: "16px",
-    },
-    "@media(max-width: 834px)": {
-      fontSize: "2.03vw",
-      marginBottom: "1.91vw",
-    },
-    "@media(max-width: 414px)": {
-      fontSize: "4.1vw",
-      marginBottom: "3.86vw",
-    },
-  },
 }))
 
 export default function Filter({ products, setFilterProducts }) {
   const classes = useStyles()
 
-  // получаем уникальные значения для фильтра
-  const price = new Set()
+  // получаем уникальные значения для фильтров по умолчанию
+  const prices = new Set()
   const colors = new Set()
+  const brands = new Set()
+  const other = new Map()
 
   products.forEach(product => {
-    price.add(product.data.price)
-    colors.add(product.data.color.replace("ё", "е"))
+    prices.add(product.data.price)
+    colors.add(product.data.color_name.replace("ё", "е").toLowerCase())
+    brands.add(product.data.brand.document.data.name.replace("ё", "е"))
+    product.data.body1
+      .filter(slice => slice.slice_type === "characteristics")
+      .forEach(slice => {
+        slice.items.forEach(characteristic => {
+          const type = characteristic.characteristic.document.data.variant
+          const name = characteristic.characteristic.document.data.name
+          const value = characteristic.value
+          if (type === "none") return
+          if (other.has(name)) {
+            const filter = { ...other.get(name) }
+            filter.value.add(value)
+            other.set(name, filter)
+          } else {
+            const newFilter = { type, value: new Set([value]) }
+            other.set(name, newFilter)
+          }
+        })
+      })
   })
+
+  // фильтр по цене
+  const [filterPrice, setFilterPrice] = React.useState([])
+  // фильтр по цвету
+  const [filterColor, setFilterColor] = React.useState([])
+  // фильтр по производителю
+  const [filterBrand, setFilterBrand] = React.useState([])
+  // остальные фильтры
+  const [filtersOther, setFiltersOther] = React.useState(new Map())
+
+  // установка фильтра от до
+  function setFilterFromTo(title, value) {
+    console.log(value)
+    if (title === "Цена") setFilterPrice(value)
+    else
+      setFiltersOther(
+        new Map(
+          filtersOther.set(title, {
+            type: "from to",
+            value: value,
+          })
+        )
+      )
+  }
+  // установка фильтра чекбокса
+  function setFilterCheckbox(title, value) {
+    if (title === "Производитель") setFilterBrand(value)
+    else
+      setFiltersOther(
+        new Map(
+          filtersOther.set(title, {
+            type: "checkbox",
+            value: value,
+          })
+        )
+      )
+  }
+  // установка фильтра максимума
+  function setFilterMaximum(title, value) {
+    setFiltersOther(
+      new Map(
+        filtersOther.set(title, {
+          type: "maximum",
+          value: value,
+        })
+      )
+    )
+  }
+  // установка фильтра ратио
+  function setFilterRatio(title, value) {
+    setFiltersOther(
+      new Map(
+        filtersOther.set(title, {
+          type: "ratio",
+          value: value,
+        })
+      )
+    )
+  }
+  // установка фильтра да/нет
+  function setFilterBoolean(title, value) {
+    setFiltersOther(
+      new Map(
+        filtersOther.set(title, {
+          type: "boolean",
+          value: value,
+        })
+      )
+    )
+  }
 
   return (
     <Grid
@@ -82,12 +136,83 @@ export default function Filter({ products, setFilterProducts }) {
       alignContent="flex-start"
       className={classes.wrapper}
     >
-      <BlockFromTo spacing={price} />
-      {products.map(product => (
-        <Grid key={product.id} className={classes.wrapperBlock}>
-          <Typography className={classes.title}>Title</Typography>
-        </Grid>
-      ))}
+      <BlockFromTo
+        title="Цена"
+        set={[...prices]}
+        span={[...filterPrice]}
+        setSpan={setFilterFromTo}
+        slider={true}
+      />
+      <BlockColors
+        title="Цвет"
+        allColors={[...colors]}
+        colors={[...filterColor]}
+        setColors={setFilterColor}
+      />
+      <BlockCheckbox
+        title="Производитель"
+        set={[...brands]}
+        selected={[...filterBrand]}
+        setFilter={setFilterCheckbox}
+      />
+      {/* <BlockBoolean
+        title={title}
+        filtersOther={filtersOther}
+        setFilter={setFilterBoolean}
+      /> */}
+      {[...other.entries()].map(item => {
+        const title = item[0]
+        const type = item[1].type
+        const value = item[1].value
+        switch (type) {
+          case "from to":
+            return (
+              <BlockFromTo
+                title={title}
+                set={[...value]}
+                span={filtersOther.get(title)?.value}
+                setSpan={setFilterFromTo}
+              />
+            )
+          case "checkbox":
+            return (
+              <BlockCheckbox
+                title={title}
+                set={[...value]}
+                selected={filtersOther.get(title)?.value ?? []}
+                setFilter={setFilterCheckbox}
+              />
+            )
+          case "ratio":
+            return (
+              <BlockRatio
+                title={title}
+                set={[...value]}
+                selected={filtersOther.get(title)?.value}
+                setFilter={setFilterRatio}
+              />
+            )
+          case "maximum":
+            return (
+              <BlockMax
+                title={title}
+                set={[...value]}
+                filtersOther={filtersOther}
+                setFilter={setFilterMaximum}
+              />
+            )
+          // case "boolean":
+          //   return (
+          //     <BlockBoolean
+          //       title={title}
+          //       filtersOther={filtersOther}
+          //       setFilter={setFilterBoolean}
+          //     />
+          //   )
+          default:
+            return null
+        }
+      })}
     </Grid>
   )
 }
