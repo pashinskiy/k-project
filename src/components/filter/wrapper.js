@@ -49,17 +49,20 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function Filter({ children, title, ...other }) {
+export default function Wrapper({ children, title, key }) {
   const classes = useStyles()
 
   return (
     <Grid
       container
       direction="column"
-      {...other}
+      alignContent="flex-start"
       className={classes.wrapperBlock}
+      key={key ?? title}
     >
-      <Typography className={classes.title}>{title}</Typography>
+      <Typography hidden={!title} className={classes.title}>
+        {title}
+      </Typography>
       {children}
     </Grid>
   )

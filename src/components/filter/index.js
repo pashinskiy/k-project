@@ -33,12 +33,18 @@ export default function Filter({ products, setFilterProducts }) {
   const prices = new Set()
   const colors = new Set()
   const brands = new Set()
+  const stickers = new Set()
   const other = new Map()
 
   products.forEach(product => {
     prices.add(product.data.price)
     colors.add(product.data.color_name.replace("ё", "е").toLowerCase())
     brands.add(product.data.brand.document.data.name.replace("ё", "е"))
+    product.data.body
+      .filter(slice => slice.slice_type === "stickers")
+      .forEach(slice => {
+        slice.items.forEach(item => stickers.add(item.sticker.document.id))
+      })
     product.data.body1
       .filter(slice => slice.slice_type === "characteristics")
       .forEach(slice => {
@@ -65,12 +71,13 @@ export default function Filter({ products, setFilterProducts }) {
   const [filterColor, setFilterColor] = React.useState([])
   // фильтр по производителю
   const [filterBrand, setFilterBrand] = React.useState([])
+  // фильтр по стикерам
+  const [filterSticker, setFilterSticker] = React.useState([])
   // остальные фильтры
   const [filtersOther, setFiltersOther] = React.useState(new Map())
 
   // установка фильтра от до
   function setFilterFromTo(title, value) {
-    console.log(value)
     if (title === "Цена") setFilterPrice(value)
     else
       setFiltersOther(
@@ -119,14 +126,21 @@ export default function Filter({ products, setFilterProducts }) {
   }
   // установка фильтра да/нет
   function setFilterBoolean(title, value) {
-    setFiltersOther(
-      new Map(
-        filtersOther.set(title, {
-          type: "boolean",
-          value: value,
-        })
+    if (title === "Стикер") {
+      const index = filterSticker.indexOf(value)
+      if (index === -1) filterSticker.push(value)
+      else filterSticker.splice(index, 1)
+      setFilterSticker([...filterSticker])
+    } else {
+      setFiltersOther(
+        new Map(
+          filtersOther.set(title, {
+            type: "boolean",
+            value: value,
+          })
+        )
       )
-    )
+    }
   }
 
   return (
@@ -155,11 +169,15 @@ export default function Filter({ products, setFilterProducts }) {
         selected={[...filterBrand]}
         setFilter={setFilterCheckbox}
       />
-      {/* <BlockBoolean
-        title={title}
-        filtersOther={filtersOther}
-        setFilter={setFilterBoolean}
-      /> */}
+      {[...stickers].map(sticker => (
+        <BlockBoolean
+          key={sticker}
+          title="Стикер"
+          stickerId={sticker}
+          setFilter={setFilterBoolean}
+        />
+      ))}
+
       {[...other.entries()].map(item => {
         const title = item[0]
         const type = item[1].type
@@ -168,6 +186,7 @@ export default function Filter({ products, setFilterProducts }) {
           case "from to":
             return (
               <BlockFromTo
+                key={title}
                 title={title}
                 set={[...value]}
                 span={filtersOther.get(title)?.value}
@@ -177,6 +196,7 @@ export default function Filter({ products, setFilterProducts }) {
           case "checkbox":
             return (
               <BlockCheckbox
+                key={title}
                 title={title}
                 set={[...value]}
                 selected={filtersOther.get(title)?.value ?? []}
@@ -186,6 +206,7 @@ export default function Filter({ products, setFilterProducts }) {
           case "ratio":
             return (
               <BlockRatio
+                key={title}
                 title={title}
                 set={[...value]}
                 selected={filtersOther.get(title)?.value}
@@ -195,20 +216,22 @@ export default function Filter({ products, setFilterProducts }) {
           case "maximum":
             return (
               <BlockMax
+                key={title}
                 title={title}
                 set={[...value]}
                 filtersOther={filtersOther}
                 setFilter={setFilterMaximum}
               />
             )
-          // case "boolean":
-          //   return (
-          //     <BlockBoolean
-          //       title={title}
-          //       filtersOther={filtersOther}
-          //       setFilter={setFilterBoolean}
-          //     />
-          //   )
+          case "boolean":
+            return (
+              <BlockBoolean
+                key={title}
+                title={title}
+                valueFilter={!!filtersOther.get(title)?.value}
+                setFilter={setFilterBoolean}
+              />
+            )
           default:
             return null
         }

@@ -66,7 +66,13 @@ palette = Object.fromEntries(
   })
 )
 
-export default function BlockColors({ title, allColors, colors, setColors }) {
+export default function BlockColors({
+  title,
+  allColors,
+  colors,
+  setColors,
+  ...other
+}) {
   const classes = useStyles()
 
   function change(color) {
@@ -77,7 +83,7 @@ export default function BlockColors({ title, allColors, colors, setColors }) {
   }
 
   return allColors.length ? (
-    <Wrapper title={title}>
+    <Wrapper title={title} {...other}>
       <Grid container className={classes.wrapper}>
         {allColors.map(color => (
           <Button

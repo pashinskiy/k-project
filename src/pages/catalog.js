@@ -78,7 +78,7 @@ export const query = graphql`
                             alt
                             localFile {
                               childImageSharp {
-                                fluid(maxHeight: 46) {
+                                fluid(maxHeight: 35) {
                                   aspectRatio
                                   src
                                   srcSet

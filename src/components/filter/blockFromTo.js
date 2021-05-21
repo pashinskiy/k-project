@@ -134,10 +134,17 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function BlockFromTo({ title, set, span, setSpan, slider }) {
+export default function BlockFromTo({
+  title,
+  set,
+  span,
+  setSpan,
+  slider,
+  ...other
+}) {
   const classes = useStyles()
 
-  const sortSet = set.sort((a, b) => a - b)
+  const sortSet = set.map(el => +el).sort((a, b) => a - b)
   const valueMax = sortSet[sortSet.length - 1]
   const valueMin = sortSet[0]
 
@@ -184,7 +191,7 @@ export default function BlockFromTo({ title, set, span, setSpan, slider }) {
     setValue([...result])
   }
   return valueMax !== valueMin ? (
-    <Wrapper title={title}>
+    <Wrapper title={title} {...other}>
       <Grid container justify="space-between" id={title}>
         <Input
           value={value[0]}
@@ -204,11 +211,11 @@ export default function BlockFromTo({ title, set, span, setSpan, slider }) {
         />
       </Grid>
 
-      {true ? (
+      {slider ? (
         <Slider
           value={value}
           onChange={(e, newValue) => {
-            // setSpan(title, newValue)
+            setSpan(title, newValue)
             setValue(newValue)
           }}
           max={valueMax}

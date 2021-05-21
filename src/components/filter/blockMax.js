@@ -42,7 +42,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function BlockMax({ title, set, filtersOther, setFilter }) {
+export default function BlockMax({
+  title,
+  set,
+  filtersOther,
+  setFilter,
+  ...other
+}) {
   const classes = useStyles()
 
   const sortSet = set.sort((a, b) => a - b)
@@ -76,7 +82,7 @@ export default function BlockMax({ title, set, filtersOther, setFilter }) {
   }
 
   return set.length ? (
-    <Wrapper title={title}>
+    <Wrapper title={title} {...other}>
       <Input
         value={value}
         id="input"

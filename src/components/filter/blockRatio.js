@@ -86,51 +86,44 @@ const useStyles = makeStyles(theme => ({
     },
   },
   check: {
-    position: "relative",
     background: theme.palette.background.main,
-    flexShrink: 0,
-    padding: 0,
 
     width: "1.25vw",
     height: "1.25vw",
-    borderRadius: "0.46vw",
+    borderRadius: "100%",
     marginRight: "0.62vw",
     boxShadow: `inset 0 0 0 0.07vw ${theme.palette.background.accentSecondary}`,
     "@media(min-width: 1280px)": {
       width: "16px",
       height: "16px",
-      borderRadius: "6px",
       marginRight: "8px",
       boxShadow: `inset 0 0 0 1px ${theme.palette.background.accentSecondary}`,
     },
     "@media(max-width: 834px)": {
       width: "1.91vw",
       height: "1.91vw",
-      borderRadius: "0.71vw",
       marginRight: "0.95vw",
       boxShadow: `inset 0 0 0 0.11vw ${theme.palette.background.accentSecondary}`,
     },
     "@media(max-width: 414px)": {
       width: "3.86vw",
       height: "3.86vw",
-      borderRadius: "1.44vw",
       marginRight: "1.93vw",
       boxShadow: `inset 0 0 0 0.24vw ${theme.palette.background.main}`,
     },
   },
   active: {
-    boxShadow: "none",
     background: theme.palette.background.accent,
 
-    padding: "0.23vw",
+    boxShadow: `inset 0 0 0 0.07vw ${theme.palette.background.accentSecondary}, inset 0 0 0 0.21vw ${theme.palette.background.main}`,
     "@media(min-width: 1280px)": {
-      padding: "3px",
+      boxShadow: `inset 0 0 0 1px ${theme.palette.background.accentSecondary}, inset 0 0 0 3px ${theme.palette.background.main}`,
     },
     "@media(max-width: 834px)": {
-      padding: "0.35vw",
+      boxShadow: `inset 0 0 0 0.11vw ${theme.palette.background.accentSecondary}, inset 0 0 0 0.33vw ${theme.palette.background.main}`,
     },
     "@media(max-width: 414px)": {
-      padding: "0.72vw",
+      boxShadow: `inset 0 0 0 0.24vw ${theme.palette.background.accentSecondary}, inset 0 0 0 0.72vw ${theme.palette.background.main}`,
     },
   },
   text: {
@@ -166,28 +159,38 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function BlockCheckbox({ title, set, selected, setFilter }) {
+export default function BlockCheckbox({
+  title,
+  set,
+  selected,
+  setFilter,
+  ...other
+}) {
   const [show, setShow] = React.useState(false)
   const classes = useStyles({ show })
 
-  function change(value) {
+  React.useEffect(() => {
+    if (selected === undefined) setValueFilter(set[0])
+  })
+
+  function setValueFilter(value) {
     setFilter(title, value)
   }
 
-  if (!show) set = set.slice(0, 6)
+  const showlist = show ? set : set.slice(0, 6)
 
   return set.length ? (
-    <Wrapper title={title}>
+    <Wrapper title={title} {...other}>
       <Grid
         container
         direction="column"
         wrap="nowrap"
         className={classes.wrapper}
       >
-        {set.map(value => (
+        {showlist.map(value => (
           <Button
             key={value ?? title}
-            onClick={() => change(value)}
+            onClick={() => setValueFilter(value)}
             className={classes.item}
             aria-label={value}
           >

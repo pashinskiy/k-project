@@ -116,7 +116,7 @@ const useStyles = makeStyles(theme => ({
       height: "3.86vw",
       borderRadius: "1.44vw",
       marginRight: "1.93vw",
-      boxShadow: `inset 0 0 0 0.24vw ${theme.palette.background.main}`,
+      boxShadow: `inset 0 0 0 0.24vw ${theme.palette.background.accentSecondary}`,
     },
   },
   active: {
@@ -167,7 +167,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function BlockCheckbox({ title, set, selected, setFilter }) {
+export default function BlockCheckbox({
+  title,
+  set,
+  selected,
+  setFilter,
+  ...other
+}) {
   const [show, setShow] = React.useState(false)
   const classes = useStyles({ show })
 
@@ -178,17 +184,17 @@ export default function BlockCheckbox({ title, set, selected, setFilter }) {
     setFilter(title, selected)
   }
 
-  if (!show) set = set.slice(0, 6)
+  const showlist = show ? set : set.slice(0, 6)
 
   return set.length ? (
-    <Wrapper title={title}>
+    <Wrapper title={title} {...other}>
       <Grid
         container
         direction="column"
         wrap="nowrap"
         className={classes.wrapper}
       >
-        {set.map(value => (
+        {showlist.map(value => (
           <Button
             key={value ?? title}
             onClick={() => change(value)}
