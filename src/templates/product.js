@@ -429,6 +429,7 @@ export const pageQuery = graphql`
           data {
             categories {
               category {
+                uid
                 document {
                   ... on PrismicCategory {
                     data {
