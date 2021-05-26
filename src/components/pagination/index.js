@@ -184,7 +184,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function Pagination({ pageSize, products }) {
+export default function Pagination({ pageSize, components }) {
   const classes = useStyles()
   const barItem = React.useRef()
 
@@ -192,8 +192,8 @@ export default function Pagination({ pageSize, products }) {
   const url = new URL(window.location.href)
   const page = url.searchParams.has("page") ? +url.searchParams.get("page") : 1
 
-  const lastPage = Math.ceil(products.length / pageSize)
-  const showProducts = products.slice(pageSize * (page - 1), pageSize * page)
+  const lastPage = Math.ceil(components.length / pageSize)
+  const showComponents = components.slice(pageSize * (page - 1), pageSize * page)
 
   function setPageUrl(value) {
     url.searchParams.set("page", value)
@@ -229,8 +229,8 @@ export default function Pagination({ pageSize, products }) {
 
   return (
     <Grid className={classes.wrapper}>
-      {showProducts.length ? (
-        showProducts
+      {showComponents.length ? (
+        showComponents
       ) : (
         <Typography align="center" className={classes.text}>
           ничего не найдено

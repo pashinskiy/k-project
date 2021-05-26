@@ -6,7 +6,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 import CardProduct from "../components/catalog/catalogCardProduct"
-import Pagination from "../components/catalog/Pagination"
+import Pagination from "../components/pagination"
 import Filter from "../components/filter"
 import Sort from "../components/sort"
 
@@ -51,7 +51,7 @@ const IndexPage = ({ data }) => {
         <Filter products={allProducts} setFilterProducts={setFilterProducts} />
       </Grid>
 
-      <Pagination pageSize={mobile ? 5 : 10} products={arrayCards} />
+      <Pagination pageSize={mobile ? 5 : 10} components={arrayCards} />
     </Layout>
   )
 }

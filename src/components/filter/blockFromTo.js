@@ -144,11 +144,11 @@ export default function BlockFromTo({
 }) {
   const classes = useStyles()
 
-  const sortSet = set.map(el => +el)
+  const sortSet = set.map(el => +el).sort((a, b) => a - b)
   const valueMax = sortSet[sortSet.length - 1]
   const valueMin = sortSet[0]
 
-  const [value, setValue] = React.useState(span ?? [valueMin, valueMax])
+  const [value, setValue] = React.useState([valueMin, valueMax])
 
   const id =
     "id" +
@@ -175,17 +175,16 @@ export default function BlockFromTo({
     }
   })
 
-  function setValueFilter(newValue) {
-    const result =
-      newValue ??
-      value
-        .sort((a, b) => a - b)
-        .map(el => {
-          if (el < valueMin) return valueMin
-          if (el > valueMax) return valueMax
-          return el
-        })
+  function setValueFilter() {
+    const result = value
+      .sort((a, b) => a - b)
+      .map(el => {
+        if (el < valueMin) return valueMin
+        if (el > valueMax) return valueMax
+        return el
+      })
 
+    setValue([...result])
     if (result[0] === valueMin && result[1] === valueMax) setSpan(title, [])
     else setSpan(title, result)
   }
@@ -224,9 +223,10 @@ export default function BlockFromTo({
         <Slider
           value={value}
           onChange={(e, newValue) => {
-            setValueFilter(newValue)
+            setValue(newValue)
           }}
-          // onPointerUp={setValueFilter}
+          onPointerUp={setValueFilter}
+          onPointerLeave={setValueFilter}
           max={valueMax}
           min={valueMin}
           scale={x => `${x}руб.`}
