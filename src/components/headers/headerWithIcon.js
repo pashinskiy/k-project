@@ -62,16 +62,49 @@ const useStyles = makeStyles(theme => ({
       fontSize: "4.83vw",
     },
   },
+  classCount: {
+    color: theme.palette.color.secondary,
+    marginLeft: "12px",
+
+    fontWeight: 700,
+    fontSize: "1.328vw",
+    "@media(min-width: 1280px)": {
+      fontSize: "17px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: 14,
+    },
+    "@media(max-width: 414px)": {
+      fontSize: 14,
+    },
+  },
 }))
 
-export default function HeaderWithIcon({ icon, title, divider }) {
+export default function HeaderWithIcon({ icon, title, divider, count }) {
   const classes = useStyles()
+  const goodsTitle = {
+    title1: "товар",
+    title2: "товара",
+    title3: "товаров",
+  }
+
+  function getTitle() {
+    // var check = count % 100
+    // switch(check){
+    //   case 
+    //   case check >= 11 && check <= 19:
+    //     return title3
+
+    // }
+  }
 
   return (
     <Grid container direction="column" className={classes.wrapper}>
       <Grid container alignItems="center" className={classes.wrapperTitle}>
         {icon ? <Grid className={classes.icon}>{icon}</Grid> : null}
         <Typography className={classes.classTitle}>{title}</Typography>
+        {count ? <Typography className={classes.classCount}>{count} товаров</Typography> : null}
+
       </Grid>
       {divider ? <Divider /> : null}
     </Grid>

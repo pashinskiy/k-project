@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Button, makeStyles } from "@material-ui/core"
 
 import Favorites from "../../../../static/svg/favorites.svg"
@@ -75,13 +75,29 @@ const useStyles = makeStyles(theme => ({
 export default function ButtonAddFavorites({ product, variant }) {
   const classes = useStyles()
 
+  let favorites = localStorage.getItem("favorites")
+  favorites = favorites === null || !favorites ? [] : JSON.parse(favorites)
+
+  const [isFavorite, setIsFavorite] = useState(favorites.includes(product.uid))
+
   function changeToFavorites() {
-    console.log(`change to favorites ${product.uid}`)
+    // console.log(`change to favorites ${product.uid}`)
+    let favorites = localStorage.getItem("favorites")
+    favorites = favorites === null || !favorites ? [] : JSON.parse(favorites)
+    if (favorites.includes(product.uid)) {
+      let favIndex = favorites.indexOf(product.uid)
+      if (favIndex === -1) return
+      favorites.splice(favIndex, 1)
+      localStorage.setItem("favorites", JSON.stringify(favorites))
+      setIsFavorite(false)
+    } else {
+      favorites.push(product.uid)
+      localStorage.setItem("favorites", JSON.stringify(favorites))
+      setIsFavorite(true)
+    }
   }
 
-  const favorites = product.uid === "yandex-col1"
-
-  const background = favorites ? classes.favorites : classes.notFavorites
+  const background = isFavorite ? classes.favorites : classes.notFavorites
 
   const classButton =
     variant === "page" ? classes.buttonPage : classes.buttonCard
@@ -91,7 +107,7 @@ export default function ButtonAddFavorites({ product, variant }) {
       onClick={changeToFavorites}
       className={classes.button + " " + classButton + " " + background}
     >
-      {favorites ? <Favorites /> : <NotFavorites />}
+      {isFavorite ? <Favorites /> : <NotFavorites />}
     </Button>
   )
 }
