@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function AddInCartAndFav({ product, text, variant, fixed }) {
+export default function AddInCartAndFav({ product, text, variant, fixed, afterChange}) {
   const classes = useStyles()
   fixed = fixed ? classes.fixed : ""
 
@@ -39,7 +39,7 @@ export default function AddInCartAndFav({ product, text, variant, fixed }) {
       ) : (
         <ButtonAddCart product={product} text={text} variant={variant} />
       )}
-      <ButtonAddFavorites product={product} variant={variant} />
+      <ButtonAddFavorites product={product} variant={variant} afterChange={afterChange} />
     </Grid>
   )
 }

@@ -83,7 +83,7 @@ const useStyles = makeStyles(theme => ({
     bottom: "20px",
     left: "20px",
     right: "20px",
-    color: "white",
+    color: theme.palette.color.mainContrast,
     margin: "auto",
     overflowWrap: "break-word",
   },
@@ -127,6 +127,16 @@ const useStyles = makeStyles(theme => ({
     paddingTop: "8px",
     paddingBottom: "8px",
   },
+  smallCardTitle: {
+    padding: "20px",
+    color: theme.palette.color.main,
+  },
+  smallCardRoot: {
+    boxShadow: "none",
+    background: theme.palette.background.secondary,
+    borderRadius: "12px "
+  },
+
 }))
 
 //При вызове компонента указывается только ширина, кроме STORIES
@@ -147,10 +157,12 @@ const useStyles = makeStyles(theme => ({
 //brand - для карточки брендов или акций
 //можно передавать с текстом или без
 
+//small - только текст
+
 
 export default function CardWidget(props) {
   const classes = useStyles()
-  const altImage = props.cardImage.images.fallback.src.split("_")[1].replace(".jpg", "")
+  const altImage = props.cardImage ? props.cardImage.images.fallback.src.split("_")[1].replace(".jpg", "") : null
   const cardType = () => {
     switch (props.variant) {
       case "category":
@@ -224,6 +236,14 @@ export default function CardWidget(props) {
             {/* </Link> */}
           </div>
         )
+        case "small":
+          return(
+            <Card className={classes.smallCardRoot}>
+              <Typography className={classes.smallCardTitle}>
+                {props.cardTitle}
+              </Typography>
+            </Card>
+          )
       default:
         return console.log(
           "Передайте компоненту значение типа карточки (variant)"

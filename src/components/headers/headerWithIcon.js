@@ -88,14 +88,14 @@ export default function HeaderWithIcon({ icon, title, divider, count }) {
     title3: "товаров",
   }
 
-  function getTitle() {
-    // var check = count % 100
-    // switch(check){
-    //   case 
-    //   case check >= 11 && check <= 19:
-    //     return title3
-
-    // }
+  const getTitle = () => {
+    if(count % 100 >= 11 && count % 100 <=19)
+      return goodsTitle.title3
+    if (count % 10 >= 2 && count % 10 <= 4)
+      return goodsTitle.title2
+    if(count === 1)
+      return goodsTitle.title1
+    return goodsTitle.title3
   }
 
   return (
@@ -103,8 +103,7 @@ export default function HeaderWithIcon({ icon, title, divider, count }) {
       <Grid container alignItems="center" className={classes.wrapperTitle}>
         {icon ? <Grid className={classes.icon}>{icon}</Grid> : null}
         <Typography className={classes.classTitle}>{title}</Typography>
-        {count ? <Typography className={classes.classCount}>{count} товаров</Typography> : null}
-
+        {count ? <Typography className={classes.classCount}>{count} {getTitle()}</Typography> : null}
       </Grid>
       {divider ? <Divider /> : null}
     </Grid>

@@ -51,7 +51,6 @@ export default function CategoryWidget(props) {
   // const mobile = useMediaQuery("(max-width: 414px)")
   // const pad = useMediaQuery("(max-width: 834px)")
   const data = props.props.allPrismicCatalog.edges[0].node.data.categories
-  console.log(props)
 
   return (
     <>

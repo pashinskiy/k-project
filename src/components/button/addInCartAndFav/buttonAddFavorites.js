@@ -72,7 +72,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function ButtonAddFavorites({ product, variant }) {
+export default function ButtonAddFavorites({ product, variant, afterChange }) {
   const classes = useStyles()
 
   let favorites = localStorage.getItem("favorites")
@@ -90,10 +90,12 @@ export default function ButtonAddFavorites({ product, variant }) {
       favorites.splice(favIndex, 1)
       localStorage.setItem("favorites", JSON.stringify(favorites))
       setIsFavorite(false)
+      if(afterChange) afterChange()
     } else {
       favorites.push(product.uid)
       localStorage.setItem("favorites", JSON.stringify(favorites))
       setIsFavorite(true)
+      if(afterChange) afterChange()
     }
   }
 
