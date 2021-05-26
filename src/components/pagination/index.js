@@ -5,13 +5,7 @@ import { navigate } from "gatsby"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
-    width: "71.56vw",
-    "@media(min-width: 1280px)": {
-      width: "916px",
-    },
-    "@media(max-width: 834px)": {
-      width: "100%",
-    },
+    width: "100%",
   },
   paginationBlock: {
     width: "auto",
@@ -193,7 +187,10 @@ export default function Pagination({ pageSize, components }) {
   const page = url.searchParams.has("page") ? +url.searchParams.get("page") : 1
 
   const lastPage = Math.ceil(components.length / pageSize)
-  const showComponents = components.slice(pageSize * (page - 1), pageSize * page)
+  const showComponents = components.slice(
+    pageSize * (page - 1),
+    pageSize * page
+  )
 
   function setPageUrl(value) {
     url.searchParams.set("page", value)

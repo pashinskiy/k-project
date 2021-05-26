@@ -11,7 +11,7 @@ import Filter from "../components/filter"
 import Sort from "../components/sort"
 
 const useStyles = makeStyles(theme => ({
-  wrapper: {
+  blockSortAndFilter: {
     borderBottom: `solid 1px ${theme.palette.color.secondaryLight}`,
     position: "relative",
 
@@ -27,6 +27,15 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 414px)": {
       padding: "4.83vw 0",
       borderWidth: "0.24vw",
+    },
+  },
+  blockPagination: {
+    width: "71.56vw",
+    "@media(min-width: 1280px)": {
+      width: "916px",
+    },
+    "@media(max-width: 834px)": {
+      width: "100%",
     },
   },
 }))
@@ -46,12 +55,18 @@ const IndexPage = ({ data }) => {
     <Layout>
       <Seo title="Home" />
 
-      <Grid container justify="space-between" className={classes.wrapper}>
+      <Grid
+        container
+        justify="space-between"
+        className={classes.blockSortAndFilter}
+      >
         <Sort products={filterProducts} setSortProducts={setFilterProducts} />
         <Filter products={allProducts} setFilterProducts={setFilterProducts} />
       </Grid>
 
-      <Pagination pageSize={mobile ? 5 : 10} components={arrayCards} />
+      <Grid className={classes.blockPagination}>
+        <Pagination pageSize={mobile ? 5 : 10} components={arrayCards} />
+      </Grid>
     </Layout>
   )
 }
