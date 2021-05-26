@@ -1,0 +1,21 @@
+{
+    "Main" : {
+      "categories" : {
+        "type" : "Group",
+        "config" : {
+          "fields" : {
+            "category" : {
+              "type" : "Link",
+              "config" : {
+                "select" : "document",
+                "customtypes" : [ "category" ],
+                "label" : "Категория",
+                "placeholder" : "Категория"
+              }
+            }
+          },
+          "label" : "Категории"
+        }
+      }
+    }
+  }

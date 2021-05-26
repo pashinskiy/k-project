@@ -11,8 +11,11 @@ import DeliveryCards from "../components/productPage/delivery"
 import SimilarProduct from "../components/productPage/similarProduct"
 import TabPanel from "../components/productPage/tabPanel"
 import CharacteristicsBlock from "../components/productPage/characteristics"
+import CategoryPage from "../components/categoryPage"
 
-const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
+const Product = ({
+  data: { prismicProduct, allPrismicProduct, allPrismicCatalog },
+}) => {
   return (
     <Layout>
       <Seo title="Home" />
@@ -58,6 +61,7 @@ const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
       {/* <CharacteristicsBlock props={prismicProduct} /> */}
       <div id="delivery" />
       <DeliveryCards prismicProduct={prismicProduct} />
+      <CategoryPage allPrismicCatalog={allPrismicCatalog} />
     </Layout>
   )
 }
@@ -235,6 +239,7 @@ export const pageQuery = graphql`
         body1 {
           ... on PrismicProductBody1Characteristics {
             items {
+              value
               characteristic {
                 document {
                   ... on PrismicCharacteristic {
@@ -246,7 +251,6 @@ export const pageQuery = graphql`
                   }
                 }
               }
-              value
             }
             primary {
               title
@@ -429,6 +433,52 @@ export const pageQuery = graphql`
             }
           }
           uid
+        }
+      }
+    }
+    allPrismicCatalog {
+      edges {
+        node {
+          id
+          data {
+            categories {
+              category {
+                uid
+                document {
+                  ... on PrismicCategory {
+                    data {
+                      image {
+                        localFile {
+                          childImageSharp {
+                            gatsbyImageData(
+                              height: 128
+                              width: 188
+                              transformOptions: {
+                                cropFocus: CENTER
+                                fit: COVER
+                              }
+                              outputPixelDensities: [
+                                0.35
+                                0.5
+                                0.75
+                                1
+                                1.25
+                                1.5
+                                1.75
+                                2
+                              ]
+                              sizes: "(min-width: 1280px) 188px, (max-width: 414px) 40.84vw, (max-width: 834px) 21.905vw"
+                            )
+                          }
+                        }
+                      }
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
