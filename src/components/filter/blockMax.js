@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 export default function BlockMax({
   title,
   set,
-  filtersOther,
+  valueFilter,
   setFilter,
   ...other
 }) {
@@ -57,10 +57,15 @@ export default function BlockMax({
 
   const [value, setValue] = React.useState(valueMax)
 
-  React.useEffect(() => {
-    if (!filtersOther.has(title)) setValueFilter()
+  const id =
+    "id" +
+    title
+      .split("")
+      .map(char => "_" + char.charCodeAt(0))
+      .join("")
 
-    const wrapper = document.querySelector("#input")
+  React.useEffect(() => {
+    const wrapper = document.querySelector(`#${id}`)
     if (wrapper) {
       wrapper.addEventListener("blur", setValueFilter)
       return () => wrapper.removeEventListener("blur", setValueFilter)
@@ -72,7 +77,7 @@ export default function BlockMax({
     let result = value
     if (value > valueMax) result = valueMax
     if (value < valueMin) result = valueMin
-    setFilter(title, result)
+    setFilter(title, result === valueMax ? [] : `${result}`)
     setValue(result)
   }
   // изменение состояния компонента
@@ -85,7 +90,7 @@ export default function BlockMax({
     <Wrapper title={title} {...other}>
       <Input
         value={value}
-        id="input"
+        id={id}
         onChange={changeValue}
         disableUnderline
         className={classes.input}

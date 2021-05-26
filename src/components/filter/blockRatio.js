@@ -169,12 +169,8 @@ export default function BlockCheckbox({
   const [show, setShow] = React.useState(false)
   const classes = useStyles({ show })
 
-  React.useEffect(() => {
-    if (selected === undefined) setValueFilter(set[0])
-  })
-
   function setValueFilter(value) {
-    setFilter(title, value)
+    setFilter(title, value === selected ? [] : value)
   }
 
   const showlist = show ? set : set.slice(0, 6)

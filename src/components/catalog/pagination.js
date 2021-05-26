@@ -1,6 +1,7 @@
 import React from "react"
-import { Grid, makeStyles } from "@material-ui/core"
+import { Grid, makeStyles, Typography } from "@material-ui/core"
 import Arrow from "../../../static/svg/arrow.svg"
+import { navigate } from "gatsby"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -166,16 +167,38 @@ const useStyles = makeStyles(theme => ({
       "user-select": "none",
     },
   },
+  text: {
+    fontWeight: 400,
+    lineHeight: 1.5,
+
+    fontSize: "1.56vw",
+    "@media(min-width: 1280px)": {
+      fontSize: "20px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "2.39vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "4.83vw",
+    },
+  },
 }))
 
 export default function Pagination({ pageSize, products }) {
   const classes = useStyles()
-
   const barItem = React.useRef()
-  const [page, setPage] = React.useState(1)
+
+  // смотрим адресную строку
+  const url = new URL(window.location.href)
+  const page = url.searchParams.has("page") ? +url.searchParams.get("page") : 1
 
   const lastPage = Math.ceil(products.length / pageSize)
   const showProducts = products.slice(pageSize * (page - 1), pageSize * page)
+
+  function setPageUrl(value) {
+    url.searchParams.set("page", value)
+    navigate(url.href)
+  }
 
   function goTo(i) {
     if (i < 1 || i > lastPage || i === page) return
@@ -191,7 +214,7 @@ export default function Pagination({ pageSize, products }) {
 
       bar.style.marginLeft = newLeft + "px"
     }
-    setPage(i)
+    setPageUrl(i)
   }
 
   const pagination = []
@@ -206,7 +229,13 @@ export default function Pagination({ pageSize, products }) {
 
   return (
     <Grid className={classes.wrapper}>
-      {showProducts}
+      {showProducts.length ? (
+        showProducts
+      ) : (
+        <Typography align="center" className={classes.text}>
+          ничего не найдено
+        </Typography>
+      )}
 
       <Grid container alignItems="center" className={classes.paginationBlock}>
         <button onClick={() => goTo(page - 1)}>

@@ -1,7 +1,7 @@
 import React from "react"
 import { Button, Grid, makeStyles, Typography } from "@material-ui/core"
 import { useStaticQuery, graphql } from "gatsby"
-import { GatsbyImage } from "gatsby-plugin-image"
+// import { GatsbyImage } from "gatsby-plugin-image"
 
 import Wrapper from "./wrapper"
 
@@ -18,14 +18,12 @@ const useStyles = makeStyles(theme => ({
     width: "2.5vw",
     height: "1.4vw",
     padding: "0.23vw",
-    marginRight: "0.62vw",
     borderRadius: "0.46vw",
     boxShadow: `inset 0 0 0 0.07vw ${theme.palette.background.accentSecondary}`,
     "@media(min-width: 1280px)": {
       width: "32px",
       height: "18px",
       padding: "3px",
-      marginRight: "8px",
       borderRadius: "6px",
       boxShadow: `inset 0 0 0 1px ${theme.palette.background.accentSecondary}`,
     },
@@ -33,7 +31,6 @@ const useStyles = makeStyles(theme => ({
       width: "3.83vw",
       height: "2.15vw",
       padding: "0.35vw",
-      marginRight: "0.95vw",
       borderRadius: "0.71vw",
       boxShadow: `inset 0 0 0 0.11vw ${theme.palette.background.accentSecondary}`,
     },
@@ -41,7 +38,6 @@ const useStyles = makeStyles(theme => ({
       width: "7.72vw",
       height: "4.34vw",
       padding: "0.72vw",
-      marginRight: "1.93vw",
       borderRadius: "1.44vw",
       boxShadow: `inset 0 0 0 0.24vw ${theme.palette.background.accentSecondary}`,
     },
@@ -83,26 +79,34 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 700,
     color: "#131313",
     fontSize: "1.32vw",
+    marginLeft: "0.62vw",
     "@media(min-width: 1280px)": {
       fontSize: "17px",
+      marginLeft: "8px",
     },
     "@media(max-width: 834px)": {
       fontSize: "2.03vw",
+      marginLeft: "0.95vw",
     },
     "@media(max-width: 414px)": {
       fontSize: "4.1vw",
+      marginLeft: "1.93vw",
     },
   },
   image: {
     height: "2.65vw",
+    marginLeft: "0.93vw",
     "@media(min-width: 1280px)": {
       height: "34px",
+      marginLeft: "12px",
     },
     "@media(max-width: 834px)": {
       height: "4.07vw",
+      marginLeft: "1.43vw",
     },
     "@media(max-width: 414px)": {
       height: "8.21vw",
+      marginLeft: "2.89vw",
     },
   },
 }))
@@ -127,6 +131,12 @@ export default function BlockBoolean({
                 localFile {
                   childImageSharp {
                     gatsbyImageData
+                    fluid(maxHeight: 35) {
+                      aspectRatio
+                      src
+                      srcSet
+                      srcSetWebp
+                    }
                   }
                 }
               }
@@ -143,13 +153,9 @@ export default function BlockBoolean({
 
   const [value, setValue] = React.useState(false)
 
-  React.useEffect(() => {
-    if (!valueFilter && !img) setValueFilter(false)
-  })
-
   // установка значения в фильтр и состояние
   function setValueFilter(value) {
-    let result = value ? "да" : "нет"
+    let result = value ? "да" : []
     if (img) result = stickerId
     setFilter(title, result)
     setValue(value)
@@ -163,13 +169,31 @@ export default function BlockBoolean({
       >
         <Grid className={classes.ratio + " " + (value ? classes.active : "")} />
         {img ? (
-          <GatsbyImage
-            image={img.localFile.childImageSharp.gatsbyImageData}
-            alt={img.alt ?? "sticker"}
-            className={classes.image}
-            imgStyle={{ objectFit: "contain" }}
-          />
+          <div className={classes.image}>
+            <picture style={{ display: "flex", width: "100%", height: "100%" }}>
+              <source
+                srcSet={img.localFile.childImageSharp.fluid.srcSetWebp}
+                type="image/webp"
+                sizes=""
+              />
+              <img
+                src={img.localFile.childImageSharp.fluid.src}
+                srcSet={img?.srcSet}
+                alt={img.alt}
+                sizes=""
+                width={img.localFile.childImageSharp.fluid.aspectRatio}
+                height="1"
+                style={{ width: "auto", height: "100%" }}
+              />
+            </picture>
+          </div>
         ) : (
+          // <GatsbyImage
+          //   image={img.localFile.childImageSharp.gatsbyImageData}
+          //   alt={img.alt ?? "sticker"}
+          //   className={classes.image}
+          //   imgStyle={{ objectFit: "contain" }}
+          // />
           <Typography className={classes.title}>{title}</Typography>
         )}
       </Button>

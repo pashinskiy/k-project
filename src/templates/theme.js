@@ -15,6 +15,7 @@ const theme = createMuiTheme({
       accent: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)", // Акцентный цвет
       accentSecondary: "#291AD5",
       secondary: "#EFEFF2",
+      secondaryDark: "#E3E3EA",
     },
     width: {
       limit: "1280px",

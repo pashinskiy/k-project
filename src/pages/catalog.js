@@ -1,6 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { Grid, useMediaQuery } from "@material-ui/core"
+import { makeStyles, useMediaQuery, Grid } from "@material-ui/core"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -8,8 +8,31 @@ import Seo from "../components/seo"
 import CardProduct from "../components/catalog/catalogCardProduct"
 import Pagination from "../components/catalog/Pagination"
 import Filter from "../components/filter"
+import Sort from "../components/sort"
+
+const useStyles = makeStyles(theme => ({
+  wrapper: {
+    borderBottom: `solid 1px ${theme.palette.color.secondaryLight}`,
+    position: "relative",
+
+    padding: "1.56vw 0",
+    "@media(min-width: 1280px)": {
+      padding: "20px 0",
+      borderWidth: "1px",
+    },
+    "@media(max-width: 834px)": {
+      padding: "2.39vw 0",
+      borderWidth: "0.11vw",
+    },
+    "@media(max-width: 414px)": {
+      padding: "4.83vw 0",
+      borderWidth: "0.24vw",
+    },
+  },
+}))
 
 const IndexPage = ({ data }) => {
+  const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 834px)")
 
   const allProducts = data.allPrismicProduct.edges.map(edge => edge.node)
@@ -22,10 +45,13 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <Seo title="Home" />
-      <Grid container justify="space-between">
-        <Pagination pageSize={mobile ? 5 : 10} products={arrayCards} />
+
+      <Grid container justify="space-between" className={classes.wrapper}>
+        <Sort products={filterProducts} setSortProducts={setFilterProducts} />
         <Filter products={allProducts} setFilterProducts={setFilterProducts} />
       </Grid>
+
+      <Pagination pageSize={mobile ? 5 : 10} products={arrayCards} />
     </Layout>
   )
 }
@@ -120,6 +146,7 @@ export const query = graphql`
                         data {
                           name
                           variant
+                          order
                         }
                       }
                     }

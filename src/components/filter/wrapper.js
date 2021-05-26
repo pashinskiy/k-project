@@ -17,13 +17,11 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "12px",
     },
     "@media(max-width: 834px)": {
-      width: "49.22%",
       padding: "3.35vw",
       marginBottom: "1.43vw",
       borderRadius: "1.43vw",
     },
     "@media(max-width: 414px)": {
-      width: "100%",
       padding: "6.76vw",
       marginBottom: "2.89vw",
       borderRadius: "2.89vw",
@@ -49,7 +47,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function Wrapper({ children, title, key }) {
+export default function Wrapper({ children, title, key, ...other }) {
   const classes = useStyles()
 
   return (
@@ -59,6 +57,7 @@ export default function Wrapper({ children, title, key }) {
       alignContent="flex-start"
       className={classes.wrapperBlock}
       key={key ?? title}
+      {...other}
     >
       <Typography hidden={!title} className={classes.title}>
         {title}

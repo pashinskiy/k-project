@@ -144,16 +144,21 @@ export default function BlockFromTo({
 }) {
   const classes = useStyles()
 
-  const sortSet = set.map(el => +el).sort((a, b) => a - b)
+  const sortSet = set.map(el => +el)
   const valueMax = sortSet[sortSet.length - 1]
   const valueMin = sortSet[0]
 
-  const [value, setValue] = React.useState([valueMin, valueMax])
+  const [value, setValue] = React.useState(span ?? [valueMin, valueMax])
+
+  const id =
+    "id" +
+    title
+      .split("")
+      .map(char => "_" + char.charCodeAt(0))
+      .join("")
 
   React.useEffect(() => {
-    if (!span) setValueFilter()
-
-    const wrapper = document.querySelector(`#${title}`)
+    const wrapper = document.querySelector(`#${id}`)
     if (wrapper) {
       wrapper.children[0].children[0].addEventListener("blur", setValueFilter)
       wrapper.children[1].children[0].addEventListener("blur", setValueFilter)
@@ -170,32 +175,36 @@ export default function BlockFromTo({
     }
   })
 
-  function setValueFilter() {
-    const result = value
-      .sort((a, b) => a - b)
-      .map(el => {
-        if (el < valueMin) return valueMin
-        if (el > valueMax) return valueMax
-        return el
-      })
-    setSpan(title, result)
-    setValue([...result])
+  function setValueFilter(newValue) {
+    const result =
+      newValue ??
+      value
+        .sort((a, b) => a - b)
+        .map(el => {
+          if (el < valueMin) return valueMin
+          if (el > valueMax) return valueMax
+          return el
+        })
+
+    if (result[0] === valueMin && result[1] === valueMax) setSpan(title, [])
+    else setSpan(title, result)
   }
 
   function changeValue(e) {
     const result = value
-    if (e.target.id === `${title} from` && !isNaN(+e.target.value))
+    if (e.target.id === `${id}_from` && !isNaN(+e.target.value))
       result[0] = +e.target.value
-    if (e.target.id === `${title} to` && !isNaN(+e.target.value))
+    if (e.target.id === `${id}_to` && !isNaN(+e.target.value))
       result[1] = +e.target.value
     setValue([...result])
   }
+
   return valueMax !== valueMin ? (
     <Wrapper title={title} {...other}>
-      <Grid container justify="space-between" id={title}>
+      <Grid container justify="space-between" id={id}>
         <Input
           value={value[0]}
-          id={`${title} from`}
+          id={`${id}_from`}
           onChange={changeValue}
           disableUnderline
           className={classes.input}
@@ -203,7 +212,7 @@ export default function BlockFromTo({
         />
         <Input
           value={value[1]}
-          id={`${title} to`}
+          id={`${id}_to`}
           onChange={changeValue}
           disableUnderline
           className={classes.input}
@@ -215,9 +224,9 @@ export default function BlockFromTo({
         <Slider
           value={value}
           onChange={(e, newValue) => {
-            setSpan(title, newValue)
-            setValue(newValue)
+            setValueFilter(newValue)
           }}
+          // onPointerUp={setValueFilter}
           max={valueMax}
           min={valueMin}
           scale={x => `${x}руб.`}
