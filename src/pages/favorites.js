@@ -4,7 +4,7 @@ import FavoritesIcon from "../../static/svg/favoritesIcon.svg"
 import { Grid, makeStyles, Typography, useMediaQuery } from "@material-ui/core"
 import Layout from "../components/layout"
 import CardSimilarProduct from "../components/productPage/similarProduct/cardProduct"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql } from "gatsby"
 import Seo from "../components/seo"
 import SmallCategoriesPanel from "../components/smallCategoriesPanel"
 import Sort from "../components/sort"
@@ -89,6 +89,9 @@ const IndexPage = ({ data }) => {
   }
   //TODO: почистить от null
   console.log(arrayCards)
+  const cleanArrayCards = arrayCards.filter(function(element){
+    return element != null
+  } )
 
   return (
     <Layout>
@@ -106,7 +109,7 @@ const IndexPage = ({ data }) => {
 
       <Grid container  alignItems="center" className={classes.containerRoot}>
       {/* {arrayCards} */}
-      <Pagination pageSize={isMobile ? 5 : 10} components={arrayCards} />
+      <Pagination pageSize={isMobile ? 5 : 6} components={cleanArrayCards} />
       </Grid>
     </Layout>
   )

@@ -61,7 +61,6 @@ const Product = ({
       <CharacteristicsBlock props={prismicProduct} />
       <div id="delivery" />
       <DeliveryCards prismicProduct={prismicProduct} />
-      <CategoryPage allPrismicCatalog={allPrismicCatalog} />
     </Layout>
   )
 }

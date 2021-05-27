@@ -155,7 +155,8 @@ const useStyles = makeStyles(theme => ({
   },
   catSingleContainer: {
     width: "79.1%",
-    padding: "28px",
+    padding: "28px 0",
+    margin: "auto",
   }
 }))
 
