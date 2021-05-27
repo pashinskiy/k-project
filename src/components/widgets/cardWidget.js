@@ -134,9 +134,30 @@ const useStyles = makeStyles(theme => ({
   smallCardRoot: {
     boxShadow: "none",
     background: theme.palette.background.secondary,
-    borderRadius: "12px "
+    borderRadius: "12px"
   },
 
+  catSingleRoot: {
+    width: "268px",
+    background: theme.palette.background.secondary,
+    boxShadow: "none",
+    borderRadius: "20px"
+  },
+  catSingleTitle: {
+    // paddingBottom: "32px",
+    marginBottom: "20px",
+    fontSize: 17,
+    fontWeight: 700,
+  },
+  catSingleSubTitle: {
+    color: theme.palette.color.secondary,
+
+  },
+  catSingleContainer: {
+    width: "79.1%",
+    padding: "28px 0",
+    margin: "auto",
+  }
 }))
 
 //При вызове компонента указывается только ширина, кроме STORIES
@@ -159,6 +180,8 @@ const useStyles = makeStyles(theme => ({
 
 //small - только текст
 
+//categoriesSingle - список категорий с подкатегориями на 1 карточке
+//передать список категорий
 
 export default function CardWidget(props) {
   const classes = useStyles()
@@ -244,6 +267,20 @@ export default function CardWidget(props) {
               </Typography>
             </Card>
           )
+          case "categoriesSingle":
+            return(
+              <Card className={classes.catSingleRoot}>
+                <div className={classes.catSingleContainer}>
+                <Typography className={classes.catSingleTitle} variant="body2">
+                  {props.categoryTitle}
+                </Typography>
+                <Typography className={classes.catSingleSubTitle}>
+                  {props.subCategoryTitle}
+                </Typography>
+                </div>
+
+              </Card>
+            )
       default:
         return console.log(
           "Передайте компоненту значение типа карточки (variant)"

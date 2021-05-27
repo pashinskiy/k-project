@@ -17,6 +17,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 414px)": {
       width: "49.51vw",
     },
+    margin: "auto",
   },
   imageWrapper: {
     width: "100%",

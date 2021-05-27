@@ -69,7 +69,7 @@ export default function CategoryWidget(props) {
                 />
               </Grid>
             ))
-          : null}
+            : null}
       </Grid>
     </>
   )
