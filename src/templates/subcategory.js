@@ -56,7 +56,7 @@ const SubCategory = ({ data }) => {
     <Layout>
       <Seo title="Home" />
 
-      <FastLink products={allProducts} />
+      {/* <FastLink products={allProducts} /> */}
       <Grid
         container
         justify="space-between"
