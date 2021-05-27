@@ -54,6 +54,9 @@ const useStyles = makeStyles(theme => ({
             "@media(max-width: 834px)": {
                 width: "29.97vw",
             },
+            "@media(max-width: 414px)": {
+              width: "49.51vw",
+            },
         },
     },
     arrows: {
