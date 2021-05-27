@@ -225,7 +225,7 @@ export default function Pagination({ pageSize, components }) {
   }
 
   return (
-    <Grid className={classes.wrapper}>
+    <Grid container className={classes.wrapper}>
       {showComponents.length ? (
         showComponents
       ) : (

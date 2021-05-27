@@ -9,6 +9,7 @@ import CardProduct from "../components/catalog/catalogCardProduct"
 import Pagination from "../components/pagination"
 import Filter from "../components/filter"
 import Sort from "../components/sort"
+import FastLink from "../components/catalog/fastLink"
 
 const useStyles = makeStyles(theme => ({
   blockSortAndFilter: {
@@ -55,6 +56,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <Seo title="Home" />
 
+      <FastLink products={allProducts} />
       <Grid
         container
         justify="space-between"
