@@ -1,5 +1,5 @@
 import * as React from "react"
-import CategoryWidget from "../categoryCard"
+import CategoryWidget from "../widgets"
 
 const CategoryPage = (allPrismicCatalog) => {
   return (

@@ -38,18 +38,22 @@ const useStyles = makeStyles(theme => ({
     },
   },
   icon: {
-    height: "0.62vw",
+    width: "0.46vw",
+    height: "0.7vw",
     marginRight: "0.78vw",
     "@media(min-width: 1280px)": {
-      height: "8px",
+      width: "6px",
+      height: "9px",
       marginRight: "10px",
     },
     "@media(max-width: 834px)": {
-      height: "0.95vw",
+      width: "0.71vw",
+      height: "1.07vw",
       marginRight: "1.19vw",
     },
     "@media(max-width: 414px)": {
-      height: "1.93vw",
+      width: "1.44vw",
+      height: "2.17vw",
       marginRight: "2.41vw",
     },
   },

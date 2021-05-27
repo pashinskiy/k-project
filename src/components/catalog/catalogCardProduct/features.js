@@ -4,36 +4,25 @@ import { GatsbyImage } from "gatsby-plugin-image"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
-    height: "3.9vw",
-    width: "100vw",
+    width: "100%",
     position: " relative",
     boxSizing: "border-box",
-    marginTop: "4.06vw",
-    marginLeft: "-2.18vw",
-    paddingLeft: "2.18vw",
+    cursor: "pointer",
 
-    overflow: "scroll",
-    scrollbarWidth: "none",
-    "-ms-overflow-style": "none",
+    overflow: "hidden",
+    // overflow: "scroll",
+    // scrollbarWidth: "none",
+    // "-ms-overflow-style": "none",
 
+    height: "2.89vw",
     "@media(min-width: 1280px)": {
-      height: "50px",
-      width: "1280px",
-      marginTop: "52px",
-      marginLeft: "-28px",
-      paddingLeft: "28px",
+      height: "37px",
     },
     "@media(max-width: 834px)": {
-      height: "5.99vw",
-      marginTop: "1.91vw",
-      marginLeft: "-3.35vw",
-      paddingLeft: "3.35vw",
+      height: "4.07vw",
     },
     "@media(max-width: 414px)": {
-      height: "12.07vw",
-      marginTop: "3.86vw",
-      marginLeft: "-6.76vw",
-      paddingLeft: "6.76vw",
+      height: "6.28vw",
     },
     "&::-webkit-scrollbar": {
       display: "none",
@@ -43,38 +32,34 @@ const useStyles = makeStyles(theme => ({
     height: "100%",
     width: "auto",
     flexShrink: 0,
-    minWidth: "9vw",
-    padding: "0.78vw 2.34vw",
-    borderRadius: "1.56vw",
-    marginRight: "0.78vw",
     whiteSpace: "nowrap",
 
     boxSizing: "border-box",
     background: "#fff",
 
     backgroundClip: "padding-box",
-    border: "0.15vw solid transparent",
     position: "relative",
 
+    padding: "0.62vw 0.93vw",
+    borderRadius: "0.93vw",
+    marginRight: "0.62vw",
+    border: "0.15vw solid transparent",
     "@media(min-width: 1280px)": {
-      minWidth: "116px",
-      padding: "10px 30px",
-      borderRadius: "20px",
-      marginRight: "10px",
+      padding: "8px 12px",
+      borderRadius: "12px",
+      marginRight: "8px",
       border: "2px solid transparent",
     },
     "@media(max-width: 834px)": {
-      minWidth: "13.9vw",
-      padding: "1.19vw 3.59vw",
-      borderRadius: "2.39vw",
+      padding: "0.95vw 1.43vw",
+      borderRadius: "1.43vw",
       marginRight: "0.95vw",
       border: "0.23vw solid transparent",
     },
     "@media(max-width: 414px)": {
-      minWidth: "28.01vw",
-      padding: "2.41vw 7.24vw",
-      borderRadius: "4.83vw",
-      marginRight: "1.93vw",
+      padding: "0.96vw 2.89vw",
+      borderRadius: "2.89vw",
+      marginRight: "0.96vw",
       border: "0.48vw solid transparent",
     },
 
@@ -114,20 +99,20 @@ const useStyles = makeStyles(theme => ({
     },
   },
   text: {
-    fontWeight: 300,
-    lineHeight: "2.04vw",
-    fontSize: "1.32vw",
+    fontWeight: 400,
+    lineHeight: "1.2vw",
+    fontSize: "1.09vw",
     "@media(min-width: 1280px)": {
-      fontSize: "17px",
-      lineHeight: "26px",
+      fontSize: "14px",
+      lineHeight: "15.36px",
     },
     "@media(max-width: 834px)": {
       fontSize: "1.43vw",
-      lineHeight: "3.15vw",
+      lineHeight: "1.7vw",
     },
     "@media(max-width: 414px)": {
       fontSize: "2.89vw",
-      lineHeight: "6.29vw",
+      lineHeight: "3.8vw",
     },
   },
   unselect: {
@@ -145,6 +130,8 @@ const useStyles = makeStyles(theme => ({
 export default function Features({ featuresSlices }) {
   // input data
   const classes = useStyles()
+
+  const features = React.useRef()
 
   // достаем особые черты из слайсов и готовим к распечатке
   const featuresArr = featuresSlices.reduce((arr, featuresSlice) => {
@@ -170,11 +157,33 @@ export default function Features({ featuresSlices }) {
     return arr
   }, [])
 
+  function setScrollBar(e) {
+    //   const cardPanel = e.currentTarget
+    //   const transition = cardPanel.style.transition
+    //   cardPanel.style.transition = "none"
+    //   //отмена перехвата браузера
+    //   cardPanel.ondragstart = () => false
+    //   const clientX = e.clientX
+    //   const scrollLeft = cardPanel.scrollLeft
+    //   document.addEventListener("pointermove", scrollBar)
+    //   document.addEventListener("pointerup", deleteScrollBar)
+    //   function deleteScrollBar() {
+    //     cardPanel.style.transition = transition
+    //     document.removeEventListener("pointermove", scrollBar)
+    //     document.removeEventListener("pointerup", deleteScrollBar)
+    //   }
+    //   function scrollBar(e) {
+    //     let newLeft = scrollLeft - e.clientX + clientX
+    //     cardPanel.scrollLeft = newLeft
+    //   }
+  }
+
   return (
     <Grid
       hidden={!featuresArr.length}
       container
-      wrap="nowrap"
+      ref={features}
+      onPointerDown={setScrollBar}
       className={classes.wrapper + " " + classes.unselect}
     >
       {featuresArr}

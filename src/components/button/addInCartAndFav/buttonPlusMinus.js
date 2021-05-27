@@ -108,10 +108,10 @@ const useStyles = makeStyles(theme => ({
       fontSize: "17px",
     },
     "@media(max-width: 834px)": {
-      fontSize: "2.03vw",
+      fontSize: "1.67vw",
     },
     "@media(max-width: 414px)": {
-      fontSize: "4.1vw",
+      fontSize: "3.38vw",
     },
   },
   disable: {

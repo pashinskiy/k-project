@@ -61,7 +61,7 @@ const useStyle = makeStyles(theme => ({
   title: {
     fontWeight: 400,
     lineHeight: 1.21,
-    height: "3.63em",
+    // height: "3.63em",
     fontSize: "1.09vw",
     marginTop: "0.62vw",
     "@media(min-width: 1280px)": {
@@ -79,7 +79,7 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-export default function CardSimilarProduct({ product }) {
+export default function CardSimilarProduct({ product, afterChange }) {
   const img =
     product.data.images[0].image.localFile?.childImageSharp.gatsbyImageData
   const alt = product.data.images[0].image.alt
@@ -101,7 +101,7 @@ export default function CardSimilarProduct({ product }) {
           {title}
         </Typography>
       </Link>
-      <AddInCartAndFav text="В корзину" product={product} />
+      <AddInCartAndFav text="В корзину" product={product} afterChange={afterChange} />
     </Grid>
   )
 }

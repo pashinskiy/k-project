@@ -7,18 +7,22 @@
         "placeholder" : "Уникальный ID"
       }
     },
-    "name" : {
-      "type" : "Text",
-      "config" : {
-        "label" : "Название товара",
-        "placeholder" : "Название товара"
+    "brand": {
+      "type": "Link",
+      "config": {
+        "select": "document",
+        "customtypes": [
+          "brand"
+        ],
+        "label": "Производитель",
+        "placeholder": "документ"
       }
     },
-    "brand" : {
-      "type" : "Text",
-      "config" : {
-        "label" : "Бренд",
-        "placeholder" : "Бренд"
+    "name": {
+      "type": "Text",
+      "config": {
+        "label": "Название товара",
+        "placeholder": "Название товара"
       }
     },
     "color_name" : {
@@ -64,44 +68,28 @@
         "label" : "Изображения товара"
       }
     },
-    "body" : {
-      "type" : "Slices",
-      "fieldset" : "Slice zone",
-      "config" : {
-        "labels" : { },
-        "choices" : {
-          "brand" : {
-            "type" : "Slice",
-            "fieldset" : "brand",
-            "description" : "логотип бренда",
-            "icon" : "crop_original",
-            "non-repeat" : {
-              "image" : {
-                "type" : "Image",
-                "config" : {
-                  "constraint" : { },
-                  "thumbnails" : [ ],
-                  "label" : "Изображение"
-                }
-              }
-            },
-            "repeat" : { },
-            "display" : "list"
-          },
-          "stickers" : {
-            "type" : "Slice",
-            "fieldset" : "stickers",
-            "description" : "стикеры к заголовку",
-            "icon" : "local_offer",
-            "non-repeat" : { },
-            "repeat" : {
-              "sticker" : {
-                "type" : "Link",
-                "config" : {
-                  "select" : "document",
-                  "customtypes" : [ "sticker" ],
-                  "label" : "Стикер",
-                  "placeholder" : "Стикер"
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": {},
+        "choices": {
+          "stickers": {
+            "type": "Slice",
+            "fieldset": "stickers",
+            "description": "стикеры к заголовку",
+            "icon": "local_offer",
+            "non-repeat": {},
+            "repeat": {
+              "sticker": {
+                "type": "Link",
+                "config": {
+                  "select": "document",
+                  "customtypes": [
+                    "sticker"
+                  ],
+                  "label": "Стикер",
+                  "placeholder": "Стикер"
                 }
               }
             },
@@ -481,35 +469,35 @@
       }
     }
   },
-  "Документы" : {
-    "documents" : {
-      "type" : "Group",
-      "config" : {
-        "fields" : {
-          "doc_title" : {
-            "type" : "StructuredText",
-            "config" : {
-              "label" : "Название документа",
-              "placeholder" : "Название документа"
+  "Документы": {
+    "documents": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "doc_title": {
+            "type": "StructuredText",
+            "config": {
+              "label": "Название документа",
+              "placeholder": "Название документа"
             }
           },
-          "doc_description" : {
-            "type" : "StructuredText",
-            "config" : {
-              "label" : "Описание документа",
-              "placeholder" : "Описание документа"
+          "doc_description": {
+            "type": "StructuredText",
+            "config": {
+              "label": "Описание документа",
+              "placeholder": "Описание документа"
             }
           },
-          "file" : {
-            "type" : "Link",
-            "config" : {
-              "select" : "media",
-              "label" : "Документ",
-              "placeholder" : "Документ"
+          "file": {
+            "type": "Link",
+            "config": {
+              "select": "media",
+              "label": "Документ",
+              "placeholder": "Документ"
             }
           }
         },
-        "label" : "Документы"
+        "label": "Документы"
       }
     }
   }

@@ -1,7 +1,7 @@
 import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import { Grid, Typography} from "@material-ui/core"
-import CategoryCard from "./categoryCard"
+import CardWidget from "./cardWidget"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,11 +13,11 @@ const useStyles = makeStyles(theme => ({
     fontSize: 17,
     fontWeight: 700,
     "@media(max-width: 834px)": {
-      fontSize: "2.038vw",
+      // fontSize: "2.038vw",
       paddingTop: "4.79vw",
     },
     "@media(max-width: 414px)": {
-      fontSize: "4.1vw",
+      // fontSize: "4.1vw",
       paddingTop: "9.66vw",
     },
   },
@@ -39,8 +39,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   storiesCardItem: {
-    width: "136px",
-    height: "136px",
+    width: "187.5px",
+    height: "187.5px",
     padding: "8px",
   },
 
@@ -59,13 +59,13 @@ export default function CategoryWidget(props) {
         {data.length
           ? data.map((category, i) => (
               <Grid item key={i} className={classes.storiesCardItem}>
-                <CategoryCard
+                <CardWidget
                   cardImage={
                     category.category.document.data.image.localFile
                       .childImageSharp.gatsbyImageData
                   }
                   cardTitle={category.category.document.data.name}
-                  variant="brand2"
+                  variant="category"
                 />
               </Grid>
             ))
