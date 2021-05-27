@@ -13,22 +13,17 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allPrismicSubcategory {
+        edges {
+          node {
+            uid
+          }
+        }
+      }
       allPrismicCategory {
         edges {
           node {
             uid
-            data {
-              name
-              children {
-                child {
-                  document {
-                    ... on PrismicCategory {
-                      uid
-                    }
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -48,31 +43,28 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
-
-  console.log("Sub-Categories page build")
-  const subCategory = path.resolve("src/templates/subCategories.js")
-
-  pages.data.allPrismicCategory.edges.forEach(edge => {
-    edge.node.data.children.forEach(childCat => {
-      console.log(childCat.uid)
-      createPage({
-        path: `subcategory/${childCat.uid}/`,
-        component: subCategory,
-        context: {
-          uid: childCat.uid,
-        },
-    })
-    })
-  })
-
-  console.log("Categories page build")
-  const category = path.resolve("src/templates/categories.js")
+  console.log("Category page build")
+  const category = path.resolve("src/templates/category.js")
 
   pages.data.allPrismicCategory.edges.forEach(edge => {
     console.log(edge.node.uid)
     createPage({
-      path: `category/${edge.node.uid}/`,
+      path: `/${edge.node.uid}/`,
       component: category,
+      context: {
+        uid: edge.node.uid,
+      },
+    })
+  })
+
+  console.log("Subcategory page build")
+  const subcategory = path.resolve("src/templates/subcategory.js")
+
+  pages.data.allPrismicSubcategory.edges.forEach(edge => {
+    console.log(edge.node.uid)
+    createPage({
+      path: `/${edge.node.uid}/`,
+      component: subcategory,
       context: {
         uid: edge.node.uid,
       },
