@@ -1,6 +1,7 @@
 import React from "react"
 import { Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import CardWidget from "../../widgets/cardWidget"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {},
@@ -84,10 +85,12 @@ export default function FastLink({ products }) {
       cardPanel.scrollLeft = newLeft
     }
   }
-  
+
+  // const brand = product.data.brand.document.data.name.replace("ё", "е")
+  // console.log(brand)
+
   return (
     <Grid className={classes.wrapper}>
-      
       <Grid
         container
         wrap="nowrap"
@@ -99,7 +102,7 @@ export default function FastLink({ products }) {
             key={product.uid + i}
             className={classes.wrapperCard + " " + classes.unsecect}
           >
-            <Grid></Grid>
+            <CardWidget variant="brand" />
           </div>
         ))}
       </Grid>
