@@ -58,7 +58,7 @@ const Product = ({
         imagesArr={prismicProduct.data.photos.map(photo => photo.image)}
       />
       <div id="characteristics" />
-      {/* <CharacteristicsBlock props={prismicProduct} /> */}
+      <CharacteristicsBlock props={prismicProduct} />
       <div id="delivery" />
       <DeliveryCards prismicProduct={prismicProduct} />
       <CategoryPage allPrismicCatalog={allPrismicCatalog} />

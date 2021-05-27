@@ -87,6 +87,8 @@ const IndexPage = ({ data }) => {
     favorites = favorites === null || !favorites ? [] : JSON.parse(favorites)
     setFavoritesArray(favorites)
   }
+  //TODO: почистить от null
+  console.log(arrayCards)
 
   return (
     <Layout>
@@ -103,8 +105,8 @@ const IndexPage = ({ data }) => {
       </Grid>
 
       <Grid container  alignItems="center" className={classes.containerRoot}>
-      {arrayCards}
-      {/* <Pagination pageSize={isMobile ? 5 : 10} components={arrayCards} /> */}
+      {/* {arrayCards} */}
+      <Pagination pageSize={isMobile ? 5 : 10} components={arrayCards} />
       </Grid>
     </Layout>
   )
