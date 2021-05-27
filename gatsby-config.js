@@ -59,6 +59,8 @@ module.exports = {
           catalog: require("./src/schemas/catalog.json"),
           category: require("./src/schemas/category.json"),
           characteristic: require("./src/schemas/characteristic.json"),
+          subcategory: require("./src/schemas/subcategory.json"),
+          tag: require("./src/schemas/tag.json"),
         },
         shouldDownloadImage: () => true,
       },
