@@ -1,0 +1,171 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "uid",
+        "placeholder": "header"
+      }
+    },
+    "logo_svg": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Вставьте логотип"
+      }
+    }
+  },
+  "Каталог": {
+    "catalog_name": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label": "Каталог",
+        "placeholder": "Каталог"
+      }
+    },
+    "catalog_img": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Вставьте изображение \"Каталог\""
+      }
+    },
+    "catalog_mobile_img": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Вставьте изображение \"Каталог\" для мобильного меню"
+      }
+    }
+  },
+  "Избранное": {
+    "favorites_name": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label": "Избранное",
+        "placeholder": "Избранное"
+      }
+    },
+    "favorites_img": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Вставьте изображение \"Избранное\""
+      }
+    }
+  },
+  "Корзина": {
+    "cart_name": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label": "Корзина",
+        "placeholder": "Корзина"
+      }
+    },
+    "cart_img": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Вставьте изображение \"Корзина\""
+      }
+    }
+  },
+  "Поиск": {
+    "find_name": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label": "Найти",
+        "placeholder": "Найти"
+      }
+    },
+    "field_example": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label": "Введите значение, которое будет отображаться в поле \"Найти\"",
+        "placeholder": "Например, iPhone 12 Pro Max"
+      }
+    },
+    "find_img": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Вставьте изображение \"Найти\""
+      }
+    }
+  },
+  "Дополнительное меню": {
+    "sale_name": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label": "Акции и предложения",
+        "placeholder": "Введите название для страницы \"Акции и предложения\""
+      }
+    },
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": {
+          "link": []
+        },
+        "choices": {
+          "link": {
+            "type": "Slice",
+            "fieldset": "Link",
+            "description": "Ссылки на дополнительные страницы",
+            "icon": "insert_link",
+            "display": "list",
+            "non-repeat": {
+              "link_name": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                  "label": "Название страницы",
+                  "placeholder": "Введите название страницы, куда будет вести ссылка"
+                }
+              },
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Ссылка на страницу",
+                  "placeholder": "Введите ссылку"
+                }
+              }
+            },
+            "repeat": {}
+          }
+        }
+      }
+    }
+  },
+  "Главная": {
+    "main_name": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label": "Главная",
+        "placeholder": "Главная"
+      }
+    },
+    "main_img": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Вставьте изображение \"Главная\""
+      }
+    }
+  }
+}
