@@ -234,7 +234,7 @@ export default function CardWidget(props) {
       case "brand":
         return (
           <div className={classes.brandCardRoot}>
-            {/* <Link to={props.cardLink} className={classes.stretch}> */}
+            <Link to={props.cardLink} className={classes.stretch}>
             <Card
               className={classes.brandContainer}
               style={
@@ -255,7 +255,7 @@ export default function CardWidget(props) {
                 {props.cardTitle}
               </Typography>
             ) : null}
-            {/* </Link> */}
+            </Link>
           </div>
         )
         case "small":

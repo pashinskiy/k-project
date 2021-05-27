@@ -62,6 +62,11 @@ const useStyles = makeStyles(theme => ({
         marginLeft: "2.89vw",
       },
     },
+    "&:last-child": {
+      "&:before": {
+        content: "'до'",
+      },
+    },
   },
   root: {
     padding: "0 !important",
@@ -148,8 +153,7 @@ export default function BlockFromTo({
   const valueMax = sortSet[sortSet.length - 1]
   const valueMin = sortSet[0]
 
-  const [value, setValue] = React.useState([valueMin, valueMax])
-
+  const value = span ? span : [valueMin, valueMax]
   const id =
     "id" +
     title
@@ -160,22 +164,16 @@ export default function BlockFromTo({
   React.useEffect(() => {
     const wrapper = document.querySelector(`#${id}`)
     if (wrapper) {
-      wrapper.children[0].children[0].addEventListener("blur", setValueFilter)
-      wrapper.children[1].children[0].addEventListener("blur", setValueFilter)
+      wrapper.children[0].children[0].addEventListener("blur", onBlur)
+      wrapper.children[1].children[0].addEventListener("blur", onBlur)
       return () => {
-        wrapper.children[0].children[0].removeEventListener(
-          "blur",
-          setValueFilter
-        )
-        wrapper.children[1].children[0].removeEventListener(
-          "blur",
-          setValueFilter
-        )
+        wrapper.children[0].children[0].removeEventListener("blur", onBlur)
+        wrapper.children[1].children[0].removeEventListener("blur", onBlur)
       }
     }
   })
 
-  function setValueFilter() {
+  function onBlur() {
     const result = value
       .sort((a, b) => a - b)
       .map(el => {
@@ -184,7 +182,6 @@ export default function BlockFromTo({
         return el
       })
 
-    setValue([...result])
     if (result[0] === valueMin && result[1] === valueMax) setSpan(title, [])
     else setSpan(title, result)
   }
@@ -195,7 +192,7 @@ export default function BlockFromTo({
       result[0] = +e.target.value
     if (e.target.id === `${id}_to` && !isNaN(+e.target.value))
       result[1] = +e.target.value
-    setValue([...result])
+    setSpan(title, [...result])
   }
 
   return valueMax !== valueMin ? (
@@ -223,10 +220,12 @@ export default function BlockFromTo({
         <Slider
           value={value}
           onChange={(e, newValue) => {
-            setValue(newValue)
+            setSpan(title, newValue)
           }}
-          onPointerUp={setValueFilter}
-          onPointerLeave={setValueFilter}
+          onPointerUp={onBlur}
+          onPointerLeave={e =>
+            e.currentTarget.dispatchEvent(new Event("pointerup"))
+          }
           max={valueMax}
           min={valueMin}
           scale={x => `${x}руб.`}

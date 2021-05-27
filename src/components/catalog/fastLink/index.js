@@ -2,10 +2,6 @@ import React from "react"
 import { Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
-import IconSimilarProduct from "../../../../static/svg/similarProducts.svg"
-import HeaderWithIcon from "../../headers/headerWithIcon"
-import CardSimilarProduct from "./cardProduct"
-
 const useStyle = makeStyles(theme => ({
   wrapper: {},
   cardPanel: {
@@ -37,16 +33,16 @@ const useStyle = makeStyles(theme => ({
     },
   },
   wrapperCard: {
-    paddingRight: "2.81vw",
+    paddingRight: "0.93vw",
     boxSizing: "border-box",
     "@media(min-width: 1280px)": {
-      paddingRight: "36px",
+      paddingRight: "12px",
     },
     "@media(max-width: 834px)": {
-      paddingRight: "4.31vw",
+      paddingRight: "1.43vw",
     },
     "@media(max-width: 414px)": {
-      paddingRight: "7.24vw",
+      paddingRight: "2.89vw",
     },
   },
   unselect: {
@@ -61,9 +57,9 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-export default function SimilarProduct({ products }) {
+export default function FastLink({ products }) {
   const classes = useStyle()
-  
+
   function setScrollBar(e) {
     const cardPanel = e.currentTarget
     const transition = cardPanel.style.transition
@@ -91,11 +87,7 @@ export default function SimilarProduct({ products }) {
   
   return (
     <Grid className={classes.wrapper}>
-      <HeaderWithIcon
-        title="Похожие товары"
-        icon={<IconSimilarProduct />}
-        divider={true}
-      />
+      
       <Grid
         container
         wrap="nowrap"
@@ -107,7 +99,7 @@ export default function SimilarProduct({ products }) {
             key={product.uid + i}
             className={classes.wrapperCard + " " + classes.unsecect}
           >
-            <CardSimilarProduct product={product} />
+            <Grid></Grid>
           </div>
         ))}
       </Grid>

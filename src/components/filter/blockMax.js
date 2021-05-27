@@ -55,8 +55,8 @@ export default function BlockMax({
   const valueMax = sortSet[sortSet.length - 1]
   const valueMin = sortSet[0]
 
-  const [value, setValue] = React.useState(valueMax)
-
+  // const [value, setValue] = React.useState(valueMax)
+  const value = valueFilter ? +valueFilter : valueMax
   const id =
     "id" +
     title
@@ -78,12 +78,11 @@ export default function BlockMax({
     if (value > valueMax) result = valueMax
     if (value < valueMin) result = valueMin
     setFilter(title, result === valueMax ? [] : `${result}`)
-    setValue(result)
   }
   // изменение состояния компонента
   function changeValue(e) {
     const newValue = isNaN(+e.target.value) ? value : +e.target.value
-    setValue(newValue)
+    setFilter(title, `${newValue}`)
   }
 
   return set.length ? (

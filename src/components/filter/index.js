@@ -14,10 +14,10 @@ import BlockCheckbox from "./blockCheckbox"
 import BlockMax from "./blockMax"
 import BlockRatio from "./blockRatio"
 import BlockBoolean from "./blockBoolean"
+import ButtonClean from "./buttonClean"
 
 import IconFilter from "../../../static/svg/filter.svg"
 import IconBack from "../../../static/svg/breadCrumbs.svg"
-import ButtonClean from "./buttonClean"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -89,12 +89,21 @@ const useStyles = makeStyles(theme => ({
     width: "49.22%",
   },
   wrapperButtonFilter: {
+    width: "11.56vw",
+    position: "absolute",
+    zIndex: 99,
+    right: "100%",
+    transform: "translate(0,-50%)",
+    "@media(min-width: 1280px)": {
+      width: "148px",
+    },
     "@media(max-width: 834px)": {
       width: "100%",
       padding: "0.95vw",
       bottom: "7.43vw",
       position: "fixed",
       left: 0,
+      transform: "none",
     },
     "@media(max-width: 414px)": {
       padding: "1.93vw",
@@ -104,27 +113,51 @@ const useStyles = makeStyles(theme => ({
   buttonFilter: {
     background: theme.palette.background.accent,
     color: theme.palette.color.mainContrast,
-    fontWeight: 700,
+    fontWeight: 500,
     lineHeight: 1.21,
     width: "100%",
 
-    fontSize: "1.4vw",
-    borderRadius: "1.56vw",
-    padding: "1.09vw",
+    fontSize: "1.09vw",
+    borderRadius: "0.93vw",
+    padding: "1.52vw 1.56vw",
     "@media(min-width: 1280px)": {
-      fontSize: "18px",
-      borderRadius: "20px",
-      padding: "14px",
+      fontSize: "14px",
+      borderRadius: "12px",
+      padding: "19.5px 20px",
     },
     "@media(max-width: 834px)": {
+      fontWeight: 700,
+      lineHeight: 1.21,
+
       fontSize: "2.15vw",
       borderRadius: "2.39vw",
       padding: "1.67vw",
+      position: "static",
     },
     "@media(max-width: 414px)": {
       fontSize: "4.34vw",
       borderRadius: "4.83vw",
       padding: "3.38vw",
+    },
+    "&:after": {
+      content: "''",
+      display: "block",
+      position: "absolute",
+      background: "linear-gradient(135deg, #291AD5 -1.79%, #681DE1 98.21%)",
+      transform: "rotate(45deg)",
+      zIndex: -1,
+
+      width: "3.04vw",
+      height: "3.04vw",
+      right: "-0.31vw",
+      "@media(min-width: 1280px)": {
+        width: "39px",
+        height: "39px",
+        right: "-4px",
+      },
+      "@media(max-width: 834px)": {
+        display: "none",
+      },
     },
   },
   modal: {
@@ -261,7 +294,6 @@ export default function Filter({ products, setFilterProducts }) {
     })
 
   const [filters, setFilters] = React.useState(new Map([...filtersInUrl]))
-
   //счетчик фильтров
   const countFilter = [...filters].reduce((sum, filter) => {
     if (filter[1].type === "checkbox" || filter[1].type === "color")
@@ -346,7 +378,7 @@ export default function Filter({ products, setFilterProducts }) {
   }
 
   //фильтрация
-  function filtration() {
+  function filtration(first) {
     // отфильтрованные товары
     const filterProducts = products.filter(product => {
       return [...filters].every(filter => {
@@ -391,19 +423,22 @@ export default function Filter({ products, setFilterProducts }) {
         }
       })
     })
-    console.log(filterProducts)
-    url.search = ""
-    Array.from(filters).forEach(filter => {
-      setUrl(filter[0], filter[1].value)
-    })
+    
+    if (!first) {
+      url.search = ""
+      Array.from(filters).forEach(filter => {
+        setUrl(filter[0], filter[1].value)
+      })
+    }
 
     setShow(false)
+    setTop(false)
     navigate(url.href)
     setFilterProducts(filterProducts)
   }
   //фильтрация при первом рендере
   React.useEffect(() => {
-    if (url.search) filtration()
+    if (url.search) filtration(true)
   }, [])
   //очистка фильтра
   function cleanFilter() {
@@ -511,6 +546,34 @@ export default function Filter({ products, setFilterProducts }) {
     }
   })
 
+  // кнопка отфильтровать десктоп
+  const [top, setTop] = React.useState(0)
+  const [timeoutId, setTimeoutId] = React.useState(null)
+
+  function setNewCoordinate(e) {
+    if (!e.target.closest("button") && e.type === "pointerdown") return
+    if (
+      !e.target.classList.contains("MuiSlider-thumb") &&
+      e.type === "pointerup"
+    )
+      return
+
+    const target =
+      e.target.closest("button") ?? e.target.closest("input") ?? e.target
+    const containerTop =
+      e.currentTarget.getBoundingClientRect().top + window.pageYOffset
+    const coordinateTarget =
+      target.getBoundingClientRect().top +
+      window.pageYOffset +
+      target.offsetHeight / 2
+
+    const newCoordinate = coordinateTarget - containerTop
+    // показываем кнопку отфильтровать
+    if (timeoutId !== null) clearTimeout(timeoutId)
+    setTop(newCoordinate)
+    setTimeoutId(setTimeout(setTop, 5000, false))
+  }
+
   return (
     <Grid container style={{ width: "auto", position: "relative" }}>
       <Button onClick={() => setShow(!show)} className={classes.button}>
@@ -538,9 +601,7 @@ export default function Filter({ products, setFilterProducts }) {
               justify="space-between"
               className={classes.modalTitle}
             >
-              <Typography className={classes.modalTitleText}>
-                Фильтер
-              </Typography>
+              <Typography className={classes.modalTitleText}>Фильтр</Typography>
               <ButtonClean clean={cleanFilter} count={countFilter} />
             </Grid>
 
@@ -565,32 +626,50 @@ export default function Filter({ products, setFilterProducts }) {
             </Grid>
           </Grid>
         ) : null
-      ) : desktop || show ? (
+      ) : desktop ? (
         <Grid container className={classes.modal}>
-          {desktop ? null : (
-            <>
-              <Button
-                onClick={() => setShow(!show)}
-                className={classes.button + " " + classes.modalButtonBack}
-              >
-                <IconBack className={classes.modalButtonBackIcon} />
-                <Typography variant="body2" className={classes.buttonText}>
-                  Назад
-                </Typography>
-              </Button>
+          <Grid
+            container
+            direction="column"
+            className={classes.wrapperFilterBlock}
+            onPointerUp={setNewCoordinate}
+            onPointerDown={setNewCoordinate}
+            onChange={setNewCoordinate}
+          >
+            {fields}
 
+            {top ? (
               <Grid
-                container
-                justify="space-between"
-                className={classes.modalTitle}
+                className={classes.wrapperButtonFilter}
+                style={{ top: top }}
               >
-                <Typography className={classes.modalTitleText}>
-                  Фильтер
-                </Typography>
-                <ButtonClean clean={cleanFilter} count={countFilter} />
+                <Button onClick={filtration} className={classes.buttonFilter}>
+                  Отфильтровать
+                </Button>
               </Grid>
-            </>
-          )}
+            ) : null}
+          </Grid>
+        </Grid>
+      ) : show ? (
+        <Grid container className={classes.modal}>
+          <Button
+            onClick={() => setShow(!show)}
+            className={classes.button + " " + classes.modalButtonBack}
+          >
+            <IconBack className={classes.modalButtonBackIcon} />
+            <Typography variant="body2" className={classes.buttonText}>
+              Назад
+            </Typography>
+          </Button>
+
+          <Grid
+            container
+            justify="space-between"
+            className={classes.modalTitle}
+          >
+            <Typography className={classes.modalTitleText}>Фильтр</Typography>
+            <ButtonClean clean={cleanFilter} count={countFilter} />
+          </Grid>
 
           <Grid
             container
