@@ -239,7 +239,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function CardProduct({ product, ...other }) {
+export default function CardProduct({ product, afterChange, ...other }) {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 414px)")
 
@@ -397,6 +397,7 @@ export default function CardProduct({ product, ...other }) {
               text="В корзину"
               product={product}
               variant="card"
+              afterChange={afterChange}
             />
           </Grid>
         )}

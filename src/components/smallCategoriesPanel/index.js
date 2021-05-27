@@ -89,6 +89,7 @@ export default function SmallCategoriesPanel(categories) {
       cardPanel.scrollLeft = newLeft
     }
   }
+  console.log(categories)
 
   return (
     <Grid
@@ -99,8 +100,8 @@ export default function SmallCategoriesPanel(categories) {
     >
       {isMobile ? icon : null}
       {categories.categories.map(item => (
-        <Grid item className={classes.itemRoot}>
-          <CardWidget cardTitle={item.node.data.name} variant="small" />
+        <Grid item className={classes.itemRoot} key={item.uid} >
+          <CardWidget cardTitle={item.data.name} variant="small" />
         </Grid>
       ))}
       {isMobile ? null : icon}
