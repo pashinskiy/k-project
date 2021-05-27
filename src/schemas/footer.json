@@ -1,0 +1,232 @@
+{
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "uid",
+          "placeholder": "footer"
+        }
+      },
+      "copyright": {
+        "type": "StructuredText",
+        "config": {
+          "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+          "label": "Введите copyright-сообщение о товарном знаке",
+          "placeholder": "© 2021  ООО «Krypton»"
+        }
+      },
+      "menu_name": {
+        "type": "StructuredText",
+        "config": {
+          "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+          "label": "Введите название поля \"Меню\"",
+          "placeholder": "Введите название поля \"Меню\""
+        }
+      },
+      "about_name": {
+        "type": "StructuredText",
+        "config": {
+          "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+          "label": "Введите название поля \"О компании\"",
+          "placeholder": "Введите название поля \"О компании\""
+        }
+      },
+      "contact_name": {
+        "type": "StructuredText",
+        "config": {
+          "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+          "label": "Введите название поля \"Связаться с нами\"",
+          "placeholder": "Введите название поля \"Связаться с нами\""
+        }
+      },
+      "seen_name": {
+        "type": "StructuredText",
+        "config": {
+          "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+          "label": "Введите название поля \"Вы смотрели\"",
+          "placeholder": "Введите название поля \"Вы смотрели\""
+        }
+      }
+    },
+    "Меню": {
+      "body": {
+        "type": "Slices",
+        "fieldset": "Slice zone",
+        "config": {
+          "labels": {
+            "link": []
+          },
+          "choices": {
+            "link": {
+              "type": "Slice",
+              "fieldset": "link",
+              "description": "Добавить ссылку на страницу",
+              "icon": "link",
+              "display": "list",
+              "non-repeat": {
+                "link_name": {
+                  "type": "StructuredText",
+                  "config": {
+                    "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                    "label": "Введите название ссылки",
+                    "placeholder": "Введите название ссылки"
+                  }
+                },
+                "link": {
+                  "type": "Link",
+                  "config": {
+                    "select": "document",
+                    "label": "Выберите страницу",
+                    "placeholder": "Выберите страницу"
+                  }
+                }
+              },
+              "repeat": {}
+            }
+          }
+        }
+      }
+    },
+    "О компании": {
+      "body1": {
+        "type": "Slices",
+        "fieldset": "Slice zone",
+        "config": {
+          "labels": {
+            "link": []
+          },
+          "choices": {
+            "link": {
+              "type": "Slice",
+              "fieldset": "link",
+              "description": "Добавить ссылку на страницу",
+              "icon": "link",
+              "display": "list",
+              "non-repeat": {
+                "link_name": {
+                  "type": "StructuredText",
+                  "config": {
+                    "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                    "label": "Введите название ссылки",
+                    "placeholder": "Введите название ссылки"
+                  }
+                },
+                "link": {
+                  "type": "Link",
+                  "config": {
+                    "select": "document",
+                    "label": "Выберите страницу",
+                    "placeholder": "Выберите страницу"
+                  }
+                }
+              },
+              "repeat": {}
+            }
+          }
+        }
+      }
+    },
+    "Связаться с нами": {
+      "body2": {
+        "type": "Slices",
+        "fieldset": "Slice zone",
+        "config": {
+          "labels": {
+            "social": [],
+            "contact": []
+          },
+          "choices": {
+            "social": {
+              "type": "Slice",
+              "fieldset": "social",
+              "description": "Добавить социальную сеть",
+              "icon": "supervisor_account",
+              "display": "list",
+              "non-repeat": {
+                "social_img": {
+                  "type": "Image",
+                  "config": {
+                    "constraint": {},
+                    "thumbnails": [],
+                    "label": "Вставьте изображение социальной сети"
+                  }
+                },
+                "link": {
+                  "type": "Link",
+                  "config": {
+                    "label": "Введите ссылку на социальную сеть",
+                    "placeholder": "Введите ссылку на социальную сеть"
+                  }
+                }
+              },
+              "repeat": {}
+            },
+            "contact": {
+              "type": "Slice",
+              "fieldset": "contact",
+              "description": "Добавить контакт",
+              "icon": "contact_phone",
+              "display": "list",
+              "non-repeat": {
+                "contact_link_name": {
+                  "type": "StructuredText",
+                  "config": {
+                    "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                    "label": "Введите название контакта",
+                    "placeholder": "Введите название контакта"
+                  }
+                },
+                "contact_link": {
+                  "type": "Link",
+                  "config": {
+                    "label": "Введите ссылку на контакт",
+                    "placeholder": "Введите ссылку на контакт"
+                  }
+                }
+              },
+              "repeat": {}
+            }
+          }
+        }
+      }
+    },
+    "Документы": {
+      "body3": {
+        "type": "Slices",
+        "fieldset": "Slice zone",
+        "config": {
+          "labels": {
+            "document": []
+          },
+          "choices": {
+            "document": {
+              "type": "Slice",
+              "fieldset": "document",
+              "description": "Вставить документ для пользователей",
+              "icon": "face",
+              "display": "list",
+              "non-repeat": {
+                "doc_name": {
+                  "type": "StructuredText",
+                  "config": {
+                    "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+                    "label": "Введите название документа",
+                    "placeholder": "Введите название документа"
+                  }
+                },
+                "doc_file": {
+                  "type": "Link",
+                  "config": {
+                    "select": "media",
+                    "label": "Вставьте документ",
+                    "placeholder": "Вставьте документ"
+                  }
+                }
+              },
+              "repeat": {}
+            }
+          }
+        }
+      }
+    }
+  }

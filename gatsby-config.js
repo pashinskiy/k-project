@@ -49,6 +49,8 @@ module.exports = {
         accessToken: `${process.env.API_KEY}`,
         schemas: {
           product: require("./src/schemas/product.json"),
+          header: require("./src/schemas/header.json"),
+          footer: require("./src/schemas/footer.json"),
           sticker: require("./src/schemas/sticker.json"),
           delivery: require("./src/schemas/delivery.json"),
           credit: require("./src/schemas/credit.json"),

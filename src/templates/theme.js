@@ -3,7 +3,7 @@ import { createMuiTheme } from "@material-ui/core/styles"
 const theme = createMuiTheme({
   palette: {
     color: {
-      main: "#000000",
+      main: "#131313",
       mainContrast: "#ffffff",
       accent: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)", // Акцентный цвет
       accentSecondary: "#681DE1", // Акцентный цвет для браузеров не поддерживающих -webkit-background-clip
@@ -40,7 +40,7 @@ const theme = createMuiTheme({
           backgroundClip: "border-box",
           "-webkit-text-fill-color": "none",
           backgroundColor: "#ffffff",
-          color: "#000000",
+          color: "#131313",
         },
       },
     },
