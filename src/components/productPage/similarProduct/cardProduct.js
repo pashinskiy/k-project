@@ -89,7 +89,7 @@ export default function CardSimilarProduct({ product, afterChange }) {
 
   const classes = useStyle()
   return (
-    <Grid className={classes.wrapper}>
+    <Grid className={`${classes.wrapper} product--card`}>
       <GatsbyImage
         image={img}
         alt={alt ?? `image product`}
