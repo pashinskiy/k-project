@@ -517,5 +517,26 @@
         "label": "Документы"
       }
     }
+  },
+  "Теги": {
+    "tags": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "tag": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": [
+                "tag"
+              ],
+              "label": "tag",
+              "placeholder": "документ"
+            }
+          }
+        },
+        "label": "Теги"
+      }
+    }
   }
 }
