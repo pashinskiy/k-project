@@ -1,0 +1,19 @@
+{
+    "Main" : {
+      "text" : {
+        "type" : "StructuredText",
+        "config" : {
+          "single" : "heading6",
+          "label" : "Текст"
+        }
+      },
+      "image" : {
+        "type" : "Image",
+        "config" : {
+          "constraint" : { },
+          "thumbnails" : [ ],
+          "label" : "Изображение"
+        }
+      }
+    }
+  }
