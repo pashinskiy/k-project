@@ -29,6 +29,20 @@ const useStyles = makeStyles(theme => ({
     minWidth: 0,
     position: "relative",
   },
+  buttonShow: {
+    width: "auto",
+    position: "absolute",
+    bottom: "100%",
+    right: 0,
+    marginBottom: "1.56vw",
+    "@media(min-width: 1280px)": {
+      marginBottom: "20px",
+    },
+    "@media(max-width: 834px)": {
+      position: "static",
+      marginBottom: 0,
+    },
+  },
   buttonIcon: {
     height: "1.85vw",
     width: "1.85vw",
@@ -65,17 +79,13 @@ const useStyles = makeStyles(theme => ({
     },
   },
   wrapperFilterBlock: {
-    position: "absolute",
-    top: "100%",
-    right: 0,
     width: "21.87vw",
-    marginTop: "4.37vw",
+    marginTop: "2.18vw",
     "@media(min-width: 1280px)": {
       width: "280px",
-      marginTop: "56px",
+      marginTop: "28px",
     },
     "@media(max-width: 834px)": {
-      position: "static",
       width: "100%",
       marginTop: "3.39vw",
       marginBottom: "11.27vw",
@@ -161,6 +171,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   modal: {
+    width: "auto",
     "@media(max-width: 834px)": {
       position: "fixed",
       top: 0,
@@ -378,7 +389,7 @@ export default function Filter({ products, setFilterProducts }) {
   }
 
   //фильтрация
-  function filtration(first) {
+  function filtration(trim) {
     // отфильтрованные товары
     const filterProducts = products.filter(product => {
       return [...filters].every(filter => {
@@ -423,13 +434,15 @@ export default function Filter({ products, setFilterProducts }) {
         }
       })
     })
-    
-    if (!first) {
-      url.search = ""
-      Array.from(filters).forEach(filter => {
-        setUrl(filter[0], filter[1].value)
-      })
-    }
+
+    const page = url.searchParams.get("page") ?? false
+
+    if (trim) url.search = ""
+    Array.from(filters).forEach(filter => {
+      setUrl(filter[0], filter[1].value)
+    })
+
+    if (page && !trim) url.searchParams.set("page", page)
 
     setShow(false)
     setTop(false)
@@ -438,7 +451,7 @@ export default function Filter({ products, setFilterProducts }) {
   }
   //фильтрация при первом рендере
   React.useEffect(() => {
-    if (url.search) filtration(true)
+    if (url.search) filtration(false)
   }, [])
   //очистка фильтра
   function cleanFilter() {
@@ -576,12 +589,14 @@ export default function Filter({ products, setFilterProducts }) {
 
   return (
     <Grid container style={{ width: "auto", position: "relative" }}>
-      <Button onClick={() => setShow(!show)} className={classes.button}>
-        <IconFilter className={classes.buttonIcon} />
-        <Typography className={classes.buttonText}>Фильтр</Typography>
-      </Button>
+      <Grid container className={classes.buttonShow}>
+        <Button onClick={() => setShow(!show)} className={classes.button}>
+          <IconFilter className={classes.buttonIcon} />
+          <Typography className={classes.buttonText}>Фильтр</Typography>
+        </Button>
 
-      <ButtonClean clean={cleanFilter} count={countFilter} />
+        <ButtonClean clean={cleanFilter} count={countFilter} />
+      </Grid>
 
       {second_variant ? (
         show ? (

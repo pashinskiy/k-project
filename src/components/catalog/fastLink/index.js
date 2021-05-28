@@ -86,8 +86,13 @@ export default function FastLink({ products }) {
     }
   }
 
-  // const brand = product.data.brand.document.data.name.replace("ё", "е")
-  // console.log(brand)
+  const popularBrand = new Set()
+  products.forEach(product => {
+    if (product.data.brand.document === null) return
+    if (product.data.brand.document.data.name) return
+    popularBrand.add(product.data.brand.document.data.name.replace("ё", "е"))
+  })
+  console.log(popularBrand)
 
   return (
     <Grid className={classes.wrapper}>
