@@ -28,6 +28,14 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
+    allPrismicSales {
+      edges {
+        node {
+          uid
+        }
+      }
+    }
+  }
   `)
 
   console.log("Product page build")
@@ -43,6 +51,7 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
+
   console.log("Category page build")
   const category = path.resolve("src/templates/category.js")
 
@@ -65,6 +74,20 @@ exports.createPages = async ({ graphql, actions }) => {
     createPage({
       path: `/${edge.node.uid}/`,
       component: subcategory,
+      context: {
+        uid: edge.node.uid,
+      },
+    })
+  })
+  
+  console.log("Sale page build")
+  const sale = path.resolve("src/templates/sale.js")
+  
+  pages.data.allPrismicSales.edges.forEach(edge => {
+    console.log(edge.node.uid)
+    createPage({
+      path: `/${edge.node.uid}/`,
+      component: sale,
       context: {
         uid: edge.node.uid,
       },
