@@ -99,10 +99,12 @@ const useStyles = makeStyles(theme => ({
   },
   brandContainer: {
     width: "100%",
+    height:"auto",
     display: "inline-block",
     position: "relative",
     boxShadow: "none",
     background: theme.palette.background.secondary,
+    borderRadius: "20px",
   },
   brandDummy: {
     marginTop: "100%",
@@ -115,6 +117,7 @@ const useStyles = makeStyles(theme => ({
     bottom: "14.286%",
     left: "14.286%",
     rigth: "14.286%",
+    objectFit: "contain",
   },
   brandTitle: {
     fontSize: 14,
@@ -122,9 +125,10 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center",
     paddingTop: "8px",
     paddingBottom: "8px",
+    color: theme.palette.color.main,
   },
   smallCardTitle: {
-    padding: "20px",
+    padding: "12px",
     color: theme.palette.color.main,
   },
   smallCardRoot: {
@@ -171,6 +175,7 @@ const useStyles = makeStyles(theme => ({
 //При вызове для stories высота(height) обязательно должна быть указана!
 
 //brand - для карточки брендов или акций
+//нужно передавать только ширину
 //можно передавать с текстом или без
 
 //small - только текст
@@ -231,8 +236,8 @@ export default function CardWidget(props) {
         )
       case "brand":
         return (
+            <Link to={props.cardLink} className={classes.stretch} style={{textDecoration: "none"}}>
           <div className={classes.brandCardRoot}>
-            <Link to={props.cardLink} className={classes.stretch}>
               <Card
                 className={classes.brandContainer}
                 style={
@@ -246,6 +251,7 @@ export default function CardWidget(props) {
                   image={props.cardImage}
                   alt={altImage}
                   className={classes.brandElement}
+                  imgStyle={{ objectFit: "contain" }}
                 />
               </Card>
               {props.cardTitle ? (
@@ -253,16 +259,18 @@ export default function CardWidget(props) {
                   {props.cardTitle}
                 </Typography>
               ) : null}
-            </Link>
           </div>
+            </Link>
         )
       case "small":
         return (
+          <Link to={props.cardLink} className={classes.stretch} style={{textDecoration: "none"}}>
           <Card className={classes.smallCardRoot}>
             <Typography className={classes.smallCardTitle}>
               {props.cardTitle}
             </Typography>
           </Card>
+          </Link>
         )
       case "categoriesSingle":
         return (

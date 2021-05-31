@@ -9,21 +9,21 @@ const useStyle = makeStyles(theme => ({
     borderRadius: "100%",
 
     width: "10.93vw",
-    height: "12.89",
+    // height: "12.89vw",
     paddingRight: "0.93vw",
     "@media(min-width: 1280px)": {
       width: "140px",
-      height: "165px",
+      // height: "165px",
       paddingRight: "12px",
     },
     "@media(max-width: 834px)": {
       width: "16.76vw",
-      height: "19.76vw",
+      // height: "19.76vw",
       paddingRight: "0.95vw",
     },
     "@media(max-width: 414px)": {
       width: "33.81vw",
-      height: "39.85vw",
+      // height: "39.85vw",
       paddingRight: "1.93vw",
     },
   },

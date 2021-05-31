@@ -64,18 +64,20 @@ const useStyles = makeStyles(theme => ({
   },
   classCount: {
     color: theme.palette.color.secondary,
-    marginLeft: "12px",
-
     fontWeight: 700,
+    marginLeft: "0.9375vw",
     fontSize: "1.328vw",
     "@media(min-width: 1280px)": {
       fontSize: "17px",
+      marginLeft: "12px",
     },
     "@media(max-width: 834px)": {
-      fontSize: 14,
+      fontSize: "1.678vw",
+      marginLeft: "1.199vw",
     },
     "@media(max-width: 414px)": {
-      fontSize: 14,
+      fontSize: "3.381vw",
+      marginLeft: "2.415vw",
     },
   },
 }))
