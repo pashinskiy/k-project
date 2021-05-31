@@ -7,6 +7,8 @@ import BlockPrice from "./blockPrice"
 import AddInCartAndFav from "../../button/addInCartAndFav"
 import Features from "./features"
 
+import palette from "../../../templates/colors.json"
+
 const useStyles = makeStyles(theme => ({
   wrapper: {
     width: "100%",
@@ -319,6 +321,7 @@ export default function CardProduct({ product, afterChange, ...other }) {
           }
           alt={product.data.images[0]?.image.alt ?? "product"}
           className={classes.wrapperImg}
+          imgStyle={{ objectFit: "contain" }}
         />
       </Grid>
 
@@ -347,7 +350,8 @@ export default function CardProduct({ product, afterChange, ...other }) {
             <div
               className={classes.color}
               style={{
-                background: product.data.color,
+                background:
+                  product.data.color ?? palette[product.data.color_group],
               }}
             />
             <Grid className={classes.features}>

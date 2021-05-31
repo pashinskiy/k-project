@@ -1,10 +1,6 @@
 import React from "react"
-import {
-  Card,
-  CardActionArea,
-  Typography,
-  Link,
-} from "@material-ui/core"
+import { Link } from "gatsby"
+import { Card, CardActionArea, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { GatsbyImage } from "gatsby-plugin-image"
 
@@ -42,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     height: "100%",
     boxShadow: "none",
     position: "relative",
-    borderRadius: "12px"
+    borderRadius: "12px",
     // "@media(min-width: 1280px)": {
     //   borderRadius: "12px",
     // },
@@ -134,14 +130,14 @@ const useStyles = makeStyles(theme => ({
   smallCardRoot: {
     boxShadow: "none",
     background: theme.palette.background.secondary,
-    borderRadius: "12px"
+    borderRadius: "12px",
   },
 
   catSingleRoot: {
     width: "268px",
     background: theme.palette.background.secondary,
     boxShadow: "none",
-    borderRadius: "20px"
+    borderRadius: "20px",
   },
   catSingleTitle: {
     // paddingBottom: "32px",
@@ -151,13 +147,12 @@ const useStyles = makeStyles(theme => ({
   },
   catSingleSubTitle: {
     color: theme.palette.color.secondary,
-
   },
   catSingleContainer: {
     width: "79.1%",
     padding: "28px 0",
     margin: "auto",
-  }
+  },
 }))
 
 //При вызове компонента указывается только ширина, кроме STORIES
@@ -169,7 +164,7 @@ const useStyles = makeStyles(theme => ({
 //variant - тип необходимой карточки
 
 //Типы:
-//category 
+//category
 
 //stories - минимальный размер для сторис = 120px + padding
 //соотношение сторон 1х1
@@ -185,7 +180,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function CardWidget(props) {
   const classes = useStyles()
-  const altImage = props.cardImage ? props.cardImage.images.fallback.src.split("_")[1].replace(".jpg", "") : null
+  const altImage = props.cardImage
+    ? props.cardImage.images.fallback.src.split("_")[1].replace(".jpg", "")
+    : null
   const cardType = () => {
     switch (props.variant) {
       case "category":
@@ -236,51 +233,50 @@ export default function CardWidget(props) {
         return (
           <div className={classes.brandCardRoot}>
             <Link to={props.cardLink} className={classes.stretch}>
-            <Card
-              className={classes.brandContainer}
-              style={
-                props.cardTitle
-                  ? { borderRadius: "20px" }
-                  : { borderRadius: "12px" }
-              }
-            >
-              <div className={classes.brandDummy} />
-              <GatsbyImage
-                image={props.cardImage}
-                alt={altImage}
-                className={classes.brandElement}
-              />
-            </Card>
-            {props.cardTitle ? (
-              <Typography className={classes.brandTitle}>
-                {props.cardTitle}
-              </Typography>
-            ) : null}
+              <Card
+                className={classes.brandContainer}
+                style={
+                  props.cardTitle
+                    ? { borderRadius: "20px" }
+                    : { borderRadius: "12px" }
+                }
+              >
+                <div className={classes.brandDummy} />
+                <GatsbyImage
+                  image={props.cardImage}
+                  alt={altImage}
+                  className={classes.brandElement}
+                />
+              </Card>
+              {props.cardTitle ? (
+                <Typography className={classes.brandTitle}>
+                  {props.cardTitle}
+                </Typography>
+              ) : null}
             </Link>
           </div>
         )
-        case "small":
-          return(
-            <Card className={classes.smallCardRoot}>
-              <Typography className={classes.smallCardTitle}>
-                {props.cardTitle}
+      case "small":
+        return (
+          <Card className={classes.smallCardRoot}>
+            <Typography className={classes.smallCardTitle}>
+              {props.cardTitle}
+            </Typography>
+          </Card>
+        )
+      case "categoriesSingle":
+        return (
+          <Card className={classes.catSingleRoot}>
+            <div className={classes.catSingleContainer}>
+              <Typography className={classes.catSingleTitle} variant="body2">
+                {props.categoryTitle}
               </Typography>
-            </Card>
-          )
-          case "categoriesSingle":
-            return(
-              <Card className={classes.catSingleRoot}>
-                <div className={classes.catSingleContainer}>
-                <Typography className={classes.catSingleTitle} variant="body2">
-                  {props.categoryTitle}
-                </Typography>
-                <Typography className={classes.catSingleSubTitle}>
-                  {props.subCategoryTitle}
-                </Typography>
-                </div>
-
-              </Card>
-            )
+              <Typography className={classes.catSingleSubTitle}>
+                {props.subCategoryTitle}
+              </Typography>
+            </div>
+          </Card>
+        )
       default:
         return console.log(
           "Передайте компоненту значение типа карточки (variant)"

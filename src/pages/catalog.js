@@ -63,11 +63,24 @@ const IndexPage = ({ data }) => {
         className={classes.blockSortAndFilter}
       >
         <Sort products={filterProducts} setSortProducts={setFilterProducts} />
-        <Filter products={allProducts} setFilterProducts={setFilterProducts} />
+        {mobile ? (
+          <Filter
+            products={allProducts}
+            setFilterProducts={setFilterProducts}
+          />
+        ) : null}
       </Grid>
 
-      <Grid className={classes.blockPagination}>
-        <Pagination pageSize={mobile ? 5 : 10} components={arrayCards} />
+      <Grid container justify="space-between">
+        <Grid className={classes.blockPagination}>
+          <Pagination pageSize={mobile ? 5 : 10} components={arrayCards} />
+        </Grid>
+        {mobile ? null : (
+          <Filter
+            products={allProducts}
+            setFilterProducts={setFilterProducts}
+          />
+        )}
       </Grid>
     </Layout>
   )
@@ -83,12 +96,25 @@ export const query = graphql`
           id
           uid
           data {
+            tags {
+              tag {
+                document {
+                  ... on PrismicTag {
+                    id
+                    data {
+                      name
+                    }
+                  }
+                }
+              }
+            }
             brand {
               document {
                 ... on PrismicBrand {
                   id
                   data {
                     name
+                    popular
                   }
                 }
               }
@@ -98,6 +124,7 @@ export const query = graphql`
             old_price
             color
             color_name
+            color_group
             images {
               image {
                 alt

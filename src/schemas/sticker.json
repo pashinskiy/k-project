@@ -1,5 +1,12 @@
 {
   "Main": {
+    "name": {
+      "type": "Text",
+      "config": {
+        "label": "Название",
+        "placeholder": "Название"
+      }
+    },
     "image": {
       "type": "Image",
       "config": {

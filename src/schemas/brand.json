@@ -7,6 +7,15 @@
         "placeholder" : "Название"
       }
     },
+    "popular" : {
+      "type" : "Boolean",
+      "config" : {
+        "placeholder_false" : "нет",
+        "placeholder_true" : "да",
+        "default_value" : false,
+        "label" : "популярный"
+      }
+    },
     "body" : {
       "type" : "Slices",
       "fieldset" : "Slice zone",

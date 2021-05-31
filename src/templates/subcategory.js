@@ -56,7 +56,7 @@ const SubCategory = ({ data }) => {
     <Layout>
       <Seo title="Home" />
 
-      <FastLink products={allProducts} />
+      {/* <FastLink products={allProducts} /> */}
       <Grid
         container
         justify="space-between"
@@ -98,6 +98,7 @@ export const query = graphql`
             old_price
             color
             color_name
+            color_group
             images {
               image {
                 alt

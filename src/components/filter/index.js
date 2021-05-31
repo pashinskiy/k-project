@@ -29,6 +29,20 @@ const useStyles = makeStyles(theme => ({
     minWidth: 0,
     position: "relative",
   },
+  buttonShow: {
+    width: "auto",
+    position: "absolute",
+    bottom: "100%",
+    right: 0,
+    marginBottom: "1.56vw",
+    "@media(min-width: 1280px)": {
+      marginBottom: "20px",
+    },
+    "@media(max-width: 834px)": {
+      position: "static",
+      marginBottom: 0,
+    },
+  },
   buttonIcon: {
     height: "1.85vw",
     width: "1.85vw",
@@ -65,17 +79,13 @@ const useStyles = makeStyles(theme => ({
     },
   },
   wrapperFilterBlock: {
-    position: "absolute",
-    top: "100%",
-    right: 0,
     width: "21.87vw",
-    marginTop: "4.37vw",
+    marginTop: "2.18vw",
     "@media(min-width: 1280px)": {
       width: "280px",
-      marginTop: "56px",
+      marginTop: "28px",
     },
     "@media(max-width: 834px)": {
-      position: "static",
       width: "100%",
       marginTop: "3.39vw",
       marginBottom: "11.27vw",
@@ -94,8 +104,10 @@ const useStyles = makeStyles(theme => ({
     zIndex: 99,
     right: "100%",
     transform: "translate(0,-50%)",
+    marginTop: "2.18vw",
     "@media(min-width: 1280px)": {
       width: "148px",
+      marginTop: "28px",
     },
     "@media(max-width: 834px)": {
       width: "100%",
@@ -161,6 +173,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   modal: {
+    width: "auto",
     "@media(max-width: 834px)": {
       position: "fixed",
       top: 0,
@@ -242,9 +255,9 @@ export default function Filter({ products, setFilterProducts }) {
   const [show, setShow] = React.useState(false)
 
   const fieldsFilter = new Map([
-    ["Цена", { type: "from to", value: new Set(), order: 1 }],
-    ["Цвет", { type: "color", value: new Set(), order: 2 }],
-    ["Производитель", { type: "checkbox", value: new Set(), order: 3 }],
+    ["Цена", { type: "from to", value: new Set(), order: -3 }],
+    ["Цвет", { type: "color", value: new Set(), order: -2 }],
+    ["Производитель", { type: "checkbox", value: new Set(), order: -1 }],
     ["Стикеры", { type: "boolean", value: new Set(), order: 7 }],
   ])
 
@@ -266,13 +279,16 @@ export default function Filter({ products, setFilterProducts }) {
           }
         })
       })
-    fieldsFilter.get("Цена").value.add(product.data.price)
-    fieldsFilter
-      .get("Цвет")
-      .value.add(product.data.color_name.replace("ё", "е").toLowerCase())
-    fieldsFilter
-      .get("Производитель")
-      .value.add(product.data.brand.document.data.name.replace("ё", "е"))
+    if (product.data.price !== null)
+      fieldsFilter.get("Цена").value.add(product.data.price)
+    if (product.data.color_group !== null)
+      fieldsFilter
+        .get("Цвет")
+        .value.add(product.data.color_group.replace("ё", "е").toLowerCase())
+    if (product.data.brand.document !== null)
+      fieldsFilter
+        .get("Производитель")
+        .value.add(product.data.brand.document.data.name.replace("ё", "е"))
     product.data.body
       .filter(slice => slice.slice_type === "stickers")
       .forEach(slice => {
@@ -378,7 +394,7 @@ export default function Filter({ products, setFilterProducts }) {
   }
 
   //фильтрация
-  function filtration(first) {
+  function filtration(saveParam) {
     // отфильтрованные товары
     const filterProducts = products.filter(product => {
       return [...filters].every(filter => {
@@ -396,7 +412,9 @@ export default function Filter({ products, setFilterProducts }) {
 
         if (title === "Цена") productParam = product.data.price
         if (title === "Цвет")
-          productParam = product.data.color_name.replace("ё", "е").toLowerCase()
+          productParam = product.data.color_group
+            ?.replace("ё", "е")
+            .toLowerCase()
         if (title === "Производитель")
           productParam = product.data.brand.document.data.name.replace("ё", "е")
         if (title === "Стикеры")
@@ -423,13 +441,15 @@ export default function Filter({ products, setFilterProducts }) {
         }
       })
     })
-    
-    if (!first) {
-      url.search = ""
-      Array.from(filters).forEach(filter => {
-        setUrl(filter[0], filter[1].value)
-      })
-    }
+
+    const page = url.searchParams.get("page") ?? false
+
+    url.search = ""
+    Array.from(filters).forEach(filter => {
+      setUrl(filter[0], filter[1].value)
+    })
+
+    if (page && saveParam) url.searchParams.set("page", page)
 
     setShow(false)
     setTop(false)
@@ -438,7 +458,7 @@ export default function Filter({ products, setFilterProducts }) {
   }
   //фильтрация при первом рендере
   React.useEffect(() => {
-    if (url.search) filtration(true)
+    filtration(true)
   }, [])
   //очистка фильтра
   function cleanFilter() {
@@ -561,7 +581,9 @@ export default function Filter({ products, setFilterProducts }) {
     const target =
       e.target.closest("button") ?? e.target.closest("input") ?? e.target
     const containerTop =
-      e.currentTarget.getBoundingClientRect().top + window.pageYOffset
+      e.currentTarget.getBoundingClientRect().top +
+      window.pageYOffset +
+      e.currentTarget.style.marginTop
     const coordinateTarget =
       target.getBoundingClientRect().top +
       window.pageYOffset +
@@ -576,12 +598,14 @@ export default function Filter({ products, setFilterProducts }) {
 
   return (
     <Grid container style={{ width: "auto", position: "relative" }}>
-      <Button onClick={() => setShow(!show)} className={classes.button}>
-        <IconFilter className={classes.buttonIcon} />
-        <Typography className={classes.buttonText}>Фильтр</Typography>
-      </Button>
+      <Grid container className={classes.buttonShow}>
+        <Button onClick={() => setShow(!show)} className={classes.button}>
+          <IconFilter className={classes.buttonIcon} />
+          <Typography className={classes.buttonText}>Фильтр</Typography>
+        </Button>
 
-      <ButtonClean clean={cleanFilter} count={countFilter} />
+        <ButtonClean clean={cleanFilter} count={countFilter} />
+      </Grid>
 
       {second_variant ? (
         show ? (
