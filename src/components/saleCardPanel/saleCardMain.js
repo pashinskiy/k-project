@@ -37,20 +37,23 @@ const useStyles = makeStyles(theme => ({
   },
 
   wrapperImg: {
-    height: "400px",
+    height: "31.25vw",
     borderRadius: "0.9375vw",
     marginBottom: "2.1875vw",
     "@media(min-width: 1280px)": {
       borderRadius: "12px",
       marginBottom: "28px",
+      height: "400px",
     },
     "@media(max-width: 834px)": {
       borderRadius: "1.438vw",
       marginBottom: "3.357vw",
+      height: "47.961vw",
     },
     "@media(max-width: 414px)": {
       borderRadius: "2.898vw",
       marginBottom: "6.763vw",
+      height: "96.618vw",
     },
   },
   text: {

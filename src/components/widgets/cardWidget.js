@@ -106,6 +106,9 @@ const useStyles = makeStyles(theme => ({
     background: theme.palette.background.secondary,
     borderRadius: "20px",
   },
+  brandContainerGradient:{
+    background: theme.palette.background.accent,
+  },
   brandDummy: {
     marginTop: "100%",
   },
@@ -260,8 +263,9 @@ export default function CardWidget(props) {
                 className={classes.brandContainer}
                 style={
                   props.cardTitle
-                    ? { borderRadius: "20px" }
-                    : { borderRadius: "12px" }
+                    ? { borderRadius: "20px", }
+                    : { borderRadius: "12px", },
+                  props.gradientBack === true ? {background: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",} : {background: "#EFEFF2",}
                 }
               >
                 <div className={classes.brandDummy} />
