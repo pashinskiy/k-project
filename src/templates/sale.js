@@ -5,15 +5,19 @@ import { makeStyles, useMediaQuery, Grid } from "@material-ui/core"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
+import SaleCardMain from '../components/saleCardPanel/saleCardMain.js'
+
 const useStyles = makeStyles(theme => ({}))
 
 const Sale = ({ data }) => {
   const classes = useStyles()
+  const sale = data.prismicSales
   console.log(data)
 
   return (
     <Layout>
       <Seo title="Sale" />
+      <SaleCardMain sale={sale} />
     </Layout>
   )
 }
@@ -36,6 +40,9 @@ export const query = graphql`
           }
         }
         previewtext {
+          text
+        }
+        title {
           text
         }
         salestext {

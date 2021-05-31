@@ -11,7 +11,7 @@ import DeliveryCards from "../components/productPage/delivery"
 import SimilarProduct from "../components/productPage/similarProduct"
 import TabPanel from "../components/productPage/tabPanel"
 import CharacteristicsBlock from "../components/productPage/characteristics"
-import CategoryPage from "../components/categoryPage"
+// import CategoryPage from "../components/categoryPage"
 
 const Product = ({
   data: { prismicProduct, allPrismicProduct, allPrismicCatalog },

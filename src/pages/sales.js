@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core"
+// import { makeStyles } from "@material-ui/core"
 import { graphql } from "gatsby"
 import React from "react"
 import HeaderWithIcon from "../components/headers/headerWithIcon"
@@ -6,17 +6,17 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import SalesIcon from "../../static/svg/salesIcon.svg"
 import SaleCardPanel from "../components/saleCardPanel"
-import CardWidget from "../components/widgets/cardWidget"
+// import CardWidget from "../components/widgets/cardWidget"
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-    height: "100%",
-  },
-}))
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//     width: "100%",
+//     height: "100%",
+//   },
+// }))
 
 const IndexPage = ({ data }) => {
-  const classes = useStyles()
+  // const classes = useStyles()
   const AllSales = data.allPrismicSales.edges.map(edge => edge.node)
 
   console.log(AllSales[0].uid)
