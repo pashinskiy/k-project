@@ -3,72 +3,62 @@ import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-
-import HeaderWithIcon from "../components/headers/headerWithIcon"
-import SmartphonesIcon from "../../static/svg/smartphonesIcon.svg"
-import { Grid } from "@material-ui/core"
 import CardWidget from "../components/widgets/cardWidget"
-import { makeStyles} from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
-    wrapper: {
-        
-    },
-    cardWidget: {
-        width: "21.895%",
-    },
-    components: {
-        width: "78.105%",
-    }
-
+  categoryCardItem: {
+    width: "187.5px",
+    padding: "8px",
+  },
 }))
 
+const Category = ({ data: { allPrismicSubcategory } }) => {
+  const classes = useStyles()
+  const dataSubCategory = allPrismicSubcategory.edges.map(edge => edge.node)
+
+  console.log(dataSubCategory)
+}
+
 const Category = ({ data: { prismicCategory } }) => {
-    const classes = useStyles()
+  const classes = useStyles()
   console.log(prismicCategory)
   return (
     <Layout>
-      <Seo title={prismicCategory.data.name} />
-      <HeaderWithIcon
-        //TODO: dynamic icons for category
-        icon={<SmartphonesIcon />}
-        title={prismicCategory.data.name}
-        divider={false}
-      />
-      <Grid container className={classes.wrapper}>
-          <Grid item className={classes.cardWidget}>
-              <CardWidget variant="categoriesSingle" style={{width: "100%"}}/>
-          </Grid>
-          <Grid container className={classes.components}>
-
-
-          </Grid>
+      <Seo title="Home" />
+      <Grid container>
+        {dataSubCategory.length
+          ? dataSubCategory.map((subCategory, i) => (
+              <Grid item key={i} className={classes.categoryCardItem}>
+                <CardWidget
+                  cardImage={
+                    subCategory.data.image.localFile.childImageSharp
+                      .gatsbyImageData
+                  }
+                  cardTitle={subCategory.data.name}
+                  variant="category"
+                />
+              </Grid>
+            ))
+          : null}
       </Grid>
     </Layout>
   )
 }
 
 export default Category
-
 export const pageQuery = graphql`
-  query CategoryBySlug($uid: String!) {
-    prismicCategory(uid: { eq: $uid }) {
-      uid
-      data {
-        name
-        children {
-          child {
-            document {
-              ... on PrismicCategory {
-                uid
+  query Category {
+    allPrismicSubcategory {
+      edges {
+        node {
+          data {
+            name
+            image {
+              localFile {
+                childImageSharp {
+                  gatsbyImageData
+                }
               }
-            }
-          }
-        }
-        image {
-          localFile {
-            childImageSharp {
-              gatsbyImageData
             }
           }
         }

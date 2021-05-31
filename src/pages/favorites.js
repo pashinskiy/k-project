@@ -50,7 +50,6 @@ const IndexPage = ({ data }) => {
   let favorites = localStorage.getItem("favorites")
   favorites = favorites === null || !favorites ? [] : JSON.parse(favorites)
 
-  const isPad = useMediaQuery("(max-width: 834px)")
   const isMobile = useMediaQuery("(max-width: 414px)")
 
   const [favoritesArray, setFavoritesArray] = useState(favorites)
