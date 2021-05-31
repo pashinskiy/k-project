@@ -5,6 +5,8 @@ import { makeStyles, useMediaQuery, Grid } from "@material-ui/core"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
+import BreadCrumbs from "../components/breadCrumbs"
+import HeaderWithIcon from "../components/headers/headerWithIcon"
 import CardProduct from "../components/catalog/catalogCardProduct"
 import Pagination from "../components/pagination"
 import Filter from "../components/filter"
@@ -55,7 +57,15 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <Seo title="Home" />
-
+      <BreadCrumbs
+        links={[
+          {
+            title: "Каталог",
+            href: `/catalog/`,
+          },
+        ]}
+      />
+      {/* <HeaderWithIcon title={} count={allProducts.length} /> */}
       <FastLink products={allProducts} />
       <Grid
         container
