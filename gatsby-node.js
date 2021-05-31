@@ -27,11 +27,11 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-    }
-    allPrismicSales {
-      edges {
-        node {
-          uid
+      allPrismicSales {
+        edges {
+          node {
+            uid
+          }
         }
       }
     }
