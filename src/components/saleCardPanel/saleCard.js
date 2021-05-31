@@ -77,8 +77,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function SaleCard({ sale }) {
   const classes = useStyles()
-  console.log(sale)
-
   return (
     <Card className={classes.wrapper}>
           <GatsbyImage

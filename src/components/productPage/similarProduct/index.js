@@ -61,7 +61,7 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-export default function SimilarProduct({ products }) {
+export default function SimilarProduct({ products, withoutHeader }) {
   const classes = useStyle()
   
   function setScrollBar(e) {
@@ -91,11 +91,11 @@ export default function SimilarProduct({ products }) {
   
   return (
     <Grid className={classes.wrapper}>
-      <HeaderWithIcon
+      {withoutHeader === true ? null : <HeaderWithIcon
         title="Похожие товары"
         icon={<IconSimilarProduct />}
         divider={true}
-      />
+      /> }
       <Grid
         container
         wrap="nowrap"

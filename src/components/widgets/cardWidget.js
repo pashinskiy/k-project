@@ -128,13 +128,31 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.color.main,
   },
   smallCardTitle: {
-    padding: "12px",
     color: theme.palette.color.main,
+    padding: "0,9375",
+    "@media(min-width: 1280px)": {
+      padding: "12px",
+    },
+    "@media(max-width: 834px)": {
+      padding: "1.199vw",
+    },
+    "@media(max-width: 414px)": {
+      padding: "2.415vw",
+    },
   },
   smallCardRoot: {
     boxShadow: "none",
     background: theme.palette.background.secondary,
-    borderRadius: "12px",
+    borderRadius: "0,9375",
+    "@media(min-width: 1280px)": {
+      borderRadius: "12px",
+    },
+    "@media(max-width: 834px)": {
+      borderRadius: "1.199vw",
+    },
+    "@media(max-width: 414px)": {
+      borderRadius: "2.415vw",
+    },
   },
 
   catSingleRoot: {
