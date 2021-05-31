@@ -7,15 +7,15 @@ import {
 } from "@material-ui/core"
 import { GatsbyImage } from "gatsby-plugin-image"
 
-//TODO: Размер(в том числе высота) карточек должен быть одинаковым, кроме телефонов
-
 const useStyles = makeStyles(theme => ({
   wrapper: {
     width: "100%",
+    height: "100%",
     boxShadow: "none",
     borderRadius: "20px",
     backgroundColor: theme.palette.background.secondary,
     padding: "8px",
+    position: "relative",
   },
   stretch: {
     width: "100%",
@@ -38,15 +38,15 @@ const useStyles = makeStyles(theme => ({
   previewText: {
     color: theme.palette.color.secondary,
     fontSize: 14,
-    paddingBottom: "2.73vw",
+    paddingBottom: "6.328vw",
     "@media(min-width: 1280px)": {
-      paddingBottom: "35px",
+      paddingBottom: "81px",
     },
     "@media(max-width: 834px)": {
-      paddingBottom: "3.59vw",
+      paddingBottom: "9.336vw",
     },
     "@media(max-width: 414px)": {
-      paddingBottom: "6.76vw",
+      paddingBottom: "17.87vw",
     },
   },
 
@@ -54,7 +54,12 @@ const useStyles = makeStyles(theme => ({
     width: "146px",
     height: "46px",
     borderRadius: "12px",
-    backgroundColor: "#D2D0E9"
+    backgroundColor: "#D2D0E9",
+    marginLeft: "12px",
+    marginBottom: "12px",
+    position:"absolute",
+    bottom: 0,
+    left: 0,
   },
   wrapperImg: {
     height: "200px",

@@ -6,6 +6,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import SalesIcon from "../../static/svg/salesIcon.svg"
 import SaleCardPanel from "../components/saleCardPanel"
+import CardWidget from "../components/widgets/cardWidget"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,6 +19,7 @@ const IndexPage = ({ data }) => {
   const classes = useStyles()
   const AllSales = data.allPrismicSales.edges.map(edge => edge.node)
 
+  console.log(AllSales[0].uid)
   return (
     <Layout>
       <Seo title="Акции и предложения" />
@@ -26,15 +28,26 @@ const IndexPage = ({ data }) => {
         title="Акции и предложения"
         divider={false}
       />
-      <SaleCardPanel sales={AllSales}/>
+      <SaleCardPanel sales={AllSales} />
+      {/* <div style={{width: "100px", height: "100px"}}>
+      <CardWidget
+        cardImage={
+          AllSales[0].data.previewimage.localFile.childImageSharp
+            .gatsbyImageData
+        }
+        cardTitle={AllSales[0].uid}
+        variant="brand"
+      />
 
+      </div> */}
+      {/* <div style={{width:"100px", height:"100px"}} /> */}
     </Layout>
   )
 }
 export default IndexPage
 
 export const query = graphql`
-query AllSales {
+  query AllSales {
     allPrismicSales {
       edges {
         node {
@@ -44,13 +57,13 @@ query AllSales {
             enddate
             startdate
             previewimage {
-                localFile {
-                  childImageSharp {
-                    gatsbyImageData
-                  }
+              localFile {
+                childImageSharp {
+                  gatsbyImageData
                 }
-                alt
               }
+              alt
+            }
             previewtext {
               text
             }
