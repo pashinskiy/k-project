@@ -96,6 +96,18 @@ export const query = graphql`
           id
           uid
           data {
+            tags {
+              tag {
+                document {
+                  ... on PrismicTag {
+                    id
+                    data {
+                      name
+                    }
+                  }
+                }
+              }
+            }
             brand {
               document {
                 ... on PrismicBrand {
@@ -103,21 +115,6 @@ export const query = graphql`
                   data {
                     name
                     popular
-                    body {
-                      ... on PrismicBrandBodyLogo {
-                        id
-                        slice_type
-                        primary {
-                          image {
-                            localFile {
-                              childImageSharp {
-                                gatsbyImageData
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
                   }
                 }
               }
@@ -127,6 +124,7 @@ export const query = graphql`
             old_price
             color
             color_name
+            color_group
             images {
               image {
                 alt

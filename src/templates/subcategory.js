@@ -98,6 +98,7 @@ export const query = graphql`
             old_price
             color
             color_name
+            color_group
             images {
               image {
                 alt
