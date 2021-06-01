@@ -8,8 +8,8 @@ import {
   useMediaQuery,
 } from "@material-ui/core"
 import Social from "../layout/footer/social"
-import SimilarProduct from "../productPage/productsScrollBar"
-import CardSimilarProduct from "../productPage/productsScrollBar/cardProduct"
+import SimilarProduct from "../scrollBar/productsScrollBar"
+import CardSimilarProduct from "../scrollBar/productsScrollBar/cardProduct"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {},

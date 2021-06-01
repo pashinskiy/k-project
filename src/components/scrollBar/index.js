@@ -104,30 +104,33 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
   const classes = useStyle()
   const size = fullScreen ? classes.fullScreen : ""
 
-  const cardPanel = React.useRef()
+  const [cardPanel, setCardPanel] = React.useState(null)
 
   const maxTranslateX =
-    cardPanel.current?.offsetWidth >
-    cardPanel.current?.parentElement.offsetWidth * 0.87
-      ? cardPanel.current?.parentElement.offsetWidth * 0.87 -
-        cardPanel.current?.offsetWidth
+    cardPanel?.offsetWidth > cardPanel?.parentElement.offsetWidth * 0.87
+      ? cardPanel?.parentElement.offsetWidth * 0.87 - cardPanel?.offsetWidth
       : 0
 
+  const setRef = React.useCallback(node => {
+    if (node !== null) {
+      setCardPanel(node)
+    }
+  }, [])
+
   function setScrollBar(e) {
-    const panel = cardPanel.current
-    const transition = panel.style.transition
-    panel.style.transition = "none"
+    const transition = cardPanel.style.transition
+    cardPanel.style.transition = "none"
     //отмена перехвата браузера
-    panel.ondragstart = () => false
+    cardPanel.ondragstart = () => false
 
     const clientX = e.clientX
-    const translateX = +panel.style.transform.slice(10, -3)
+    const translateX = +cardPanel.style.transform.slice(10, -3)
 
     document.addEventListener("pointermove", scrollBar)
     document.addEventListener("pointerup", deleteScrollBar)
 
     function deleteScrollBar(e) {
-      panel.style.transition = transition
+      cardPanel.style.transition = transition
       document.removeEventListener("pointermove", scrollBar)
       document.removeEventListener("pointerup", deleteScrollBar)
       setTimeout(() => document.removeEventListener("click", noGoLink), 0)
@@ -139,7 +142,7 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
       newTranslateX = newTranslateX > 0 ? 0 : newTranslateX
       newTranslateX =
         newTranslateX < maxTranslateX ? maxTranslateX : newTranslateX
-      panel.style.transform = `translate(${newTranslateX}px)`
+      cardPanel.style.transform = `translate(${newTranslateX}px)`
     }
 
     function noGoLink(e) {
@@ -148,17 +151,16 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
   }
 
   function next() {
-    const panel = cardPanel.current
-    const translateX = +panel.style.transform.slice(10, -3)
-    const paddingLeft = panel.offsetLeft
+    const translateX = +cardPanel.style.transform.slice(10, -3)
+    const paddingLeft = cardPanel.offsetLeft
 
-    const nextElement = [...panel.children].find(child => {
+    const nextElement = [...cardPanel.children].find(child => {
       return child.offsetLeft > -(translateX - paddingLeft)
     })
 
     let newTranslateX = -nextElement.offsetLeft
     newTranslateX = newTranslateX < maxTranslateX ? 0 : newTranslateX
-    panel.style.transform = `translate(${newTranslateX}px)`
+    cardPanel.style.transform = `translate(${newTranslateX}px)`
   }
 
   return (
@@ -168,7 +170,7 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
     >
       <Grid
         container
-        ref={cardPanel}
+        ref={setRef}
         onPointerDown={setScrollBar}
         className={classes.track}
       >

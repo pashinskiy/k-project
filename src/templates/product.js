@@ -8,7 +8,7 @@ import CardProduct from "../components/productPage/cardProduct"
 import Landing from "../components/productPage/landing"
 import Gallery from "../components/productPage/gallery"
 import DeliveryCards from "../components/productPage/delivery"
-import ProductsScrollBar from "../components/productPage/productsScrollBar"
+import ProductsScrollBar from "../components/scrollBar/productsScrollBar"
 import TabPanel from "../components/productPage/tabPanel"
 import CharacteristicsBlock from "../components/productPage/characteristics"
 

@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles"
 
 import HeaderWithIcon from "../../headers/headerWithIcon"
 import CardSimilarProduct from "./cardProduct"
-import ScrollBar from "../../scrollBar"
+import ScrollBar from "../"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {},
@@ -24,7 +24,7 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-export default function productsScrollBar({ products, title, icon, divider }) {
+export default function ProductsScrollBar({ products, title, icon, divider }) {
   const classes = useStyle()
 
   return (
@@ -35,7 +35,7 @@ export default function productsScrollBar({ products, title, icon, divider }) {
 
       <ScrollBar fullScreen buttonNext>
         {products.map((product, i) => (
-          <div key={product.uid + i} className={classes.wrapperCard}>
+          <div key={product.uid} className={classes.wrapperCard}>
             <CardSimilarProduct product={product} />
           </div>
         ))}

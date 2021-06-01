@@ -99,14 +99,14 @@ const useStyles = makeStyles(theme => ({
   },
   brandContainer: {
     width: "100%",
-    height:"auto",
+    height: "auto",
     display: "inline-block",
     position: "relative",
     boxShadow: "none",
     background: theme.palette.background.secondary,
     borderRadius: "20px",
   },
-  brandContainerGradient:{
+  brandContainerGradient: {
     background: theme.palette.background.accent,
   },
   brandDummy: {
@@ -132,7 +132,7 @@ const useStyles = makeStyles(theme => ({
   },
   smallCardTitle: {
     color: theme.palette.color.main,
-    padding: "0,9375",
+    padding: "0.9375vw",
     "@media(min-width: 1280px)": {
       padding: "12px",
     },
@@ -146,7 +146,7 @@ const useStyles = makeStyles(theme => ({
   smallCardRoot: {
     boxShadow: "none",
     background: theme.palette.background.secondary,
-    borderRadius: "0,9375",
+    borderRadius: "0.9375vw",
     "@media(min-width: 1280px)": {
       borderRadius: "12px",
     },
@@ -257,15 +257,24 @@ export default function CardWidget(props) {
         )
       case "brand":
         return (
-            <Link to={props.cardLink} className={classes.stretch} style={{textDecoration: "none"}}>
-          <div className={classes.brandCardRoot}>
+          <Link
+            to={props.cardLink}
+            className={classes.stretch}
+            style={{ textDecoration: "none" }}
+          >
+            <div className={classes.brandCardRoot}>
               <Card
                 className={classes.brandContainer}
                 style={
-                  props.cardTitle
-                    ? { borderRadius: "20px", }
-                    : { borderRadius: "12px", },
-                  props.gradientBack === true ? {background: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",} : {background: "#EFEFF2",}
+                  (props.cardTitle
+                    ? { borderRadius: "20px" }
+                    : { borderRadius: "12px" },
+                  props.gradientBack === true
+                    ? {
+                        background:
+                          "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",
+                      }
+                    : { background: "#EFEFF2" })
                 }
               >
                 <div className={classes.brandDummy} />
@@ -281,17 +290,21 @@ export default function CardWidget(props) {
                   {props.cardTitle}
                 </Typography>
               ) : null}
-          </div>
-            </Link>
+            </div>
+          </Link>
         )
       case "small":
         return (
-          <Link to={props.cardLink} className={classes.stretch} style={{textDecoration: "none"}}>
-          <Card className={classes.smallCardRoot}>
-            <Typography className={classes.smallCardTitle}>
-              {props.cardTitle}
-            </Typography>
-          </Card>
+          <Link
+            to={props.cardLink}
+            className={classes.stretch}
+            style={{ textDecoration: "none" }}
+          >
+            <Card className={classes.smallCardRoot}>
+              <Typography className={classes.smallCardTitle}>
+                {props.cardTitle}
+              </Typography>
+            </Card>
           </Link>
         )
       case "categoriesSingle":

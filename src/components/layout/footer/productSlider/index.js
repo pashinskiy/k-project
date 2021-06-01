@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import ProductCard from '../../../productPage/similarProduct/cardProduct';
+import ProductCard from '../../../scrollBar/productsScrollBar/cardProduct';
 import Arrow from '../../../../../static/svg/arrow.svg';
 
 const useStyles = makeStyles(theme => ({
