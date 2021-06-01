@@ -92,7 +92,7 @@ export default function SaleCard({ sale }) {
           <Typography className={classes.previewText + " " + classes.text}>
             {sale.data.previewtext.text}
           </Typography>
-          <Button href={`/${sale.uid}/`} className={classes.button} >
+          <Button href={`/sale/${sale.uid}/`} className={classes.button} >
             <Typography variant="body2" className={classes.buttonText}>
               Перейти
             </Typography>

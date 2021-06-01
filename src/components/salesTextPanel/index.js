@@ -142,7 +142,7 @@ export default function SalesTextPanel({ sale, socials, products }) {
               }
               return null
           })
-        )}
+        }
       </Grid>
     </Grid>
   )
