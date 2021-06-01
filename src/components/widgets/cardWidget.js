@@ -232,7 +232,7 @@ export default function CardWidget(props) {
       case "stories":
         return (
           <Card className={classes.storiesCardRoot}>
-            <CardActionArea className={classes.stretch}>
+            <CardActionArea className={classes.stretch} style={{borderRadius: "12px"}}>
               <Link to={props.cardLink} className={classes.stretch}>
                 <GatsbyImage
                   image={props.cardImage}

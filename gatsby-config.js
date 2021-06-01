@@ -61,7 +61,7 @@ module.exports = {
           characteristic: require("./src/schemas/characteristic.json"),
           subcategory: require("./src/schemas/subcategory.json"),
           tag: require("./src/schemas/tag.json"),
-          stoies: require("./src/schemas/stories.json"),
+          stories: require("./src/schemas/stories.json"),
           sales: require("./src/schemas/sales.json"),
         },
         shouldDownloadImage: () => true,
