@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Zoom } from '@material-ui/core';
 import Header from './header';
 import Footer from './footer';
 import MobileMenu from './mobileMenu';
+import Catalog from './catalog';
+import './layout.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,6 +30,21 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     flex: 1,
+  },
+  background: {
+      background: 'rgba(0,0,0,.5)',
+      zIndex: 100,
+      position: 'fixed',
+      width: '100vw',
+      height: '100vh',
+      top: 0,
+      left: 0,
+      animationName: props => (props.animation === true)
+          ? 'back_in'
+          : 'back_out',
+      animationDuration: '.15s',
+      animationTimingFunction: 'ease-out',
+      animationFillMode: 'forwards',
   },
 }));
 
@@ -113,6 +130,70 @@ export default function Layout({ children }) {
                 }
               }
               main_name {
+                text
+              }
+            }
+          }
+        }
+      }
+      allPrismicCatalog {
+        edges {
+          node {
+            data {
+              categories {
+                category {
+                  document {
+                    ... on PrismicCategory {
+                      id
+                      data {
+                        body {
+                          ... on PrismicCategoryBodyVerticalImg {
+                            id
+                            primary {
+                              catalog_img {
+                                alt
+                                localFile {
+                                  childImageSharp {
+                                    gatsbyImageData
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                        children {
+                          child {
+                            document {
+                              ... on PrismicSubcategory {
+                                id
+                                data {
+                                  name
+                                }
+                              }
+                            }
+                          }
+                        }
+                        name
+                        image {
+                          localFile {
+                            childImageSharp {
+                              gatsbyImageData
+                            }
+                          }
+                          alt
+                        }
+                        category_icon {
+                          localFile {
+                            publicURL
+                          }
+                          alt
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              catalog_name {
                 text
               }
             }
@@ -233,11 +314,42 @@ export default function Layout({ children }) {
     }
   `);
 
-  const classes = useStyles({ });
+  const [catalog, setCatalog] = React.useState(false);
+  const [animation, setAnimation] = React.useState(false);
+
+  const button_trigger = (catalog) => {
+      switch(catalog) {
+          case true:
+              return <Catalog data={data} animation={animation} />
+          
+          default:
+              return null
+      };
+  };
+
+  const back_trigger = (catalog) => {
+      switch(catalog) {
+          case true:
+              return (
+                <div className={classes.background} 
+                  onClick={() => {
+                    if (catalog === true) {setTimeout(()=>{ setCatalog(!catalog); },150)} else { setCatalog(!catalog); };
+                    setAnimation(!animation);
+                  }} />
+              )
+          
+          default:
+              return null
+      };
+  };
+
+  const classes = useStyles({ animation });
 
   return (
     <main className={classes.root}>
-      <Header data={data} />
+      <Header data={data} catalog={catalog} setCatalog={setCatalog} animation={animation} setAnimation={setAnimation} />
+      {button_trigger(catalog)}
+      {back_trigger(catalog)}
       <MobileMenu data={data} />
       <div className={classes.content}>
         {children}

@@ -10,6 +10,7 @@ import Search from './search';
 const useStyles = makeStyles(theme => ({
     root: {
         height: 100,
+        background: 'white',
         display: 'flex',
         alignItems: 'center',
         '@media (max-width: 1024px)': {
@@ -18,6 +19,7 @@ const useStyles = makeStyles(theme => ({
     },
     wrapper: {
         width: '100%',
+        zIndex: 1001,
     },
     submenu: {
         width: '100%',
@@ -90,9 +92,21 @@ const useStyles = makeStyles(theme => ({
             },
         },
     },
+    background: {
+        background: 'white',
+        zIndex: 999,
+        position: 'absolute',
+        width: '100vw',
+        height: 100,
+        top: 0,
+        left: 0,
+        '@media (max-width: 1024px)': {
+            height: 70,
+        },
+    },
 }));
 
-export default function Header({ data }) {
+export default function Header({ data, catalog, setCatalog, animation, setAnimation }) {
 
     const classes = useStyles();
 
@@ -104,8 +118,8 @@ export default function Header({ data }) {
                 <nav className={classes.submenu}>
                     <SaleButton name={data.allPrismicHeader.edges[0].node.data.sale_name.text} />
 
-                    {links.map((links) => (
-                        <DefaultLink name={links.primary.link_name.text} />
+                    {links.map((links, i) => (
+                        <DefaultLink key={`info ${i}`} name={links.primary.link_name.text} />
                     ))}
                 </nav>
                 <nav className={classes.menu}>
@@ -116,7 +130,12 @@ export default function Header({ data }) {
                     </Link>
                     
                     <div className={classes.catafind}>
-                        <CatalogButton data={data} />
+                        <CatalogButton
+                            data={data}
+                            catalog={catalog}
+                            setCatalog={setCatalog}
+                            animation={animation}
+                            setAnimation={setAnimation} />
 
                         <Search data={data} />
                     </div>
@@ -132,6 +151,7 @@ export default function Header({ data }) {
                         alt={data.allPrismicHeader.edges[0].node.data.cart_img.alt} />
                 </nav>
             </div>
+            <div className={classes.background} />
         </header>
     );
 };

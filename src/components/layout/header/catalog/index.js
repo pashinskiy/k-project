@@ -12,8 +12,11 @@ const useStyles = makeStyles(theme => ({
         border: 'none',
         transition: '.15s ease all',
         padding: 0,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         borderRadius: props =>
-            (props.click === true)
+            (props.animation === true)
             ? '12px 12px 0px 0px'
             : 12
         ,
@@ -30,6 +33,7 @@ const useStyles = makeStyles(theme => ({
         },
     },
     img: {
+        display: 'block',
         width: 12,
         height: 12,
     },
@@ -41,16 +45,19 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function CatalogButton({ data }) {
+export default function CatalogButton({ data, setCatalog, catalog, setAnimation, animation }) {
 
-    const [click, setClick] = React.useState(false);
-
-    const classes = useStyles({ click });
+    const classes = useStyles({ animation });
 
     return (
-        <button className={`${classes.root} catalog`} onClick={() => { setClick(!click); }}>
+        <button
+            className={`${classes.root} catalog`}
+            onClick={() => {
+                if (catalog === true) {setTimeout(()=>{ setCatalog(!catalog); },150)} else { setCatalog(!catalog); };
+                setAnimation(!animation);
+            }}>
             <img
-                src={data.allPrismicHeader.edges[0].node.data.catalog_img.localFile.publicURL + `#${(click === true) ? 'Cross' : 'Burger'}`}
+                src={data.allPrismicHeader.edges[0].node.data.catalog_img.localFile.publicURL + `#${(catalog === true) ? 'Cross' : 'Burger'}`}
                 alt={data.allPrismicHeader.edges[0].node.data.catalog_img.alt}
                 className={classes.img} />
             <span className={classes.text}>{data.allPrismicHeader.edges[0].node.data.catalog_name.text}</span>
