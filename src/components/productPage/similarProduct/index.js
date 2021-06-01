@@ -5,40 +5,14 @@ import { makeStyles } from "@material-ui/core/styles"
 import IconSimilarProduct from "../../../../static/svg/similarProducts.svg"
 import HeaderWithIcon from "../../headers/headerWithIcon"
 import CardSimilarProduct from "./cardProduct"
+import ScrollBar from "../../scrollBar"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {},
-  cardPanel: {
-    cursor: "pointer",
-    overflow: "scroll",
-    scrollbarWidth: "none",
-    "-ms-overflow-style": "none",
-    width: "100vw",
-    marginLeft: "-2.18vw",
-    paddingLeft: "2.18vw",
-    "@media(min-width: 1280px)": {
-      width: "1280px",
-      marginLeft: "-28px",
-      paddingLeft: "28px",
-    },
-    "@media(max-width: 834px)": {
-      marginLeft: "-3.35vw",
-      paddingLeft: "3.35vw",
-    },
-    "@media(max-width: 414px)": {
-      marginLeft: "-6.76vw",
-      paddingLeft: "6.76vw",
-    },
-    "& *": {
-      flexShrink: 0,
-    },
-    "&::-webkit-scrollbar": {
-      display: "none",
-    },
-  },
   wrapperCard: {
-    paddingRight: "2.81vw",
     boxSizing: "border-box",
+
+    paddingRight: "2.81vw",
     "@media(min-width: 1280px)": {
       paddingRight: "36px",
     },
@@ -49,46 +23,11 @@ const useStyle = makeStyles(theme => ({
       paddingRight: "7.24vw",
     },
   },
-  unselect: {
-    "& *": {
-      "-webkit-touch-callout": "none" /* iOS Safari */,
-      "-webkit-user-select": "none" /* Chrome/Safari/Opera */,
-      "-khtml-user-select": "none" /* Konqueror */,
-      "-moz-user-select": "none" /* Firefox */,
-      "-ms-user-select": "none" /* Internet Explorer/Edge */,
-      "user-select": "none",
-    },
-  },
 }))
 
 export default function SimilarProduct({ products }) {
   const classes = useStyle()
-  
-  function setScrollBar(e) {
-    const cardPanel = e.currentTarget
-    const transition = cardPanel.style.transition
-    cardPanel.style.transition = "none"
-    //отмена перехвата браузера
-    cardPanel.ondragstart = () => false
 
-    const clientX = e.clientX
-    const scrollLeft = cardPanel.scrollLeft
-
-    document.addEventListener("pointermove", scrollBar)
-    document.addEventListener("pointerup", deleteScrollBar)
-
-    function deleteScrollBar() {
-      cardPanel.style.transition = transition
-      document.removeEventListener("pointermove", scrollBar)
-      document.removeEventListener("pointerup", deleteScrollBar)
-    }
-
-    function scrollBar(e) {
-      let newLeft = scrollLeft - e.clientX + clientX
-      cardPanel.scrollLeft = newLeft
-    }
-  }
-  
   return (
     <Grid className={classes.wrapper}>
       <HeaderWithIcon
@@ -96,21 +35,14 @@ export default function SimilarProduct({ products }) {
         icon={<IconSimilarProduct />}
         divider={true}
       />
-      <Grid
-        container
-        wrap="nowrap"
-        onPointerDown={setScrollBar}
-        className={classes.cardPanel}
-      >
+
+      <ScrollBar fullScreen buttonNext>
         {products.map((product, i) => (
-          <div
-            key={product.uid + i}
-            className={classes.wrapperCard + " " + classes.unsecect}
-          >
+          <div key={product.uid + i} className={classes.wrapperCard}>
             <CardSimilarProduct product={product} />
           </div>
         ))}
-      </Grid>
+      </ScrollBar>
     </Grid>
   )
 }

@@ -394,9 +394,18 @@ export default function Filter({ products, setFilterProducts }) {
   }
 
   //фильтрация
-  function filtration(saveParam) {
+  function filtration(firstRun) {
+    firstRun = firstRun === true ? true : false
+    const group = url.searchParams.get("group") ?? false
+    const search = url.searchParams.get("search") ?? false
+
     // отфильтрованные товары
     const filterProducts = products.filter(product => {
+      if (group) {
+        const tags = product.data.tags.map(item => item.tag.document?.data.name)
+        if (!tags.includes(group)) return false
+      }
+
       return [...filters].every(filter => {
         const title = filter[0]
         const type = filter[1].type
@@ -442,19 +451,20 @@ export default function Filter({ products, setFilterProducts }) {
       })
     })
 
-    const page = url.searchParams.get("page") ?? false
-
-    url.search = ""
-    Array.from(filters).forEach(filter => {
-      setUrl(filter[0], filter[1].value)
-    })
-
-    if (page && saveParam) url.searchParams.set("page", page)
-
-    setShow(false)
-    setTop(false)
-    navigate(url.href)
     setFilterProducts(filterProducts)
+
+    if (!firstRun) {
+      url.search = ""
+      Array.from(filters).forEach(filter => {
+        setUrl(filter[0], filter[1].value)
+      })
+      if (group) url.searchParams.set("group", group)
+      if (search) url.searchParams.set("search", search)
+
+      setShow(false)
+      setTop(false)
+      navigate(url.href)
+    }
   }
   //фильтрация при первом рендере
   React.useEffect(() => {

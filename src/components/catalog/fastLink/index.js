@@ -26,12 +26,10 @@ export default function FastLink({ products }) {
   const classes = useStyle()
 
   return (
-    <Grid container direction="column">
-      <Grid className={classes.wrapperBlock}>
-        <ScrollBar fullScreen>
-          <FiltersByTag products={products} />
-        </ScrollBar>
-      </Grid>
+    <Grid container direction="column" className={classes.wrapperBlock}>
+      <ScrollBar fullScreen>
+        <FiltersByTag products={products} />
+      </ScrollBar>
 
       <Grid className={classes.wrapperBlock}>
         <ScrollBar fullScreen buttonNext>

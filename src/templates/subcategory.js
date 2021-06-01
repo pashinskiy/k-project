@@ -43,11 +43,11 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const IndexPage = ({ data }) => {
+const IndexPage = ({ data: { allPrismicProduct, prismicSubcategory } }) => {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 834px)")
 
-  const allProducts = data.allPrismicProduct.edges.map(edge => edge.node)
+  const allProducts = allPrismicProduct.edges.map(edge => edge.node)
   const [filterProducts, setFilterProducts] = React.useState(allProducts)
 
   const arrayCards = filterProducts.map(product => (
@@ -65,7 +65,10 @@ const IndexPage = ({ data }) => {
           },
         ]}
       />
-      {/* <HeaderWithIcon title={} count={allProducts.length} /> */}
+      <HeaderWithIcon
+        title={prismicSubcategory.data.name}
+        count={allProducts.length}
+      />
       <FastLink products={allProducts} />
       <Grid
         container
@@ -99,8 +102,13 @@ const IndexPage = ({ data }) => {
 export default IndexPage
 
 export const query = graphql`
-  {
-    allPrismicProduct {
+  query productCategory($uid: String!) {
+    prismicSubcategory(uid: { eq: $uid }) {
+      data {
+        name
+      }
+    }
+    allPrismicProduct(filter: { data: { category: { uid: { eq: $uid } } } }) {
       edges {
         node {
           id

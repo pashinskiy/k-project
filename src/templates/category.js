@@ -1,5 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
+import { makeStyles, Grid } from "@material-ui/core"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -10,36 +11,33 @@ const useStyles = makeStyles(theme => ({
     width: "187.5px",
     padding: "8px",
   },
+  
 }))
 
-const Category = ({ data: { allPrismicSubcategory } }) => {
+const Category = ({data: {allPrismicSubcategory}}) => {
   const classes = useStyles()
   const dataSubCategory = allPrismicSubcategory.edges.map(edge => edge.node)
 
   console.log(dataSubCategory)
-}
 
-const Category = ({ data: { prismicCategory } }) => {
-  const classes = useStyles()
-  console.log(prismicCategory)
   return (
     <Layout>
       <Seo title="Home" />
-      <Grid container>
-        {dataSubCategory.length
+      <Grid container> 
+      {dataSubCategory.length
           ? dataSubCategory.map((subCategory, i) => (
               <Grid item key={i} className={classes.categoryCardItem}>
                 <CardWidget
                   cardImage={
-                    subCategory.data.image.localFile.childImageSharp
-                      .gatsbyImageData
+                    subCategory.data.image.localFile
+                      .childImageSharp.gatsbyImageData
                   }
                   cardTitle={subCategory.data.name}
                   variant="category"
                 />
               </Grid>
             ))
-          : null}
+            : null}
       </Grid>
     </Layout>
   )
@@ -47,17 +45,16 @@ const Category = ({ data: { prismicCategory } }) => {
 
 export default Category
 export const pageQuery = graphql`
-  query Category {
-    allPrismicSubcategory {
-      edges {
-        node {
-          data {
-            name
-            image {
-              localFile {
-                childImageSharp {
-                  gatsbyImageData
-                }
+query Category {
+  allPrismicSubcategory {
+    edges {
+      node {
+        data {
+          name
+          image {
+            localFile {
+              childImageSharp {
+                gatsbyImageData
               }
             }
           }
@@ -65,4 +62,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+}`
