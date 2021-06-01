@@ -67,6 +67,7 @@ const useStyle = makeStyles(theme => ({
   },
   track: {
     width: "auto",
+    touchAction: "none",
     transition: "1s transform",
     position: "relative",
     boxSizing: "border-box",
@@ -120,8 +121,9 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
   }, [])
 
   function setScrollBar(e) {
-    const transition = cardPanel.style.transition
+    const transition = window.getComputedStyle(cardPanel).transition
     cardPanel.style.transition = "none"
+
     //отмена перехвата браузера
     cardPanel.ondragstart = () => false
 
