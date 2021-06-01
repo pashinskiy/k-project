@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   classCount: {
-    color: theme.palette.color.secondary,
+    color: theme.palette.color.secondaryLight,
     fontWeight: 700,
     marginLeft: "0.9375vw",
     fontSize: "1.328vw",
@@ -91,23 +91,34 @@ export default function HeaderWithIcon({ icon, title, divider, count }) {
   }
 
   const getTitle = () => {
-    if(count % 100 >= 11 && count % 100 <=19)
-      return goodsTitle.title3
-    if (count % 10 >= 2 && count % 10 <= 4)
-      return goodsTitle.title2
-    if(count === 1)
-      return goodsTitle.title1
+    if (count % 100 >= 11 && count % 100 <= 19) return goodsTitle.title3
+    if (count % 10 >= 2 && count % 10 <= 4) return goodsTitle.title2
+    if (count === 1) return goodsTitle.title1
     return goodsTitle.title3
   }
 
-  return (
+  return divider ? (
     <Grid container direction="column" className={classes.wrapper}>
       <Grid container alignItems="center" className={classes.wrapperTitle}>
         {icon ? <Grid className={classes.icon}>{icon}</Grid> : null}
         <Typography className={classes.classTitle}>{title}</Typography>
-        {count ? <Typography className={classes.classCount}>{count} {getTitle()}</Typography> : null}
+        {count ? (
+          <Typography className={classes.classCount}>
+            {count} {getTitle()}
+          </Typography>
+        ) : null}
       </Grid>
-      {divider ? <Divider /> : null}
+      <Divider />
+    </Grid>
+  ) : (
+    <Grid container alignItems="center" className={classes.wrapperTitle}>
+      {icon ? <Grid className={classes.icon}>{icon}</Grid> : null}
+      <Typography className={classes.classTitle}>{title}</Typography>
+      {count ? (
+        <Typography className={classes.classCount}>
+          {count} {getTitle()}
+        </Typography>
+      ) : null}
     </Grid>
   )
 }

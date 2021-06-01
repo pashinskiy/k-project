@@ -36,7 +36,7 @@ export default function FiltersByTag({ products }) {
         const title = tag.replace("ё", "е")
         const url = new URL(window.location.href)
         url.search = ""
-        url.searchParams.set("tags", JSON.stringify([tag]))
+        url.searchParams.set("group", tag)
         return (
           <div key={tag} className={classes.wrapper}>
             <CardWidget variant="small" cardTitle={title} cardLink={url.href} />

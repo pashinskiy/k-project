@@ -5,8 +5,8 @@ import {
   useMediaQuery,
 } from "@material-ui/core"
 import Social from "../layout/footer/social"
-import SimilarProduct from "../productPage/similarProduct"
-import CardSimilarProduct from "../productPage/similarProduct/cardProduct"
+import SimilarProduct from "../scrollBar/productsScrollBar"
+import CardSimilarProduct from "../scrollBar/productsScrollBar/cardProduct"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {},
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 414px)": {
       padding: "2.898vw",
       paddingTop: 0,
-      paddingBottom: "9.661vw"
+      paddingBottom: "9.661vw",
     },
   },
 
@@ -38,8 +38,8 @@ const useStyles = makeStyles(theme => ({
   },
 
   textWrapper: {
-      width: "53.125vw",
-      paddingBottom: "5.3125vw",
+    width: "53.125vw",
+    paddingBottom: "5.3125vw",
     "& p": {
       fontSize: "1.328vw",
     },
@@ -83,17 +83,17 @@ const useStyles = makeStyles(theme => ({
       width: "100%",
     },
   },
-  productItem:{
-      paddingBottom: "3.125vw",
-      "@media(min-width: 1280px)": {
-        paddingBottom: "40px",
-      },
-      "@media(max-width: 834px)": {
-        paddingBottom: "4.796vw",
-      },
-      "&:nth-last-of-type(1)":{
-         paddingBottom: 0, 
-      },
+  productItem: {
+    paddingBottom: "3.125vw",
+    "@media(min-width: 1280px)": {
+      paddingBottom: "40px",
+    },
+    "@media(max-width: 834px)": {
+      paddingBottom: "4.796vw",
+    },
+    "&:nth-last-of-type(1)": {
+      paddingBottom: 0,
+    },
   },
   productItemMobile: {
     paddingBottom: "16.425vw",
@@ -142,7 +142,7 @@ export default function SalesTextPanel({ sale, socials, products }) {
               }
               return null
           })
-        }
+        )}
       </Grid>
     </Grid>
   )

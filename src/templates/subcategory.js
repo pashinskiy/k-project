@@ -6,9 +6,12 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 import CardProduct from "../components/catalog/catalogCardProduct"
-import Pagination from "../components/pagination"
-import Filter from "../components/filter"
+import BreadCrumbs from "../components/breadCrumbs"
+import HeaderWithIcon from "../components/headers/headerWithIcon"
+import FastLink from "../components/catalog/fastLink"
 import Sort from "../components/sort"
+import Filter from "../components/filter"
+import Pagination from "../components/pagination"
 
 const useStyles = makeStyles(theme => ({
   blockSortAndFilter: {
@@ -40,11 +43,11 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const SubCategory = ({ data }) => {
+const IndexPage = ({ data: { allPrismicProduct, prismicSubcategory } }) => {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 834px)")
 
-  const allProducts = data.allPrismicProduct.edges.map(edge => edge.node)
+  const allProducts = allPrismicProduct.edges.map(edge => edge.node)
   const [filterProducts, setFilterProducts] = React.useState(allProducts)
 
   const arrayCards = filterProducts.map(product => (
@@ -54,40 +57,82 @@ const SubCategory = ({ data }) => {
   return (
     <Layout>
       <Seo title="Home" />
-
-      {/* <FastLink products={allProducts} /> */}
+      <BreadCrumbs
+        links={[
+          {
+            title: "Каталог",
+            href: `/catalog/`,
+          },
+        ]}
+      />
+      <HeaderWithIcon
+        title={prismicSubcategory.data.name}
+        count={allProducts.length}
+      />
+      <FastLink products={allProducts} />
       <Grid
         container
         justify="space-between"
         className={classes.blockSortAndFilter}
       >
         <Sort products={filterProducts} setSortProducts={setFilterProducts} />
-        <Filter products={allProducts} setFilterProducts={setFilterProducts} />
+        {mobile ? (
+          <Filter
+            products={allProducts}
+            setFilterProducts={setFilterProducts}
+          />
+        ) : null}
       </Grid>
 
-      <Grid className={classes.blockPagination}>
-        <Pagination pageSize={mobile ? 5 : 10} components={arrayCards} />
+      <Grid container justify="space-between">
+        <Grid className={classes.blockPagination}>
+          <Pagination pageSize={mobile ? 5 : 10} components={arrayCards} />
+        </Grid>
+        {mobile ? null : (
+          <Filter
+            products={allProducts}
+            setFilterProducts={setFilterProducts}
+          />
+        )}
       </Grid>
     </Layout>
   )
 }
 
-export default SubCategory
+export default IndexPage
 
 export const query = graphql`
-  {
-    allPrismicProduct {
+  query productCategory($uid: String!) {
+    prismicSubcategory(uid: { eq: $uid }) {
+      data {
+        name
+      }
+    }
+    allPrismicProduct(filter: { data: { category: { uid: { eq: $uid } } } }) {
       edges {
         node {
           id
           uid
           data {
+            tags {
+              tag {
+                document {
+                  ... on PrismicTag {
+                    id
+                    data {
+                      name
+                    }
+                  }
+                }
+              }
+            }
             brand {
               document {
                 ... on PrismicBrand {
                   id
                   data {
                     name
+                    popular
                   }
                 }
               }

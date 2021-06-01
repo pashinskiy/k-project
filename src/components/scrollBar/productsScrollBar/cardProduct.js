@@ -22,22 +22,28 @@ const useStyle = makeStyles(theme => ({
   imageWrapper: {
     width: "100%",
     overflow: "hidden",
+    background: theme.palette.background.main,
+
     height: "15.62vw",
+    borderRadius: "1.56vw",
     "@media(min-width: 1280px)": {
       height: "200px",
+      borderRadius: "20px",
     },
     "@media(max-width: 834px)": {
       height: "23.98vw",
+      borderRadius: "2.39vw",
     },
     "@media(max-width: 414px)": {
       height: "48.3vw",
+      borderRadius: "4.83vw",
     },
     "& picture": {
       width: "100%",
       height: "100%",
     },
   },
-  link:{
+  link: {
     textDecoration: "none",
   },
   price: {
@@ -102,7 +108,11 @@ export default function CardSimilarProduct({ product, afterChange }) {
           {title}
         </Typography>
       </Link>
-      <AddInCartAndFav text="В корзину" product={product} afterChange={afterChange} />
+      <AddInCartAndFav
+        text="В корзину"
+        product={product}
+        afterChange={afterChange}
+      />
     </Grid>
   )
 }

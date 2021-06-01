@@ -8,19 +8,7 @@ import FiltersBySticker from "./filtersBySticker"
 import FiltersByTag from "./filtersByTag"
 
 const useStyle = makeStyles(theme => ({
-  wrapper: {
-    padding: "2.18vw 0",
-    "@media(min-width: 1280px)": {
-      padding: "28px 0",
-    },
-    "@media(max-width: 834px)": {
-      padding: "2.39vw 0",
-    },
-    "@media(max-width: 414px)": {
-      padding: "4.83vw 0",
-    },
-  },
-  wrapperSecondBlock: {
+  wrapperBlock: {
     marginTop: "2.18vw",
     "@media(min-width: 1280px)": {
       marginTop: "28px",
@@ -38,12 +26,12 @@ export default function FastLink({ products }) {
   const classes = useStyle()
 
   return (
-    <Grid container direction="column" className={classes.wrapper}>
+    <Grid container direction="column" className={classes.wrapperBlock}>
       <ScrollBar fullScreen>
         <FiltersByTag products={products} />
       </ScrollBar>
 
-      <Grid className={classes.wrapperSecondBlock}>
+      <Grid className={classes.wrapperBlock}>
         <ScrollBar fullScreen buttonNext>
           <FiltersBySticker products={products} />
           <PopularBrand products={products} />
