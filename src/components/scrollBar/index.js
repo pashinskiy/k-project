@@ -10,16 +10,6 @@ const useStyle = makeStyles(theme => ({
     cursor: "pointer",
     position: "relative",
 
-    overflow: "scroll",
-    scrollbarWidth: "none",
-    "-ms-overflow-style": "none",
-    "&::-webkit-scrollbar": {
-      display: "none",
-    },
-
-    "& *": {
-      flexShrink: 0,
-    },
     "&:before": {
       content: "''",
       width: "20%",
@@ -32,6 +22,18 @@ const useStyle = makeStyles(theme => ({
       top: 0,
 
       background: `linear-gradient(-90deg,${theme.palette.background.main} 0%, transparent 100%)`,
+    },
+  },
+  wrapperTrack: {
+    overflow: "scroll",
+    scrollbarWidth: "none",
+    "-ms-overflow-style": "none",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
+
+    "& *": {
+      flexShrink: 0,
     },
   },
   unselect: {
@@ -164,18 +166,18 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
   }
 
   return (
-    <Grid
-      container
-      className={classes.wrapper + " " + classes.unselect + " " + size}
-    >
-      <Grid
-        container
-        ref={setRef}
-        onPointerDown={setScrollBar}
-        className={classes.track}
-      >
-        {children}
+    <Grid container className={classes.wrapper + " " + size}>
+      <Grid container className={classes.wrapperTrack + " " + classes.unselect}>
+        <Grid
+          container
+          ref={setRef}
+          onPointerDown={setScrollBar}
+          className={classes.track}
+        >
+          {children}
+        </Grid>
       </Grid>
+
       {maxTranslateX < 0 && buttonNext ? (
         <Button onClick={next} className={classes.button}>
           <Arrow />
