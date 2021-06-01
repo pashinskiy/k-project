@@ -87,7 +87,6 @@ const IndexPage = ({ data }) => {
     setFavoritesArray(favorites)
   }
   //TODO: почистить от null
-  console.log(arrayCards)
   const cleanArrayCards = arrayCards.filter(function(element){
     return element != null
   } )

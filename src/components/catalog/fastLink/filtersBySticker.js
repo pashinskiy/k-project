@@ -87,6 +87,7 @@ export default function FiltersBySticker({ products }) {
               }
               cardTitle={title}
               cardLink={url.href}
+              gradientBack={true}
             />
           </div>
         )

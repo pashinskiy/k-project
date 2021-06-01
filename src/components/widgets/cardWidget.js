@@ -106,6 +106,9 @@ const useStyles = makeStyles(theme => ({
     background: theme.palette.background.secondary,
     borderRadius: "20px",
   },
+  brandContainerGradient:{
+    background: theme.palette.background.accent,
+  },
   brandDummy: {
     marginTop: "100%",
   },
@@ -128,13 +131,31 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.color.main,
   },
   smallCardTitle: {
-    padding: "12px",
     color: theme.palette.color.main,
+    padding: "0,9375",
+    "@media(min-width: 1280px)": {
+      padding: "12px",
+    },
+    "@media(max-width: 834px)": {
+      padding: "1.199vw",
+    },
+    "@media(max-width: 414px)": {
+      padding: "2.415vw",
+    },
   },
   smallCardRoot: {
     boxShadow: "none",
     background: theme.palette.background.secondary,
-    borderRadius: "12px",
+    borderRadius: "0,9375",
+    "@media(min-width: 1280px)": {
+      borderRadius: "12px",
+    },
+    "@media(max-width: 834px)": {
+      borderRadius: "1.199vw",
+    },
+    "@media(max-width: 414px)": {
+      borderRadius: "2.415vw",
+    },
   },
 
   catSingleRoot: {
@@ -242,8 +263,9 @@ export default function CardWidget(props) {
                 className={classes.brandContainer}
                 style={
                   props.cardTitle
-                    ? { borderRadius: "20px" }
-                    : { borderRadius: "12px" }
+                    ? { borderRadius: "20px", }
+                    : { borderRadius: "12px", },
+                  props.gradientBack === true ? {background: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",} : {background: "#EFEFF2",}
                 }
               >
                 <div className={classes.brandDummy} />

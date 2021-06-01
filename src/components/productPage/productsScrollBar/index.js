@@ -2,7 +2,6 @@ import React from "react"
 import { Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
-import IconSimilarProduct from "../../../../static/svg/similarProducts.svg"
 import HeaderWithIcon from "../../headers/headerWithIcon"
 import CardSimilarProduct from "./cardProduct"
 import ScrollBar from "../../scrollBar"
@@ -25,16 +24,14 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-export default function SimilarProduct({ products }) {
+export default function productsScrollBar({ products, title, icon, divider }) {
   const classes = useStyle()
 
   return (
     <Grid className={classes.wrapper}>
-      <HeaderWithIcon
-        title="Похожие товары"
-        icon={<IconSimilarProduct />}
-        divider={true}
-      />
+      {title ? (
+        <HeaderWithIcon title={title} icon={icon} divider={divider} />
+      ) : null}
 
       <ScrollBar fullScreen buttonNext>
         {products.map((product, i) => (
