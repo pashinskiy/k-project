@@ -1,8 +1,7 @@
-import { Grid, useMediaQuery } from "@material-ui/core"
+import { Grid } from "@material-ui/core"
 import React from "react"
 import CardWidget from "./cardWidget"
 import { makeStyles } from "@material-ui/core/styles"
-import ScrollBar from "../scrollBar"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -40,7 +39,6 @@ const useStyles = makeStyles(theme => ({
 }))
 export default function StoriesPanel({ stories }) {
   const classes = useStyles()
-  const mobile = useMediaQuery("(max-width: 834px)")
   console.log(stories)
 
 
