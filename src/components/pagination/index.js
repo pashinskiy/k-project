@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
   },
   paginationBlock: {
-    width: "auto",
+    width: "100%",
     margin: "2.18vw 0 5.31vw",
     "@media(min-width: 1280px)": {
       margin: "28px 0 68px",

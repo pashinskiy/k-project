@@ -3,7 +3,7 @@ import HeaderWithIcon from "../components/headers/headerWithIcon"
 import FavoritesIcon from "../../static/svg/favoritesIcon.svg"
 import { Grid, makeStyles, Typography, useMediaQuery } from "@material-ui/core"
 import Layout from "../components/layout"
-import CardSimilarProduct from "../components/productPage/similarProduct/cardProduct"
+import CardSimilarProduct from "../components/scrollBar/productsScrollBar/cardProduct"
 import { graphql } from "gatsby"
 import Seo from "../components/seo"
 import SmallCategoriesPanel from "../components/smallCategoriesPanel"
@@ -50,7 +50,6 @@ const IndexPage = ({ data }) => {
   let favorites = localStorage.getItem("favorites")
   favorites = favorites === null || !favorites ? [] : JSON.parse(favorites)
 
-  const isPad = useMediaQuery("(max-width: 834px)")
   const isMobile = useMediaQuery("(max-width: 414px)")
 
   const [favoritesArray, setFavoritesArray] = useState(favorites)
@@ -88,7 +87,6 @@ const IndexPage = ({ data }) => {
     setFavoritesArray(favorites)
   }
   //TODO: почистить от null
-  console.log(arrayCards)
   const cleanArrayCards = arrayCards.filter(function(element){
     return element != null
   } )

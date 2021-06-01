@@ -16,9 +16,9 @@ export default function SaleCardPanel({sales}) {
   const isMobile = useMediaQuery("(max-width: 414px)")
   return (
     <Grid container className={classes.wrapper}>
-      {sales.map((sale) => (
-        <Grid item xs={isMobile ? 12 : 6} className={classes.cardItem}>
-          <SaleCard sale={sale} />
+      {sales.map((sale, i) => (
+        <Grid item xs={isMobile ? 12 : 6} className={classes.cardItem} key={sale.uid + "_" + i}>
+          <SaleCard sale={sale} key={sale.uid} />
         </Grid>
       ))}
     </Grid>

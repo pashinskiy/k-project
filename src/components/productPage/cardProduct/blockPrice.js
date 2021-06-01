@@ -238,13 +238,15 @@ export default function BlockPrice({ product, allColors }) {
       <Grid container className={classes.collorsPanel}>
         {allColors.map(prod => {
           const active =
-            prod.data.color === product.data.color ? classes.active : ""
+            prod.data.color === (prod.data.color ?? prod.data.color_group)
+              ? classes.active
+              : ""
           return (
             <Link to={`/${prod.uid}/`} key={prod.uid}>
               <div
                 className={classes.item + " " + active}
                 style={{
-                  background: prod.data.color,
+                  background: prod.data.color ?? prod.data.color_group,
                 }}
               ></div>
             </Link>

@@ -8,10 +8,11 @@ import CardProduct from "../components/productPage/cardProduct"
 import Landing from "../components/productPage/landing"
 import Gallery from "../components/productPage/gallery"
 import DeliveryCards from "../components/productPage/delivery"
-import SimilarProduct from "../components/productPage/similarProduct"
+import ProductsScrollBar from "../components/scrollBar/productsScrollBar"
 import TabPanel from "../components/productPage/tabPanel"
 import CharacteristicsBlock from "../components/productPage/characteristics"
-import CategoryPage from "../components/categoryPage"
+
+import IconSimilarProduct from "../../static/svg/similarProducts.svg"
 
 const Product = ({
   data: { prismicProduct, allPrismicProduct, allPrismicCatalog },
@@ -48,8 +49,11 @@ const Product = ({
         prismicProduct={prismicProduct}
         allPrismicProduct={allPrismicProduct}
       />
-      <SimilarProduct
+      <ProductsScrollBar
         products={allPrismicProduct.edges.map(edge => edge.node)}
+        title="Похожие товары"
+        icon={<IconSimilarProduct />}
+        divider={true}
       />
       <div id="description" />
       <Landing slices={prismicProduct.data.body2} />
