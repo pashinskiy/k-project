@@ -52,9 +52,6 @@ export default function StoriesPanel({ stories }) {
   }
 
   return (
-    // <Grid container className={classes.wrapper}>
-        // <ScrollBar fullScreen buttonNext>
-
       duplicateStories.map(story => (
             <Grid item className={classes.storiesCard}>
               <CardWidget
@@ -67,6 +64,5 @@ export default function StoriesPanel({ stories }) {
                 </Grid>
                 
                 ))
-    // </Grid>
   )
 }

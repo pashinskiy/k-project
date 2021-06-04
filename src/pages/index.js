@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import MainPageSlider from "../components/mainPageSlider"
 import Seo from "../components/seo"
+import TestSlider from "../components/mainPageSlider/testSlider"
 
 const IndexPage = ({ data }) => {
   console.log(data)
@@ -10,7 +11,8 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <Seo title="Home" />
-      <MainPageSlider sales={allSales} />
+      {/* <MainPageSlider sales={allSales} /> */}
+      <TestSlider />
     </Layout>
   )
 }

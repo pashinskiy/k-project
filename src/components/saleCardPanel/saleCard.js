@@ -311,6 +311,7 @@ export default function SaleCard({ sale, mainPage }) {
             }
             alt={sale.data.previewimage.alt ?? "sales"}
             className={classes.wrapperImgMainPage}
+            imgStyle={{objectFit: "cover"}}
           />
           <div className={classes.contentBox}>
             <Typography

@@ -26,27 +26,44 @@ const useStyles = makeStyles(theme => ({
     display: "grid",
     // marginLeft: "-28px",
     
-    gridTemplateColumns: "repeat(10, 90.625%)",
-    gridColumnGap : "12px",
+    // gridTemplateColumns: "repeat(10, 90.625%)",
+    // gridColumnGap : "12px",
     
     // gridTemplateRows: "1fr",
     // gridRowGap: "1rem",
-    overflow: "scroll",
+    // overflow: "scroll",
     // scrollbarWidth: "none",
     
     height: "20vw",
     // height: "auto",
 
-    scrollSnapType: "both mandatory",
+  //   scrollSnapType: "both mandatory",
   //   // scrollPadding: "1rem",
-    flexShrink: 0,
+  //   flexShrink: 0,
+  //   "&::-webkit-scrollbar": {
+  //     display: "none",
+  //   },
+  //   "-webkit-transition": ".5s all ease-out",
+  // "-moz-transition": ".5s all ease-out",
+  // "transition": ".5s all ease-out",
+  },
+
+  wrapperTrack: {
+    gridTemplateColumns: "repeat(10, 90.625%)",
+    gridColumnGap : "12px",
+    gridRow: "1",
+    overflow: "scroll",
+    scrollbarWidth: "none",
+    "-ms-overflow-style": "none",
     "&::-webkit-scrollbar": {
       display: "none",
     },
-    "-webkit-transition": ".5s all ease-out",
-  "-moz-transition": ".5s all ease-out",
-  "transition": ".5s all ease-out",
+
+    "& *": {
+      flexShrink: 0,
+    },
   },
+
   unselect: {
     "& *": {
       "-webkit-touch-callout": "none" /* iOS Safari */,
@@ -58,20 +75,20 @@ const useStyles = makeStyles(theme => ({
     },
   },
 item:{
-  scrollSnapAlign: "center",
-	display: "inline-block",
-  alignSelf: "center",
-	borderRadius: "3px",
-  height: "90%",
-  opacity: .5,
-  "-webkit-transition": ".5s all ease-out",
-  "-moz-transition": ".5s all ease-out",
-  "transition": ".5s all ease-out",
-  // width: "auto",
-  // touchAction: "none",
-  // transition: "1s transform",
-  // position: "relative",
-  // boxSizing: "border-box",
+  // scrollSnapAlign: "center",
+	// display: "inline-block",
+  // alignSelf: "center",
+	// borderRadius: "3px",
+  // height: "90%",
+  // opacity: .5,
+  // "-webkit-transition": ".5s all ease-out",
+  // "-moz-transition": ".5s all ease-out",
+  // "transition": ".5s all ease-out",
+  width: "auto",
+  touchAction: "none",
+  transition: "1s transform",
+  position: "relative",
+  boxSizing: "border-box",
 },
 itemActive: {
   height: "100%",
@@ -116,38 +133,7 @@ export default function MainPageSlider({ sales }) {
     }
   }, [])
 
-  const slider = document.getElementById("scrollBar")
-  console.log(document.getElementById("scrollBar"))
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-
-  function mouseDown(e) {
-    isDown = true;
-    // slider.classList.add('active');
-    startX = e.pageX - slider.offsetLeft
-    scrollLeft = slider.scrollLeft
-    document.addEventListener("mousemove", mouseMove)
-    document.addEventListener("mouseup", deleteScrollBar)
-
-    function deleteScrollBar(e) {
-      isDown = false
-      document.removeEventListener("mousemove", mouseMove)
-      document.removeEventListener("mouseup", deleteScrollBar)
-    }
-  }
-
-  function mouseMove(e) {
-    if(!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 3; //scroll-fast
-    slider.scrollLeft = scrollLeft - walk;
-    console.log(walk);
-  }
-
   const scrollBar = document.getElementById("scrollBar")
-  console.log(scrollBar)
   // const totalCountChildren = scrollBar.childElementCount
 
   // console.log(scrollBar.scrollLeft)
@@ -165,7 +151,81 @@ export default function MainPageSlider({ sales }) {
     console.log(cardPanel.scrollLeft)
     // console.log(cardPanel.children[8].offsetLeft)
     // console.log(cardPanel.scrollLeft)
-    
+    let isDown = true
+    let pos = {
+      left: cardPanel.scrollLeft,
+      top: cardPanel.scrollTop,
+      x: e.clientX,
+      y: e.clientY,
+    }
+
+    // document.addEventListener("pointermove", handlePointerMove)
+    // document.addEventListener("pointerup", cleanEvents)
+
+    document.addEventListener("mousemove", handlePointerMove)
+    document.addEventListener("mouseup", cleanEvents)
+
+    function cleanEvents(e) {
+      // console.log(Math.round(cardPanel.scrollLeft / saleWidth))
+      // console.log("smth: " + cardPanel.scrollLeft)
+      console.log('ends')
+      isDown = false
+
+      // cardPanel.children.map(child => {
+      //   if(Math.abs(cardPanel.scrollLeft - child.getBoundingClientRect().left) > saleWidth){
+      //     console.log(child)
+      //   }
+      // })
+
+      // cardPanel.children[activeSale].style.opacity = "0.5"
+      // cardPanel.children[activeSale].style.height = "90%"
+      // let newActiveSale = cardPanel.scrollLeft / saleWidth
+      // cardPanel.children[newActiveSale].style.opacity = "1"
+      // cardPanel.children[newActiveSale].style.height = "100%"
+      // setActiveSale(newActiveSale)
+      // console.log(cardPanel)
+
+      document.removeEventListener("pointermove", handlePointerMove)
+      document.removeEventListener("pointerup", cleanEvents)
+
+      // document.removeEventListener("mousemove", handlePointerMove)
+      // document.removeEventListener("mouseup", cleanEvents)
+
+      // setTimeout(() => document.removeEventListener("click", noGoLink), 0)
+    }
+
+    function handlePointerMove(e) {
+      // console.log("dragin'")
+      // document.addEventListener("click", noGoLink)
+      if (!isDown) return
+      e.preventDefault()
+      
+      //working
+      const deltaX = e.clientX - pos.x
+      const deltaY = e.clientY - pos.y
+
+      cardPanel.scrollLeft = pos.left - deltaX
+      cardPanel.scrollTop = pos.top - deltaY
+
+      // const x = e.clientX - cardPanel.offsetLeft;
+      // const walk = (x - pos.x) * 1; //scroll-fast
+      // cardPanel.scrollLeft = pos.left - walk;
+      // console.log(walk);
+
+
+
+      // if(Math.abs(cardPanel.scrollLeft - cardPanel.children[activeSale].getBoundingClientRect().left) > saleWidth){
+      //   cardPanel.children[activeSale].className = cardPanel.children[activeSale].className.replace(classes.itemActive, "")
+      // } 
+      // if(Math.abs(cardPanel.scrollLeft - cardPanel.children[activeSale].getBoundingClientRect().left) < saleWidth)
+
+
+      
+    }
+
+    function noGoLink(e) {
+      e.preventDefault()
+    }
   }
   function handleButtonClickLeft(e) {
     if(activeSale > 0){
@@ -197,29 +257,32 @@ export default function MainPageSlider({ sales }) {
   //   console.log("ends")
   // }
 
-    return (
-  /* <Grid container className={classes.root}>
-    <div className={classes.dummy} /> */
-  <div>
-      <Grid id="scrollBar" container className={classes.wrapper + " " + classes.unselect} ref={setRef}
-      // onPointerDown={handlePointerDown}
-      onMouseDown={mouseDown}
-      >
-  {/* {salesArray.map((sale, i) => (
-    <Grid item className={classes.item} key={sale.uid + "_" + i}>
-    <SaleCard sale={sale} key={sale.uid} mainPage />
-    </Grid>
-  ))} */}
-      {/* </Grid> */}
-  {testArray.map((test, i) => (    <Card id={"item" + i} style={{background: "gray"}} className={classes.item} ><Typography>BlahBlah</Typography></Card>))}
+  return (
+/* <Grid container className={classes.root}>
+  <div className={classes.dummy} /> */
+<div>
+    <Grid container className={classes.wrapper}>
+
+    <Grid id="scrollBar" container className={classes.wrapperTrack + " " + classes.unselect} ref={setRef}
+    // onPointerDown={handlePointerDown}
+    // onMouseDown={handlePointerDown}
+    >
+{/* {salesArray.map((sale, i) => (
+  <Grid item className={classes.item} key={sale.uid + "_" + i}>
+  <SaleCard sale={sale} key={sale.uid} mainPage />
+  </Grid>
+))} */}
+    {/* </Grid> */}
+{testArray.map((test, i) => (    <Card id={"item" + i} style={{background: "gray"}} className={classes.item} ><Typography>BlahBlah</Typography></Card>))}
 
   </Grid>
-    <button onClick={handleButtonClickLeft}>
-      left
-    </button>
-    <button onClick={handleButtonClickRigth}>
-      right
-    </button>
-  </div>
-    )
+</Grid>
+  <button onClick={handleButtonClickLeft}>
+    left
+  </button>
+  <button onClick={handleButtonClickRigth}>
+    right
+  </button>
+</div>
+  )
 }
