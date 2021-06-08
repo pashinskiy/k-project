@@ -12,7 +12,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <Seo title="Home" />
       {/* <MainPageSlider sales={allSales} /> */}
-      <TestSlider />
+      <TestSlider sales={allSales} />
     </Layout>
   )
 }

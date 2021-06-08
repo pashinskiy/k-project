@@ -204,26 +204,26 @@ const useStyles = makeStyles(theme => ({
 //categoriesSingle - список категорий с подкатегориями на 1 карточке
 //передать список категорий
 
-export default function CardWidget(props) {
+export default function CardWidget({cardImage, cardTitle, cardLink, variant, gradientBack, categoryTitle, subCategoryTitle}) {
   const classes = useStyles()
-  const altImage = props.cardImage
-    ? props.cardImage.images.fallback.src.split("_")[1].replace(".jpg", "")
+  const altImage = cardImage
+    ? cardImage.images.fallback.src.split("_")[1].replace(".jpg", "")
     : null
   const cardType = () => {
-    switch (props.variant) {
+    switch (variant) {
       case "category":
         return (
           <Card className={classes.categoryCardRoot}>
             <CardActionArea className={classes.stretch}>
               {/* TODO: Добавить в поле с ссылкой на страницу категорию */}
-              <Link to={props.cardLink} className={classes.stretch}>
+              <Link to={cardLink} className={classes.stretch}>
                 <GatsbyImage
-                  image={props.cardImage}
+                  image={cardImage}
                   alt={altImage}
                   className={classes.stretch}
                 />
                 <Typography className={classes.categoryCardTitle}>
-                  {props.cardTitle}
+                  {cardTitle}
                 </Typography>
               </Link>
             </CardActionArea>
@@ -233,9 +233,9 @@ export default function CardWidget(props) {
         return (
           <Card className={classes.storiesCardRoot}>
             <CardActionArea className={classes.stretch} style={{borderRadius: "12px"}}>
-              <Link to={props.cardLink} className={classes.stretch}>
+              <Link to={cardLink} className={classes.stretch}>
                 <GatsbyImage
-                  image={props.cardImage}
+                  image={cardImage}
                   alt={altImage}
                   className={classes.storiesImageContainer}
                 />
@@ -249,7 +249,7 @@ export default function CardWidget(props) {
                   }}
                 />
                 <Typography className={classes.storiesCardTitle}>
-                  {props.cardTitle}
+                  {cardTitle}
                 </Typography>
               </Link>
             </CardActionArea>
@@ -258,7 +258,7 @@ export default function CardWidget(props) {
       case "brand":
         return (
           <Link
-            to={props.cardLink}
+            to={cardLink}
             className={classes.stretch}
             style={{ textDecoration: "none" }}
           >
@@ -266,10 +266,10 @@ export default function CardWidget(props) {
               <Card
                 className={classes.brandContainer}
                 style={
-                  (props.cardTitle
+                  (cardTitle
                     ? { borderRadius: "20px" }
                     : { borderRadius: "12px" },
-                  props.gradientBack === true
+                  gradientBack === true
                     ? {
                         background:
                           "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",
@@ -279,15 +279,15 @@ export default function CardWidget(props) {
               >
                 <div className={classes.brandDummy} />
                 <GatsbyImage
-                  image={props.cardImage}
+                  image={cardImage}
                   alt={altImage}
                   className={classes.brandElement}
                   imgStyle={{ objectFit: "contain" }}
                 />
               </Card>
-              {props.cardTitle ? (
+              {cardTitle ? (
                 <Typography className={classes.brandTitle}>
-                  {props.cardTitle}
+                  {cardTitle}
                 </Typography>
               ) : null}
             </div>
@@ -296,13 +296,13 @@ export default function CardWidget(props) {
       case "small":
         return (
           <Link
-            to={props.cardLink}
+            to={cardLink}
             className={classes.stretch}
             style={{ textDecoration: "none" }}
           >
             <Card className={classes.smallCardRoot}>
               <Typography className={classes.smallCardTitle}>
-                {props.cardTitle}
+                {cardTitle}
               </Typography>
             </Card>
           </Link>
@@ -312,10 +312,10 @@ export default function CardWidget(props) {
           <Card className={classes.catSingleRoot}>
             <div className={classes.catSingleContainer}>
               <Typography className={classes.catSingleTitle} variant="body2">
-                {props.categoryTitle}
+                {categoryTitle}
               </Typography>
               <Typography className={classes.catSingleSubTitle}>
-                {props.subCategoryTitle}
+                {subCategoryTitle}
               </Typography>
             </div>
           </Card>

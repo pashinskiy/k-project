@@ -87,21 +87,22 @@ const useStyle = makeStyles(theme => ({
 }))
 
 export default function CardSimilarProduct({ product, afterChange }) {
-  const img =
-    product.data.images[0].image.localFile?.childImageSharp.gatsbyImageData
-  const alt = product.data.images[0].image.alt
+  console.log(product.data.images[0])
+  // const img =
+    // product.data.images[0].image.localFile?.childImageSharp.gatsbyImageData
+  // const alt = product.data.images[0].image.alt
   const title = product.data.name
   const price = product.data.price
 
   const classes = useStyle()
   return (
     <Grid className={`${classes.wrapper} product--card`}>
-      <GatsbyImage
+      {/* <GatsbyImage
         image={img}
         alt={alt ?? `image product`}
         className={classes.imageWrapper}
         imgStyle={{ objectFit: "contain" }}
-      />
+      /> */}
       <Link to={`/${product.uid}/`} className={classes.link}>
         <Typography className={classes.price}>{price} ₽</Typography>
         <Typography variant="body2" className={classes.title}>

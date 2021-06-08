@@ -215,6 +215,16 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 414px)": {
       padding: "0 6.763vw 6.763vw 6.763vw",
     },
+    // padding: "0 2.1875vw",
+    // "@media(min-width: 1280px)": {
+    //   padding: "0 28px ",
+    // },
+    // "@media(max-width: 834px)": {
+    //   padding: "0 3.357vw",
+    // },
+    // "@media(max-width: 414px)": {
+    //   padding: "0 6.763vw",
+    // },
   },
   buttonMainPage: {
     right: "2.1875vw",
