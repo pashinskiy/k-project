@@ -189,7 +189,7 @@ export default function BlockBoolean({
           </div>
         ) : (
           // <GatsbyImage
-          //   image={img.localFile.childImageSharp.gatsbyImageData}
+          //   image={img?.localFile?.childImageSharp.gatsbyImageData}
           //   alt={img.alt ?? "sticker"}
           //   className={classes.image}
           //   imgStyle={{ objectFit: "contain" }}

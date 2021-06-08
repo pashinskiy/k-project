@@ -81,7 +81,7 @@ export default function SaleCard({ sale }) {
     <Card className={classes.wrapper}>
           <GatsbyImage
             image={
-              sale.data.previewimage.localFile.childImageSharp.gatsbyImageData
+              sale.data.previewimage?.localFile?.childImageSharp.gatsbyImageData
             }
             alt={sale.data.previewimage.alt ?? "sales"}
             className={classes.wrapperImg}

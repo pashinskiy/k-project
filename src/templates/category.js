@@ -29,8 +29,8 @@ const Category = ({data: {allPrismicSubcategory}}) => {
               <Grid item key={i} className={classes.categoryCardItem}>
                 <CardWidget
                   cardImage={
-                    subCategory.data.image.localFile
-                      .childImageSharp.gatsbyImageData
+                    subCategory.data.image?.localFile
+                      ?.childImageSharp.gatsbyImageData
                   }
                   cardTitle={subCategory.data.name}
                   variant="category"
