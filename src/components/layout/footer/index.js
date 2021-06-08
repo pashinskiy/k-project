@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     nav: {
         display: 'flex',
         justifyContent: 'space-between',
-        boxSizing: 'padding-box',
+        boxSizing: 'border-box',
         padding: 60,
         '@media (max-width: 1279px)': {
             padding: '3.5vw',
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     menu: {
         maxWidth: 250,
         width: '100%',
-        boxSizing: 'padding-box',
+        boxSizing: 'border-box',
         padding: 30,
         '& [class^="MuiTypography-root"]': {
             fontSize: 17,
@@ -62,7 +62,7 @@ const useStyles = makeStyles(theme => ({
         },
         '@media (max-width: 778px)': {
             maxWidth: '100vw',
-            width: '50vw',
+            width: '49vw',
             '&:last-child': {
                 width: '100%',
             },
@@ -100,7 +100,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        boxSizing: 'padding-box',
+        boxSizing: 'border-box',
         padding: '0px 24px',
         '@media (max-width: 1024px)': {
             background: theme.palette.color.mainContrast,
@@ -111,7 +111,7 @@ const useStyles = makeStyles(theme => ({
     },
     docs_wrapper: {
         '@media (max-width: 664px)': {
-            boxSizing: 'padding-box',
+            boxSizing: 'border-box',
             padding: 20,
             overflowX: 'scroll',
             '&::-webkit-scrollbar': {
@@ -123,7 +123,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         '@media (max-width: 1024px)': {
             justifyContent: 'center',
-            boxSizing: 'padding-box',
+            boxSizing: 'border-box',
             padding: 20,
         },
         '@media (max-width: 664px)': {

@@ -119,7 +119,7 @@ export default function ProductSlider({ data }) {
     return (
         <div className={classes.root}>
             <div className={classes.slider}>
-                <div className={classes.product}>
+                {/* <div className={classes.product}>
                     <ProductCard product={data.allPrismicProduct.edges[0].node} />
                 </div>
                 <div className={classes.product}>
@@ -130,7 +130,7 @@ export default function ProductSlider({ data }) {
                 </div>
                 <div className={classes.product}>
                     <ProductCard product={data.allPrismicProduct.edges[3].node} />
-                </div>
+                </div> */}
             </div>
 
             <div className={classes.arrows}>

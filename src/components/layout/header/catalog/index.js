@@ -53,7 +53,7 @@ export default function CatalogButton({ data, setCatalog, catalog, setAnimation,
         <button
             className={`${classes.root} catalog`}
             onClick={() => {
-                if (catalog === true) {setTimeout(()=>{ setCatalog(!catalog); },150)} else { setCatalog(!catalog); };
+                if (catalog === true) {setTimeout(()=>{ setCatalog(!catalog); },300)} else { setCatalog(!catalog); };
                 setAnimation(!animation);
             }}>
             <img

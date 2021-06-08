@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, Divider, Typography } from '@material-ui/core';
 import Category from './category';
 import './catalog.css';
+import DefaultLink from '../header/link/default';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -50,6 +51,9 @@ const useStyles = makeStyles(theme => ({
     divider: {
         height: 'auto',
     },
+    categories_brands: {
+        display: 'flex',
+    },
     category: {
         padding: 28,
         boxSizing: 'border-box',
@@ -70,17 +74,24 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'space-between',
         flexWrap: 'wrap',
         width: 528,
+        height: 'fit-content',
     },
     sub_category: {
         marginTop: 28,
         width: 'calc(50% - 14px)',
-        animationName: 'catalog_in',
-        animationDuration: '.15s',
-        animationTimingFunction: 'ease-out',
-        animationFillMode: 'forwards',
+        height: 'fit-content',
         '& h4': {
             fontSize: 17,
             fontWeight: 600,
+            marginBottom: 20,
+        },
+        '& a': {
+            marginLeft: 0,
+            marginTop: 12,
+            fontSize: 14,
+            '&:first-child': {
+                marginTop: 0,
+            },
         },
     },
     promo: {
@@ -91,6 +102,25 @@ const useStyles = makeStyles(theme => ({
             width: 240,
             height: 340,
             marginBottom: 12,
+        },
+    },
+    brand_wrapper: {
+        padding: 12,
+        width: 84,
+        height: 84,
+        boxSizing: 'border-box',
+        display: 'flex',
+        alignItems: 'center',
+        objectFit: 'fit',
+        background: theme.palette.background.secondary,
+        borderRadius: 12,
+        marginTop: 8,
+        '&:first-child': {
+            marginTop: 28,
+        },
+        '& img': {
+            width: '100%',
+            height: 'auto',
         },
     },
 }));
@@ -125,7 +155,7 @@ export default function Catalog({ data, animation }) {
                                 <img src={category.category.document.data.category_icon.localFile.publicURL + '#gradient'} alt={''} />
                                 <Typography variant="h3">{category.category.document.data.name}</Typography>
                             </div>
-                            <div>
+                            <div className={classes.categories_brands}>
                                 <div className={classes.sub_categories}>
                                 {category.category.document.data.children.map((sub_category, i) => (
                                     <div className={classes.sub_category} key={`subcategory ${i}`}>
@@ -133,12 +163,25 @@ export default function Catalog({ data, animation }) {
                                             {(sub_category.child.document === null) ? null : sub_category.child.document.data.name}
                                         </Typography>
                                         <nav>
-
+                                            {(sub_category.child.document === null)
+                                                ?
+                                                    null 
+                                                :
+                                                    [sub_category.child.document.data.tags.map((tag, i) => (
+                                                        <DefaultLink name={tag.tag.document.data.name} link={""} key={`tag ${i}`} />
+                                                    ))]
+                                            }
                                         </nav>
                                     </div>
                                 ))}
                                 </div>
-                                <nav className={classes.brands}></nav>
+                                <nav className={classes.brands}>
+                                    {category.category.document.data.brands.map((brand, i) => (
+                                        <div className={classes.brand_wrapper} key={`brand ${i}`}>
+                                            <img src={brand.child.document.data.body[0].primary.image.localFile.childImageSharp.gatsbyImageData.images.fallback.src} alt={brand.child.document.data.body[0].primary.image.alt} />
+                                        </div>
+                                    ))}
+                                </nav>
                             </div>
                         </div>
                     ))}

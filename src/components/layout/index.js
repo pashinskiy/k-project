@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, Zoom } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import Header from './header';
 import Footer from './footer';
 import MobileMenu from './mobileMenu';
 import Catalog from './catalog';
 import './layout.css';
+import MobileCatalog from './catalog/mobile';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,7 +43,7 @@ const useStyles = makeStyles(theme => ({
       animationName: props => (props.animation === true)
           ? 'back_in'
           : 'back_out',
-      animationDuration: '.15s',
+      animationDuration: '.3s',
       animationTimingFunction: 'ease-out',
       animationFillMode: 'forwards',
   },
@@ -146,6 +147,33 @@ export default function Layout({ children }) {
                     ... on PrismicCategory {
                       id
                       data {
+                        brands {
+                          child {
+                            document {
+                              ... on PrismicBrand {
+                                id
+                                data {
+                                  name
+                                  body {
+                                    ... on PrismicBrandBodyLogo {
+                                      id
+                                      primary {
+                                        image {
+                                          alt
+                                          localFile {
+                                            childImageSharp {
+                                              gatsbyImageData
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
                         body {
                           ... on PrismicCategoryBodyVerticalImg {
                             id
@@ -168,6 +196,18 @@ export default function Layout({ children }) {
                                 id
                                 data {
                                   name
+                                  tags {
+                                    tag {
+                                      document {
+                                        ... on PrismicTag {
+                                          id
+                                          data {
+                                            name
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
                                 }
                               }
                             }
@@ -187,6 +227,14 @@ export default function Layout({ children }) {
                             publicURL
                           }
                           alt
+                        }
+                        image {
+                          alt
+                          localFile {
+                            childImageSharp {
+                              gatsbyImageData
+                            }
+                          }
                         }
                       }
                     }
@@ -314,13 +362,26 @@ export default function Layout({ children }) {
     }
   `);
 
+  const IsDesktop = typeof window !== 'undefined' && window.matchMedia("(min-width: 1025px)").matches
+
   const [catalog, setCatalog] = React.useState(false);
+
   const [animation, setAnimation] = React.useState(false);
+
+  const choose_catalog = (IsDesktop) => {
+    switch(IsDesktop) {
+        case true:
+            return <Catalog data={data} animation={animation} />
+        
+        default:
+            return <MobileCatalog data={data} animation={animation} />
+    };
+};
 
   const button_trigger = (catalog) => {
       switch(catalog) {
           case true:
-              return <Catalog data={data} animation={animation} />
+              return choose_catalog(IsDesktop)
           
           default:
               return null
@@ -331,8 +392,12 @@ export default function Layout({ children }) {
       switch(catalog) {
           case true:
               return (
-                <div className={classes.background} 
+                <div role="button" aria-label="Background Catalog" tabIndex={0} className={classes.background}
                   onClick={() => {
+                    if (catalog === true) {setTimeout(()=>{ setCatalog(!catalog); },150)} else { setCatalog(!catalog); };
+                    setAnimation(!animation);
+                  }}
+                  onKeyDown={() => {
                     if (catalog === true) {setTimeout(()=>{ setCatalog(!catalog); },150)} else { setCatalog(!catalog); };
                     setAnimation(!animation);
                   }} />
