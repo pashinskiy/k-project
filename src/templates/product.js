@@ -1,7 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 
-import Layout from "../components/layout"
 import Seo from "../components/seo"
 import CardProduct from "../components/productPage/cardProduct"
 
@@ -18,7 +17,7 @@ const Product = ({
   data: { prismicProduct, allPrismicProduct, allPrismicCatalog },
 }) => {
   return (
-    <Layout>
+    <>
       <Seo title="Home" />
       <TabPanel
         links={[
@@ -65,7 +64,7 @@ const Product = ({
       <CharacteristicsBlock props={prismicProduct} />
       <div id="delivery" />
       <DeliveryCards prismicProduct={prismicProduct} />
-    </Layout>
+    </>
   )
 }
 

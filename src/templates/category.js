@@ -2,7 +2,6 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import { makeStyles, Grid } from "@material-ui/core"
 
-import Layout from "../components/layout"
 import Seo from "../components/seo"
 import CardWidget from "../components/widgets/cardWidget"
 
@@ -21,7 +20,7 @@ const Category = ({data: {allPrismicSubcategory}}) => {
   console.log(dataSubCategory)
 
   return (
-    <Layout>
+    <>
       <Seo title="Home" />
       <Grid container> 
       {dataSubCategory.length
@@ -39,7 +38,7 @@ const Category = ({data: {allPrismicSubcategory}}) => {
             ))
             : null}
       </Grid>
-    </Layout>
+    </>
   )
 }
 

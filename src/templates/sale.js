@@ -2,7 +2,6 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import { makeStyles, useMediaQuery, Grid } from "@material-ui/core"
 
-import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 import SaleCardMain from '../components/saleCardPanel/saleCardMain.js'
@@ -18,11 +17,11 @@ const Sale = ({ data }) => {
   console.log(products)
 
   return (
-    <Layout>
+    <>
       <Seo title="Sale" />
       <SaleCardMain sale={sale} />
       <SalesTextPanel sale={sale} socials={socials} products={products} />
-    </Layout>
+    </>
   )
 }
 
