@@ -558,6 +558,7 @@ export default function Filter({ products, setFilterProducts }) {
                 key={sticker}
                 style={{ order }}
                 title={title}
+                valueFilter={!!filters.get(title)?.value.includes(sticker)}
                 stickerId={sticker}
                 setFilter={setFilterBoolean}
               />

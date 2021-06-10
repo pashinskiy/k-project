@@ -63,6 +63,7 @@ module.exports = {
           tag: require("./src/schemas/tag.json"),
           stories: require("./src/schemas/stories.json"),
           sales: require("./src/schemas/sales.json"),
+          promotion_banner: require("./src/schemas/promotion_banner.json"),
         },
         shouldDownloadImage: () => true,
       },
