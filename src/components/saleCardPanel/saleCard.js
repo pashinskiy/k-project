@@ -93,7 +93,6 @@ const useStyles = makeStyles(theme => ({
     },
   },
 
-  },
   button: {
     position: "absolute",
     backgroundColor: "#D2D0E9",
