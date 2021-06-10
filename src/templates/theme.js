@@ -6,7 +6,7 @@ const theme = createMuiTheme({
       main: "#131313",
       mainContrast: "#ffffff",
       accent: "linear-gradient(180deg, #291AD5 0%, #681DE1 100%)", // Акцентный цвет
-      accentSecondary: "#291AD5", // Акцентный цвет для браузеров не поддерживающих -webkit-background-clip
+      accentSecondary: "#5A1CDE", // Акцентный цвет для браузеров не поддерживающих -webkit-background-clip
       secondary: "#5A5A5A",
       secondaryLight: "#BDBDC6",
     },

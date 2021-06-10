@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Typography } from '@material-ui/core';
 import Arrow from '../../../../../static/svg/arrowGray.svg';
+import { navigate } from 'gatsby';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -33,13 +34,14 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function Category({ svg, alt, name, setHover }) {
+export default function Category({ svg, alt, name, setHover, uid }) {
 
     const classes = useStyles();
 
     return (
         <button
-            className={classes.root} 
+            className={classes.root}
+            onClick={() => {navigate(`/category/${uid}`)}} 
             onMouseEnter={() => {
                 setHover(name);
             }}

@@ -3,6 +3,7 @@ import { makeStyles, Divider, Typography } from '@material-ui/core';
 import Category from './category';
 import './catalog.css';
 import DefaultLink from '../header/link/default';
+import { navigate } from 'gatsby-link';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -63,6 +64,7 @@ const useStyles = makeStyles(theme => ({
         },
     },
     wrapper: {
+        cursor: 'pointer',
         display: 'flex',
         alignItems: 'center',
         '& img': {
@@ -104,6 +106,12 @@ const useStyles = makeStyles(theme => ({
             marginBottom: 12,
         },
     },
+    brand: {
+        marginTop: 8,
+        '&:first-child': {
+            marginTop: 28,
+        },
+    },
     brand_wrapper: {
         padding: 12,
         width: 84,
@@ -114,10 +122,6 @@ const useStyles = makeStyles(theme => ({
         objectFit: 'fit',
         background: theme.palette.background.secondary,
         borderRadius: 12,
-        marginTop: 8,
-        '&:first-child': {
-            marginTop: 28,
-        },
         '& img': {
             width: '100%',
             height: 'auto',
@@ -144,6 +148,7 @@ export default function Catalog({ data, animation }) {
                                     svg={category.category.document.data.category_icon.localFile.publicURL + '#fill'}
                                     alt={category.category.document.data.category_icon.alt}
                                     name={category.category.document.data.name}
+                                    uid={category.category.document.uid}
                                     setHover={setHover} />
                             ))}
                         </nav>
@@ -151,7 +156,9 @@ export default function Catalog({ data, animation }) {
                     <Divider orientation="vertical" className={classes.divider} />
                     {data.allPrismicCatalog.edges[0].node.data.categories.filter(atr => atr.category.document.data.name === hover).map((category, i) => (
                         <div className={classes.category} key={`category ${i}`}>
-                            <div className={classes.wrapper}>
+                            <div role="button" aria-label="Catalog Category" tabIndex={0} className={classes.wrapper}
+                                onClick={() => {navigate(`/category/${category.category.document.uid}`)}}
+                                onKeyDown={() => {navigate(`/category/${category.category.document.uid}`)}}>
                                 <img src={category.category.document.data.category_icon.localFile.publicURL + '#gradient'} alt={''} />
                                 <Typography variant="h3">{category.category.document.data.name}</Typography>
                             </div>
@@ -177,8 +184,15 @@ export default function Catalog({ data, animation }) {
                                 </div>
                                 <nav className={classes.brands}>
                                     {category.category.document.data.brands.map((brand, i) => (
-                                        <div className={classes.brand_wrapper} key={`brand ${i}`}>
-                                            <img src={brand.child.document.data.body[0].primary.image.localFile.childImageSharp.gatsbyImageData.images.fallback.src} alt={brand.child.document.data.body[0].primary.image.alt} />
+                                        <div className={classes.brand} key={`brand ${i}`}>
+                                            {(brand.child.document === null)
+                                                ?
+                                                    null
+                                                :
+                                                    <div className={classes.brand_wrapper}>
+                                                        <img src={brand.child.document.data.body[0].primary.image.localFile.childImageSharp.gatsbyImageData.images.fallback.src} alt={brand.child.document.data.body[0].primary.image.alt} />
+                                                    </div>
+                                            }
                                         </div>
                                     ))}
                                 </nav>
@@ -187,13 +201,11 @@ export default function Catalog({ data, animation }) {
                     ))}
                 </div>
                 
-                {data.allPrismicCatalog.edges[0].node.data.categories.filter(atr => atr.category.document.data.name === hover).map((wrapper, i) => (
-                    <div className={classes.promo}>
-                        {wrapper.category.document.data.body.map((promo, i) => (
-                            <img src={promo.primary.catalog_img?.localFile.childImageSharp.gatsbyImageData.images.fallback.src} alt={promo.primary.catalog_img.alt} className={classes.img} key={`images_promo ${i}`} />
-                        ))}
-                    </div>
-                ))}
+                <div className={classes.promo}>
+                    {data.allPrismicCatalog.edges[0].node.data.categories.filter(atr => atr.category.document.data.name === hover)[0].category.document.data.body.map((promo, i) => (
+                        <img src={promo.primary.catalog_img?.localFile.childImageSharp.gatsbyImageData.images.fallback.src} alt={promo.primary.catalog_img.alt} className={classes.img} key={`images_promo ${i}`} />
+                    ))}
+                </div>
             </div>
         </div>
     );

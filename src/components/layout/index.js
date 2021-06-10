@@ -141,11 +141,61 @@ export default function Layout({ children }) {
         edges {
           node {
             data {
+              sales_name {
+                text
+              }
+              all_stories {
+                stories {
+                  document {
+                    ... on PrismicStories {
+                      id
+                      data {
+                        image {
+                          localFile {
+                            childImageSharp {
+                              gatsbyImageData
+                            }
+                          }
+                        }
+                        text {
+                          text
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              all_sales {
+                sales {
+                  document {
+                    ... on PrismicSales {
+                      id
+                      data {
+                        title {
+                          text
+                        }
+                        previewtext {
+                          text
+                        }
+                        previewimage {
+                          alt
+                          localFile {
+                            childImageSharp {
+                              gatsbyImageData
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
               categories {
                 category {
                   document {
                     ... on PrismicCategory {
                       id
+                      uid
                       data {
                         brands {
                           child {
@@ -299,6 +349,12 @@ export default function Layout({ children }) {
                   primary {
                     link {
                       url
+                    }
+                    social_img_white {
+                      alt
+                      localFile {
+                        publicURL
+                      }
                     }
                     social_img {
                       alt
