@@ -1,6 +1,5 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/layout"
 import MainPageSlider from "../components/mainPageSlider"
 import Seo from "../components/seo"
 
@@ -14,7 +13,7 @@ const IndexPage = ({ data }) => {
       <Seo title="Home" />
       <MainPageSlider array={allSales} variant={"sales"} />
       <MainPageSlider array={allPromotionBanners} variant={"promotionBanner"}/>
-    </Layout>
+    </>
   )
 }
 

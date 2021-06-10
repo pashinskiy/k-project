@@ -23,7 +23,7 @@ const IndexPage = ({ data }) => {
         <StoriesPanel stories={allStories}/>
       </ScrollBar>
       <SaleCardPanel sales={AllSales} />
-    </Layout>
+    </>
   )
 }
 export default IndexPage

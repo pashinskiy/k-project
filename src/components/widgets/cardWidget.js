@@ -247,7 +247,7 @@ export default function CardWidget({cardImage, cardTitle, cardLink, variant, gra
         return (
           <Card className={`${classes.storiesCardRoot} catalog--stories`}>
             <CardActionArea className={classes.stretch} style={{borderRadius: "12px"}}>
-              <Link to={props.cardLink} className={`${classes.stretch} strech`}>
+              <Link to={cardLink} className={`${classes.stretch} strech`}>
                 <GatsbyImage
                   image={cardImage}
                   alt={altImage}
@@ -263,7 +263,7 @@ export default function CardWidget({cardImage, cardTitle, cardLink, variant, gra
                   }}
                 />
                 <Typography className={`${classes.storiesCardTitle} card--title`}>
-                  {props.cardTitle}
+                  {cardTitle}
                 </Typography>
               </Link>
             </CardActionArea>
