@@ -124,6 +124,16 @@ const useStyles = makeStyles(theme => ({
   costStatic: {
     display: "inline-block",
     color: theme.palette.color.secondary,
+    fontSize: "1.328vw",
+    "@media(min-width: 1280px)": {
+      fontSize: 17,
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "2.038vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "4.106vw",
+    },
   },
   time: {
     background: theme.palette.background.accent,
@@ -149,6 +159,16 @@ const useStyles = makeStyles(theme => ({
   timeStatic: {
     display: "inline-block",
     color: theme.palette.color.secondary,
+    fontSize: "1.328vw",
+    "@media(min-width: 1280px)": {
+      fontSize: 17,
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "2.038vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "4.106vw",
+    },
   },
 }))
 
