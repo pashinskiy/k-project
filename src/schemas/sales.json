@@ -1,62 +1,69 @@
 {
-    "Main": {
-      "uid": {
-        "type": "UID",
-        "config": {
-          "label": "uid"
-        }
-      },
-      "title": {
-        "type": "StructuredText",
-        "config": {
-          "label": "Заголовок",
-          "placeholder": "Заголовок"
-        }
-      },
-      "previewtext": {
-        "type": "StructuredText",
-        "config": {
-          "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
-          "label": "Текст для превью",
-          "placeholder": "Текст"
-        }
-      },
-      "salestext": {
-        "type": "StructuredText",
-        "config": {
-          "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
-          "label": "Текст акции",
-          "placeholder": "Текст акции"
-        }
-      },
-      "creationdate": {
-        "type": "Date",
-        "config": {
-          "label": "Дата создания",
-          "placeholder": "Дата создания"
-        }
-      },
-      "startdate": {
-        "type": "Date",
-        "config": {
-          "label": "Срок проведения начало",
-          "placeholder": "Срок проведения начало"
-        }
-      },
-      "enddate": {
-        "type": "Date",
-        "config": {
-          "label": "Срок проведения конец",
-          "placeholder": "Срок проведения конец"
-        }
-      },
-      "previewimage": {
-        "type": "Image",
-        "config": {
-          "constraint": {},
-          "thumbnails": [],
-          "label": "Изображение"
-        }
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "uid"
+      }
+    },
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "label": "Заголовок",
+        "placeholder": "Заголовок"
+      }
+    },
+    "link": {
+      "type": "StructuredText",
+      "config": {
+        "label": "Ссылка",
+        "placeholder": "Ссылка на товар или фильтр каталога"
+      }
+    },
+    "previewtext": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
+        "label": "Текст для превью",
+        "placeholder": "Текст"
+      }
+    },
+    "salestext": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
+        "label": "Текст акции",
+        "placeholder": "Текст акции"
+      }
+    },
+    "creationdate": {
+      "type": "Date",
+      "config": {
+        "label": "Дата создания",
+        "placeholder": "Дата создания"
+      }
+    },
+    "startdate": {
+      "type": "Date",
+      "config": {
+        "label": "Срок проведения начало",
+        "placeholder": "Срок проведения начало"
+      }
+    },
+    "enddate": {
+      "type": "Date",
+      "config": {
+        "label": "Срок проведения конец",
+        "placeholder": "Срок проведения конец"
+      }
+    },
+    "previewimage": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Изображение"
       }
     }
   }
+}

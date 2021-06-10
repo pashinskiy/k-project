@@ -96,12 +96,12 @@ export default function CardSimilarProduct({ product, afterChange }) {
   const classes = useStyle()
   return (
     <Grid className={`${classes.wrapper} product--card`}>
-      <GatsbyImage
+      {/* <GatsbyImage
         image={img}
         alt={alt ?? `image product`}
         className={classes.imageWrapper}
         imgStyle={{ objectFit: "contain" }}
-      />
+      /> */}
       <Link to={`/${product.uid}/`} className={classes.link}>
         <Typography className={classes.price}>{price} ₽</Typography>
         <Typography variant="body2" className={classes.title}>

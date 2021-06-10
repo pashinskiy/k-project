@@ -89,7 +89,7 @@ export default function SmallCategoriesPanel(categories) {
       cardPanel.scrollLeft = newLeft
     }
   }
-  console.log(categories)
+  // console.log(categories)
 
   return (
     <Grid
