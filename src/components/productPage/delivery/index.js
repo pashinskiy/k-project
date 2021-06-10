@@ -4,10 +4,10 @@ import DeliveryCard from "./deliveryCard.js"
 import { makeStyles } from "@material-ui/core/styles"
 import HeaderWithIcon from "../../headers/headerWithIcon.js"
 import IconDelivery from "../../../../static/svg/deliveryIcon.svg"
+import { useMediaQuery } from "@material-ui/core"
 
 const useStyles = makeStyles({
   root: {
-    margin: "0px",
     width: "100%",
   },
 })
@@ -17,6 +17,8 @@ export default function DeliveryCards(prismicProduct) {
     prismicProduct.prismicProduct.data.delivery.document?.data.body[0].items ??
     []
 
+    const mobile = useMediaQuery("(max-width: 414px)")
+
   return (
     <>
       <HeaderWithIcon
@@ -24,7 +26,7 @@ export default function DeliveryCards(prismicProduct) {
         title="Информация о доставке"
         divider={true}
       />
-      <Grid container spacing={4} className={classes.root}>
+      <Grid container spacing={mobile ? 12 : null}>
         {delivery.length
           ? delivery.map(variant => (
               <Grid item key={variant.city_name}>

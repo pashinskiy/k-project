@@ -66,7 +66,7 @@ export default function ImagesRow({ images, reverse, ...other }) {
       className={classes.row}
     >
       {images.map((image, i) => {
-        const img = image?.localFile?.childImageSharp.gatsbyImageData ?? null
+        const img = image?.localFile?.childImageSharp?.gatsbyImageData ?? null
         return img ? (
           <GatsbyImage
             image={img}
