@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 }))
 export default function StoriesPanel({ stories }) {
   const classes = useStyles()
-  console.log(stories)
+  // console.log(stories)
 
 
   let duplicateStories = []

@@ -3,16 +3,17 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import MainPageSlider from "../components/mainPageSlider"
 import Seo from "../components/seo"
-import TestSlider from "../components/mainPageSlider/testSlider"
 
 const IndexPage = ({ data }) => {
-  console.log(data)
   const allSales = data.allPrismicSales.edges.map(edge => edge.node)
+  const allPromotionBanners = data.allPrismicPromotionBanner.edges.map(edge => edge.node)
+
+  console.log(allPromotionBanners)
   return (
     <Layout>
       <Seo title="Home" />
-      {/* <MainPageSlider sales={allSales} /> */}
-      <TestSlider sales={allSales} />
+      <MainPageSlider array={allSales} variant={"sales"} />
+      <MainPageSlider array={allPromotionBanners} variant={"promotionBanner"}/>
     </Layout>
   )
 }
@@ -46,6 +47,9 @@ export const query = graphql`
             salestext {
               html
             }
+            link {
+              text
+            }
           }
         }
       }
@@ -63,6 +67,22 @@ export const query = graphql`
                   gatsbyImageData
                 }
               }
+            }
+          }
+        }
+      }
+    }
+    allPrismicPromotionBanner {
+      edges {
+        node {
+          data {
+            image {
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(quality: 100)
+                }
+              }
+              alt
             }
           }
         }

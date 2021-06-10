@@ -12,7 +12,7 @@ const Sale = ({ data }) => {
   const sale = data.prismicSales
   const socials = data.allPrismicFooter.edges[0].node.data.body2.filter(item => item.primary.social_img)
   const products = data.allPrismicProduct.edges.map(edge => edge.node)
-  console.log(products)
+  // console.log(products)
 
   return (
     <Layout>

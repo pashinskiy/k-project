@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function OneImage({ slice, ...other }) {
   const img =
-    slice.primary.image.localFile?.childImageSharp.gatsbyImageData ?? false
+    slice.primary.image.localFile?.childImageSharp?.gatsbyImageData ?? false
   const alt = slice.primary.image.alt ?? "image"
   const order = slice.primary.order ?? false
 

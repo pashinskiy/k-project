@@ -184,6 +184,8 @@ const useStyles = makeStyles(theme => ({
   },
 
   wrapperImgMainPage: {
+    // width: "auto",
+    // height: "auto",
     height: "30.859vw",
     borderRadius: "0.9375vw",
     marginBottom: "2.1875vw",
@@ -202,6 +204,9 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "2.898vw",
       marginBottom: "6.763vw",
     },
+  },
+  wrapperMainPage: {
+    // height: "550px",
   },
   contentBox: {
     position: "relative",
@@ -307,17 +312,18 @@ const useStyles = makeStyles(theme => ({
 
 export default function SaleCard({ sale, mainPage }) {
   const classes = useStyles()
-  const previewText = "Риск повреждений дисплея при падении в 4 раза"
-  const tooMuchText = previewText.length > 50
+  const previewText = sale.data.previewtext.text
+  const tooMuchText = previewText?.length > 72
   const mobile = useMediaQuery("(max-width: 414px)")
+  const mainPageLink = sale.data.link?.text 
 
   switch (mainPage) {
     case mainPage !== null:
       return (
-        <Card className={classes.wrapper}>
+        <Card className={classes.wrapper + " " + classes.wrapperMainPage}>
           <GatsbyImage
             image={
-              sale.data.previewimage.localFile.childImageSharp.gatsbyImageData
+              sale.data.previewimage?.localFile?.childImageSharp?.gatsbyImageData
             }
             alt={sale.data.previewimage.alt ?? "sales"}
             className={classes.wrapperImgMainPage}
@@ -336,7 +342,7 @@ export default function SaleCard({ sale, mainPage }) {
               </Typography>
             )}
             <Button
-              href={`/sale/${sale.uid}/`}
+              href={mainPageLink ? mainPageLink : `/sale/${sale.uid}/`}
               className={
                 classes.button +
                 " " + (mobile ? classes.buttonMobile : 

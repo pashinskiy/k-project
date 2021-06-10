@@ -87,7 +87,6 @@ const useStyle = makeStyles(theme => ({
 }))
 
 export default function CardSimilarProduct({ product, afterChange }) {
-  console.log(product.data.images[0])
   // const img =
     // product.data.images[0].image.localFile?.childImageSharp.gatsbyImageData
   // const alt = product.data.images[0].image.alt
