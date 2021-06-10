@@ -2,7 +2,6 @@ import React from "react"
 import {
   makeStyles,
   Typography,
-  Button,
   Card,
   useMediaQuery,
 } from "@material-ui/core"
@@ -174,7 +173,7 @@ export default function SaleCardMain({ sale }) {
   return (
     <Card className={classes.root}>
       <GatsbyImage
-        image={sale.data.previewimage.localFile.childImageSharp.gatsbyImageData}
+        image={sale.data.previewimage?.localFile.childImageSharp.gatsbyImageData}
         alt={sale.data.previewimage.alt ?? "sales"}
         className={classes.wrapperImg}
       />

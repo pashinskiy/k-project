@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     nav: {
         display: 'flex',
         justifyContent: 'space-between',
-        boxSizing: 'padding-box',
+        boxSizing: 'border-box',
         padding: 60,
         '@media (max-width: 1279px)': {
             padding: '3.5vw',
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     menu: {
         maxWidth: 250,
         width: '100%',
-        boxSizing: 'padding-box',
+        boxSizing: 'border-box',
         padding: 30,
         '& [class^="MuiTypography-root"]': {
             fontSize: 17,
@@ -62,7 +62,7 @@ const useStyles = makeStyles(theme => ({
         },
         '@media (max-width: 778px)': {
             maxWidth: '100vw',
-            width: '50vw',
+            width: '49vw',
             '&:last-child': {
                 width: '100%',
             },
@@ -100,7 +100,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        boxSizing: 'padding-box',
+        boxSizing: 'border-box',
         padding: '0px 24px',
         '@media (max-width: 1024px)': {
             background: theme.palette.color.mainContrast,
@@ -111,7 +111,7 @@ const useStyles = makeStyles(theme => ({
     },
     docs_wrapper: {
         '@media (max-width: 664px)': {
-            boxSizing: 'padding-box',
+            boxSizing: 'border-box',
             padding: 20,
             overflowX: 'scroll',
             '&::-webkit-scrollbar': {
@@ -123,7 +123,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         '@media (max-width: 1024px)': {
             justifyContent: 'center',
-            boxSizing: 'padding-box',
+            boxSizing: 'border-box',
             padding: 20,
         },
         '@media (max-width: 664px)': {
@@ -183,8 +183,8 @@ export default function Footer({ data }) {
                         {data.allPrismicFooter.edges[0].node.data.menu_name.text}
                     </Typography>
                     <nav className={classes.links}>
-                        {menu_links.map((link) => (
-                            <DefaultLink name={link.primary.link_name.text} link={link.primary.link.url} />
+                        {menu_links.map((link, i) => (
+                            <DefaultLink key={`menu ${i}`} name={link.primary.link_name.text} link={link.primary.link.url} />
                         ))}
                     </nav>
                 </div>
@@ -193,8 +193,8 @@ export default function Footer({ data }) {
                         {data.allPrismicFooter.edges[0].node.data.about_name.text}
                     </Typography>
                     <nav className={classes.links}>
-                        {about_links.map((link) => (
-                            <DefaultLink name={link.primary.link_name.text} link={link.primary.link.url} />
+                        {about_links.map((link, i) => (
+                            <DefaultLink key={`info_2 ${i}`} name={link.primary.link_name.text} link={link.primary.link.url} />
                         ))}
                     </nav>
                 </div>
@@ -203,13 +203,13 @@ export default function Footer({ data }) {
                         {data.allPrismicFooter.edges[0].node.data.contact_name.text}
                     </Typography>
                     <nav className={classes.links}>
-                        {contact_links.filter(atr => atr.slice_type === 'contact').map((link) => (
-                            <DefaultA name={link.primary.contact_link_name.text} link={link.primary.contact_link.url} />
+                        {contact_links.filter(atr => atr.slice_type === 'contact').map((link, i) => (
+                            <DefaultA key={`contact ${i}`} name={link.primary.contact_link_name.text} link={link.primary.contact_link.url} />
                         ))}
                     </nav>
                     <nav className={classes.social}>
-                        {contact_links.filter(atr => atr.slice_type === 'social').map((link) => (
-                            <Social icon={link.primary.social_img.localFile.publicURL} alt={link.primary.social_img.alt} link={link.primary.link.url} />
+                        {contact_links.filter(atr => atr.slice_type === 'social').map((link, i) => (
+                            <Social key={`social ${i}`} icon={link.primary.social_img.localFile.publicURL} alt={link.primary.social_img.alt} link={link.primary.link.url} />
                         ))}
                     </nav>
                 </div>
@@ -225,8 +225,8 @@ export default function Footer({ data }) {
             <div className={classes.addition}>
                 <div className={classes.docs_wrapper}>
                     <div className={classes.docs}>
-                        {docs_links.map((link) => (
-                            <WhiteLink name={link.primary.doc_name.text} link={link.primary.doc_file.url} />
+                        {docs_links.map((link, i) => (
+                            <WhiteLink key={`documents ${i}`} name={link.primary.doc_name.text} link={link.primary.doc_file.url} />
                         ))}
                     </div>
                 </div>

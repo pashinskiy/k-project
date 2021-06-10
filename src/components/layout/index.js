@@ -4,6 +4,9 @@ import { makeStyles } from '@material-ui/core';
 import Header from './header';
 import Footer from './footer';
 import MobileMenu from './mobileMenu';
+import Catalog from './catalog';
+import './layout.css';
+import MobileCatalog from './catalog/mobile';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,6 +31,21 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     flex: 1,
+  },
+  background: {
+      background: 'rgba(0,0,0,.5)',
+      zIndex: 100,
+      position: 'fixed',
+      width: '100vw',
+      height: '100vh',
+      top: 0,
+      left: 0,
+      animationName: props => (props.animation === true)
+          ? 'back_in'
+          : 'back_out',
+      animationDuration: '.3s',
+      animationTimingFunction: 'ease-out',
+      animationFillMode: 'forwards',
   },
 }));
 
@@ -119,6 +137,167 @@ export default function Layout({ children }) {
           }
         }
       }
+      allPrismicCatalog {
+        edges {
+          node {
+            data {
+              sales_name {
+                text
+              }
+              all_stories {
+                stories {
+                  document {
+                    ... on PrismicStories {
+                      id
+                      data {
+                        image {
+                          localFile {
+                            childImageSharp {
+                              gatsbyImageData
+                            }
+                          }
+                        }
+                        text {
+                          text
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              all_sales {
+                sales {
+                  document {
+                    ... on PrismicSales {
+                      id
+                      data {
+                        title {
+                          text
+                        }
+                        previewtext {
+                          text
+                        }
+                        previewimage {
+                          alt
+                          localFile {
+                            childImageSharp {
+                              gatsbyImageData
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              categories {
+                category {
+                  document {
+                    ... on PrismicCategory {
+                      id
+                      uid
+                      data {
+                        brands {
+                          child {
+                            document {
+                              ... on PrismicBrand {
+                                id
+                                data {
+                                  name
+                                  body {
+                                    ... on PrismicBrandBodyLogo {
+                                      id
+                                      primary {
+                                        image {
+                                          alt
+                                          localFile {
+                                            childImageSharp {
+                                              gatsbyImageData
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                        body {
+                          ... on PrismicCategoryBodyVerticalImg {
+                            id
+                            primary {
+                              catalog_img {
+                                alt
+                                localFile {
+                                  childImageSharp {
+                                    gatsbyImageData
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                        children {
+                          child {
+                            document {
+                              ... on PrismicSubcategory {
+                                id
+                                data {
+                                  name
+                                  tags {
+                                    tag {
+                                      document {
+                                        ... on PrismicTag {
+                                          id
+                                          data {
+                                            name
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                        name
+                        image {
+                          localFile {
+                            childImageSharp {
+                              gatsbyImageData
+                            }
+                          }
+                          alt
+                        }
+                        category_icon {
+                          localFile {
+                            publicURL
+                          }
+                          alt
+                        }
+                        image {
+                          alt
+                          localFile {
+                            childImageSharp {
+                              gatsbyImageData
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              catalog_name {
+                text
+              }
+            }
+          }
+        }
+      }
       allPrismicFooter {
         edges {
           node {
@@ -170,6 +349,12 @@ export default function Layout({ children }) {
                   primary {
                     link {
                       url
+                    }
+                    social_img_white {
+                      alt
+                      localFile {
+                        publicURL
+                      }
                     }
                     social_img {
                       alt
@@ -233,11 +418,59 @@ export default function Layout({ children }) {
     }
   `);
 
-  const classes = useStyles({ });
+  const IsDesktop = typeof window !== 'undefined' && window.matchMedia("(min-width: 1025px)").matches
+
+  const [catalog, setCatalog] = React.useState(false);
+
+  const [animation, setAnimation] = React.useState(false);
+
+  const choose_catalog = (IsDesktop) => {
+    switch(IsDesktop) {
+        case true:
+            return <Catalog data={data} animation={animation} />
+        
+        default:
+            return <MobileCatalog data={data} animation={animation} />
+    };
+};
+
+  const button_trigger = (catalog) => {
+      switch(catalog) {
+          case true:
+              return choose_catalog(IsDesktop)
+          
+          default:
+              return null
+      };
+  };
+
+  const back_trigger = (catalog) => {
+      switch(catalog) {
+          case true:
+              return (
+                <div role="button" aria-label="Background Catalog" tabIndex={0} className={classes.background}
+                  onClick={() => {
+                    if (catalog === true) {setTimeout(()=>{ setCatalog(!catalog); },150)} else { setCatalog(!catalog); };
+                    setAnimation(!animation);
+                  }}
+                  onKeyDown={() => {
+                    if (catalog === true) {setTimeout(()=>{ setCatalog(!catalog); },150)} else { setCatalog(!catalog); };
+                    setAnimation(!animation);
+                  }} />
+              )
+          
+          default:
+              return null
+      };
+  };
+
+  const classes = useStyles({ animation });
 
   return (
     <main className={classes.root}>
-      <Header data={data} />
+      <Header data={data} catalog={catalog} setCatalog={setCatalog} animation={animation} setAnimation={setAnimation} />
+      {button_trigger(catalog)}
+      {back_trigger(catalog)}
       <MobileMenu data={data} />
       <div className={classes.content}>
         {children}

@@ -5,6 +5,8 @@ import HeaderWithIcon from "../components/headers/headerWithIcon"
 import Seo from "../components/seo"
 import SalesIcon from "../../static/svg/salesIcon.svg"
 import SaleCardPanel from "../components/saleCardPanel"
+import StoriesPanel from "../components/widgets/storiesPanel"
+import ScrollBar from "../components/scrollBar"
 // import CardWidget from "../components/widgets/cardWidget"
 
 // const useStyles = makeStyles(theme => ({
@@ -17,6 +19,7 @@ import SaleCardPanel from "../components/saleCardPanel"
 const IndexPage = ({ data }) => {
   // const classes = useStyles()
   const AllSales = data.allPrismicSales.edges.map(edge => edge.node)
+  const allStories = data.allPrismicStories.edges.map(edge => edge.node)
 
   console.log(AllSales[0].uid)
   return (
@@ -27,6 +30,10 @@ const IndexPage = ({ data }) => {
         title="Акции и предложения"
         divider={false}
       />
+      <ScrollBar fullScreen buttonNext >
+
+        <StoriesPanel stories={allStories}/>
+      </ScrollBar>
       <SaleCardPanel sales={AllSales} />
       {/* <div style={{width: "100px", height: "100px"}}>
       <CardWidget
@@ -71,6 +78,24 @@ export const query = graphql`
             }
             salestext {
               html
+            }
+          }
+        }
+      }
+    }
+    allPrismicStories {
+      edges {
+        node {
+          data {
+            text {
+              text
+            }
+            image {
+              localFile {
+                childImageSharp {
+                  gatsbyImageData
+                }
+              }
             }
           }
         }

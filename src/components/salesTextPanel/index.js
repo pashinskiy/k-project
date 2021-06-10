@@ -1,9 +1,6 @@
 import React from "react"
 import {
   makeStyles,
-  Typography,
-  Button,
-  Card,
   Grid,
   useMediaQuery,
 } from "@material-ui/core"
@@ -133,21 +130,19 @@ export default function SalesTextPanel({ sale, socials, products }) {
       </Grid>
       <Grid item>
         {mobile ? (
-          <div className={classes.productItemMobile}>
-            <SimilarProduct products={products} />
-          </div>
-        ) : (
-          products.map(function (mapProduct, i) {
-            if (i < 3) {
-              console.log(i)
-              return (
-                <div className={classes.productItem}>
-                  <CardSimilarProduct product={mapProduct} />
-                </div>
-              )
-            }
+            <div className={classes.productItemMobile}>
+
+          <SimilarProduct products={products} withoutHeader={true} />
+            </div>
+        ) : 
+          products.map(function(mapProduct, i) {
+              if(i < 3){
+                  console.log(i)
+                  return (<div className={classes.productItem}><CardSimilarProduct product={mapProduct} /></div>)
+              }
+              return null
           })
-        )}
+        }
       </Grid>
     </Grid>
   )

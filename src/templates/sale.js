@@ -1,16 +1,13 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { makeStyles, useMediaQuery, Grid } from "@material-ui/core"
 
 import Seo from "../components/seo"
 
 import SaleCardMain from '../components/saleCardPanel/saleCardMain.js'
 import SalesTextPanel from "../components/salesTextPanel"
 
-const useStyles = makeStyles(theme => ({}))
 
 const Sale = ({ data }) => {
-  const classes = useStyles()
   const sale = data.prismicSales
   const socials = data.allPrismicFooter.edges[0].node.data.body2.filter(item => item.primary.social_img)
   const products = data.allPrismicProduct.edges.map(edge => edge.node)

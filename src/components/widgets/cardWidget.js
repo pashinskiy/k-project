@@ -10,10 +10,35 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.color.mainContrast,
     fontWeight: 700,
     fontSize: 14,
-    top: "12px",
-    left: "12px",
-    right: "12px",
+    top: 0,
+    left: 0,
+    right: 0,
+    padding: 12,
+    boxSizing: 'border-box',
+    '@media(max-width: 1024px)': {
+      padding: '0.937vw',
+    },
+    '@media(max-width: 834px)': {
+      padding: '1.438vw',
+    },
+    '@media(max-width: 787px)': {
+      padding: '1.398vw',
+    },
+    '@media(max-width: 665px)': {
+      padding: '1.898vw',
+    },
+    '@media(max-width: 550px)': {
+      padding: '2.898vw',
+    },
+    '@media(max-width: 418px)': {
+      width: "100%",
+    },
+    '@media(max-width: 353px)': {
+      fontSize: '3.8vw',
+    },
     width: "78%",
+    height: '100%',
+    lineHeight: '120%',
     // "@media(max-width: 834px)": {
     //   top: "1.438vw",
     //   left: "1.438vw",
@@ -32,6 +57,7 @@ const useStyles = makeStyles(theme => ({
   stretch: {
     width: "100%",
     height: "100%",
+    display: 'block',
   },
   categoryCardRoot: {
     width: "100%",
@@ -54,44 +80,32 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     height: "100%",
     boxShadow: "none",
-    overflow: "visible",
-    position: "relative",
-    border: "4px solid transparent",
-    borderRadius: "24px",
+    border: `3px solid ${theme.palette.color.accentSecondary}`,
+    borderRadius: 24,
     background: "white",
-    backgroundClip: "padding-box",
-    "&::after": {
-      position: "absolute",
-      top: "-4px; bottom: -4px",
-      left: "-4px; right: -4px",
-      // background: "linear-gradient(#2b28d0, #682cdb)",
-      background: theme.palette.color.accent,
-      content: "''",
-      zIndex: "-1",
-      borderRadius: "24px",
-    },
   },
 
   storiesCardTitle: {
     position: "absolute",
     fontWeight: 700,
     fontSize: 14,
-    bottom: "20px",
-    left: "20px",
-    right: "20px",
+    lineHeight: '120%',
+    bottom: 16,
+    left: 16,
+    right: 16,
     color: theme.palette.color.mainContrast,
     margin: "auto",
     overflowWrap: "break-word",
   },
   storiesImageContainer: {
-    width: "calc(100% - 8px)",
-    height: "calc(100% - 8px)",
-    borderRadius: "18px",
+    width: "calc(100% - 6px)",
+    height: "calc(100% - 6px)",
+    borderRadius: 18,
     position: "absolute",
-    right: "0",
-    left: "0",
-    top: "0",
-    bottom: "0",
+    right: 0,
+    left: 0,
+    top: 0,
+    bottom: 0,
     margin: "auto",
   },
   brandCardRoot: {
@@ -213,14 +227,14 @@ export default function CardWidget(props) {
     switch (props.variant) {
       case "category":
         return (
-          <Card className={classes.categoryCardRoot}>
+          <Card className={`${classes.categoryCardRoot} catalog--category`}>
             <CardActionArea className={classes.stretch}>
               {/* TODO: Добавить в поле с ссылкой на страницу категорию */}
               <Link to={props.cardLink} className={classes.stretch}>
                 <GatsbyImage
                   image={props.cardImage}
                   alt={altImage}
-                  className={classes.stretch}
+                  className={`${classes.stretch} gatsby--image`}
                 />
                 <Typography className={classes.categoryCardTitle}>
                   {props.cardTitle}
@@ -231,9 +245,9 @@ export default function CardWidget(props) {
         )
       case "stories":
         return (
-          <Card className={classes.storiesCardRoot}>
-            <CardActionArea className={classes.stretch}>
-              <Link to={props.cardLink} className={classes.stretch}>
+          <Card className={`${classes.storiesCardRoot} catalog--stories`}>
+            <CardActionArea className={classes.stretch} style={{borderRadius: "12px"}}>
+              <Link to={props.cardLink} className={`${classes.stretch} strech`}>
                 <GatsbyImage
                   image={props.cardImage}
                   alt={altImage}
@@ -244,11 +258,11 @@ export default function CardWidget(props) {
                   style={{
                     background: "linear-gradient(transparent, #681DE1)",
                     height: "55%",
-                    bottom: "4px",
+                    bottom: "3px",
                     top: "auto",
                   }}
                 />
-                <Typography className={classes.storiesCardTitle}>
+                <Typography className={`${classes.storiesCardTitle} card--title`}>
                   {props.cardTitle}
                 </Typography>
               </Link>

@@ -12,66 +12,49 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     height: "100%",
     boxShadow: "none",
-    borderRadius: "20px",
+    borderRadius: 20,
     backgroundColor: theme.palette.background.secondary,
-    padding: "8px",
-    position: "relative",
-  },
-  stretch: {
-    width: "100%",
-    height: "100%",
+    padding: 8,
   },
   cardAction: {
-    borderRadius: "12px"
+    borderRadius: 12,
   },
   text: {
     width: "100%",
-    paddingRight: "12px",
-    paddingLeft: "12px",
+    paddingRight: 12,
+    paddingLeft: 12,
   },
   mainTitle: {
     fontSize: 20,
     fontWeight: 700,
     color: theme.palette.color.main,
-    paddingBottom: "12px"
+    paddingBottom: 12,
   },
   previewText: {
     color: theme.palette.color.secondary,
     fontSize: 14,
-    paddingBottom: "6.328vw",
-    "@media(min-width: 1280px)": {
-      paddingBottom: "81px",
-    },
-    "@media(max-width: 834px)": {
-      paddingBottom: "9.336vw",
-    },
-    "@media(max-width: 414px)": {
-      paddingBottom: "17.87vw",
-    },
-  },
+    paddingBottom: 28,
 
+  },
   button: {
-    width: "146px",
-    height: "46px",
-    borderRadius: "12px",
+    width: 146,
+    height: 46,
+    borderRadius: 12,
     backgroundColor: "#D2D0E9",
-    marginLeft: "12px",
-    marginBottom: "12px",
-    position:"absolute",
-    bottom: 0,
-    left: 0,
+    marginLeft: 12,
+    marginBottom: 12,
   },
   wrapperImg: {
-    height: "200px",
-    borderRadius: "12px",
-    marginBottom: "28px",
+    height: 200,
+    borderRadius: 12,
+    marginBottom: 28,
   },
   link: {
     textDecoration: "none",
   },
   buttonText: {
-    fontSize: "14",
-    fontWeight: "700",
+    fontSize: 14,
+    fontWeight: 700,
   },
 }))
 
@@ -81,7 +64,7 @@ export default function SaleCard({ sale }) {
     <Card className={classes.wrapper}>
           <GatsbyImage
             image={
-              sale.data.previewimage.localFile.childImageSharp.gatsbyImageData
+              sale.data.previewimage?.localFile?.childImageSharp.gatsbyImageData
             }
             alt={sale.data.previewimage.alt ?? "sales"}
             className={classes.wrapperImg}
@@ -92,7 +75,7 @@ export default function SaleCard({ sale }) {
           <Typography className={classes.previewText + " " + classes.text}>
             {sale.data.previewtext.text}
           </Typography>
-          <Button href={`/${sale.uid}/`} className={classes.button} >
+          <Button href={`/sale/${sale.uid}/`} className={classes.button} >
             <Typography variant="body2" className={classes.buttonText}>
               Перейти
             </Typography>
