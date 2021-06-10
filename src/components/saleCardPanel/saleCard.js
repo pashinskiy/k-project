@@ -184,29 +184,40 @@ const useStyles = makeStyles(theme => ({
   },
 
   wrapperImgMainPage: {
-    // width: "auto",
-    // height: "auto",
-    height: "30.859vw",
+    alignSelf: "stretch",
+    flexGrow: "1",
+    //необходимо задать
+    height: "10px",
     borderRadius: "0.9375vw",
     marginBottom: "2.1875vw",
     "@media(min-width: 1280px)": {
-      height: "395px",
       borderRadius: "12px",
       marginBottom: "28px",
     },
     "@media(max-width: 834px)": {
-      height: "50.359vw",
       borderRadius: "1.438vw",
       marginBottom: "3.357vw",
     },
     "@media(max-width: 414px)": {
-      height: "90.338vw",
       borderRadius: "2.898vw",
       marginBottom: "6.763vw",
     },
   },
   wrapperMainPage: {
-    // height: "550px",
+    display: "flex",
+    flexWrap: "wrap",
+    flexDirection: "column",
+    width: "100%",
+    height: "42.89vw",
+    "@media(min-width: 1280px)": {
+      height: "549px",
+    },
+    "@media(max-width: 834px)": {
+      height: "65.827vw",
+    },
+    "@media(max-width: 414px)": {
+      height: "144.927vw",
+    },
   },
   contentBox: {
     position: "relative",
@@ -220,16 +231,6 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 414px)": {
       padding: "0 6.763vw 6.763vw 6.763vw",
     },
-    // padding: "0 2.1875vw",
-    // "@media(min-width: 1280px)": {
-    //   padding: "0 28px ",
-    // },
-    // "@media(max-width: 834px)": {
-    //   padding: "0 3.357vw",
-    // },
-    // "@media(max-width: 414px)": {
-    //   padding: "0 6.763vw",
-    // },
   },
   buttonMainPage: {
     right: "2.1875vw",
