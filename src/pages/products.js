@@ -8,6 +8,7 @@ import CardProduct from "../components/catalog/catalogCardProduct"
 import Sort from "../components/sort"
 import Filter from "../components/filter"
 import Pagination from "../components/pagination"
+import Search from "../components/search"
 
 const useStyles = makeStyles(theme => ({
   smallText: {
@@ -80,6 +81,7 @@ const useStyles = makeStyles(theme => ({
 export default function Products({ data: { allPrismicProduct } }) {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 834px)")
+  const search = useMediaQuery("(max-width: 1024px)")
 
   const url = new URL(window.location.href)
   const titleUrl = url.searchParams.has("search")
@@ -109,6 +111,9 @@ export default function Products({ data: { allPrismicProduct } }) {
   return (
     <>
       <Seo title="Продукты" />
+
+      {search ? <Search /> : null}
+
       <Typography className={classes.smallText}>Поиск по:</Typography>
       <Typography className={classes.title}>{title}</Typography>
 
