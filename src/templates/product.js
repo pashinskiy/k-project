@@ -8,11 +8,15 @@ import CardProduct from "../components/productPage/cardProduct"
 import Landing from "../components/productPage/landing"
 import Gallery from "../components/productPage/gallery"
 import DeliveryCards from "../components/productPage/delivery"
-import SimilarProduct from "../components/productPage/similarProduct"
+import ProductsScrollBar from "../components/scrollBar/productsScrollBar"
 import TabPanel from "../components/productPage/tabPanel"
 import CharacteristicsBlock from "../components/productPage/characteristics"
 
-const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
+import IconSimilarProduct from "../../static/svg/similarProducts.svg"
+
+const Product = ({
+  data: { prismicProduct, allPrismicProduct, allPrismicCatalog },
+}) => {
   return (
     <Layout>
       <Seo title="Home" />
@@ -45,8 +49,11 @@ const Product = ({ data: { prismicProduct, allPrismicProduct } }) => {
         prismicProduct={prismicProduct}
         allPrismicProduct={allPrismicProduct}
       />
-      <SimilarProduct
+      <ProductsScrollBar
         products={allPrismicProduct.edges.map(edge => edge.node)}
+        title="Похожие товары"
+        icon={<IconSimilarProduct />}
+        divider={true}
       />
       <div id="description" />
       <Landing slices={prismicProduct.data.body2} />
@@ -69,7 +76,37 @@ export const pageQuery = graphql`
     prismicProduct(uid: { eq: $uid }) {
       uid
       data {
-        brand
+        brand {
+          document {
+            ... on PrismicBrand {
+              id
+              data {
+                name
+                body {
+                  ... on PrismicBrandBodyLogo {
+                    id
+                    slice_type
+                    primary {
+                      image {
+                        localFile {
+                          childImageSharp {
+                            fluid(maxHeight: 35) {
+                              aspectRatio
+                              src
+                              srcSet
+                              srcSetWebp
+                            }
+                          }
+                        }
+                        alt
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
         name
         color_name
         color
@@ -160,24 +197,6 @@ export const pageQuery = graphql`
           }
         }
         body {
-          ... on PrismicProductBodyBrand {
-            slice_type
-            primary {
-              image {
-                localFile {
-                  childImageSharp {
-                    fluid(maxHeight: 35) {
-                      aspectRatio
-                      src
-                      srcSet
-                      srcSetWebp
-                    }
-                  }
-                }
-                alt
-              }
-            }
-          }
           ... on PrismicProductBodyStickers {
             slice_type
             items {
@@ -190,7 +209,7 @@ export const pageQuery = graphql`
                         alt
                         localFile {
                           childImageSharp {
-                            fluid(maxHeight: 46) {
+                            fluid(maxHeight: 35) {
                               aspectRatio
                               src
                               srcSet
@@ -223,8 +242,18 @@ export const pageQuery = graphql`
         body1 {
           ... on PrismicProductBody1Characteristics {
             items {
-              characteristic
               value
+              characteristic {
+                document {
+                  ... on PrismicCharacteristic {
+                    id
+                    data {
+                      name
+                      variant
+                    }
+                  }
+                }
+              }
             }
             primary {
               title
@@ -407,6 +436,52 @@ export const pageQuery = graphql`
             }
           }
           uid
+        }
+      }
+    }
+    allPrismicCatalog {
+      edges {
+        node {
+          id
+          data {
+            categories {
+              category {
+                uid
+                document {
+                  ... on PrismicCategory {
+                    data {
+                      image {
+                        localFile {
+                          childImageSharp {
+                            gatsbyImageData(
+                              height: 128
+                              width: 188
+                              transformOptions: {
+                                cropFocus: CENTER
+                                fit: COVER
+                              }
+                              outputPixelDensities: [
+                                0.35
+                                0.5
+                                0.75
+                                1
+                                1.25
+                                1.5
+                                1.75
+                                2
+                              ]
+                              sizes: "(min-width: 1280px) 188px, (max-width: 414px) 40.84vw, (max-width: 834px) 21.905vw"
+                            )
+                          }
+                        }
+                      }
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

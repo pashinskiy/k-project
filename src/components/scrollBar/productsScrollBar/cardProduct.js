@@ -17,26 +17,33 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 414px)": {
       width: "49.51vw",
     },
+    margin: "auto",
   },
   imageWrapper: {
     width: "100%",
     overflow: "hidden",
+    background: theme.palette.background.main,
+
     height: "15.62vw",
+    borderRadius: "1.56vw",
     "@media(min-width: 1280px)": {
       height: "200px",
+      borderRadius: "20px",
     },
     "@media(max-width: 834px)": {
       height: "23.98vw",
+      borderRadius: "2.39vw",
     },
     "@media(max-width: 414px)": {
       height: "48.3vw",
+      borderRadius: "4.83vw",
     },
     "& picture": {
       width: "100%",
       height: "100%",
     },
   },
-  link:{
+  link: {
     textDecoration: "none",
   },
   price: {
@@ -61,7 +68,7 @@ const useStyle = makeStyles(theme => ({
   title: {
     fontWeight: 400,
     lineHeight: 1.21,
-    height: "3.63em",
+    // height: "3.63em",
     fontSize: "1.09vw",
     marginTop: "0.62vw",
     "@media(min-width: 1280px)": {
@@ -79,16 +86,16 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-export default function CardSimilarProduct({ product }) {
+export default function CardSimilarProduct({ product, afterChange }) {
   const img =
-    product.data.images[0].image.localFile?.childImageSharp.gatsbyImageData
-  const alt = product.data.images[0].image.alt
+    product.data.images[0]?.image.localFile?.childImageSharp.gatsbyImageData
+  const alt = product.data.images[0]?.image.alt
   const title = product.data.name
   const price = product.data.price
 
   const classes = useStyle()
   return (
-    <Grid className={classes.wrapper}>
+    <Grid className={`${classes.wrapper} product--card`}>
       <GatsbyImage
         image={img}
         alt={alt ?? `image product`}
@@ -101,7 +108,11 @@ export default function CardSimilarProduct({ product }) {
           {title}
         </Typography>
       </Link>
-      <AddInCartAndFav text="В корзину" product={product} />
+      <AddInCartAndFav
+        text="В корзину"
+        product={product}
+        afterChange={afterChange}
+      />
     </Grid>
   )
 }

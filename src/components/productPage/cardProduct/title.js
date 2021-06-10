@@ -22,6 +22,8 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     fontWeight: 900,
     lineHeight: 1.21,
+    color: theme.palette.color.main,
+
     fontSize: "3.75vw",
     marginTop: "1.09vw",
     "@media(min-width: 1280px)": {

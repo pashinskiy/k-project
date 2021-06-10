@@ -1,0 +1,77 @@
+{
+  "Main": {
+    "all_stories": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "stories": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": [
+                "stories"
+              ],
+              "label": "Добавьте истории",
+              "placeholder": "Добавьте истории"
+            }
+          }
+        },
+        "label": "Истории"
+      }
+    },
+    "catalog_name": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label": "Каталог",
+        "placeholder": "Каталог"
+      }
+    },
+    "categories": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "category": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": [
+                "category"
+              ],
+              "label": "Категория",
+              "placeholder": "Категория"
+            }
+          }
+        },
+        "label": "Категории"
+      }
+    },
+    "sales_name": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label": "Акции и предложения",
+        "placeholder": "Акции и предложения"
+      }
+    },
+    "all_sales": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "sales": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": [
+                "sales"
+              ],
+              "label": "Добавьте акции и предложения",
+              "placeholder": "Добавьте акции и предложения"
+            }
+          }
+        },
+        "label": "Акции и предложения"
+      }
+    }
+  }
+}

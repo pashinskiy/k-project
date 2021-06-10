@@ -156,10 +156,10 @@ export default function Characteristics(props) {
   ) {
     const attribArr = parentItems.items.map(function (childTitles) {
       return (
-        <Grid container key={childTitles.characteristic}>
+        <Grid container key={childTitles.characteristic.document.data.name}>
           <Grid item className={classes.wrapperChild}>
             <Typography className={classes.childTitle}>
-              {childTitles.characteristic}
+              {childTitles.characteristic.document.data.name}  
             </Typography>
           </Grid>
           <Grid item className={classes.wrapperAttrib}>

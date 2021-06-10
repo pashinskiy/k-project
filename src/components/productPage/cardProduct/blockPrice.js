@@ -238,7 +238,7 @@ export default function BlockPrice({ product, allColors }) {
       <Grid container className={classes.collorsPanel}>
         {allColors.map(prod => {
           const active =
-            prod.data.color_name === product.data.color_name
+            prod.data.color === (prod.data.color ?? prod.data.color_group)
               ? classes.active
               : ""
           return (
@@ -246,7 +246,7 @@ export default function BlockPrice({ product, allColors }) {
               <div
                 className={classes.item + " " + active}
                 style={{
-                  background: prod.data.color,
+                  background: prod.data.color ?? prod.data.color_group,
                 }}
               ></div>
             </Link>
@@ -260,8 +260,9 @@ export default function BlockPrice({ product, allColors }) {
             slice => slice.slice_type === "stickers"
           )}
           logo={
-            product.data.body.find(slice => slice.slice_type === "brand")
-              ?.primary.image
+            product.data.brand.document.data.body.find(
+              slice => slice.slice_type === "brand"
+            )?.primary.image
           }
         />
       ) : null}

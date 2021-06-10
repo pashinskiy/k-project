@@ -1,0 +1,32 @@
+{
+  "Main" : {
+    "uid" : {
+      "type" : "UID",
+      "config" : {
+        "label" : "uid"
+      }
+    },
+    "name" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Название характеристики",
+        "placeholder" : "для maximum и from to укажите единицы измерения после названия"
+      }
+    },
+    "variant" : {
+      "type" : "Select",
+      "config" : {
+        "options" : [ "none", "checkbox", "ratio", "boolean", "maximum", "from to" ],
+        "default_value" : "none",
+        "label" : "Отображение в фильтре"
+      }
+    },
+    "order" : {
+      "type" : "Number",
+      "config" : {
+        "label" : "Порядковый номер",
+        "placeholder" : "позиция в фильтре"
+      }
+    }
+  }
+}

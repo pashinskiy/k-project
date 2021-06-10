@@ -62,18 +62,63 @@ const useStyles = makeStyles(theme => ({
       fontSize: "4.83vw",
     },
   },
+  classCount: {
+    color: theme.palette.color.secondaryLight,
+    fontWeight: 700,
+    marginLeft: "0.9375vw",
+    fontSize: "1.328vw",
+    "@media(min-width: 1280px)": {
+      fontSize: "17px",
+      marginLeft: "12px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "1.678vw",
+      marginLeft: "1.199vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "3.381vw",
+      marginLeft: "2.415vw",
+    },
+  },
 }))
 
-export default function HeaderWithIcon({ icon, title, divider }) {
+export default function HeaderWithIcon({ icon, title, divider, count }) {
   const classes = useStyles()
+  const goodsTitle = {
+    title1: "товар",
+    title2: "товара",
+    title3: "товаров",
+  }
 
-  return (
+  const getTitle = () => {
+    if (count % 100 >= 11 && count % 100 <= 19) return goodsTitle.title3
+    if (count % 10 >= 2 && count % 10 <= 4) return goodsTitle.title2
+    if (count === 1) return goodsTitle.title1
+    return goodsTitle.title3
+  }
+
+  return divider ? (
     <Grid container direction="column" className={classes.wrapper}>
       <Grid container alignItems="center" className={classes.wrapperTitle}>
         {icon ? <Grid className={classes.icon}>{icon}</Grid> : null}
         <Typography className={classes.classTitle}>{title}</Typography>
+        {count ? (
+          <Typography className={classes.classCount}>
+            {count} {getTitle()}
+          </Typography>
+        ) : null}
       </Grid>
-      {divider ? <Divider /> : null}
+      <Divider />
+    </Grid>
+  ) : (
+    <Grid container alignItems="center" className={classes.wrapperTitle}>
+      {icon ? <Grid className={classes.icon}>{icon}</Grid> : null}
+      <Typography className={classes.classTitle}>{title}</Typography>
+      {count ? (
+        <Typography className={classes.classCount}>
+          {count} {getTitle()}
+        </Typography>
+      ) : null}
     </Grid>
   )
 }

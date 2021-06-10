@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     overflow: "scroll",
     scrollbarWidth: "none",
     "-ms-overflow-style": "none",
-    
+
     "@media(min-width: 1280px)": {
       height: "50px",
       width: "1280px",
@@ -130,6 +130,16 @@ const useStyles = makeStyles(theme => ({
       lineHeight: "6.29vw",
     },
   },
+  unselect: {
+    "& *": {
+      "-webkit-touch-callout": "none" /* iOS Safari */,
+      "-webkit-user-select": "none" /* Chrome/Safari/Opera */,
+      "-khtml-user-select": "none" /* Konqueror */,
+      "-moz-user-select": "none" /* Firefox */,
+      "-ms-user-select": "none" /* Internet Explorer/Edge */,
+      "user-select": "none",
+    },
+  },
 }))
 
 export default function Features({ featuresSlices }) {
@@ -144,7 +154,7 @@ export default function Features({ featuresSlices }) {
           <Grid container wrap="nowrap" key={i} className={classes.item}>
             {feature.image.localFile ? (
               <GatsbyImage
-                image={feature.image.localFile.childImageSharp.gatsbyImageData}
+                image={feature.image?.localFile.childImageSharp.gatsbyImageData}
                 alt={feature.image.alt ?? "icon"}
                 className={classes.itemImg}
                 imgStyle={{ objectFit: "contain" }}
@@ -165,7 +175,7 @@ export default function Features({ featuresSlices }) {
       hidden={!featuresArr.length}
       container
       wrap="nowrap"
-      className={classes.wrapper}
+      className={classes.wrapper + " " + classes.unselect}
     >
       {featuresArr}
     </Grid>
