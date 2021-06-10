@@ -151,7 +151,7 @@ export default function BlockBoolean({
     edge => edge.node.id === stickerId
   )?.node.data.image
 
-  const [value, setValue] = React.useState(false)
+  const [value, setValue] = React.useState(valueFilter)
 
   // установка значения в фильтр и состояние
   function setValueFilter(value) {

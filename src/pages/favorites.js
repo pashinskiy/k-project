@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import HeaderWithIcon from "../components/headers/headerWithIcon"
 import FavoritesIcon from "../../static/svg/favoritesIcon.svg"
 import { Grid, makeStyles, Typography, useMediaQuery } from "@material-ui/core"
-import Layout from "../components/layout"
 import CardSimilarProduct from "../components/scrollBar/productsScrollBar/cardProduct"
 import { graphql } from "gatsby"
 import Seo from "../components/seo"
@@ -92,7 +91,7 @@ const IndexPage = ({ data }) => {
   } )
 
   return (
-    <Layout>
+    <>
       <Seo title="Favorites" />
       <HeaderWithIcon
         icon={<FavoritesIcon />}
@@ -109,7 +108,7 @@ const IndexPage = ({ data }) => {
       {/* {arrayCards} */}
       <Pagination pageSize={isMobile ? 5 : 6} components={cleanArrayCards} />
       </Grid>
-    </Layout>
+    </>
   )
 }
 

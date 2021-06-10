@@ -2,7 +2,6 @@
 import { graphql } from "gatsby"
 import React from "react"
 import HeaderWithIcon from "../components/headers/headerWithIcon"
-import Layout from "../components/layout"
 import Seo from "../components/seo"
 import SalesIcon from "../../static/svg/salesIcon.svg"
 import SaleCardPanel from "../components/saleCardPanel"
@@ -24,7 +23,7 @@ const IndexPage = ({ data }) => {
 
   console.log(AllSales[0].uid)
   return (
-    <Layout>
+    <>
       <Seo title="Акции и предложения" />
       <HeaderWithIcon
         icon={<SalesIcon />}
@@ -48,7 +47,7 @@ const IndexPage = ({ data }) => {
 
       </div> */}
       {/* <div style={{width:"100px", height:"100px"}} /> */}
-    </Layout>
+    </>
   )
 }
 export default IndexPage
