@@ -4,13 +4,17 @@ import theme from "./src/templates/theme.js"
 import ClientOnly from "./src/clientOnly.js"
 import { CssBaseline } from "@material-ui/core"
 
+import Layout from "./src/components/layout"
+
 export default function MuiRootWrapper({ element }) {
   try {
     return (
       <ClientOnly>
         <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {element}
+          <Layout>
+            <CssBaseline />
+            {element}
+          </Layout>
         </ThemeProvider>
       </ClientOnly>
     )
@@ -18,8 +22,10 @@ export default function MuiRootWrapper({ element }) {
     return (
       <ClientOnly>
         <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {element}
+          <Layout>
+            <CssBaseline />
+            {element}
+          </Layout>
         </ThemeProvider>
       </ClientOnly>
     )

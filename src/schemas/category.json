@@ -1,40 +1,122 @@
 {
-  "Main" : {
-    "uid" : {
-      "type" : "UID",
-      "config" : {
-        "label" : "uid"
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "uid"
       }
     },
-    "name" : {
-      "type" : "Text",
-      "config" : {
-        "label" : "Название категории",
-        "placeholder" : "Название категории"
+    "name": {
+      "type": "Text",
+      "config": {
+        "label": "Название категории",
+        "placeholder": "Название категории"
       }
     },
-    "image" : {
-      "type" : "Image",
-      "config" : {
-        "constraint" : { },
-        "thumbnails" : [ ],
-        "label" : "Изображение"
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Изображение"
       }
     },
-    "children" : {
-      "type" : "Group",
-      "config" : {
-        "fields" : {
-          "child" : {
-            "type" : "Link",
-            "config" : {
-              "select" : "document",
-              "customtypes" : [ "subcategory" ],
-              "label" : "Дочерняя категория",
-              "placeholder" : "Категория"
+    "category_icon": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Иконка Категории"
+      }
+    },
+    "children": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "child": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": [
+                "subcategory"
+              ],
+              "label": "Выберите подкатегорию",
+              "placeholder": "Выберите подкатегорию"
             }
           }
+        },
+        "label": "Выберите подкатегории, относящиеся к данной категории"
+      }
+    }
+  },
+  "Рекламные баннеры": {
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": {
+          "vertical_img": [],
+          "horizontal_img": []
+        },
+        "choices": {
+          "vertical_img": {
+            "type": "Slice",
+            "fieldset": "vertical_img",
+            "description": "Вертикальный баннер для Каталога",
+            "icon": "image",
+            "display": "list",
+            "non-repeat": {
+              "catalog_img": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Вставьте вертикальный баннер для Каталога"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "horizontal_img": {
+            "type": "Slice",
+            "fieldset": "horizontal_img",
+            "description": "Горизонтальный баннер для страницы Категории",
+            "icon": "image",
+            "display": "list",
+            "non-repeat": {
+              "category_img": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Вставьте горизонтальный баннер для страницы Категории"
+                }
+              }
+            },
+            "repeat": {}
+          }
         }
+      }
+    }
+  },
+  "Бренды": {
+    "brands": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "child": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": [
+                "brand"
+              ],
+              "label": "Выберите бренд",
+              "placeholder": "Выберите бренд"
+            }
+          }
+        },
+        "label": "Выберите бренды, относящиеся к данной категории"
       }
     }
   }

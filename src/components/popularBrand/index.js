@@ -88,7 +88,7 @@ export default function PopularBrand({ products }) {
               cardImage={
                 product.data.body.filter(
                   slice => (slice.slice_type = "logo")
-                )[0].primary.image.localFile?.childImageSharp.gatsbyImageData
+                )[0].primary.image?.localFile?.childImageSharp.gatsbyImageData
               }
               cardTitle={title}
               cardLink={url.href}

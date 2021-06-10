@@ -56,7 +56,7 @@ export default function StoriesPanel({ stories }) {
             <Grid item className={classes.storiesCard}>
               <CardWidget
                 cardImage={
-                      story.data.image.localFile.childImageSharp.gatsbyImageData
+                      story.data.image?.localFile?.childImageSharp.gatsbyImageData
                     }
                     cardTitle={story.data.text.text}
                     variant="stories"

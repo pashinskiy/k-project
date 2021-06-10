@@ -83,7 +83,7 @@ export default function FiltersBySticker({ products }) {
             <CardWidget
               variant="brand"
               cardImage={
-                sticker.data.image.localFile?.childImageSharp.gatsbyImageData
+                sticker.data.image?.localFile?.childImageSharp.gatsbyImageData
               }
               cardTitle={title}
               cardLink={url.href}

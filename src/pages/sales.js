@@ -1,7 +1,6 @@
 import { graphql } from "gatsby"
 import React from "react"
 import HeaderWithIcon from "../components/headers/headerWithIcon"
-import Layout from "../components/layout"
 import Seo from "../components/seo"
 import SalesIcon from "../../static/svg/salesIcon.svg"
 import SaleCardPanel from "../components/saleCardPanel"
@@ -12,7 +11,7 @@ const IndexPage = ({ data }) => {
   const AllSales = data.allPrismicSales.edges.map(edge => edge.node)
   const allStories = data.allPrismicStories.edges.map(edge => edge.node)
   return (
-    <Layout>
+    <>
       <Seo title="Акции и предложения" />
       <HeaderWithIcon
         icon={<SalesIcon />}

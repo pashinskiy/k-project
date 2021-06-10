@@ -10,7 +10,7 @@ const IndexPage = ({ data }) => {
 
   console.log(allPromotionBanners)
   return (
-    <Layout>
+    <>
       <Seo title="Home" />
       <MainPageSlider array={allSales} variant={"sales"} />
       <MainPageSlider array={allPromotionBanners} variant={"promotionBanner"}/>

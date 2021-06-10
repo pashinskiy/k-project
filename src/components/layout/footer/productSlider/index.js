@@ -75,7 +75,7 @@ const useStyles = makeStyles(theme => ({
         '&:first-child': {
             marginRight: 10,
             '& .arrow': {
-                transform: 'rotate(180deg)',
+                transform: 'scaleX(-1)',
             },
         },
         '& .arrow': {

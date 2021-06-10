@@ -85,7 +85,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function TwoImages({ slice, ...other }) {
   const img_1 =
-    slice.primary.image_1.localFile?.childImageSharp.gatsbyImageData ?? false
+    slice.primary.image_1?.localFile?.childImageSharp.gatsbyImageData ?? false
   const alt_1 = slice.primary.image_1.alt ?? "image"
   const img_2 =
     slice.primary.image_2?.localFile?.childImageSharp.gatsbyImageData ?? false
