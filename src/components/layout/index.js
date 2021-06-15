@@ -226,6 +226,7 @@ export default function Layout({ children }) {
                         }
                         body {
                           ... on PrismicCategoryBodyVerticalImg {
+                            slice_type
                             id
                             primary {
                               catalog_img {

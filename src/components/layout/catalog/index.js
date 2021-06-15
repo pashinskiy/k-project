@@ -202,8 +202,8 @@ export default function Catalog({ data, animation }) {
                 </div>
                 
                 <div className={classes.promo}>
-                    {data.allPrismicCatalog.edges[0].node.data.categories.filter(atr => atr.category.document.data.name === hover)[0].category.document.data.body.map((promo, i) => (
-                        <img src={promo.primary.catalog_img?.localFile.childImageSharp.gatsbyImageData.images.fallback.src} alt={promo.primary.catalog_img.alt} className={classes.img} key={`images_promo ${i}`} />
+                    {data.allPrismicCatalog.edges[0].node.data.categories.filter(atr => atr.category.document.data.name === hover)[0].category.document.data.body.filter(slice => slice.slice_type === 'vertical_img').map((promo, i) => (
+                        <img src={promo.primary?.catalog_img?.localFile.childImageSharp.gatsbyImageData.images.fallback.src} alt={promo.primary?.catalog_img.alt} className={classes.img} key={`images_promo ${i}`} />
                     ))}
                 </div>
             </div>
