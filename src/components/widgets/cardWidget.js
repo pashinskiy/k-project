@@ -114,7 +114,7 @@ const useStyles = makeStyles(theme => ({
   brandContainer: {
     width: "100%",
     height: "auto",
-    display: "inline-block",
+    display: "block",
     position: "relative",
     boxShadow: "none",
     background: theme.palette.background.secondary,
@@ -139,9 +139,8 @@ const useStyles = makeStyles(theme => ({
   brandTitle: {
     fontSize: 14,
     fontWeight: 700,
+    marginTop: 8,
     textAlign: "center",
-    paddingTop: "8px",
-    paddingBottom: "8px",
     color: theme.palette.color.main,
   },
   smallCardTitle: {

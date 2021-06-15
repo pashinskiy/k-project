@@ -86,10 +86,11 @@ const useStyle = makeStyles(theme => ({
   itemAll: {
     width: "90.625vw",
     maxWidth: "1160px",
-    height: "90%",
+    height: "100%",
     opacity: 0.5,
     alignSelf: "center",
-    transition: "height 1s, opacity 1s",
+    transform: "scaleY(0.9)",
+    transition: "transform 1s, opacity 1s",
     "@media(max-width: 834px)": {
       width: "88.729vw",
     },
@@ -102,7 +103,8 @@ const useStyle = makeStyles(theme => ({
     maxWidth: "1160px",
     height: "100%",
     opacity: 1,
-    transition: "height 1s, opacity 1s",
+    transform: "scaleY(1)",
+    transition: "transform 1s, opacity 1s",
     "@media(max-width: 834px)": {
       width: "88.729vw",
     },
