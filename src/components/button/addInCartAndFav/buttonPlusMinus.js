@@ -90,6 +90,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   icon: {
+    cursor: "pointer",
+
     width: "0.93vw",
     height: "0.93vw",
     "@media(min-width: 1280px)": {
@@ -120,6 +122,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   disable: {
+    cursor: "default",
     "& path": {
       fill: theme.palette.color.secondaryLight,
     },

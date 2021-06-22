@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles } from '@material-ui/core';
-import Header from './header';
-import Footer from './footer';
-import MobileMenu from './mobileMenu';
-import Catalog from './catalog';
-import './layout.css';
-import MobileCatalog from './catalog/mobile';
+import * as React from "react"
+import { graphql, useStaticQuery } from "gatsby"
+import { makeStyles } from "@material-ui/core"
+import Header from "./header"
+import Footer from "./footer"
+import MobileMenu from "./mobileMenu"
+import Catalog from "./catalog"
+import "./layout.css"
+import MobileCatalog from "./catalog/mobile"
 
 const useStyles = makeStyles(theme => ({
   root: {
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
     boxSizing: "border-box",
     width: "100vw",
     padding: "0 2.18vw",
@@ -33,24 +33,21 @@ const useStyles = makeStyles(theme => ({
     flex: 1,
   },
   background: {
-      background: 'rgba(0,0,0,.5)',
-      zIndex: 100,
-      position: 'fixed',
-      width: '100vw',
-      height: '100vh',
-      top: 0,
-      left: 0,
-      animationName: props => (props.animation === true)
-          ? 'back_in'
-          : 'back_out',
-      animationDuration: '.3s',
-      animationTimingFunction: 'ease-out',
-      animationFillMode: 'forwards',
+    background: "rgba(0,0,0,.5)",
+    zIndex: 100,
+    position: "fixed",
+    width: "100vw",
+    height: "100vh",
+    top: 0,
+    left: 0,
+    animationName: props => (props.animation === true ? "back_in" : "back_out"),
+    animationDuration: ".3s",
+    animationTimingFunction: "ease-out",
+    animationFillMode: "forwards",
   },
-}));
+}))
 
 export default function Layout({ children }) {
-
   const data = useStaticQuery(graphql`
     query Layout {
       allPrismicHeader {
@@ -399,6 +396,8 @@ export default function Layout({ children }) {
       allPrismicProduct {
         edges {
           node {
+            id
+            uid
             data {
               name
               images {
@@ -417,67 +416,89 @@ export default function Layout({ children }) {
         }
       }
     }
-  `);
+  `)
 
-  const IsDesktop = typeof window !== 'undefined' && window.matchMedia("(min-width: 1025px)").matches
+  const IsDesktop =
+    typeof window !== "undefined" &&
+    window.matchMedia("(min-width: 1025px)").matches
 
-  const [catalog, setCatalog] = React.useState(false);
+  const [catalog, setCatalog] = React.useState(false)
 
-  const [animation, setAnimation] = React.useState(false);
+  const [animation, setAnimation] = React.useState(false)
 
-  const choose_catalog = (IsDesktop) => {
-    switch(IsDesktop) {
-        case true:
-            return <Catalog data={data} animation={animation} />
-        
-        default:
-            return <MobileCatalog data={data} animation={animation} />
-    };
-};
+  const choose_catalog = IsDesktop => {
+    switch (IsDesktop) {
+      case true:
+        return <Catalog data={data} animation={animation} />
 
-  const button_trigger = (catalog) => {
-      switch(catalog) {
-          case true:
-              return choose_catalog(IsDesktop)
-          
-          default:
-              return null
-      };
-  };
+      default:
+        return <MobileCatalog data={data} animation={animation} />
+    }
+  }
 
-  const back_trigger = (catalog) => {
-      switch(catalog) {
-          case true:
-              return (
-                <div role="button" aria-label="Background Catalog" tabIndex={0} className={classes.background}
-                  onClick={() => {
-                    if (catalog === true) {setTimeout(()=>{ setCatalog(!catalog); },150)} else { setCatalog(!catalog); };
-                    setAnimation(!animation);
-                  }}
-                  onKeyDown={() => {
-                    if (catalog === true) {setTimeout(()=>{ setCatalog(!catalog); },150)} else { setCatalog(!catalog); };
-                    setAnimation(!animation);
-                  }} />
-              )
-          
-          default:
-              return null
-      };
-  };
+  const button_trigger = catalog => {
+    switch (catalog) {
+      case true:
+        return choose_catalog(IsDesktop)
 
-  const classes = useStyles({ animation });
+      default:
+        return null
+    }
+  }
+
+  const back_trigger = catalog => {
+    switch (catalog) {
+      case true:
+        return (
+          <div
+            role="button"
+            aria-label="Background Catalog"
+            tabIndex={0}
+            className={classes.background}
+            onClick={() => {
+              if (catalog === true) {
+                setTimeout(() => {
+                  setCatalog(!catalog)
+                }, 150)
+              } else {
+                setCatalog(!catalog)
+              }
+              setAnimation(!animation)
+            }}
+            onKeyDown={() => {
+              if (catalog === true) {
+                setTimeout(() => {
+                  setCatalog(!catalog)
+                }, 150)
+              } else {
+                setCatalog(!catalog)
+              }
+              setAnimation(!animation)
+            }}
+          />
+        )
+
+      default:
+        return null
+    }
+  }
+
+  const classes = useStyles({ animation })
 
   return (
     <main className={classes.root}>
-      <Header data={data} catalog={catalog} setCatalog={setCatalog} animation={animation} setAnimation={setAnimation} />
+      <Header
+        data={data}
+        catalog={catalog}
+        setCatalog={setCatalog}
+        animation={animation}
+        setAnimation={setAnimation}
+      />
       {button_trigger(catalog)}
       {back_trigger(catalog)}
       <MobileMenu data={data} />
-      <div className={classes.content}>
-        {children}
-      </div>
+      <div className={classes.content}>{children}</div>
       <Footer data={data} />
     </main>
-  );
-
-};
+  )
+}

@@ -414,6 +414,8 @@ export const pageQuery = graphql`
     allPrismicProduct {
       edges {
         node {
+          id
+          uid
           data {
             name
             price
@@ -435,7 +437,6 @@ export const pageQuery = graphql`
               }
             }
           }
-          uid
         }
       }
     }
