@@ -1,6 +1,8 @@
 import React from "react"
 import { Button, makeStyles, Typography } from "@material-ui/core"
 
+import { GlobalDispatchContext } from "../../../context/GlobalContextProvider"
+
 const useStyles = makeStyles(theme => ({
   button: {
     padding: 0,
@@ -83,9 +85,12 @@ const useStyles = makeStyles(theme => ({
 
 export default function ButtonAddCart({ product, text, variant }) {
   const classes = useStyles()
+  const dispatch = React.useContext(GlobalDispatchContext)
+
   function addToCart() {
-    console.log(`add to cart ${product.uid}`)
+    dispatch({ type: "ADD_PRODUCT_IN_CART", payload: product.id })
   }
+
   const classText = variant === "page" ? classes.textPage : classes.textCard
   const classButton =
     variant === "page" ? classes.buttonPage : classes.buttonCard

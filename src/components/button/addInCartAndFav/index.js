@@ -1,5 +1,8 @@
 import React from "react"
 import { Grid, makeStyles } from "@material-ui/core"
+
+import { GlobalStateContext } from "../../../context/GlobalContextProvider"
+
 import ButtonAddCart from "./buttonAddCart"
 import ButtonAddFavorites from "./buttonAddFavorites"
 import ButtonPlusMinus from "./buttonPlusMinus"
@@ -25,7 +28,8 @@ export default function AddInCartAndFav({ product, text, variant, fixed, afterCh
   const classes = useStyles()
   fixed = fixed ? classes.fixed : ""
 
-  const inCart = product.uid === "yandex-col1"
+  const state = React.useContext(GlobalStateContext)
+  const inCart = state.inCart(product.id)
   return (
     <Grid
       container

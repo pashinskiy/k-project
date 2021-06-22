@@ -90,15 +90,16 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-export default function CardSimilarProduct({ product, afterChange }) {
+export default function CardProduct({ product, afterChange }) {
+  const classes = useStyle()
+
   const img =
     product.data.images[0]?.image.localFile?.childImageSharp.gatsbyImageData
   const alt = product.data.images[0]?.image.alt
   const title = product.data.name
   const price = product.data.price
 
-  const classes = useStyle()
-  return (
+  return img ? (
     <Grid className={`${classes.wrapper} product--card`}>
       <GatsbyImage
         image={img}
@@ -118,5 +119,5 @@ export default function CardSimilarProduct({ product, afterChange }) {
         afterChange={afterChange}
       />
     </Grid>
-  )
+  ) : null
 }
