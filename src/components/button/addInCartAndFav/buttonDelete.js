@@ -60,11 +60,20 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function ButtonDelete({ product, variant }) {
+export default function ButtonDelete({ product, variant, setInCart}) {
   const classes = useStyles()
+
+  let cartItems = localStorage.getItem("cart")
+  cartItems = cartItems === null || !cartItems ? [] : JSON.parse(cartItems)
+  let currentItemIndex = cartItems.findIndex(obj => obj.name === product.uid)
 
   function deleteInCart() {
     console.log(`delete in cart ${product.uid}`)
+    if(currentItemIndex !== -1){
+      cartItems.splice(currentItemIndex, 1)
+      localStorage.setItem("cart", JSON.stringify(cartItems))
+      setInCart(false)
+    }
   }
 
   const classButton =

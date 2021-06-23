@@ -1,10 +1,7 @@
 import React from "react"
 import {
   makeStyles,
-  Typography,
-  Button,
   Card,
-  useMediaQuery,
 } from "@material-ui/core"
 import { GatsbyImage } from "gatsby-plugin-image"
 

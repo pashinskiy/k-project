@@ -121,21 +121,35 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function ButtonPlusMinus({ product, variant }) {
+export default function ButtonPlusMinus({ product, variant, setInCart }) {
   const classes = useStyles()
 
   const classButton =
     variant === "page" ? classes.buttonPage : classes.buttonCard
 
-  const [count, setCount] = React.useState(99)
+  let cartItems = localStorage.getItem("cart")
+  cartItems = cartItems === null || !cartItems ? [] : JSON.parse(cartItems)
+  let currentItemIndex = cartItems.findIndex(obj => obj.name === product.uid)
+
+  const [count, setCount] = React.useState(cartItems[currentItemIndex].count)
 
   function plus() {
     console.log(`plus ${product.uid}`)
-    if (count < 99) setCount(count + 1)
+    if (count < 99){
+      setCount(count + 1)  
+      cartItems[currentItemIndex].count += 1 
+      localStorage.setItem("cart", JSON.stringify(cartItems))
+      console.log(cartItems)
+    } 
   }
   function minus() {
     console.log(`minus ${product.uid}`)
-    if (count > 1) setCount(count - 1)
+    if (count > 1){
+      setCount(count - 1)
+      cartItems[currentItemIndex].count -= 1
+      localStorage.setItem("cart", JSON.stringify(cartItems))
+      console.log(cartItems)
+    } 
   }
 
   const classMinus = count > 1 ? "" : classes.disable

@@ -1,0 +1,213 @@
+import React, { useState } from "react"
+import Card from "@material-ui/core/Card"
+import { makeStyles } from "@material-ui/core/styles"
+import {
+  Button,
+  CardContent,
+  Dialog,
+  Grid,
+  Typography,
+} from "@material-ui/core"
+import { Link } from "gatsby"
+import CartIcon from "../../../static/svg/cartIcon.svg"
+import { GatsbyImage } from "gatsby-plugin-image"
+import ButtonAddCart from "../button/addInCartAndFav/buttonAddCart"
+
+const useStyles = makeStyles(theme => ({
+  accessoriesRoot: {
+    marginBottom: "2.1875vw",
+    width: "19.53125vw",
+    "@media(min-width: 1280px)": {
+      width: "250px",
+      marginBottom: "28px",
+    },
+    "@media(max-width: 834px)": {
+      width: "29.976vw",
+      marginBottom: "3.3573vw",
+    },
+    "@media(max-width: 414px)": {
+      width: "37.198vw",
+      marginBottom: "6.7632vw",
+    },
+  },
+
+  productImageContainer: {
+    background: theme.palette.background.main,
+    minWidth: "19.53125vw",
+    width: "19.53125vw",
+    height: "15.625vw",
+    padding: "0.390625vw",
+    borderRadius: "0.9375vw",
+    marginBottom: "1.914vw",
+    "@media(min-width: 1280px)": {
+      minWidth: "250px",
+      width: "250px",
+      height: "200px",
+      padding: "5px",
+      borderRadius: "12px",
+      marginBottom: "24.5px",
+    },
+    "@media(max-width: 834px)": {
+      minWidth: "29.976vw",
+      width: "29.976vw",
+      height: "23.98vw",
+      padding: "0.5995vw",
+      borderRadius: "1.4388vw",
+      marginBottom: "2.9376vw",
+    },
+    "@media(max-width: 414px)": {
+      minWidth: "24.154vw",
+      width: "24.154vw",
+      height: "24.154vw",
+      padding: "1.2077vw",
+      borderRadius: "2.8985vw",
+      marginBottom: "2.898vw",
+    },
+  },
+  accessoriesPrice: {
+    color: theme.palette.color.main,
+    fontWeight: 700,
+    marginBottom: "0.625vw",
+    fontSize: "1.5625vw",
+    lineHeight: "1.875vw",
+    "@media(min-width: 1280px)": {
+      marginBottom: "8px",
+      fontSize: 20,
+      lineHeight: "24px",
+    },
+    "@media(max-width: 834px)": {
+      marginBottom: "0.9592vw",
+      fontSize: "2.398vw",
+      lineHeight: "2.8776vw",
+    },
+    "@media(max-width: 414px)": {
+      marginBottom: "1.9323vw",
+      fontSize: "4.8309vw",
+      lineHeight: "5.797vw",
+    },
+  },
+  accessoriesTitle: {
+    lineHeight: "1.328125vw",
+    fontSize: "1.09375vw",
+    "@media(min-width: 1280px)": {
+      lineHeight: "17px",
+      fontSize: 14,
+    },
+    "@media(max-width: 834px)": {
+      lineHeight: "2.0383vw",
+      fontSize: "1.6786vw",
+    },
+    "@media(max-width: 414px)": {
+      lineHeight: "4.1062vw",
+      fontSize: "3.3816vw",
+    },
+  },
+  titlesConteiner: {
+    marginBottom: "1.914vw",
+    width: "15.625vw",
+    "@media(min-width: 1280px)": {
+      marginBottom: "24.5px",
+      width: "200px",
+    },
+    "@media(max-width: 834px)": {
+      width: "23.98vw",
+      marginBottom: "2.9376vw",
+    },
+    "@media(max-width: 414px)": {
+      width: "37.198vw",
+      marginBottom: "2.898vw",
+    },
+  },
+  buttonAdded: {
+    width: "250px",
+    height: "50px",
+
+    fontSize: "1.09375vw",
+    borderRadius: "0.9375vw",
+    marginRight: "0.390625vw",
+    "@media(min-width: 1280px)": {
+      fontSize: "14px",
+      borderRadius: "12px",
+      marginRight: "5px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "1.6786vw",
+      borderRadius: "1.4388vw",
+      marginRight: "0.5995vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "3.3816vw",
+      borderRadius: "2.8985vw",
+      marginRight: "1.2077vw",
+    },
+    fontWeight: 700,
+    //градиент бордер
+    border: "solid 1px transparent",
+    backgroundImage:
+      "linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(180deg, #291AD5 0%, #681DE1 100%)",
+    backgroundOrigin: "border-box",
+    backgroundClip: "content-box, border-box",
+    boxShadow: "1px 1000px 1px #EFEFF2 inset",
+    //градиент текст
+    "& span": {
+      background: "-webkit-linear-gradient(270deg, #291AD5 0%, #681DE1 100%)",
+      "-webkit-background-clip": "text",
+      "-webkit-text-fill-color": "transparent",
+    },
+  },
+}))
+
+export default function CardOfferProduct({ accessory }) {
+  const classes = useStyles()
+  const accessoryItem = accessory.product_accessories.document
+  // console.log(accessory)
+
+  let cartItems = localStorage.getItem("cart")
+  cartItems = cartItems === null || !cartItems ? [] : JSON.parse(cartItems)
+  let currentItemIndex = cartItems.findIndex(
+    obj => obj.name === accessoryItem.uid
+  )
+
+  return (
+    <Grid item xs={6} className={classes.accessoriesRoot}>
+      <Link
+        to={`/${accessoryItem.uid}/`}
+        key={accessoryItem.uid}
+        style={{ textDecoration: "none" }}
+      >
+        <GatsbyImage
+          image={
+            accessoryItem?.data.images[0].image.localFile.childImageSharp
+              .gatsbyImageData
+          }
+          alt={
+            accessoryItem?.data.images[0].image.alt
+              ? accessoryItem.data.images[0].image.alt
+              : "accessory-image-" + accessoryItem.uid
+          }
+          className={classes.productImageContainer}
+          //высота и ширина для отступа от контейнера
+          imgStyle={{
+            objectFit: "contain",
+            height: "95%",
+            width: "95%",
+            margin: "auto",
+          }}
+        />
+        <div className={classes.titlesConteiner}>
+          <Typography className={classes.accessoriesPrice}>
+            {accessoryItem?.data.price} &#8381;
+          </Typography>
+          <Typography variant="body2" className={classes.accessoriesTitle}>
+            {accessoryItem?.data.name}
+          </Typography>
+        </div>
+      </Link>
+      {currentItemIndex !== -1 ? (
+        <Button className={classes.buttonAdded}>Добавлено</Button>
+      ) : (
+        <ButtonAddCart product={accessoryItem} text="В корзину" />
+      )}
+    </Grid>
+  )
+}

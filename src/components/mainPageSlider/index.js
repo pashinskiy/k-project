@@ -198,7 +198,6 @@ const useStyle = makeStyles(theme => ({
 
 export default function MainPageSlider({ array, variant }) {
   const classes = useStyle()
-  const testArray = [1, 2, 3, 4, 5, 6]
   const [activeChild, setActiveChild] = React.useState()
   let contentArray = array
   switch(variant){

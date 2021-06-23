@@ -563,5 +563,24 @@
         "label": "Теги"
       }
     }
+  },
+  "Аксессуары" : {
+    "all_product_accessories" : {
+      "type" : "Group",
+      "config" : {
+        "fields" : {
+          "product_accessories" : {
+            "type" : "Link",
+            "config" : {
+              "select" : "document",
+              "customtypes" : [ "product" ],
+              "label" : "Добавьте аксессуары для товара",
+              "placeholder" : "Добавьте аксессуары для товара"
+            }
+          }
+        },
+        "label" : "Аксессуары"
+      }
+    }
   }
 }

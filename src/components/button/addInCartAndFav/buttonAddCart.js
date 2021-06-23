@@ -1,5 +1,6 @@
-import React from "react"
-import { Button, makeStyles, Typography } from "@material-ui/core"
+import React, { useState } from "react"
+import { Button, Dialog, makeStyles, Typography } from "@material-ui/core"
+import ProductAddedCard from "../../cart/productAddedCard"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -81,23 +82,67 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function ButtonAddCart({ product, text, variant }) {
+export default function ButtonAddCart({ product, text, variant, setInCart }) {
+  const [dialogOpen, setDialogOpen] = useState(false)
   const classes = useStyles()
+  let dialog = true
+  if (text === "В корзину") dialog = false
+
+  let cartItems = localStorage.getItem("cart")
+  cartItems = cartItems === null || !cartItems ? [] : JSON.parse(cartItems)
+
   function addToCart() {
+    //логика добавления в корзину (localStorage)
     console.log(`add to cart ${product.uid}`)
+    let cartItems = localStorage.getItem("cart")
+    cartItems = cartItems === null || !cartItems ? [] : JSON.parse(cartItems)
+    let hasItem = false
+    cartItems.filter(function(item){
+      if(item.name === product.uid){
+        hasItem = true
+      }
+    })
+    if (!hasItem) {
+      let jsonCartItem = {"name": product.uid, "count": 1}
+      cartItems.push(jsonCartItem)
+      localStorage.setItem("cart", JSON.stringify(cartItems))
+      setDialogOpen(true)
+    }
+  }
+  function closeDialog() {
+    setDialogOpen(false)
+    setInCart(true)
   }
   const classText = variant === "page" ? classes.textPage : classes.textCard
   const classButton =
     variant === "page" ? classes.buttonPage : classes.buttonCard
   return (
-    <Button
-      disableRipple
-      onClick={addToCart}
-      className={classes.button + " " + classButton}
-    >
-      <Typography align="center" className={classText}>
-        {text}
-      </Typography>
-    </Button>
+    <>
+      <Button
+        disableRipple
+        onClick={addToCart}
+        className={classes.button + " " + classButton}
+      >
+        <Typography align="center" className={classText}>
+          {text}
+        </Typography>
+      </Button>
+      {dialog ? (
+        <Dialog
+          open={dialogOpen}
+          onClose={closeDialog}
+          maxWidth={false}
+          scroll={"body"}
+          PaperProps={{
+            style: {
+              background: "transparent",
+              boxShadow: "none",
+            },
+          }}
+        >
+          <ProductAddedCard product={product} closeDialog={closeDialog} />
+        </Dialog>
+      ) : null}
+    </>
   )
 }
