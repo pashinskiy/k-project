@@ -12,6 +12,7 @@ import {
   GlobalStateContext,
   GlobalDispatchContext,
 } from "../../../context/GlobalContextProvider"
+import { Link } from "gatsby"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -250,9 +251,11 @@ export default function Card({ product }) {
         />
 
         <div className={classes.centralBlockWrapper}>
-          <Typography variant="body2" className={classes.title}>
-            {product.data.name}
-          </Typography>
+          <Link to={`/${product.uid}/`} style={{ textDecoration: "none" }}>
+            <Typography variant="body2" className={classes.title}>
+              {product.data.name}
+            </Typography>
+          </Link>
 
           <Grid container alignItems="center" className={classes.priceWrapper}>
             <Typography className={classes.price}>
