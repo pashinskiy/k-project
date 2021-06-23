@@ -1,14 +1,11 @@
-import React, { useState } from "react"
-import Card from "@material-ui/core/Card"
+import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import {
   Button,
-  CardContent,
   Grid,
   Typography,
 } from "@material-ui/core"
 import { Link } from "gatsby"
-import CartIcon from "../../../static/svg/cartIcon.svg"
 import { GatsbyImage } from "gatsby-plugin-image"
 import ButtonAddCart from "../button/addInCartAndFav/buttonAddCart"
 
@@ -183,11 +180,9 @@ const useStyles = makeStyles(theme => ({
 export default function CardOfferProduct({ accessory }) {
   const classes = useStyles()
   const accessoryItem = accessory.product_accessories.document
-  // console.log(accessory)
 
   const state = React.useContext(GlobalStateContext)
   const inCart = state.inCart(accessoryItem.id)
-  // console.log(inCart)
 
   return (
     <Grid item className={classes.accessoriesRoot}>

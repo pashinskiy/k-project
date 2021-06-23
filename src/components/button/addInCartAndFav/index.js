@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Grid, makeStyles, Dialog } from "@material-ui/core"
 
-import { GlobalStateContext, GlobalDispatchContext } from "../../../context/GlobalContextProvider"
+import { GlobalStateContext } from "../../../context/GlobalContextProvider"
 
 import ButtonAddCart from "./buttonAddCart"
 import ButtonAddFavorites from "./buttonAddFavorites"
@@ -82,7 +82,6 @@ export default function AddInCartAndFav({
   const [dialogOpen, setDialogOpen] = useState(false)
 
   const state = React.useContext(GlobalStateContext)
-  const dispatch = React.useContext(GlobalDispatchContext)
   const inCart = state.inCart(product.id)
 
   function closeDialog(){

@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react"
-import { Button, Dialog, Grid, makeStyles, Typography } from "@material-ui/core"
-import ProductAddedCard from "../../cart/productAddedCard"
+import React from "react"
+import { Button, makeStyles, Typography } from "@material-ui/core"
 import IconButtonPlus from "../../../../static/svg/iconButtonPlus.svg"
 
-import { GlobalDispatchContext, GlobalStateContext } from "../../../context/GlobalContextProvider"
+import { GlobalDispatchContext } from "../../../context/GlobalContextProvider"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -122,7 +121,6 @@ export default function ButtonAddCart({ product, text, variant, dialog, iconPlus
   const classes = useStyles()
 
   const dispatch = React.useContext(GlobalDispatchContext)
-  const state = React.useContext(GlobalStateContext)
 
   function addToCart() {
     if(dialog)

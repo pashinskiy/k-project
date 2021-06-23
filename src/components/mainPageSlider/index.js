@@ -373,11 +373,6 @@ export default function MainPageSlider({ array, variant }) {
           onPointerDown={setScrollBar}
           className={classes.track}
         >
-          {/* {testArray.map((test, i) => (    
-          <Card id={"item" + i} style={{background: "gray"}} className={classes.item}>
-            <Typography>BlahBlah</Typography>
-          </Card>
-          ))} */}
           {contentArray}
         </Grid>
         <Button
@@ -406,10 +401,6 @@ export default function MainPageSlider({ array, variant }) {
           ))}
         </Grid>
       </Grid>
-      {/* <div style={{paddingTop: "100px", paddingBottom: "100px", width: "1160px", height: "auto"}}>
-
-      <SaleCard sale={contentArray[0]} key={contentArray[0].uid} mainPage />
-      </div> */}
     </Grid>
   )
 }

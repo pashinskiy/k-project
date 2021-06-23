@@ -1,17 +1,14 @@
-import React, { useState } from "react"
+import React from "react"
 import Card from "@material-ui/core/Card"
 import { makeStyles } from "@material-ui/core/styles"
 import {
   Button,
-  CardContent,
   Grid,
   Typography,
 } from "@material-ui/core"
 import CartIcon from "../../../static/svg/cartIcon.svg"
 import { GatsbyImage } from "gatsby-plugin-image"
 import CardOfferProduct from "./cardOfferProduct"
-
-import { GlobalDispatchContext, GlobalStateContext } from "../../context/GlobalContextProvider"
 
 const useStyles = makeStyles(theme => ({
   cardRoot: {
@@ -299,14 +296,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function ProductAddedCard({ product, closeDialog }) {
   const classes = useStyles()
-  // console.log(product)
   const image =
     product.data.images[0]?.image?.localFile?.childImageSharp.gatsbyImageData
   const accessoriesArray = product.data.all_product_accessories
-  // console.log(accessoriesArray)
-
-  const dispatch = React.useContext(GlobalDispatchContext)
-  const state = React.useContext(GlobalStateContext)
 
   return (
     <>

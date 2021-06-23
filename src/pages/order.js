@@ -1,15 +1,9 @@
-import React, { useState } from "react"
-import Card from "@material-ui/core/Card"
+import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import {
-  Button,
-  CardContent,
-  Grid,
   Typography,
   Divider,
 } from "@material-ui/core"
-import { Link } from "gatsby"
-import { GatsbyImage } from "gatsby-plugin-image"
 import OrderProductCard from "../components/orderPage/orderProductCard"
 
 const useStyles = makeStyles(theme => ({
