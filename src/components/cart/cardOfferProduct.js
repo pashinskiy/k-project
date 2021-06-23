@@ -17,18 +17,26 @@ import { GlobalStateContext } from "../../context/GlobalContextProvider"
 const useStyles = makeStyles(theme => ({
   accessoriesRoot: {
     marginBottom: "2.1875vw",
+    marginRight: "2.1875vw",
     width: "19.53125vw",
     "@media(min-width: 1280px)": {
       width: "250px",
       marginBottom: "28px",
+      marginRight: "28px",
     },
     "@media(max-width: 834px)": {
       width: "29.976vw",
       marginBottom: "3.3573vw",
+      marginRight: "3.3573vw",
     },
     "@media(max-width: 414px)": {
       width: "37.198vw",
       marginBottom: "6.7632vw",
+      marginRight: "4.8309vw",
+    },
+
+    "&:nth-of-type(2n)":{
+      marginRight: 0,
     },
   },
 
@@ -57,9 +65,9 @@ const useStyles = makeStyles(theme => ({
       marginBottom: "2.9376vw",
     },
     "@media(max-width: 414px)": {
-      minWidth: "24.154vw",
-      width: "24.154vw",
-      height: "24.154vw",
+      // minWidth: "24.154vw",
+      width: "37.198vw",
+      height: "37.198vw",
       padding: "1.2077vw",
       borderRadius: "2.8985vw",
       marginBottom: "2.898vw",
@@ -120,26 +128,25 @@ const useStyles = makeStyles(theme => ({
     },
   },
   buttonAdded: {
-    width: "250px",
-    height: "50px",
-
+    width: "100%",
+    height: "3.90625vw",
     fontSize: "1.09375vw",
     borderRadius: "0.9375vw",
-    marginRight: "0.390625vw",
     "@media(min-width: 1280px)": {
+      height: "50px",
       fontSize: "14px",
       borderRadius: "12px",
-      marginRight: "5px",
     },
     "@media(max-width: 834px)": {
+      height: "5.9952vw",
       fontSize: "1.6786vw",
       borderRadius: "1.4388vw",
-      marginRight: "0.5995vw",
     },
     "@media(max-width: 414px)": {
+      width: "99.6%",
+      height: "9.6618vw",
       fontSize: "3.3816vw",
       borderRadius: "2.8985vw",
-      marginRight: "1.2077vw",
     },
     fontWeight: 700,
     //градиент бордер
@@ -183,7 +190,7 @@ export default function CardOfferProduct({ accessory }) {
   // console.log(inCart)
 
   return (
-    <Grid item xs={6} className={classes.accessoriesRoot}>
+    <Grid item className={classes.accessoriesRoot}>
       <Link
         to={`/${accessoryItem.uid}/`}
         key={accessoryItem.uid}

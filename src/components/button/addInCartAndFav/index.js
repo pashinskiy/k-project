@@ -53,7 +53,6 @@ const useStyles = makeStyles(theme => ({
     background: "transparent",
     boxShadow: "none",
     position: "unset",
-    zIndex: 999,
     marginTop: "13.28125vw",
     "@media(min-width: 1280px)": {
       marginTop: "170px",
@@ -63,6 +62,9 @@ const useStyles = makeStyles(theme => ({
     },
     "@media(max-width: 414px)": {
       marginTop: "17.1497vw",
+      maxWidth: "100%",
+      marginRight: "5.1932vw",
+      marginLeft: "4.5893vw",
     },
   },
 }))
@@ -117,7 +119,7 @@ export default function AddInCartAndFav({
         classes={{paper: classes.dialogPaper}}
       >
         <IconCloseDialog className={classes.iconCloseDialog} onClick={e => closeDialog()} />
-        <ProductAddedCard product={product}/>
+        <ProductAddedCard product={product} closeDialog={closeDialog}/>
       </Dialog>
     </Grid>
   )

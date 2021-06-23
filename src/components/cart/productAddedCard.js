@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "2.398vw",
     },
     "@media(max-width: 414px)": {
-      width: "90.21739vw",
+      width: "90.8212vw",
       padding: "5.797vw",
       borderRadius: "4.8309vw",
     },
@@ -210,17 +210,21 @@ const useStyles = makeStyles(theme => ({
     width: "19.84375vw",
     borderRadius: "0.93vw",
     height: "3.90625vw",
+    fontSize: "1.09375vw",
     "@media(min-width: 1280px)": {
       borderRadius: "12px",
       width: "254px",
       height: "50px",
+      fontSize: "14px",
     },
     "@media(max-width: 834px)": {
       borderRadius: "1.4388vw",
       width: "30.455vw",
       height: "5.9952vw",
+      fontSize: "1.6786vw",
     },
     "@media(max-width: 414px)": {
+      fontSize: "3.3816vw",
       borderRadius: "2.8985vw",
       height: "9.661vw",
       width: "32.367vw",
@@ -291,22 +295,9 @@ const useStyles = makeStyles(theme => ({
       lineHeight: "4.5893vw",
     },
   },
-
-  accessoriesRoot: {
-    width: "19.53125vw",
-    "@media(min-width: 1280px)": {
-      width: "250px",
-    },
-    "@media(max-width: 834px)": {
-      width: "29.976vw",
-    },
-    "@media(max-width: 414px)": {
-      width: "37.198vw",
-    },
-  },
 }))
 
-export default function ProductAddedCard({ product }) {
+export default function ProductAddedCard({ product, closeDialog }) {
   const classes = useStyles()
   // console.log(product)
   const image =
@@ -356,7 +347,7 @@ export default function ProductAddedCard({ product }) {
           </div>
           <div className={classes.buttonContainer}>
             <Button
-              onClick={e => console.log("clicked продоложить")}
+              onClick={e => closeDialog()}
               className={classes.buttonContinue}
             >
               Продолжить покупки
@@ -367,12 +358,12 @@ export default function ProductAddedCard({ product }) {
             </Button>
           </div>
         </Card>
-        {accessoriesArray.length !== 0 ? (
+        {accessoriesArray?.length !== 0 ? (
           <Card className={classes.cardRoot}>
             <Typography className={classes.offerTitle}>
               Добавьте аксессуар в комплект
             </Typography>
-            <Grid container>
+            <Grid container className={classes.accessoriesContainer}>
               {accessoriesArray.map(accessory => (
                 <CardOfferProduct
                   accessory={accessory}

@@ -83,6 +83,19 @@ const useStyles = makeStyles(theme => ({
       fontSize: "3.38vw",
     },
   },
+  buttonPageOffer: {
+    width: "100%",
+    height: "3.9vw",
+    "@media(min-width: 1280px)": {
+      height: "50px",
+    },
+    "@media(max-width: 834px)": {
+      height: "5.99vw",
+    },
+    "@media(max-width: 414px)": {
+      height: "9.6618vw",
+    },
+  },
   iconButtonPlus: {
     width: "1.5625vw",
     height: "1.5625vw",
@@ -117,10 +130,6 @@ export default function ButtonAddCart({ product, text, variant, dialog, iconPlus
     dispatch({ type: "ADD_PRODUCT_IN_CART", payload: product.id })
   }
 
-  // const classText = variant === "page" ? classes.textPage : classes.textCard
-  // const classButton =
-  //   variant === "page" ? classes.buttonPage : classes.buttonCard
-
   let classText
   let classButton
 
@@ -131,7 +140,7 @@ export default function ButtonAddCart({ product, text, variant, dialog, iconPlus
       break
     case "offerPage":
       classText = classes.textCard
-      classButton = classes.buttonPage
+      classButton = classes.buttonPageOffer
       break
     default:
       classText = classes.textCard
