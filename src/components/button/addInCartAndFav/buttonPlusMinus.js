@@ -89,7 +89,16 @@ const useStyles = makeStyles(theme => ({
       height: "9.66vw",
     },
   },
+  buttonFull: {
+    width: "100%",
+    height: "100%",
+  },
   icon: {
+    minWidth: 0,
+    minHeight: 0,
+    padding: 0,
+    background: "transparent",
+    border: "none",
     cursor: "pointer",
 
     width: "0.93vw",
@@ -127,12 +136,30 @@ const useStyles = makeStyles(theme => ({
       fill: theme.palette.color.secondaryLight,
     },
   },
+  unselect: {
+    "& *": {
+      "-webkit-touch-callout": "none" /* iOS Safari */,
+      "-webkit-user-select": "none" /* Chrome/Safari/Opera */,
+      "-khtml-user-select": "none" /* Konqueror */,
+      "-moz-user-select": "none" /* Firefox */,
+      "-ms-user-select": "none" /* Internet Explorer/Edge */,
+      "user-select": "none",
+    },
+  },
 }))
 
 export default function ButtonPlusMinus({ product, variant }) {
   const classes = useStyles()
-  const classButton =
-    variant === "page" ? classes.buttonPage : classes.buttonCard
+  const classButton = (() => {
+    switch (variant) {
+      case "page":
+        return classes.buttonPage
+      case "full":
+        return classes.buttonFull
+      default:
+        return classes.buttonCard
+    }
+  })()
 
   const state = React.useContext(GlobalStateContext)
   const dispatch = React.useContext(GlobalDispatchContext)
@@ -154,11 +181,17 @@ export default function ButtonPlusMinus({ product, variant }) {
       container
       justify="space-between"
       alignItems="center"
-      className={classes.wrapper + " " + classButton}
+      className={classes.wrapper + " " + classes.unselect + " " + classButton}
     >
-      <Minus onClick={minus} className={classes.icon + " " + classMinus} />
+      <button onClick={minus} className={classes.icon}>
+        <Minus className={classMinus} />
+      </button>
+
       <Typography className={classes.amount}>{count}</Typography>
-      <Plus onClick={plus} className={classes.icon + " " + classPlus} />
+
+      <button onClick={plus} className={classes.icon}>
+        <Plus className={classPlus} />
+      </button>
     </Grid>
   )
 }

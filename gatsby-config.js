@@ -64,6 +64,7 @@ module.exports = {
           stories: require("./src/schemas/stories.json"),
           sales: require("./src/schemas/sales.json"),
           promotion_banner: require("./src/schemas/promotion_banner.json"),
+          cart_and_order: require("./src/schemas/cart_and_order.json"),
         },
         shouldDownloadImage: () => true,
       },
