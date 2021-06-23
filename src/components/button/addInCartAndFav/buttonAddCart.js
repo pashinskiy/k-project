@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import { Button, Dialog, makeStyles, Typography } from "@material-ui/core"
 import ProductAddedCard from "../../cart/productAddedCard"
 
+import { GlobalDispatchContext } from "../../../context/GlobalContextProvider"
+
 const useStyles = makeStyles(theme => ({
   button: {
     padding: 0,
@@ -87,27 +89,11 @@ export default function ButtonAddCart({ product, text, variant, setInCart }) {
   const classes = useStyles()
   let dialog = true
   if (text === "В корзину") dialog = false
-
-  let cartItems = localStorage.getItem("cart")
-  cartItems = cartItems === null || !cartItems ? [] : JSON.parse(cartItems)
+  const dispatch = React.useContext(GlobalDispatchContext)
 
   function addToCart() {
-    //логика добавления в корзину (localStorage)
-    console.log(`add to cart ${product.uid}`)
-    let cartItems = localStorage.getItem("cart")
-    cartItems = cartItems === null || !cartItems ? [] : JSON.parse(cartItems)
-    let hasItem = false
-    cartItems.filter(function(item){
-      if(item.name === product.uid){
-        hasItem = true
-      }
-    })
-    if (!hasItem) {
-      let jsonCartItem = {"name": product.uid, "count": 1}
-      cartItems.push(jsonCartItem)
-      localStorage.setItem("cart", JSON.stringify(cartItems))
-      setDialogOpen(true)
-    }
+    dispatch({ type: "ADD_PRODUCT_IN_CART", payload: product.id })
+    setDialogOpen(true)
   }
   function closeDialog() {
     setDialogOpen(false)

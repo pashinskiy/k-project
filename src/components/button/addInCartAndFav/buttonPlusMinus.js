@@ -4,6 +4,11 @@ import { Grid, makeStyles, Typography } from "@material-ui/core"
 import Minus from "../../../../static/svg/minus.svg"
 import Plus from "../../../../static/svg/plus.svg"
 
+import {
+  GlobalStateContext,
+  GlobalDispatchContext,
+} from "../../../context/GlobalContextProvider"
+
 const useStyles = makeStyles(theme => ({
   wrapper: {
     backgroundClip: "padding-box",
@@ -85,6 +90,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   icon: {
+    cursor: "pointer",
+
     width: "0.93vw",
     height: "0.93vw",
     "@media(min-width: 1280px)": {
@@ -115,6 +122,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   disable: {
+    cursor: "default",
     "& path": {
       fill: theme.palette.color.secondaryLight,
     },
@@ -123,33 +131,19 @@ const useStyles = makeStyles(theme => ({
 
 export default function ButtonPlusMinus({ product, variant, setInCart }) {
   const classes = useStyles()
-
   const classButton =
     variant === "page" ? classes.buttonPage : classes.buttonCard
 
-  let cartItems = localStorage.getItem("cart")
-  cartItems = cartItems === null || !cartItems ? [] : JSON.parse(cartItems)
-  let currentItemIndex = cartItems.findIndex(obj => obj.name === product.uid)
+  const state = React.useContext(GlobalStateContext)
+  const dispatch = React.useContext(GlobalDispatchContext)
 
-  const [count, setCount] = React.useState(cartItems[currentItemIndex].count)
+  const count = state.inCart(product.id)
 
   function plus() {
-    console.log(`plus ${product.uid}`)
-    if (count < 99){
-      setCount(count + 1)  
-      cartItems[currentItemIndex].count += 1 
-      localStorage.setItem("cart", JSON.stringify(cartItems))
-      console.log(cartItems)
-    } 
+    dispatch({ type: "INCREMENT_PRODUCT_COUNT", payload: product.id })
   }
   function minus() {
-    console.log(`minus ${product.uid}`)
-    if (count > 1){
-      setCount(count - 1)
-      cartItems[currentItemIndex].count -= 1
-      localStorage.setItem("cart", JSON.stringify(cartItems))
-      console.log(cartItems)
-    } 
+    dispatch({ type: "DECREMENT_PRODUCT_COUNT", payload: product.id })
   }
 
   const classMinus = count > 1 ? "" : classes.disable

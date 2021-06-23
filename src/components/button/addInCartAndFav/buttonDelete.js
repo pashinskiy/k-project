@@ -2,6 +2,7 @@ import React from "react"
 import { Button, makeStyles } from "@material-ui/core"
 
 import Delete from "../../../../static/svg/trash.svg"
+import { GlobalDispatchContext } from "../../../context/GlobalContextProvider"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -62,18 +63,14 @@ const useStyles = makeStyles(theme => ({
 
 export default function ButtonDelete({ product, variant, setInCart}) {
   const classes = useStyles()
+  const dispatch = React.useContext(GlobalDispatchContext)
 
   let cartItems = localStorage.getItem("cart")
   cartItems = cartItems === null || !cartItems ? [] : JSON.parse(cartItems)
   let currentItemIndex = cartItems.findIndex(obj => obj.name === product.uid)
 
   function deleteInCart() {
-    console.log(`delete in cart ${product.uid}`)
-    if(currentItemIndex !== -1){
-      cartItems.splice(currentItemIndex, 1)
-      localStorage.setItem("cart", JSON.stringify(cartItems))
-      setInCart(false)
-    }
+    dispatch({ type: "DELETE_PRODUCT_FROM_CART", payload: product.id })
   }
 
   const classButton =

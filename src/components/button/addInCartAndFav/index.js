@@ -1,5 +1,8 @@
 import React, { useState } from "react"
 import { Grid, makeStyles } from "@material-ui/core"
+
+import { GlobalStateContext } from "../../../context/GlobalContextProvider"
+
 import ButtonAddCart from "./buttonAddCart"
 import ButtonAddFavorites from "./buttonAddFavorites"
 import ButtonPlusMinus from "./buttonPlusMinus"
@@ -29,6 +32,8 @@ export default function AddInCartAndFav({ product, text, variant, fixed, afterCh
 
   const [inCart, setInCart] = useState(cartItems.some((element) => element.name === product.uid))
 
+  const state = React.useContext(GlobalStateContext)
+  const inCart = state.inCart(product.id)
   return (
     <Grid
       container

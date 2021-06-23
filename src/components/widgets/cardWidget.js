@@ -151,7 +151,7 @@ const useStyles = makeStyles(theme => ({
   brandContainer: {
     width: "100%",
     height: "auto",
-    display: "inline-block",
+    display: "block",
     position: "relative",
     boxShadow: "none",
     background: theme.palette.background.secondary,
@@ -184,6 +184,7 @@ const useStyles = makeStyles(theme => ({
   },
   brandTitle: {
     fontWeight: 700,
+    marginTop: 8,
     textAlign: "center",
     color: theme.palette.color.main,
 

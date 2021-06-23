@@ -68,33 +68,38 @@ const useStyle = makeStyles(theme => ({
   title: {
     fontWeight: 400,
     lineHeight: 1.21,
-    // height: "3.63em",
+
+    height: "3.98vw",
     fontSize: "1.09vw",
     marginTop: "0.62vw",
     "@media(min-width: 1280px)": {
+      height: "51px",
       fontSize: "14px",
       marginTop: "8px",
     },
     "@media(max-width: 834px)": {
+      height: "6.11vw",
       fontSize: "1.67vw",
       marginTop: "0.95vw",
     },
     "@media(max-width: 414px)": {
+      height: "12.31vw",
       fontSize: "3.38vw",
       marginTop: "1.93vw",
     },
   },
 }))
 
-export default function CardSimilarProduct({ product, afterChange }) {
+export default function CardProduct({ product, afterChange }) {
+  const classes = useStyle()
+
   const img =
     product.data.images[0]?.image.localFile?.childImageSharp.gatsbyImageData
   const alt = product.data.images[0]?.image.alt
   const title = product.data.name
   const price = product.data.price
 
-  const classes = useStyle()
-  return (
+  return img ? (
     <Grid className={`${classes.wrapper} product--card`}>
       <GatsbyImage
         image={img}
@@ -114,5 +119,5 @@ export default function CardSimilarProduct({ product, afterChange }) {
         afterChange={afterChange}
       />
     </Grid>
-  )
+  ) : null
 }

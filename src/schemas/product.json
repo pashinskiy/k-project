@@ -7,6 +7,17 @@
         "placeholder": "Уникальный ID"
       }
     },
+    "main_category": {
+      "type": "Link",
+      "config": {
+        "select": "document",
+        "customtypes": [
+          "category"
+        ],
+        "label": "Категория",
+        "placeholder": "Категория"
+      }
+    },
     "category": {
       "type": "Link",
       "config": {

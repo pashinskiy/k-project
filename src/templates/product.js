@@ -73,6 +73,7 @@ export default Product
 export const pageQuery = graphql`
   query ProductBySlug($uid: String!) {
     prismicProduct(uid: { eq: $uid }) {
+      id
       uid
       data {
         brand {
@@ -438,6 +439,8 @@ export const pageQuery = graphql`
     allPrismicProduct {
       edges {
         node {
+          id
+          uid
           data {
             name
             price
@@ -459,7 +462,6 @@ export const pageQuery = graphql`
               }
             }
           }
-          uid
         }
       }
     }
