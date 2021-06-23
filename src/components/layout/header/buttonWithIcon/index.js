@@ -41,7 +41,7 @@ export default function ButtonWithIcon({ name, img, alt, link }) {
     const classes = useStyles();
 
     return (
-        <Link to={`/${link}`} className={classes.root}>
+        <Link to={`/${link}/`} className={classes.root}>
             <img src={img} alt={alt} className={classes.img} />
             <span className={classes.text}>{name}</span>
         </Link>

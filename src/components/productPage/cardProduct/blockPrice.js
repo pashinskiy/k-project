@@ -185,22 +185,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function BlockPrice({ product, allColors }) {
-  // input data
-
-  // product = {
-  //   uid: "1234567",
-  //   data: {
-  //     name: "name",
-  //     color: "red",
-  //     price: "19000",
-  //     oldPrice: "50000",
-  //   },
-  // }
-  // allColors = [
-  //   { uid: "123", data: { color_name: "Красный", color: "red" } },
-  //   { uid: "6787", data: { color_name: "Желтый", color: "yellow" } },
-  // ]
-
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 834px)")
 

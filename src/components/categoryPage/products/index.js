@@ -17,6 +17,7 @@ export default function AllProductsByCategory({ subcategory_product }) {
             allPrismicProduct {
                 edges {
                     node {
+                        id
                         uid
                         data {
                             name
