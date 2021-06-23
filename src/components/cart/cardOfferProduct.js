@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles"
 import {
   Button,
   CardContent,
-  Dialog,
   Grid,
   Typography,
 } from "@material-ui/core"
@@ -12,6 +11,8 @@ import { Link } from "gatsby"
 import CartIcon from "../../../static/svg/cartIcon.svg"
 import { GatsbyImage } from "gatsby-plugin-image"
 import ButtonAddCart from "../button/addInCartAndFav/buttonAddCart"
+
+import { GlobalStateContext } from "../../context/GlobalContextProvider"
 
 const useStyles = makeStyles(theme => ({
   accessoriesRoot: {
@@ -155,6 +156,21 @@ const useStyles = makeStyles(theme => ({
       "-webkit-text-fill-color": "transparent",
     },
   },
+
+  buttonAddCart: {
+    "& p":{
+      fontSize: "1.09375vw",
+      "@media(min-width: 1280px)": {
+        fontSize: "14px",
+      },
+      "@media(max-width: 834px)": {
+        fontSize: "1.6786vw",
+      },
+      "@media(max-width: 414px)": {
+        fontSize: "3.3816vw",
+      },
+    },
+  },
 }))
 
 export default function CardOfferProduct({ accessory }) {
@@ -162,11 +178,9 @@ export default function CardOfferProduct({ accessory }) {
   const accessoryItem = accessory.product_accessories.document
   // console.log(accessory)
 
-  let cartItems = localStorage.getItem("cart")
-  cartItems = cartItems === null || !cartItems ? [] : JSON.parse(cartItems)
-  let currentItemIndex = cartItems.findIndex(
-    obj => obj.name === accessoryItem.uid
-  )
+  const state = React.useContext(GlobalStateContext)
+  const inCart = state.inCart(accessoryItem.id)
+  // console.log(inCart)
 
   return (
     <Grid item xs={6} className={classes.accessoriesRoot}>
@@ -203,10 +217,10 @@ export default function CardOfferProduct({ accessory }) {
           </Typography>
         </div>
       </Link>
-      {currentItemIndex !== -1 ? (
+      {inCart ? (
         <Button className={classes.buttonAdded}>Добавлено</Button>
       ) : (
-        <ButtonAddCart product={accessoryItem} text="В корзину" />
+        <ButtonAddCart product={accessoryItem} text="В корзину" iconPlus={true} variant="offerPage" className={classes.buttonAddCart}/>
       )}
     </Grid>
   )

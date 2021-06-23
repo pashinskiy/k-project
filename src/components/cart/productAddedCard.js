@@ -1,10 +1,17 @@
 import React, { useState } from "react"
 import Card from "@material-ui/core/Card"
 import { makeStyles } from "@material-ui/core/styles"
-import { Button, CardContent, Dialog, Grid, Typography } from "@material-ui/core"
+import {
+  Button,
+  CardContent,
+  Grid,
+  Typography,
+} from "@material-ui/core"
 import CartIcon from "../../../static/svg/cartIcon.svg"
 import { GatsbyImage } from "gatsby-plugin-image"
 import CardOfferProduct from "./cardOfferProduct"
+
+import { GlobalDispatchContext, GlobalStateContext } from "../../context/GlobalContextProvider"
 
 const useStyles = makeStyles(theme => ({
   cardRoot: {
@@ -284,7 +291,7 @@ const useStyles = makeStyles(theme => ({
       lineHeight: "4.5893vw",
     },
   },
-  
+
   accessoriesRoot: {
     width: "19.53125vw",
     "@media(min-width: 1280px)": {
@@ -299,7 +306,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function ProductAddedCard({ product, closeDialog }) {
+export default function ProductAddedCard({ product }) {
   const classes = useStyles()
   // console.log(product)
   const image =
@@ -307,68 +314,74 @@ export default function ProductAddedCard({ product, closeDialog }) {
   const accessoriesArray = product.data.all_product_accessories
   // console.log(accessoriesArray)
 
+  const dispatch = React.useContext(GlobalDispatchContext)
+  const state = React.useContext(GlobalStateContext)
+
   return (
     <>
-      <Card className={classes.cardRoot}>
-        <div className={classes.headerWrapper}>
-          <CartIcon className={classes.cartIcon} />
-          <Typography className={classes.cardHeaderTitle}>
-            Товар добавлен в корзину
-          </Typography>
-        </div>
-        <div className={classes.productInfoWrapper}>
-          <GatsbyImage
-            image={image}
-            alt="product-image"
-            className={classes.productImageContainer}
-            //высота и ширина для отступа от контейнера
-            imgStyle={{
-              objectFit: "contain",
-              height: "95%",
-              width: "95%",
-              margin: "auto",
-            }}
-          />
-
-          <div className={classes.productTextContainer}>
-            <Typography variant="body2" className={classes.productTitle}>
-              {product.data.name}
+        <Card className={classes.cardRoot}>
+          <div className={classes.headerWrapper}>
+            <CartIcon className={classes.cartIcon} />
+            <Typography className={classes.cardHeaderTitle}>
+              Товар добавлен в корзину
             </Typography>
-            <div className={classes.costContainer}>
-              <Typography className={classes.costMain}>
-                {product.data.price} &#8381;
+          </div>
+          <div className={classes.productInfoWrapper}>
+            <GatsbyImage
+              image={image}
+              alt="product-image"
+              className={classes.productImageContainer}
+              //высота и ширина для отступа от контейнера
+              imgStyle={{
+                objectFit: "contain",
+                height: "95%",
+                width: "95%",
+                margin: "auto",
+              }}
+            />
+
+            <div className={classes.productTextContainer}>
+              <Typography variant="body2" className={classes.productTitle}>
+                {product.data.name}
               </Typography>
-              <Typography className={classes.costOld}>
-                {product.data.old_price} &#8381;
-              </Typography>
+              <div className={classes.costContainer}>
+                <Typography className={classes.costMain}>
+                  {product.data.price} &#8381;
+                </Typography>
+                <Typography className={classes.costOld}>
+                  {product.data.old_price} &#8381;
+                </Typography>
+              </div>
             </div>
           </div>
-        </div>
-        <div className={classes.buttonContainer}>
-          <Button
-            onClick={e => closeDialog(e)}
-            className={classes.buttonContinue}
-          >
-            Продолжить покупки
-          </Button>
-          {/* TODO: Добавить ссылку на страницу оформления */}
-          <Button href="#" className={classes.buttonCheckout}>
-            Оформить
-          </Button>
-        </div>
-      </Card>
-      {accessoriesArray.length !== 0 ? (
-        <Card className={classes.cardRoot}>
-          <Typography className={classes.offerTitle}>
-            Добавьте аксессуар в комплект
-          </Typography>
-          <Grid container>
-          {accessoriesArray.map(accessory => (
-            <CardOfferProduct accessory={accessory} key={accessory.product_accessories.document?.uid + "-offer"}/>
-          ))}
-          </Grid>
+          <div className={classes.buttonContainer}>
+            <Button
+              onClick={e => console.log("clicked продоложить")}
+              className={classes.buttonContinue}
+            >
+              Продолжить покупки
+            </Button>
+            {/* TODO: Добавить ссылку на страницу оформления */}
+            <Button href="#" className={classes.buttonCheckout}>
+              Оформить
+            </Button>
+          </div>
         </Card>
-      ) : null}
+        {accessoriesArray.length !== 0 ? (
+          <Card className={classes.cardRoot}>
+            <Typography className={classes.offerTitle}>
+              Добавьте аксессуар в комплект
+            </Typography>
+            <Grid container>
+              {accessoriesArray.map(accessory => (
+                <CardOfferProduct
+                  accessory={accessory}
+                  key={accessory.product_accessories.document?.uid + "-offer"}
+                />
+              ))}
+            </Grid>
+          </Card>
+        ) : null}
     </>
   )
 }

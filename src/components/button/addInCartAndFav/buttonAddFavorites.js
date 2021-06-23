@@ -4,6 +4,8 @@ import { Button, makeStyles } from "@material-ui/core"
 import Favorites from "../../../../static/svg/favorites.svg"
 import NotFavorites from "../../../../static/svg/notFavorites.svg"
 
+import { GlobalStateContext, GlobalDispatchContext } from "../../../context/GlobalContextProvider"
+
 const useStyles = makeStyles(theme => ({
   button: {
     minWidth: 0,
@@ -72,31 +74,19 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function ButtonAddFavorites({ product, variant, afterChange }) {
+export default function ButtonAddFavorites({ product, variant }) {
   const classes = useStyles()
 
-  let favorites = localStorage.getItem("favorites")
-  favorites = favorites === null || !favorites ? [] : JSON.parse(favorites)
+  const dispatch = React.useContext(GlobalDispatchContext)
+  const state = React.useContext(GlobalStateContext)
 
-  const [isFavorite, setIsFavorite] = useState(favorites.includes(product.uid))
+  const isFavorite = state.inFavorites(product.id)
 
   function changeToFavorites() {
-    // console.log(`change to favorites ${product.uid}`)
-    let favorites = localStorage.getItem("favorites")
-    favorites = favorites === null || !favorites ? [] : JSON.parse(favorites)
-    if (favorites.includes(product.uid)) {
-      let favIndex = favorites.indexOf(product.uid)
-      if (favIndex === -1) return
-      favorites.splice(favIndex, 1)
-      localStorage.setItem("favorites", JSON.stringify(favorites))
-      setIsFavorite(false)
-      if(afterChange) afterChange()
-    } else {
-      favorites.push(product.uid)
-      localStorage.setItem("favorites", JSON.stringify(favorites))
-      setIsFavorite(true)
-      if(afterChange) afterChange()
-    }
+    if(!isFavorite)
+    dispatch({ type: "ADD_PRODUCT_IN_FAVORITES", payload: product.id })
+    else
+    dispatch({ type: "DELETE_PRODUCT_FROM_FAVORITES", payload: product.id })
   }
 
   const background = isFavorite ? classes.favorites : classes.notFavorites

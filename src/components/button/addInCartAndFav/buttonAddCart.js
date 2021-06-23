@@ -1,8 +1,9 @@
-import React, { useState } from "react"
-import { Button, Dialog, makeStyles, Typography } from "@material-ui/core"
+import React, { useContext, useState } from "react"
+import { Button, Dialog, Grid, makeStyles, Typography } from "@material-ui/core"
 import ProductAddedCard from "../../cart/productAddedCard"
+import IconButtonPlus from "../../../../static/svg/iconButtonPlus.svg"
 
-import { GlobalDispatchContext } from "../../../context/GlobalContextProvider"
+import { GlobalDispatchContext, GlobalStateContext } from "../../../context/GlobalContextProvider"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -82,26 +83,60 @@ const useStyles = makeStyles(theme => ({
       fontSize: "3.38vw",
     },
   },
+  iconButtonPlus: {
+    width: "1.5625vw",
+    height: "1.5625vw",
+    marginRight: "0.78125vw",
+    "@media(min-width: 1280px)": {
+      width: "20px",
+      height: "20px",
+      marginRight: "10px",
+      },
+    "@media(max-width: 834px)": {
+      width: "2.398vw",
+      height: "2.398vw",
+      marginRight: "1.199vw",
+      },
+    "@media(max-width: 414px)": {
+      width: "4.10628vw",
+      height: "4.10628vw",
+      marginRight: "3.8647vw",
+      },
+}
 }))
 
-export default function ButtonAddCart({ product, text, variant, setInCart }) {
-  const [dialogOpen, setDialogOpen] = useState(false)
+export default function ButtonAddCart({ product, text, variant, dialog, iconPlus, setDialogOpen }) {
   const classes = useStyles()
-  let dialog = true
-  if (text === "В корзину") dialog = false
+
   const dispatch = React.useContext(GlobalDispatchContext)
+  const state = React.useContext(GlobalStateContext)
 
   function addToCart() {
+    if(dialog)
+      setDialogOpen(true)
     dispatch({ type: "ADD_PRODUCT_IN_CART", payload: product.id })
-    setDialogOpen(true)
   }
-  function closeDialog() {
-    setDialogOpen(false)
-    setInCart(true)
+
+  // const classText = variant === "page" ? classes.textPage : classes.textCard
+  // const classButton =
+  //   variant === "page" ? classes.buttonPage : classes.buttonCard
+
+  let classText
+  let classButton
+
+  switch(variant){
+    case "page":
+      classText = classes.textPage
+      classButton = classes.buttonPage
+      break
+    case "offerPage":
+      classText = classes.textCard
+      classButton = classes.buttonPage
+      break
+    default:
+      classText = classes.textCard
+      classButton = classes.buttonCard
   }
-  const classText = variant === "page" ? classes.textPage : classes.textCard
-  const classButton =
-    variant === "page" ? classes.buttonPage : classes.buttonCard
   return (
     <>
       <Button
@@ -109,26 +144,11 @@ export default function ButtonAddCart({ product, text, variant, setInCart }) {
         onClick={addToCart}
         className={classes.button + " " + classButton}
       >
+        {iconPlus ? <IconButtonPlus className={classes.iconButtonPlus}/> : null}
         <Typography align="center" className={classText}>
           {text}
         </Typography>
       </Button>
-      {dialog ? (
-        <Dialog
-          open={dialogOpen}
-          onClose={closeDialog}
-          maxWidth={false}
-          scroll={"body"}
-          PaperProps={{
-            style: {
-              background: "transparent",
-              boxShadow: "none",
-            },
-          }}
-        >
-          <ProductAddedCard product={product} closeDialog={closeDialog} />
-        </Dialog>
-      ) : null}
     </>
   )
 }

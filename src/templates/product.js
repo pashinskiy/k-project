@@ -416,6 +416,7 @@ export const pageQuery = graphql`
             document {
               ... on PrismicProduct {
                 uid
+                id
                 data {
                   images {
                     image {

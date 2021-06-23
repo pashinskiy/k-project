@@ -61,13 +61,9 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function ButtonDelete({ product, variant, setInCart}) {
+export default function ButtonDelete({ product, variant }) {
   const classes = useStyles()
   const dispatch = React.useContext(GlobalDispatchContext)
-
-  let cartItems = localStorage.getItem("cart")
-  cartItems = cartItems === null || !cartItems ? [] : JSON.parse(cartItems)
-  let currentItemIndex = cartItems.findIndex(obj => obj.name === product.uid)
 
   function deleteInCart() {
     dispatch({ type: "DELETE_PRODUCT_FROM_CART", payload: product.id })

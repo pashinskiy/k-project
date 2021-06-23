@@ -129,7 +129,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function ButtonPlusMinus({ product, variant, setInCart }) {
+export default function ButtonPlusMinus({ product, variant }) {
   const classes = useStyles()
   const classButton =
     variant === "page" ? classes.buttonPage : classes.buttonCard

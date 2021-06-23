@@ -4,6 +4,12 @@ import { Link } from "gatsby"
 import AddInCartAndFav from "../../button/addInCartAndFav"
 import Title from "./title"
 import Features from "./features"
+import ProductAddedCard from "../../cart/productAddedCard"
+
+import {
+  GlobalStateContext,
+  GlobalDispatchContext,
+} from "../../../context/GlobalContextProvider"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -204,6 +210,9 @@ export default function BlockPrice({ product, allColors }) {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 834px)")
 
+  const state = React.useContext(GlobalStateContext)
+  const dispatch = React.useContext(GlobalDispatchContext)
+
   // цвет продукта первый в массиве
   allColors.unshift(
     ...allColors.splice(allColors.findIndex(prod => prod.uid === product.uid))
@@ -281,6 +290,7 @@ export default function BlockPrice({ product, allColors }) {
           text="Добавить в корзину"
           product={product}
           variant="page"
+          dialog={true}
         />
       )}
       {mobile ? (

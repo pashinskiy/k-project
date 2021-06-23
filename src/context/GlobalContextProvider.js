@@ -25,6 +25,8 @@ function reducer(state, action) {
         const index = cart.findIndex(product => product.id === action.payload)
         cart.splice(index, 1)
 
+        console.log(state.cart)
+
         localStorage.setItem("cart", JSON.stringify(cart))
         return {
           ...state,
@@ -84,7 +86,6 @@ function reducer(state, action) {
           favorites: favorites,
         }
       }
-
     default:
       throw new Error("Error action")
   }
