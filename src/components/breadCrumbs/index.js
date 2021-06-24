@@ -60,21 +60,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function BreadCrumbs({ links }) {
-  links =
-    links !== undefined
-      ? links
-      : [
-          {
-            title: "text1",
-            href: "href1",
-          },
-          {
-            title: "text2",
-            href: "href2",
-          },
-        ]
-
   const classes = useStyles()
+
   return (
     <Grid
       container

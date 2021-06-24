@@ -1,9 +1,7 @@
 import React from "react"
 import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
 
-import { GlobalStateContext } from "../../../context/GlobalContextProvider"
-
-import GoRegistration from "../../button/goRegistration"
+import Pay from "../../button/pay"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -189,9 +187,14 @@ const useStyle = makeStyles(theme => ({
 
 export default function PriceBlock({ products }) {
   const classes = useStyle()
-  const state = React.useContext(GlobalStateContext)
   const [showMoreInfo, setShowMoreInfo] = React.useState(false)
   const mobile = useMediaQuery("(max-width: 834px)")
+
+  const order = JSON.parse(localStorage.getItem("order"))
+
+  function payOrder() {
+    localStorage.removeItem("order")
+  }
 
   function swipeStart(e) {
     const clientY = e.clientY
@@ -203,36 +206,6 @@ export default function PriceBlock({ products }) {
       if (e.clientY - clientY > 50) setShowMoreInfo(false)
       document.removeEventListener("pointerup", swipeEnd)
     }
-  }
-
-  const summPrice = products.reduce((summ, product) => {
-    return summ + product.data.price * state.inCart(product.id)
-  }, 0)
-  const summOldPrice = products.reduce((summ, product) => {
-    return (
-      summ +
-      (product.data.old_price ?? product.data.price) * state.inCart(product.id)
-    )
-  }, 0)
-
-  function goRegistration() {
-    const positions = products.reduce((order, product, i) => {
-      const num = i + 1
-      const name = product.data.name
-      const color = product.data.color_name
-      const count = state.inCart(product.id)
-      const position = `${num}. Товар: ${name}; Цвет: ${color}; Количество: ${count}. \n`
-      return order + position
-    }, "")
-
-    localStorage.setItem(
-      "order",
-      JSON.stringify({
-        positions,
-        price: summPrice,
-        sale: summPrice - summOldPrice,
-      })
-    )
   }
 
   // варианты доставки
@@ -271,7 +244,7 @@ export default function PriceBlock({ products }) {
             <Typography className={classes.normalText}>Стоимость</Typography>
 
             <Typography className={classes.normalText}>{`${priceMod(
-              summOldPrice
+              order.price - order.sale
             )} ₽`}</Typography>
           </Grid>
 
@@ -285,7 +258,22 @@ export default function PriceBlock({ products }) {
             <Typography
               className={classes.normalText}
               style={{ color: "#FF5B5B" }}
-            >{`${priceMod(summPrice - summOldPrice)} ₽`}</Typography>
+            >{`${priceMod(order.sale)} ₽`}</Typography>
+          </Grid>
+
+          <Grid
+            container
+            justify="space-between"
+            className={classes.discountWrapper}
+          >
+            <Typography className={classes.normalText}>Доставка</Typography>
+
+            <Typography
+              className={classes.normalText}
+              style={{ color: "#20CA1D" }}
+            >
+              Бесплатно
+            </Typography>
           </Grid>
         </>
       ) : null}
@@ -298,12 +286,12 @@ export default function PriceBlock({ products }) {
         <Typography className={classes.boldText}>Итого</Typography>
 
         <Typography className={classes.boldText}>{`${priceMod(
-          summPrice
+          order.price
         )} ₽`}</Typography>
       </Grid>
 
       <div className={classes.goRegistration}>
-        <GoRegistration text="Перейти к оформлению" onClick={goRegistration} />
+        <Pay text="Оплатить заказ" products={products} onClick={payOrder} />
       </div>
 
       {credit && !mobile ? (

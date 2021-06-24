@@ -1,6 +1,5 @@
 import React from "react"
 import { Button, makeStyles, Typography } from "@material-ui/core"
-import { navigate } from "gatsby"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -43,16 +42,11 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function GoRegistration({ text, onClick }) {
+export default function Pay({ text, onClick }) {
   const classes = useStyles()
 
-  function buttonClick() {
-    onClick()
-    navigate("/ordering/")
-  }
-
   return (
-    <Button disableRipple onClick={buttonClick} className={classes.button}>
+    <Button disableRipple onClick={onClick} className={classes.button}>
       <Typography align="center" className={classes.text}>
         {text}
       </Typography>

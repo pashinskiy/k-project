@@ -60,6 +60,7 @@ export default function MobileMenu({ data }) {
             <div className={classes.menu_point}>
                 <ButtonWithIcon
                     name={data.allPrismicHeader.edges[0].node.data.cart_name.text}
+                    link="/cart/"
                     img={data.allPrismicHeader.edges[0].node.data.cart_img.localFile.publicURL + '#outline'}
                     alt={data.allPrismicHeader.edges[0].node.data.cart_img.alt} />
             </div>

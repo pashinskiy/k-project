@@ -1,25 +1,35 @@
 {
-    "Main": {
-      "disclaimer": {
-        "type": "StructuredText",
-        "config": {
-          "multi": "preformatted",
-          "label": "Отказ от ответственности"
-        }
-      },
-      "title_support": {
-        "type": "Text",
-        "config": {
-          "label": "Заголовок номера техподдержки",
-          "placeholder": "заголовок"
-        }
-      },
-      "phone_support": {
-        "type": "Text",
-        "config": {
-          "label": "Телефон техподдержки",
-          "placeholder": "телефон"
-        }
+  "Main" : {
+    "disclaimer" : {
+      "type" : "StructuredText",
+      "config" : {
+        "multi" : "preformatted",
+        "label" : "Отказ от ответственности"
+      }
+    },
+    "title_support" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Заголовок номера техподдержки",
+        "placeholder" : "заголовок"
+      }
+    },
+    "phone_support" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Телефон техподдержки",
+        "placeholder" : "телефон"
+      }
+    }
+  },
+  "Стикер доставки" : {
+    "sticker" : {
+      "type" : "Image",
+      "config" : {
+        "constraint" : { },
+        "thumbnails" : [ ],
+        "label" : "Стикер"
       }
     }
   }
+}
