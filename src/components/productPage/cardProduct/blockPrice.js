@@ -265,6 +265,7 @@ export default function BlockPrice({ product, allColors }) {
           text="Добавить в корзину"
           product={product}
           variant="page"
+          dialog
         />
       )}
       {mobile ? (

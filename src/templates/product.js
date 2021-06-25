@@ -90,6 +90,7 @@ export const pageQuery = graphql`
                       image {
                         localFile {
                           childImageSharp {
+                            gatsbyImageData
                             fluid(maxHeight: 35) {
                               aspectRatio
                               src
@@ -116,6 +117,7 @@ export const pageQuery = graphql`
           image {
             localFile {
               childImageSharp {
+                gatsbyImageData
                 fluid(
                   maxWidth: 750
                   srcSetBreakpoints: [
@@ -404,6 +406,30 @@ export const pageQuery = graphql`
                       sizes: "(min-width: 1280px) 700px, (max-width: 414px) 86.47vw, (max-width: 834px) 44.96vw, 54.68vw"
                     )
                   }
+                }
+              }
+            }
+          }
+        }
+        all_product_accessories {
+          product_accessories {
+            document {
+              ... on PrismicProduct {
+                uid
+                id
+                data {
+                  images {
+                    image {
+                      localFile {
+                        childImageSharp {
+                          gatsbyImageData
+                        }
+                      }
+                      alt
+                    }
+                  }
+                  price
+                  name
                 }
               }
             }

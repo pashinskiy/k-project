@@ -1,0 +1,118 @@
+import React from 'react';
+import { Grid, makeStyles, Typography } from '@material-ui/core';
+import CardWidget from '../../widgets/cardWidget';
+import ScrollBar from '../../scrollBar';
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        width: '100%',
+        '& h3': {
+            fontSize: 60,
+            fontWeight: 700,
+            lineHeight: '130%',
+            '@media (max-width: 1024px)': {
+                fontSize: '6vw',
+            },
+            '@media (max-width: 767px)': {
+                fontSize: '9vw',
+            },
+            '& span': {
+                color: theme.palette.color.accentSecondary,
+            },
+        },
+    },
+    brand: {
+        width: 140,
+        height: 165,
+        marginRight: 12,
+        overflow: 'hidden',
+    },
+    title: {
+        width: '100%',
+        marginBottom: 20,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    card: {
+        width: 160,
+        height: 260,
+        textDecoration: 'none',
+        color: theme.palette.color.main,
+        borderRadius: 20,
+        background: theme.palette.background.secondary,
+        marginRight: 12,
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+        '&:last-child': {
+            marginRight: 0,
+        },
+        '& h4': {
+            fontSize: 17,
+            fontWeight: 700,
+            padding: 20,
+            '& span': {
+                color: theme.palette.color.accentSecondary,
+            },
+        },
+    },
+    subtitle: {
+        marginBottom: 40,
+        '& p': {
+            fontSize: 17,
+            color: theme.palette.color.secondary,
+        },
+    },
+    icon: {
+        flex: 1,
+        width: '100%',
+        background: theme.palette.color.accent,
+        borderRadius: '120px 0px 0px 0px',
+        display: 'flex',
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        '& img': {
+            width: 120,
+            height: 120,
+        },
+    },
+}));
+
+export default function SocialNetworks(props) {
+
+    const classes = useStyles();
+
+    return (
+        <div className={classes.root}>
+            <div className={classes.title}>
+                <Typography variant="h3">
+                    Подписывайтесь<br />на наши <span>социальные сети</span>
+                </Typography>
+            </div>
+            <div className={classes.subtitle}>
+                <Typography variant="body1">
+                    Оставайтесь в курсе новых акций и выхода устройств!
+                </Typography>
+            </div>
+            <div className={classes.brands}>
+                <ScrollBar buttonNext>
+                    {props.data.allPrismicFooterBody2Social.edges.map((social, i) => (
+                        <a
+                            href={social.node.primary.link.url}
+                            target="_blank" rel="noopener noreferrer"
+                            key={`social_card ${i}`}
+                            className={classes.card}>
+                            <Typography variant="h4" dangerouslySetInnerHTML={{
+                                __html: social.node.primary.social_name.raw[0].text
+                                }} />
+                            <div className={classes.icon}>
+                                <img src={social.node.primary.social_img_white.localFile.publicURL} alt={social.node.primary.social_img_white.alt} />
+                            </div>
+                        </a>
+                    ))}
+                </ScrollBar>
+            </div>
+        </div>
+    );
+};
