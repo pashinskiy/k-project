@@ -69,7 +69,6 @@ const IndexPage = ({ data }) => {
       <Popular data={data} />
       <div style={{marginBottom: 100,}} />
       <SocialNetworks data={data} />
-      <div style={{marginBottom: 68,}} />
     </>
   );
 };

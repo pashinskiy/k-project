@@ -20,7 +20,6 @@ const useStyles = makeStyles(theme => ({
     },
     brand: {
         width: 140,
-        height: 165,
         marginRight: 12,
         overflow: 'hidden',
     },
