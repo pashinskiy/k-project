@@ -235,7 +235,7 @@ export default function CardWidget({cardImage, cardTitle, cardLink, variant, gra
                   alt={altImage}
                   className={`${classes.stretch} gatsby--image`}
                 />
-                <Typography className={classes.categoryCardTitle}>
+                <Typography className={`${classes.categoryCardTitle} category--title`}>
                   {cardTitle}
                 </Typography>
               </Link>
@@ -306,6 +306,34 @@ export default function CardWidget({cardImage, cardTitle, cardLink, variant, gra
             </div>
           </Link>
         )
+        case "brand_mainPage":
+          return (
+            <Link
+              to={cardLink}
+              className={classes.stretch}
+              style={{ textDecoration: "none" }}
+            >
+              <div className={classes.brandCardRoot}>
+                <Card
+                  className={classes.brandContainer}
+                  style={{ background: "#EFEFF2", borderRadius: 100, }}
+                >
+                  <div className={classes.brandDummy} />
+                  <GatsbyImage
+                    image={cardImage}
+                    alt={altImage}
+                    className={classes.brandElement}
+                    imgStyle={{ objectFit: "contain" }}
+                  />
+                </Card>
+                {cardTitle ? (
+                  <Typography className={classes.brandTitle}>
+                    {cardTitle}
+                  </Typography>
+                ) : null}
+              </div>
+            </Link>
+          )
       case "small":
         return (
           <Link
