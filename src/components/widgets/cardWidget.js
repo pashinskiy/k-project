@@ -64,16 +64,16 @@ const useStyles = makeStyles(theme => ({
     height: "100%",
     boxShadow: "none",
     position: "relative",
-    borderRadius: "12px",
-    // "@media(min-width: 1280px)": {
-    //   borderRadius: "12px",
-    // },
-    // "@media(max-width: 834px)": {
-    //   borderRadius: "1.438vw",
-    // },
-    // "@media(max-width: 414px)": {
-    //   borderRadius: "2.89vw",
-    // },
+    borderRadius: "0.9375vw",
+    "@media(min-width: 1280px)": {
+      borderRadius: "12px",
+    },
+    "@media(max-width: 834px)": {
+      borderRadius: "1.438vw",
+    },
+    "@media(max-width: 414px)": {
+      borderRadius: "2.89vw",
+    },
   },
 
   storiesCardRoot: {
@@ -81,32 +81,69 @@ const useStyles = makeStyles(theme => ({
     height: "100%",
     boxShadow: "none",
     border: `3px solid ${theme.palette.color.accentSecondary}`,
-    borderRadius: 24,
     background: "white",
+    borderRadius: "1.875vw",
+    "@media(min-width: 1280px)": {
+      borderRadius: "24px",
+    },
+    "@media(max-width: 834px)": {
+      borderRadius: "2.877vw",
+    },
+    "@media(max-width: 414px)": {
+      borderRadius: "5.797vw",
+    },
   },
 
   storiesCardTitle: {
     position: "absolute",
     fontWeight: 700,
-    fontSize: 14,
     lineHeight: '120%',
-    bottom: 16,
-    left: 16,
-    right: 16,
+    width: "71%",
     color: theme.palette.color.mainContrast,
     margin: "auto",
     overflowWrap: "break-word",
+    fontSize: "1.0937vw",
+    bottom: "1.25vw",
+    left: "1.25vw",
+    right: "1.25vw",
+    "@media(min-width: 1280px)": {
+      fontSize: 14,
+      bottom: 16,
+      left: 16,
+      right: 16,
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "1.678vw",
+      bottom: "1.918vw",
+      left: "1.918vw",
+      right: "1.918vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "3.381vw",
+      bottom: "3.864vw",
+      left: "3.864vw",
+      right: "3.864vw",
+    },
   },
   storiesImageContainer: {
     width: "calc(100% - 6px)",
     height: "calc(100% - 6px)",
-    borderRadius: 18,
     position: "absolute",
     right: 0,
     left: 0,
     top: 0,
     bottom: 0,
     margin: "auto",
+    borderRadius: "1.406vw",
+    "@media(min-width: 1280px)": {
+      borderRadius: 18,
+    },
+    "@media(max-width: 834px)": {
+      borderRadius: "2.158vw",
+    },
+    "@media(max-width: 414px)": {
+      borderRadius: "4.347vw",
+    },
   },
   brandCardRoot: {
     width: "100%",
@@ -118,7 +155,16 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     boxShadow: "none",
     background: theme.palette.background.secondary,
-    borderRadius: "20px",
+    borderRadius: "1.5625vw",
+    "@media(min-width: 1280px)": {
+      borderRadius: "20px",
+    },
+    "@media(max-width: 834px)": {
+      borderRadius: "2.398vw",
+    },
+    "@media(max-width: 414px)": {
+      borderRadius: "4.83vw",
+    },
   },
   brandContainerGradient: {
     background: theme.palette.background.accent,
@@ -137,11 +183,29 @@ const useStyles = makeStyles(theme => ({
     objectFit: "contain",
   },
   brandTitle: {
-    fontSize: 14,
     fontWeight: 700,
     marginTop: 8,
     textAlign: "center",
     color: theme.palette.color.main,
+
+    paddingTop: "0.625vw",
+    paddingBottom: "0.625vw",
+    fontSize: "1.09375vw",
+    "@media(min-width: 1280px)": {
+      paddingTop: "8px",
+      paddingBottom: "8px",
+      fontSize: 14,
+    },
+    "@media(max-width: 834px)": {
+      paddingTop: "0.959vw",
+      paddingBottom: "0.959vw",
+      fontSize: "1.6786vw",
+    },
+    "@media(max-width: 414px)": {
+      paddingTop: "1.932vw",
+      paddingBottom: "1.932vw",
+      fontSize: "3.3816vw",
+    },
   },
   smallCardTitle: {
     color: theme.palette.color.main,
@@ -172,24 +236,57 @@ const useStyles = makeStyles(theme => ({
   },
 
   catSingleRoot: {
-    width: "268px",
     background: theme.palette.background.secondary,
     boxShadow: "none",
-    borderRadius: "20px",
+    width: "20.9375vw",
+    borderRadius: "1.5625vw",
+    "@media(min-width: 1280px)": {
+      width: "268px",
+      borderRadius: "20px",
+    },
+    "@media(max-width: 834px)": {
+      width: "32.134vw",
+      borderRadius: "2.398vw",
+    },
+    "@media(max-width: 414px)": {
+      width: "64.734vw",
+      borderRadius: "4.83vw",
+    },
   },
   catSingleTitle: {
     // paddingBottom: "32px",
-    marginBottom: "20px",
-    fontSize: 17,
     fontWeight: 700,
+    marginBottom: "1.5625vw",
+    fontSize: "1.328125vw",
+    "@media(min-width: 1280px)": {
+      marginBottom: "20px",
+      fontSize: 17,
+    },
+    "@media(max-width: 834px)": {
+      marginBottom: "2.398vw",
+      fontSize: "2.0383vw",
+    },
+    "@media(max-width: 414px)": {
+      marginBottom: "4.83vw",
+      fontSize: "4.106vw",
+    },
   },
   catSingleSubTitle: {
     color: theme.palette.color.secondary,
   },
   catSingleContainer: {
     width: "79.1%",
-    padding: "28px 0",
     margin: "auto",
+    padding: "2.1875vw 0",
+    "@media(min-width: 1280px)": {
+      padding: "28px 0",
+    },
+    "@media(max-width: 834px)": {
+      padding: "3.357vw 0",
+    },
+    "@media(max-width: 414px)": {
+      padding: "6.763vw 0",
+    },
   },
 }))
 
@@ -235,7 +332,7 @@ export default function CardWidget({cardImage, cardTitle, cardLink, variant, gra
                   alt={altImage}
                   className={`${classes.stretch} gatsby--image`}
                 />
-                <Typography className={classes.categoryCardTitle}>
+                <Typography className={`${classes.categoryCardTitle} category--title`}>
                   {cardTitle}
                 </Typography>
               </Link>
@@ -306,6 +403,34 @@ export default function CardWidget({cardImage, cardTitle, cardLink, variant, gra
             </div>
           </Link>
         )
+        case "brand_mainPage":
+          return (
+            <Link
+              to={cardLink}
+              className={classes.stretch}
+              style={{ textDecoration: "none" }}
+            >
+              <div className={classes.brandCardRoot}>
+                <Card
+                  className={classes.brandContainer}
+                  style={{ background: "#EFEFF2", borderRadius: 100, }}
+                >
+                  <div className={classes.brandDummy} />
+                  <GatsbyImage
+                    image={cardImage}
+                    alt={altImage}
+                    className={classes.brandElement}
+                    imgStyle={{ objectFit: "contain" }}
+                  />
+                </Card>
+                {cardTitle ? (
+                  <Typography className={classes.brandTitle}>
+                    {cardTitle}
+                  </Typography>
+                ) : null}
+              </div>
+            </Link>
+          )
       case "small":
         return (
           <Link

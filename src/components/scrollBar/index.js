@@ -17,7 +17,7 @@ const useStyle = makeStyles(theme => ({
       pointerEvents: "none",
 
       position: "absolute",
-      zIndex: 1,
+      zIndex: 6,
       right: 0,
       top: 0,
 
@@ -76,7 +76,7 @@ const useStyle = makeStyles(theme => ({
     minWidth: 0,
 
     position: "absolute",
-    zIndex: 1,
+    zIndex: 6,
     right: 0,
     top: "50%",
     transform: "translateY(-50%)",

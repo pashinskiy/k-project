@@ -6,6 +6,13 @@
         "label": "uid"
       }
     },
+    "order": {
+      "type": "Number",
+      "config": {
+        "label": "Порядковый номер",
+        "placeholder": "Порядковый номер"
+      }
+    },
     "name": {
       "type": "Text",
       "config": {

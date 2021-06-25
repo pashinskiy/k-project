@@ -14,16 +14,6 @@ const useStyle = makeStyles(theme => ({
     width: "100%",
     cursor: "pointer",
     position: "relative",
-    marginBottom: "3.125vw",
-    "@media(min-width: 1280px)": {
-      marginBottom: "40px",
-    },
-    "@media(max-width: 834px)": {
-      marginBottom: "4.796vw",
-    },
-    "@media(max-width: 414px)": {
-      marginBottom: "9.66vw",
-    },
   },
   wrapperTrack: {
     overflow: "scroll",
@@ -154,6 +144,7 @@ const useStyle = makeStyles(theme => ({
     height: "6px",
     minHeight: "6px",
     minWidth: "6px",
+    padding: 0,
     marginRight: "4px",
     backgroundColor: "#C4C4C4",
     borderRadius: "1000px",
@@ -161,44 +152,14 @@ const useStyle = makeStyles(theme => ({
     "&:hover": {
       backgroundColor: "#C4C4C4",
     },
-    "&": {
-      padding: "6px",
-      "@media(max-width: 834px)": {
-        padding: "0.719vw",
-      },
-      "@media(max-width: 414px)": {
-        padding: "1.449vw",
-      },
-    },
-    "@media(max-width: 834px)": {
-      width: "0.719vw",
-      height: "0.719vw",
-      minHeight: "0.719vw",
-      minWidth: "0.719vw",
-      marginRight: "0.4796vw",
-    },
-    "@media(max-width: 414px)": {
-      width: "1.449vw",
-      height: "1.449vw",
-      minHeight: "1.449vw",
-      minWidth: "1.449vw",
-      marginRight: "0.966vw",
-    },
   },
   activeSmallButton: {
     width: "28px",
-    "@media(max-width: 834px)": {
-      width: "3.357vw",
-    },
-    "@media(max-width: 414px)": {
-      width: "6.763vw",
-    },
   },
 }))
 
 export default function MainPageSlider({ array, variant }) {
   const classes = useStyle()
-  const testArray = [1, 2, 3, 4, 5, 6]
   const [activeChild, setActiveChild] = React.useState()
   let contentArray = array
   switch(variant){
@@ -374,11 +335,6 @@ export default function MainPageSlider({ array, variant }) {
           onPointerDown={setScrollBar}
           className={classes.track}
         >
-          {/* {testArray.map((test, i) => (    
-          <Card id={"item" + i} style={{background: "gray"}} className={classes.item}>
-            <Typography>BlahBlah</Typography>
-          </Card>
-          ))} */}
           {contentArray}
         </Grid>
         <Button
@@ -407,10 +363,6 @@ export default function MainPageSlider({ array, variant }) {
           ))}
         </Grid>
       </Grid>
-      {/* <div style={{paddingTop: "100px", paddingBottom: "100px", width: "1160px", height: "auto"}}>
-
-      <SaleCard sale={contentArray[0]} key={contentArray[0].uid} mainPage />
-      </div> */}
     </Grid>
   )
 }

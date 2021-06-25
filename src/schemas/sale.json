@@ -1,0 +1,41 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "uid",
+        "placeholder": "uid"
+      }
+    },
+    "sale_name": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+        "label": "Название акции",
+        "placeholder": "Название акции"
+      }
+    },
+    "sale_value": {
+      "type": "Number",
+      "config": {
+        "label": "Скидка",
+        "placeholder": "Скидка"
+      }
+    },
+    "sale_link": {
+      "type": "Link",
+      "config": {
+        "label": "Ссылка на акционные товары",
+        "placeholder": "Ссылка на акционные товары"
+      }
+    },
+    "sale_img": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Изображение акции"
+      }
+    }
+  }
+}

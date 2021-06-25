@@ -59,7 +59,7 @@ export default function CardProduct({ prismicProduct, allPrismicProduct }) {
       )}
 
       {mobile ? (
-        <AddInCartAndFav product={prismicProduct} text="В корзину" variant="page" fixed={true} />
+        <AddInCartAndFav product={prismicProduct} text="В корзину" variant="page" fixed={true} dialog />
       ) : null}
     </>
   )
