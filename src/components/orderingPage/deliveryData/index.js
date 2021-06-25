@@ -6,6 +6,7 @@ import HeaderWithIcon from "../headerWithIcon"
 import SmallHeaderWithIcon from "../smallHeaderWithIcon"
 
 import WrapperWithTitle from "../elementsForm/wrapperWithTitle"
+import VariantDelivery from "../elementsForm/variantDelivery"
 import Select from "../elementsForm/select"
 import ListRatioRect from "../elementsForm/listRatioRect"
 import Input from "../elementsForm/input"
@@ -122,6 +123,8 @@ export default function DeliveryData({ prismicCartAndOrder, afterChange }) {
   const stickerDelivery = prismicCartAndOrder.data.sticker ?? false
 
   const [city, setCity] = React.useState(false)
+
+  const [variantDelivery, setVariantDelivery] = React.useState("standart")
   const [date, setDate] = React.useState(false)
   const [time, setTime] = React.useState(false)
   const [street, setStreet] = React.useState(false)
@@ -172,6 +175,8 @@ export default function DeliveryData({ prismicCartAndOrder, afterChange }) {
           />
         </WrapperWithTitle>
       </div>
+
+      <VariantDelivery value={variantDelivery} setValue={setVariantDelivery} />
 
       {/* ******************************************************* */}
       <div className={classes.wrapperInfoAboutStandartDelivery}>
