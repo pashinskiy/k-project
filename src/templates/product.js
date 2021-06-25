@@ -73,6 +73,7 @@ export default Product
 export const pageQuery = graphql`
   query ProductBySlug($uid: String!) {
     prismicProduct(uid: { eq: $uid }) {
+      id
       uid
       data {
         brand {
@@ -89,6 +90,7 @@ export const pageQuery = graphql`
                       image {
                         localFile {
                           childImageSharp {
+                            gatsbyImageData
                             fluid(maxHeight: 35) {
                               aspectRatio
                               src
@@ -115,6 +117,7 @@ export const pageQuery = graphql`
           image {
             localFile {
               childImageSharp {
+                gatsbyImageData
                 fluid(
                   maxWidth: 750
                   srcSetBreakpoints: [
@@ -408,11 +411,37 @@ export const pageQuery = graphql`
             }
           }
         }
+        all_product_accessories {
+          product_accessories {
+            document {
+              ... on PrismicProduct {
+                uid
+                id
+                data {
+                  images {
+                    image {
+                      localFile {
+                        childImageSharp {
+                          gatsbyImageData
+                        }
+                      }
+                      alt
+                    }
+                  }
+                  price
+                  name
+                }
+              }
+            }
+          }
+        }
       }
     }
     allPrismicProduct {
       edges {
         node {
+          id
+          uid
           data {
             name
             price
@@ -434,7 +463,6 @@ export const pageQuery = graphql`
               }
             }
           }
-          uid
         }
       }
     }

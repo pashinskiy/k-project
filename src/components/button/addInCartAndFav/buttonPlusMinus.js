@@ -4,6 +4,11 @@ import { Grid, makeStyles, Typography } from "@material-ui/core"
 import Minus from "../../../../static/svg/minus.svg"
 import Plus from "../../../../static/svg/plus.svg"
 
+import {
+  GlobalStateContext,
+  GlobalDispatchContext,
+} from "../../../context/GlobalContextProvider"
+
 const useStyles = makeStyles(theme => ({
   wrapper: {
     backgroundClip: "padding-box",
@@ -84,7 +89,18 @@ const useStyles = makeStyles(theme => ({
       height: "9.66vw",
     },
   },
+  buttonFull: {
+    width: "100%",
+    height: "100%",
+  },
   icon: {
+    minWidth: 0,
+    minHeight: 0,
+    padding: 0,
+    background: "transparent",
+    border: "none",
+    cursor: "pointer",
+
     width: "0.93vw",
     height: "0.93vw",
     "@media(min-width: 1280px)": {
@@ -115,27 +131,46 @@ const useStyles = makeStyles(theme => ({
     },
   },
   disable: {
+    cursor: "default",
     "& path": {
       fill: theme.palette.color.secondaryLight,
+    },
+  },
+  unselect: {
+    "& *": {
+      "-webkit-touch-callout": "none" /* iOS Safari */,
+      "-webkit-user-select": "none" /* Chrome/Safari/Opera */,
+      "-khtml-user-select": "none" /* Konqueror */,
+      "-moz-user-select": "none" /* Firefox */,
+      "-ms-user-select": "none" /* Internet Explorer/Edge */,
+      "user-select": "none",
     },
   },
 }))
 
 export default function ButtonPlusMinus({ product, variant }) {
   const classes = useStyles()
+  const classButton = (() => {
+    switch (variant) {
+      case "page":
+        return classes.buttonPage
+      case "full":
+        return classes.buttonFull
+      default:
+        return classes.buttonCard
+    }
+  })()
 
-  const classButton =
-    variant === "page" ? classes.buttonPage : classes.buttonCard
+  const state = React.useContext(GlobalStateContext)
+  const dispatch = React.useContext(GlobalDispatchContext)
 
-  const [count, setCount] = React.useState(99)
+  const count = state.inCart(product.id)
 
   function plus() {
-    console.log(`plus ${product.uid}`)
-    if (count < 99) setCount(count + 1)
+    dispatch({ type: "INCREMENT_PRODUCT_COUNT", payload: product.id })
   }
   function minus() {
-    console.log(`minus ${product.uid}`)
-    if (count > 1) setCount(count - 1)
+    dispatch({ type: "DECREMENT_PRODUCT_COUNT", payload: product.id })
   }
 
   const classMinus = count > 1 ? "" : classes.disable
@@ -146,11 +181,17 @@ export default function ButtonPlusMinus({ product, variant }) {
       container
       justify="space-between"
       alignItems="center"
-      className={classes.wrapper + " " + classButton}
+      className={classes.wrapper + " " + classes.unselect + " " + classButton}
     >
-      <Minus onClick={minus} className={classes.icon + " " + classMinus} />
+      <button onClick={minus} className={classes.icon}>
+        <Minus className={classMinus} />
+      </button>
+
       <Typography className={classes.amount}>{count}</Typography>
-      <Plus onClick={plus} className={classes.icon + " " + classPlus} />
+
+      <button onClick={plus} className={classes.icon}>
+        <Plus className={classPlus} />
+      </button>
     </Grid>
   )
 }

@@ -1,10 +1,7 @@
 import React from "react"
 import {
   makeStyles,
-  Typography,
-  Button,
   Card,
-  useMediaQuery,
 } from "@material-ui/core"
 import { GatsbyImage } from "gatsby-plugin-image"
 
@@ -52,6 +49,9 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 414px)": {
       height: "131.4vw",
       borderRadius: "2.8985vw",
+    },
+    "&:img":{
+      borderRadius: "inherit",
     },
   },
 }))

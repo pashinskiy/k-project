@@ -333,6 +333,7 @@ export const pageQuery = graphql`
         allPrismicProduct(filter: { data: { main_category: { uid: { eq: $uid } } } }) {
             edges {
                 node {
+                    id
                     uid
                     data {
                         body {

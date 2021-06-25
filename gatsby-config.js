@@ -68,6 +68,7 @@ module.exports = {
           advantage: require("./src/schemas/advantage.json"),
           sale: require("./src/schemas/sale.json"),
           main_page: require("./src/schemas/main_page.json"),
+          cart_and_order: require("./src/schemas/cart_and_order.json"),
         },
         shouldDownloadImage: () => true,
       },
