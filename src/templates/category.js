@@ -1,5 +1,5 @@
 import * as React from "react";
-import { graphql, useStaticQuery, Link } from "gatsby";
+import { graphql, Link } from "gatsby";
 import { Grid, makeStyles, Typography } from "@material-ui/core";
 import Seo from "../components/seo";
 import BreadCrumbs from "../components/breadCrumbs";
@@ -9,7 +9,6 @@ import ScrollBar from "../components/categoryPage/scrollBar";
 import { GatsbyImage } from "gatsby-plugin-image";
 import CardWidget from "../components/widgets/cardWidget";
 import FiltersBySticker from "../components/catalog/fastLink/filtersBySticker";
-import CardProduct from "../components/scrollBar/productsScrollBar/cardProduct";
 import AllProductsByCategory from "../components/categoryPage/products";
 
 const useStyles = makeStyles(theme => ({

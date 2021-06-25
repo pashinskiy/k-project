@@ -202,6 +202,9 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "2.898vw",
       marginBottom: "6.763vw",
     },
+    "&:img":{
+      borderRadius: "inherit",
+    },
   },
   wrapperMainPage: {
     display: "flex",

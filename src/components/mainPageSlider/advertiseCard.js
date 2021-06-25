@@ -50,6 +50,9 @@ const useStyles = makeStyles(theme => ({
       height: "131.4vw",
       borderRadius: "2.8985vw",
     },
+    "&:img":{
+      borderRadius: "inherit",
+    },
   },
 }))
 

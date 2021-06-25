@@ -274,24 +274,52 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.color.main,
     textAlign: "center",
     fontSize: "1.875vw",
-    marginBottom: "2.1875vw",
+    marginBottom: "1.09375vw",
     lineHeight: "2.265625vw",
     "@media(min-width: 1280px)": {
       fontSize: "24px",
-      marginBottom: "28px",
+      marginBottom: "14px",
       lineHeight: "29px",
     },
     "@media(max-width: 834px)": {
       fontSize: "2.877vw",
-      marginBottom: "3.3573vw",
+      marginBottom: "1.6786vw",
       lineHeight: "3.4772vw",
     },
     "@media(max-width: 414px)": {
       fontSize: "3.8647vw",
-      marginBottom: "6.7632vw",
+      marginBottom: "3.3816vw",
       lineHeight: "4.5893vw",
     },
   },
+  accessoriesContainer: {
+    width: "calc(100% + 2.1875vw)",
+    margin: "0 -1.09375vw",
+    "@media(min-width: 1280px)": {
+      width: "calc(100% + 28px)",
+      margin: "0 -14px",
+    },
+    "@media(max-width: 834px)": {
+      width: "calc(100% + 3.3573vw)",
+      margin: "0 -1.6786vw",
+    },
+    "@media(max-width: 414px)": {
+      width: "calc(100% + 4.8309vw)",
+      margin: "0 -2.41545vw",
+    },
+  },
+  accessoriesRoot: {
+    padding: "1.09375vw",
+    "@media(min-width: 1280px)": {
+      padding: "14px",
+    },
+    "@media(max-width: 834px)": {
+      padding: "1.67865vw",
+    },
+    "@media(max-width: 414px)": {
+      padding: "2.4154vw",
+    },
+  }
 }))
 
 export default function ProductAddedCard({ product, closeDialog }) {
@@ -317,8 +345,8 @@ export default function ProductAddedCard({ product, closeDialog }) {
               //высота и ширина для отступа от контейнера
               imgStyle={{
                 objectFit: "contain",
-                height: "95%",
-                width: "95%",
+                // height: "95%",
+                // width: "95%",
                 margin: "auto",
               }}
             />
@@ -350,17 +378,19 @@ export default function ProductAddedCard({ product, closeDialog }) {
             </Button>
           </div>
         </Card>
-        {accessoriesArray?.length !== 0 ? (
+        {!!accessoriesArray.length ? (
           <Card className={classes.cardRoot}>
             <Typography className={classes.offerTitle}>
               Добавьте аксессуар в комплект
             </Typography>
             <Grid container className={classes.accessoriesContainer}>
               {accessoriesArray.map(accessory => (
+              <Grid item xs={6} className={classes.accessoriesRoot}>
                 <CardOfferProduct
                   accessory={accessory}
                   key={accessory.product_accessories.document?.uid + "-offer"}
                 />
+              </Grid>
               ))}
             </Grid>
           </Card>

@@ -1,15 +1,12 @@
 import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import {
-  Button,
-  Grid,
-  Typography,
-} from "@material-ui/core"
+import { Button, Typography } from "@material-ui/core"
 import { Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import ButtonAddCart from "../button/addInCartAndFav/buttonAddCart"
 
 import { GlobalStateContext } from "../../context/GlobalContextProvider"
+import OfferAddedButtonIcon from "../../../static/svg/offerAddedButtonIcon.svg"
 
 const useStyles = makeStyles(theme => ({
   accessoriesRoot: {
@@ -32,7 +29,7 @@ const useStyles = makeStyles(theme => ({
       marginRight: "4.8309vw",
     },
 
-    "&:nth-of-type(2n)":{
+    "&:nth-of-type(2n)": {
       marginRight: 0,
     },
   },
@@ -40,22 +37,22 @@ const useStyles = makeStyles(theme => ({
   productImageContainer: {
     background: theme.palette.background.main,
     minWidth: "19.53125vw",
-    width: "19.53125vw",
+    // width: "19.53125vw",
     height: "15.625vw",
     padding: "0.390625vw",
     borderRadius: "0.9375vw",
     marginBottom: "1.914vw",
     "@media(min-width: 1280px)": {
-      minWidth: "250px",
-      width: "250px",
+      // minWidth: "250px",
+      // width: "250px",
       height: "200px",
       padding: "5px",
       borderRadius: "12px",
       marginBottom: "24.5px",
     },
     "@media(max-width: 834px)": {
-      minWidth: "29.976vw",
-      width: "29.976vw",
+      // minWidth: "29.976vw",
+      // width: "29.976vw",
       height: "23.98vw",
       padding: "0.5995vw",
       borderRadius: "1.4388vw",
@@ -63,7 +60,7 @@ const useStyles = makeStyles(theme => ({
     },
     "@media(max-width: 414px)": {
       // minWidth: "24.154vw",
-      width: "37.198vw",
+      // width: "37.198vw",
       height: "37.198vw",
       padding: "1.2077vw",
       borderRadius: "2.8985vw",
@@ -162,7 +159,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   buttonAddCart: {
-    "& p":{
+    "& p": {
       fontSize: "1.09375vw",
       "@media(min-width: 1280px)": {
         fontSize: "14px",
@@ -175,6 +172,26 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
+  iconOfferAdded: {
+    width: "1.328125vw",
+    height: "1.328125vw",
+    marginRight: "0.78125vw",
+    "@media(min-width: 1280px)": {
+      width: "17px",
+      height: "17px",
+      marginRight: "10px",
+    },
+    "@media(max-width: 834px)": {
+      width: "2.03836vw",
+      height: "2.03836vw",
+      marginRight: "1.199vw",
+    },
+    "@media(max-width: 414px)": {
+      width: "4.1062vw",
+      height: "4.1062vw",
+      marginRight: "2.41545vw",
+    },
+  },
 }))
 
 export default function CardOfferProduct({ accessory }) {
@@ -182,10 +199,11 @@ export default function CardOfferProduct({ accessory }) {
   const accessoryItem = accessory.product_accessories.document
 
   const state = React.useContext(GlobalStateContext)
-  const inCart = state.inCart(accessoryItem.id)
+  const inCart = !!state.inCart(accessoryItem.id)
 
   return (
-    <Grid item className={classes.accessoriesRoot}>
+    // <Grid item className={classes.accessoriesRoot}>
+    <>
       <Link
         to={`/${accessoryItem.uid}/`}
         key={accessoryItem.uid}
@@ -205,8 +223,8 @@ export default function CardOfferProduct({ accessory }) {
           //высота и ширина для отступа от контейнера
           imgStyle={{
             objectFit: "contain",
-            height: "95%",
-            width: "95%",
+            // height: "95%",
+            // width: "95%",
             margin: "auto",
           }}
         />
@@ -220,10 +238,20 @@ export default function CardOfferProduct({ accessory }) {
         </div>
       </Link>
       {inCart ? (
-        <Button className={classes.buttonAdded}>Добавлено</Button>
+        <Button className={classes.buttonAdded}>
+          <OfferAddedButtonIcon className={classes.iconOfferAdded} />
+          Добавлено
+        </Button>
       ) : (
-        <ButtonAddCart product={accessoryItem} text="В корзину" iconPlus={true} variant="offerPage" className={classes.buttonAddCart}/>
+        <ButtonAddCart
+          product={accessoryItem}
+          text="Добавить"
+          iconPlus={true}
+          variant="offerPage"
+          className={classes.buttonAddCart}
+        />
       )}
-    </Grid>
+      {/* // </Grid> */}
+    </>
   )
 }
