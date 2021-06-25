@@ -36,31 +36,23 @@ const useStyles = makeStyles(theme => ({
 
   productImageContainer: {
     background: theme.palette.background.main,
-    minWidth: "19.53125vw",
-    // width: "19.53125vw",
     height: "15.625vw",
     padding: "0.390625vw",
     borderRadius: "0.9375vw",
     marginBottom: "1.914vw",
     "@media(min-width: 1280px)": {
-      // minWidth: "250px",
-      // width: "250px",
       height: "200px",
       padding: "5px",
       borderRadius: "12px",
       marginBottom: "24.5px",
     },
     "@media(max-width: 834px)": {
-      // minWidth: "29.976vw",
-      // width: "29.976vw",
       height: "23.98vw",
       padding: "0.5995vw",
       borderRadius: "1.4388vw",
       marginBottom: "2.9376vw",
     },
     "@media(max-width: 414px)": {
-      // minWidth: "24.154vw",
-      // width: "37.198vw",
       height: "37.198vw",
       padding: "1.2077vw",
       borderRadius: "2.8985vw",
