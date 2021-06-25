@@ -81,7 +81,7 @@ export default function Advantages(props) {
                 </button> */}
             </div>
             <div className={classes.advantages}>
-                <ScrollBar buttonNext>
+                <ScrollBar buttonNext fullScreen>
                     {props.data.allPrismicAdvantage.edges.map((advantage, i) => (
                         <div className={classes.card}>
                             <Typography variant="h4" dangerouslySetInnerHTML={{
