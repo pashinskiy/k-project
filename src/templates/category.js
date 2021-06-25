@@ -16,6 +16,9 @@ const useStyles = makeStyles(theme => ({
         padding: "28px 0px 68px 0px",
         boxSizing: "border-box",
         width: '100%',
+        "@media (max-width: 1024px)": {
+            paddingTop: 0,
+        },
     },
     wrapper: {
         marginTop: 28,
@@ -50,7 +53,7 @@ const useStyles = makeStyles(theme => ({
         background: theme.palette.background.secondary,
         borderRadius: 20,
         "@media (max-width: 1024px)": {
-        display: "none",
+            display: "none",
         },
     },
     title_subcategory: {
@@ -77,6 +80,12 @@ const useStyles = makeStyles(theme => ({
         padding: 8,
         borderRadius: 20,
         marginTop: 48,
+        '@media (max-width: 1024px)': {
+            marginTop: 28,
+        },
+        '@media (max-width: 767px)': {
+            marginTop: 36,
+        },
     },
     img: {
         borderRadius: 12,
@@ -85,10 +94,19 @@ const useStyles = makeStyles(theme => ({
     },
     content_wrapper: {
         marginTop: 40,
+        '@media (max-width: 1024px)': {
+            marginTop: 28,
+        },
+        '@media (max-width: 767px)': {
+            marginTop: 36,
+        },
         width: '100%',
         height: 'fit-content',
         '& h3': {
             fontSize: 28,
+            '@media (max-width: 767px)': {
+                fontSize: 17,
+            },
             fontWeight: 700,
             marginBottom: 20,
         },

@@ -17,6 +17,7 @@ const theme = createMuiTheme({
       secondary: "#EFEFF2",
       secondaryDark: "#E3E3EA",
       secondaryLight: "#BDBDC6",
+      brandLight: "#D2D0E9",
     },
     width: {
       limit: "1280px",

@@ -1,0 +1,45 @@
+{
+  "Main" : {
+    "uid" : {
+      "type" : "UID",
+      "config" : {
+        "label" : "uid",
+        "placeholder" : "uid"
+      }
+    },
+    "hot" : {
+      "type" : "Group",
+      "config" : {
+        "fields" : {
+          "hot_product" : {
+            "type" : "Link",
+            "config" : {
+              "select" : "document",
+              "customtypes" : [ "product" ],
+              "label" : "Выберите товар",
+              "placeholder" : "Выберите товар"
+            }
+          }
+        },
+        "label" : "Выберите товары для раздела \"Хиты продаж\""
+      }
+    },
+    "new" : {
+      "type" : "Group",
+      "config" : {
+        "fields" : {
+          "new_product" : {
+            "type" : "Link",
+            "config" : {
+              "select" : "document",
+              "customtypes" : [ "product" ],
+              "label" : "Выберите товар",
+              "placeholder" : "Выберите товар"
+            }
+          }
+        },
+        "label" : "Выберите товары для раздела \"Новинки\""
+      }
+    }
+  }
+}
