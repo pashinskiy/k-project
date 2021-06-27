@@ -7,15 +7,11 @@ import CardProduct from "../components/productPage/cardProduct"
 import Landing from "../components/productPage/landing"
 import Gallery from "../components/productPage/gallery"
 import DeliveryCards from "../components/productPage/delivery"
-import ProductsScrollBar from "../components/scrollBar/productsScrollBar"
 import TabPanel from "../components/productPage/tabPanel"
 import CharacteristicsBlock from "../components/productPage/characteristics"
+import SimilarProducts from "../components/productPage/similarProducts"
 
-import IconSimilarProduct from "../../static/svg/similarProducts.svg"
-
-const Product = ({
-  data: { prismicProduct, allPrismicProduct, allPrismicCatalog },
-}) => {
+const Product = ({ data: { prismicProduct } }) => {
   return (
     <>
       <Seo title="Home" />
@@ -44,16 +40,8 @@ const Product = ({
         ]}
       />
       <div id="about_product" />
-      <CardProduct
-        prismicProduct={prismicProduct}
-        allPrismicProduct={allPrismicProduct}
-      />
-      <ProductsScrollBar
-        products={allPrismicProduct.edges.map(edge => edge.node)}
-        title="Похожие товары"
-        icon={<IconSimilarProduct />}
-        divider={true}
-      />
+      <CardProduct prismicProduct={prismicProduct} />
+      <SimilarProducts />
       <div id="description" />
       <Landing slices={prismicProduct.data.body2} />
       <div id="photo" />
@@ -430,81 +418,6 @@ export const pageQuery = graphql`
                   }
                   price
                   name
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    allPrismicProduct {
-      edges {
-        node {
-          id
-          uid
-          data {
-            name
-            price
-            color_name
-            color
-            images {
-              image {
-                alt
-                localFile {
-                  childImageSharp {
-                    gatsbyImageData(
-                      width: 250
-                      transformOptions: { fit: CONTAIN }
-                      outputPixelDensities: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
-                      sizes: "(min-width: 1280px) 250px, (max-width: 414px) 49.51vw, (max-width: 834px) 29.97vw, 19.53vw"
-                    )
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    allPrismicCatalog {
-      edges {
-        node {
-          id
-          data {
-            categories {
-              category {
-                uid
-                document {
-                  ... on PrismicCategory {
-                    data {
-                      image {
-                        localFile {
-                          childImageSharp {
-                            gatsbyImageData(
-                              height: 128
-                              width: 188
-                              transformOptions: {
-                                cropFocus: CENTER
-                                fit: COVER
-                              }
-                              outputPixelDensities: [
-                                0.35
-                                0.5
-                                0.75
-                                1
-                                1.25
-                                1.5
-                                1.75
-                                2
-                              ]
-                              sizes: "(min-width: 1280px) 188px, (max-width: 414px) 40.84vw, (max-width: 834px) 21.905vw"
-                            )
-                          }
-                        }
-                      }
-                      name
-                    }
-                  }
                 }
               }
             }

@@ -1,4 +1,5 @@
 import * as React from "react"
+import { graphql, useStaticQuery } from "gatsby"
 import { Grid, useMediaQuery } from "@material-ui/core"
 
 import ProductSlider from "./productSlider"
@@ -8,8 +9,26 @@ import BlockPrice from "./blockPrice"
 import AddInCartAndFav from "../../button/addInCartAndFav"
 import Features from "./features"
 
-export default function CardProduct({ prismicProduct, allPrismicProduct }) {
+export default function CardProduct({ prismicProduct }) {
   const mobile = useMediaQuery("(max-width: 834px)")
+
+  const data = useStaticQuery(graphql`
+    {
+      allPrismicProduct {
+        edges {
+          node {
+            id
+            uid
+            data {
+              name
+              color_name
+              color
+            }
+          }
+        }
+      }
+    }
+  `)
 
   // массив фото
   const photos = prismicProduct.data.images.map(
@@ -17,7 +36,7 @@ export default function CardProduct({ prismicProduct, allPrismicProduct }) {
   )
 
   // все продукты данной модели
-  const allColors = allPrismicProduct.edges
+  const allColors = data.allPrismicProduct.edges
     .filter(node => node.node.data.name === prismicProduct.data.name)
     .map(node => node.node)
 
@@ -30,8 +49,9 @@ export default function CardProduct({ prismicProduct, allPrismicProduct }) {
             slice => slice.slice_type === "stickers"
           )}
           logo={
-            prismicProduct.data.brand.document.data.body.find(slice => slice.slice_type === "logo")
-              ?.primary.image
+            prismicProduct.data.brand.document.data.body.find(
+              slice => slice.slice_type === "logo"
+            )?.primary.image
           }
         />
       )}
@@ -59,7 +79,13 @@ export default function CardProduct({ prismicProduct, allPrismicProduct }) {
       )}
 
       {mobile ? (
-        <AddInCartAndFav product={prismicProduct} text="В корзину" variant="page" fixed={true} dialog />
+        <AddInCartAndFav
+          product={prismicProduct}
+          text="В корзину"
+          variant="page"
+          fixed={true}
+          dialog
+        />
       ) : null}
     </>
   )
