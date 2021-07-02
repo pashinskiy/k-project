@@ -1,5 +1,8 @@
 import React from "react"
-import { makeStyles, Grid, Typography, Button } from "@material-ui/core"
+import { makeStyles, Grid, Typography } from "@material-ui/core"
+
+import Standart from "../../../../../static/svg/deliveryIcon.svg"
+import Express from "../../../../../static/svg/delivery.svg"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -13,9 +16,14 @@ const useStyle = makeStyles(theme => ({
   itemWrapper: {
     width: "50%",
     display: "flex",
+    padding: 0,
+    border: "none",
+    cursor: "pointer",
 
     "@media(max-width: 414px)": {
       justifyContent: "center",
+      alignItems: "center",
+      padding: "2.89vw",
       borderRadius: "2.17vw",
     },
   },
@@ -27,39 +35,99 @@ const useStyle = makeStyles(theme => ({
       },
     },
   },
-  title: {
-    fontWeight: 400,
-    lineHeight: 1.21,
+  ratio: {
+    borderRadius: "100%",
+    background: theme.palette.background.main,
+    border: `1px solid ${theme.palette.background.accentSecondary}`,
+    flexShrink: 0,
 
-    fontSize: "1.09vw",
+    width: "1.4vw",
+    height: "1.4vw",
+    marginTop: "0.23vw",
+    marginRight: "1.48vw",
     "@media(min-width: 1280px)": {
-      fontSize: "14px",
+      width: "18px",
+      height: "18px",
+      marginTop: "3px",
+      marginRight: "19px",
     },
     "@media(max-width: 834px)": {
-      fontSize: "1.67vw",
+      width: "2.15vw",
+      height: "2.15vw",
+      marginTop: "0.35vw",
+      marginRight: "2.27vw",
     },
     "@media(max-width: 414px)": {
-      fontSize: "3.38vw",
+      display: "none",
+    },
+  },
+  activeRatio: {
+    background: theme.palette.background.accentSecondary,
+
+    boxShadow: `inset 0 0 0 0.15vw ${theme.palette.background.main}`,
+    "@media(min-width: 1280px)": {
+      boxShadow: `inset 0 0 0 2px ${theme.palette.background.main}`,
+    },
+    "@media(max-width: 834px)": {
+      boxShadow: `inset 0 0 0 0.23vw ${theme.palette.background.main}`,
+    },
+  },
+  title: {
+    fontWeight: 700,
+    lineHeight: 1.21,
+    textAlign: "left",
+
+    fontSize: "1.4vw",
+    "@media(min-width: 1280px)": {
+      fontSize: "18px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "2.15vw",
+    },
+    "@media(max-width: 414px)": {
+      textAlign: "center",
+      fontSize: "2.89vw",
     },
   },
   description: {
     fontWeight: 400,
     lineHeight: 1.21,
+    textAlign: "left",
 
+    marginTop: "0.62vw",
     fontSize: "1.09vw",
     "@media(min-width: 1280px)": {
+      marginTop: "8px",
       fontSize: "14px",
     },
     "@media(max-width: 834px)": {
+      marginTop: "0.95vw",
       fontSize: "1.67vw",
     },
     "@media(max-width: 414px)": {
-      fontSize: "3.38vw",
+      color: theme.palette.color.secondary,
+      textAlign: "center",
+
+      marginTop: "1.93vw",
+      fontSize: "2.89vw",
+    },
+  },
+  icon: {
+    display: "none",
+    "@media(max-width: 414px)": {
+      display: "block",
+      width: "5.79vw",
+      height: "5.79vw",
+      margin: "0 auto",
     },
   },
 }))
 
-export default function VariantDelivery({ value, setValue }) {
+export default function VariantDelivery({
+  value,
+  setValue,
+  prismicCartAndOrder,
+}) {
   const classes = useStyle()
 
   function setStandartDelivery() {
@@ -72,7 +140,7 @@ export default function VariantDelivery({ value, setValue }) {
 
   return (
     <Grid container justify="space-between" className={classes.wrapper}>
-      <Button
+      <button
         onClick={setStandartDelivery}
         className={
           classes.itemWrapper +
@@ -80,10 +148,28 @@ export default function VariantDelivery({ value, setValue }) {
           (value === "standart" ? classes.activeItem : "")
         }
       >
-        Стандартная
-      </Button>
+        <div
+          className={
+            classes.ratio +
+            " " +
+            (value === "standart" ? classes.activeRatio : "")
+          }
+        />
 
-      <Button
+        <div>
+          <div className={classes.icon}>
+            <Standart />
+          </div>
+
+          <Typography className={classes.title}>Стандартная</Typography>
+
+          <Typography className={classes.description}>
+            {prismicCartAndOrder.data.description_standart}
+          </Typography>
+        </div>
+      </button>
+
+      <button
         onClick={setExpressDelivery}
         className={
           classes.itemWrapper +
@@ -91,8 +177,25 @@ export default function VariantDelivery({ value, setValue }) {
           (value === "express" ? classes.activeItem : "")
         }
       >
-        Экспресс
-      </Button>
+        <div
+          className={
+            classes.ratio +
+            " " +
+            (value === "express" ? classes.activeRatio : "")
+          }
+        />
+        <div>
+          <div className={classes.icon}>
+            <Express />
+          </div>
+
+          <Typography className={classes.title}>Экспресс</Typography>
+
+          <Typography className={classes.description}>
+            {prismicCartAndOrder.data.description_express}
+          </Typography>
+        </div>
+      </button>
     </Grid>
   )
 }

@@ -12,7 +12,6 @@ const useStyle = makeStyles(theme => ({
     width: "100%",
     background: theme.palette.background.main,
     border: `1px solid transparent`,
-    position: "relative",
 
     padding: "1.17vw 0.93vw",
     borderRadius: "0.46vw",
@@ -75,6 +74,7 @@ const useStyle = makeStyles(theme => ({
   },
   options: {
     background: theme.palette.background.main,
+    boxShadow: `0 0 1px #333`,
     position: "absolute",
     top: "110%",
     left: 0,
@@ -134,25 +134,29 @@ export default function Select({ options, afterChange }) {
   }
 
   function setGlobalValue(value) {
+    toggleShowOptions()
     setValue(value)
     afterChange(value)
   }
 
   return (
-    <Button
-      onClick={toggleShowOptions}
-      className={classes.select + " " + active}
-    >
-      <Typography className={classes.text}>{value}</Typography>
-      <div className={classes.icon + " " + rotate}>
-        <Arrow />
-      </div>
+    <div style={{ position: "relative" }}>
+      <Button
+        onClick={toggleShowOptions}
+        className={classes.select + " " + active}
+      >
+        <Typography className={classes.text}>{value}</Typography>
+        <div className={classes.icon + " " + rotate}>
+          <Arrow />
+        </div>
+      </Button>
 
       {showOptions ? (
         <Grid container direction="column" className={classes.options}>
           {options.map(option => (
             <Button
               onClick={() => setGlobalValue(option)}
+              key={option}
               className={classes.option + " " + classes.text}
             >
               {option}
@@ -160,6 +164,6 @@ export default function Select({ options, afterChange }) {
           ))}
         </Grid>
       ) : null}
-    </Button>
+    </div>
   )
 }

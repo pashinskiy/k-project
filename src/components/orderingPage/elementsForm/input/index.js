@@ -1,10 +1,9 @@
 import React from "react"
-import { makeStyles, Grid, Typography, Button } from "@material-ui/core"
-
-import Arrow from "../../../../../static/svg/arrow.svg"
+import { makeStyles } from "@material-ui/core"
 
 const useStyle = makeStyles(theme => ({
   input: {
+    width: "100%",
     background: theme.palette.background.main,
     border: `1px solid transparent`,
     outline: "none",
@@ -37,24 +36,21 @@ const useStyle = makeStyles(theme => ({
   },
   error: {
     border: `1px solid #F1ADAD`,
+    "@media(max-width: 414px)": {
+      border: `1px solid ${theme.palette.color.accentSecondary}`,
+    },
   },
 }))
 
 export default function Input({ afterChange, checkValue, ...other }) {
   const classes = useStyle()
   checkValue = checkValue ? checkValue : () => true
-  const [value, setValue] = React.useState("")
 
-  const error = checkValue(value) ? "" : classes.error
+  const error = checkValue() ? "" : classes.error
 
   function onInput(e) {
     const newValue = e.currentTarget.value
-    if (checkValue(newValue) || newValue === "") {
-      setValue(newValue)
-      afterChange(newValue)
-    } else {
-      e.currentTarget.value = value
-    }
+    afterChange(newValue)
   }
 
   return (

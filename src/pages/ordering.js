@@ -2,16 +2,17 @@ import React from "react"
 import { graphql } from "gatsby"
 import { makeStyles, Grid, Typography } from "@material-ui/core"
 
-import { GlobalStateContext } from "../context/GlobalContextProvider"
-
 import Seo from "../components/seo"
 import HeaderWithIcon from "../components/headers/headerWithIcon"
 import BreadCrumbs from "../components/breadCrumbs"
+import OrderingContext from "../components/orderingPage/context"
 import CartIcon from "../../static/svg/cart.svg"
 import PriceBlock from "../components/orderingPage/priceBlock"
 import DeliveryData from "../components/orderingPage/deliveryData"
 import PayData from "../components/orderingPage/payData"
 import RecipientData from "../components/orderingPage/recipientData"
+
+import { GlobalStateContext } from "../context/GlobalContextProvider"
 
 const useStyle = makeStyles(theme => ({
   mainBlockWrapper: {
@@ -140,7 +141,9 @@ const IndexPage = ({ data }) => {
   return (
     <>
       <Seo title="Оформление заказа" />
+
       <HeaderWithIcon icon={<CartIcon />} title={`Оформление заказа`} />
+
       <BreadCrumbs
         links={[{ title: "Оформление заказа", href: "/ordering/" }]}
       />
@@ -148,7 +151,7 @@ const IndexPage = ({ data }) => {
       {order === null ? (
         <Typography>Нет выбранных товаров для оформления</Typography>
       ) : (
-        <>
+        <OrderingContext>
           <Grid
             container
             justify="space-between"
@@ -192,7 +195,7 @@ const IndexPage = ({ data }) => {
           >
             {data.prismicCartAndOrder.data.phone_support}
           </a>
-        </>
+        </OrderingContext>
       )}
     </>
   )
@@ -273,6 +276,19 @@ export const query = graphql`
               gatsbyImageData(height: 40)
             }
           }
+        }
+        description_standart
+        description_express
+        time_standart {
+          range
+        }
+        description_card
+        description_getting
+        credit_partners {
+          url
+        }
+        installment_plan_partners {
+          url
         }
       }
     }

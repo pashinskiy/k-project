@@ -1,7 +1,5 @@
 import React from "react"
-import { makeStyles, Grid, Typography, Button } from "@material-ui/core"
-
-import Arrow from "../../../../../static/svg/arrow.svg"
+import { makeStyles, Grid, Button } from "@material-ui/core"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -88,6 +86,7 @@ export default function RatioList({ list, afterChange }) {
         return (
           <Button
             onClick={() => setGlobalValue(item)}
+            key={item}
             className={classes.item + " " + active}
           >
             {item}

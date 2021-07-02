@@ -4,6 +4,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 
 import HeaderWithIcon from "../headerWithIcon"
 import SmallHeaderWithIcon from "../smallHeaderWithIcon"
+import SmallHeaderAccentWithIcon from "../smallHeaderAccentWithIcon"
 
 import WrapperWithTitle from "../elementsForm/wrapperWithTitle"
 import VariantDelivery from "../elementsForm/variantDelivery"
@@ -14,6 +15,8 @@ import Input from "../elementsForm/input"
 import Delivery from "../../../../static/svg/delivery.svg"
 import Watch from "../../../../static/svg/watch.svg"
 import Geo from "../../../../static/svg/geo.svg"
+
+import { OrderingStateContext, OrderingDispatchContext } from "../context"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -48,7 +51,7 @@ const useStyle = makeStyles(theme => ({
       height: "9.66vw",
     },
   },
-  wrapperSelectCity: {
+  selectCityWrapper: {
     marginTop: "0.93vw",
     "@media(min-width: 1280px)": {
       marginTop: "12px",
@@ -60,7 +63,19 @@ const useStyle = makeStyles(theme => ({
       marginTop: "1.93",
     },
   },
-  wrapperInfoAboutStandartDelivery: {
+  variantDeliveryWrapper: {
+    marginTop: "2.81vw",
+    "@media(min-width: 1280px)": {
+      marginTop: "36px",
+    },
+    "@media(max-width: 834px)": {
+      marginTop: "4.31vw",
+    },
+    "@media(max-width: 414px)": {
+      marginTop: "2.65vw",
+    },
+  },
+  infoAboutStandartDeliveryWrapper: {
     marginTop: "2.81vw",
     "@media(min-width: 1280px)": {
       marginTop: "36px",
@@ -85,7 +100,97 @@ const useStyle = makeStyles(theme => ({
       },
     },
   },
-  wrapperInfoAddress: {
+  infoAboutExpressDeliveryWrapper: {
+    marginTop: "2.81vw",
+    "@media(min-width: 1280px)": {
+      marginTop: "36px",
+    },
+    "@media(max-width: 834px)": {
+      marginTop: "4.31vw",
+    },
+    "@media(max-width: 414px)": {
+      marginTop: "5.55vw",
+    },
+  },
+  infoAboutExpressDeliveryTitle: {
+    fontWeight: 400,
+    lineHeight: 1.21,
+
+    fontSize: "1.25vw",
+    marginBottom: "0.62vw",
+    "@media(min-width: 1280px)": {
+      fontSize: "16px",
+      marginBottom: "8px",
+    },
+    "@media(max-width: 834px)": {
+      marginBottom: "0.95vw",
+      fontSize: "1.91vw",
+    },
+    "@media(max-width: 414px)": {
+      marginBottom: "1.93vw",
+      fontSize: "3.86vw",
+    },
+  },
+  timesExpressWrapper: {
+    lineHeight: 0,
+
+    marginTop: "0.93vw",
+    "@media(min-width: 1280px)": {
+      marginTop: "12px",
+    },
+    "@media(max-width: 834px)": {
+      marginTop: "1.43vw",
+    },
+    "@media(max-width: 414px)": {
+      marginTop: "2.89vw",
+    },
+
+    "& button": {
+      background: "transparent",
+      padding: 0,
+      minWidth: 0,
+      border: "none",
+      cursor: "pointer",
+    },
+  },
+  timesExpressTitle: {
+    fontWeight: 500,
+    lineHeight: 1.21,
+    color: theme.palette.color.accentSecondary,
+    borderBottom: `1px solid ${theme.palette.color.accentSecondary}`,
+
+    fontSize: "0.93vw",
+    "@media(min-width: 1280px)": {
+      fontSize: "12px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "1.43vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "2.89vw",
+    },
+  },
+  timesExpressVariant: {
+    fontWeight: 500,
+    lineHeight: 1.21,
+    color: theme.palette.color.accentSecondary,
+
+    marginTop: "0.39vw",
+    fontSize: "0.93vw",
+    "@media(min-width: 1280px)": {
+      marginTop: "5px",
+      fontSize: "12px",
+    },
+    "@media(max-width: 834px)": {
+      marginTop: "0.59vw",
+      fontSize: "1.43vw",
+    },
+    "@media(max-width: 414px)": {
+      marginTop: "1.93vw",
+      fontSize: "2.89vw",
+    },
+  },
+  infoAddressWrapper: {
     marginTop: "1.87vw",
     "@media(min-width: 1280px)": {
       marginTop: "24px",
@@ -117,34 +222,101 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-export default function DeliveryData({ prismicCartAndOrder, afterChange }) {
+export default function DeliveryData({ prismicCartAndOrder }) {
   const classes = useStyle()
   const smartPhoneScreen = useMediaQuery("(max-width: 414px)")
+
   const stickerDelivery = prismicCartAndOrder.data.sticker ?? false
+  
+  const cities = ["Санкт-Петербург", "Москва", "Владивосток"]
+  const streets = [
+    "Проспект Барклая",
+    "Проспект Просвещения",
+    "Проспект Культуры",
+  ]
+  const dates = [
+    `${getDate("+1")}, завтра`,
+    `${getDate("+2")}, послезавтра`,
+    `${getDate("+3")}, через 2 дня`,
+  ]
+  const timeStandartDelivery = prismicCartAndOrder.data.time_standart.map(
+    item => item.range
+  )
 
-  const [city, setCity] = React.useState(false)
+  React.useEffect(() => {
+    setCity(cities[0])
+    setDate(dates[0])
+    setTime(timeStandartDelivery[0])
+    setStreet(streets[0])
+  }, [])
 
-  const [variantDelivery, setVariantDelivery] = React.useState("standart")
-  const [date, setDate] = React.useState(false)
-  const [time, setTime] = React.useState(false)
-  const [street, setStreet] = React.useState(false)
-  const [house, setHouse] = React.useState(false)
-  const [apartment, setApartment] = React.useState(false)
-  const [variantPay, setVariantPay] = React.useState(false)
-  const [name, setName] = React.useState(false)
-  const [phone, setPhone] = React.useState(false)
+  const orderingState = React.useContext(OrderingStateContext)
+  const orderingDispatch = React.useContext(OrderingDispatchContext)
 
-  console.log({
-    city,
-    date,
-    time,
-    street,
-    house,
-    apartment,
-  })
+  // получение строки с датой
+  function getDate(value) {
+    const date = new Date()
+    if (value === "+1") date.setDate(date.getDate() + 1)
+    if (value === "+2") date.setDate(date.getDate() + 2)
+    if (value === "+3") date.setDate(date.getDate() + 3)
 
-  function checkNumber(value) {
-    return /^[0-9]+$/.test(value)
+    const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
+
+    const month =
+      date.getMonth() < 9 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+
+    const year = date.getFullYear()
+
+    return `${day}/${month}/${year}`
+  }
+
+  // получение диапазонов экспресс доставки
+  const [
+    showTimesExpressDelivery,
+    setShowTimesExpressDelivery,
+  ] = React.useState(false)
+  function getTimesExpress() {
+    const date = new Date()
+
+    const hour = date.getHours() < 10 ? 10 : date.getHours()
+    const min =
+      date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()
+
+    const times = []
+    for (let i = hour; i < 20; i++) {
+      times.push(`Сегодня с ${i}:${min} до ${i + 1}:${min}`)
+    }
+
+    return hour < 20 ? times : ["Завтра с 10:00 до 11:00"]
+  }
+
+  // функции для компонентов
+  function setCity(value) {
+    orderingDispatch({ type: "SET_CITY", payload: value })
+  }
+  function setVariantDelivery(value) {
+    orderingDispatch({ type: "SET_VARIANT_DELIVERY", payload: value })
+    if (value === "express") {
+      orderingDispatch({ type: "SET_TIME", payload: getTimesExpress()[0] })
+    }
+    if (value === "standart") {
+      orderingDispatch({ type: "SET_TIME", payload: timeStandartDelivery[0] })
+    }
+  }
+  function setDate(value) {
+    orderingDispatch({ type: "SET_DATE", payload: value })
+  }
+  function setTime(value) {
+    orderingDispatch({ type: "SET_TIME", payload: value })
+  }
+  function setStreet(value) {
+    orderingDispatch({ type: "SET_STREET", payload: value })
+  }
+  function setHouse(value) {
+    orderingDispatch({ type: "SET_HOUSE", payload: value })
+  }
+  function setApartment(value) {
+    orderingDispatch({ type: "SET_APARTAMENT", payload: value })
   }
 
   return (
@@ -167,79 +339,109 @@ export default function DeliveryData({ prismicCartAndOrder, afterChange }) {
         ) : null}
       </Grid>
 
-      <div className={classes.wrapperSelectCity}>
+      <div className={classes.selectCityWrapper}>
         <WrapperWithTitle title="Город">
-          <Select
-            options={["Санкт-Петербург", "Москва", "Владивосток"]}
-            afterChange={setCity}
-          />
+          <Select options={cities} afterChange={setCity} />
         </WrapperWithTitle>
       </div>
 
-      <VariantDelivery value={variantDelivery} setValue={setVariantDelivery} />
-
-      {/* ******************************************************* */}
-      <div className={classes.wrapperInfoAboutStandartDelivery}>
-        <SmallHeaderWithIcon
-          icon={smartPhoneScreen ? <Watch /> : null}
-          number={smartPhoneScreen ? null : 1}
-          title="Выберите дату и время доставки"
+      <div className={classes.variantDeliveryWrapper}>
+        <VariantDelivery
+          value={orderingState.variantDelivery}
+          setValue={setVariantDelivery}
+          prismicCartAndOrder={prismicCartAndOrder}
         />
-
-        <WrapperWithTitle title="Дата">
-          <Select
-            options={[
-              "18/05/2021, завтра",
-              "19/05/2021, послезавтра",
-              "20/05/2021, через 2 дня",
-            ]}
-            afterChange={setDate}
-          />
-        </WrapperWithTitle>
-
-        <WrapperWithTitle title="Время">
-          {smartPhoneScreen ? (
-            <Select
-              options={[
-                "10:00 - 12:00",
-                "12:00 - 14:00",
-                "14:00 - 16:00",
-                "16:00 - 18:00",
-                "18:00 - 20:00",
-              ]}
-              afterChange={setTime}
-            />
-          ) : (
-            <ListRatioRect
-              list={[
-                "10:00 - 12:00",
-                "12:00 - 14:00",
-                "14:00 - 16:00",
-                "16:00 - 18:00",
-                "18:00 - 20:00",
-              ]}
-              afterChange={setTime}
-            />
-          )}
-        </WrapperWithTitle>
       </div>
-      {/* ******************************************************* */}
 
-      <div className={classes.wrapperInfoAddress}>
+      {/* ----------------- Standart delivery ----------------- */}
+      {orderingState.variantDelivery === "standart" ? (
+        <div className={classes.infoAboutStandartDeliveryWrapper}>
+          <SmallHeaderWithIcon
+            icon={smartPhoneScreen ? <Watch /> : null}
+            number={smartPhoneScreen ? null : 1}
+            title="Выберите дату и время доставки"
+          />
+
+          <WrapperWithTitle title="Дата">
+            <Select options={dates} afterChange={setDate} />
+          </WrapperWithTitle>
+
+          <WrapperWithTitle title="Время">
+            {smartPhoneScreen ? (
+              <Select options={timeStandartDelivery} afterChange={setTime} />
+            ) : (
+              <ListRatioRect
+                list={timeStandartDelivery}
+                afterChange={setTime}
+              />
+            )}
+          </WrapperWithTitle>
+        </div>
+      ) : null}
+
+      {/* --------------------- Express delivery --------------------- */}
+      {orderingState.variantDelivery === "express" ? (
+        <div className={classes.infoAboutExpressDeliveryWrapper}>
+          <Typography className={classes.infoAboutExpressDeliveryTitle}>
+            Заказ будет доставлен:
+          </Typography>
+
+          <SmallHeaderAccentWithIcon
+            icon={<Watch />}
+            title={orderingState.time}
+          />
+
+          <div className={classes.timesExpressWrapper}>
+            <button
+              onClick={() =>
+                setShowTimesExpressDelivery(!showTimesExpressDelivery)
+              }
+            >
+              <Typography className={classes.timesExpressTitle}>
+                Изменить время доставки
+              </Typography>
+            </button>
+
+            {showTimesExpressDelivery ? (
+              <Grid container direction="column">
+                {getTimesExpress().map(time => (
+                  <button
+                    key={time}
+                    onClick={() => {
+                      setTime(time)
+                      setShowTimesExpressDelivery(false)
+                    }}
+                  >
+                    <Typography
+                      align="left"
+                      className={classes.timesExpressVariant}
+                    >
+                      {time}
+                    </Typography>
+                  </button>
+                ))}
+              </Grid>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
+
+      <div className={classes.infoAddressWrapper}>
         <SmallHeaderWithIcon
-          icon={smartPhoneScreen ? <Geo /> : null}
-          number={smartPhoneScreen ? null : 2}
+          icon={
+            smartPhoneScreen || orderingState.variantDelivery === "express" ? (
+              <Geo />
+            ) : null
+          }
+          number={
+            smartPhoneScreen || orderingState.variantDelivery === "express"
+              ? null
+              : 2
+          }
           title="Укажите адрес"
         />
         <WrapperWithTitle title="Улица">
-          <Select
-            options={[
-              "Проспект Барклая",
-              "Проспект Просвещения",
-              "Проспект Культуры",
-            ]}
-            afterChange={setStreet}
-          />
+          <Select options={streets} afterChange={setStreet} />
         </WrapperWithTitle>
 
         <Grid
@@ -248,11 +450,17 @@ export default function DeliveryData({ prismicCartAndOrder, afterChange }) {
           className={classes.twoInputWrapper}
         >
           <WrapperWithTitle title="Дом">
-            <Input afterChange={setHouse} checkValue={checkNumber} />
+            <Input
+              afterChange={setHouse}
+              checkValue={() => orderingState.validationHouse()}
+            />
           </WrapperWithTitle>
 
           <WrapperWithTitle title="Квартира">
-            <Input afterChange={setApartment} checkValue={checkNumber} />
+            <Input
+              afterChange={setApartment}
+              checkValue={() => orderingState.validationApartament()}
+            />
           </WrapperWithTitle>
         </Grid>
       </div>

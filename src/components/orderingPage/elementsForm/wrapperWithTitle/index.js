@@ -63,9 +63,9 @@ export default function WrapperWithTitle({ title, children }) {
     <div>
       <Typography className={classes.title}>
         {title}
-        <div className={classes.icon}>
+        <i className={classes.icon}>
           <Star />
-        </div>
+        </i>
       </Typography>
 
       <div className={classes.childrenWrapper}>{children}</div>

@@ -3,6 +3,10 @@ import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
 
 import Pay from "../../button/pay"
 
+import { OrderingStateContext } from "../context"
+
+import Star from "../../../../static/svg/star.svg"
+
 const useStyle = makeStyles(theme => ({
   wrapper: {
     background: theme.palette.background.secondary,
@@ -99,6 +103,57 @@ const useStyle = makeStyles(theme => ({
       fontSize: "6.03vw",
     },
   },
+  errorWrapper: {
+    marginTop: "1.56vw",
+    "@media(min-width: 1280px)": {
+      marginTop: "20px",
+    },
+    "@media(max-width: 834px)": {
+      marginTop: "2.99vw",
+    },
+    "@media(max-width: 414px)": {
+      marginTop: "6.03vw",
+    },
+  },
+  error: {
+    display: "flex",
+    fontWeight: 400,
+    lineHeight: 1.21,
+    color: "#FF5B5B",
+
+    fontSize: "1.09vw",
+    "@media(min-width: 1280px)": {
+      fontSize: "14px",
+    },
+    "@media(max-width: 834px)": {
+      fontSize: "1.67vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "3.38vw",
+    },
+  },
+  icon: {
+    display: "flex",
+
+    width: "0.78vw",
+    height: "0.78vw",
+    marginRight: "0.23vw",
+    "@media(min-width: 1280px)": {
+      width: "10px",
+      height: "10px",
+      marginRight: "3px",
+    },
+    "@media(max-width: 834px)": {
+      width: "1.19vw",
+      height: "1.19vw",
+      marginRight: "0.35vw",
+    },
+    "@media(max-width: 414px)": {
+      width: "2.41vw",
+      height: "2.41vw",
+      marginRight: "0.72vw",
+    },
+  },
   goRegistration: {
     width: "100%",
 
@@ -189,6 +244,10 @@ export default function PriceBlock({ products }) {
   const classes = useStyle()
   const [showMoreInfo, setShowMoreInfo] = React.useState(false)
   const mobile = useMediaQuery("(max-width: 834px)")
+
+  const orderingState = React.useContext(OrderingStateContext)
+
+  const validData = orderingState.validationAll()
 
   const order = JSON.parse(localStorage.getItem("order"))
 
@@ -289,6 +348,17 @@ export default function PriceBlock({ products }) {
           order.price
         )} ₽`}</Typography>
       </Grid>
+
+      {validData ? null : (
+        <div className={classes.errorWrapper}>
+          <Typography className={classes.error}>
+            <i className={classes.icon}>
+              <Star />
+            </i>
+            Некоторые поля заполнены некорректно
+          </Typography>
+        </div>
+      )}
 
       <div className={classes.goRegistration}>
         <Pay text="Оплатить заказ" products={products} onClick={payOrder} />

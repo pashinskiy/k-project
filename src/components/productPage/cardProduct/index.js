@@ -49,7 +49,7 @@ export default function CardProduct({ prismicProduct }) {
             slice => slice.slice_type === "stickers"
           )}
           logo={
-            prismicProduct.data.brand.document.data.body.find(
+            prismicProduct.data.brand.document?.data.body.find(
               slice => slice.slice_type === "logo"
             )?.primary.image
           }

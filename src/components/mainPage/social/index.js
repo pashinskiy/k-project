@@ -1,6 +1,5 @@
 import React from 'react';
-import { Grid, makeStyles, Typography } from '@material-ui/core';
-import CardWidget from '../../widgets/cardWidget';
+import { makeStyles, Typography } from '@material-ui/core';
 import ScrollBar from '../../scrollBar';
 
 const useStyles = makeStyles(theme => ({
