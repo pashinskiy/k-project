@@ -194,7 +194,7 @@ export default function Pagination({ pageSize, components }) {
 
   function setPageUrl(value) {
     url.searchParams.set("page", value)
-    navigate(url.href)
+    navigate(url.search)
   }
 
   function goTo(i) {
