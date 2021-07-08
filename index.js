@@ -15,6 +15,7 @@ app.post("/build", (req, res) => {
     build.status = "Собирается. "
     res.sendStatus(200)
 
+    execSync("git reset --hard")
     execSync("git pull")
     execSync("npm install")
     execSync("npm run clean")
@@ -32,7 +33,7 @@ app.post("/build", (req, res) => {
       if (err) {
         build.status = "В ожидании. "
         build.message = `
-         Последнее обновление: ${day}.${month} в ${hour}:${min}. Результат: Ошибка (code:${err.code}, message: ${err.message}). 
+          Последнее обновление: ${day}.${month} в ${hour}:${min}. Результат: Ошибка (code:${err.code}, message: ${err.message}). 
         `
       } else {
         fs.renameSync("./public-finish", "./oldVersion")
