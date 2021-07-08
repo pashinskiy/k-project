@@ -103,7 +103,7 @@ export default function Search() {
     e.preventDefault()
     const url = new URL(window.location.origin + "/products/")
     url.searchParams.set("search", JSON.stringify(value))
-    navigate(url.href)
+    navigate(url.pathname + url.search)
   }
 
   return (
