@@ -235,6 +235,8 @@ export default function MainPageSlider({ array, variant }) {
   }, [])
 
   function setScrollBar(e) {
+    const bar = e.currentTarget
+    bar.style.cursor = "grabbing"
 
     let eventScroll = null
     const clientY = e.clientY
@@ -251,6 +253,7 @@ export default function MainPageSlider({ array, variant }) {
     document.addEventListener("pointerup", deleteScrollBar)
 
     function deleteScrollBar(e) {
+      bar.style.cursor = "grab"
       cardPanel.style.transition = transition
       //при pointerUP происходит центрирование активного итема
       cardPanel.style.transform = `translate(${getTransition(
