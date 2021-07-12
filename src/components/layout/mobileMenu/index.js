@@ -41,28 +41,28 @@ export default function MobileMenu({ data }) {
         <nav className={classes.root}>
             <div className={classes.menu_point}>
                 <ButtonWithIcon
-                    name={data.allPrismicHeader.edges[0].node.data.main_name.text}
-                    img={data.allPrismicHeader.edges[0].node.data.main_img.localFile.publicURL + '#outline'}
-                    alt={data.allPrismicHeader.edges[0].node.data.main_img.alt} />
+                    name={data.allPrismicHeader.edges[0]?.node.data.main_name.text}
+                    img={data.allPrismicHeader.edges[0]?.node.data.main_img.localFile.publicURL + '#outline'}
+                    alt={data.allPrismicHeader.edges[0]?.node.data.main_img.alt} />
             </div>
             <div className={classes.menu_point}>
                 <ButtonWithIcon
-                    name={data.allPrismicHeader.edges[0].node.data.catalog_name.text}
-                    img={data.allPrismicHeader.edges[0].node.data.catalog_mobile_img.localFile.publicURL + '#outline'}
-                    alt={data.allPrismicHeader.edges[0].node.data.catalog_mobile_img.alt} />
+                    name={data.allPrismicHeader.edges[0]?.node.data.catalog_name.text}
+                    img={data.allPrismicHeader.edges[0]?.node.data.catalog_mobile_img.localFile.publicURL + '#outline'}
+                    alt={data.allPrismicHeader.edges[0]?.node.data.catalog_mobile_img.alt} />
             </div>
             <div className={classes.menu_point}>
                 <ButtonWithIcon
-                    name={data.allPrismicHeader.edges[0].node.data.favorites_name.text}
-                    img={data.allPrismicHeader.edges[0].node.data.favorites_img.localFile.publicURL + '#outline'}
-                    alt={data.allPrismicHeader.edges[0].node.data.favorites_img.alt} />
+                    name={data.allPrismicHeader.edges[0]?.node.data.favorites_name.text}
+                    img={data.allPrismicHeader.edges[0]?.node.data.favorites_img.localFile.publicURL + '#outline'}
+                    alt={data.allPrismicHeader.edges[0]?.node.data.favorites_img.alt} />
             </div>
             <div className={classes.menu_point}>
                 <ButtonWithIcon
-                    name={data.allPrismicHeader.edges[0].node.data.cart_name.text}
+                    name={data.allPrismicHeader.edges[0]?.node.data.cart_name.text}
                     link="/cart/"
-                    img={data.allPrismicHeader.edges[0].node.data.cart_img.localFile.publicURL + '#outline'}
-                    alt={data.allPrismicHeader.edges[0].node.data.cart_img.alt} />
+                    img={data.allPrismicHeader.edges[0]?.node.data.cart_img.localFile.publicURL + '#outline'}
+                    alt={data.allPrismicHeader.edges[0]?.node.data.cart_img.alt} />
             </div>
         </nav>
     );

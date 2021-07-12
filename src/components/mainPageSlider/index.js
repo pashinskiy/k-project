@@ -235,6 +235,11 @@ export default function MainPageSlider({ array, variant }) {
   }, [])
 
   function setScrollBar(e) {
+
+    let eventScroll = null
+    const clientY = e.clientY
+    const scroll = window.pageYOffset
+    
     const transition = window.getComputedStyle(cardPanel).transition
     cardPanel.style.transition = "none"
     //отмена перехвата браузера
@@ -260,6 +265,15 @@ export default function MainPageSlider({ array, variant }) {
     }
 
     function scrollBar(e) {
+      if (eventScroll === null) {
+        eventScroll =
+          Math.abs(e.clientX - clientX) < Math.abs(e.clientY - clientY)
+      }
+      if (eventScroll) {
+        window.scrollTo(0, scroll + clientY - e.clientY)
+        return
+      }
+
       document.addEventListener("click", noGoLink)
       let newTranslateX = translateX + e.clientX - clientX
       //левый барьер

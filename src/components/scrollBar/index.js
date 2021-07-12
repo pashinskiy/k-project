@@ -121,6 +121,10 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
   }, [])
 
   function setScrollBar(e) {
+    let eventScroll = null
+    const clientY = e.clientY
+    const scroll = window.pageYOffset
+    
     const transition = window.getComputedStyle(cardPanel).transition
     cardPanel.style.transition = "none"
 
@@ -141,6 +145,15 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
     }
 
     function scrollBar(e) {
+      if (eventScroll === null) {
+        eventScroll =
+          Math.abs(e.clientX - clientX) < Math.abs(e.clientY - clientY)
+      }
+      if (eventScroll) {
+        window.scrollTo(0, scroll + clientY - e.clientY)
+        return
+      }
+
       document.addEventListener("click", noGoLink)
       let newTranslateX = translateX + e.clientX - clientX
       newTranslateX = newTranslateX > 0 ? 0 : newTranslateX

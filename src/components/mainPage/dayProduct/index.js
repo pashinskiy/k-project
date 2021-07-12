@@ -70,9 +70,9 @@ export default function DayProduct(props) {
                         <Count />
                     </Typography>
                 </div>
-                <SaleValue value={props.data.allPrismicDayProduct.edges[0].node.data.sale} />
+                <SaleValue value={props.data.allPrismicDayProduct.edges[0]?.node.data.sale} />
             </div>
-            <ProductCard product={props.data.allPrismicDayProduct.edges[0].node.data.product.document} sale={props.data.allPrismicDayProduct.edges[0].node.data.sale} />
+            <ProductCard product={props.data.allPrismicDayProduct.edges[0]?.node.data.product.document} sale={props.data.allPrismicDayProduct.edges[0]?.node.data.sale} />
         </div>
     ); 
 };

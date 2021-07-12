@@ -102,11 +102,11 @@ const useStyle = makeStyles(theme => ({
 
 export default function CardSimilarProduct({ product, afterChange, sale }) {
   const img =
-    product.data.images[0]?.image.localFile?.childImageSharp.gatsbyImageData
-  const alt = product.data.images[0]?.image.alt
-  const title = product.data.name
-  const old_price = product.data.price
-  const price = Math.ceil(product.data.price * sale / 100)
+    product?.data.images[0]?.image.localFile?.childImageSharp.gatsbyImageData
+  const alt = product?.data.images[0]?.image.alt
+  const title = product?.data.name
+  const old_price = product?.data.price
+  const price = Math.ceil(product?.data.price * sale / 100)
 
   const classes = useStyle()
   return (
@@ -117,7 +117,7 @@ export default function CardSimilarProduct({ product, afterChange, sale }) {
         className={classes.imageWrapper}
         imgStyle={{ objectFit: "contain" }}
       />
-      <Link to={`/${product.uid}/`} className={classes.link}>
+      <Link to={`/${product?.uid}/`} className={classes.link}>
         <div className={classes.allPrice}>
           <Typography className={classes.price}>{price} ₽</Typography>
           <Typography className={classes.oldPrice}>{old_price} ₽</Typography>
