@@ -76,7 +76,7 @@ const useStyles = makeStyles(theme => ({
 export default function Search({ data }) {
   const classes = useStyles()
   const [value, setValue] = React.useState(
-    data.allPrismicHeader.edges[0].node.data.field_example.text
+    data.allPrismicHeader.edges[0]?.node.data.field_example.text
   )
 
   function submit(e) {
@@ -91,10 +91,10 @@ export default function Search({ data }) {
       <Link to={`/products/`} className={classes.button}>
         <img
           src={
-            data.allPrismicHeader.edges[0].node.data.find_img.localFile
+            data.allPrismicHeader.edges[0]?.node.data.find_img.localFile
               .publicURL
           }
-          alt={data.allPrismicHeader.edges[0].node.data.find_img.alt}
+          alt={data.allPrismicHeader.edges[0]?.node.data.find_img.alt}
           className={classes.img}
         />
       </Link>
@@ -102,22 +102,22 @@ export default function Search({ data }) {
       <form onSubmit={submit} className={classes.form}>
         <img
           src={
-            data.allPrismicHeader.edges[0].node.data.find_img.localFile
+            data.allPrismicHeader.edges[0]?.node.data.find_img.localFile
               .publicURL
           }
-          alt={data.allPrismicHeader.edges[0].node.data.find_img.alt}
+          alt={data.allPrismicHeader.edges[0]?.node.data.find_img.alt}
           className={classes.img}
         />
         <input
           type="text"
           onInput={e => setValue(e.currentTarget.value)}
           placeholder={
-            data.allPrismicHeader.edges[0].node.data.field_example.text
+            data.allPrismicHeader.edges[0]?.node.data.field_example.text
           }
           name="search"
         />
         <button type="submit">
-          {data.allPrismicHeader.edges[0].node.data.find_name.text}
+          {data.allPrismicHeader.edges[0]?.node.data.find_name.text}
         </button>
       </form>
     </div>

@@ -57,10 +57,10 @@ export default function CatalogButton({ data, setCatalog, catalog, setAnimation,
                 setAnimation(!animation);
             }}>
             <img
-                src={data.allPrismicHeader.edges[0].node.data.catalog_img.localFile.publicURL + `#${(catalog === true) ? 'Cross' : 'Burger'}`}
-                alt={data.allPrismicHeader.edges[0].node.data.catalog_img.alt}
+                src={data.allPrismicHeader.edges[0]?.node.data.catalog_img.localFile.publicURL + `#${(catalog === true) ? 'Cross' : 'Burger'}`}
+                alt={data.allPrismicHeader.edges[0]?.node.data.catalog_img.alt}
                 className={classes.img} />
-            <span className={classes.text}>{data.allPrismicHeader.edges[0].node.data.catalog_name.text}</span>
+            <span className={classes.text}>{data.allPrismicHeader.edges[0]?.node.data.catalog_name.text}</span>
         </button>
     );
 };

@@ -66,6 +66,10 @@ export default function SmallCategoriesPanel(categories) {
   }
 
   function setScrollBar(e) {
+    let eventScroll = null
+    const clientY = e.clientY
+    const scroll = window.pageYOffset
+
     const cardPanel = e.currentTarget
     const transition = cardPanel.style.transition
     cardPanel.style.transition = "none"
@@ -85,6 +89,15 @@ export default function SmallCategoriesPanel(categories) {
     }
 
     function scrollBar(e) {
+      if (eventScroll === null) {
+        eventScroll =
+          Math.abs(e.clientX - clientX) < Math.abs(e.clientY - clientY)
+      }
+      if (eventScroll) {
+        window.scrollTo(0, scroll + clientY - e.clientY)
+        return
+      }
+      
       let newLeft = scrollLeft - e.clientX + clientX
       cardPanel.scrollLeft = newLeft
     }

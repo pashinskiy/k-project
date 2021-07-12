@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function AdvertiseCard({ banner }) {
   const classes = useStyles()
-  console.log(banner)
+  // console.log(banner)
   return (
     <Card className={classes.cardRoot}>
       <GatsbyImage

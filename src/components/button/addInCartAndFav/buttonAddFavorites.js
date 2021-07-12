@@ -84,9 +84,9 @@ export default function ButtonAddFavorites({ product, variant }) {
 
   function changeToFavorites() {
     if(!isFavorite)
-    dispatch({ type: "ADD_PRODUCT_IN_FAVORITES", payload: product.id })
+    dispatch({ type: "ADD_PRODUCT_IN_FAVORITES", payload: product?.id })
     else
-    dispatch({ type: "DELETE_PRODUCT_FROM_FAVORITES", payload: product.id })
+    dispatch({ type: "DELETE_PRODUCT_FROM_FAVORITES", payload: product?.id })
   }
 
   const background = isFavorite ? classes.favorites : classes.notFavorites

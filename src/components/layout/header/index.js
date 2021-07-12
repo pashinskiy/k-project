@@ -115,17 +115,17 @@ export default function Header({
 }) {
   const classes = useStyles()
 
-  const links = data.allPrismicHeader.edges[0].node.data.body
+  const links = data.allPrismicHeader?.edges[0]?.node.data.body
 
-  return (
+  return (  
     <header id="header" className={classes.root}>
       <div className={classes.wrapper}>
         <nav className={classes.submenu}>
           <SaleButton
-            name={data.allPrismicHeader.edges[0].node.data.sale_name.text}
+            name={data.allPrismicHeader?.edges[0]?.node.data.sale_name.text}
           />
 
-          {links.map((links, i) => (
+          {links?.map((links, i) => (
             <DefaultLink
               key={`info ${i}`}
               name={links.primary.link_name.text}
@@ -136,10 +136,10 @@ export default function Header({
           <Link to={"/"} className={classes.logo}>
             <img
               src={
-                data.allPrismicHeader.edges[0].node.data.logo_svg.localFile
+                data.allPrismicHeader.edges[0]?.node.data.logo_svg.localFile
                   .publicURL
               }
-              alt={data.allPrismicHeader.edges[0].node.data.logo_svg.alt}
+              alt={data.allPrismicHeader.edges[0]?.node.data.logo_svg.alt}
             />
           </Link>
 
@@ -156,22 +156,22 @@ export default function Header({
           </div>
 
           <ButtonWithIcon
-            name={data.allPrismicHeader.edges[0].node.data.favorites_name.text}
+            name={data.allPrismicHeader.edges[0]?.node.data.favorites_name.text}
             img={
-              data.allPrismicHeader.edges[0].node.data.favorites_img.localFile
+              data.allPrismicHeader.edges[0]?.node.data.favorites_img.localFile
                 .publicURL + "#outline"
             }
-            alt={data.allPrismicHeader.edges[0].node.data.favorites_img.alt}
+            alt={data.allPrismicHeader.edges[0]?.node.data.favorites_img.alt}
           />
 
           <ButtonWithIcon
-            name={data.allPrismicHeader.edges[0].node.data.cart_name.text}
+            name={data.allPrismicHeader.edges[0]?.node.data.cart_name.text}
             link={"/cart/"}
             img={
-              data.allPrismicHeader.edges[0].node.data.cart_img.localFile
+              data.allPrismicHeader.edges[0]?.node.data.cart_img.localFile
                 .publicURL + "#outline"
             }
-            alt={data.allPrismicHeader.edges[0].node.data.cart_img.alt}
+            alt={data.allPrismicHeader.edges[0]?.node.data.cart_img.alt}
           />
         </nav>
       </div>
