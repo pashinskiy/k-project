@@ -255,6 +255,10 @@ export default function SliderProduct({ photos }) {
   }
 
   function setScrollBar(e) {
+    let eventScroll = null
+    const clientY = e.clientY
+    const scroll = window.pageYOffset
+    
     const bar = slideBar.current
     const transition = bar.style.transition
     bar.style.transition = "none"
@@ -278,6 +282,15 @@ export default function SliderProduct({ photos }) {
     }
 
     function scrollBar(e) {
+      if (eventScroll === null) {
+        eventScroll =
+          Math.abs(e.clientX - clientX) < Math.abs(e.clientY - clientY)
+      }
+      if (eventScroll) {
+        window.scrollTo(0, scroll + clientY - e.clientY)
+        return
+      }
+
       let newLeft = left + e.clientX - clientX
       newLeft = newLeft > maxLeft ? maxLeft : newLeft
       newLeft = newLeft < minLeft ? minLeft : newLeft

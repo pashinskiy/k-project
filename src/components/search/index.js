@@ -101,9 +101,9 @@ export default function Search() {
 
   function submit(e) {
     e.preventDefault()
-    const url = new URL(window.location.origin + "/products/")
+    const url = new URL(window.location)
     url.searchParams.set("search", JSON.stringify(value))
-    navigate(url.href)
+    navigate(`/products/${url.search}`)
   }
 
   return (

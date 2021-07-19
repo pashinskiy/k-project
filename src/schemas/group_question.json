@@ -1,0 +1,62 @@
+{
+  "Main": {
+    "group_name": {
+      "type": "Text",
+      "config": {
+        "label": "Название группы",
+        "placeholder": "название группы"
+      }
+    },
+    "order": {
+      "type": "Number",
+      "config": {
+        "label": "Очередность",
+        "placeholder": "порядок следования (сверху)"
+      }
+    },
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": {},
+        "choices": {
+          "question_subgroup": {
+            "type": "Slice",
+            "fieldset": "question_subgroup",
+            "description": "подгруппа вопросов",
+            "icon": "format_list_bulleted",
+            "non-repeat": {
+              "order": {
+                "type": "Number",
+                "config": {
+                  "label": "Очередность",
+                  "placeholder": "номер следования (сверху)"
+                }
+              },
+              "subgroup_name": {
+                "type": "Text",
+                "config": {
+                  "label": "Название подгруппы",
+                  "placeholder": "название подгруппы"
+                }
+              }
+            },
+            "repeat": {
+              "question": {
+                "type": "Link",
+                "config": {
+                  "select": "document",
+                  "customtypes": [
+                    "question"
+                  ],
+                  "label": "Вопрос",
+                  "placeholder": "документ"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -235,6 +235,13 @@ export default function MainPageSlider({ array, variant }) {
   }, [])
 
   function setScrollBar(e) {
+    const bar = e.currentTarget
+    bar.style.cursor = "grabbing"
+
+    let eventScroll = null
+    const clientY = e.clientY
+    const scroll = window.pageYOffset
+    
     const transition = window.getComputedStyle(cardPanel).transition
     cardPanel.style.transition = "none"
     //отмена перехвата браузера
@@ -246,6 +253,7 @@ export default function MainPageSlider({ array, variant }) {
     document.addEventListener("pointerup", deleteScrollBar)
 
     function deleteScrollBar(e) {
+      bar.style.cursor = "grab"
       cardPanel.style.transition = transition
       //при pointerUP происходит центрирование активного итема
       cardPanel.style.transform = `translate(${getTransition(
@@ -260,6 +268,15 @@ export default function MainPageSlider({ array, variant }) {
     }
 
     function scrollBar(e) {
+      if (eventScroll === null) {
+        eventScroll =
+          Math.abs(e.clientX - clientX) < Math.abs(e.clientY - clientY)
+      }
+      if (eventScroll) {
+        window.scrollTo(0, scroll + clientY - e.clientY)
+        return
+      }
+
       document.addEventListener("click", noGoLink)
       let newTranslateX = translateX + e.clientX - clientX
       //левый барьер

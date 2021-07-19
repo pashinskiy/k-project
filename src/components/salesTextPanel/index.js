@@ -102,7 +102,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SalesTextPanel({ sale, socials, products }) {
   const classes = useStyles()
-  console.log(products)
+  // console.log(products)
   const mobile = useMediaQuery("(max-width: 414px)")
   return (
     <Grid container justify="space-between">

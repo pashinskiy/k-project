@@ -77,6 +77,8 @@ module.exports = {
           sale: require("./src/schemas/sale.json"),
           main_page: require("./src/schemas/main_page.json"),
           cart_and_order: require("./src/schemas/cart_and_order.json"),
+          question: require("./src/schemas/question.json"),
+          group_question: require("./src/schemas/group_question.json"),
         },
         shouldDownloadImage: () => true,
       },
