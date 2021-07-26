@@ -8,6 +8,10 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     height: "31.25vw",
     overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     marginTop: "2.18vw",
     borderRadius: "0.93vw",
     "@media(min-width: 1280px)": {

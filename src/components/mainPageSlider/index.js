@@ -59,7 +59,7 @@ const useStyle = makeStyles(theme => ({
   track: {
     width: "auto",
     touchAction: "none",
-    transition: "1s transform",
+    transition: "0.6s transform",
     position: "relative",
     boxSizing: "border-box",
     gridColumnGap: "0.9375vw",
@@ -80,7 +80,7 @@ const useStyle = makeStyles(theme => ({
     opacity: 0.5,
     alignSelf: "center",
     transform: "scaleY(0.9)",
-    transition: "transform 1s, opacity 1s",
+    transition: "transform .6s, opacity .6s",
     "@media(max-width: 834px)": {
       width: "88.729vw",
     },
@@ -94,7 +94,7 @@ const useStyle = makeStyles(theme => ({
     height: "100%",
     opacity: 1,
     transform: "scaleY(1)",
-    transition: "transform 1s, opacity 1s",
+    transition: "transform .6s, opacity .6s",
     "@media(max-width: 834px)": {
       width: "88.729vw",
     },
@@ -148,7 +148,7 @@ const useStyle = makeStyles(theme => ({
     marginRight: "4px",
     backgroundColor: "#C4C4C4",
     borderRadius: "1000px",
-    transition: "width 1s",
+    transition: "width .6s",
     "&:hover": {
       backgroundColor: "#C4C4C4",
     },

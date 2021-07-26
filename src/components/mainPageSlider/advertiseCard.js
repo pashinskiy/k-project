@@ -17,6 +17,11 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.secondary,
     position: "relative",
     borderRadius: "1.5625vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     padding: "0.625vw",
     "@media(min-width: 1280px)": {
       borderRadius: "20px",
@@ -38,6 +43,11 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     height: "22.1875vw",
     borderRadius: "0.9375vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     "@media(min-width: 1280px)": {
       height: "284px",
       borderRadius: "12px",

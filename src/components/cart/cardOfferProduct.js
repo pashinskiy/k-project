@@ -39,6 +39,11 @@ const useStyles = makeStyles(theme => ({
     height: "15.625vw",
     padding: "0.390625vw",
     borderRadius: "0.9375vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     marginBottom: "1.914vw",
     "@media(min-width: 1280px)": {
       height: "200px",

@@ -21,7 +21,7 @@ const useStyle = makeStyles(theme => ({
       right: 0,
       top: 0,
       '@media (min-width: 1025px)': {
-        background: `linear-gradient(-90deg,${theme.palette.background.main} 0%, transparent 100%)`,
+        background: `linear-gradient(-90deg,${theme.palette.background.main} 0%, rgb(255, 255, 255, 0) 100%)`,
       },
     },
   },
@@ -53,7 +53,7 @@ const useStyle = makeStyles(theme => ({
   track: {
     width: "auto",
     touchAction: "none",
-    transition: "1s transform",
+    transition: ".3s transform",
     position: "relative",
     boxSizing: "border-box",
   },

@@ -15,7 +15,11 @@ const useStyles = makeStyles(theme => ({
     minHeight: "26.25vw",
     padding: "2.18vw 0",
     borderBottom: "1px solid #E3E3EA",
-
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     "@media(min-width: 1280px)": {
       minHeight: "336px",
       padding: "28px 0",
@@ -115,6 +119,10 @@ const useStyles = makeStyles(theme => ({
   color: {
     borderRadius: "100%",
     overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     boxSizing: "border-box",
     boxShadow: "inset 0px 2px 4px rgba(0, 0, 0, 0.25)",
 

@@ -21,11 +21,14 @@ const useStyle = makeStyles(theme => ({
       right: 0,
       top: 0,
 
-      background: `linear-gradient(-90deg,${theme.palette.background.main} 0%, transparent 100%)`,
+      background: props => props.maxTranslateX < 0 && props.buttonNext ? `linear-gradient(-90deg,${theme.palette.background.main} 0%, rgb(255, 255, 255, 0) 100%)` : 'none',
     },
   },
   wrapperTrack: {
-    overflow: "scroll",
+    overflow: "hidden",
+    '@media (max-width: 1024px)': {
+      overflow: "scroll",
+    },
     scrollbarWidth: "none",
     "-ms-overflow-style": "none",
     "&::-webkit-scrollbar": {
@@ -68,7 +71,7 @@ const useStyle = makeStyles(theme => ({
   track: {
     width: "auto",
     touchAction: "none",
-    transition: "1s transform",
+    transition: ".3s transform",
     position: "relative",
     boxSizing: "border-box",
   },
@@ -104,8 +107,6 @@ const useStyle = makeStyles(theme => ({
 export default function ScrollBar({ children, fullScreen, buttonNext }) {
   // fullScreen (boolean) прокрутка с выходом за границы layuot
   // buttonNext нужно ли отображить кнопку при переполнении
-  const classes = useStyle()
-  const size = fullScreen ? classes.fullScreen : ""
 
   const [cardPanel, setCardPanel] = React.useState(null)
 
@@ -179,6 +180,9 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
     newTranslateX = newTranslateX < maxTranslateX ? 0 : newTranslateX
     cardPanel.style.transform = `translate(${newTranslateX}px)`
   }
+
+  const classes = useStyle({ maxTranslateX, buttonNext })
+  const size = fullScreen ? classes.fullScreen : ""
 
   return (
     <Grid container className={classes.wrapper + " " + size}>

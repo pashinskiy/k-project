@@ -10,6 +10,10 @@ const useStyles = makeStyles(theme => ({
     cursor: "pointer",
 
     overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     // overflow: "scroll",
     // scrollbarWidth: "none",
     // "-ms-overflow-style": "none",
@@ -42,6 +46,11 @@ const useStyles = makeStyles(theme => ({
 
     padding: "0.62vw 0.93vw",
     borderRadius: "0.93vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     marginRight: "0.62vw",
     border: "0.15vw solid transparent",
     "@media(min-width: 1280px)": {

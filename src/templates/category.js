@@ -79,6 +79,11 @@ const useStyles = makeStyles(theme => ({
         background: theme.palette.background.secondary,
         padding: 8,
         borderRadius: 20,
+        overflow: "hidden",
+        WebkitBackfaceVisibility: 'hidden',
+        MozBackfaceVisibility: 'hidden',
+        WebkitTransform: 'translate3d(0, 0, 0)',
+        MozTransform: 'translate3d(0, 0, 0)',
         marginTop: 48,
         '@media (max-width: 1024px)': {
             marginTop: 28,

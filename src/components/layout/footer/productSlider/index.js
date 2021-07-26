@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     },
     product: {
         transform: props => `translateX(${props.arrow}px)`,
-        transition: '0.4s ease all',
+        transition: '0.3s ease all',
         marginRight: 12,
         "@media(max-width: 834px)": {
             marginRight: 12,

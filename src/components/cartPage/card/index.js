@@ -20,6 +20,11 @@ const useStyle = makeStyles(theme => ({
 
     padding: "1.87vw",
     borderRadius: "0.93vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     "@media(min-width: 1280px)": {
       padding: "24px",
       borderRadius: "12px",

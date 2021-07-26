@@ -16,8 +16,12 @@ const useStyle = makeStyles(theme => ({
   },
   item: {
     height: "31.25vw",
-    overflow: "hidden",
     borderRadius: "0.93vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     marginBottom: "1.81%",
     "@media(min-width: 1280px)": {
       height: "400px",
