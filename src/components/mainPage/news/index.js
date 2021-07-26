@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, makeStyles, Typography } from '@material-ui/core';
+import { Grid, makeStyles, useMediaQuery, Typography } from '@material-ui/core';
 import CardWidget from '../../widgets/cardWidget';
 import ScrollBar from '../../scrollBar';
 
@@ -32,14 +32,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function News(props) {
-
+    const maxWidth1024 = useMediaQuery("(max-width: 1024px)")
+    
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
             <Typography variant="h6">Новости</Typography>
             <div className={classes.categories}>
-                <ScrollBar buttonNext>
+                <ScrollBar buttonNext fullScreen={maxWidth1024}>
                     {props.data.edges.map((stories, i) => (
                         <Grid className={classes.story}>
                             <CardWidget

@@ -44,13 +44,13 @@ export default function Popular(props) {
                 </Typography>
             </div>
             <div className={classes.brands}>
-                <ScrollBar buttonNext>
+                <ScrollBar buttonNext fullScreen>
                     {props.data.allPrismicBrand.edges.map((brand, i) => (
                         <Grid className={classes.brand}>
                             <CardWidget
                                 variant={"brand_mainPage"}
                                 key={`brand ${i}`}
-                                cardImage={brand.node.data.body[0]?.primary?.image?.localFile.childImageSharp.gatsbyImageData}
+                                cardImage={brand.node.data.body[0]?.primary?.image?.localFile.childImageSharp?.gatsbyImageData}
                                 cardTitle={brand.node.data.name}
                                 cardLink={""}  />
                         </Grid>

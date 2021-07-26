@@ -1,6 +1,5 @@
 import React from "react"
-import { Button, Grid } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, Button, Grid, useMediaQuery } from "@material-ui/core"
 
 import Arrow from "../../../static/svg/arrowWhite.svg"
 
@@ -9,6 +8,7 @@ const useStyle = makeStyles(theme => ({
     width: "100%",
     cursor: "pointer",
     position: "relative",
+    overflow: "hidden",
 
     "&:before": {
       content: "''",
@@ -21,14 +21,17 @@ const useStyle = makeStyles(theme => ({
       right: 0,
       top: 0,
 
-      background: props => props.maxTranslateX < 0 && props.buttonNext ? `linear-gradient(-90deg,${theme.palette.background.main} 0%, rgb(255, 255, 255, 0) 100%)` : 'none',
+      background: props =>
+        props.maxTranslateX < 0 && props.buttonNext
+          ? `linear-gradient(-90deg,${theme.palette.background.main} 0%, rgb(255, 255, 255, 0) 100%)`
+          : "none",
+
+      "@media(max-width: 1024px)": {
+        display: "none",
+      },
     },
   },
   wrapperTrack: {
-    overflow: "hidden",
-    '@media (max-width: 1024px)': {
-      overflow: "scroll",
-    },
     scrollbarWidth: "none",
     "-ms-overflow-style": "none",
     "&::-webkit-scrollbar": {
@@ -52,6 +55,7 @@ const useStyle = makeStyles(theme => ({
   fullScreen: {
     width: "100vw",
     maxWidth: "1280px",
+    flexShrink: 0,
 
     marginLeft: "-2.18vw",
     paddingLeft: "2.18vw",
@@ -98,7 +102,7 @@ const useStyle = makeStyles(theme => ({
       height: "46px",
       padding: "13px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1024px)": {
       display: "none",
     },
   },
@@ -108,11 +112,14 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
   // fullScreen (boolean) прокрутка с выходом за границы layuot
   // buttonNext нужно ли отображить кнопку при переполнении
 
+  const maxWidth1024 = useMediaQuery("(max-width: 1024px)")
+
   const [cardPanel, setCardPanel] = React.useState(null)
 
   const maxTranslateX =
-    cardPanel?.offsetWidth > cardPanel?.parentElement.offsetWidth * 0.87
-      ? cardPanel?.parentElement.offsetWidth * 0.87 - cardPanel?.offsetWidth
+    cardPanel?.offsetWidth > cardPanel?.parentElement.offsetWidth
+      ? cardPanel?.parentElement.offsetWidth * (maxWidth1024 ? 1 : 0.87) -
+        cardPanel?.offsetWidth
       : 0
 
   const setRef = React.useCallback(node => {
@@ -125,7 +132,7 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
     let eventScroll = null
     const clientY = e.clientY
     const scroll = window.pageYOffset
-    
+
     const transition = window.getComputedStyle(cardPanel).transition
     cardPanel.style.transition = "none"
 
@@ -186,7 +193,11 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
 
   return (
     <Grid container className={classes.wrapper + " " + size}>
-      <Grid container className={classes.wrapperTrack + " " + classes.unselect}>
+      <Grid
+        container
+        className={classes.wrapperTrack + " " + classes.unselect}
+        style={{ overflow: fullScreen ? "visible" : "hidden" }}
+      >
         <Grid
           container
           ref={setRef}

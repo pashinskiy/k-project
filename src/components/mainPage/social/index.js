@@ -95,7 +95,7 @@ export default function SocialNetworks(props) {
                 </Typography>
             </div>
             <div className={classes.brands}>
-                <ScrollBar buttonNext>
+                <ScrollBar buttonNext fullScreen>
                     {props.data.allPrismicFooterBody2Social.edges.map((social, i) => (
                         <a
                             href={social.node.primary.link.url}

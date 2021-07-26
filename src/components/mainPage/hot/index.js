@@ -57,7 +57,7 @@ export default function Hot(props) {
                 </Typography>
             </div>
             <div className={classes.advantages}>
-                <ScrollBar buttonNext>
+                <ScrollBar buttonNext fullScreen>
                     {props.data.allPrismicMainPage.edges[0].node.data.hot.map((product, i) => (
                         <div key={`hot ${i}`} className={classes.product}>
                             <CardProduct product={product.hot_product.document} />

@@ -108,7 +108,7 @@ export default function Sales(props) {
         <Typography variant="h3">Выгодные акции</Typography>
       </div>
       <div className={classes.advantages}>
-        <ScrollBar buttonNext>
+        <ScrollBar buttonNext fullScreen>
           {props.data.allPrismicSale.edges.map((advantage, i) => (
             <div className={classes.card}>
               <div className={classes.info}>

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { graphql, Link } from "gatsby";
-import { Grid, makeStyles, Typography } from "@material-ui/core";
+import { useMediaQuery, Grid, makeStyles, Typography } from "@material-ui/core";
 import Seo from "../components/seo";
 import BreadCrumbs from "../components/breadCrumbs";
 import DefaultLink from "../components/layout/header/link/default";
@@ -140,6 +140,8 @@ const Category = ({ data: { prismicCategory, allPrismicStories, allPrismicProduc
 
     const classes = useStyles();
 
+    const maxWidth1024 = useMediaQuery("(max-width: 1024px)")
+
     return (
         <div>
             <Seo title={`Купить ${prismicCategory.data.name} в Krypton`} />
@@ -169,7 +171,7 @@ const Category = ({ data: { prismicCategory, allPrismicStories, allPrismicProduc
                         ))}
                     </div>
                     <div className={classes.content_blocks}>
-                        <ScrollBar fullScreen buttonNext >
+                        <ScrollBar fullScreen={maxWidth1024} buttonNext >
                             <StoriesPanel stories={allPrismicStories.edges.map(edge => edge.node)}/>
                         </ScrollBar>
                         <div className={classes.banner}>
@@ -180,7 +182,7 @@ const Category = ({ data: { prismicCategory, allPrismicStories, allPrismicProduc
                         </div>
                         <div className={classes.content_wrapper}>
                             <Typography variant="h3">Категории</Typography>
-                            <ScrollBar fullScreen buttonNext >
+                            <ScrollBar fullScreen={maxWidth1024} buttonNext >
                                 {prismicCategory.data.children.map((subcategory, i) => (
                                     <Grid key={`subcategories_cards_category_page ${i}`} className={classes.subcategory_card}>
                                         <CardWidget
@@ -194,13 +196,13 @@ const Category = ({ data: { prismicCategory, allPrismicStories, allPrismicProduc
                         </div>
                         <div className={classes.content_wrapper}>
                             <Typography variant="h3">Специальные предложения</Typography>
-                            <ScrollBar fullScreen buttonNext >
+                            <ScrollBar fullScreen={maxWidth1024} buttonNext >
                                 <FiltersBySticker products={allPrismicProduct.edges.map(edge => edge.node)} />
                             </ScrollBar>
                         </div>
                         <div className={classes.content_wrapper}>
                             <Typography variant="h3">Популярные бренды</Typography>
-                            <ScrollBar fullScreen buttonNext >
+                            <ScrollBar fullScreen={maxWidth1024} buttonNext >
                                 {prismicCategory.data.brands.map((brand, i) => (
                                     <Grid key={`brands_category_page ${i}`} className={classes.brand_card}>
                                         <CardWidget
