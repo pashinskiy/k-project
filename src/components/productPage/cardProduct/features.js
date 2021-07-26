@@ -4,7 +4,6 @@ import { GatsbyImage } from "gatsby-plugin-image"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
-    height: "3.9vw",
     width: "100vw",
     position: " relative",
     boxSizing: "border-box",
@@ -17,20 +16,17 @@ const useStyles = makeStyles(theme => ({
     "-ms-overflow-style": "none",
 
     "@media(min-width: 1280px)": {
-      height: "50px",
       width: "1280px",
       marginTop: "52px",
       marginLeft: "-28px",
       paddingLeft: "28px",
     },
     "@media(max-width: 834px)": {
-      height: "5.99vw",
       marginTop: "1.91vw",
       marginLeft: "-3.35vw",
       paddingLeft: "3.35vw",
     },
     "@media(max-width: 414px)": {
-      height: "12.07vw",
       marginTop: "3.86vw",
       marginLeft: "-6.76vw",
       paddingLeft: "6.76vw",
@@ -40,12 +36,26 @@ const useStyles = makeStyles(theme => ({
     },
   },
   item: {
-    height: "100%",
+    height: "3.9vw",
+    "@media(min-width: 1280px)": {
+      height: "50px",
+    },
+    "@media(max-width: 834px)": {
+      height: "5.99vw",
+    },
+    "@media(max-width: 414px)": {
+      height: "12.07vw",
+    },
     width: "auto",
     flexShrink: 0,
     minWidth: "9vw",
     padding: "0.78vw 2.34vw",
     borderRadius: "1.56vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     marginRight: "0.78vw",
     whiteSpace: "nowrap",
 

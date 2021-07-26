@@ -45,6 +45,11 @@ const useStyles = makeStyles(theme => ({
         height: 300,
         flexShrink: 0,
         borderRadius: 20,
+        overflow: "hidden",
+        WebkitBackfaceVisibility: 'hidden',
+        MozBackfaceVisibility: 'hidden',
+        WebkitTransform: 'translate3d(0, 0, 0)',
+        MozTransform: 'translate3d(0, 0, 0)',
         background: theme.palette.background.secondary,
         marginRight: 12,
         '&:last-child': {
@@ -59,6 +64,10 @@ const useStyles = makeStyles(theme => ({
             },
         },
         overflow: 'hidden',
+    },
+    img: {
+        height: 220,
+        width: 'auto',
     },
 }));
 

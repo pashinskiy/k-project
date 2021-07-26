@@ -17,6 +17,11 @@ const useStyles = makeStyles(theme => ({
     
     marginBottom: "2.1875vw",
     borderRadius: "1.5625vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     padding: "0.625vw",
     "@media(min-width: 1280px)": {
       borderRadius: "20px",
@@ -38,6 +43,11 @@ const useStyles = makeStyles(theme => ({
   wrapperImg: {
     height: "31.25vw",
     borderRadius: "0.9375vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     marginBottom: "2.1875vw",
     "@media(min-width: 1280px)": {
       borderRadius: "12px",

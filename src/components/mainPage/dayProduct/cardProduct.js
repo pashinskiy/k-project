@@ -22,6 +22,10 @@ const useStyle = makeStyles(theme => ({
   imageWrapper: {
     width: "100%",
     overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     background: theme.palette.background.main,
 
     height: "15.62vw",
@@ -110,27 +114,27 @@ export default function CardSimilarProduct({ product, afterChange, sale }) {
 
   const classes = useStyle()
   return (
-    <Grid className={`${classes.wrapper} product--card`}>
-      <GatsbyImage
-        image={img}
-        alt={alt ?? `image product`}
-        className={classes.imageWrapper}
-        imgStyle={{ objectFit: "contain" }}
-      />
-      <Link to={`/${product?.uid}/`} className={classes.link}>
-        <div className={classes.allPrice}>
-          <Typography className={classes.price}>{price} ₽</Typography>
-          <Typography className={classes.oldPrice}>{old_price} ₽</Typography>
-        </div>
-        <Typography variant="body2" className={classes.title}>
-          {title}
-        </Typography>
-      </Link>
-      <AddInCartAndFav
-        text="В корзину"
-        product={product}
-        afterChange={afterChange}
-      />
-    </Grid>
+    <Link to={`/${product?.uid}/`} className={classes.link}>
+      <Grid className={`${classes.wrapper} product--card`}>
+        <GatsbyImage
+          image={img}
+          alt={alt ?? `image product`}
+          className={classes.imageWrapper}
+          imgStyle={{ objectFit: "contain" }}
+        />
+          <div className={classes.allPrice}>
+            <Typography className={classes.price}>{price} ₽</Typography>
+            <Typography className={classes.oldPrice}>{old_price} ₽</Typography>
+          </div>
+          <Typography variant="body2" className={classes.title}>
+            {title}
+          </Typography>
+        <AddInCartAndFav
+          text="В корзину"
+          product={product}
+          afterChange={afterChange}
+        />
+      </Grid>
+    </Link>
   )
 }

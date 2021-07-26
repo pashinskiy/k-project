@@ -9,10 +9,14 @@ const useStyles = makeStyles(theme => ({
   wrapperBlock: {
     color: theme.palette.color.mainContrast,
     height: "31.25vw",
-    overflow: "hidden",
     boxSizing: "border-box",
     marginTop: "2.18vw",
     borderRadius: "0.93vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     "@media(min-width: 1280px)": {
       height: "400px",
       marginTop: "28px",

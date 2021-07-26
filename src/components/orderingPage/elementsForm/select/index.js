@@ -51,7 +51,7 @@ const useStyle = makeStyles(theme => ({
     display: "flex",
     position: "relative",
     transform: "rotate(90deg)",
-    transition: "transform .4s",
+    transition: "transform .3s",
 
     width: "1.4vw",
     height: "1.64vw",

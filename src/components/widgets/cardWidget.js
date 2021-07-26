@@ -65,6 +65,11 @@ const useStyles = makeStyles(theme => ({
     boxShadow: "none",
     position: "relative",
     borderRadius: "0.9375vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     "@media(min-width: 1280px)": {
       borderRadius: "12px",
     },
@@ -83,6 +88,11 @@ const useStyles = makeStyles(theme => ({
     border: `3px solid ${theme.palette.color.accentSecondary}`,
     background: "white",
     borderRadius: "1.875vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     "@media(min-width: 1280px)": {
       borderRadius: "24px",
     },
@@ -135,6 +145,11 @@ const useStyles = makeStyles(theme => ({
     bottom: 0,
     margin: "auto",
     borderRadius: "1.406vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     "@media(min-width: 1280px)": {
       borderRadius: 18,
     },
@@ -156,6 +171,11 @@ const useStyles = makeStyles(theme => ({
     boxShadow: "none",
     background: theme.palette.background.secondary,
     borderRadius: "1.5625vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     "@media(min-width: 1280px)": {
       borderRadius: "20px",
     },
@@ -224,6 +244,11 @@ const useStyles = makeStyles(theme => ({
     boxShadow: "none",
     background: theme.palette.background.secondary,
     borderRadius: "0.9375vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     "@media(min-width: 1280px)": {
       borderRadius: "12px",
     },
@@ -240,6 +265,11 @@ const useStyles = makeStyles(theme => ({
     boxShadow: "none",
     width: "20.9375vw",
     borderRadius: "1.5625vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translate3d(0, 0, 0)',
+    MozTransform: 'translate3d(0, 0, 0)',
     "@media(min-width: 1280px)": {
       width: "268px",
       borderRadius: "20px",
@@ -352,7 +382,7 @@ export default function CardWidget({cardImage, cardTitle, cardLink, variant, gra
                 <div
                   className={classes.storiesImageContainer}
                   style={{
-                    background: "linear-gradient(transparent, #681DE1)",
+                    background: "linear-gradient(rgb(104, 29, 225, 0), #681DE1)",
                     height: "55%",
                     bottom: "3px",
                     top: "auto",
