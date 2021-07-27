@@ -29,6 +29,11 @@ const useStyle = makeStyles(theme => ({
 
 export default function Gallery({ imagesArr }) {
   const images = imagesArr ? imagesArr : []
+  for (let i = 0; i < images.length; i++) {
+    if (images[i].localFile !== null) continue
+    images.splice(i, 1)
+    i--
+  }
   const rows = []
   for (let i = 0; i < images.length; i += 2) {
     rows.push(images.slice(i, i + 2))

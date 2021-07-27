@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     alignContent: "center",
     minWidth: 0,
     position: "relative",
+    cursor: "inherit",
   },
   buttonShow: {
     width: "auto",
@@ -267,6 +268,7 @@ export default function Filter({ products, setFilterProducts }) {
       .filter(slice => slice.slice_type === "characteristics")
       .forEach(slice => {
         slice.items.forEach(characteristic => {
+          if (characteristic.characteristic.document === null) return
           const type = characteristic.characteristic.document.data.variant
           const name = characteristic.characteristic.document.data.name
           const value = characteristic.value

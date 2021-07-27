@@ -2,20 +2,34 @@ import React from "react"
 import { Grid, makeStyles, Typography, useMediaQuery } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
-  logo: {
-    height: "2.73vw",
+  wrapper: {
     marginTop: "2.18vw",
     "@media(min-width: 1280px)": {
-      height: "35px",
       marginTop: "28px",
     },
     "@media(max-width: 834px)": {
-      height: "4.19vw",
       marginTop: "2.16vw",
     },
     "@media(max-width: 414px)": {
-      height: "8.45vw",
       marginTop: "4.29vw",
+    },
+  },
+  firstStringWrapper: {
+    marginBottom: "1.09vw",
+    "@media(min-width: 1280px)": {
+      marginBottom: "14px",
+    },
+  },
+  logo: {
+    height: "2.73vw",
+    "@media(min-width: 1280px)": {
+      height: "35px",
+    },
+    "@media(max-width: 834px)": {
+      height: "4.19vw",
+    },
+    "@media(max-width: 414px)": {
+      height: "8.45vw",
     },
   },
   text: {
@@ -25,10 +39,8 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.color.main,
 
     fontSize: "3.75vw",
-    marginTop: "1.09vw",
     "@media(min-width: 1280px)": {
       fontSize: "48px",
-      marginTop: "14px",
     },
     "@media(max-width: 834px)": {
       width: "50%",
@@ -127,31 +139,38 @@ export default function Title({ logo, text, stickersSlices }) {
       : "flex-start"
 
   return (
-    <Grid container direction="column">
-      <Grid container justify={justify} alignItems="flex-end">
-        {logoImg ? (
-          <picture className={classes.logo}>
-            <source srcSet={logoImg.srcSetWebp} type="image/webp" />
-            <img
-              src={logoImg.src}
-              srcSet={logoImg.srcSet}
-              alt={logoImg.alt}
-              height="1"
-              width={logoImg.aspectRatio}
-              style={{
-                objectFit: "contain",
-                width: "auto",
-                height: "100%",
-              }}
-            />
-          </picture>
-        ) : null}
-        {stickersImgArr.length && !mobile ? (
-          <Grid container style={{ width: "auto" }}>
-            {stickersImgArr}
-          </Grid>
-        ) : null}
-      </Grid>
+    <Grid container direction="column" className={classes.wrapper}>
+      {logoImg || (stickersImgArr.length && !mobile) ? (
+        <Grid
+          container
+          justify={justify}
+          className={classes.firstStringWrapper}
+          alignItems="flex-end"
+        >
+          {logoImg ? (
+            <picture className={classes.logo}>
+              <source srcSet={logoImg.srcSetWebp} type="image/webp" />
+              <img
+                src={logoImg.src}
+                srcSet={logoImg.srcSet}
+                alt={logoImg.alt}
+                height="1"
+                width={logoImg.aspectRatio}
+                style={{
+                  objectFit: "contain",
+                  width: "auto",
+                  height: "100%",
+                }}
+              />
+            </picture>
+          ) : null}
+          {stickersImgArr.length && !mobile ? (
+            <Grid container style={{ width: "auto" }}>
+              {stickersImgArr}
+            </Grid>
+          ) : null}
+        </Grid>
+      ) : null}
       <Typography className={classes.text}>{text}</Typography>
       {stickersImgArr.length && mobile ? (
         <Grid container className={classes.stickerWrapperMobile}>

@@ -21,8 +21,8 @@ export default function CardProduct({ prismicProduct }) {
             uid
             data {
               name
-              color_name
               color
+              color_group
             }
           }
         }

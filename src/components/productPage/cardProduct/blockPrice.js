@@ -4,6 +4,7 @@ import { Link } from "gatsby"
 import AddInCartAndFav from "../../button/addInCartAndFav"
 import Title from "./title"
 import Features from "./features"
+import colors from "../../../templates/colors.json"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -221,16 +222,13 @@ export default function BlockPrice({ product, allColors }) {
     <Grid container direction="column" className={classes.wrapper}>
       <Grid container className={classes.collorsPanel}>
         {allColors.map(prod => {
-          const active =
-            prod.data.color === (prod.data.color ?? prod.data.color_group)
-              ? classes.active
-              : ""
+          const active = product.uid === prod.uid ? classes.active : ""
           return (
             <Link to={`/${prod.uid}/`} key={prod.uid}>
               <div
                 className={classes.item + " " + active}
                 style={{
-                  background: prod.data.color ?? prod.data.color_group,
+                  background: prod.data.color ?? colors[prod.data.color_group],
                 }}
               ></div>
             </Link>
