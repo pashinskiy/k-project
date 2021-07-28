@@ -26,7 +26,7 @@ export default function DefaultLink({ name, link }) {
     const classes = useStyles();
 
     return (
-        <Link to={`/${link}`} className={classes.root}>
+        <Link to={link} className={classes.root}>
             {name}
         </Link>
     );

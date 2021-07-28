@@ -110,22 +110,11 @@ export default function Title({ logo, text, stickersSlices }) {
   const stickersImgArr = stickersSlices.reduce((arr, stickersSlice) => {
     arr.push(
       ...stickersSlice.items.map((sticker, i) => {
-        const img =
-          sticker.sticker.document.data.image.localFile?.childImageSharp.fluid
+        const img = sticker.sticker.document.data.image.localFile.publicURL
+
         return (
           <div className={classes.sticker} key={i}>
-            <picture style={{ display: "flex", width: "100%", height: "100%" }}>
-              <source srcSet={img?.srcSetWebp} type="image/webp" sizes="" />
-              <img
-                src={img?.src}
-                srcSet={img?.srcSet}
-                alt={sticker.sticker.document.data.image.alt}
-                sizes=""
-                width={img?.aspectRatio}
-                height="1"
-                style={{ width: "auto", height: "100%" }}
-              />
-            </picture>
+            <img src={img} style={{ width: "auto", height: "100%" }} />
           </div>
         )
       })

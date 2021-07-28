@@ -419,7 +419,7 @@ export default function Filter({ products, setFilterProducts }) {
           .filter(slice => slice.slice_type === "characteristics")
           .map(slice => slice.items)
           .flat()
-          .find(item => item.characteristic.document.data.name === title)?.value
+          .find(item => item.characteristic.document?.data.name === title)?.value
 
         if (title === "Цена") productParam = product.data.price
         if (title === "Цвет")

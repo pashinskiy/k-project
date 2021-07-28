@@ -49,12 +49,29 @@ export default function CatalogButton({ data, setCatalog, catalog, setAnimation,
 
     const classes = useStyles({ animation });
 
+    function openCatalog() {
+        setCatalog(true)
+        setAnimation(true);
+        setTimeout(()=>document.addEventListener("click", closeCatalog), 0)    
+    } 
+    function closeCatalog(e) {
+        const flagInCatalog = e.target.closest("#catalog") !== null
+        const flagInLink = e.target.closest("a") !== null
+        const flagInButton = e.target.closest("button") !== null
+
+        if (flagInCatalog && !flagInLink && !flagInButton) return
+        setTimeout(()=>setCatalog(false), 300)
+        setAnimation(false);
+        document.removeEventListener("click", closeCatalog)
+    }
+
     return (
         <button
             className={`${classes.root} catalog`}
             onClick={() => {
-                if (catalog === true) {setTimeout(()=>{ setCatalog(!catalog); },300)} else { setCatalog(!catalog); };
-                setAnimation(!animation);
+                if (catalog === false) {
+                    openCatalog()
+                }
             }}>
             <img
                 src={data.allPrismicHeader.edges[0]?.node.data.catalog_img.localFile.publicURL + `#${(catalog === true) ? 'Cross' : 'Burger'}`}

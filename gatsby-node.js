@@ -34,6 +34,18 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allPrismicDoc {
+        edges {
+          node {
+            uid
+            data {
+              content {
+                text
+              }
+            }
+          }
+        }
+      }
     }
   `)
 
@@ -88,6 +100,20 @@ exports.createPages = async ({ graphql, actions }) => {
       component: sale,
       context: {
         uid: edge.node.uid,
+      },
+    })
+  })
+
+  console.log("Document page build")
+  const document = path.resolve("src/templates/document.js")
+
+  pages.data.allPrismicDoc.edges.forEach(edge => {
+    console.log(edge.node.uid)
+    createPage({
+      path: `/documents/${edge.node.uid}/`,
+      component: document,
+      context: {
+        content: edge.node.data.content.text,
       },
     })
   })

@@ -129,6 +129,7 @@ export default function BlockBoolean({
               image {
                 alt
                 localFile {
+                  publicURL
                   childImageSharp {
                     gatsbyImageData
                     fluid(maxHeight: 35) {
@@ -170,7 +171,11 @@ export default function BlockBoolean({
         <Grid className={classes.ratio + " " + (value ? classes.active : "")} />
         {img ? (
           <div className={classes.image}>
-            <picture style={{ display: "flex", width: "100%", height: "100%" }}>
+            <img
+              src={img.localFile.publicURL}
+              style={{ width: "auto", height: "100%" }}
+            />
+            {/* <picture style={{ display: "flex", width: "100%", height: "100%" }}>
               <source
                 srcSet={img.localFile.childImageSharp.fluid.srcSetWebp}
                 type="image/webp"
@@ -185,7 +190,7 @@ export default function BlockBoolean({
                 height="1"
                 style={{ width: "auto", height: "100%" }}
               />
-            </picture>
+            </picture> */}
           </div>
         ) : (
           // <GatsbyImage

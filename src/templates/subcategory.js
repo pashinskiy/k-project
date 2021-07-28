@@ -13,6 +13,18 @@ import Filter from "../components/filter"
 import Pagination from "../components/pagination"
 
 const useStyles = makeStyles(theme => ({
+  wrapper: {
+    marginTop: "2.18vw",
+    "@media(min-width: 1280px)": {
+      marginTop: "28px",
+    },
+    "@media(max-width: 834px)": {
+      marginTop: "3.35vw",
+    },
+    "@media(max-width: 414px)": {
+      marginTop: "6.76vw",
+    },
+  },
   blockSortAndFilter: {
     borderBottom: `solid 1px ${theme.palette.color.secondaryLight}`,
     position: "relative",
@@ -54,7 +66,7 @@ const IndexPage = ({ data: { allPrismicProduct, prismicSubcategory } }) => {
   ))
 
   return (
-    <>
+    <div className={classes.wrapper}>
       <Seo title="Home" />
       <BreadCrumbs
         links={[
@@ -94,7 +106,7 @@ const IndexPage = ({ data: { allPrismicProduct, prismicSubcategory } }) => {
           />
         )}
       </Grid>
-    </>
+    </div>
   )
 }
 
@@ -164,14 +176,7 @@ export const query = graphql`
                           image {
                             alt
                             localFile {
-                              childImageSharp {
-                                fluid(maxHeight: 35) {
-                                  aspectRatio
-                                  src
-                                  srcSet
-                                  srcSetWebp
-                                }
-                              }
+                              publicURL
                             }
                           }
                         }

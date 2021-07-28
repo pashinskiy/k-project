@@ -42,9 +42,7 @@ export default function FiltersBySticker({ products }) {
               name
               image {
                 localFile {
-                  childImageSharp {
-                    gatsbyImageData
-                  }
+                  publicURL
                 }
               }
             }
@@ -82,9 +80,7 @@ export default function FiltersBySticker({ products }) {
           <div key={sticker.id} className={classes.wrapper}>
             <CardWidget
               variant="brand"
-              cardImage={
-                sticker.data.image?.localFile?.childImageSharp.gatsbyImageData
-              }
+              publicURL={sticker.data.image?.localFile?.publicURL}
               cardTitle={title}
               cardLink={url.href}
               gradientBack={true}

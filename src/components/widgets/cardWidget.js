@@ -14,31 +14,31 @@ const useStyles = makeStyles(theme => ({
     left: 0,
     right: 0,
     padding: 12,
-    boxSizing: 'border-box',
-    '@media(max-width: 1024px)': {
-      padding: '0.937vw',
+    boxSizing: "border-box",
+    "@media(max-width: 1024px)": {
+      padding: "0.937vw",
     },
-    '@media(max-width: 834px)': {
-      padding: '1.438vw',
+    "@media(max-width: 834px)": {
+      padding: "1.438vw",
     },
-    '@media(max-width: 787px)': {
-      padding: '1.398vw',
+    "@media(max-width: 787px)": {
+      padding: "1.398vw",
     },
-    '@media(max-width: 665px)': {
-      padding: '1.898vw',
+    "@media(max-width: 665px)": {
+      padding: "1.898vw",
     },
-    '@media(max-width: 550px)': {
-      padding: '2.898vw',
+    "@media(max-width: 550px)": {
+      padding: "2.898vw",
     },
-    '@media(max-width: 418px)': {
+    "@media(max-width: 418px)": {
       width: "100%",
     },
-    '@media(max-width: 353px)': {
-      fontSize: '3.8vw',
+    "@media(max-width: 353px)": {
+      fontSize: "3.8vw",
     },
     width: "78%",
-    height: '100%',
-    lineHeight: '120%',
+    height: "100%",
+    lineHeight: "120%",
     // "@media(max-width: 834px)": {
     //   top: "1.438vw",
     //   left: "1.438vw",
@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
   stretch: {
     width: "100%",
     height: "100%",
-    display: 'block',
+    display: "block",
   },
   categoryCardRoot: {
     width: "100%",
@@ -66,10 +66,10 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     borderRadius: "0.9375vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     "@media(min-width: 1280px)": {
       borderRadius: "12px",
     },
@@ -89,10 +89,10 @@ const useStyles = makeStyles(theme => ({
     background: "white",
     borderRadius: "1.875vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     "@media(min-width: 1280px)": {
       borderRadius: "24px",
     },
@@ -107,7 +107,7 @@ const useStyles = makeStyles(theme => ({
   storiesCardTitle: {
     position: "absolute",
     fontWeight: 700,
-    lineHeight: '120%',
+    lineHeight: "120%",
     width: "71%",
     color: theme.palette.color.mainContrast,
     margin: "auto",
@@ -146,10 +146,10 @@ const useStyles = makeStyles(theme => ({
     margin: "auto",
     borderRadius: "1.406vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     "@media(min-width: 1280px)": {
       borderRadius: 18,
     },
@@ -172,10 +172,10 @@ const useStyles = makeStyles(theme => ({
     background: theme.palette.background.secondary,
     borderRadius: "1.5625vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     "@media(min-width: 1280px)": {
       borderRadius: "20px",
     },
@@ -245,10 +245,10 @@ const useStyles = makeStyles(theme => ({
     background: theme.palette.background.secondary,
     borderRadius: "0.9375vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     "@media(min-width: 1280px)": {
       borderRadius: "12px",
     },
@@ -266,10 +266,10 @@ const useStyles = makeStyles(theme => ({
     width: "20.9375vw",
     borderRadius: "1.5625vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     "@media(min-width: 1280px)": {
       width: "268px",
       borderRadius: "20px",
@@ -344,7 +344,16 @@ const useStyles = makeStyles(theme => ({
 //categoriesSingle - список категорий с подкатегориями на 1 карточке
 //передать список категорий
 
-export default function CardWidget({cardImage, cardTitle, cardLink, variant, gradientBack, categoryTitle, subCategoryTitle}) {
+export default function CardWidget({
+  cardImage,
+  publicURL,
+  cardTitle,
+  cardLink,
+  variant,
+  gradientBack,
+  categoryTitle,
+  subCategoryTitle,
+}) {
   const classes = useStyles()
   const altImage = cardImage
     ? cardImage.images.fallback.src.split("_")[1].replace(".jpg", "")
@@ -362,7 +371,9 @@ export default function CardWidget({cardImage, cardTitle, cardLink, variant, gra
                   alt={altImage}
                   className={`${classes.stretch} gatsby--image`}
                 />
-                <Typography className={`${classes.categoryCardTitle} category--title`}>
+                <Typography
+                  className={`${classes.categoryCardTitle} category--title`}
+                >
                   {cardTitle}
                 </Typography>
               </Link>
@@ -372,7 +383,10 @@ export default function CardWidget({cardImage, cardTitle, cardLink, variant, gra
       case "stories":
         return (
           <Card className={`${classes.storiesCardRoot} catalog--stories`}>
-            <CardActionArea className={classes.stretch} style={{borderRadius: "12px"}}>
+            <CardActionArea
+              className={classes.stretch}
+              style={{ borderRadius: "12px" }}
+            >
               <Link to={cardLink} className={`${classes.stretch} strech`}>
                 <GatsbyImage
                   image={cardImage}
@@ -382,13 +396,16 @@ export default function CardWidget({cardImage, cardTitle, cardLink, variant, gra
                 <div
                   className={classes.storiesImageContainer}
                   style={{
-                    background: "linear-gradient(rgb(104, 29, 225, 0), #681DE1)",
+                    background:
+                      "linear-gradient(rgb(104, 29, 225, 0), #681DE1)",
                     height: "55%",
                     bottom: "3px",
                     top: "auto",
                   }}
                 />
-                <Typography className={`${classes.storiesCardTitle} card--title`}>
+                <Typography
+                  className={`${classes.storiesCardTitle} card--title`}
+                >
                   {cardTitle}
                 </Typography>
               </Link>
@@ -418,6 +435,51 @@ export default function CardWidget({cardImage, cardTitle, cardLink, variant, gra
                 }
               >
                 <div className={classes.brandDummy} />
+                {publicURL ? (
+                  <div
+                    className={classes.brandElement}
+                    style={{ display: "flex" }}
+                  >
+                    <img
+                      src={publicURL}
+                      alt={altImage}
+                      style={{
+                        objectFit: "contain",
+                        height: "100%",
+                        width: "100%",
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <GatsbyImage
+                    image={cardImage}
+                    alt={altImage}
+                    className={classes.brandElement}
+                    imgStyle={{ objectFit: "contain" }}
+                  />
+                )}
+              </Card>
+              {cardTitle ? (
+                <Typography className={classes.brandTitle}>
+                  {cardTitle}
+                </Typography>
+              ) : null}
+            </div>
+          </Link>
+        )
+      case "brand_mainPage":
+        return (
+          <Link
+            to={cardLink}
+            className={classes.stretch}
+            style={{ textDecoration: "none" }}
+          >
+            <div className={classes.brandCardRoot}>
+              <Card
+                className={classes.brandContainer}
+                style={{ background: "#EFEFF2", borderRadius: 100 }}
+              >
+                <div className={classes.brandDummy} />
                 <GatsbyImage
                   image={cardImage}
                   alt={altImage}
@@ -433,34 +495,6 @@ export default function CardWidget({cardImage, cardTitle, cardLink, variant, gra
             </div>
           </Link>
         )
-        case "brand_mainPage":
-          return (
-            <Link
-              to={cardLink}
-              className={classes.stretch}
-              style={{ textDecoration: "none" }}
-            >
-              <div className={classes.brandCardRoot}>
-                <Card
-                  className={classes.brandContainer}
-                  style={{ background: "#EFEFF2", borderRadius: 100, }}
-                >
-                  <div className={classes.brandDummy} />
-                  <GatsbyImage
-                    image={cardImage}
-                    alt={altImage}
-                    className={classes.brandElement}
-                    imgStyle={{ objectFit: "contain" }}
-                  />
-                </Card>
-                {cardTitle ? (
-                  <Typography className={classes.brandTitle}>
-                    {cardTitle}
-                  </Typography>
-                ) : null}
-              </div>
-            </Link>
-          )
       case "small":
         return (
           <Link

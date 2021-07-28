@@ -260,7 +260,7 @@ export default function MobileCatalog({ data, animation }) {
     const classes = useStyles({ animation });
 
     return (
-        <div className={classes.root}>
+        <div id="catalog" className={classes.root}>
             <div className={classes.root_container}>
                 <div className={classes.container}>
                     <div className={classes.stories}>
@@ -283,7 +283,7 @@ export default function MobileCatalog({ data, animation }) {
                                     key={`category ${i}`}
                                     cardImage={category.category.document.data.image.localFile.childImageSharp.gatsbyImageData}
                                     cardTitle={category.category.document.data.name}
-                                    cardLink={""}  />
+                                    cardLink={`/category/${category.category.document.uid}`}  />
                             ))}
                         </nav>
                     </div>

@@ -193,14 +193,7 @@ export const query = graphql`
                           image {
                             alt
                             localFile {
-                              childImageSharp {
-                                fluid(maxHeight: 35) {
-                                  aspectRatio
-                                  src
-                                  srcSet
-                                  srcSetWebp
-                                }
-                              }
+                              publicURL
                             }
                           }
                         }

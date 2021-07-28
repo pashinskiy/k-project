@@ -32,15 +32,16 @@ const useStyles = makeStyles(theme => ({
       fontSize: 14,
     },
   },
-  cardContent:{
+  cardContent: {
     padding: "16px",
     color: theme.palette.color.main,
-  }
+  },
 }))
 
 export default function CharacteristicsBlock(props) {
   const classes = useStyles()
   const description = props.props.data.description ?? null
+  
   return (
     <div>
       <HeaderWithIcon
@@ -50,13 +51,15 @@ export default function CharacteristicsBlock(props) {
       />
       <Grid container wrap="nowrap">
         <Grid item xs={12}>
-          <Card className={classes.cardDescription}>
-            <CardContent className={classes.cardContent}>
-              <Typography className={classes.cardText}>
-                {description}
-              </Typography>
-            </CardContent>
-          </Card>
+          {description ? (
+            <Card className={classes.cardDescription}>
+              <CardContent className={classes.cardContent}>
+                <Typography className={classes.cardText}>
+                  {description}
+                </Typography>
+              </CardContent>
+            </Card>
+          ) : null}
           <Characteristics props={props.props.data} />
         </Grid>
       </Grid>

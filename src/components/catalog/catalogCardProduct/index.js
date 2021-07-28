@@ -16,10 +16,10 @@ const useStyles = makeStyles(theme => ({
     padding: "2.18vw 0",
     borderBottom: "1px solid #E3E3EA",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     "@media(min-width: 1280px)": {
       minHeight: "336px",
       padding: "28px 0",
@@ -119,10 +119,10 @@ const useStyles = makeStyles(theme => ({
   color: {
     borderRadius: "100%",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     boxSizing: "border-box",
     boxShadow: "inset 0px 2px 4px rgba(0, 0, 0, 0.25)",
 
@@ -260,22 +260,10 @@ export default function CardProduct({ product, afterChange, ...other }) {
   const stickersImgArr = stickersSlices.reduce((arr, stickersSlice) => {
     arr.push(
       ...stickersSlice.items.map((sticker, i) => {
-        const img =
-          sticker.sticker.document.data.image.localFile?.childImageSharp.fluid
+        const img = sticker.sticker.document.data.image.localFile?.publicURL
         return (
           <div className={classes.sticker} key={i}>
-            <picture style={{ display: "flex", width: "100%", height: "100%" }}>
-              <source srcSet={img?.srcSetWebp} type="image/webp" sizes="" />
-              <img
-                src={img?.src}
-                srcSet={img?.srcSet}
-                alt={sticker.sticker.document.data.image.alt}
-                sizes=""
-                width={img?.aspectRatio}
-                height="1"
-                style={{ width: "auto", height: "100%" }}
-              />
-            </picture>
+            <img src={img} style={{ width: "auto", height: "100%" }} />
           </div>
         )
       })

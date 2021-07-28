@@ -1,0 +1,17 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "Уникальный ID"
+      }
+    },
+    "content": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "preformatted",
+        "label": "Содержание"
+      }
+    }
+  }
+}

@@ -242,6 +242,7 @@ export default function Layout({ children }) {
                             document {
                               ... on PrismicSubcategory {
                                 id
+                                uid
                                 data {
                                   name
                                   tags {
@@ -455,26 +456,26 @@ export default function Layout({ children }) {
             aria-label="Background Catalog"
             tabIndex={0}
             className={classes.background}
-            onClick={() => {
-              if (catalog === true) {
-                setTimeout(() => {
-                  setCatalog(!catalog)
-                }, 150)
-              } else {
-                setCatalog(!catalog)
-              }
-              setAnimation(!animation)
-            }}
-            onKeyDown={() => {
-              if (catalog === true) {
-                setTimeout(() => {
-                  setCatalog(!catalog)
-                }, 150)
-              } else {
-                setCatalog(!catalog)
-              }
-              setAnimation(!animation)
-            }}
+            // onClick={() => {
+            //   if (catalog === true) {
+            //     setTimeout(() => {
+            //       setCatalog(!catalog)
+            //     }, 150)
+            //   } else {
+            //     setCatalog(!catalog)
+            //   }
+            //   setAnimation(!animation)
+            // }}
+            // onKeyDown={() => {
+            //   if (catalog === true) {
+            //     setTimeout(() => {
+            //       setCatalog(!catalog)
+            //     }, 150)
+            //   } else {
+            //     setCatalog(!catalog)
+            //   }
+            //   setAnimation(!animation)
+            // }}
           />
         )
 

@@ -3,7 +3,7 @@ import { makeStyles, Divider, Typography } from '@material-ui/core';
 import Category from './category';
 import './catalog.css';
 import DefaultLink from '../header/link/default';
-import { navigate } from 'gatsby-link';
+import { Link } from 'gatsby';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -64,6 +64,8 @@ const useStyles = makeStyles(theme => ({
         },
     },
     wrapper: {
+        textDecoration: "none",
+        color: theme.palette.color.main,
         cursor: 'pointer',
         display: 'flex',
         alignItems: 'center',
@@ -136,7 +138,7 @@ export default function Catalog({ data, animation }) {
     const classes = useStyles({ animation });
 
     return (
-        <div className={classes.root}>
+        <div id="catalog" className={classes.root}>
             <div className={classes.root_container}>
                 <div className={classes.container}>
                     <div className={classes.catalog}>
@@ -156,12 +158,10 @@ export default function Catalog({ data, animation }) {
                     <Divider orientation="vertical" className={classes.divider} />
                     {data.allPrismicCatalog.edges[0].node.data.categories.filter(atr => atr.category.document.data.name === hover).map((category, i) => (
                         <div className={classes.category} key={`category ${i}`}>
-                            <div role="button" aria-label="Catalog Category" tabIndex={0} className={classes.wrapper}
-                                onClick={() => {navigate(`/category/${category.category.document.uid}`)}}
-                                onKeyDown={() => {navigate(`/category/${category.category.document.uid}`)}}>
+                            <Link to={`/category/${category.category.document.uid}`} className={classes.wrapper}>
                                 <img src={category.category.document.data.category_icon.localFile.publicURL + '#gradient'} alt={''} />
                                 <Typography variant="h3">{category.category.document.data.name}</Typography>
-                            </div>
+                            </Link>
                             <div className={classes.categories_brands}>
                                 <div className={classes.sub_categories}>
                                 {category.category.document.data.children.map((sub_category, i) => (
@@ -175,7 +175,7 @@ export default function Catalog({ data, animation }) {
                                                     null 
                                                 :
                                                     [sub_category.child.document.data.tags.map((tag, i) => (
-                                                        <DefaultLink name={tag.tag.document.data.name} link={""} key={`tag ${i}`} />
+                                                        <DefaultLink name={tag.tag.document.data.name} link={`/subcategory/${sub_category.child.document.uid}/?group=${tag.tag.document.data.name}`} key={`tag ${i}`} />
                                                     ))]
                                             }
                                         </nav>

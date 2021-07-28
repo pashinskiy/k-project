@@ -12,12 +12,14 @@ import CharacteristicsBlock from "../components/productPage/characteristics"
 import SimilarProducts from "../components/productPage/similarProducts"
 
 const Product = ({ data: { prismicProduct } }) => {
-  const IsDesktop = typeof window !== 'undefined' && window.matchMedia("(min-width: 1025px)").matches
+  const IsDesktop =
+    typeof window !== "undefined" &&
+    window.matchMedia("(min-width: 1025px)").matches
   return (
     <>
       <Seo title="Home" />
-      {(IsDesktop === true) ? <div style={{ marginTop: 36, }} /> : null}
-      <div style={{ marginTop: 16, }} />
+      {IsDesktop === true ? <div style={{ marginTop: 36 }} /> : null}
+      <div style={{ marginTop: 16 }} />
       <TabPanel
         links={[
           {
@@ -201,14 +203,7 @@ export const pageQuery = graphql`
                       image {
                         alt
                         localFile {
-                          childImageSharp {
-                            fluid(maxHeight: 35) {
-                              aspectRatio
-                              src
-                              srcSet
-                              srcSetWebp
-                            }
-                          }
+                          publicURL
                         }
                       }
                     }
