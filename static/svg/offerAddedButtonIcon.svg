@@ -1,7 +1,7 @@
 <svg width="100%" height="100%" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M15.9667 0.821048C16.4382 1.0479 16.6358 1.61257 16.4081 2.08227L6.41962 17.5L0.632204 10.0625C0.364721 9.61406 0.512812 9.03453 0.962975 8.76808C1.41314 8.50163 1.9949 8.64915 2.26239 9.09758L6.41962 13.25L14.7006 1.26079C14.9283 0.791078 15.4951 0.594201 15.9667 0.821048Z" fill="url(#paint0_linear)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15.9667 0.821048C16.4382 1.0479 16.6358 1.61257 16.4081 2.08227L6.41962 17.5L0.632204 10.0625C0.364721 9.61406 0.512812 9.03453 0.962975 8.76808C1.41314 8.50163 1.9949 8.64915 2.26239 9.09758L6.41962 13.25L14.7006 1.26079C14.9283 0.791078 15.4951 0.594201 15.9667 0.821048Z" fill="url(#offerAddedButtonIcon_paint0_linear)"/>
 <defs>
-<linearGradient id="paint0_linear" x1="8.50085" y1="0.726837" x2="8.50085" y2="17.5" gradientUnits="userSpaceOnUse">
+<linearGradient id="offerAddedButtonIcon_paint0_linear" x1="8.50085" y1="0.726837" x2="8.50085" y2="17.5" gradientUnits="userSpaceOnUse">
 <stop stop-color="#291AD5"/>
 <stop offset="1" stop-color="#681DE1"/>
 </linearGradient>

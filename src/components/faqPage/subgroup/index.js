@@ -7,7 +7,7 @@ import Info from "../../../../static/svg/info.svg"
 const useStyles = makeStyles(theme => ({
   leftBlock: {
     width: "68.91%",
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "100%",
     },
   },
@@ -18,15 +18,15 @@ const useStyles = makeStyles(theme => ({
     padding: "3.12vw 1.56vw",
     borderRadius: "2.81vw 0 0 2.81vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     "@media(min-width: 1280px)": {
       padding: "40px 20px",
       borderRadius: "20px 0 0 20px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       display: "none",
     },
   },
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
       marginLeft: "52px",
       fontSize: "36px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginLeft: "6.23vw",
       fontSize: "4.31vw",
     },
@@ -62,7 +62,7 @@ const useStyles = makeStyles(theme => ({
       marginLeft: "24px",
       paddingLeft: "28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "3.35vw",
       marginLeft: "2.87vw",
       paddingLeft: "3.35vw",
@@ -87,7 +87,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "28px",
       fontSize: "24px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "3.35vw",
       fontSize: "2.87vw",
     },
@@ -121,7 +121,7 @@ const useStyles = makeStyles(theme => ({
         borderWidth: "3px",
         boxShadow: `0 0 0 12px ${theme.palette.background.main}`,
       },
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         width: "2.87vw",
         height: "2.87vw",
         top: "0.35vw",
@@ -139,7 +139,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginTop: "24px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "2.87vw",
     },
     "@media(max-width: 414px)": {
@@ -157,7 +157,7 @@ const useStyles = makeStyles(theme => ({
       marginBottom: "16px",
       fontSize: "14px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginBottom: "1.91vw",
       fontSize: "1.67vw",
     },
@@ -209,7 +209,7 @@ const useStyles = makeStyles(theme => ({
         marginBottom: "20px",
         paddingLeft: "20px",
       },
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         marginBottom: "2.39vw",
         paddingLeft: "2.39vw",
       },
@@ -225,15 +225,15 @@ const useStyles = makeStyles(theme => ({
     height: "19.29vw",
     borderRadius: "0.93vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     "@media(min-width: 1280px)": {
       height: "247px",
       borderRadius: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       height: "23.86vw",
       borderRadius: "0.71vw",
     },
@@ -251,7 +251,7 @@ const useStyles = makeStyles(theme => ({
       padding: "12px",
       borderRadius: "10px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       padding: "1.43vw",
       borderRadius: "1.19vw",
     },
@@ -269,7 +269,7 @@ const useStyles = makeStyles(theme => ({
       height: "24px",
       marginRight: "10px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "2.87vw",
       height: "2.87vw",
       marginRight: "1.19vw",
@@ -287,7 +287,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       width: "550px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "47.56vw",
     },
     "@media(max-width: 414px)": {
@@ -405,6 +405,8 @@ export default function Subgroup({ subgroup }) {
                           />
                         </Grid>
                       )
+                    default:
+                      return null
                   }
                 })}
               </Grid>

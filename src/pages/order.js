@@ -21,7 +21,7 @@ const useStyle = makeStyles(theme => ({
       width: "890px",
       fontSize: "14px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "3.35vw",
       width: "100%",
       fontSize: "1.67vw",
@@ -46,7 +46,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: "14px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
     },
     "@media(max-width: 414px)": {
@@ -60,7 +60,7 @@ const useStyle = makeStyles(theme => ({
       fontSize: 24,
       lineHeight: "29.05px",
       },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "2.8776vw",
       lineHeight: "3.4832vw",
       },
@@ -77,7 +77,7 @@ const useStyle = makeStyles(theme => ({
       width: "250px",
       marginRight: "60px",
       },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "29.976vw",
       marginRight: "7.1942vw",
       },
@@ -93,7 +93,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       width: "375px",
       },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "44.964vw",
       },
     "@media(max-width: 414px)": {
@@ -106,7 +106,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginBottom: "16px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginBottom: "1.9184vw",
     },
     "@media(max-width: 414px)": {
@@ -123,7 +123,7 @@ const useStyle = makeStyles(theme => ({
       width: "800px",
       margin: "28px 0",
       },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "95.9232vw",
       margin: "3.3573vw 0",
       },
@@ -142,7 +142,7 @@ const useStyle = makeStyles(theme => ({
       width: "660px",
       marginTop: "16px",
       },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "79.13669vw",
       marginTop: "1.9184vw",
       },
@@ -156,7 +156,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginTop: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "1.4388vw",
     },
     "@media(max-width: 414px)": {
@@ -275,7 +275,6 @@ export const query = graphql`
             name
             price
             old_price
-            color_name
             images {
               image {
                 alt

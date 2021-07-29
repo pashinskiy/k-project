@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.color.main,
     lineHeight: "100%",
     transition: ".15s ease all",
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       display: "none",
     },
     "&:hover": {
@@ -25,12 +25,12 @@ const useStyles = makeStyles(theme => ({
     marginRight: "auto",
     marginBottom: 4,
     transition: ".15s ease all",
-    "@media(max-width: 1024px)": {
+    "@media(max-width: 1025px)": {
       width: 24,
     },
   },
   text: {
-    "@media(max-width: 1024px)": {
+    "@media(max-width: 1025px)": {
       fontSize: 12,
     },
   },

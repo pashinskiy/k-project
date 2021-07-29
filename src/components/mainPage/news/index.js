@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function News(props) {
-    const maxWidth1024 = useMediaQuery("(max-width: 1024px)")
+    const maxWidth1024 = useMediaQuery("(max-width: 1025px)")
     
     const classes = useStyles();
 

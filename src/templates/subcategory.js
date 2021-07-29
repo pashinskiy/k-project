@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginTop: "28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "3.35vw",
     },
     "@media(max-width: 414px)": {
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
       padding: "28px 0",
       borderWidth: "1px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       padding: "2.39vw 0",
       borderWidth: "0.11vw",
     },
@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       width: "916px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "100%",
     },
   },
@@ -62,7 +62,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "28px",
       fontSize: "30px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "3.35vw",
       fontSize: "3.59vw",
     },
@@ -82,7 +82,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "12px",
       fontSize: "24px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "1.43vw",
       fontSize: "2.87vw",
     },
@@ -92,14 +92,19 @@ const useStyles = makeStyles(theme => ({
     },
   },
   cleanFilter: {
+    border: "none",
     borderBottom: "1px solid #878787",
+    background: "transparent",
+
+    fontSize: "inherit",
+    color: "inherit",
     cursor: "pointer",
   },
 }))
 
 const IndexPage = ({ data: { allPrismicProduct, prismicSubcategory } }) => {
   const classes = useStyles()
-  const mobile = useMediaQuery("(max-width: 834px)")
+  const mobile = useMediaQuery("(max-width: 1025px)")
 
   const allProducts = allPrismicProduct.edges.map(edge => edge.node)
   const [filterProducts, setFilterProducts] = React.useState(allProducts)
@@ -110,7 +115,8 @@ const IndexPage = ({ data: { allPrismicProduct, prismicSubcategory } }) => {
 
   function cleanFilter() {
     const url = new URL(window.location)
-    console.log(url)
+    url.search = ""
+    window.location = url.href
   }
 
   return (
@@ -218,7 +224,6 @@ export const query = graphql`
             price
             old_price
             color
-            color_name
             color_group
             images {
               image {

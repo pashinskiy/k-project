@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
         width: 'fit-content',
         height: 'fit-content',
         padding: 40,
-        '@media (max-width: 1024px)': {
+        '@media (max-width: 1025px)': {
             padding: 12,
         },
         '@media (max-width: 767px)': {

@@ -28,7 +28,7 @@ const useStyle = makeStyles(theme => ({
       borderRadius: "12px",
       //   marginBottom: "28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       height: "47.96vw",
       borderRadius: "1.43vw",
       //   marginBottom: "2.87vw",

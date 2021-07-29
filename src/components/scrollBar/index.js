@@ -1,5 +1,5 @@
 import React from "react"
-import { makeStyles, Button, Grid, useMediaQuery } from "@material-ui/core"
+import { makeStyles, Button, Grid } from "@material-ui/core"
 
 import Arrow from "../../../static/svg/arrowWhite.svg"
 
@@ -42,7 +42,7 @@ const useStyle = makeStyles(theme => ({
       marginLeft: "-28px",
       paddingLeft: "28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginLeft: "-3.35vw",
       paddingLeft: "3.35vw",
     },
@@ -73,7 +73,7 @@ const useStyle = makeStyles(theme => ({
         ? `linear-gradient(-90deg, rgb(255, 255, 255, 0) 0%,${theme.palette.background.main} 100%)`
         : "none",
 
-    "@media(max-width: 1024px)": {
+    "@media(max-width: 1025px)": {
       display: "none",
     },
   },
@@ -101,7 +101,7 @@ const useStyle = makeStyles(theme => ({
       height: "46px",
       padding: "13px",
     },
-    "@media(max-width: 1024px)": {
+    "@media(max-width: 1025px)": {
       display: "none",
     },
   },
@@ -120,7 +120,7 @@ const useStyle = makeStyles(theme => ({
         ? `linear-gradient(-90deg, ${theme.palette.background.main} 0%, rgb(255, 255, 255, 0) 100%)`
         : "none",
 
-    "@media(max-width: 1024px)": {
+    "@media(max-width: 1025px)": {
       display: "none",
     },
   },
@@ -148,7 +148,7 @@ const useStyle = makeStyles(theme => ({
       height: "46px",
       padding: "13px",
     },
-    "@media(max-width: 1024px)": {
+    "@media(max-width: 1025px)": {
       display: "none",
     },
   },

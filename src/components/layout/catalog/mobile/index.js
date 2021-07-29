@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
         paddingBottom: 62,
         top: 100,
         left: 0,
-        '@media (max-width: 1024px)': {
+        '@media (max-width: 1025px)': {
             top: 70,
         },
         animationName: props => (props.animation === true)
@@ -32,12 +32,12 @@ const useStyles = makeStyles(theme => ({
         animationFillMode: 'forwards',
     },
     root_container: {
-        '@media(max-width: 1024px)': {
+        '@media(max-width: 1025px)': {
             padding: '2.18vw',
             paddingTop: '1.25vw',
             paddingBottom: 'calc(2.18vw - 8px)',
         },
-        '@media(max-width: 834px)': {
+        '@media(max-width: 1025px)': {
             padding: '3.35vw',
             paddingTop: '1.918vw',
             paddingBottom: 'calc(3.35vw - 8px)',
@@ -57,13 +57,13 @@ const useStyles = makeStyles(theme => ({
     catalog: {
         width: 'fit-content',
         marginRight: 12,
-        '@media (max-width: 1024px)': {
+        '@media (max-width: 1025px)': {
             marginRight: 0,
         },
         '& h2': {
             fontSize: 17,
             fontWeight: 600,
-            '@media (max-width: 1024px)': {
+            '@media (max-width: 1025px)': {
                 marginBottom: 16,
             },
         },
@@ -110,12 +110,12 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         overflowX: 'scroll',
         marginBottom: 28,
-        '@media(max-width: 1024px)': {
+        '@media(max-width: 1025px)': {
             marginLeft: '-2.18vw',
             marginRight: '-2.18vw',
             paddingLeft: '2.18vw',
         },
-        '@media(max-width: 834px)': {
+        '@media(max-width: 1025px)': {
             marginLeft: '-3.35vw',
             marginRight: '-3.35vw',
             paddingLeft: '3.35vw',
@@ -139,10 +139,10 @@ const useStyles = makeStyles(theme => ({
     wrapper_stories: {
         marginRight: 4,
         '&:last-child': {
-            '@media(max-width: 1024px)': {
+            '@media(max-width: 1025px)': {
                 paddingRight: '2.18vw',
             },
-            '@media(max-width: 834px)': {
+            '@media(max-width: 1025px)': {
                 paddingRight: '3.35vw',
             },
             '@media(max-width: 414px)': {
@@ -175,12 +175,12 @@ const useStyles = makeStyles(theme => ({
         '&::-webkit-scrollbar': {
             display: 'none',
         },
-        '@media(max-width: 1024px)': {
+        '@media(max-width: 1025px)': {
             marginLeft: '-2.18vw',
             marginRight: '-2.18vw',
             paddingLeft: '2.18vw',
         },
-        '@media(max-width: 834px)': {
+        '@media(max-width: 1025px)': {
             marginLeft: '-3.35vw',
             marginRight: '-3.35vw',
             paddingLeft: '3.35vw',
@@ -194,7 +194,7 @@ const useStyles = makeStyles(theme => ({
     sale: {
         maxWidth: 366,
         width: 'calc(100vw - 2.18vw)',
-        '@media(max-width: 834px)': {
+        '@media(max-width: 1025px)': {
             width: 'calc(100vw - 3.35vw * 2)',
         },
         '@media(max-width: 414px)': {
@@ -204,10 +204,10 @@ const useStyles = makeStyles(theme => ({
         height: 'fit-content',
         marginRight: 12,
         '&:last-child': {
-            '@media(max-width: 1024px)': {
+            '@media(max-width: 1025px)': {
                 marginRight: '2.18vw',
             },
-            '@media(max-width: 834px)': {
+            '@media(max-width: 1025px)': {
                 marginRight: '3.35vw',
             },
             '@media(max-width: 414px)': {
@@ -220,7 +220,7 @@ const useStyles = makeStyles(theme => ({
         '& h2': {
             fontSize: 17,
             fontWeight: 600,
-            '@media (max-width: 1024px)': {
+            '@media (max-width: 1025px)': {
                 marginBottom: 16,
             },
         },

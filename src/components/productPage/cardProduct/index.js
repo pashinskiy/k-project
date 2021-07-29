@@ -10,7 +10,7 @@ import AddInCartAndFav from "../../button/addInCartAndFav"
 import Features from "./features"
 
 export default function CardProduct({ prismicProduct }) {
-  const mobile = useMediaQuery("(max-width: 834px)")
+  const mobile = useMediaQuery("(max-width: 1025px)")
 
   const data = useStaticQuery(graphql`
     {

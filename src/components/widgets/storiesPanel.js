@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
         marginBottom: "40px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
         marginBottom: "4.796vw",
     },
     "@media(max-width: 414px)": {
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
         height: "148px",
         padding: "4px",
         },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
         width: "17.745vw",
         height: "17.745vw",
         padding: "0.959vw",

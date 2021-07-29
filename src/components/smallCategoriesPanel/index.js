@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     width: "calc(100% + 16px)",
     margin: "0 -16px 0 -16px",
     "-ms-overflow-style": "none",
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "100vw",
       marginLeft: "-3.35vw",
       paddingLeft: "3.35vw",
@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   },
   itemRoot: {
     padding: "4px",
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       boxSizing: "border-box",
       "-webkit-touch-callout": "none",
       "-webkit-user-select": "none",
@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
   iconContainer: {
     alignSelf:"center",
     marginLeft: "4px",
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
     marginRight: "4px",
     }
   },
@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SmallCategoriesPanel(categories) {
   const classes = useStyles()
-  const isMobile = useMediaQuery("(max-width: 834px)")
+  const isMobile = useMediaQuery("(max-width: 1025px)")
   const icon = (
     <Grid item className={classes.iconContainer}>
       <FavoritesPlusIcon className={classes.icon} onClick={addCategory} />

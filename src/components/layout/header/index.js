@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     background: "white",
     display: "flex",
     alignItems: "center",
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       height: 70,
     },
   },
@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     justifyContent: "flex-end",
     marginBottom: 8,
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       display: "none",
     },
   },
@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     "@media (min-width: 1025px) and (max-width: 1279px)": {
       width: "17.8vw",
     },
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       height: 36,
       width: "auto",
     },
@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
       "@media (min-width: 1025px) and (max-width: 1279px)": {
         width: "17.8vw",
       },
-      "@media (max-width: 1024px)": {
+      "@media (max-width: 1025px)": {
         height: 36,
         width: "auto",
       },
@@ -75,7 +75,7 @@ const useStyles = makeStyles(theme => ({
   catafind: {
     display: "flex",
     alignItems: "center",
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       flexDirection: "row-reverse",
     },
     "& .catalog": {
@@ -83,7 +83,7 @@ const useStyles = makeStyles(theme => ({
       "@media (min-width: 1025px) and (max-width: 1279px)": {
         marginRight: "1.4vw",
       },
-      "@media (max-width: 1024px)": {
+      "@media (max-width: 1025px)": {
         marginLeft: 20,
         marginRight: 0,
       },
@@ -100,7 +100,7 @@ const useStyles = makeStyles(theme => ({
     height: 100,
     top: 0,
     left: 0,
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       height: 70,
     },
   },
@@ -123,6 +123,7 @@ export default function Header({
         <nav className={classes.submenu}>
           <SaleButton
             name={data.allPrismicHeader?.edges[0]?.node.data.sale_name.text}
+            link="/sales/"
           />
 
           {links?.map((links, i) => (
@@ -157,6 +158,7 @@ export default function Header({
 
           <ButtonWithIcon
             name={data.allPrismicHeader.edges[0]?.node.data.favorites_name.text}
+            link={"/favorites/"}
             img={
               data.allPrismicHeader.edges[0]?.node.data.favorites_img.localFile
                 .publicURL + "#outline"

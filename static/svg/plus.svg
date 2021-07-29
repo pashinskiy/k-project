@@ -1,12 +1,12 @@
 <svg width="100%" height="100%" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M5.33333 0.666667L6 0L6.66667 0.666667V11.3333L6 12L5.33333 11.3333V0.666667Z" fill="url(#paint0_linear)"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M0 6L0.555556 5.33333H11.4444L12 6L11.4444 6.66667H0.555556L0 6Z" fill="url(#paint1_linear)"/>
+<path d="M5.33333 0.666667L6 0L6.66667 0.666667V11.3333L6 12L5.33333 11.3333V0.666667Z" fill="url(#plus_paint0_linear)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 6L0.555556 5.33333H11.4444L12 6L11.4444 6.66667H0.555556L0 6Z" fill="url(#plus_paint1_linear)"/>
 <defs>
-<linearGradient id="paint0_linear" x1="6" y1="0" x2="6" y2="12" gradientUnits="userSpaceOnUse">
+<linearGradient id="plus_paint0_linear" x1="6" y1="0" x2="6" y2="12" gradientUnits="userSpaceOnUse">
 <stop stop-color="#291AD5"/>
 <stop offset="1" stop-color="#681DE1"/>
 </linearGradient>
-<linearGradient id="paint1_linear" x1="6" y1="0" x2="6" y2="12" gradientUnits="userSpaceOnUse">
+<linearGradient id="plus_paint1_linear" x1="6" y1="0" x2="6" y2="12" gradientUnits="userSpaceOnUse">
 <stop stop-color="#291AD5"/>
 <stop offset="1" stop-color="#681DE1"/>
 </linearGradient>

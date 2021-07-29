@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       paddingLeft: "40px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       paddingLeft: "4.79vw",
     },
     "@media(max-width: 414px)": {
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: "36px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "4.31vw",
     },
     "@media(max-width: 414px)": {
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
       marginLeft: "-39px",
       width: "calc(100% + 39px)",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginLeft: "-2.03vw",
       width: "calc(100% + 2.03vw)",
     },
@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
       marginLeft: "39px",
       width: "239px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginLeft: "1.79vw",
       width: "27.57vw",
     },
@@ -76,7 +76,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "28px",
       fontSize: "17px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "3.35vw",
       fontSize: "2.03vw",
     },
@@ -98,7 +98,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginTop: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "1.43vw",
     },
     "@media(max-width: 414px)": {
@@ -110,7 +110,7 @@ const useStyles = makeStyles(theme => ({
       "@media(min-width: 1280px)": {
         marginTop: "20px",
       },
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         marginTop: "2.39vw",
       },
       "@media(max-width: 414px)": {
@@ -125,7 +125,7 @@ const useStyles = makeStyles(theme => ({
       "@media(min-width: 1280px)": {
         fontSize: "14px",
       },
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         fontSize: "1.67vw",
       },
       "@media(max-width: 414px)": {

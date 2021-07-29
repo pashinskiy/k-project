@@ -21,7 +21,7 @@ const useStyle = makeStyles(theme => ({
       marginTop: "28px",
       padding: "28px 0",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "3.35vw",
       padding: "3.35vw 0",
     },
@@ -35,7 +35,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       width: "721px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "100%",
     },
   },
@@ -44,7 +44,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginTop: "20px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "2.39vw",
     },
     "@media(max-width: 414px)": {
@@ -59,7 +59,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       width: "452px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       position: "fixed",
       left: 0,
       bottom: 62,
@@ -79,7 +79,7 @@ const useStyle = makeStyles(theme => ({
       width: "890px",
       fontSize: "14px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "3.35vw",
       width: "100%",
       fontSize: "1.67vw",
@@ -104,7 +104,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: "14px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
     },
     "@media(max-width: 414px)": {
@@ -200,7 +200,6 @@ export const query = graphql`
             name
             price
             old_price
-            color_name
             images {
               image {
                 alt

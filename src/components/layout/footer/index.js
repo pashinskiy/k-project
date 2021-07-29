@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "5.46vw",
       marginLeft: "-2.18vw",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "calc(100% + 3.35vw * 2)",
       marginTop: "8.39vw",
       marginLeft: "-3.35vw",
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     "@media (max-width: 1279px)": {
       padding: "3.5vw",
     },
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       flexWrap: "wrap",
       padding: "10px 0px 0px 0px",
     },
@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
       maxWidth: "fit-content",
       width: "fit-content",
     },
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       maxWidth: "100vw",
       width: "calc(100vw / 3)",
       "&:last-child": {
@@ -92,7 +92,7 @@ const useStyles = makeStyles(theme => ({
   },
   seen: {
     marginTop: 28,
-    "@media (max-width: 834px)": {
+    "@media (max-width: 1025px)": {
       margin: "0px -30px",
       marginTop: 28,
     },
@@ -106,7 +106,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     boxSizing: "border-box",
     padding: "0px 24px",
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       background: theme.palette.color.mainContrast,
       display: "block",
       height: "auto",
@@ -125,7 +125,7 @@ const useStyles = makeStyles(theme => ({
   },
   docs: {
     display: "flex",
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       justifyContent: "center",
       boxSizing: "border-box",
       padding: 20,
@@ -147,7 +147,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: 12,
       color: "white",
     },
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       textAlign: "center",
       '& [class^="MuiTypography-root"]': {
         color: theme.palette.color.main,

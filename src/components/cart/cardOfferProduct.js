@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
       marginBottom: "28px",
       marginRight: "28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "29.976vw",
       marginBottom: "3.3573vw",
       marginRight: "3.3573vw",
@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "12px",
       marginBottom: "24.5px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       height: "23.98vw",
       padding: "0.5995vw",
       borderRadius: "1.4388vw",
@@ -75,7 +75,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: 20,
       lineHeight: "24px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginBottom: "0.9592vw",
       fontSize: "2.398vw",
       lineHeight: "2.8776vw",
@@ -93,7 +93,7 @@ const useStyles = makeStyles(theme => ({
       lineHeight: "17px",
       fontSize: 14,
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       lineHeight: "2.0383vw",
       fontSize: "1.6786vw",
     },
@@ -109,7 +109,7 @@ const useStyles = makeStyles(theme => ({
       marginBottom: "24.5px",
       width: "200px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "23.98vw",
       marginBottom: "2.9376vw",
     },
@@ -128,7 +128,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "14px",
       borderRadius: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       height: "5.9952vw",
       fontSize: "1.6786vw",
       borderRadius: "1.4388vw",
@@ -161,7 +161,7 @@ const useStyles = makeStyles(theme => ({
       "@media(min-width: 1280px)": {
         fontSize: "14px",
       },
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         fontSize: "1.6786vw",
       },
       "@media(max-width: 414px)": {
@@ -178,7 +178,7 @@ const useStyles = makeStyles(theme => ({
       height: "17px",
       marginRight: "10px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "2.03836vw",
       height: "2.03836vw",
       marginRight: "1.199vw",

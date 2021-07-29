@@ -20,14 +20,14 @@ const useStyles = makeStyles(theme => ({
             ? '12px 12px 0px 0px'
             : 12
         ,
-        '@media (max-width: 1024px)': {
+        '@media (max-width: 1025px)': {
             width: 40,
             height: 40,
             borderRadius: '100% !important',
         },
         '&:hover': {
             transform: 'scale(1.05)',
-            '@media (max-width: 1024px)': {
+            '@media (max-width: 1025px)': {
                 transform: 'scale(1.1)',
             },
         },
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     },
     text: {
         marginLeft: 10,
-        '@media (max-width: 1024px)': {
+        '@media (max-width: 1025px)': {
             display: 'none',
         },
     },

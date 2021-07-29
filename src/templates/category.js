@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
         padding: "28px 0px 68px 0px",
         boxSizing: "border-box",
         width: '100%',
-        "@media (max-width: 1024px)": {
+        "@media (max-width: 1025px)": {
             paddingTop: 0,
         },
     },
@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
         boxSizing: "border-box",
         background: theme.palette.background.secondary,
         borderRadius: 20,
-        "@media (max-width: 1024px)": {
+        "@media (max-width: 1025px)": {
             display: "none",
         },
     },
@@ -85,7 +85,7 @@ const useStyles = makeStyles(theme => ({
         WebkitTransform: 'translate3d(0, 0, 0)',
         MozTransform: 'translate3d(0, 0, 0)',
         marginTop: 48,
-        '@media (max-width: 1024px)': {
+        '@media (max-width: 1025px)': {
             marginTop: 28,
         },
         '@media (max-width: 767px)': {
@@ -99,7 +99,7 @@ const useStyles = makeStyles(theme => ({
     },
     content_wrapper: {
         marginTop: 40,
-        '@media (max-width: 1024px)': {
+        '@media (max-width: 1025px)': {
             marginTop: 28,
         },
         '@media (max-width: 767px)': {
@@ -140,7 +140,7 @@ const Category = ({ data: { prismicCategory, allPrismicStories, allPrismicProduc
 
     const classes = useStyles();
 
-    const maxWidth1024 = useMediaQuery("(max-width: 1024px)")
+    const maxWidth1024 = useMediaQuery("(max-width: 1025px)")
 
     return (
         <div>

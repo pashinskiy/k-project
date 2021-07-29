@@ -27,7 +27,7 @@ const useStyle = makeStyles(theme => ({
           ? `linear-gradient(-90deg,${theme.palette.background.main} 0%, rgb(255, 255, 255, 0) 100%)`
           : "none",
 
-      "@media(max-width: 1024px)": {
+      "@media(max-width: 1025px)": {
         display: "none",
       },
     },
@@ -64,7 +64,7 @@ const useStyle = makeStyles(theme => ({
       marginLeft: "-28px",
       paddingLeft: "28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginLeft: "-3.35vw",
       paddingLeft: "3.35vw",
     },
@@ -103,7 +103,7 @@ const useStyle = makeStyles(theme => ({
       height: "46px",
       padding: "13px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       display: "none",
     },
   },
@@ -113,7 +113,7 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
   // fullScreen (boolean) прокрутка с выходом за границы layuot
   // buttonNext нужно ли отображить кнопку при переполнении
 
-  const maxWidth1024 = useMediaQuery("(max-width: 1024px)")
+  const maxWidth1024 = useMediaQuery("(max-width: 1025px)")
 
   const classes = useStyle()
   const size = fullScreen ? classes.fullScreen : ""

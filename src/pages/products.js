@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "14px",
       marginTop: "40px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
       marginTop: "4.79vw",
     },
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "36px",
       marginTop: "10px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "4.31vw",
       marginTop: "1.19vw",
     },
@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
       padding: "28px 0",
       borderWidth: "1px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       padding: "4.79vw 0 2.39vw",
       borderWidth: "0.11vw",
     },
@@ -72,7 +72,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       width: "916px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "100%",
     },
   },
@@ -80,8 +80,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function Products({ data: { allPrismicProduct } }) {
   const classes = useStyles()
-  const mobile = useMediaQuery("(max-width: 834px)")
-  const search = useMediaQuery("(max-width: 1024px)")
+  const mobile = useMediaQuery("(max-width: 1025px)")
+  const search = useMediaQuery("(max-width: 1025px)")
 
   const url = new URL(window.location.href)
   const titleUrl = url.searchParams.has("search")
@@ -169,7 +169,6 @@ export const query = graphql`
             price
             old_price
             color
-            color_name
             color_group
             images {
               image {

@@ -15,7 +15,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       paddingRight: "36px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       paddingRight: "4.31vw",
     },
     "@media(max-width: 414px)": {

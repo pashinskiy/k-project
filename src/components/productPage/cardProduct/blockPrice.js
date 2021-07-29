@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "20px 0 0 20px",
       padding: "40px 26px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "100%",
       borderRadius: 0,
       background: "transparent",
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   collorsPanel: {
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       minHeight: "3.12vw",
     },
     "@media(max-width: 414px)": {
@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
       marginRight: "10px",
       marginBottom: "10px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "3.59vw",
       height: "3.59vw",
       marginRight: "1.19vw",
@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginTop: "22px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "1.91w",
     },
     "@media(max-width: 414px)": {
@@ -93,9 +93,9 @@ const useStyles = makeStyles(theme => ({
       fontSize: "48px",
       marginRight: "16px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       ...theme.typography.body2,
-      fontWeight: 900,
+      fontWeight: 700,
       fontSize: "5.75vw",
       marginRight: "1.43vw",
       color: "#681DE1",
@@ -114,7 +114,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: "20px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "2.39vw",
     },
     "@media(max-width: 414px)": {
@@ -130,7 +130,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "40px",
       fontSize: "17px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "4.79vw",
       fontSize: "2.03vw",
     },
@@ -148,7 +148,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "14px",
       marginTop: "8px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
       marginTop: "0.95vw",
     },
@@ -169,7 +169,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "14px",
       marginTop: "8px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
       marginTop: "0.95vw",
     },
@@ -187,7 +187,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function BlockPrice({ product, allColors }) {
   const classes = useStyles()
-  const mobile = useMediaQuery("(max-width: 834px)")
+  const mobile = useMediaQuery("(max-width: 1025px)")
 
   // цвет продукта первый в массиве
   allColors.unshift(

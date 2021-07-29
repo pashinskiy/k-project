@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: "none",
     width: "57.8125vw",
     maxWidth: "740px",
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "76.7vw",
       maxWidth: "640px",
     },

@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
       height: "28px",
       margin: "4px 10px 12px 0",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "3.35vw",
       height: "3.35vw",
       margin: "0.46vw 1.19vw 1.43vw 0",
@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       boxShadow: `0px 0px 0px 2px ${theme.palette.background.secondary}, 0px 0px 0px 4px ${theme.palette.background.accentSecondary}`,
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       boxShadow: `0px 0px 0px 0.23vw ${theme.palette.background.secondary}, 0px 0px 0px 0.46vw ${theme.palette.background.accentSecondary}`,
     },
     "@media(max-width: 414px)": {

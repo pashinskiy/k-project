@@ -15,7 +15,7 @@ const useStyle = makeStyles(theme => ({
       padding: "40px 26px",
       borderRadius: "20px 0 0 20px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       padding: "5.03vw 2.87vw 0.95vw",
       borderRadius: "2.39vw 2.39vw 0 0 ",
       boxShadow: "0px 0px 2.39vw rgba(0, 0, 0, 0.25)",
@@ -33,7 +33,7 @@ const useStyle = makeStyles(theme => ({
     background: theme.palette.background.secondaryLight,
     touchAction: "none",
 
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       top: "1.43vw",
       width: "11.87vw",
       height: "0.59vw",
@@ -51,7 +51,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginTop: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "0.95vw",
     },
     "@media(max-width: 414px)": {
@@ -63,7 +63,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginTop: "20px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "2.99vw",
     },
     "@media(max-width: 414px)": {
@@ -78,7 +78,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: "24px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "2.15vw",
     },
     "@media(max-width: 414px)": {
@@ -93,7 +93,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: "36px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontWeight: 900,
       fontSize: "2.99vw",
     },
@@ -110,7 +110,7 @@ const useStyle = makeStyles(theme => ({
       marginTop: "20px",
       height: "50px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "98.08vw",
       marginTop: "1.91vw",
       marginLeft: "-1.91vw",
@@ -132,7 +132,7 @@ const useStyle = makeStyles(theme => ({
       marginTop: "40px",
       fontSize: "17px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "4.79vw",
       fontSize: "2.03vw",
     },
@@ -150,7 +150,7 @@ const useStyle = makeStyles(theme => ({
       fontSize: "14px",
       marginTop: "8px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
       marginTop: "0.95vw",
     },
@@ -171,7 +171,7 @@ const useStyle = makeStyles(theme => ({
       fontSize: "14px",
       marginTop: "8px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
       marginTop: "0.95vw",
     },
@@ -191,7 +191,7 @@ export default function PriceBlock({ products }) {
   const classes = useStyle()
   const state = React.useContext(GlobalStateContext)
   const [showMoreInfo, setShowMoreInfo] = React.useState(false)
-  const mobile = useMediaQuery("(max-width: 834px)")
+  const mobile = useMediaQuery("(max-width: 1025px)")
 
   function swipeStart(e) {
     const clientY = e.clientY
@@ -219,9 +219,8 @@ export default function PriceBlock({ products }) {
     const positions = products.reduce((order, product, i) => {
       const num = i + 1
       const name = product.data.name
-      const color = product.data.color_name
       const count = state.inCart(product.id)
-      const position = `${num}. Товар: ${name}; Цвет: ${color}; Количество: ${count}. \n`
+      const position = `${num}. Товар: ${name}; Количество: ${count}. \n`
       return order + position
     }, "")
 

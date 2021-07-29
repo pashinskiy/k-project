@@ -12,14 +12,9 @@ import CharacteristicsBlock from "../components/productPage/characteristics"
 import SimilarProducts from "../components/productPage/similarProducts"
 
 const Product = ({ data: { prismicProduct } }) => {
-  const IsDesktop =
-    typeof window !== "undefined" &&
-    window.matchMedia("(min-width: 1025px)").matches
   return (
     <>
       <Seo title="Home" />
-      {IsDesktop === true ? <div style={{ marginTop: 36 }} /> : null}
-      <div style={{ marginTop: 16 }} />
       <TabPanel
         links={[
           {
@@ -102,7 +97,6 @@ export const pageQuery = graphql`
           }
         }
         name
-        color_name
         color
         old_price
         price
@@ -332,7 +326,7 @@ export const pageQuery = graphql`
                         1.75
                         2
                       ]
-                      sizes: "(min-width: 1280px) 598px, (max-width: 414px) 86.47vw, (max-width: 834px) 44.96vw, 50vw"
+                      sizes: "(min-width: 1280px) 598px, (max-width: 414px) 86.47vw, (max-width: 1025px) 44.96vw, 50vw"
                     )
                   }
                 }
@@ -355,7 +349,7 @@ export const pageQuery = graphql`
                         1.75
                         2
                       ]
-                      sizes: "(min-width: 1280px) 598px, (max-width: 414px) 86.47vw, (max-width: 834px) 44.96vw, 46.71vw"
+                      sizes: "(min-width: 1280px) 598px, (max-width: 414px) 86.47vw, (max-width: 1025px) 44.96vw, 46.71vw"
                     )
                   }
                 }
@@ -389,7 +383,7 @@ export const pageQuery = graphql`
                         1.75
                         2
                       ]
-                      sizes: "(min-width: 1280px) 700px, (max-width: 414px) 86.47vw, (max-width: 834px) 44.96vw, 54.68vw"
+                      sizes: "(min-width: 1280px) 700px, (max-width: 414px) 86.47vw, (max-width: 1025px) 44.96vw, 54.68vw"
                     )
                   }
                 }

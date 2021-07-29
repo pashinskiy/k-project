@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginTop: "28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "2.16vw",
     },
     "@media(max-width: 414px)": {
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       height: "35px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       height: "4.19vw",
     },
     "@media(max-width: 414px)": {
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: "48px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "50%",
       fontSize: "3.75vw",
     },
@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
       height: "46px",
       marginLeft: "10",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       height: "3.95vw",
       marginLeft: 0,
       marginRight: "1.19vw",
@@ -79,27 +79,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function Title({ logo, text, stickersSlices }) {
-  // input data
-  // logo = {
-  //   alt: "photo name",
-  //   localFile: {
-  //     childImageSharp: {
-  //       fluid: {
-  //         src:
-  //           "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81.svg/1200px-%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81.svg.png",
-  //         srcSet:
-  //           "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81.svg/1200px-%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81.svg.png",
-  //         srcSetWebp:
-  //           "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81.svg/1200px-%D0%AF%D0%BD%D0%B4%D0%B5%D0%BA%D1%81.svg.png",
-  //         aspectRatio: "1.5",
-  //       },
-  //     },
-  //   },
-  // }
-  // text = "Умная колонка Яндекс.Станция Макс"
-
   const classes = useStyles()
-  const mobile = useMediaQuery("(max-width: 834px)")
+  const mobile = useMediaQuery("(max-width: 1025px)")
   // формируем объект для отображения логотипа брэнда при наличии
   const logoImg =
     logo !== null && logo
@@ -111,10 +92,11 @@ export default function Title({ logo, text, stickersSlices }) {
     arr.push(
       ...stickersSlice.items.map((sticker, i) => {
         const img = sticker.sticker.document.data.image.localFile.publicURL
+        const alt = sticker.sticker.document.data.image.alt
 
         return (
           <div className={classes.sticker} key={i}>
-            <img src={img} style={{ width: "auto", height: "100%" }} />
+            <img src={img} alt={alt} style={{ width: "auto", height: "100%" }} />
           </div>
         )
       })

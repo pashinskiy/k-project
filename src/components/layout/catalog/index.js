@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center',
         top: 100,
         left: 0,
-        '@media (max-width: 1024px)': {
+        '@media (max-width: 1025px)': {
             top: 70,
         },
         animationName: props => (props.animation === true)

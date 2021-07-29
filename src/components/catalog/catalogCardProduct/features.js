@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       height: "37px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       height: "4.07vw",
     },
     "@media(max-width: 414px)": {
@@ -59,7 +59,7 @@ const useStyles = makeStyles(theme => ({
       marginRight: "8px",
       border: "2px solid transparent",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       padding: "0.95vw 1.43vw",
       borderRadius: "1.43vw",
       marginRight: "0.95vw",
@@ -86,7 +86,7 @@ const useStyles = makeStyles(theme => ({
       "@media(min-width: 1280px)": {
         margin: "-2px",
       },
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         margin: "-0.23vw",
       },
       "@media(max-width: 414px)": {
@@ -100,7 +100,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginRight: "10px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginRight: "1.19vw",
     },
     "@media(max-width: 414px)": {
@@ -115,7 +115,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "14px",
       lineHeight: "15.36px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.43vw",
       lineHeight: "1.7vw",
     },

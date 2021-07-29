@@ -1,17 +1,17 @@
 <svg width="100%" height="100%" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M23.6664 5.33333H10.3331C9.71947 5.33333 9.222 5.83079 9.222 6.44444V27.5556C9.222 28.1692 9.71947 28.6667 10.3331 28.6667H23.6664C24.2801 28.6667 24.7776 28.1692 24.7776 27.5556V6.44444C24.7776 5.83079 24.2801 5.33333 23.6664 5.33333ZM10.3331 2C7.87852 2 5.88867 3.98984 5.88867 6.44444V27.5556C5.88867 30.0102 7.87852 32 10.3331 32H23.6664C26.121 32 28.1109 30.0102 28.1109 27.5556V6.44444C28.1109 3.98985 26.121 2 23.6664 2H10.3331Z" fill="url(#paint0_linear)"/>
-<path d="M11.3331 24.3333H22.6664V26.5556H11.3331V24.3333Z" fill="url(#paint1_linear)"/>
-<path d="M11.4442 5.33333H22.5553C22.5553 6.56063 21.5604 7.55556 20.3331 7.55556H13.6664C12.4391 7.55556 11.4442 6.56063 11.4442 5.33333Z" fill="url(#paint2_linear)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M23.6664 5.33333H10.3331C9.71947 5.33333 9.222 5.83079 9.222 6.44444V27.5556C9.222 28.1692 9.71947 28.6667 10.3331 28.6667H23.6664C24.2801 28.6667 24.7776 28.1692 24.7776 27.5556V6.44444C24.7776 5.83079 24.2801 5.33333 23.6664 5.33333ZM10.3331 2C7.87852 2 5.88867 3.98984 5.88867 6.44444V27.5556C5.88867 30.0102 7.87852 32 10.3331 32H23.6664C26.121 32 28.1109 30.0102 28.1109 27.5556V6.44444C28.1109 3.98985 26.121 2 23.6664 2H10.3331Z" fill="url(#smartphonesIcon_paint0_linear)"/>
+<path d="M11.3331 24.3333H22.6664V26.5556H11.3331V24.3333Z" fill="url(#smartphonesIcon_paint1_linear)"/>
+<path d="M11.4442 5.33333H22.5553C22.5553 6.56063 21.5604 7.55556 20.3331 7.55556H13.6664C12.4391 7.55556 11.4442 6.56063 11.4442 5.33333Z" fill="url(#smartphonesIcon_paint2_linear)"/>
 <defs>
-<linearGradient id="paint0_linear" x1="16.9998" y1="2" x2="16.9998" y2="32" gradientUnits="userSpaceOnUse">
+<linearGradient id="smartphonesIcon_paint0_linear" x1="16.9998" y1="2" x2="16.9998" y2="32" gradientUnits="userSpaceOnUse">
 <stop stop-color="#291AD5"/>
 <stop offset="1" stop-color="#681DE1"/>
 </linearGradient>
-<linearGradient id="paint1_linear" x1="16.9998" y1="2" x2="16.9998" y2="32" gradientUnits="userSpaceOnUse">
+<linearGradient id="smartphonesIcon_paint1_linear" x1="16.9998" y1="2" x2="16.9998" y2="32" gradientUnits="userSpaceOnUse">
 <stop stop-color="#291AD5"/>
 <stop offset="1" stop-color="#681DE1"/>
 </linearGradient>
-<linearGradient id="paint2_linear" x1="16.9998" y1="2" x2="16.9998" y2="32" gradientUnits="userSpaceOnUse">
+<linearGradient id="smartphonesIcon_paint2_linear" x1="16.9998" y1="2" x2="16.9998" y2="32" gradientUnits="userSpaceOnUse">
 <stop stop-color="#291AD5"/>
 <stop offset="1" stop-color="#681DE1"/>
 </linearGradient>

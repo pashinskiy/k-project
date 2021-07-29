@@ -47,7 +47,7 @@ const useStyle = makeStyles(theme => ({
       marginLeft: "-28px",
       //   paddingLeft: "28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginLeft: "-3.35vw",
       //   paddingLeft: "3.35vw",
     },
@@ -66,7 +66,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       gridColumnGap: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       gridColumnGap: "1.4388vw",
     },
     "@media(max-width: 414px)": {
@@ -81,7 +81,7 @@ const useStyle = makeStyles(theme => ({
     alignSelf: "center",
     transform: "scaleY(0.9)",
     transition: "transform .6s, opacity .6s",
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "88.729vw",
     },
     "@media(max-width: 414px)": {
@@ -95,7 +95,7 @@ const useStyle = makeStyles(theme => ({
     opacity: 1,
     transform: "scaleY(1)",
     transition: "transform .6s, opacity .6s",
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "88.729vw",
     },
     "@media(max-width: 414px)": {
@@ -122,7 +122,7 @@ const useStyle = makeStyles(theme => ({
       height: "46px",
       padding: "13px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       display: "none",
     },
   },

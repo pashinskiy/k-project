@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: "-2.18vw",
     paddingLeft: "2.18vw",
 
-    overflow: "scroll",
+    overflowX: "scroll",
     scrollbarWidth: "none",
     "-ms-overflow-style": "none",
 
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
       marginLeft: "-28px",
       paddingLeft: "28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "1.91vw",
       marginLeft: "-3.35vw",
       paddingLeft: "3.35vw",
@@ -36,39 +36,33 @@ const useStyles = makeStyles(theme => ({
     },
   },
   item: {
-    height: "3.9vw",
-    "@media(min-width: 1280px)": {
-      height: "50px",
-    },
-    "@media(max-width: 834px)": {
-      height: "5.99vw",
-    },
-    "@media(max-width: 414px)": {
-      height: "12.07vw",
-    },
     width: "auto",
     flexShrink: 0,
-    minWidth: "9vw",
-    padding: "0.78vw 2.34vw",
-    borderRadius: "1.56vw",
-    marginRight: "0.78vw",
+    
     whiteSpace: "nowrap",
 
     boxSizing: "border-box",
     background: "#fff",
 
     backgroundClip: "padding-box",
-    border: "0.15vw solid transparent",
     position: "relative",
 
+    height: "3.9vw",
+    minWidth: "9vw",
+    padding: "0.78vw 2.34vw",
+    borderRadius: "1.56vw",
+    marginRight: "0.78vw",
+    border: "0.15vw solid transparent",
     "@media(min-width: 1280px)": {
+      height: "50px",
       minWidth: "116px",
       padding: "10px 30px",
       borderRadius: "20px",
       marginRight: "10px",
       border: "2px solid transparent",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
+      height: "5.99vw",
       minWidth: "13.9vw",
       padding: "1.19vw 3.59vw",
       borderRadius: "2.39vw",
@@ -76,6 +70,7 @@ const useStyles = makeStyles(theme => ({
       border: "0.23vw solid transparent",
     },
     "@media(max-width: 414px)": {
+      height: "12.07vw",
       minWidth: "28.01vw",
       padding: "2.41vw 7.24vw",
       borderRadius: "4.83vw",
@@ -97,7 +92,7 @@ const useStyles = makeStyles(theme => ({
       "@media(min-width: 1280px)": {
         margin: "-2px",
       },
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         margin: "-0.23vw",
       },
       "@media(max-width: 414px)": {
@@ -111,7 +106,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginRight: "10px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginRight: "1.19vw",
     },
     "@media(max-width: 414px)": {
@@ -126,7 +121,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "17px",
       lineHeight: "26px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.43vw",
       lineHeight: "3.15vw",
     },
@@ -148,7 +143,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function Features({ featuresSlices }) {
-  // input data
   const classes = useStyles()
 
   // достаем особые черты из слайсов и готовим к распечатке

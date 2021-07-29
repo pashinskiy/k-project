@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     "@media (min-width: 1025px) and (max-width: 1279px)": {
       width: "46.875vw",
     },
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       width: 600,
       height: 40,
       borderRadius: 100,
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
       color: "white",
       cursor: "pointer",
       borderRadius: "0px 12px 12px 0px",
-      "@media (max-width: 1024px)": {
+      "@media (max-width: 1025px)": {
         width: 100,
         height: 40,
         borderRadius: "0px 100px 100px 0px",
@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
     height: "auto",
     display: "block",
     marginRight: 5,
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       width: 24,
       marginRight: 0,
     },

@@ -8,12 +8,12 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         overflow: 'hidden',
         width: "250px",
-        "@media(max-width: 1024px)": {
+        "@media(max-width: 1025px)": {
             marginBottom: 28,
             width: '100%',
             justifyContent: 'space-between',
         },
-        "@media(max-width: 834px)": {
+        "@media(max-width: 1025px)": {
             marginBottom: 28,
             width: '100%',
             justifyContent: 'flex-start',
@@ -33,25 +33,25 @@ const useStyles = makeStyles(theme => ({
         transform: props => `translateX(${props.arrow}px)`,
         transition: '0.3s ease all',
         marginRight: 12,
-        "@media(max-width: 834px)": {
+        "@media(max-width: 1025px)": {
             marginRight: 12,
         },
         '&:first-child': {
-            "@media(max-width: 834px)": {
+            "@media(max-width: 1025px)": {
                 paddingLeft: 30,
             },
         },
         '&:last-child': {
-            "@media(max-width: 834px)": {
+            "@media(max-width: 1025px)": {
                 paddingRight: 30,
             },
         },
         '& .product--card': {
             width: "250px",
-            "@media(max-width: 1024px)": {
+            "@media(max-width: 1025px)": {
                 width: "19.53vw",
             },
-            "@media(max-width: 834px)": {
+            "@media(max-width: 1025px)": {
                 width: "29.97vw",
             },
             "@media(max-width: 414px)": {
@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
         marginTop: 30,
         display: 'flex',
         justifyContent: 'center',
-        "@media(max-width: 1024px)": {
+        "@media(max-width: 1025px)": {
             display: 'none',
         },
     },

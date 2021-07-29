@@ -72,13 +72,6 @@
         "label": "Цветовая группа (для фильтра)"
       }
     },
-    "color_name": {
-      "type": "Text",
-      "config": {
-        "label": "Название цвета",
-        "placeholder": "Название цвета"
-      }
-    },
     "color": {
       "type": "Color",
       "config": {

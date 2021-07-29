@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
       width: "750px",
       height: "632px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "93.28vw",
       height: "51.19vw",
       margin: "0 auto",
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 400,
     fontSize: "1.67vw",
     color: "#BCBCBC",
-    "@media(min-width: 834px)": {
+    "@media(min-width: 1025px)": {
       display: "none",
     },
     "@media(max-width: 414px)": {
@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
     overflow: "hidden",
     position: "relative",
     zIndex: 2,
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "100vw",
       marginLeft: "-3.35vw",
       paddingLeft: "3.35vw",
@@ -71,6 +71,14 @@ const useStyles = makeStyles(theme => ({
     touchAction: "none",
     overflow: "visible",
     transition: "left .3s",
+    
+    left:0,
+    "@media(max-width: 1025px)": {
+      left: "3.35vw",
+    },
+    "@media(max-width: 414px)": {
+      left: "6.76vw",
+    }
   },
   item: {
     height: "100%",
@@ -82,7 +90,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       padding: "0 8px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       padding: "0 0.6vw",
     },
   },
@@ -92,13 +100,8 @@ const useStyles = makeStyles(theme => ({
     right: 0,
     transform: "translate(0, 100%)",
     height: "7%",
-    "@media(max-width: 834px)": {
-      width: "7.71%",
-      bottom: "-1.19vw",
-    },
-    "@media(max-width: 414px)": {
-      width: "17.85%",
-      bottom: "-2.41vw",
+    "@media(max-width: 1025px)": {
+      display: "none",
     },
     "& button": {
       background: "transparent",
@@ -108,7 +111,7 @@ const useStyles = makeStyles(theme => ({
       padding: 0,
       height: "100%",
       width: "4.26%",
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         width: "30%",
       },
     },
@@ -119,21 +122,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function SliderProduct({ photos }) {
-  //input data
-
-  // photos = [
-  //   {
-  //     src:
-  //       "https://cameralabs.org/media/k2/items/cache/8272a40ed0c2b743fb18f5ed4322ba21_L.jpg",
-  //     srcSet:
-  //       "https://cameralabs.org/media/k2/items/cache/8272a40ed0c2b743fb18f5ed4322ba21_L.jpg",
-  //     srcSetWebp:
-  //       "https://cameralabs.org/media/k2/items/cache/8272a40ed0c2b743fb18f5ed4322ba21_L.jpg",
-  //     aspectRatio: "1.5",
-  //     alt: "photo name",
-  //   },
-  // ]
-
   const classes = useStyles()
 
   //индекс главного слайдера
@@ -258,7 +246,7 @@ export default function SliderProduct({ photos }) {
     let eventScroll = null
     const clientY = e.clientY
     const scroll = window.pageYOffset
-    
+
     const bar = slideBar.current
     const transition = bar.style.transition
     bar.style.transition = "none"
@@ -268,9 +256,12 @@ export default function SliderProduct({ photos }) {
     const clientX = e.clientX
     const left = +bar.style.left.slice(0, -2)
     const minLeft =
-      bar.parentElement.offsetWidth > bar.offsetWidth
+      bar.parentElement.offsetWidth >= bar.offsetWidth
         ? 0
         : bar.parentElement.offsetWidth - bar.offsetWidth - 1
+
+    if (minLeft === 0) return
+
     const maxLeft = getComputedStyle(bar.parentElement).paddingLeft.slice(0, -2)
     document.addEventListener("pointermove", scrollBar, true)
     document.addEventListener("pointerup", deleteScrollBar)
@@ -343,7 +334,8 @@ export default function SliderProduct({ photos }) {
     const widthParent = bar.parentElement.offsetWidth
     const widthNextSlide = nextSlide.offsetWidth
     const leftNextSlide = left + nextSlide.offsetLeft
-    const rightNextSlide = left + (nextSlide.offsetLeft + widthNextSlide)
+    const rightNextSlide =
+      left + (nextSlide.offsetLeft + widthNextSlide)
 
     if (rightNextSlide >= widthParent) {
       bar.style.left = left - (rightNextSlide - widthParent) - 1 + "px"
