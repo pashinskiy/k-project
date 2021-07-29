@@ -176,7 +176,7 @@ export default function Footer({ data }) {
   const menu_links = data.allPrismicFooter.edges[0].node.data.body
   const about_links = data.allPrismicFooter.edges[0].node.data.body1
   const contact_links = data.allPrismicFooter.edges[0].node.data.body2
-  const docs_links = data.allPrismicFooter.edges[0].node.data.body3
+  const docs_from_footer = data.prismicDocs.data.from_footer
 
   return (
     <footer id="footer" className={classes.root}>
@@ -246,16 +246,18 @@ export default function Footer({ data }) {
           </div>
         </div>
       </nav>
+
       <div className={classes.addition}>
         <div className={classes.docs_wrapper}>
           <div className={classes.docs}>
-            {docs_links.map((link, i) => (
+            {docs_from_footer.map(doc => (
               <WhiteLink
-                key={`documents ${i}`}
-                name={link.primary.doc_name.text}
-                link={link.primary.doc_file.url}
+                key={doc.doc.document.id}
+                name={doc.doc.document.data.name}
+                link={`/documents/${doc.doc.document.uid}/`}
               />
             ))}
+            <WhiteLink key="all_docs" name="Все документы" link="/documents/" />
           </div>
         </div>
         <div className={classes.copyright}>

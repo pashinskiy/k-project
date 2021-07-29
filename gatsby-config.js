@@ -80,6 +80,7 @@ module.exports = {
           question: require("./src/schemas/question.json"),
           group_question: require("./src/schemas/group_question.json"),
           doc: require("./src/schemas/doc.json"),
+          docs: require("./src/schemas/docs.json"),
         },
         shouldDownloadImage: () => true,
       },

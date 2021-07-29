@@ -416,6 +416,23 @@ export default function Layout({ children }) {
           }
         }
       }
+      prismicDocs {
+        data {
+          from_footer {
+            doc {
+              document {
+                ... on PrismicDoc {
+                  id
+                  uid
+                  data {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   `)
 

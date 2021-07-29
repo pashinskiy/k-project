@@ -50,27 +50,30 @@ const useStyles = makeStyles(theme => ({
   variantsWrapper: {
     background: theme.palette.background.secondary,
     position: "absolute",
-    top: "100%",
     left: 0,
     zIndex: 1,
 
     width: "14.14vw",
     padding: "0.93vw",
     borderRadius: "1.56vw",
+    top: "calc(100% - 1.56vw)",
     "@media(min-width: 1280px)": {
       width: "181px",
       padding: "12px",
       borderRadius: "20px",
+      top: "calc(100% - 12px)",
     },
     "@media(max-width: 834px)": {
       width: "21.7vw",
       padding: "1.43vw",
       borderRadius: "2.39vw",
+      top: "calc(100% - 2.39vw)",
     },
     "@media(max-width: 414px)": {
       width: "43.71vw",
       padding: "2.89vw",
       borderRadius: "4.83vw",
+      top: "calc(100% - 4.83vw)",
     },
   },
   variant: {
@@ -106,6 +109,18 @@ export default function Sort({ products, setSortProducts }) {
   const [value, setValue] = React.useState(variantsSort[0].name)
   const [show, setShow] = React.useState(false)
 
+  function openPanel() {
+    if (show) return
+    setShow(true)
+    setTimeout(
+      () =>
+        document.addEventListener("click", () => setShow(false), {
+          once: true,
+        }),
+      0
+    )
+  }
+
   function sortByPrice(product1, product2) {
     return product1.data.price - product2.data.price
   }
@@ -119,15 +134,15 @@ export default function Sort({ products, setSortProducts }) {
 
   function sorting(name, func) {
     setValue(name)
-    setShow(!show)
     setSortProducts([...products].sort(func))
   }
   return (
     <Grid>
-      <Button onClick={() => setShow(!show)} className={classes.button}>
+      <Button onClick={openPanel} className={classes.button}>
         <IconSort className={classes.icon} />
         <Typography className={classes.text}>{value}</Typography>
       </Button>
+
       {show ? (
         <Grid container justify="column" className={classes.variantsWrapper}>
           {variantsSort.map(variant => (

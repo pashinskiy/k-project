@@ -1,0 +1,38 @@
+{
+  "Main": {
+    "from_footer": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "doc": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": ["doc"],
+              "label": "Документ",
+              "placeholder": "выберите документ"
+            }
+          }
+        },
+        "label": "Доступные из футера"
+      }
+    },
+    "other": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "doc": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": ["doc"],
+              "label": "Документ",
+              "placeholder": "выберите документ"
+            }
+          }
+        },
+        "label": "Остальные"
+      }
+    }
+  }
+}

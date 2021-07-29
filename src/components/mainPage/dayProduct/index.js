@@ -57,7 +57,10 @@ export default function DayProduct(props) {
         if (completed) {
             return <Count />;
         } else {
-            return <span>{hours}:{minutes}:{seconds}</span>;
+            const hour = hours < 10 ? `0${hours}` : hours
+            const min = minutes < 10 ? `0${minutes}` : minutes
+            const sec = seconds < 10 ? `0${seconds}` : seconds
+            return <span>{hour}:{min}:{sec}</span>;
         }
     };
 

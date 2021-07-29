@@ -6,6 +6,13 @@
         "label": "Уникальный ID"
       }
     },
+    "name": {
+      "type": "Text",
+      "config": {
+        "label": "Название документа",
+        "placeholder": "Название документа"
+      }
+    },
     "content": {
       "type": "StructuredText",
       "config": {
