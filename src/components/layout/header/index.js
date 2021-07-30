@@ -130,6 +130,7 @@ export default function Header({
             <DefaultLink
               key={`info ${i}`}
               name={links.primary.link_name.text}
+              link={`/documents/${links.primary.link.document?.uid}`}
             />
           ))}
         </nav>
