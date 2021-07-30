@@ -65,7 +65,12 @@ export default function Layout({ children }) {
                   id
                   primary {
                     link {
-                      url
+                      document {
+                        ... on PrismicDoc {
+                          id
+                          uid
+                        }
+                      }
                     }
                     link_name {
                       text
@@ -320,8 +325,8 @@ export default function Layout({ children }) {
                 ... on PrismicFooterBodyLink {
                   id
                   primary {
-                    link {
-                      url
+                    uid_link {
+                      text
                     }
                     link_name {
                       text

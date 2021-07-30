@@ -72,12 +72,12 @@
                   "placeholder": "Введите название ссылки"
                 }
               },
-              "link": {
-                "type": "Link",
+              "uid_link": {
+                "type": "StructuredText",
                 "config": {
-                  "select": "document",
-                  "label": "Выберите страницу",
-                  "placeholder": "Выберите страницу"
+                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
+                  "label": "uid",
+                  "placeholder": "uid"
                 }
               }
             },
@@ -114,9 +114,8 @@
               "link": {
                 "type": "Link",
                 "config": {
-                  "select": "document",
-                  "label": "Выберите страницу",
-                  "placeholder": "Выберите страницу"
+                  "label": "Выберете странице",
+                  "placeholder": "Выберете странице"
                 }
               }
             },
@@ -146,7 +145,7 @@
               "social_name": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
                   "label": "Название социальной сети",
                   "placeholder": "Название социальной сети"
                 }
