@@ -18,7 +18,7 @@ const useStyle = makeStyles(theme => ({
       position: "absolute",
       left: 0,
       height: "100%",
-      background: `linear-gradient(90deg, ${theme.palette.background.main} 0%, transparent 100%)`,
+      background: `linear-gradient(90deg, ${theme.palette.background.main} 0%, rgba(255, 255, 255, 0) 100%)`,
       zIndex: 1,
       pointerEvents: "none",
 
@@ -39,7 +39,7 @@ const useStyle = makeStyles(theme => ({
       position: "absolute",
       right: 0,
       height: "100%",
-      background: `linear-gradient(90deg, transparent 0%, ${theme.palette.background.main} 100%)`,
+      background: `linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, ${theme.palette.background.main} 100%)`,
       zIndex: 1,
       pointerEvents: "none",
 
