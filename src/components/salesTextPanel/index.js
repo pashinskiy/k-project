@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       padding: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       padding: "1.438vw",
     },
     "@media(max-width: 414px)": {
@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: 24,
       },
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "49.4vw",
       paddingBottom: "8.153vw",
       "& p": {
@@ -88,7 +88,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       paddingBottom: "40px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       paddingBottom: "4.796vw",
     },
     "&:nth-last-of-type(1)": {

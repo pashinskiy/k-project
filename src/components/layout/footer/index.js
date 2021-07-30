@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "5.46vw",
       marginLeft: "-2.18vw",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "calc(100% + 3.35vw * 2)",
       marginTop: "8.39vw",
       marginLeft: "-3.35vw",
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     "@media (max-width: 1279px)": {
       padding: "3.5vw",
     },
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       flexWrap: "wrap",
       padding: "10px 0px 0px 0px",
     },
@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
       maxWidth: "fit-content",
       width: "fit-content",
     },
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       maxWidth: "100vw",
       width: "calc(100vw / 3)",
       "&:last-child": {
@@ -92,7 +92,7 @@ const useStyles = makeStyles(theme => ({
   },
   seen: {
     marginTop: 28,
-    "@media (max-width: 834px)": {
+    "@media (max-width: 1025px)": {
       margin: "0px -30px",
       marginTop: 28,
     },
@@ -106,7 +106,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     boxSizing: "border-box",
     padding: "0px 24px",
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       background: theme.palette.color.mainContrast,
       display: "block",
       height: "auto",
@@ -125,7 +125,7 @@ const useStyles = makeStyles(theme => ({
   },
   docs: {
     display: "flex",
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       justifyContent: "center",
       boxSizing: "border-box",
       padding: 20,
@@ -147,7 +147,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: 12,
       color: "white",
     },
-    "@media (max-width: 1024px)": {
+    "@media (max-width: 1025px)": {
       textAlign: "center",
       '& [class^="MuiTypography-root"]': {
         color: theme.palette.color.main,
@@ -176,7 +176,7 @@ export default function Footer({ data }) {
   const menu_links = data.allPrismicFooter.edges[0].node.data.body
   const about_links = data.allPrismicFooter.edges[0].node.data.body1
   const contact_links = data.allPrismicFooter.edges[0].node.data.body2
-  const docs_links = data.allPrismicFooter.edges[0].node.data.body3
+  const docs_from_footer = data.prismicDocs.data.from_footer
 
   return (
     <footer id="footer" className={classes.root}>
@@ -246,16 +246,18 @@ export default function Footer({ data }) {
           </div>
         </div>
       </nav>
+
       <div className={classes.addition}>
         <div className={classes.docs_wrapper}>
           <div className={classes.docs}>
-            {docs_links.map((link, i) => (
+            {docs_from_footer.map(doc => (
               <WhiteLink
-                key={`documents ${i}`}
-                name={link.primary.doc_name.text}
-                link={link.primary.doc_file.url}
+                key={doc.doc.document.id}
+                name={doc.doc.document.data.name}
+                link={`/documents/${doc.doc.document.uid}/`}
               />
             ))}
+            <WhiteLink key="all_docs" name="Все документы" link="/documents/" />
           </div>
         </div>
         <div className={classes.copyright}>

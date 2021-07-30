@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
         color: 'white',
         marginRight: 20,
         textDecoration: 'none',
-        '@media (max-width: 1024px)': {
+        '@media (max-width: 1025px)': {
             color: theme.palette.color.main,
         },
     },

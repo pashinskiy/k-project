@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     alignContent: "center",
     minWidth: 0,
     position: "relative",
+    cursor: "inherit",
   },
   buttonShow: {
     width: "auto",
@@ -38,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginBottom: "20px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       position: "static",
       marginBottom: 0,
     },
@@ -52,7 +53,7 @@ const useStyles = makeStyles(theme => ({
       height: "24px",
       marginRight: "8px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "2.87vw",
       height: "2.87vw",
       marginRight: "0.95vw",
@@ -71,7 +72,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: "14px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
     },
     "@media(max-width: 414px)": {
@@ -85,7 +86,7 @@ const useStyles = makeStyles(theme => ({
       width: "280px",
       marginTop: "28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "100%",
       marginTop: "3.39vw",
       marginBottom: "11.27vw",
@@ -109,7 +110,7 @@ const useStyles = makeStyles(theme => ({
       width: "148px",
       marginTop: "28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "100%",
       padding: "0.95vw",
       bottom: "7.43vw",
@@ -137,7 +138,7 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "12px",
       padding: "19.5px 20px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontWeight: 700,
       lineHeight: 1.21,
 
@@ -167,14 +168,14 @@ const useStyles = makeStyles(theme => ({
         height: "39px",
         right: "-4px",
       },
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         display: "none",
       },
     },
   },
   modal: {
     width: "auto",
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       position: "fixed",
       top: 0,
       left: 0,
@@ -201,7 +202,7 @@ const useStyles = makeStyles(theme => ({
   },
   modalButtonBack: {
     background: theme.palette.background.secondary,
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       padding: "0.95vw 1.43vw",
       borderRadius: "2.39vw",
       marginTop: "3.35vw",
@@ -213,7 +214,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   modalButtonBackIcon: {
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "0.71vw",
       height: "0.95vw",
       marginRight: "1.07vw",
@@ -225,7 +226,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   modalTitle: {
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "2.39vw",
     },
     "@media(max-width: 414px)": {
@@ -236,7 +237,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 700,
     lineHeight: 1.21,
 
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "3.35vw",
     },
     "@media(max-width: 414px)": {
@@ -250,7 +251,7 @@ export default function Filter({ products, setFilterProducts }) {
 
   const desktop = useMediaQuery("(min-width: 835px)")
   const second_variant = useMediaQuery(
-    "(min-width: 415px) and (max-width: 834px)"
+    "(min-width: 415px) and (max-width: 1025px)"
   )
   const [show, setShow] = React.useState(false)
 
@@ -267,6 +268,7 @@ export default function Filter({ products, setFilterProducts }) {
       .filter(slice => slice.slice_type === "characteristics")
       .forEach(slice => {
         slice.items.forEach(characteristic => {
+          if (characteristic.characteristic.document === null) return
           const type = characteristic.characteristic.document.data.variant
           const name = characteristic.characteristic.document.data.name
           const value = characteristic.value
@@ -417,7 +419,7 @@ export default function Filter({ products, setFilterProducts }) {
           .filter(slice => slice.slice_type === "characteristics")
           .map(slice => slice.items)
           .flat()
-          .find(item => item.characteristic.document.data.name === title)?.value
+          .find(item => item.characteristic.document?.data.name === title)?.value
 
         if (title === "Цена") productParam = product.data.price
         if (title === "Цвет")

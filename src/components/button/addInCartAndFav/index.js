@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
   fixed: {
     position: "fixed",
-    bottom: "3%",
+    bottom: 70,
     justifyContent: "space-evenly",
     left: 0,
     zIndex: 999,
@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
       width: "40px",
       height: "40px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       right: 0,
       top: "5.9952vw",
       width: "4.796vw",
@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginTop: "170px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "0",
       position: "relative",
       paddingTop: "20.3836vw",

@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
         width: 'fit-content',
         height: 'fit-content',
         padding: 40,
-        '@media (max-width: 1024px)': {
+        '@media (max-width: 1025px)': {
             padding: 12,
         },
         '@media (max-width: 767px)': {
@@ -57,7 +57,10 @@ export default function DayProduct(props) {
         if (completed) {
             return <Count />;
         } else {
-            return <span>{hours}:{minutes}:{seconds}</span>;
+            const hour = hours < 10 ? `0${hours}` : hours
+            const min = minutes < 10 ? `0${minutes}` : minutes
+            const sec = seconds < 10 ? `0${seconds}` : seconds
+            return <span>{hour}:{min}:{sec}</span>;
         }
     };
 

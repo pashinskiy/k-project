@@ -1,6 +1,6 @@
 import * as React from "react";
 import { graphql, Link } from "gatsby";
-import { Grid, makeStyles, Typography } from "@material-ui/core";
+import { useMediaQuery, Grid, makeStyles, Typography } from "@material-ui/core";
 import Seo from "../components/seo";
 import BreadCrumbs from "../components/breadCrumbs";
 import DefaultLink from "../components/layout/header/link/default";
@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
         padding: "28px 0px 68px 0px",
         boxSizing: "border-box",
         width: '100%',
-        "@media (max-width: 1024px)": {
+        "@media (max-width: 1025px)": {
             paddingTop: 0,
         },
     },
@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
         boxSizing: "border-box",
         background: theme.palette.background.secondary,
         borderRadius: 20,
-        "@media (max-width: 1024px)": {
+        "@media (max-width: 1025px)": {
             display: "none",
         },
     },
@@ -85,7 +85,7 @@ const useStyles = makeStyles(theme => ({
         WebkitTransform: 'translate3d(0, 0, 0)',
         MozTransform: 'translate3d(0, 0, 0)',
         marginTop: 48,
-        '@media (max-width: 1024px)': {
+        '@media (max-width: 1025px)': {
             marginTop: 28,
         },
         '@media (max-width: 767px)': {
@@ -99,7 +99,7 @@ const useStyles = makeStyles(theme => ({
     },
     content_wrapper: {
         marginTop: 40,
-        '@media (max-width: 1024px)': {
+        '@media (max-width: 1025px)': {
             marginTop: 28,
         },
         '@media (max-width: 767px)': {
@@ -140,6 +140,8 @@ const Category = ({ data: { prismicCategory, allPrismicStories, allPrismicProduc
 
     const classes = useStyles();
 
+    const maxWidth1024 = useMediaQuery("(max-width: 1025px)")
+
     return (
         <div>
             <Seo title={`Купить ${prismicCategory.data.name} в Krypton`} />
@@ -169,7 +171,7 @@ const Category = ({ data: { prismicCategory, allPrismicStories, allPrismicProduc
                         ))}
                     </div>
                     <div className={classes.content_blocks}>
-                        <ScrollBar fullScreen buttonNext >
+                        <ScrollBar fullScreen={maxWidth1024} buttonNext >
                             <StoriesPanel stories={allPrismicStories.edges.map(edge => edge.node)}/>
                         </ScrollBar>
                         <div className={classes.banner}>
@@ -180,7 +182,7 @@ const Category = ({ data: { prismicCategory, allPrismicStories, allPrismicProduc
                         </div>
                         <div className={classes.content_wrapper}>
                             <Typography variant="h3">Категории</Typography>
-                            <ScrollBar fullScreen buttonNext >
+                            <ScrollBar fullScreen={maxWidth1024} buttonNext >
                                 {prismicCategory.data.children.map((subcategory, i) => (
                                     <Grid key={`subcategories_cards_category_page ${i}`} className={classes.subcategory_card}>
                                         <CardWidget
@@ -194,13 +196,13 @@ const Category = ({ data: { prismicCategory, allPrismicStories, allPrismicProduc
                         </div>
                         <div className={classes.content_wrapper}>
                             <Typography variant="h3">Специальные предложения</Typography>
-                            <ScrollBar fullScreen buttonNext >
+                            <ScrollBar fullScreen={maxWidth1024} buttonNext >
                                 <FiltersBySticker products={allPrismicProduct.edges.map(edge => edge.node)} />
                             </ScrollBar>
                         </div>
                         <div className={classes.content_wrapper}>
                             <Typography variant="h3">Популярные бренды</Typography>
-                            <ScrollBar fullScreen buttonNext >
+                            <ScrollBar fullScreen={maxWidth1024} buttonNext >
                                 {prismicCategory.data.brands.map((brand, i) => (
                                     <Grid key={`brands_category_page ${i}`} className={classes.brand_card}>
                                         <CardWidget

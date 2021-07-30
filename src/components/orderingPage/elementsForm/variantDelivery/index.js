@@ -51,7 +51,7 @@ const useStyle = makeStyles(theme => ({
       marginTop: "3px",
       marginRight: "19px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "2.15vw",
       height: "2.15vw",
       marginTop: "0.35vw",
@@ -68,7 +68,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       boxShadow: `inset 0 0 0 2px ${theme.palette.background.main}`,
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       boxShadow: `inset 0 0 0 0.23vw ${theme.palette.background.main}`,
     },
   },
@@ -81,7 +81,7 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: "18px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "2.15vw",
     },
     "@media(max-width: 414px)": {
@@ -100,7 +100,7 @@ const useStyle = makeStyles(theme => ({
       marginTop: "8px",
       fontSize: "14px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "0.95vw",
       fontSize: "1.67vw",
     },

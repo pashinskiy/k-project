@@ -16,15 +16,15 @@ const useStyles = makeStyles(theme => ({
     padding: "2.18vw 0",
     borderBottom: "1px solid #E3E3EA",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     "@media(min-width: 1280px)": {
       minHeight: "336px",
       padding: "28px 0",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       minHeight: "37.88vw",
       padding: "3.35vw 0",
     },
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       width: "280px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "23.98vw",
     },
     "@media(max-width: 414px)": {
@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       height: "280px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       height: "23.98vw",
     },
     "@media(max-width: 414px)": {
@@ -72,7 +72,7 @@ const useStyles = makeStyles(theme => ({
   wrapperRightBlock: {
     width: "67.24%",
     height: "100%",
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "71.72%",
     },
     "@media(max-width: 414px)": {
@@ -82,7 +82,7 @@ const useStyles = makeStyles(theme => ({
   wrapperMainBlock: {
     width: "68.18%",
     height: "100%",
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "61.22%",
     },
     "@media(max-width: 414px)": {
@@ -96,7 +96,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: "20px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "2.03vw",
     },
     "@media(max-width: 414px)": {
@@ -109,7 +109,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginTop: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "1.43vw",
     },
     "@media(max-width: 414px)": {
@@ -119,10 +119,10 @@ const useStyles = makeStyles(theme => ({
   color: {
     borderRadius: "100%",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     boxSizing: "border-box",
     boxShadow: "inset 0px 2px 4px rgba(0, 0, 0, 0.25)",
 
@@ -132,7 +132,7 @@ const useStyles = makeStyles(theme => ({
       width: "37px",
       height: "37px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "4.07vw",
       height: "4.07vw",
     },
@@ -146,7 +146,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       width: "343px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "35.73vw",
     },
     "@media(max-width: 414px)": {
@@ -158,7 +158,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       padding: "12px 0",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       padding: "1.43vw 0",
     },
     "@media(max-width: 414px)": {
@@ -170,7 +170,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginTop: "8px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "0.95vw",
     },
     "&:first-child": {
@@ -185,7 +185,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.43vw",
     },
   },
@@ -194,7 +194,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginRight: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginRight: "1.43vw",
     },
   },
@@ -205,7 +205,7 @@ const useStyles = makeStyles(theme => ({
       height: "30px",
       marginRight: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       height: "3.59vw",
       marginRight: "1.43vw",
     },
@@ -232,7 +232,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       width: "178px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "31.89%",
     },
     "@media(max-width: 414px)": {
@@ -260,22 +260,11 @@ export default function CardProduct({ product, afterChange, ...other }) {
   const stickersImgArr = stickersSlices.reduce((arr, stickersSlice) => {
     arr.push(
       ...stickersSlice.items.map((sticker, i) => {
-        const img =
-          sticker.sticker.document.data.image.localFile?.childImageSharp.fluid
+        const img = sticker.sticker.document.data.image.localFile?.publicURL
+        const alt = sticker.sticker.document.data.image.alt
         return (
           <div className={classes.sticker} key={i}>
-            <picture style={{ display: "flex", width: "100%", height: "100%" }}>
-              <source srcSet={img?.srcSetWebp} type="image/webp" sizes="" />
-              <img
-                src={img?.src}
-                srcSet={img?.srcSet}
-                alt={sticker.sticker.document.data.image.alt}
-                sizes=""
-                width={img?.aspectRatio}
-                height="1"
-                style={{ width: "auto", height: "100%" }}
-              />
-            </picture>
+            <img src={img} alt={alt} style={{ width: "auto", height: "100%" }} />
           </div>
         )
       })
@@ -343,10 +332,7 @@ export default function CardProduct({ product, afterChange, ...other }) {
 
           <Link to={`/${product.uid}`} className={classes.link}>
             <Typography className={classes.title}>
-              {product.data.name} {mobile ? product.data.color_name : null}
-            </Typography>
-            <Typography hidden={mobile} className={classes.title}>
-              {product.data.color_name}
+              {product.data.name}
             </Typography>
           </Link>
 

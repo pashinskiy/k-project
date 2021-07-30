@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "28px",
       borderRadius: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       height: "47.96vw",
       marginTop: "3.35vw",
       borderRadius: "1.43vw",
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       width: "700px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "48.2%",
     },
     "@media(max-width: 414px)": {
@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
       width: "496px",
       padding: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "48.2%",
       padding: "1.43vw",
     },
@@ -75,7 +75,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "36px",
       marginTop: "28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "4.31vw",
       marginTop: "3.35vw",
     },
@@ -93,7 +93,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "20px",
       marginTop: "28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "2.39vw",
       marginTop: "3.35vw",
     },
@@ -111,7 +111,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "17px",
       marginTop: "28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "2.03vw",
       marginTop: "3.35vw",
     },
@@ -129,7 +129,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "12px",
       marginTop: "80px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.43vw",
       marginTop: "9.59vw",
     },
@@ -142,7 +142,7 @@ const useStyles = makeStyles(theme => ({
       "@media(min-width: 1280px)": {
         marginTop: "28px",
       },
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         marginTop: "3.35vw",
       },
       "@media(max-width: 414px)": {

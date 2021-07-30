@@ -16,7 +16,7 @@ const useStyle = makeStyles(theme => ({
       height: "165px",
       paddingRight: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "16.76vw",
       height: "19.76vw",
       paddingRight: "0.95vw",
@@ -42,9 +42,7 @@ export default function FiltersBySticker({ products }) {
               name
               image {
                 localFile {
-                  childImageSharp {
-                    gatsbyImageData
-                  }
+                  publicURL
                 }
               }
             }
@@ -82,9 +80,7 @@ export default function FiltersBySticker({ products }) {
           <div key={sticker.id} className={classes.wrapper}>
             <CardWidget
               variant="brand"
-              cardImage={
-                sticker.data.image?.localFile?.childImageSharp.gatsbyImageData
-              }
+              publicURL={sticker.data.image?.localFile?.publicURL}
               cardTitle={title}
               cardLink={url.href}
               gradientBack={true}

@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "20px",
       marginRight: "8px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "2.39vw",
       marginRight: "0.95vw",
     },
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.43vw",
     },
     "@media(max-width: 414px)": {
@@ -39,22 +39,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function BlockPrice({ product }) {
-  // input data
-
-  // product = {
-  //   uid: "1234567",
-  //   data: {
-  //     name: "name",
-  //     color: "red",
-  //     price: "19000",
-  //     oldPrice: "50000",
-  //   },
-  // }
-  // allColors = [
-  //   { uid: "123", data: { color_name: "Красный", color: "red" } },
-  //   { uid: "6787", data: { color_name: "Желтый", color: "yellow" } },
-  // ]
-
   const classes = useStyles()
 
   // преобразуем цену

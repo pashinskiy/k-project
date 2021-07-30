@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
       width: "100%",
       padding: "0 28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       padding: "0 3.35vw",
     },
     "@media(max-width: 414px)": {
@@ -242,6 +242,7 @@ export default function Layout({ children }) {
                             document {
                               ... on PrismicSubcategory {
                                 id
+                                uid
                                 data {
                                   name
                                   tags {
@@ -415,6 +416,23 @@ export default function Layout({ children }) {
           }
         }
       }
+      prismicDocs {
+        data {
+          from_footer {
+            doc {
+              document {
+                ... on PrismicDoc {
+                  id
+                  uid
+                  data {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   `)
 
@@ -455,26 +473,26 @@ export default function Layout({ children }) {
             aria-label="Background Catalog"
             tabIndex={0}
             className={classes.background}
-            onClick={() => {
-              if (catalog === true) {
-                setTimeout(() => {
-                  setCatalog(!catalog)
-                }, 150)
-              } else {
-                setCatalog(!catalog)
-              }
-              setAnimation(!animation)
-            }}
-            onKeyDown={() => {
-              if (catalog === true) {
-                setTimeout(() => {
-                  setCatalog(!catalog)
-                }, 150)
-              } else {
-                setCatalog(!catalog)
-              }
-              setAnimation(!animation)
-            }}
+            // onClick={() => {
+            //   if (catalog === true) {
+            //     setTimeout(() => {
+            //       setCatalog(!catalog)
+            //     }, 150)
+            //   } else {
+            //     setCatalog(!catalog)
+            //   }
+            //   setAnimation(!animation)
+            // }}
+            // onKeyDown={() => {
+            //   if (catalog === true) {
+            //     setTimeout(() => {
+            //       setCatalog(!catalog)
+            //     }, 150)
+            //   } else {
+            //     setCatalog(!catalog)
+            //   }
+            //   setAnimation(!animation)
+            // }}
           />
         )
 

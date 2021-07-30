@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       margin: "28px 0 68px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       margin: "3.35vw 0 8.15vw",
     },
     "@media(max-width: 414px)": {
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
       "@media(min-width: 1280px)": {
         width: "18px",
       },
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         width: "2.15vw",
       },
       "@media(max-width: 414px)": {
@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
       maxWidth: "216px",
       margin: "0 12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       height: "4.79vw",
       maxWidth: "25.89vw",
       margin: "0 1.43vw",
@@ -87,7 +87,7 @@ const useStyles = makeStyles(theme => ({
       marginRight: "4px",
       border: "2px solid transparent",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "4.79vw",
       borderRadius: "1.43vw",
       marginRight: "0.47vw",
@@ -120,7 +120,7 @@ const useStyles = makeStyles(theme => ({
       "@media(min-width: 1280px)": {
         fontSize: "14px",
       },
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         fontSize: "1.67vw",
       },
       "@media(max-width: 414px)": {
@@ -143,7 +143,7 @@ const useStyles = makeStyles(theme => ({
       "@media(min-width: 1280px)": {
         margin: "-2px",
       },
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         margin: "-0.23vw",
       },
       "@media(max-width: 414px)": {
@@ -161,26 +161,36 @@ const useStyles = makeStyles(theme => ({
       "user-select": "none",
     },
   },
-  text: {
-    fontWeight: 400,
+  title: {
+    fontWeight: 700,
     lineHeight: 1.5,
 
-    fontSize: "1.56vw",
+    marginTop: "2.18vw",
+    fontSize: "2.34vw",
     "@media(min-width: 1280px)": {
-      fontSize: "20px",
+      marginTop: "28px",
+      fontSize: "30px",
     },
-    "@media(max-width: 834px)": {
-      fontSize: "2.39vw",
+    "@media(max-width: 1025px)": {
+      marginTop: "3.35vw",
+      fontSize: "3.59vw",
     },
     "@media(max-width: 414px)": {
-      fontSize: "4.83vw",
+      marginTop: "6.76vw",
+      fontSize: "7.24vw",
     },
   },
 }))
 
-export default function Pagination({ pageSize, components }) {
+export default function Pagination({ pageSize, components, message }) {
   const classes = useStyles()
   const barItem = React.useRef()
+
+  message = message ? (
+    message
+  ) : (
+    <Typography className={classes.title}>ничего не найдено.</Typography>
+  )
 
   // смотрим адресную строку
   const url = new URL(window.location.href)
@@ -226,35 +236,31 @@ export default function Pagination({ pageSize, components }) {
 
   return (
     <Grid container className={classes.wrapper}>
-      {showComponents.length ? (
-        showComponents
-      ) : (
-        <Typography align="center" className={classes.text}>
-          ничего не найдено
-        </Typography>
-      )}
+      {showComponents.length ? showComponents : message}
 
-      <Grid container alignItems="center" className={classes.paginationBlock}>
-        <button onClick={() => goTo(page - 1)}>
-          <Arrow className={classes.mirror} />
-        </button>
+      {lastPage > 1 ? (
+        <Grid container alignItems="center" className={classes.paginationBlock}>
+          <button onClick={() => goTo(page - 1)}>
+            <Arrow className={classes.mirror} />
+          </button>
 
-        <Grid
-          className={classes.paginationItemWrapper + " " + classes.unselect}
-        >
           <Grid
-            container
-            wrap="nowrap"
-            ref={barItem}
-            className={classes.barItem}
+            className={classes.paginationItemWrapper + " " + classes.unselect}
           >
-            {pagination}
+            <Grid
+              container
+              wrap="nowrap"
+              ref={barItem}
+              className={classes.barItem}
+            >
+              {pagination}
+            </Grid>
           </Grid>
+          <button onClick={() => goTo(page + 1)}>
+            <Arrow />
+          </button>
         </Grid>
-        <button onClick={() => goTo(page + 1)}>
-          <Arrow />
-        </button>
-      </Grid>
+      ) : null}
     </Grid>
   )
 }

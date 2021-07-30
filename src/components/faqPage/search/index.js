@@ -2,7 +2,7 @@ import React from "react"
 import { makeStyles } from "@material-ui/styles"
 import { graphql, useStaticQuery } from "gatsby"
 
-import { FaqStateContext, FaqDispatchContext } from "../context"
+import { FaqDispatchContext } from "../context"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
       padding: "14px 16px",
       borderRadius: "12px",
     },
-    "@media (max-width: 834px)": {
+    "@media (max-width: 1025px)": {
       padding: "1.67vw 1.91vw",
       borderRadius: "1.43vw",
     },
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: "14px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
     },
     "@media(max-width: 414px)": {
@@ -59,7 +59,7 @@ const useStyles = makeStyles(theme => ({
       height: "16px",
       marginRight: "10px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "1.91vw",
       height: "1.91vw",
       marginRight: "1.19vw",

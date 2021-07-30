@@ -68,7 +68,7 @@ export default function SaleButton({ name, link }) {
     const classes = useStyles();
 
     return (
-        <Link to={`/${link}`} className={classes.root}>
+        <Link to={link} className={classes.root}>
             <span className={'header--sales--text'}>{name}</span>
             <div className={classes.wrapper_filled}>
                 <div className={`${classes.back_filled} back_filled`} />

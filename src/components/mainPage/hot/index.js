@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
             fontSize: 36,
             fontWeight: 700,
             lineHeight: '100%',
-            '@media (max-width: 1024px)': {
+            '@media (max-width: 1025px)': {
                 fontSize: 28,
             },
             '@media (max-width: 767px)': {
@@ -57,7 +57,7 @@ export default function Hot(props) {
                 </Typography>
             </div>
             <div className={classes.advantages}>
-                <ScrollBar buttonNext>
+                <ScrollBar buttonNext fullScreen>
                     {props.data.allPrismicMainPage.edges[0].node.data.hot.map((product, i) => (
                         <div key={`hot ${i}`} className={classes.product}>
                             <CardProduct product={product.hot_product.document} />

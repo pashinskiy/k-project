@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
       padding: "24px",
       borderRadius: "20px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "75.659vw",
       padding: "2.8776vw",
       borderRadius: "2.398vw",
@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginBottom: "28px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginBottom: "3.3573vw",
     },
     "@media(max-width: 414px)": {
@@ -61,7 +61,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "36px",
       marginLeft: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "4.3165vw",
       marginLeft: "1.4388vw",
     },
@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
       width: "40px",
       height: "40px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "4.796vw",
       height: "4.796vw",
     },
@@ -93,7 +93,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginBottom: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginBottom: "1.4388vw",
     },
     "@media(max-width: 414px)": {
@@ -119,7 +119,7 @@ const useStyles = makeStyles(theme => ({
       padding: "5px",
       borderRadius: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       minWidth: "29.976vw",
       width: "29.976vw",
       height: "23.98vw",
@@ -144,7 +144,7 @@ const useStyles = makeStyles(theme => ({
       marginBottom: "13.5px",
       lineHeight: "29px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "2.87769vw",
       marginBottom: "1.6187vw",
       lineHeight: "3.4772vw",
@@ -164,7 +164,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginLeft: "16px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginLeft: "1.9184vw",
     },
     "@media(max-width: 414px)": {
@@ -181,7 +181,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: 20,
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "2.398vw",
     },
     "@media(max-width: 414px)": {
@@ -196,7 +196,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: 12,
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.4388vw",
     },
     "@media(max-width: 414px)": {
@@ -224,7 +224,7 @@ const useStyles = makeStyles(theme => ({
       height: "50px",
       fontSize: "14px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       borderRadius: "1.4388vw",
       width: "30.455vw",
       height: "5.9952vw",
@@ -253,7 +253,7 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "12px",
       marginRight: "5px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.6786vw",
       borderRadius: "1.4388vw",
       marginRight: "0.5995vw",
@@ -291,7 +291,7 @@ const useStyles = makeStyles(theme => ({
       marginBottom: "14px",
       lineHeight: "29px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "2.877vw",
       marginBottom: "1.6786vw",
       lineHeight: "3.4772vw",
@@ -309,7 +309,7 @@ const useStyles = makeStyles(theme => ({
       width: "calc(100% + 28px)",
       margin: "0 -14px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "calc(100% + 3.3573vw)",
       margin: "0 -1.6786vw",
     },
@@ -323,7 +323,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       padding: "14px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       padding: "1.67865vw",
     },
     "@media(max-width: 414px)": {

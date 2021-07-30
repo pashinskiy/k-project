@@ -11,7 +11,6 @@ import Pagination from "../components/pagination"
 import CardProduct from "../components/catalog/catalogCardProduct"
 
 const useStyles = makeStyles(theme => ({
-
   root: {
     width: "100%",
     height: "100%",
@@ -25,7 +24,7 @@ const useStyles = makeStyles(theme => ({
       padding: "20px 0",
       borderWidth: "1px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       padding: "2.39vw 0",
       borderWidth: "0.11vw",
     },
@@ -56,39 +55,30 @@ const IndexPage = ({ data }) => {
   const dataCategory = data.allPrismicCategory.edges.map(edge => edge.node)
   const [filterProducts, setFilterProducts] = React.useState(dataProducts)
 
-  const arrayCards = favoritesArray.length !== 0 ? (
-    filterProducts.map((product, i) =>
-      favorites.indexOf(product.uid) !== -1 ? (
-        <Grid
-          item
-          xs={isMobile ? 12 : 4}
-          className={classes.itemRoot}
-          key={product.uid + "_" + i}
-        >
-          {isMobile ? <CardProduct product={product}
-            afterChange={setNewFavorites} /> : <CardSimilarProduct
-            product={product}
-            afterChange={setNewFavorites}
-          />}
-        </Grid>
-      ) : null
-    )
-  ) : (
-    <Typography align="center">
-      Добавьте понравившийся товар в избранное
-    </Typography>
-  )
+  const arrayCards = filterProducts
+    .filter(product => favorites.includes(product.id))
+    .map((product, i) => (
+      <Grid
+        item
+        xs={isMobile ? 12 : 4}
+        className={classes.itemRoot}
+        key={product.uid + "_" + i}
+      >
+        {isMobile ? (
+          <CardProduct product={product} afterChange={setNewFavorites} />
+        ) : (
+          <CardSimilarProduct product={product} afterChange={setNewFavorites} />
+        )}
+      </Grid>
+    ))
 
+    console.log(favorites)
   // обновление списка Favorites
   function setNewFavorites() {
     let favorites = localStorage.getItem("favorites")
     favorites = favorites === null || !favorites ? [] : JSON.parse(favorites)
     setFavoritesArray(favorites)
   }
-  //TODO: почистить от null
-  const cleanArrayCards = arrayCards.filter(function(element){
-    return element != null
-  } )
 
   return (
     <>
@@ -100,13 +90,22 @@ const IndexPage = ({ data }) => {
         count={favoritesArray.length ? favoritesArray.length : "0"}
       />
       <SmallCategoriesPanel categories={dataCategory} />
-      <Grid container justify="space-between" className={classes.sortFiltwrapper}>
+      <Grid
+        container
+        justify="space-between"
+        className={classes.sortFiltwrapper}
+      >
         <Sort products={filterProducts} setSortProducts={setFilterProducts} />
       </Grid>
 
-      <Grid container  alignItems="center" className={classes.containerRoot}>
-      {/* {arrayCards} */}
-      <Pagination pageSize={isMobile ? 5 : 6} components={cleanArrayCards} />
+      <Grid container alignItems="center" className={classes.containerRoot}>
+        {arrayCards.length !== 0 ? (
+          <Pagination pageSize={isMobile ? 5 : 6} components={arrayCards} />
+        ) : (
+          <Typography align="center">
+            Добавьте понравившийся товар в избранное
+          </Typography>
+        )}
       </Grid>
     </>
   )
@@ -114,59 +113,56 @@ const IndexPage = ({ data }) => {
 
 export default IndexPage
 
-
 export const query = graphql`
-    query FavPage {
-      allPrismicProduct {
-        edges {
-          node {
-            id
-            uid
-            data {
-              brand {
-                document {
-                  ... on PrismicBrand {
-                    id
-                    data {
-                      name
-                    }
+  query FavPage {
+    allPrismicProduct {
+      edges {
+        node {
+          id
+          uid
+          data {
+            brand {
+              document {
+                ... on PrismicBrand {
+                  id
+                  data {
+                    name
                   }
                 }
               }
-              name
-              price
-              old_price
-              color
-              color_name
-              images {
-                image {
-                  alt
-                  localFile {
-                    childImageSharp {
-                      gatsbyImageData
-                    }
+            }
+            name
+            price
+            old_price
+            color
+            images {
+              image {
+                alt
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData
                   }
                 }
               }
-              body {
-                ... on PrismicProductBodyStickers {
-                  slice_type
-                  items {
-                    sticker {
-                      document {
-                        ... on PrismicSticker {
-                          id
-                          data {
-                            image {
-                              alt
-                              localFile {
-                                childImageSharp {
-                                  fluid(maxHeight: 35) {
-                                    aspectRatio
-                                    src
-                                    srcSet
-                                    srcSetWebp
-                                  }
+            }
+            body {
+              ... on PrismicProductBodyStickers {
+                slice_type
+                items {
+                  sticker {
+                    document {
+                      ... on PrismicSticker {
+                        id
+                        data {
+                          image {
+                            alt
+                            localFile {
+                              childImageSharp {
+                                fluid(maxHeight: 35) {
+                                  aspectRatio
+                                  src
+                                  srcSet
+                                  srcSetWebp
                                 }
                               }
                             }
@@ -176,56 +172,57 @@ export const query = graphql`
                     }
                   }
                 }
-                ... on PrismicProductBodyFeatures {
-                  slice_type
-                  items {
-                    feature
-                    image {
-                      alt
-                      localFile {
-                        childImageSharp {
-                          gatsbyImageData(height: 30)
-                        }
+              }
+              ... on PrismicProductBodyFeatures {
+                slice_type
+                items {
+                  feature
+                  image {
+                    alt
+                    localFile {
+                      childImageSharp {
+                        gatsbyImageData(height: 30)
                       }
                     }
                   }
                 }
               }
-              body1 {
-                ... on PrismicProductBody1Characteristics {
-                  id
-                  slice_type
-                  items {
-                    characteristic {
-                      document {
-                        ... on PrismicCharacteristic {
-                          id
-                          data {
-                            name
-                            variant
-                            order
-                          }
+            }
+            body1 {
+              ... on PrismicProductBody1Characteristics {
+                id
+                slice_type
+                items {
+                  characteristic {
+                    document {
+                      ... on PrismicCharacteristic {
+                        id
+                        data {
+                          name
+                          variant
+                          order
                         }
                       }
                     }
-                    value
                   }
+                  value
                 }
               }
-              color
             }
-          }
-        }
-      }
-      allPrismicCategory {
-        edges {
-          node {
-            data {
-              name
-            }
-            uid
+            color
           }
         }
       }
     }
-  `
+    allPrismicCategory {
+      edges {
+        node {
+          data {
+            name
+          }
+          uid
+        }
+      }
+    }
+  }
+`

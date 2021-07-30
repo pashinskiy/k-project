@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "6px",
       boxShadow: `inset 0 0 0 1px ${theme.palette.background.accentSecondary}`,
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "3.83vw",
       height: "2.15vw",
       padding: "0.35vw",
@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
         height: "12px",
         borderRadius: "4px",
       },
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         width: "1.43vw",
         height: "1.43vw",
         borderRadius: "0.47vw",
@@ -84,7 +84,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "17px",
       marginLeft: "8px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "2.03vw",
       marginLeft: "0.95vw",
     },
@@ -100,7 +100,7 @@ const useStyles = makeStyles(theme => ({
       height: "34px",
       marginLeft: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       height: "4.07vw",
       marginLeft: "1.43vw",
     },
@@ -129,6 +129,7 @@ export default function BlockBoolean({
               image {
                 alt
                 localFile {
+                  publicURL
                   childImageSharp {
                     gatsbyImageData
                     fluid(maxHeight: 35) {
@@ -170,7 +171,12 @@ export default function BlockBoolean({
         <Grid className={classes.ratio + " " + (value ? classes.active : "")} />
         {img ? (
           <div className={classes.image}>
-            <picture style={{ display: "flex", width: "100%", height: "100%" }}>
+            <img
+              src={img.localFile.publicURL}
+              alt={img.alt}
+              style={{ width: "auto", height: "100%" }}
+            />
+            {/* <picture style={{ display: "flex", width: "100%", height: "100%" }}>
               <source
                 srcSet={img.localFile.childImageSharp.fluid.srcSetWebp}
                 type="image/webp"
@@ -185,7 +191,7 @@ export default function BlockBoolean({
                 height="1"
                 style={{ width: "auto", height: "100%" }}
               />
-            </picture>
+            </picture> */}
           </div>
         ) : (
           // <GatsbyImage

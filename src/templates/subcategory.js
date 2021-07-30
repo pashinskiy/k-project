@@ -1,6 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { makeStyles, useMediaQuery, Grid } from "@material-ui/core"
+import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
 
 import Seo from "../components/seo"
 
@@ -13,6 +13,18 @@ import Filter from "../components/filter"
 import Pagination from "../components/pagination"
 
 const useStyles = makeStyles(theme => ({
+  wrapper: {
+    marginTop: "2.18vw",
+    "@media(min-width: 1280px)": {
+      marginTop: "28px",
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "3.35vw",
+    },
+    "@media(max-width: 414px)": {
+      marginTop: "6.76vw",
+    },
+  },
   blockSortAndFilter: {
     borderBottom: `solid 1px ${theme.palette.color.secondaryLight}`,
     position: "relative",
@@ -22,7 +34,7 @@ const useStyles = makeStyles(theme => ({
       padding: "28px 0",
       borderWidth: "1px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       padding: "2.39vw 0",
       borderWidth: "0.11vw",
     },
@@ -36,15 +48,63 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       width: "916px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "100%",
     },
+  },
+  title: {
+    fontWeight: 700,
+    lineHeight: 1.5,
+
+    marginTop: "2.18vw",
+    fontSize: "2.34vw",
+    "@media(min-width: 1280px)": {
+      marginTop: "28px",
+      fontSize: "30px",
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "3.35vw",
+      fontSize: "3.59vw",
+    },
+    "@media(max-width: 414px)": {
+      marginTop: "6.76vw",
+      fontSize: "7.24vw",
+    },
+  },
+  text: {
+    fontWeight: 400,
+    lineHeight: 1.5,
+    color: "#878787",
+
+    marginTop: "0.93vw",
+    fontSize: "1.87vw",
+    "@media(min-width: 1280px)": {
+      marginTop: "12px",
+      fontSize: "24px",
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "1.43vw",
+      fontSize: "2.87vw",
+    },
+    "@media(max-width: 414px)": {
+      marginTop: "2.89vw",
+      fontSize: "5.79vw",
+    },
+  },
+  cleanFilter: {
+    border: "none",
+    borderBottom: "1px solid #878787",
+    background: "transparent",
+
+    fontSize: "inherit",
+    color: "inherit",
+    cursor: "pointer",
   },
 }))
 
 const IndexPage = ({ data: { allPrismicProduct, prismicSubcategory } }) => {
   const classes = useStyles()
-  const mobile = useMediaQuery("(max-width: 834px)")
+  const mobile = useMediaQuery("(max-width: 1025px)")
 
   const allProducts = allPrismicProduct.edges.map(edge => edge.node)
   const [filterProducts, setFilterProducts] = React.useState(allProducts)
@@ -53,8 +113,14 @@ const IndexPage = ({ data: { allPrismicProduct, prismicSubcategory } }) => {
     <CardProduct product={product} key={product.id} />
   ))
 
+  function cleanFilter() {
+    const url = new URL(window.location)
+    url.search = ""
+    window.location = url.href
+  }
+
   return (
-    <>
+    <div className={classes.wrapper}>
       <Seo title="Home" />
       <BreadCrumbs
         links={[
@@ -85,7 +151,25 @@ const IndexPage = ({ data: { allPrismicProduct, prismicSubcategory } }) => {
 
       <Grid container justify="space-between">
         <Grid className={classes.blockPagination}>
-          <Pagination pageSize={mobile ? 5 : 10} components={arrayCards} />
+          <Pagination
+            pageSize={mobile ? 5 : 10}
+            components={arrayCards}
+            message={
+              <Grid container direction="column">
+                <Typography className={classes.title}>
+                  К сожалению, таких товаров нет в наличии.
+                </Typography>
+
+                <Typography className={classes.text}>
+                  Попробуйте изменить настройки фильтра. Или{" "}
+                  <button onClick={cleanFilter} className={classes.cleanFilter}>
+                    сбросить
+                  </button>
+                  .
+                </Typography>
+              </Grid>
+            }
+          />
         </Grid>
         {mobile ? null : (
           <Filter
@@ -94,7 +178,7 @@ const IndexPage = ({ data: { allPrismicProduct, prismicSubcategory } }) => {
           />
         )}
       </Grid>
-    </>
+    </div>
   )
 }
 
@@ -140,7 +224,6 @@ export const query = graphql`
             price
             old_price
             color
-            color_name
             color_group
             images {
               image {
@@ -164,14 +247,7 @@ export const query = graphql`
                           image {
                             alt
                             localFile {
-                              childImageSharp {
-                                fluid(maxHeight: 35) {
-                                  aspectRatio
-                                  src
-                                  srcSet
-                                  srcSetWebp
-                                }
-                              }
+                              publicURL
                             }
                           }
                         }

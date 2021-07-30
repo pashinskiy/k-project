@@ -1,17 +1,17 @@
 <svg width="100%" height="100%" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M34.0741 4.62963H5.92593C5.10773 4.62963 4.44444 5.29291 4.44444 6.11111V23.8889C4.44444 24.7071 5.10773 25.3704 5.92592 25.3704H34.0741C34.8923 25.3704 35.5556 24.7071 35.5556 23.8889V6.11111C35.5556 5.29291 34.8923 4.62963 34.0741 4.62963ZM5.92593 0.185181C2.65313 0.185181 0 2.83831 0 6.11111V23.8889C0 27.1617 2.65313 29.8148 5.92592 29.8148H34.0741C37.3469 29.8148 40 27.1617 40 23.8889V6.11111C40 2.83831 37.3469 0.185181 34.0741 0.185181H5.92593Z" fill="url(#paint0_linear)"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M40 13.5185H0V9.07407H40V13.5185Z" fill="url(#paint1_linear)"/>
-<path d="M6.55556 18.8148C6.55556 17.9966 7.21884 17.3333 8.03704 17.3333H11C11.8182 17.3333 12.4815 17.9966 12.4815 18.8148V21.7778C12.4815 22.596 11.8182 23.2593 11 23.2593H8.03704C7.21884 23.2593 6.55556 22.596 6.55556 21.7778V18.8148Z" fill="url(#paint2_linear)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M34.0741 4.62963H5.92593C5.10773 4.62963 4.44444 5.29291 4.44444 6.11111V23.8889C4.44444 24.7071 5.10773 25.3704 5.92592 25.3704H34.0741C34.8923 25.3704 35.5556 24.7071 35.5556 23.8889V6.11111C35.5556 5.29291 34.8923 4.62963 34.0741 4.62963ZM5.92593 0.185181C2.65313 0.185181 0 2.83831 0 6.11111V23.8889C0 27.1617 2.65313 29.8148 5.92592 29.8148H34.0741C37.3469 29.8148 40 27.1617 40 23.8889V6.11111C40 2.83831 37.3469 0.185181 34.0741 0.185181H5.92593Z" fill="url(#bankCard_paint0_linear)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M40 13.5185H0V9.07407H40V13.5185Z" fill="url(#bankCard_paint1_linear)"/>
+<path d="M6.55556 18.8148C6.55556 17.9966 7.21884 17.3333 8.03704 17.3333H11C11.8182 17.3333 12.4815 17.9966 12.4815 18.8148V21.7778C12.4815 22.596 11.8182 23.2593 11 23.2593H8.03704C7.21884 23.2593 6.55556 22.596 6.55556 21.7778V18.8148Z" fill="url(#bankCard_paint2_linear)"/>
 <defs>
-<linearGradient id="paint0_linear" x1="20" y1="0.185181" x2="20" y2="29.8148" gradientUnits="userSpaceOnUse">
+<linearGradient id="bankCard_paint0_linear" x1="20" y1="0.185181" x2="20" y2="29.8148" gradientUnits="userSpaceOnUse">
 <stop stop-color="#291AD5"/>
 <stop offset="1" stop-color="#681DE1"/>
 </linearGradient>
-<linearGradient id="paint1_linear" x1="20" y1="0.185181" x2="20" y2="29.8148" gradientUnits="userSpaceOnUse">
+<linearGradient id="bankCard_paint1_linear" x1="20" y1="0.185181" x2="20" y2="29.8148" gradientUnits="userSpaceOnUse">
 <stop stop-color="#291AD5"/>
 <stop offset="1" stop-color="#681DE1"/>
 </linearGradient>
-<linearGradient id="paint2_linear" x1="20" y1="0.185181" x2="20" y2="29.8148" gradientUnits="userSpaceOnUse">
+<linearGradient id="bankCard_paint2_linear" x1="20" y1="0.185181" x2="20" y2="29.8148" gradientUnits="userSpaceOnUse">
 <stop stop-color="#291AD5"/>
 <stop offset="1" stop-color="#681DE1"/>
 </linearGradient>

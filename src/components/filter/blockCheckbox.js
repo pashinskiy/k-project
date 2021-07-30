@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       maxHeight: "309px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       maxHeight: "37.05vw",
     },
     "@media(max-width: 414px)": {
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
         width: "10px",
         borderRadius: "12px",
       },
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         width: "1.19vw",
         borderRadius: "1.43vw",
       },
@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
         width: "6px",
         borderRadius: "6px",
       },
-      "@media(max-width: 834px)": {
+      "@media(max-width: 1025px)": {
         width: "0.71vw",
         borderRadius: "0.71vw",
       },
@@ -76,7 +76,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginBottom: "12px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginBottom: "1.43vw",
     },
     "@media(max-width: 414px)": {
@@ -104,7 +104,7 @@ const useStyles = makeStyles(theme => ({
       marginRight: "8px",
       boxShadow: `inset 0 0 0 1px ${theme.palette.background.accentSecondary}`,
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       width: "1.91vw",
       height: "1.91vw",
       borderRadius: "0.71vw",
@@ -127,7 +127,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       padding: "3px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       padding: "0.35vw",
     },
     "@media(max-width: 414px)": {
@@ -142,7 +142,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: "14px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
     },
     "@media(max-width: 414px)": {
@@ -158,7 +158,7 @@ const useStyles = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       marginTop: "16px",
     },
-    "@media(max-width: 834px)": {
+    "@media(max-width: 1025px)": {
       marginTop: "1.91vw",
     },
     "@media(max-width: 414px)": {

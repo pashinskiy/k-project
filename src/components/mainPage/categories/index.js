@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
                 marginRight: 0,
             },
         },
-        '@media (max-width: 1024px) and (min-width: 768px)': {
+        '@media (max-width: 1025px) and (min-width: 768px)': {
             marginRight: 8,
             marginBottom: 8,
             height: '12vw',

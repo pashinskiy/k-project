@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
             fontSize: 36,
             fontWeight: 700,
             lineHeight: '100%',
-            '@media (max-width: 1024px)': {
+            '@media (max-width: 1025px)': {
                 fontSize: 28,
             },
             '@media (max-width: 767px)': {
@@ -63,7 +63,6 @@ const useStyles = makeStyles(theme => ({
                 color: theme.palette.color.accentSecondary,
             },
         },
-        overflow: 'hidden',
     },
     img: {
         height: 220,

@@ -15,7 +15,6 @@ export default function SimilarProducts({ category }) {
             data {
               name
               price
-              color_name
               color
               images {
                 image {
@@ -26,7 +25,7 @@ export default function SimilarProducts({ category }) {
                         width: 250
                         transformOptions: { fit: CONTAIN }
                         outputPixelDensities: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
-                        sizes: "(min-width: 1280px) 250px, (max-width: 414px) 49.51vw, (max-width: 834px) 29.97vw, 19.53vw"
+                        sizes: "(min-width: 1280px) 250px, (max-width: 414px) 49.51vw, (max-width: 1025px) 29.97vw, 19.53vw"
                       )
                     }
                   }
