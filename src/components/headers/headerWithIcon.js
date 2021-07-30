@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "4.31vw",
     },
     "@media(max-width: 414px)": {
-      fontSize: "4.83vw",
+      fontSize: props => (props.subcategory ? "6.76vw" : "4.83vw"),
     },
   },
   classCount: {
@@ -83,8 +83,14 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function HeaderWithIcon({ icon, title, divider, count }) {
-  const classes = useStyles()
+export default function HeaderWithIcon({
+  icon,
+  title,
+  divider,
+  count,
+  subcategory,
+}) {
+  const classes = useStyles({ subcategory })
   const goodsTitle = {
     title1: "товар",
     title2: "товара",

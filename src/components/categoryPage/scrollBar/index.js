@@ -10,27 +10,6 @@ const useStyle = makeStyles(theme => ({
     cursor: "pointer",
     position: "relative",
     overflow: "hidden",
-
-    "&:before": {
-      content: "''",
-      width: "20%",
-      height: "100%",
-      pointerEvents: "none",
-
-      position: "absolute",
-      zIndex: 6,
-      right: 0,
-      top: 0,
-
-      background: props =>
-        props.maxTranslateX < 0 && props.buttonNext
-          ? `linear-gradient(-90deg,${theme.palette.background.main} 0%, rgb(255, 255, 255, 0) 100%)`
-          : "none",
-
-      "@media(max-width: 1025px)": {
-        display: "none",
-      },
-    },
   },
   wrapperTrack: {
     scrollbarWidth: "none",
@@ -80,11 +59,78 @@ const useStyle = makeStyles(theme => ({
     position: "relative",
     boxSizing: "border-box",
   },
-  button: {
-    minWidth: 0,
+  buttonPrevWrapper: {
+    width: "20%",
+    height: "100%",
+    pointerEvents: "none",
 
     position: "absolute",
-    zIndex: 1,
+    zIndex: 6,
+    left: 0,
+    top: 0,
+
+    background: props =>
+      props.maxTranslateX < 0 && props.buttonNext
+        ? `linear-gradient(-90deg, rgb(255, 255, 255, 0) 0%,${theme.palette.background.main} 100%)`
+        : "none",
+
+    "@media(max-width: 1025px)": {
+      display: "none",
+    },
+  },
+  buttonPrev: {
+    minWidth: 0,
+    pointerEvents: "auto",
+
+    position: "absolute",
+    zIndex: 6,
+    left: 0,
+    top: "50%",
+    transform: "translateY(-50%)",
+    background: theme.palette.background.accent,
+    borderRadius: "100%",
+
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+
+    width: "3.59vw",
+    height: "3.59vw",
+    padding: "1.01vw",
+    "@media(min-width: 1280px)": {
+      width: "46px",
+      height: "46px",
+      padding: "13px",
+    },
+    "@media(max-width: 1025px)": {
+      display: "none",
+    },
+  },
+  buttonNextWrapper: {
+    width: "20%",
+    height: "100%",
+    pointerEvents: "none",
+
+    position: "absolute",
+    zIndex: 6,
+    right: 0,
+    top: 0,
+
+    background: props =>
+      props.maxTranslateX < 0 && props.buttonNext
+        ? `linear-gradient(-90deg, ${theme.palette.background.main} 0%, rgb(255, 255, 255, 0) 100%)`
+        : "none",
+
+    "@media(max-width: 1025px)": {
+      display: "none",
+    },
+  },
+  buttonNext: {
+    minWidth: 0,
+    pointerEvents: "auto",
+
+    position: "absolute",
+    zIndex: 6,
     right: 0,
     top: "50%",
     transform: "translateY(-50%)",
@@ -107,6 +153,9 @@ const useStyle = makeStyles(theme => ({
       display: "none",
     },
   },
+  mirror: {
+    transform: "scaleX(-1)",
+  },
 }))
 
 export default function ScrollBar({ children, fullScreen, buttonNext }) {
@@ -115,16 +164,15 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
 
   const maxWidth1024 = useMediaQuery("(max-width: 1025px)")
 
-  const classes = useStyle()
-  const size = fullScreen ? classes.fullScreen : ""
-
   const [cardPanel, setCardPanel] = React.useState(null)
 
   const maxTranslateX =
     cardPanel?.offsetWidth > cardPanel?.parentElement.offsetWidth
-      ? cardPanel?.parentElement.offsetWidth * (maxWidth1024 ? 1 : 0.87) -
-        cardPanel?.offsetWidth
+      ? cardPanel?.parentElement.offsetWidth - cardPanel?.offsetWidth
       : 0
+
+  const [showNext, setShowNext] = React.useState(true)
+  const [showPrev, setShowPrev] = React.useState(false)
 
   const setRef = React.useCallback(node => {
     if (node !== null) {
@@ -133,6 +181,7 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
   }, [])
 
   function setScrollBar(e) {
+    if (maxTranslateX === 0) return
     let eventScroll = null
     const clientY = e.clientY
     const scroll = window.pageYOffset
@@ -168,29 +217,60 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
 
       document.addEventListener("click", noGoLink)
       let newTranslateX = translateX + e.clientX - clientX
-      newTranslateX = newTranslateX > 0 ? 0 : newTranslateX
-      newTranslateX =
-        newTranslateX < maxTranslateX ? maxTranslateX : newTranslateX
+      if (newTranslateX >= 0) {
+        newTranslateX = 0
+        setShowPrev(false)
+      } else setShowPrev(true)
+
+      if (newTranslateX <= maxTranslateX && maxTranslateX !== 0) {
+        newTranslateX = maxTranslateX
+        setShowNext(false)
+      } else setShowNext(true)
+
       cardPanel.style.transform = `translate(${newTranslateX}px)`
     }
 
     function noGoLink(e) {
+      console.log("222")
       e.preventDefault()
     }
   }
 
   function next() {
+    if (!showPrev) setShowPrev(true)
+
     const translateX = +cardPanel.style.transform.slice(10, -3)
-    const paddingLeft = cardPanel.offsetLeft
 
     const nextElement = [...cardPanel.children].find(child => {
-      return child.offsetLeft > -(translateX - paddingLeft)
+      return child.offsetLeft > -translateX
     })
 
     let newTranslateX = -nextElement.offsetLeft
-    newTranslateX = newTranslateX < maxTranslateX ? 0 : newTranslateX
+    if (newTranslateX < maxTranslateX) {
+      newTranslateX = maxTranslateX
+      setShowNext(false)
+    }
     cardPanel.style.transform = `translate(${newTranslateX}px)`
   }
+
+  function prev() {
+    if (!showNext) setShowNext(true)
+
+    const translateX = +cardPanel.style.transform.slice(10, -3)
+
+    const prevElement = [...cardPanel.children].reverse().find(child => {
+      return child.offsetLeft < -translateX
+    })
+
+    let newTranslateX = 0 - prevElement.offsetLeft
+    if (newTranslateX === 0) {
+      setShowPrev(false)
+    }
+    cardPanel.style.transform = `translate(${newTranslateX}px)`
+  }
+
+  const classes = useStyle({ maxTranslateX, buttonNext })
+  const size = fullScreen ? classes.fullScreen : ""
 
   return (
     <Grid container className={classes.wrapper + " " + size}>
@@ -209,10 +289,20 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
         </Grid>
       </Grid>
 
-      {maxTranslateX < 0 && buttonNext ? (
-        <Button onClick={next} className={classes.button}>
-          <Arrow />
-        </Button>
+      {maxTranslateX < 0 && buttonNext && showPrev ? (
+        <div className={classes.buttonPrevWrapper}>
+          <Button onClick={prev} className={classes.buttonPrev}>
+            <Arrow className={classes.mirror} />
+          </Button>
+        </div>
+      ) : null}
+
+      {maxTranslateX < 0 && buttonNext && showNext ? (
+        <div className={classes.buttonNextWrapper}>
+          <Button onClick={next} className={classes.buttonNext}>
+            <Arrow />
+          </Button>
+        </div>
       ) : null}
     </Grid>
   )

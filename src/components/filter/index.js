@@ -427,7 +427,7 @@ export default function Filter({ products, setFilterProducts }) {
             ?.replace("ё", "е")
             .toLowerCase()
         if (title === "Производитель")
-          productParam = product.data.brand.document.data.name.replace("ё", "е")
+          productParam = product.data.brand.document?.data.name.replace("ё", "е")
         if (title === "Стикеры")
           productParam = product.data.body
             .filter(slice => slice.slice_type === "stickers")

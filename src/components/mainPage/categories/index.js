@@ -98,7 +98,7 @@ export default function Categories(props) {
                             key={`category ${i}`}
                             cardImage={category.node.data.image.localFile.childImageSharp.gatsbyImageData}
                             cardTitle={category.node.data.name}
-                            cardLink={""}  />
+                            cardLink={`/category/${category.node.uid}/`}  />
                     </Grid>
                 ))}
             </nav>

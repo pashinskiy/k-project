@@ -29,17 +29,17 @@ const useStyles = makeStyles(theme => ({
     borderBottom: `solid 1px ${theme.palette.color.secondaryLight}`,
     position: "relative",
 
-    padding: "2.18vw 0",
+    padding: "3.2vw 0 2.18vw",
     "@media(min-width: 1280px)": {
-      padding: "28px 0",
+      padding: "41px 0 28px",
       borderWidth: "1px",
     },
     "@media(max-width: 1025px)": {
-      padding: "2.39vw 0",
+      padding: "4.45vw 0 2.39vw",
       borderWidth: "0.11vw",
     },
     "@media(max-width: 414px)": {
-      padding: "4.83vw 0",
+      padding: "14vw 0 4.83vw",
       borderWidth: "0.24vw",
     },
   },
@@ -126,13 +126,14 @@ const IndexPage = ({ data: { allPrismicProduct, prismicSubcategory } }) => {
         links={[
           {
             title: "Каталог",
-            href: `/catalog/`,
+            href: `/products/`,
           },
         ]}
       />
       <HeaderWithIcon
         title={prismicSubcategory.data.name}
         count={allProducts.length}
+        subcategory
       />
       <FastLink products={allProducts} />
       <Grid

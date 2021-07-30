@@ -52,7 +52,7 @@ export default function Popular(props) {
                                 key={`brand ${i}`}
                                 cardImage={brand.node.data.body[0]?.primary?.image?.localFile.childImageSharp?.gatsbyImageData}
                                 cardTitle={brand.node.data.name}
-                                cardLink={""}  />
+                                cardLink={`/products/?Производитель=["${brand.node.data.name.replace("ё", "е")}"]`}  />
                         </Grid>
                     ))}
                 </ScrollBar>
