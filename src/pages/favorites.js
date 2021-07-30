@@ -19,17 +19,17 @@ const useStyles = makeStyles(theme => ({
     borderBottom: `solid 1px ${theme.palette.color.secondaryLight}`,
     position: "relative",
 
-    padding: "1.56vw 0",
+    padding: "3.12vw 0 2.18vw",
     "@media(min-width: 1280px)": {
-      padding: "20px 0",
+      padding: "40px 0 28px",
       borderWidth: "1px",
     },
     "@media(max-width: 1025px)": {
-      padding: "2.39vw 0",
+      padding: "5.87vw 0 2.39vw",
       borderWidth: "0.11vw",
     },
     "@media(max-width: 414px)": {
-      padding: "4.83vw 0",
+      padding: "11.83vw 0 6.76vw",
       borderWidth: "0.24vw",
     },
   },
@@ -88,6 +88,7 @@ const IndexPage = ({ data }) => {
         title="Избранное"
         divider={false}
         count={favoritesArray.length ? favoritesArray.length : "0"}
+        subcategory
       />
       <SmallCategoriesPanel categories={dataCategory} />
       <Grid

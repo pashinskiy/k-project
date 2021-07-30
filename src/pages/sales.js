@@ -17,6 +17,7 @@ const IndexPage = ({ data }) => {
         icon={<SalesIcon />}
         title="Акции и предложения"
         divider={false}
+        subcategory
       />
       <ScrollBar fullScreen buttonNext >
 

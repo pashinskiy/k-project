@@ -22,10 +22,10 @@ const useStyle = makeStyles(theme => ({
   imageWrapper: {
     width: "100%",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     background: theme.palette.background.main,
 
     height: "15.62vw",
@@ -51,8 +51,8 @@ const useStyle = makeStyles(theme => ({
     textDecoration: "none",
   },
   allPrice: {
-    display: 'flex',
-    alignItems: 'flex-end',
+    display: "flex",
+    alignItems: "flex-end",
   },
   price: {
     color: theme.palette.color.accentSecondary,
@@ -74,8 +74,8 @@ const useStyle = makeStyles(theme => ({
     },
   },
   oldPrice: {
-    textDecorationLine: 'line-through',
-    color: '#838383',
+    textDecorationLine: "line-through",
+    color: "#838383",
     fontWeight: 500,
     fontSize: 12,
     marginLeft: 8,
@@ -110,31 +110,31 @@ export default function CardSimilarProduct({ product, afterChange, sale }) {
   const alt = product?.data.images[0]?.image.alt
   const title = product?.data.name
   const old_price = product?.data.price
-  const price = Math.ceil(product?.data.price * sale / 100)
+  const price = Math.ceil((product?.data.price * sale) / 100)
 
   const classes = useStyle()
   return (
-    <Link to={`/${product?.uid}/`} className={classes.link}>
-      <Grid className={`${classes.wrapper} product--card`}>
+    <Grid className={`${classes.wrapper} product--card`}>
+      <Link to={`/${product?.uid}/`} className={classes.link}>
         <GatsbyImage
           image={img}
           alt={alt ?? `image product`}
           className={classes.imageWrapper}
           imgStyle={{ objectFit: "contain" }}
         />
-          <div className={classes.allPrice}>
-            <Typography className={classes.price}>{price} ₽</Typography>
-            <Typography className={classes.oldPrice}>{old_price} ₽</Typography>
-          </div>
-          <Typography variant="body2" className={classes.title}>
-            {title}
-          </Typography>
-        <AddInCartAndFav
-          text="В корзину"
-          product={product}
-          afterChange={afterChange}
-        />
-      </Grid>
-    </Link>
+        <div className={classes.allPrice}>
+          <Typography className={classes.price}>{price} ₽</Typography>
+          <Typography className={classes.oldPrice}>{old_price} ₽</Typography>
+        </div>
+        <Typography variant="body2" className={classes.title}>
+          {title}
+        </Typography>
+      </Link>
+      <AddInCartAndFav
+        text="В корзину"
+        product={product}
+        afterChange={afterChange}
+      />
+    </Grid>
   )
 }

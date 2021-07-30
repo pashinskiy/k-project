@@ -86,6 +86,7 @@ export const query = graphql`
                 document {
                   ... on PrismicProduct {
                     id
+                    uid
                     data {
                       images {
                         image {
@@ -108,6 +109,7 @@ export const query = graphql`
                 document {
                   ... on PrismicProduct {
                     id
+                    uid
                     data {
                       images {
                         image {
@@ -248,6 +250,7 @@ export const query = graphql`
     allPrismicProduct {
       edges {
         node {
+          uid
           data {
             name
             price
@@ -289,6 +292,7 @@ export const query = graphql`
               document {
                 ... on PrismicProduct {
                   id
+                  uid
                   data {
                     name
                     price
@@ -314,6 +318,7 @@ export const query = graphql`
     allPrismicCategory(sort: {fields: data___order}) {
       edges {
         node {
+          uid
           data {
             image {
               alt

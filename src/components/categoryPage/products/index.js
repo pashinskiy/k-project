@@ -53,11 +53,13 @@ export default function AllProductsByCategory({ subcategory_product }) {
             sub.node.data.category.uid ===
             subcategory_product.child.document.uid
         )
-        .map((product, i) => (
-          <div key={`${product.node.uid} ${i}`} className={classes.product}>
-            <CardProduct product={product.node} />
-          </div>
-        ))}
+        .map((product, i) => {
+          return product.node.data.images[0]?.image.localFile ? (
+            <div key={`${product.node.uid} ${i}`} className={classes.product}>
+              <CardProduct product={product.node} />
+            </div>
+          ) : null
+        })}
     </ScrollBar>
   )
 }

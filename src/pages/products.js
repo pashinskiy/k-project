@@ -76,6 +76,54 @@ const useStyles = makeStyles(theme => ({
       width: "100%",
     },
   },
+  title: {
+    fontWeight: 700,
+    lineHeight: 1.5,
+
+    marginTop: "2.18vw",
+    fontSize: "2.34vw",
+    "@media(min-width: 1280px)": {
+      marginTop: "28px",
+      fontSize: "30px",
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "3.35vw",
+      fontSize: "3.59vw",
+    },
+    "@media(max-width: 414px)": {
+      marginTop: "6.76vw",
+      fontSize: "7.24vw",
+    },
+  },
+  text: {
+    fontWeight: 400,
+    lineHeight: 1.5,
+    color: "#878787",
+
+    marginTop: "0.93vw",
+    fontSize: "1.87vw",
+    "@media(min-width: 1280px)": {
+      marginTop: "12px",
+      fontSize: "24px",
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "1.43vw",
+      fontSize: "2.87vw",
+    },
+    "@media(max-width: 414px)": {
+      marginTop: "2.89vw",
+      fontSize: "5.79vw",
+    },
+  },
+  cleanFilter: {
+    border: "none",
+    borderBottom: "1px solid #878787",
+    background: "transparent",
+
+    fontSize: "inherit",
+    color: "inherit",
+    cursor: "pointer",
+  },
 }))
 
 export default function Products({ data: { allPrismicProduct } }) {
@@ -108,6 +156,12 @@ export default function Products({ data: { allPrismicProduct } }) {
     <CardProduct product={product} key={product.id} />
   ))
 
+  function cleanFilter() {
+    const url = new URL(window.location)
+    url.search = ""
+    window.location = url.href
+  }
+
   return (
     <>
       <Seo title="Продукты" />
@@ -133,7 +187,25 @@ export default function Products({ data: { allPrismicProduct } }) {
 
       <Grid container justify="space-between">
         <Grid className={classes.blockPagination}>
-          <Pagination pageSize={mobile ? 5 : 10} components={arrayCards} />
+          <Pagination
+            pageSize={mobile ? 5 : 10}
+            components={arrayCards}
+            message={
+              <Grid container direction="column">
+                <Typography className={classes.title}>
+                  К сожалению, таких товаров нет в наличии.
+                </Typography>
+
+                <Typography className={classes.text}>
+                  Попробуйте изменить настройки фильтра. Или{" "}
+                  <button onClick={cleanFilter} className={classes.cleanFilter}>
+                    сбросить
+                  </button>
+                  .
+                </Typography>
+              </Grid>
+            }
+          />
         </Grid>
         {mobile ? null : (
           <Filter

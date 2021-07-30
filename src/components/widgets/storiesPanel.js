@@ -28,12 +28,12 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
         width: "17.745vw",
         height: "17.745vw",
-        padding: "0.959vw",
+        padding: "0.4796vw",
         },
     "@media(max-width: 414px)": {
         width: "35.748vw",
         height: "35.748vw",
-        padding: "1.932vw",
+        padding: "0.9661vw",
         },
   },
 }))

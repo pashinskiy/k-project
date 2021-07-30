@@ -35,9 +35,7 @@ export default function ProductsScrollBar({ products, title, icon, divider }) {
 
       <ScrollBar fullScreen buttonNext>
         {products.map((product, i) => {
-          const checkImg =
-            (<CardSimilarProduct product={product} />).props.product.data
-              .images[0]?.image.localFile ?? false
+          const checkImg = product.data.images[0]?.image.localFile ?? false
 
           return checkImg ? (
             <div key={product.uid} className={classes.wrapperCard}>

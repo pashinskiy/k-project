@@ -161,7 +161,7 @@ const Category = ({ data: { prismicCategory, allPrismicStories, allPrismicProduc
                     <div className={classes.hyper_links}>
                         {prismicCategory.data.children.map((subcategory, i) => (
                             <div key={`subcategories_category_page ${i}`} className={classes.subcategory}>
-                                <Link to={`/`} className={classes.title_subcategory}>{subcategory.child.document?.data?.name}</Link>
+                                <Link to={`/subcategory/${subcategory.child.document?.uid}/`} className={classes.title_subcategory}>{subcategory.child.document?.data?.name}</Link>
                                 <nav className={classes.all_tags}>
                                 {subcategory.child.document?.data.tags?.map((tag, i) => (
                                     <DefaultLink name={tag.tag.document.data.name} />
@@ -176,8 +176,8 @@ const Category = ({ data: { prismicCategory, allPrismicStories, allPrismicProduc
                         </ScrollBar>
                         <div className={classes.banner}>
                             <GatsbyImage
-                                image={prismicCategory.data.body[0].primary.category_img.localFile.childImageSharp.gatsbyImageData}
-                                alt={prismicCategory.data.body[0].primary.category_img.alt}
+                                image={prismicCategory.data.body[0]?.primary.category_img.localFile.childImageSharp.gatsbyImageData}
+                                alt={prismicCategory.data.body[0]?.primary.category_img.alt}
                                 className={classes.img} />
                         </div>
                         <div className={classes.content_wrapper}>
@@ -187,7 +187,7 @@ const Category = ({ data: { prismicCategory, allPrismicStories, allPrismicProduc
                                     <Grid key={`subcategories_cards_category_page ${i}`} className={classes.subcategory_card}>
                                         <CardWidget
                                             variant="category"
-                                            cardLink={``}
+                                            cardLink={`/subcategory/${subcategory.child.document?.uid}/`}
                                             cardImage={subcategory.child.document?.data?.image.localFile.childImageSharp.gatsbyImageData}
                                             cardTitle={subcategory.child.document?.data?.name} />
                                     </Grid>
