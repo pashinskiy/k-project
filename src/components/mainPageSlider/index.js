@@ -1,8 +1,5 @@
 import React from "react"
-import {
-  Button,
-  Grid,
-} from "@material-ui/core"
+import { Button, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
 import Arrow from "../../../static/svg/arrowWhite.svg"
@@ -14,6 +11,49 @@ const useStyle = makeStyles(theme => ({
     width: "100%",
     cursor: "pointer",
     position: "relative",
+
+    "&:before": {
+      content: "''",
+      display: "block",
+      position: "absolute",
+      left: 0,
+      height: "100%",
+      background: `linear-gradient(90deg, ${theme.palette.background.main} 0%, transparent 100%)`,
+      zIndex: 1,
+      pointerEvents: "none",
+
+      width: "4.68vw",
+      "@media(min-width: 1280px)": {
+        width: "60px",
+      },
+      "@media(max-width: 1025px)": {
+        width: "5.6vw",
+      },
+      "@media(max-width: 414px)": {
+        width: "8.93vw",
+      },
+    },
+    "&:after": {
+      content: "''",
+      display: "block",
+      position: "absolute",
+      right: 0,
+      height: "100%",
+      background: `linear-gradient(90deg, transparent 0%, ${theme.palette.background.main} 100%)`,
+      zIndex: 1,
+      pointerEvents: "none",
+
+      width: "4.68vw",
+      "@media(min-width: 1280px)": {
+        width: "60px",
+      },
+      "@media(max-width: 1025px)": {
+        width: "5.6vw",
+      },
+      "@media(max-width: 414px)": {
+        width: "8.93vw",
+      },
+    },
   },
   wrapperTrack: {
     overflow: "scroll",
@@ -62,6 +102,7 @@ const useStyle = makeStyles(theme => ({
     transition: "0.6s transform",
     position: "relative",
     boxSizing: "border-box",
+
     gridColumnGap: "0.9375vw",
     "@media(min-width: 1280px)": {
       gridColumnGap: "12px",
@@ -77,10 +118,9 @@ const useStyle = makeStyles(theme => ({
     width: "90.625vw",
     maxWidth: "1160px",
     height: "100%",
-    opacity: 0.5,
     alignSelf: "center",
     transform: "scaleY(0.9)",
-    transition: "transform .6s, opacity .6s",
+    transition: "transform .6s",
     "@media(max-width: 1025px)": {
       width: "88.729vw",
     },
@@ -92,9 +132,8 @@ const useStyle = makeStyles(theme => ({
     width: "90.625vw",
     maxWidth: "1160px",
     height: "100%",
-    opacity: 1,
     transform: "scaleY(1)",
-    transition: "transform .6s, opacity .6s",
+    transition: "transform .6s",
     "@media(max-width: 1025px)": {
       width: "88.729vw",
     },
@@ -105,7 +144,7 @@ const useStyle = makeStyles(theme => ({
   button: {
     minWidth: 0,
     position: "absolute",
-    zIndex: 1,
+    zIndex: 2,
     top: "50%",
     background: theme.palette.background.accent,
     borderRadius: "100%",
@@ -162,7 +201,7 @@ export default function MainPageSlider({ array, variant }) {
   const classes = useStyle()
   const [activeChild, setActiveChild] = React.useState()
   let contentArray = array
-  switch(variant){
+  switch (variant) {
     case "sales":
       contentArray = contentArray.map((sale, i) => (
         <Grid item className={classes.itemAll} key={sale.uid + "_" + i}>
@@ -177,9 +216,9 @@ export default function MainPageSlider({ array, variant }) {
         </Grid>
       ))
       break
-    default: 
-    if(variant !== "sales" && variant !== "promotionBanner")
-      console.log("Выберите вариант sales или promotionBanner")
+    default:
+      if (variant !== "sales" && variant !== "promotionBanner")
+        console.log("Выберите вариант sales или promotionBanner")
   }
   // console.log(contentArray)
 
@@ -241,7 +280,7 @@ export default function MainPageSlider({ array, variant }) {
     let eventScroll = null
     const clientY = e.clientY
     const scroll = window.pageYOffset
-    
+
     const transition = window.getComputedStyle(cardPanel).transition
     cardPanel.style.transition = "none"
     //отмена перехвата браузера
@@ -368,14 +407,13 @@ export default function MainPageSlider({ array, variant }) {
         </Button>
         <Grid container className={classes.smallButtonContainer}>
           {contentArray.map((sale, i) => (
-            
             <Button
               className={
                 i === activeChild
                   ? classes.smallButton + " " + classes.activeSmallButton
                   : classes.smallButton
               }
-              onClick={(e) => handleSmallButtonClick(i)}
+              onClick={e => handleSmallButtonClick(i)}
             ></Button>
           ))}
         </Grid>

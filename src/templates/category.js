@@ -176,8 +176,8 @@ const Category = ({ data: { prismicCategory, allPrismicStories, allPrismicProduc
                         </ScrollBar>
                         <div className={classes.banner}>
                             <GatsbyImage
-                                image={prismicCategory.data.body[0].primary.category_img.localFile.childImageSharp.gatsbyImageData}
-                                alt={prismicCategory.data.body[0].primary.category_img.alt}
+                                image={prismicCategory.data.body[0]?.primary.category_img.localFile.childImageSharp.gatsbyImageData}
+                                alt={prismicCategory.data.body[0]?.primary.category_img.alt}
                                 className={classes.img} />
                         </div>
                         <div className={classes.content_wrapper}>
