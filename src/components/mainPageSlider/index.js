@@ -102,17 +102,6 @@ const useStyle = makeStyles(theme => ({
     transition: "0.6s transform",
     position: "relative",
     boxSizing: "border-box",
-
-    gridColumnGap: "0.9375vw",
-    "@media(min-width: 1280px)": {
-      gridColumnGap: "12px",
-    },
-    "@media(max-width: 1025px)": {
-      gridColumnGap: "1.4388vw",
-    },
-    "@media(max-width: 414px)": {
-      gridColumnGap: "2.898vw",
-    },
   },
   itemAll: {
     width: "90.625vw",
@@ -121,11 +110,19 @@ const useStyle = makeStyles(theme => ({
     alignSelf: "center",
     transform: "scaleY(0.9)",
     transition: "transform .6s",
+
+    marginRight: "0.9375vw",
+    "@media(min-width: 1280px)": {
+      marginRight: "12px",
+    },
+
     "@media(max-width: 1025px)": {
       width: "88.729vw",
+      marginRight: "1.4388vw",
     },
     "@media(max-width: 414px)": {
       width: "82.125vw",
+      marginRight: "2.898vw",
     },
   },
   itemActive: {
@@ -220,7 +217,6 @@ export default function MainPageSlider({ array, variant }) {
       if (variant !== "sales" && variant !== "promotionBanner")
         console.log("Выберите вариант sales или promotionBanner")
   }
-  // console.log(contentArray)
 
   const [cardPanel, setCardPanel] = React.useState(null)
   //вычисляем размер экрана
@@ -239,7 +235,7 @@ export default function MainPageSlider({ array, variant }) {
   function getTransition(parentNode, activeChild) {
     let childWidth = parentNode.children[0].offsetWidth
     let childPadding = parseFloat(
-      window.getComputedStyle(parentNode).gridColumnGap
+      window.getComputedStyle(parentNode.children[0]).marginRight
     )
     let parentWidth = window.screen.width > 1280 ? 1280 : window.screen.width
     let gapBetween = (parentWidth - childWidth) / 2
