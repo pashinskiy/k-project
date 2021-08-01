@@ -409,6 +409,7 @@ export default function MainPageSlider({ array, variant }) {
                   ? classes.smallButton + " " + classes.activeSmallButton
                   : classes.smallButton
               }
+              key={"small-button-" + i}
               onClick={e => handleSmallButtonClick(i)}
             ></Button>
           ))}
