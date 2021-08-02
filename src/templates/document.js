@@ -1,7 +1,13 @@
 import * as React from "react"
+import SEO from "../components/seo"
 
 const IndexPage = ({ pageContext: { content } }) => {
-  return <div dangerouslySetInnerHTML={{ __html: content }} />
+  return (
+    <>
+      <SEO title={""} />
+      <div dangerouslySetInnerHTML={{ __html: content }} />
+    </>
+  )
 }
 
 export default IndexPage
