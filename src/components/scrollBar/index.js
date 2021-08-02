@@ -205,7 +205,7 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
     function scrollBar(e) {
       if (eventScroll === null) {
         eventScroll =
-          Math.abs(e.clientY - clientY) > 50 // >= Math.abs(e.clientX - clientX) 
+          Math.abs(e.clientY - clientY) > 10 // >= Math.abs(e.clientX - clientX) 
       }
       if (eventScroll) {
         window.scrollTo(0, scroll + clientY - e.clientY)
