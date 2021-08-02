@@ -216,6 +216,13 @@ export const pageQuery = graphql`
           }
         }
         body {
+          ... on PrismicProductBodySeller {
+            id
+            primary {
+              name_seller
+              ogrn
+            }
+          }
           ... on PrismicProductBodyStickers {
             slice_type
             items {
