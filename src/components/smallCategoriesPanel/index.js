@@ -41,14 +41,14 @@ const useStyles = makeStyles(theme => ({
     height: "57px",
     cursor: "pointer",
     display: "block",
-    margin: "auto"
+    margin: "auto",
   },
   iconContainer: {
-    alignSelf:"center",
+    alignSelf: "center",
     marginLeft: "4px",
     "@media(max-width: 1025px)": {
-    marginRight: "4px",
-    }
+      marginRight: "4px",
+    },
   },
 }))
 
@@ -89,15 +89,18 @@ export default function SmallCategoriesPanel(categories) {
     }
 
     function scrollBar(e) {
-      if (eventScroll === null) {
-        eventScroll =
-          Math.abs(e.clientX - clientX) < Math.abs(e.clientY - clientY)
-      }
-      if (eventScroll) {
+      // if (eventScroll === null) {
+      //   eventScroll =
+      //     Math.abs(e.clientY - clientY) >= Math.abs(e.clientX - clientX)
+      // }
+      // if (eventScroll) {
+      //   window.scrollTo(0, scroll + clientY - e.clientY)
+      //   return
+      // }
+
+      if (Math.abs(e.clientY - clientY) > 25)
         window.scrollTo(0, scroll + clientY - e.clientY)
-        return
-      }
-      
+
       let newLeft = scrollLeft - e.clientX + clientX
       cardPanel.scrollLeft = newLeft
     }
@@ -113,7 +116,7 @@ export default function SmallCategoriesPanel(categories) {
     >
       {isMobile ? icon : null}
       {categories.categories.map(item => (
-        <Grid item className={classes.itemRoot} key={item.uid} >
+        <Grid item className={classes.itemRoot} key={item.uid}>
           <CardWidget cardTitle={item.data.name} variant="small" />
         </Grid>
       ))}

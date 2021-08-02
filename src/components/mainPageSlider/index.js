@@ -304,16 +304,22 @@ export default function MainPageSlider({ array, variant }) {
     }
 
     function scrollBar(e) {
-      if (eventScroll === null) {
-        eventScroll =
-          Math.abs(e.clientY - clientY) > 10 // >= Math.abs(e.clientX - clientX) 
-      }
-      if (eventScroll) {
-        window.scrollTo(0, scroll + clientY - e.clientY)
-        return
-      }
+      // if (eventScroll === null) {
+      //   eventScroll =
+      //     Math.abs(e.clientY - clientY) >= Math.abs(e.clientX - clientX)
+      // }
+      // if (eventScroll) {
+      //   window.scrollTo(0, scroll + clientY - e.clientY)
+      //   return
+      // }
 
-      document.addEventListener("click", noGoLink, {once: true, capture: true})
+      if (Math.abs(e.clientY - clientY) > 25)
+        window.scrollTo(0, scroll + clientY - e.clientY)
+
+      document.addEventListener("click", noGoLink, {
+        once: true,
+        capture: true,
+      })
       let newTranslateX = translateX + e.clientX - clientX
       //левый барьер
       newTranslateX =

@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     height: "100%",
     position: "absolute",
     transition: "left .3s",
-    
+
     touchAction: "none",
   },
   count: {
@@ -71,15 +71,15 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     overflow: "visible",
     transition: "left .3s",
-    
-    left:0,
+
+    left: 0,
     "@media(max-width: 1025px)": {
       left: "3.35vw",
     },
     "@media(max-width: 414px)": {
       left: "6.76vw",
     },
-    
+
     touchAction: "none",
   },
   item: {
@@ -235,14 +235,17 @@ export default function SliderProduct({ photos }) {
     }
 
     function scrollBar(e) {
-      if (eventScroll === null) {
-        eventScroll =
-          Math.abs(e.clientY - clientY) > 10 // >= Math.abs(e.clientX - clientX) 
-      }
-      if (eventScroll) {
+      // if (eventScroll === null) {
+      //   eventScroll =
+      //     Math.abs(e.clientY - clientY) >= Math.abs(e.clientX - clientX)
+      // }
+      // if (eventScroll) {
+      //   window.scrollTo(0, scroll + clientY - e.clientY)
+      //   return
+      // }
+
+      if (Math.abs(e.clientY - clientY) > 25)
         window.scrollTo(0, scroll + clientY - e.clientY)
-        return
-      }
 
       let newLeft = left + e.clientX - clientX
       newLeft = newLeft > 0 ? 0 : newLeft
@@ -289,8 +292,7 @@ export default function SliderProduct({ photos }) {
 
     function scrollBar(e) {
       if (eventScroll === null) {
-        eventScroll =
-        Math.abs(e.clientY - clientY) > 10 // >= Math.abs(e.clientX - clientX) 
+        eventScroll = Math.abs(e.clientY - clientY) >= Math.abs(e.clientX - clientX)
       }
       if (eventScroll) {
         window.scrollTo(0, scroll + clientY - e.clientY)
@@ -349,8 +351,7 @@ export default function SliderProduct({ photos }) {
     const widthParent = bar.parentElement.offsetWidth
     const widthNextSlide = nextSlide.offsetWidth
     const leftNextSlide = left + nextSlide.offsetLeft
-    const rightNextSlide =
-      left + (nextSlide.offsetLeft + widthNextSlide)
+    const rightNextSlide = left + (nextSlide.offsetLeft + widthNextSlide)
 
     if (rightNextSlide >= widthParent) {
       bar.style.left = left - (rightNextSlide - widthParent) - 1 + "px"
