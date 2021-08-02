@@ -98,6 +98,10 @@ const useStyles = makeStyles(theme => ({
             },
         },
     },
+    linkSubCategory: {
+        color: theme.palette.color.main,
+        textDecoration: "none"
+    },
     promo: {
         display: 'flex',
         flexDirection: 'column',
@@ -166,9 +170,11 @@ export default function Catalog({ data, animation }) {
                                 <div className={classes.sub_categories}>
                                 {category.category.document.data.children.map((sub_category, i) => (
                                     <div className={classes.sub_category} key={`subcategory ${i}`}>
-                                        <Typography variant="h4">
-                                            {(sub_category.child.document === null) ? null : sub_category.child.document.data.name}
-                                        </Typography>
+                                        <Link to={`/subcategory/${sub_category.child.document?.uid}`} className={classes.linkSubCategory}>
+                                            <Typography variant="h4">
+                                                {(sub_category.child.document === null) ? null : sub_category.child.document.data.name}
+                                            </Typography>
+                                        </Link>
                                         <nav>
                                             {(sub_category.child.document === null)
                                                 ?

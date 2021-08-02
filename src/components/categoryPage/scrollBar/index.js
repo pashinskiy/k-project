@@ -202,7 +202,6 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
       cardPanel.style.transition = transition
       document.removeEventListener("pointermove", scrollBar)
       document.removeEventListener("pointerup", deleteScrollBar)
-      setTimeout(() => document.removeEventListener("click", noGoLink), 0)
     }
 
     function scrollBar(e) {
@@ -215,7 +214,7 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
         return
       }
 
-      document.addEventListener("click", noGoLink)
+      document.addEventListener("click", noGoLink, {once: true, capture: true})
       let newTranslateX = translateX + e.clientX - clientX
       if (newTranslateX >= 0) {
         newTranslateX = 0

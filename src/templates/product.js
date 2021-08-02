@@ -12,7 +12,36 @@ import TabPanel from "../components/productPage/tabPanel"
 import CharacteristicsBlock from "../components/productPage/characteristics"
 import SimilarProducts from "../components/productPage/similarProducts"
 
+import { GlobalDispatchContext } from "../context/GlobalContextProvider"
+
 const Product = ({ data: { prismicProduct } }) => {
+  const dispatch = React.useContext(GlobalDispatchContext)
+
+  React.useEffect(() => {
+    return function () {
+      const last_products =
+        JSON.parse(localStorage.getItem("last_products")) ?? []
+
+      const index = last_products.findIndex(
+        product => prismicProduct.id === product.id
+      )
+
+      if (last_products.length > 9) {
+        index === -1
+          ? last_products.splice(-1, 1)
+          : last_products.splice(index, 1)
+      } else if (index !== -1) {
+        last_products.splice(index, 1)
+      }
+
+      last_products.unshift(prismicProduct)
+      if (prismicProduct.data.images[0].image.localFile !== null) {
+        localStorage.setItem("last_products", JSON.stringify(last_products))
+        dispatch({ type: "UPD_LAST_PRODUCTS", payload: last_products })
+      }
+    }
+  })
+
   return (
     <Layout>
       <Seo title="Home" />

@@ -86,6 +86,12 @@ function reducer(state, action) {
           favorites: favorites,
         }
       }
+    case "UPD_LAST_PRODUCTS": {
+      return {
+        ...state,
+        last_products: [...action.payload],
+      }
+    }
     default:
       throw new Error("Error action")
   }
@@ -101,6 +107,7 @@ const GlobalContextProvider = ({ children }) => {
     inFavorites(id) {
       return this.favorites.includes(id)
     },
+    last_products: JSON.parse(localStorage.getItem("last_products")) ?? []
   }
 
   const [state, dispatch] = React.useReducer(reducer, initState)
