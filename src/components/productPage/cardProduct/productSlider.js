@@ -31,8 +31,11 @@ const useStyles = makeStyles(theme => ({
   mainPhotoBar: {
     height: "100%",
     position: "absolute",
-    touchAction: "none",
     transition: "left .3s",
+    
+    "& > *": {
+      touchAction: "none",
+    },
   },
   count: {
     height: "5%",
@@ -68,7 +71,6 @@ const useStyles = makeStyles(theme => ({
     height: "100%",
     width: "auto",
     position: "absolute",
-    touchAction: "none",
     overflow: "visible",
     transition: "left .3s",
     
@@ -78,7 +80,11 @@ const useStyles = makeStyles(theme => ({
     },
     "@media(max-width: 414px)": {
       left: "6.76vw",
-    }
+    },
+    
+    "& > *": {
+      touchAction: "none",
+    },
   },
   item: {
     height: "100%",
@@ -217,6 +223,10 @@ export default function SliderProduct({ photos }) {
     //отмена перехвата браузера
     e.currentTarget.ondragstart = () => false
 
+    let eventScroll = null
+    const clientY = e.clientY
+    const scroll = window.pageYOffset
+
     document.addEventListener("pointermove", scrollBar)
     document.addEventListener("pointerup", deleteScrollBar)
 
@@ -229,13 +239,22 @@ export default function SliderProduct({ photos }) {
     }
 
     function scrollBar(e) {
+      if (eventScroll === null) {
+        eventScroll =
+          Math.abs(e.clientY - clientY) >= Math.abs(e.clientX - clientX)
+      }
+      if (eventScroll) {
+        window.scrollTo(0, scroll + clientY - e.clientY)
+        return
+      }
+
       let newLeft = left + e.clientX - clientX
       newLeft = newLeft > 0 ? 0 : newLeft
       newLeft = newLeft < minLeft ? minLeft : newLeft
       bar.style.left = newLeft + "px"
-      if (newLeft - left > 50) {
+      if (newLeft - left > 10) {
         nextIndex = indexSlide === 0 ? null : indexSlide - 1
-      } else if (left - newLeft > 50) {
+      } else if (left - newLeft > 10) {
         nextIndex =
           indexSlide === bar.children.length - 1 ? null : indexSlide + 1
       } else nextIndex = null
@@ -275,7 +294,7 @@ export default function SliderProduct({ photos }) {
     function scrollBar(e) {
       if (eventScroll === null) {
         eventScroll =
-          Math.abs(e.clientX - clientX) < Math.abs(e.clientY - clientY)
+        Math.abs(e.clientY - clientY) >= Math.abs(e.clientX - clientX) 
       }
       if (eventScroll) {
         window.scrollTo(0, scroll + clientY - e.clientY)

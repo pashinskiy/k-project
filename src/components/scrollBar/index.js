@@ -53,10 +53,13 @@ const useStyle = makeStyles(theme => ({
   },
   track: {
     width: "auto",
-    touchAction: "none",
     transition: ".3s transform",
     position: "relative",
     boxSizing: "border-box",
+    
+    "& > *": {
+      touchAction: "none",
+    },
   },
   buttonPrevWrapper: {
     width: "20%",
@@ -204,14 +207,18 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
     function scrollBar(e) {
       if (eventScroll === null) {
         eventScroll =
-          Math.abs(e.clientX - clientX) < Math.abs(e.clientY - clientY)
+          Math.abs(e.clientY - clientY) >= Math.abs(e.clientX - clientX)
       }
       if (eventScroll) {
         window.scrollTo(0, scroll + clientY - e.clientY)
         return
       }
 
-      document.addEventListener("click", noGoLink, {once: true, capture: true})
+
+      document.addEventListener("click", noGoLink, {
+        once: true,
+        capture: true,
+      })
       let newTranslateX = translateX + e.clientX - clientX
       if (newTranslateX >= 0) {
         newTranslateX = 0
