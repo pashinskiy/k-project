@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 
 import Seo from "../components/seo"
 import CardProduct from "../components/productPage/cardProduct"
+import Layout from '../components/layout'
 
 import Landing from "../components/productPage/landing"
 import Gallery from "../components/productPage/gallery"
@@ -13,7 +14,7 @@ import SimilarProducts from "../components/productPage/similarProducts"
 
 const Product = ({ data: { prismicProduct } }) => {
   return (
-    <>
+    <Layout>
       <Seo title="Home" />
       <TabPanel
         links={[
@@ -52,7 +53,7 @@ const Product = ({ data: { prismicProduct } }) => {
       <CharacteristicsBlock props={prismicProduct} />
       <div id="delivery" />
       <DeliveryCards prismicProduct={prismicProduct} />
-    </>
+    </Layout>
   )
 }
 

@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { makeStyles, Grid, Typography } from "@material-ui/core"
+import Layout from '../components/layout'
 
 import Seo from "../components/seo"
 import HeaderWithIcon from "../components/headers/headerWithIcon"
@@ -139,7 +140,7 @@ const IndexPage = ({ data }) => {
     .map(edge => edge.node)
 
   return (
-    <>
+    <Layout>
       <Seo title="Оформление заказа" />
 
       <HeaderWithIcon icon={<CartIcon />} title={`Оформление заказа`} />
@@ -197,7 +198,7 @@ const IndexPage = ({ data }) => {
           </a>
         </OrderingContext>
       )}
-    </>
+    </Layout>
   )
 }
 export default IndexPage

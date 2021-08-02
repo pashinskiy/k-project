@@ -1,6 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
+import Layout from '../components/layout'
 
 import Seo from "../components/seo"
 
@@ -163,7 +164,7 @@ export default function Products({ data: { allPrismicProduct } }) {
   }
 
   return (
-    <>
+    <Layout>
       <Seo title="Продукты" />
 
       {search ? <Search /> : null}
@@ -214,7 +215,7 @@ export default function Products({ data: { allPrismicProduct } }) {
           />
         )}
       </Grid>
-    </>
+    </Layout>
   )
 }
 
