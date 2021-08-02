@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { makeStyles, Grid, Typography } from "@material-ui/core"
+import Layout from '../components/layout'
 
 import { GlobalStateContext } from "../context/GlobalContextProvider"
 
@@ -137,7 +138,7 @@ const IndexPage = ({ data }) => {
     .map(edge => edge.node)
 
   return (
-    <>
+    <Layout>
       <Seo title="Корзина" />
       <HeaderWithIcon
         icon={<CartIcon />}
@@ -184,7 +185,7 @@ const IndexPage = ({ data }) => {
           </a>
         </>
       ) : null}
-    </>
+    </Layout>
   )
 }
 export default IndexPage

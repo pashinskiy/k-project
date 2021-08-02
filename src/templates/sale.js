@@ -2,6 +2,7 @@ import * as React from "react"
 import { graphql } from "gatsby"
 
 import Seo from "../components/seo"
+import Layout from '../components/layout'
 
 import SaleCardMain from '../components/saleCardPanel/saleCardMain.js'
 import SalesTextPanel from "../components/salesTextPanel"
@@ -14,11 +15,11 @@ const Sale = ({ data }) => {
   // console.log(products)
 
   return (
-    <>
+    <Layout>
       <Seo title="Sale" />
       <SaleCardMain sale={sale} />
       <SalesTextPanel sale={sale} socials={socials} products={products} />
-    </>
+    </Layout>
   )
 }
 

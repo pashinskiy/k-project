@@ -6,6 +6,7 @@ import Seo from "../components/seo"
 import OrderConfirmedIcon from "../../static/svg/orderConfirmedIcon.svg"
 import HeaderWithIcon from "../components/headers/headerWithIcon"
 import OrderCard from "../components/cart/orderCard"
+import Layout from '../components/layout'
 
 const useStyle = makeStyles(theme => ({
   disclaimer: {
@@ -205,7 +206,7 @@ const IndexPage = ({ data }) => {
   ]
 
   return (
-    <>
+    <Layout>
       <Seo title="Корзина" />
       <HeaderWithIcon
         title="Заказ подтверждён"
@@ -259,7 +260,7 @@ const IndexPage = ({ data }) => {
           </a>
         </>
       ) : null}
-    </>
+    </Layout>
   )
 }
 export default IndexPage

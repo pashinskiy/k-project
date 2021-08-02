@@ -10,6 +10,7 @@ import { GatsbyImage } from "gatsby-plugin-image";
 import CardWidget from "../components/widgets/cardWidget";
 import FiltersBySticker from "../components/catalog/fastLink/filtersBySticker";
 import AllProductsByCategory from "../components/categoryPage/products";
+import Layout from '../components/layout'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -143,7 +144,7 @@ const Category = ({ data: { prismicCategory, allPrismicStories, allPrismicProduc
     const maxWidth1024 = useMediaQuery("(max-width: 1025px)")
 
     return (
-        <div>
+        <Layout>
             <Seo title={`Купить ${prismicCategory.data.name} в Krypton`} />
             <div className={classes.root}>
                 <BreadCrumbs
@@ -223,7 +224,7 @@ const Category = ({ data: { prismicCategory, allPrismicStories, allPrismicProduc
                     </div>
                 </div>
             </div>
-        </div>
+        </Layout>
     );
 };
 

@@ -12,6 +12,7 @@ import Hot from "../components/mainPage/hot";
 import NewProducts from "../components/mainPage/newProducts";
 import Popular from "../components/mainPage/popular";
 import SocialNetworks from "../components/mainPage/social";
+import Layout from "../components/layout";
 
 const useStyles = makeStyles(theme => ({
   day_news_categories: {
@@ -47,7 +48,7 @@ const IndexPage = ({ data }) => {
   const allPromotionBanners = data.allPrismicPromotionBanner.edges.map(edge => edge.node);
 
   return (
-    <>
+    <Layout>
       <Seo title="Krypton – интернет-маркетплейс, который вы так долго искали" />
       <div style={{marginBottom: 28,}} />
       <MainPageSlider array={allSales} variant={"sales"} />
@@ -69,7 +70,7 @@ const IndexPage = ({ data }) => {
       <Popular data={data} />
       <div style={{marginBottom: 100,}} />
       <SocialNetworks data={data} />
-    </>
+    </Layout>
   );
 };
 
