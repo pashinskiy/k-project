@@ -3,7 +3,7 @@ import { makeStyles, Divider, Typography } from '@material-ui/core';
 import Category from './category';
 import './catalog.css';
 import DefaultLink from '../header/link/default';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -133,6 +133,30 @@ const useStyles = makeStyles(theme => ({
             height: 'auto',
         },
     },
+    buttonRoot: {
+        background: 'none',
+        marginTop: 10,
+        border: 'none',
+        width: 260,
+        padding: 10,
+        boxSizing: 'border-box',
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        color: theme.palette.color.secondary,
+        transition: '.15s ease all',
+        borderRadius: 8,
+        '& h3': {
+            fontSize: 14,
+            flex: 1,
+            textAlign: 'left',
+            lineHeight: '150%',
+            color: theme.palette.color.accentSecondary,
+        },
+        '&:hover': {
+            background: theme.palette.background.secondary,
+        },
+    },
 }));
 
 export default function Catalog({ data, animation }) {
@@ -157,6 +181,13 @@ export default function Catalog({ data, animation }) {
                                     uid={category.category.document.uid}
                                     setHover={setHover} />
                             ))}
+                            <button
+                                className={classes.buttonRoot}
+                                onClick={() => {navigate(`/discounted-products`)}}>
+                                <Typography variant="h3">
+                                    Уценённые товары
+                                </Typography>
+                            </button>
                         </nav>
                     </div>
                     <Divider orientation="vertical" className={classes.divider} />

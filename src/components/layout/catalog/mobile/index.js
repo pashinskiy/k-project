@@ -3,7 +3,7 @@ import { Grid, makeStyles, Typography } from '@material-ui/core';
 import '../catalog.css';
 import CardWidget from '../../../widgets/cardWidget';
 import SaleButton from '../../header/link/sale';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import SaleCard from '../../../saleCardPanel/saleCard';
 import Social from '../../footer/social';
 import DefaultLink from '../../footer/link/default';
@@ -253,6 +253,31 @@ const useStyles = makeStyles(theme => ({
             color: theme.palette.color.accentSecondary,
         },
     },
+    catalogTitle: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    buttonRoot: {
+        background: 'none',
+        border: 'none',
+        boxSizing: 'border-box',
+        cursor: 'pointer',
+        display: 'flex',
+        marginBottom: 16,
+        padding: 0,
+        alignItems: 'center',
+        color: theme.palette.color.secondary,
+        borderRadius: 8,
+        '& h3': {
+            fontSize: 14,
+            flex: 1,
+            textAlign: 'left',
+            lineHeight: '150%',
+            color: theme.palette.color.accentSecondary,
+        },
+    },
 }));
 
 export default function MobileCatalog({ data, animation }) {
@@ -275,7 +300,16 @@ export default function MobileCatalog({ data, animation }) {
                         ))}
                     </div>
                     <div className={classes.catalog}>
-                        <Typography variant="h2">{data.allPrismicCatalog.edges[0].node.data.catalog_name.text}</Typography>
+                        <div className={classes.catalogTitle}>
+                            <Typography variant="h2">{data.allPrismicCatalog.edges[0].node.data.catalog_name.text}</Typography>
+                            <button
+                                className={classes.buttonRoot}
+                                onClick={() => {navigate(`/discounted-products`)}}>
+                                <Typography variant="h3">
+                                    Уценённые товары
+                                </Typography>
+                            </button>
+                        </div>
                         <nav className={classes.menu}>
                             {data.allPrismicCatalog.edges[0].node.data.categories.map((category, i) => (
                                 <CardWidget
