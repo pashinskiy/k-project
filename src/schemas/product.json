@@ -29,6 +29,15 @@
         "placeholder": "подкатегория"
       }
     },
+    "sale_product": {
+      "type": "Boolean",
+      "config": {
+        "placeholder_false": "нет",
+        "placeholder_true": "да",
+        "default_value": false,
+        "label": "Уцененный товар"
+      }
+    },
     "brand": {
       "type": "Link",
       "config": {
@@ -45,6 +54,14 @@
       "config": {
         "label": "Название товара",
         "placeholder": "Название товара"
+      }
+    },
+    "gtin": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+        "label": "gtin",
+        "placeholder": "gtin"
       }
     },
     "color_group": {
@@ -112,7 +129,7 @@
       "type": "Slices",
       "fieldset": "Slice zone",
       "config": {
-        "labels": {},
+        "labels": null,
         "choices": {
           "stickers": {
             "type": "Slice",
@@ -159,6 +176,30 @@
                 }
               }
             }
+          },
+          "seller": {
+            "type": "Slice",
+            "fieldset": "Seller",
+            "description": "Продавец",
+            "icon": "business_center",
+            "display": "list",
+            "non-repeat": {
+              "name_seller": {
+                "type": "Text",
+                "config": {
+                  "label": "Название юр. лица",
+                  "placeholder": "Название юр. лица"
+                }
+              },
+              "ogrn": {
+                "type": "Text",
+                "config": {
+                  "label": "Введите ОГРН",
+                  "placeholder": "Введите ОГРН"
+                }
+              }
+            },
+            "repeat": {}
           }
         }
       }
@@ -568,22 +609,24 @@
       }
     }
   },
-  "Аксессуары" : {
-    "all_product_accessories" : {
-      "type" : "Group",
-      "config" : {
-        "fields" : {
-          "product_accessories" : {
-            "type" : "Link",
-            "config" : {
-              "select" : "document",
-              "customtypes" : [ "product" ],
-              "label" : "Добавьте аксессуары для товара",
-              "placeholder" : "Добавьте аксессуары для товара"
+  "Аксессуары": {
+    "all_product_accessories": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "product_accessories": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": [
+                "product"
+              ],
+              "label": "Добавьте аксессуары для товара",
+              "placeholder": "Добавьте аксессуары для товара"
             }
           }
         },
-        "label" : "Аксессуары"
+        "label": "Аксессуары"
       }
     }
   }
