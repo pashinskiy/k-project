@@ -29,6 +29,15 @@
         "placeholder": "подкатегория"
       }
     },
+    "sale_product": {
+      "type": "Boolean",
+      "config": {
+        "placeholder_false": "нет",
+        "placeholder_true": "да",
+        "default_value": false,
+        "label": "Уцененный товар"
+      }
+    },
     "brand": {
       "type": "Link",
       "config": {

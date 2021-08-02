@@ -400,6 +400,7 @@ export default function Filter({ products, setFilterProducts }) {
     firstRun = firstRun === true ? true : false
     const group = url.searchParams.get("group") ?? false
     const search = url.searchParams.get("search") ?? false
+    const subcategory = url.searchParams.get("subcategory") ?? false
 
     // отфильтрованные товары
     const filterProducts = products.filter(product => {
@@ -419,7 +420,8 @@ export default function Filter({ products, setFilterProducts }) {
           .filter(slice => slice.slice_type === "characteristics")
           .map(slice => slice.items)
           .flat()
-          .find(item => item.characteristic.document?.data.name === title)?.value
+          .find(item => item.characteristic.document?.data.name === title)
+          ?.value
 
         if (title === "Цена") productParam = product.data.price
         if (title === "Цвет")
@@ -427,7 +429,10 @@ export default function Filter({ products, setFilterProducts }) {
             ?.replace("ё", "е")
             .toLowerCase()
         if (title === "Производитель")
-          productParam = product.data.brand.document?.data.name.replace("ё", "е")
+          productParam = product.data.brand.document?.data.name.replace(
+            "ё",
+            "е"
+          )
         if (title === "Стикеры")
           productParam = product.data.body
             .filter(slice => slice.slice_type === "stickers")
@@ -462,6 +467,7 @@ export default function Filter({ products, setFilterProducts }) {
       })
       if (group) url.searchParams.set("group", group)
       if (search) url.searchParams.set("search", search)
+      if (subcategory) url.searchParams.set("subcategory", subcategory)
 
       setShow(false)
       setTop(false)
