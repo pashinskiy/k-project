@@ -56,10 +56,8 @@ const useStyle = makeStyles(theme => ({
     transition: ".3s transform",
     position: "relative",
     boxSizing: "border-box",
-    
-    "& > *": {
-      touchAction: "none",
-    },
+
+    touchAction: "none",
   },
   buttonPrevWrapper: {
     width: "20%",

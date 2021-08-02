@@ -102,9 +102,7 @@ const useStyle = makeStyles(theme => ({
     position: "relative",
     boxSizing: "border-box",
 
-    "& > *": {
-      touchAction: "none",
-    },
+    touchAction: "none",
   },
   itemAll: {
     width: "90.625vw",

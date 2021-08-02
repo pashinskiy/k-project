@@ -33,9 +33,7 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     transition: "left .3s",
     
-    "& > *": {
-      touchAction: "none",
-    },
+    touchAction: "none",
   },
   count: {
     height: "5%",
@@ -82,9 +80,7 @@ const useStyles = makeStyles(theme => ({
       left: "6.76vw",
     },
     
-    "& > *": {
-      touchAction: "none",
-    },
+    touchAction: "none",
   },
   item: {
     height: "100%",
