@@ -183,6 +183,25 @@ const useStyles = makeStyles(theme => ({
       "-webkit-text-fill-color": "#000000",
     },
   },
+  textSeller: {
+    fontWeight: 700,
+    fontSize: "1.09vw",
+    lineHeight: 1.21,
+    marginTop: "0.62vw",
+    color: "#681DE1",
+    "@media(min-width: 1280px)": {
+      fontSize: "14px",
+      marginTop: "8px",
+    },
+    "@media(max-width: 1025px)": {
+      fontSize: "1.67vw",
+      marginTop: "0.95vw",
+    },
+    "@media(max-width: 414px)": {
+      fontSize: "3.38vw",
+      marginTop: "1.93vw",
+    },
+  },
 }))
 
 export default function BlockPrice({ product, allColors }) {
@@ -307,6 +326,20 @@ export default function BlockPrice({ product, allColors }) {
                 {variant.name} <span>{variant.description}</span>
               </Typography>
             ))}
+          </>
+        ) : null}
+
+        {product.data.body.find(slice => slice.slice_type === "Seller" || "seller")?.primary?.name_seller !== undefined || null ? (
+          <>
+            <Typography className={classes.title}>
+              Продавец
+            </Typography>
+            <Typography hidden={!creditValue} className={classes.textSeller}>
+              {product.data.body.find(slice => slice.slice_type === "Seller" || "seller")?.primary?.name_seller}
+            </Typography>
+            <Typography hidden={!credit.months_2} className={classes.textSeller}>
+              {product.data.body.find(slice => slice.slice_type === "Seller" || "seller")?.primary?.ogrn}
+            </Typography>
           </>
         ) : null}
       </Grid>
