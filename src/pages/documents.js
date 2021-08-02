@@ -1,6 +1,7 @@
 import * as React from "react"
 import { graphql, Link } from "gatsby"
 import { makeStyles, Grid } from "@material-ui/core"
+import Layout from '../components/layout'
 
 import Seo from "../components/seo"
 
@@ -71,7 +72,7 @@ export default function Documents({ data }) {
   const other = data.prismicDocs.data.other
 
   return (
-    <>
+    <Layout>
       <Seo title="Документы" />
 
       <Grid container direction="column" className={classes.wrapper}>
@@ -95,7 +96,7 @@ export default function Documents({ data }) {
           </Link>
         ))}
       </Grid>
-    </>
+    </Layout>
   )
 }
 

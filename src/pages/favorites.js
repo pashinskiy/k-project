@@ -9,6 +9,7 @@ import SmallCategoriesPanel from "../components/smallCategoriesPanel"
 import Sort from "../components/sort"
 import Pagination from "../components/pagination"
 import CardProduct from "../components/catalog/catalogCardProduct"
+import Layout from '../components/layout'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -81,7 +82,7 @@ const IndexPage = ({ data }) => {
   }
 
   return (
-    <>
+    <Layout>
       <Seo title="Favorites" />
       <HeaderWithIcon
         icon={<FavoritesIcon />}
@@ -108,7 +109,7 @@ const IndexPage = ({ data }) => {
           </Typography>
         )}
       </Grid>
-    </>
+    </Layout>
   )
 }
 

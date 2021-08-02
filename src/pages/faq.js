@@ -1,5 +1,6 @@
 import React from "react"
 import { makeStyles, Grid, Typography } from "@material-ui/core"
+import Layout from '../components/layout'
 
 import Seo from "../components/seo"
 import FaqContext from "../components/faqPage/context"
@@ -91,7 +92,7 @@ const IndexPage = ({ data }) => {
   const classes = useStyle()
 
   return (
-    <>
+    <Layout>
       <Seo title="FAQ" />
 
       <FaqContext>
@@ -107,7 +108,7 @@ const IndexPage = ({ data }) => {
           </div>
         </Grid>
       </FaqContext>
-    </>
+    </Layout>
   )
 }
 export default IndexPage

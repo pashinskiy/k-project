@@ -113,7 +113,7 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `/documents/${edge.node.uid}/`,
       component: document,
       context: {
-        content: edge.node.data.content.text,
+        doc: edge.node,
       },
     })
   })

@@ -11,6 +11,7 @@ import FastLink from "../components/catalog/fastLink"
 import Sort from "../components/sort"
 import Filter from "../components/filter"
 import Pagination from "../components/pagination"
+import Layout from "../components/layout"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -120,6 +121,7 @@ const IndexPage = ({ data: { allPrismicProduct, prismicSubcategory } }) => {
   }
 
   return (
+    <Layout>
     <div className={classes.wrapper}>
       <Seo title="Home" />
       <BreadCrumbs
@@ -180,6 +182,7 @@ const IndexPage = ({ data: { allPrismicProduct, prismicSubcategory } }) => {
         )}
       </Grid>
     </div>
+    </Layout>
   )
 }
 

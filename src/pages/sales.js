@@ -6,12 +6,13 @@ import SalesIcon from "../../static/svg/salesIcon.svg"
 import SaleCardPanel from "../components/saleCardPanel"
 import StoriesPanel from "../components/widgets/storiesPanel"
 import ScrollBar from "../components/scrollBar"
+import Layout from '../components/layout'
 
 const IndexPage = ({ data }) => {
   const AllSales = data.allPrismicSales.edges.map(edge => edge.node)
   const allStories = data.allPrismicStories.edges.map(edge => edge.node)
   return (
-    <>
+    <Layout>
       <Seo title="Акции и предложения" />
       <HeaderWithIcon
         icon={<SalesIcon />}
@@ -24,7 +25,7 @@ const IndexPage = ({ data }) => {
         <StoriesPanel stories={allStories}/>
       </ScrollBar>
       <SaleCardPanel sales={AllSales} />
-    </>
+    </Layout>
   )
 }
 export default IndexPage
