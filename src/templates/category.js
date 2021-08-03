@@ -249,7 +249,7 @@ const Category = ({
                       cardLink={``}
                       cardImage={
                         brand.child.document?.data?.body[0].primary.image
-                          .localFile.childImageSharp.gatsbyImageData
+                          .localFile?.childImageSharp?.gatsbyImageData
                       }
                       cardTitle={brand.child.document?.data?.name}
                     />

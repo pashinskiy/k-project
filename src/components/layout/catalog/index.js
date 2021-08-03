@@ -227,7 +227,7 @@ export default function Catalog({ data, animation }) {
                                                     null
                                                 :
                                                     <div className={classes.brand_wrapper}>
-                                                        <img src={brand.child.document.data.body[0].primary.image.localFile.childImageSharp.gatsbyImageData.images.fallback.src} alt={brand.child.document.data.body[0].primary.image.alt} />
+                                                        <img src={brand.child.document.data.body[0].primary.image.localFile?.childImageSharp?.gatsbyImageData.images.fallback.src} alt={brand.child.document.data.body[0].primary.image.alt} />
                                                     </div>
                                             }
                                         </div>
