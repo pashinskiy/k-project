@@ -301,10 +301,23 @@ export default function SliderProduct({ photos }) {
     }
 
     function scrollBar(e) {
-      if (eventScroll === null) {
-        eventScroll = Math.abs(e.clientY - clientY) >= Math.abs(e.clientX - clientX)
+      // if (eventScroll === null) {
+      //   eventScroll = Math.abs(e.clientY - clientY) >= Math.abs(e.clientX - clientX)
+      // }
+      // if (eventScroll) {
+      //   window.scrollTo(0, scroll + clientY - e.clientY)
+      //   return
+      // }
+
+      if (Math.abs(e.clientY - clientY) > 15 && eventScroll === null) {
+        eventScroll = true
       }
-      if (eventScroll) {
+      if (Math.abs(e.clientX - clientX) > 15 && eventScroll === null) {
+        eventScroll = false
+        e.preventDefault()
+      }
+      if (eventScroll === null) return
+      if (eventScroll === true) {
         window.scrollTo(0, scroll + clientY - e.clientY)
         return
       }

@@ -200,6 +200,14 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
       cardPanel.style.transition = transition
       document.removeEventListener("pointermove", scrollBar)
       document.removeEventListener("pointerup", deleteScrollBar)
+      setTimeout(
+        () =>
+          document.removeEventListener("click", noGoLink, {
+            once: true,
+            capture: true,
+          }),
+        0
+      )
     }
 
     function scrollBar(e) {

@@ -301,6 +301,14 @@ export default function MainPageSlider({ array, variant }) {
       setActiveChild(getActiveChild(cardPanel))
       document.removeEventListener("pointermove", scrollBar)
       document.removeEventListener("pointerup", deleteScrollBar)
+      setTimeout(
+        () =>
+          document.removeEventListener("click", noGoLink, {
+            once: true,
+            capture: true,
+          }),
+        0
+      )
     }
 
     function scrollBar(e) {

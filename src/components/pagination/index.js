@@ -194,7 +194,15 @@ export default function Pagination({ pageSize, components, message }) {
 
   // смотрим адресную строку
   const url = new URL(window.location.href)
-  const page = url.searchParams.has("page") ? +url.searchParams.get("page") : 1
+  const pageURL = url.searchParams.has("page")
+    ? +url.searchParams.get("page")
+    : 1
+
+  const [page, setPage] = React.useState(pageURL)
+  if (pageURL !== page) {
+    if (pageURL === 1) barItem.current.style.marginLeft = "0px"
+    setPage(pageURL)
+  }
 
   const lastPage = Math.ceil(components.length / pageSize)
   const showComponents = components.slice(
@@ -218,7 +226,6 @@ export default function Pagination({ pageSize, components, message }) {
 
       if (i > 3 && i < lastPage - 2) newLeft = -step * (i - 3)
       else newLeft = i <= 3 ? 0 : -step * (lastPage - 5)
-
       bar.style.marginLeft = newLeft + "px"
     }
     setPageUrl(i)

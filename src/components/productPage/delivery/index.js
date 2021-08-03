@@ -10,7 +10,7 @@ export default function DeliveryCards(prismicProduct) {
     prismicProduct.prismicProduct.data.delivery.document?.data.body[0].items ??
     []
 
-    const mobile = useMediaQuery("(max-width: 414px)")
+  const mobile = useMediaQuery("(max-width: 414px)")
 
   return (
     <>
@@ -19,7 +19,11 @@ export default function DeliveryCards(prismicProduct) {
         title="Информация о доставке"
         divider={true}
       />
-      <Grid container spacing={mobile ? 12 : null}>
+      <Grid
+        container
+        spacing={mobile ? 12 : null}
+        style={{ overflow: "hidden" }}
+      >
         {delivery.length
           ? delivery.map(variant => (
               <Grid item key={variant.city_name}>
