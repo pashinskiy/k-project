@@ -212,8 +212,18 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
       //   return
       // }
 
-      if (Math.abs(e.clientY - clientY) > 25)
+      if (Math.abs(e.clientY - clientY) > 15 && eventScroll === null) {
+        eventScroll = true
+      }
+      if (Math.abs(e.clientX - clientX) > 15 && eventScroll === null) {
+        eventScroll = false
+        e.preventDefault()
+      }
+      if (eventScroll === null) return
+      if (eventScroll === true) {
         window.scrollTo(0, scroll + clientY - e.clientY)
+        return
+      }
 
       document.addEventListener("click", noGoLink, {
         once: true,
