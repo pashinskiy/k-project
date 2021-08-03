@@ -264,7 +264,11 @@ export default function CardProduct({ product, afterChange, ...other }) {
         const alt = sticker.sticker.document.data.image.alt
         return (
           <div className={classes.sticker} key={i}>
-            <img src={img} alt={alt} style={{ width: "auto", height: "100%" }} />
+            <img
+              src={img}
+              alt={alt}
+              style={{ width: "auto", height: "100%" }}
+            />
           </div>
         )
       })
@@ -311,15 +315,17 @@ export default function CardProduct({ product, afterChange, ...other }) {
             {stickersImgArr[0]}
           </Grid>
         ) : null}
-        <GatsbyImage
-          image={
-            product.data.images[0]?.image.localFile?.childImageSharp
-              .gatsbyImageData
-          }
-          alt={product.data.images[0]?.image.alt ?? "product"}
-          className={classes.wrapperImg}
-          imgStyle={{ objectFit: "contain" }}
-        />
+        <Link to={`/${product.uid}`} style={{ textDecoration: "none" }}>
+          <GatsbyImage
+            image={
+              product.data.images[0]?.image.localFile?.childImageSharp
+                .gatsbyImageData
+            }
+            alt={product.data.images[0]?.image.alt ?? "product"}
+            className={classes.wrapperImg}
+            imgStyle={{ objectFit: "contain" }}
+          />
+        </Link>
       </Grid>
 
       <Grid

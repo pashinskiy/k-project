@@ -1,14 +1,11 @@
 import React from "react"
 import Card from "@material-ui/core/Card"
 import { makeStyles } from "@material-ui/core/styles"
-import {
-  Button,
-  Grid,
-  Typography,
-} from "@material-ui/core"
+import { Button, Grid, Typography } from "@material-ui/core"
 import CartIcon from "../../../static/svg/cartIcon.svg"
 import { GatsbyImage } from "gatsby-plugin-image"
 import CardOfferProduct from "./cardOfferProduct"
+import { navigate } from "gatsby"
 
 const useStyles = makeStyles(theme => ({
   cardRoot: {
@@ -18,10 +15,10 @@ const useStyles = makeStyles(theme => ({
     padding: "1.875vw",
     borderRadius: "1.5625vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     marginBottom: "40px",
     "@media(min-width: 1280px)": {
       width: "631px",
@@ -108,10 +105,10 @@ const useStyles = makeStyles(theme => ({
     padding: "0.390625vw",
     borderRadius: "0.9375vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     "@media(min-width: 1280px)": {
       minWidth: "250px",
       width: "250px",
@@ -329,82 +326,90 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 414px)": {
       padding: "2.4154vw",
     },
-  }
+  },
 }))
 
 export default function ProductAddedCard({ product, closeDialog }) {
   const classes = useStyles()
   const image =
     product.data.images[0]?.image?.localFile?.childImageSharp.gatsbyImageData
-  const accessoriesArray = product.data.all_product_accessories
+  const accessoriesArray = product.data.all_product_accessories.filter(
+    item => item.product_accessories.document !== null
+  )
 
   return (
     <>
-        <Card className={classes.cardRoot}>
-          <div className={classes.headerWrapper}>
-            <CartIcon className={classes.cartIcon} />
-            <Typography className={classes.cardHeaderTitle}>
-              Товар добавлен в корзину
-            </Typography>
-          </div>
-          <div className={classes.productInfoWrapper}>
-            <GatsbyImage
-              image={image}
-              alt="product-image"
-              className={classes.productImageContainer}
-              //высота и ширина для отступа от контейнера
-              imgStyle={{
-                objectFit: "contain",
-                // height: "95%",
-                // width: "95%",
-                margin: "auto",
-              }}
-            />
+      <Card className={classes.cardRoot}>
+        <div className={classes.headerWrapper}>
+          <CartIcon className={classes.cartIcon} />
+          <Typography className={classes.cardHeaderTitle}>
+            Товар добавлен в корзину
+          </Typography>
+        </div>
+        <div className={classes.productInfoWrapper}>
+          <GatsbyImage
+            image={image}
+            alt="product-image"
+            className={classes.productImageContainer}
+            //высота и ширина для отступа от контейнера
+            imgStyle={{
+              objectFit: "contain",
+              // height: "95%",
+              // width: "95%",
+              margin: "auto",
+            }}
+          />
 
-            <div className={classes.productTextContainer}>
-              <Typography variant="body2" className={classes.productTitle}>
-                {product.data.name}
+          <div className={classes.productTextContainer}>
+            <Typography variant="body2" className={classes.productTitle}>
+              {product.data.name}
+            </Typography>
+            <div className={classes.costContainer}>
+              <Typography className={classes.costMain}>
+                {product.data.price} &#8381;
               </Typography>
-              <div className={classes.costContainer}>
-                <Typography className={classes.costMain}>
-                  {product.data.price} &#8381;
-                </Typography>
+              {product.data.old_price ? (
                 <Typography className={classes.costOld}>
                   {product.data.old_price} &#8381;
                 </Typography>
-              </div>
+              ) : null}
             </div>
           </div>
-          <div className={classes.buttonContainer}>
-            <Button
-              onClick={e => closeDialog()}
-              className={classes.buttonContinue}
-            >
-              Продолжить покупки
-            </Button>
-            {/* TODO: Добавить ссылку на страницу оформления */}
-            <Button href="#" className={classes.buttonCheckout}>
-              Оформить
-            </Button>
-          </div>
-        </Card>
-        {!!accessoriesArray.length ? (
-          <Card className={classes.cardRoot}>
-            <Typography className={classes.offerTitle}>
-              Добавьте аксессуар в комплект
-            </Typography>
-            <Grid container className={classes.accessoriesContainer}>
-              {accessoriesArray.map(accessory => (
+        </div>
+        <div className={classes.buttonContainer}>
+          <Button
+            onClick={e => closeDialog()}
+            className={classes.buttonContinue}
+          >
+            Продолжить покупки
+          </Button>
+          {/* TODO: Добавить ссылку на страницу оформления */}
+          <Button
+            aria-label="Оформить"
+            onClick={() => navigate("/ordering/")}
+            className={classes.buttonCheckout}
+          >
+            Оформить
+          </Button>
+        </div>
+      </Card>
+      {!!accessoriesArray.length ? (
+        <Card className={classes.cardRoot}>
+          <Typography className={classes.offerTitle}>
+            Добавьте аксессуар в комплект
+          </Typography>
+          <Grid container className={classes.accessoriesContainer}>
+            {accessoriesArray.map(accessory => (
               <Grid item xs={6} className={classes.accessoriesRoot}>
                 <CardOfferProduct
                   accessory={accessory}
                   key={accessory.product_accessories.document?.uid + "-offer"}
                 />
               </Grid>
-              ))}
-            </Grid>
-          </Card>
-        ) : null}
+            ))}
+          </Grid>
+        </Card>
+      ) : null}
     </>
   )
 }

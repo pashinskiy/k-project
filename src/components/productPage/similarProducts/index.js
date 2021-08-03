@@ -13,6 +13,13 @@ export default function SimilarProducts({ category }) {
             id
             uid
             data {
+              category {
+                document {
+                  ... on PrismicSubcategory {
+                    id
+                  }
+                }
+              }
               name
               price
               color
@@ -38,12 +45,14 @@ export default function SimilarProducts({ category }) {
     }
   `)
 
-  return (
+  return category ? (
     <ProductsScrollBar
-      products={data.allPrismicProduct.edges.map(edge => edge.node)}
+      products={data.allPrismicProduct.edges
+        .filter(edge => edge.node.data.category.document?.id === category.id)
+        .map(edge => edge.node)}
       title="Похожие товары"
       icon={<IconSimilarProduct />}
       divider={true}
     />
-  )
+  ) : null
 }

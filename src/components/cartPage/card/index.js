@@ -21,10 +21,10 @@ const useStyle = makeStyles(theme => ({
     padding: "1.87vw",
     borderRadius: "0.93vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     "@media(min-width: 1280px)": {
       padding: "24px",
       borderRadius: "12px",
@@ -248,12 +248,14 @@ export default function Card({ product }) {
   return img ? (
     <Grid container justify="space-between" className={classes.wrapper}>
       <Grid container alignItems="center" style={{ width: "auto" }}>
-        <GatsbyImage
-          image={img}
-          alt={product.data.images[0]?.image.alt ?? "product"}
-          className={classes.image + " " + classes.unselect}
-          imgStyle={{ objectFit: "contain" }}
-        />
+        <Link to={`/${product.uid}/`} style={{ textDecoration: "none" }}>
+          <GatsbyImage
+            image={img}
+            alt={product.data.images[0]?.image.alt ?? "product"}
+            className={classes.image + " " + classes.unselect}
+            imgStyle={{ objectFit: "contain" }}
+          />
+        </Link>
 
         <div className={classes.centralBlockWrapper}>
           <Link to={`/${product.uid}/`} style={{ textDecoration: "none" }}>
