@@ -1,90 +1,90 @@
 {
-    "Main" : {
-      "question" : {
-        "type" : "Text",
-        "config" : {
-          "label" : "Вопрос",
-          "placeholder" : "вопрос"
-        }
-      },
-      "body" : {
-        "type" : "Slices",
-        "fieldset" : "Slice zone",
-        "config" : {
-          "labels" : { },
-          "choices" : {
-            "text" : {
-              "type" : "Slice",
-              "fieldset" : "text",
-              "description" : "текст",
-              "icon" : "format_size",
-              "non-repeat" : {
-                "order" : {
-                  "type" : "Number",
-                  "config" : {
-                    "label" : "Очередность",
-                    "placeholder" : "номер следования (сверху)"
-                  }
-                },
-                "text" : {
-                  "type" : "StructuredText",
-                  "config" : {
-                    "multi" : "preformatted",
-                    "label" : "текст"
-                  }
+  "Main": {
+    "question": {
+      "type": "Text",
+      "config": {
+        "label": "Вопрос",
+        "placeholder": "вопрос"
+      }
+    },
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": {},
+        "choices": {
+          "text": {
+            "type": "Slice",
+            "fieldset": "text",
+            "description": "текст",
+            "icon": "format_size",
+            "non-repeat": {
+              "order": {
+                "type": "Number",
+                "config": {
+                  "label": "Очередность",
+                  "placeholder": "номер следования (сверху)"
                 }
               },
-              "repeat" : { }
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+                  "label": "текст"
+                }
+              }
             },
-            "image" : {
-              "type" : "Slice",
-              "fieldset" : "image",
-              "description" : "изображение",
-              "icon" : "insert_photo",
-              "non-repeat" : {
-                "order" : {
-                  "type" : "Number",
-                  "config" : {
-                    "label" : "Очередность",
-                    "placeholder" : "номер следования (сверху)"
-                  }
-                },
-                "image" : {
-                  "type" : "Image",
-                  "config" : {
-                    "constraint" : { },
-                    "thumbnails" : [ ],
-                    "label" : "Изображение"
-                  }
+            "repeat": {}
+          },
+          "image": {
+            "type": "Slice",
+            "fieldset": "image",
+            "description": "изображение",
+            "icon": "insert_photo",
+            "non-repeat": {
+              "order": {
+                "type": "Number",
+                "config": {
+                  "label": "Очередность",
+                  "placeholder": "номер следования (сверху)"
                 }
               },
-              "repeat" : { }
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Изображение"
+                }
+              }
             },
-            "info" : {
-              "type" : "Slice",
-              "fieldset" : "info",
-              "description" : "дополнительная информация",
-              "icon" : "error_outline",
-              "non-repeat" : {
-                "order" : {
-                  "type" : "Number",
-                  "config" : {
-                    "label" : "Очередность",
-                    "placeholder" : "номер следования (сверху)"
-                  }
-                },
-                "text" : {
-                  "type" : "StructuredText",
-                  "config" : {
-                    "multi" : "preformatted",
-                    "label" : "Текст"
-                  }
+            "repeat": {}
+          },
+          "info": {
+            "type": "Slice",
+            "fieldset": "info",
+            "description": "дополнительная информация",
+            "icon": "error_outline",
+            "non-repeat": {
+              "order": {
+                "type": "Number",
+                "config": {
+                  "label": "Очередность",
+                  "placeholder": "номер следования (сверху)"
                 }
               },
-              "repeat" : { }
-            }
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
+                  "label": "Текст"
+                }
+              }
+            },
+            "repeat": {}
           }
         }
       }
     }
   }
+}
