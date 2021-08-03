@@ -7,6 +7,8 @@ import CatalogButton from "./catalog"
 import ButtonWithIcon from "./buttonWithIcon"
 import Search from "./search"
 
+import { GlobalStateContext } from "../../../context/GlobalContextProvider"
+
 const useStyles = makeStyles(theme => ({
   root: {
     height: 100,
@@ -114,10 +116,11 @@ export default function Header({
   setAnimation,
 }) {
   const classes = useStyles()
+  const state = React.useContext(GlobalStateContext)
 
   const links = data.allPrismicHeader?.edges[0]?.node.data.body
 
-  return (  
+  return (
     <header id="header" className={classes.root}>
       <div className={classes.wrapper}>
         <nav className={classes.submenu}>
@@ -165,6 +168,7 @@ export default function Header({
                 .publicURL + "#outline"
             }
             alt={data.allPrismicHeader.edges[0]?.node.data.favorites_img.alt}
+            count={state.favorites.length}
           />
 
           <ButtonWithIcon
@@ -175,6 +179,7 @@ export default function Header({
                 .publicURL + "#outline"
             }
             alt={data.allPrismicHeader.edges[0]?.node.data.cart_img.alt}
+            count={state.cart.length}
           />
         </nav>
       </div>

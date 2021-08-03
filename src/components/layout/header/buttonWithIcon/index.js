@@ -14,12 +14,15 @@ const useStyles = makeStyles(theme => ({
     },
     "&:hover": {
       color: theme.palette.color.accentSecondary,
-      "& img": {
+      "& .imgWrapper": {
         transform: "translateY(-4px)",
       },
     },
   },
-  img: {
+  imgWrapper: {
+    position: "relative",
+    width: 30,
+    height: 30,
     display: "block",
     marginLeft: "auto",
     marginRight: "auto",
@@ -34,14 +37,43 @@ const useStyles = makeStyles(theme => ({
       fontSize: 12,
     },
   },
+  count: {
+    position: "absolute",
+    left: "100%",
+    transform: "translate(-50%, -50%)",
+
+    width: "auto",
+    padding: "2px 4px",
+    background: "#DF3434",
+    borderRadius: "1000px",
+
+    fontWeight: 500,
+    fontSize: 10,
+    lineHeight: "12px",
+    color: theme.palette.color.mainContrast,
+
+    "@media(max-width: 1025px)": {
+      transform: "translate(-50%, -37%)",
+    },
+  },
 }))
 
-export default function ButtonWithIcon({ name, img, alt, link }) {
+export default function ButtonWithIcon({ name, img, alt, link, count }) {
   const classes = useStyles()
+  if (count > 99) count = "99+"
 
   return (
     <Link to={`${link}`} className={classes.root}>
-      <img src={img} alt={alt} className={classes.img} />
+      <div className={classes.imgWrapper + " imgWrapper"}>
+        {count ? <div className={classes.count}>{count}</div> : null}
+        <img
+          src={img}
+          alt={alt}
+          width="30"
+          height="30"
+          style={{ width: "100%", height: "100%" }}
+        />
+      </div>
       <span className={classes.text}>{name}</span>
     </Link>
   )
