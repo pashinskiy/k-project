@@ -261,7 +261,7 @@ export default function BlockPrice({ product, allColors }) {
             slice => slice.slice_type === "stickers"
           )}
           logo={
-            product.data.brand.document.data.body.find(
+            product.data.brand.document?.data.body.find(
               slice => slice.slice_type === "brand"
             )?.primary.image
           }

@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
     zIndex: 999,
   },
   iconCloseDialog: {
+    cursor: "pointer",
     position: "absolute",
     top: "3.90625vw",
     right: "3.90625vw",
@@ -89,9 +90,8 @@ export default function AddInCartAndFav({
   const state = React.useContext(GlobalStateContext)
   const inCart = state.inCart(product?.id)
 
-  function closeDialog(){
+  function closeDialog() {
     setDialogOpen(false)
-    
   }
   return (
     <Grid
@@ -99,31 +99,33 @@ export default function AddInCartAndFav({
       justify="space-between"
       className={classes.wrapper + " " + fixed}
     >
-
-        {inCart ? (
-          <>
-            <ButtonPlusMinus product={product} variant={variant} />
-            <ButtonDelete product={product} variant={variant} />
-          </>
-        ) : (
-          <ButtonAddCart
-            product={product}
-            text={text}
-            variant={variant}
-            dialog={dialog}
-            setDialogOpen={setDialogOpen}
-          />
-        )}
-        <ButtonAddFavorites product={product} variant={variant} />
-        <Dialog
+      {inCart ? (
+        <>
+          <ButtonPlusMinus product={product} variant={variant} />
+          <ButtonDelete product={product} variant={variant} />
+        </>
+      ) : (
+        <ButtonAddCart
+          product={product}
+          text={text}
+          variant={variant}
+          dialog={dialog}
+          setDialogOpen={setDialogOpen}
+        />
+      )}
+      <ButtonAddFavorites product={product} variant={variant} />
+      <Dialog
         open={dialogOpen}
         onClose={closeDialog}
         maxWidth={false}
         scroll={"body"}
-        classes={{paper: classes.dialogPaper}}
+        classes={{ paper: classes.dialogPaper }}
       >
-        <IconCloseDialog className={classes.iconCloseDialog} onClick={e => closeDialog()} />
-        <ProductAddedCard product={product} closeDialog={closeDialog}/>
+        <IconCloseDialog
+          className={classes.iconCloseDialog}
+          onClick={e => closeDialog()}
+        />
+        <ProductAddedCard product={product} closeDialog={closeDialog} />
       </Dialog>
     </Grid>
   )

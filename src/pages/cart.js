@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { makeStyles, Grid, Typography } from "@material-ui/core"
-import Layout from '../components/layout'
+import Layout from "../components/layout"
 
 import { GlobalStateContext } from "../context/GlobalContextProvider"
 
@@ -65,6 +65,7 @@ const useStyle = makeStyles(theme => ({
       left: 0,
       bottom: 62,
       width: "100vw",
+      zIndex: 99,
     },
   },
   disclaimer: {

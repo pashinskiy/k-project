@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 
 import Seo from "../components/seo"
 import CardProduct from "../components/productPage/cardProduct"
-import Layout from '../components/layout'
+import Layout from "../components/layout"
 
 import Landing from "../components/productPage/landing"
 import Gallery from "../components/productPage/gallery"
@@ -71,7 +71,7 @@ const Product = ({ data: { prismicProduct } }) => {
       />
       <div id="about_product" />
       <CardProduct prismicProduct={prismicProduct} />
-      <SimilarProducts />
+      <SimilarProducts category={prismicProduct.data.category.document}/>
       <div id="description" />
       <Landing slices={prismicProduct.data.body2} />
       <div id="photo" />
@@ -94,6 +94,13 @@ export const pageQuery = graphql`
       id
       uid
       data {
+        category {
+          document {
+            ... on PrismicSubcategory {
+              id
+            }
+          }
+        }
         brand {
           document {
             ... on PrismicBrand {

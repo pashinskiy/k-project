@@ -5,14 +5,24 @@ const app = express()
 
 app.listen(3999, () => console.log("site deployed to port 3999"))
 
+const date = new Date()
+date.setHours(date.getHours() + 2)
+
+const day = date.getDate()
+const month =
+  date.getMonth() < 9 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1
+const hour = date.getHours()
+const min = date.getMinutes()
+
 const build = {
-  status: "В ожидании. ",
-  message: "Сборок не было",
+  status: "В ожидании сборки.",
+  last_action: `Сервер запущен ${day}.${month} в ${hour}:${min}.`,
+  result: "Успешно.",
 }
 
 app.post("/build", (req, res) => {
-  if (build.status === "В ожидании. ") {
-    build.status = "Собирается. "
+  if (build.status === "В ожидании сборки.") {
+    build.status = "Собирается."
     res.sendStatus(200)
 
     execSync("git reset --hard")
@@ -31,19 +41,17 @@ app.post("/build", (req, res) => {
       const min = date.getMinutes()
 
       if (err) {
-        build.status = "В ожидании. "
-        build.message = `
-          Последнее обновление: ${day}.${month} в ${hour}:${min}. Результат: Ошибка (code:${err.code}, message: ${err.message}). 
-        `
+        build.status = "В ожидании сборки."
+        build.last_action = `Обновление сайта ${day}.${month} в ${hour}:${min}.`
+        build.result = `Ошибка (code:${err.code}, message: ${err.message}).`
       } else {
         fs.renameSync("./public-finish", "./oldVersion")
         fs.renameSync("./public", "./public-finish")
         fs.rmSync("./oldVersion", { recursive: true, force: true })
 
-        build.status = "В ожидании. "
-        build.message = `
-          Последнее обновление: ${day}.${month} в ${hour}:${min}. Результат: Успешно.
-        `
+        build.status = "В ожидании сборки."
+        build.last_action = `Обновление сайта ${day}.${month} в ${hour}:${min}.`
+        build.result = `Успешно.`
       }
     })
   } else {
@@ -52,5 +60,8 @@ app.post("/build", (req, res) => {
 })
 
 app.get("/status", (req, res) => {
-  res.send(build.status + build.message)
+  res.send(`
+  Состояние сейчас: ${build.status} <br>
+  Последнее завершенное действие: ${build.last_action} <br>
+  Результат: ${build.result}`)
 })

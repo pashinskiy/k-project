@@ -1,7 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
-import Layout from '../components/layout'
+import Layout from "../components/layout"
 
 import Seo from "../components/seo"
 
@@ -169,8 +169,12 @@ export default function Products({ data: { allPrismicProduct } }) {
 
       {search ? <Search /> : null}
 
-      <Typography className={classes.smallText}>Поиск по:</Typography>
-      <Typography className={classes.title}>{title}</Typography>
+      {/[^\s]/.test(title) ? (
+        <>
+          <Typography className={classes.smallText}>Поиск по:</Typography>
+          <Typography className={classes.title}>{title}</Typography>
+        </>
+      ) : null}
 
       <Grid
         container

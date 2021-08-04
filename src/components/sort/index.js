@@ -1,5 +1,6 @@
 import React from "react"
 import { makeStyles, Button, Typography, Grid } from "@material-ui/core"
+import { navigate } from "gatsby"
 
 import IconSort from "../../../static/svg/sort.svg"
 
@@ -106,7 +107,7 @@ export default function Sort({ products, setSortProducts }) {
     { name: "Сначала дешевые", func: sortByPrice },
     { name: "Сначала дорогие", func: sortByPriceInv },
   ]
-  const [value, setValue] = React.useState(variantsSort[0].name)
+  const [value, setValue] = React.useState("Сортировать")
   const [show, setShow] = React.useState(false)
 
   function openPanel() {
@@ -135,7 +136,11 @@ export default function Sort({ products, setSortProducts }) {
   function sorting(name, func) {
     setValue(name)
     setSortProducts([...products].sort(func))
+    const url = new URL(window.location.href)
+    url.searchParams.set("page", 1)
+    navigate(url.search)
   }
+
   return (
     <Grid>
       <Button onClick={openPanel} className={classes.button}>

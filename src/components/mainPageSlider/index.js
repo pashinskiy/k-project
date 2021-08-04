@@ -98,10 +98,11 @@ const useStyle = makeStyles(theme => ({
   },
   track: {
     width: "auto",
-    touchAction: "none",
     transition: "0.6s transform",
     position: "relative",
     boxSizing: "border-box",
+
+    touchAction: "none",
   },
   itemAll: {
     width: "90.625vw",
@@ -232,6 +233,7 @@ export default function MainPageSlider({ array, variant }) {
         cardPanel?.offsetWidth -
         gapBetweenConst
       : gapBetweenConst
+
   function getTransition(parentNode, activeChild) {
     let childWidth = parentNode.children[0].offsetWidth
     let childPadding = parseFloat(
@@ -299,20 +301,43 @@ export default function MainPageSlider({ array, variant }) {
       setActiveChild(getActiveChild(cardPanel))
       document.removeEventListener("pointermove", scrollBar)
       document.removeEventListener("pointerup", deleteScrollBar)
-      setTimeout(() => document.removeEventListener("click", noGoLink), 0)
+      setTimeout(
+        () =>
+          document.removeEventListener("click", noGoLink, {
+            once: true,
+            capture: true,
+          }),
+        0
+      )
     }
 
     function scrollBar(e) {
-      if (eventScroll === null) {
-        eventScroll =
-          Math.abs(e.clientX - clientX) < Math.abs(e.clientY - clientY)
+      // if (eventScroll === null) {
+      //   eventScroll =
+      //     Math.abs(e.clientY - clientY) >= Math.abs(e.clientX - clientX)
+      // }
+      // if (eventScroll) {
+      //   window.scrollTo(0, scroll + clientY - e.clientY)
+      //   return
+      // }
+
+      if (Math.abs(e.clientY - clientY) > 15 && eventScroll === null) {
+        eventScroll = true
       }
-      if (eventScroll) {
+      if (Math.abs(e.clientX - clientX) > 15 && eventScroll === null) {
+        eventScroll = false
+        e.preventDefault()
+      }
+      if (eventScroll === null) return
+      if (eventScroll === true) {
         window.scrollTo(0, scroll + clientY - e.clientY)
         return
       }
 
-      document.addEventListener("click", noGoLink)
+      document.addEventListener("click", noGoLink, {
+        once: true,
+        capture: true,
+      })
       let newTranslateX = translateX + e.clientX - clientX
       //левый барьер
       newTranslateX =
