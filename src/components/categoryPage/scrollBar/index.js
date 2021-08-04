@@ -314,7 +314,7 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
 
       {maxTranslateX < 0 && buttonNext && showPrev ? (
         <div className={classes.buttonPrevWrapper}>
-          <Button onClick={prev} className={classes.buttonPrev}>
+          <Button aria-label="назад" onClick={prev} className={classes.buttonPrev}>
             <Arrow className={classes.mirror} />
           </Button>
         </div>
@@ -322,7 +322,7 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
 
       {maxTranslateX < 0 && buttonNext && showNext ? (
         <div className={classes.buttonNextWrapper}>
-          <Button onClick={next} className={classes.buttonNext}>
+          <Button aria-label="назад" onClick={next} className={classes.buttonNext}>
             <Arrow />
           </Button>
         </div>

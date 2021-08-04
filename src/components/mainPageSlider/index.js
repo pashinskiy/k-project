@@ -415,12 +415,14 @@ export default function MainPageSlider({ array, variant }) {
           {contentArray}
         </Grid>
         <Button
+          aria-label="вперед"
           className={classes.button + " " + classes.buttonRight}
           onClick={handleButtonRigth}
         >
           <Arrow />
         </Button>
         <Button
+          aria-label="назад"
           className={classes.button + " " + classes.buttonLeft}
           onClick={handleButtonLeft}
         >

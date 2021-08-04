@@ -29,7 +29,7 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-export default function FiltersBySticker({ products }) {
+export default function FiltersBySticker({ products, category }) {
   const classes = useStyle()
 
   const data = useStaticQuery(graphql`
@@ -76,13 +76,14 @@ export default function FiltersBySticker({ products }) {
         const url = new URL(window.location.href)
         url.search = ""
         url.searchParams.set("Стикеры", JSON.stringify([sticker.id]))
+        if (category) url.searchParams.set("category", JSON.stringify(category))
         return (
           <div key={sticker.id} className={classes.wrapper}>
             <CardWidget
               variant="brand"
               publicURL={sticker.data.image?.localFile?.publicURL}
               cardTitle={title}
-              cardLink={url.href}
+              cardLink={category ? `/products/${url.search}` : `${url.search}`}
               gradientBack={true}
             />
           </div>

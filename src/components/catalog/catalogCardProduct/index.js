@@ -266,7 +266,7 @@ export default function CardProduct({ product, afterChange, ...other }) {
           <div className={classes.sticker} key={i}>
             <img
               src={img}
-              alt={alt}
+              alt={alt ?? "img"}
               style={{ width: "auto", height: "100%" }}
             />
           </div>

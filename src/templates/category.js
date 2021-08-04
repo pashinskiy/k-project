@@ -121,11 +121,11 @@ const useStyles = makeStyles(theme => ({
     marginTop: 80,
     width: "100%",
     height: "fit-content",
-    "& h3": {
-      fontSize: 28,
-      fontWeight: 700,
-      marginBottom: 20,
-    },
+  },
+  h3: {
+    fontSize: 28,
+    fontWeight: 700,
+    marginBottom: 20,
   },
   subcategory_card: {
     marginRight: 8,
@@ -159,10 +159,12 @@ const Category = ({
         <div className={classes.wrapper}>
           <img
             src={
-              prismicCategory.data.category_icon.localFile.publicURL +
+              prismicCategory.data.category_icon.localFile?.publicURL +
               "#gradient"
             }
-            alt={""}
+            alt={prismicCategory.data.category_icon.alt ?? "img"}
+            width={30}
+            height={30}
           />
           <Typography variant="h1">{prismicCategory.data.name}</Typography>
         </div>
@@ -181,7 +183,10 @@ const Category = ({
                 </Link>
                 <nav className={classes.all_tags}>
                   {subcategory.child.document?.data.tags?.map((tag, i) => (
-                    <DefaultLink name={tag.tag.document.data.name} />
+                    <DefaultLink
+                      name={tag.tag.document.data.name}
+                      link={`/subcategory/${subcategory.child.document.uid}/?group=${tag.tag.document.data.name}`}
+                    />
                   ))}
                 </nav>
               </div>
@@ -200,13 +205,18 @@ const Category = ({
                     prismicCategory.data.body[0]?.primary.category_img.localFile
                       .childImageSharp.gatsbyImageData
                   }
-                  alt={prismicCategory.data.body[0]?.primary.category_img.alt}
+                  alt={
+                    prismicCategory.data.body[0]?.primary.category_img.alt ??
+                    "img"
+                  }
                   className={classes.img}
                 />
               </div>
             ) : null}
             <div className={classes.content_wrapper}>
-              <Typography variant="h3">Категории</Typography>
+              <Typography variant="h3" component="h1" className={classes.h3}>
+                Категории
+              </Typography>
               <ScrollBar fullScreen={maxWidth1024} buttonNext>
                 {prismicCategory.data.children.map((subcategory, i) => (
                   <Grid
@@ -228,16 +238,21 @@ const Category = ({
             </div>
 
             <div className={classes.content_wrapper}>
-              <Typography variant="h3">Специальные предложения</Typography>
+              <Typography variant="h3" component="h1" className={classes.h3}>
+                Специальные предложения
+              </Typography>
               <ScrollBar fullScreen={maxWidth1024} buttonNext>
                 <FiltersBySticker
                   products={allPrismicProduct.edges.map(edge => edge.node)}
+                  category={prismicCategory.data.name}
                 />
               </ScrollBar>
             </div>
-            
+
             <div className={classes.content_wrapper}>
-              <Typography variant="h3">Популярные бренды</Typography>
+              <Typography variant="h3" component="h1" className={classes.h3}>
+                Популярные бренды
+              </Typography>
               <ScrollBar fullScreen={maxWidth1024} buttonNext>
                 {prismicCategory.data.brands.map((brand, i) => (
                   <Grid
@@ -246,7 +261,7 @@ const Category = ({
                   >
                     <CardWidget
                       variant="brand"
-                      cardLink={``}
+                      cardLink={`/products/?category="${prismicCategory.data.name}"&Производитель=["${brand.child.document?.data?.name}"]`}
                       cardImage={
                         brand.child.document?.data?.body[0].primary.image
                           .localFile?.childImageSharp?.gatsbyImageData
@@ -271,7 +286,11 @@ const Category = ({
                     key={`subcategories_nodes_category_page ${i}`}
                     className={classes.subcategory_content_wrapper}
                   >
-                    <Typography variant="h3">
+                    <Typography
+                      variant="h3"
+                      component="h1"
+                      className={classes.h3}
+                    >
                       {subcategory_product.child.document?.data?.name}
                     </Typography>
                     <AllProductsByCategory

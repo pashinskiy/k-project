@@ -124,6 +124,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function SliderProduct({ photos }) {
+  photos = photos.filter(photo => !!photo?.src)
   const classes = useStyles()
 
   //индекс главного слайдера
@@ -154,7 +155,7 @@ export default function SliderProduct({ photos }) {
         srcSet={photo?.srcSet}
         sizes={`${49.37 * photo?.aspectRatio * 0.79}vw`}
         alt={"фото" + i}
-        width={photo?.aspectRatio}
+        width={photo?.aspectRatio ?? 1}
         height="1"
         style={{
           objectFit: "contain",
@@ -190,7 +191,7 @@ export default function SliderProduct({ photos }) {
             src={photo?.src}
             srcSet={photo?.srcSet}
             alt={"фото" + i}
-            width={photo?.aspectRatio}
+            width={photo?.aspectRatio ?? 1}
             height="1"
             style={{
               maxWidth: "none",
@@ -418,10 +419,10 @@ export default function SliderProduct({ photos }) {
         </Grid>
       </Grid>
       <Grid container justify="space-between" className={classes.nav}>
-        <button onClick={prevSlide}>
+        <button aria-label="назад" onClick={prevSlide}>
           <Arrow className={classes.mirror} />
         </button>
-        <button onClick={nextSlide}>
+        <button aria-label="вперед" onClick={nextSlide}>
           <Arrow />
         </button>
       </Grid>

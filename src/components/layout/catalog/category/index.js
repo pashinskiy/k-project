@@ -49,7 +49,7 @@ export default function Category({ svg, alt, name, setHover, uid }) {
                 setHover(name);
             }}>
 
-            <img src={svg} alt={alt} />
+            <img src={svg} alt={alt ?? "img"} />
             <Typography variant="h3">
                 {name}
             </Typography>

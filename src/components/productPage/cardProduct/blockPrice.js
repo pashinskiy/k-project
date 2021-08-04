@@ -1,6 +1,6 @@
 import React from "react"
 import { Grid, makeStyles, Typography, useMediaQuery } from "@material-ui/core"
-import { Link } from "gatsby"
+import { navigate } from "gatsby"
 import AddInCartAndFav from "../../button/addInCartAndFav"
 import Title from "./title"
 import Features from "./features"
@@ -41,6 +41,13 @@ const useStyles = makeStyles(theme => ({
     },
   },
   item: {
+    padding: 0,
+    border: "none",
+    background: "transparent",
+    minWidth: 0,
+    minHeight: 0,
+    cursor: "pointer",
+
     width: "3.12vw",
     height: "3.12vw",
     borderRadius: "100%",
@@ -243,14 +250,14 @@ export default function BlockPrice({ product, allColors }) {
         {allColors.map(prod => {
           const active = product.uid === prod.uid ? classes.active : ""
           return (
-            <Link to={`/${prod.uid}/`} key={prod.uid}>
-              <div
-                className={classes.item + " " + active}
-                style={{
-                  background: prod.data.color ?? colors[prod.data.color_group],
-                }}
-              ></div>
-            </Link>
+            <button
+              onClick={() => navigate(`/${prod.uid}/`)}
+              key={prod.uid}
+              className={classes.item + " " + active}
+              style={{
+                background: prod.data.color ?? colors[prod.data.color_group],
+              }}
+            ></button>
           )
         })}
       </Grid>
@@ -329,16 +336,27 @@ export default function BlockPrice({ product, allColors }) {
           </>
         ) : null}
 
-        {product.data.body.find(slice => slice.slice_type === "Seller" || "seller")?.primary?.name_seller !== undefined || null ? (
+        {product.data.body.find(
+          slice => slice.slice_type === "Seller" || "seller"
+        )?.primary?.name_seller !== undefined || null ? (
           <>
-            <Typography className={classes.title}>
-              Продавец
-            </Typography>
+            <Typography className={classes.title}>Продавец</Typography>
             <Typography hidden={!creditValue} className={classes.textSeller}>
-              {product.data.body.find(slice => slice.slice_type === "Seller" || "seller")?.primary?.name_seller}
+              {
+                product.data.body.find(
+                  slice => slice.slice_type === "Seller" || "seller"
+                )?.primary?.name_seller
+              }
             </Typography>
-            <Typography hidden={!credit.months_2} className={classes.textSeller}>
-              {product.data.body.find(slice => slice.slice_type === "Seller" || "seller")?.primary?.ogrn}
+            <Typography
+              hidden={!credit.months_2}
+              className={classes.textSeller}
+            >
+              {
+                product.data.body.find(
+                  slice => slice.slice_type === "Seller" || "seller"
+                )?.primary?.ogrn
+              }
             </Typography>
           </>
         ) : null}

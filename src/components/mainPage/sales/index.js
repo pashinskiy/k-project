@@ -8,16 +8,16 @@ const useStyles = makeStyles(theme => ({
   root: {
     marginTop: 80,
     overflowX: "visible",
-    "& h3": {
-      fontSize: 36,
-      fontWeight: 700,
-      lineHeight: "100%",
-      "@media (max-width: 1025px)": {
-        fontSize: 28,
-      },
-      "@media (max-width: 767px)": {
-        fontSize: 20,
-      },
+  },
+  h3: {
+    fontSize: 36,
+    fontWeight: 700,
+    lineHeight: "100%",
+    "@media (max-width: 1025px)": {
+      fontSize: 28,
+    },
+    "@media (max-width: 767px)": {
+      fontSize: 20,
     },
   },
   title: {
@@ -61,18 +61,18 @@ const useStyles = makeStyles(theme => ({
     "&:last-child": {
       marginRight: 0,
     },
-    "& h4": {
-      fontSize: 17,
-      fontWeight: 700,
-      padding: 12,
-      borderRadius: 12,
-      width: "100%",
-      transform: "rotate(-4deg)",
-      marginBottom: 8,
-      background: "white",
-      "& span": {
-        color: theme.palette.color.accentSecondary,
-      },
+  },
+  h4: {
+    fontSize: 17,
+    fontWeight: 700,
+    padding: 12,
+    borderRadius: 12,
+    width: "100%",
+    transform: "rotate(-4deg)",
+    marginBottom: 8,
+    background: "white",
+    "& span": {
+      color: theme.palette.color.accentSecondary,
     },
   },
   img: {
@@ -105,7 +105,7 @@ export default function Sales(props) {
   return (
     <div className={classes.root}>
       <div className={classes.title}>
-        <Typography variant="h3">Выгодные акции</Typography>
+        <Typography variant="h3" component="h1" className={classes.h3}>Выгодные акции</Typography>
       </div>
       <div className={classes.advantages}>
         <ScrollBar buttonNext fullScreen>
@@ -115,6 +115,8 @@ export default function Sales(props) {
                 <SaleValue value={advantage.node.data.sale_value} />
                 <Typography
                   variant="h4"
+                  component="h1"
+                  className={classes.h4}
                   dangerouslySetInnerHTML={{
                     __html: advantage.node.data.sale_name.raw[0].text,
                   }}
@@ -122,10 +124,10 @@ export default function Sales(props) {
               </div>
               <GatsbyImage
                 image={
-                  advantage.node.data.sale_img.localFile.childImageSharp
+                  advantage.node.data.sale_img.localFile?.childImageSharp
                     .gatsbyImageData
                 }
-                alt={advantage.node.data.sale_img.alt}
+                alt={advantage.node.data.sale_img.alt ?? "img"}
                 className={classes.img}
               />
             </div>

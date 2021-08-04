@@ -368,7 +368,7 @@ export default function CardWidget({
               <Link to={cardLink} className={classes.stretch}>
                 <GatsbyImage
                   image={cardImage}
-                  alt={altImage}
+                  alt={altImage ?? "img"}
                   className={`${classes.stretch} gatsby--image`}
                 />
                 <Typography
@@ -390,7 +390,7 @@ export default function CardWidget({
               <Link to={cardLink} className={`${classes.stretch} strech`}>
                 <GatsbyImage
                   image={cardImage}
-                  alt={altImage}
+                  alt={altImage ?? "img"}
                   className={classes.storiesImageContainer}
                 />
                 <div
@@ -442,7 +442,7 @@ export default function CardWidget({
                   >
                     <img
                       src={publicURL}
-                      alt={altImage}
+                      alt={altImage ?? "img"}
                       style={{
                         objectFit: "contain",
                         height: "100%",
@@ -453,7 +453,7 @@ export default function CardWidget({
                 ) : (
                   <GatsbyImage
                     image={cardImage}
-                    alt={altImage}
+                    alt={altImage ?? "img"}
                     className={classes.brandElement}
                     imgStyle={{ objectFit: "contain" }}
                   />
@@ -482,7 +482,7 @@ export default function CardWidget({
                 <div className={classes.brandDummy} />
                 <GatsbyImage
                   image={cardImage}
-                  alt={altImage}
+                  alt={altImage ?? "img"}
                   className={classes.brandElement}
                   imgStyle={{ objectFit: "contain" }}
                 />

@@ -184,7 +184,7 @@ export default function TwoImages({ slice, ...other }) {
         <Grid className={classes.wrapperBlock + " " + classes.imageBlock}>
           <GatsbyImage
             image={img}
-            alt={alt}
+            alt={alt ?? "img"}
             className={classes.imgWrapper}
             style={{ width: "100%", height: "100%" }}
             imgStyle={{

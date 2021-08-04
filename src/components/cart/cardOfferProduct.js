@@ -208,7 +208,7 @@ export default function CardOfferProduct({ accessory }) {
       >
         <GatsbyImage
           image={
-            accessoryItem?.data.images[0].image.localFile.childImageSharp
+            accessoryItem?.data.images[0].image.localFile?.childImageSharp
               .gatsbyImageData
           }
           alt={

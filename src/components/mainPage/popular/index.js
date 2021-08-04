@@ -50,7 +50,7 @@ export default function Popular(props) {
                             <CardWidget
                                 variant={"brand_mainPage"}
                                 key={`brand ${i}`}
-                                cardImage={brand.node.data.body[0]?.primary?.image?.localFile.childImageSharp?.gatsbyImageData}
+                                cardImage={brand.node.data.body[0]?.primary?.image?.localFile?.childImageSharp?.gatsbyImageData}
                                 cardTitle={brand.node.data.name}
                                 cardLink={`/products/?Производитель=["${brand.node.data.name.replace("ё", "е")}"]`}  />
                         </Grid>

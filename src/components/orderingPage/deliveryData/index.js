@@ -331,7 +331,7 @@ export default function DeliveryData({ prismicCartAndOrder }) {
 
         {stickerDelivery ? (
           <GatsbyImage
-            image={stickerDelivery.localFile.childImageSharp.gatsbyImageData}
+            image={stickerDelivery.localFile?.childImageSharp.gatsbyImageData}
             alt={stickerDelivery.alt ?? "sticker"}
             className={classes.deliveryImage}
             imgStyle={{ objectFit: "contain" }}

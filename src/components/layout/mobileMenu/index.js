@@ -56,9 +56,9 @@ export default function MobileMenu({ data }) {
           link="/products/"
           img={
             data.allPrismicHeader.edges[0]?.node.data.catalog_mobile_img
-              .localFile.publicURL + "#outline"
+              .localFile?.publicURL + "#outline"
           }
-          alt={data.allPrismicHeader.edges[0]?.node.data.catalog_mobile_img.alt}
+          alt={data.allPrismicHeader.edges[0]?.node.data.catalog_mobile_img.alt ?? "img"}
         />
       </div>
       <div className={classes.menu_point}>
@@ -69,7 +69,7 @@ export default function MobileMenu({ data }) {
             data.allPrismicHeader.edges[0]?.node.data.favorites_img.localFile
               .publicURL + "#outline"
           }
-          alt={data.allPrismicHeader.edges[0]?.node.data.favorites_img.alt}
+          alt={data.allPrismicHeader.edges[0]?.node.data.favorites_img.alt ?? "img"}
           count={state.favorites.length}
         />
       </div>
@@ -81,7 +81,7 @@ export default function MobileMenu({ data }) {
             data.allPrismicHeader.edges[0]?.node.data.cart_img.localFile
               .publicURL + "#outline"
           }
-          alt={data.allPrismicHeader.edges[0]?.node.data.cart_img.alt}
+          alt={data.allPrismicHeader.edges[0]?.node.data.cart_img.alt ?? "img"}
           count={state.cart.length}
         />
       </div>
