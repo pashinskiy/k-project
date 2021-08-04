@@ -172,22 +172,22 @@ export default function BlockBoolean({
         {img ? (
           <div className={classes.image}>
             <img
-              src={img.localFile.publicURL}
+              src={img.localFile?.publicURL}
               alt={img.alt ?? "img"}
               style={{ width: "auto", height: "100%" }}
             />
             {/* <picture style={{ display: "flex", width: "100%", height: "100%" }}>
               <source
-                srcSet={img.localFile.childImageSharp.fluid.srcSetWebp}
+                srcSet={img.localFile?.childImageSharp.fluid.srcSetWebp}
                 type="image/webp"
                 sizes=""
               />
               <img
-                src={img.localFile.childImageSharp.fluid.src}
+                src={img.localFile?.childImageSharp.fluid.src}
                 srcSet={img?.srcSet}
                 alt={img.alt}
                 sizes=""
-                width={img.localFile.childImageSharp.fluid.aspectRatio}
+                width={img.localFile?.childImageSharp.fluid.aspectRatio}
                 height="1"
                 style={{ width: "auto", height: "100%" }}
               />

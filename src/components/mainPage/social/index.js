@@ -106,7 +106,7 @@ export default function SocialNetworks(props) {
                                 __html: social.node.primary.social_name.raw[0].text
                                 }} />
                             <div className={classes.icon}>
-                                <img src={social.node.primary.social_img_white.localFile.publicURL} alt={social.node.primary.social_img_white.alt ?? "social"} />
+                                <img src={social.node.primary.social_img_white.localFile?.publicURL} alt={social.node.primary.social_img_white.alt ?? "social"} />
                             </div>
                         </a>
                     ))}

@@ -56,7 +56,7 @@ export default function MobileMenu({ data }) {
           link="/products/"
           img={
             data.allPrismicHeader.edges[0]?.node.data.catalog_mobile_img
-              .localFile.publicURL + "#outline"
+              .localFile?.publicURL + "#outline"
           }
           alt={data.allPrismicHeader.edges[0]?.node.data.catalog_mobile_img.alt ?? "img"}
         />

@@ -97,7 +97,7 @@ export default function OrderCard({ product }) {
     <Grid className={classes.root} >
       <GatsbyImage
         image={
-          product.data.images[0].image.localFile.childImageSharp
+          product.data.images[0].image.localFile?.childImageSharp
             .gatsbyImageData
         }
         alt={

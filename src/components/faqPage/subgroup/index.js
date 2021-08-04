@@ -371,7 +371,7 @@ export default function Subgroup({ subgroup }) {
                       )
                     case "image":
                       const image =
-                        slice.primary.image.localFile.childImageSharp
+                        slice.primary.image.localFile?.childImageSharp
                           ?.gatsbyImageData
                       const alt = slice.primary.image.alt ?? "image"
 

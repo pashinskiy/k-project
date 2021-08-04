@@ -110,7 +110,7 @@ export default function Search() {
     <form onSubmit={submit} className={classes.form}>
       <img
         src={
-          data.allPrismicHeader.edges[0].node.data.find_img.localFile.publicURL
+          data.allPrismicHeader.edges[0].node.data.find_img.localFile?.publicURL
         }
         alt={data.allPrismicHeader.edges[0].node.data.find_img.alt ?? "img"}
         className={classes.img}
