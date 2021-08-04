@@ -105,7 +105,7 @@ export default function Sales(props) {
   return (
     <div className={classes.root}>
       <div className={classes.title}>
-        <Typography variant="h3">Выгодные акции</Typography>
+        <Typography variant="h3" component="h1">Выгодные акции</Typography>
       </div>
       <div className={classes.advantages}>
         <ScrollBar buttonNext fullScreen>
@@ -115,6 +115,7 @@ export default function Sales(props) {
                 <SaleValue value={advantage.node.data.sale_value} />
                 <Typography
                   variant="h4"
+                  component="h1"
                   dangerouslySetInnerHTML={{
                     __html: advantage.node.data.sale_name.raw[0].text,
                   }}
@@ -125,7 +126,7 @@ export default function Sales(props) {
                   advantage.node.data.sale_img.localFile.childImageSharp
                     .gatsbyImageData
                 }
-                alt={advantage.node.data.sale_img.alt}
+                alt={advantage.node.data.sale_img.alt ?? "img"}
                 className={classes.img}
               />
             </div>

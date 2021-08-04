@@ -97,7 +97,7 @@ export default function Advantages(props) {
                                 }} />
                             <GatsbyImage
                                 image={advantage.node.data.adv_img.localFile.childImageSharp.gatsbyImageData}
-                                alt={advantage.node.data.adv_img.alt}
+                                alt={advantage.node.data.adv_img.alt ?? "img"}
                                 className={classes.img} />
                         </div>
                     ))}

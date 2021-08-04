@@ -116,7 +116,7 @@ export default function SalesTextPanel({ sale, socials, products }) {
           <div className={classes.socialsItems}>
             <Social
               icon={icon.primary.social_img.localFile.publicURL}
-              alt={icon.primary.social_img.alt}
+              alt={icon.primary.social_img.alt ?? "img"}
               link={icon.primary.link.url}
               key={icon.id}
             />

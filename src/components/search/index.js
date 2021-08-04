@@ -112,7 +112,7 @@ export default function Search() {
         src={
           data.allPrismicHeader.edges[0].node.data.find_img.localFile.publicURL
         }
-        alt={data.allPrismicHeader.edges[0].node.data.find_img.alt}
+        alt={data.allPrismicHeader.edges[0].node.data.find_img.alt ?? "img"}
         className={classes.img}
       />
       <input

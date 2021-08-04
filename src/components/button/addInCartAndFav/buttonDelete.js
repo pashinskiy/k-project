@@ -74,6 +74,7 @@ export default function ButtonDelete({ product, variant }) {
   return (
     <Button
       disableRipple
+      aria-label="убрать из корзины" 
       onClick={deleteInCart}
       className={classes.button + " " + classButton}
     >

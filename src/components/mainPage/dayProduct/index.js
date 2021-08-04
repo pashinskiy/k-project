@@ -68,8 +68,8 @@ export default function DayProduct(props) {
         <div className={`${classes.root} index--day--product`}>
             <div className={classes.title}>
                 <div className={classes.title_count}>
-                    <Typography variant="h3">Товар дня</Typography>
-                    <Typography variant="h6">
+                    <Typography variant="h3" component="h1">Товар дня</Typography>
+                    <Typography variant="h6" component="h1">
                         <Count />
                     </Typography>
                 </div>

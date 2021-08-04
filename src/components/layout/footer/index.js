@@ -233,7 +233,7 @@ export default function Footer({ data }) {
                 <Social
                   key={`social ${i}`}
                   icon={link.primary.social_img.localFile.publicURL}
-                  alt={link.primary.social_img.alt}
+                  alt={link.primary.social_img.alt ?? "img"}
                   link={link.primary.link.url}
                 />
               ))}

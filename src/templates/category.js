@@ -162,7 +162,7 @@ const Category = ({
               prismicCategory.data.category_icon.localFile.publicURL +
               "#gradient"
             }
-            alt={""}
+            alt={prismicCategory.data.category_icon.alt ?? "img"}
           />
           <Typography variant="h1">{prismicCategory.data.name}</Typography>
         </div>
@@ -200,7 +200,7 @@ const Category = ({
                     prismicCategory.data.body[0]?.primary.category_img.localFile
                       .childImageSharp.gatsbyImageData
                   }
-                  alt={prismicCategory.data.body[0]?.primary.category_img.alt}
+                  alt={prismicCategory.data.body[0]?.primary.category_img.alt ?? "img"}
                   className={classes.img}
                 />
               </div>

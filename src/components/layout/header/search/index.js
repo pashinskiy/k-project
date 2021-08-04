@@ -94,7 +94,7 @@ export default function Search({ data }) {
             data.allPrismicHeader.edges[0]?.node.data.find_img.localFile
               .publicURL
           }
-          alt={data.allPrismicHeader.edges[0]?.node.data.find_img.alt}
+          alt={data.allPrismicHeader.edges[0]?.node.data.find_img.alt ?? "img"}
           className={classes.img}
         />
       </Link>
@@ -105,7 +105,7 @@ export default function Search({ data }) {
             data.allPrismicHeader.edges[0]?.node.data.find_img.localFile
               .publicURL
           }
-          alt={data.allPrismicHeader.edges[0]?.node.data.find_img.alt}
+          alt={data.allPrismicHeader.edges[0]?.node.data.find_img.alt ?? "img"}
           className={classes.img}
           width={16}
           height={16}

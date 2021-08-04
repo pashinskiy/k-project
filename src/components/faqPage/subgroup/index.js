@@ -378,7 +378,7 @@ export default function Subgroup({ subgroup }) {
                       return image ? (
                         <GatsbyImage
                           image={image}
-                          alt={alt}
+                          alt={alt ?? "img"}
                           className={classes.slice + " " + classes.sliceImage}
                           style={{ order: slice.primary.order }}
                         />

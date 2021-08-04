@@ -341,7 +341,7 @@ export default function MobileCatalog({ data, animation }) {
                         <div className={classes.social}>
                             {data.allPrismicFooter.edges[0].node.data.body2.filter(atr => atr.slice_type === 'social').map((link, i) => (
                                 <div className={classes.social_wrapper} key={`social ${i}`}>
-                                    <Social icon={link.primary.social_img_white.localFile.publicURL} alt={link.primary.social_img.alt} link={link.primary.link.url} />
+                                    <Social icon={link.primary.social_img_white.localFile.publicURL} alt={link.primary.social_img.alt ?? "img"} link={link.primary.link.url} />
                                 </div>
                             ))}
                         </div>

@@ -418,10 +418,10 @@ export default function SliderProduct({ photos }) {
         </Grid>
       </Grid>
       <Grid container justify="space-between" className={classes.nav}>
-        <button onClick={prevSlide}>
+        <button aria-label="назад" onClick={prevSlide}>
           <Arrow className={classes.mirror} />
         </button>
-        <button onClick={nextSlide}>
+        <button aria-label="вперед" onClick={nextSlide}>
           <Arrow />
         </button>
       </Grid>

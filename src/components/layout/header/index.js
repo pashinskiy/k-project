@@ -144,7 +144,12 @@ export default function Header({
                 data.allPrismicHeader.edges[0]?.node.data.logo_svg.localFile
                   .publicURL
               }
-              alt={data.allPrismicHeader.edges[0]?.node.data.logo_svg.alt}
+              alt={
+                data.allPrismicHeader.edges[0]?.node.data.logo_svg.alt ?? "logo"
+              }
+              height={158}
+              width={52}
+              style={{ width: "auto", height: "100%" }}
             />
           </Link>
 
@@ -167,7 +172,10 @@ export default function Header({
               data.allPrismicHeader.edges[0]?.node.data.favorites_img.localFile
                 .publicURL + "#outline"
             }
-            alt={data.allPrismicHeader.edges[0]?.node.data.favorites_img.alt}
+            alt={
+              data.allPrismicHeader.edges[0]?.node.data.favorites_img.alt ??
+              "favorites"
+            }
             count={state.favorites.length}
           />
 
@@ -178,7 +186,9 @@ export default function Header({
               data.allPrismicHeader.edges[0]?.node.data.cart_img.localFile
                 .publicURL + "#outline"
             }
-            alt={data.allPrismicHeader.edges[0]?.node.data.cart_img.alt}
+            alt={
+              data.allPrismicHeader.edges[0]?.node.data.cart_img.alt ?? "cart"
+            }
             count={state.cart.length}
           />
         </nav>

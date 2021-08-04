@@ -173,7 +173,7 @@ export default function BlockBoolean({
           <div className={classes.image}>
             <img
               src={img.localFile.publicURL}
-              alt={img.alt}
+              alt={img.alt ?? "img"}
               style={{ width: "auto", height: "100%" }}
             />
             {/* <picture style={{ display: "flex", width: "100%", height: "100%" }}>
