@@ -262,7 +262,7 @@ export default function Footer({ data }) {
           </div>
         </div>
         <div className={classes.copyright}>
-          <Typography variant="body1">© 2021 ООО «Krypton»</Typography>
+          <Typography variant="body1">{data.allPrismicFooter.edges[0].node.data.copyright.text}</Typography>
         </div>
       </div>
     </footer>

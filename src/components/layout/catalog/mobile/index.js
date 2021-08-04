@@ -110,6 +110,21 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         overflowX: 'scroll',
         marginBottom: 28,
+        '& a': {
+            '&:last-child': {
+                '& .wrapper--stories--catalog': {
+                    '@media(max-width: 1025px)': {
+                        paddingRight: '2.18vw',
+                    },
+                    '@media(max-width: 1025px)': {
+                        paddingRight: '3.35vw',
+                    },
+                    '@media(max-width: 414px)': {
+                        paddingRight: '5.797vw',
+                    },
+                },
+            },
+        },
         '@media(max-width: 1025px)': {
             marginLeft: '-2.18vw',
             marginRight: '-2.18vw',
@@ -138,17 +153,6 @@ const useStyles = makeStyles(theme => ({
     },
     wrapper_stories: {
         marginRight: 4,
-        '&:last-child': {
-            '@media(max-width: 1025px)': {
-                paddingRight: '2.18vw',
-            },
-            '@media(max-width: 1025px)': {
-                paddingRight: '3.35vw',
-            },
-            '@media(max-width: 414px)': {
-                paddingRight: '5.797vw',
-            },
-        },
     },
     all_sales: {
         width: '100%',
@@ -172,6 +176,9 @@ const useStyles = makeStyles(theme => ({
     sales: {
         display: 'flex',
         overflowX: 'scroll',
+        '& a': {
+            textDecoration: 'none',
+        },
         '&::-webkit-scrollbar': {
             display: 'none',
         },
@@ -290,13 +297,26 @@ export default function MobileCatalog({ data, animation }) {
                 <div className={classes.container}>
                     <div className={classes.stories}>
                         {data.allPrismicCatalog.edges[0].node.data.all_stories.map((stories, i) => (
-                            <Grid className={classes.wrapper_stories} key={`stories ${i}`}>
-                                <CardWidget
-                                    variant={"stories"}
-                                    cardImage={stories.stories.document.data.image.localFile.childImageSharp.gatsbyImageData}
-                                    cardTitle={stories.stories.document.data.text.text}
-                                    cardLink={""}  />
-                            </Grid>
+                            stories.stories.document.data.tumbler_link === true ?
+                                    <Link to={`${stories.stories.document.data.link}`}>
+                                        <Grid className={`${classes.wrapper_stories} wrapper--stories--catalog`} key={`stories ${i}`}>
+                                            <CardWidget
+                                                variant={"stories"}
+                                                cardImage={stories.stories.document.data.image.localFile.childImageSharp.gatsbyImageData}
+                                                cardTitle={stories.stories.document.data.text.text}
+                                                cardLink={""}  />
+                                        </Grid>
+                                    </Link>
+                                :
+                                    <a href={`${stories.stories.document.data.link}`} target="_blank" rel="noopener noreferrer">
+                                        <Grid className={`${classes.wrapper_stories} wrapper--stories--catalog`} key={`stories ${i}`}>
+                                            <CardWidget
+                                                variant={"stories"}
+                                                cardImage={stories.stories.document.data.image.localFile.childImageSharp.gatsbyImageData}
+                                                cardTitle={stories.stories.document.data.text.text}
+                                                cardLink={""}  />
+                                        </Grid>
+                                    </a>
                         ))}
                     </div>
                     <div className={classes.catalog}>

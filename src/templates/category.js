@@ -95,6 +95,11 @@ const useStyles = makeStyles(theme => ({
   },
   img: {
     borderRadius: 12,
+    overflow: "hidden",
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     width: "100%",
     height: "100%",
   },
@@ -194,16 +199,33 @@ const Category = ({
               />
             </ScrollBar>
             {prismicCategory.data.body[0]?.primary.category_img.localFile ? (
-              <div className={classes.banner}>
-                <GatsbyImage
-                  image={
-                    prismicCategory.data.body[0]?.primary.category_img.localFile
-                      .childImageSharp.gatsbyImageData
-                  }
-                  alt={prismicCategory.data.body[0]?.primary.category_img.alt}
-                  className={classes.img}
-                />
-              </div>
+              [prismicCategory.data.body[0]?.primary.tumbler_link === true ?
+                  <Link to={`${prismicCategory.data.body[0]?.primary.link}`}>
+                    <div className={classes.banner}>
+                      <GatsbyImage
+                        image={
+                          prismicCategory.data.body[0]?.primary.category_img.localFile
+                            .childImageSharp.gatsbyImageData
+                        }
+                        alt={prismicCategory.data.body[0]?.primary.category_img.alt}
+                        className={classes.img}
+                      />
+                    </div>
+                  </Link>
+                :
+                  <a href={`${prismicCategory.data.body[0]?.primary.link}`} target="_blank" rel="noopener noreferrer">
+                    <div className={classes.banner}>
+                      <GatsbyImage
+                        image={
+                          prismicCategory.data.body[0]?.primary.category_img.localFile
+                            .childImageSharp.gatsbyImageData
+                        }
+                        alt={prismicCategory.data.body[0]?.primary.category_img.alt}
+                        className={classes.img}
+                      />
+                    </div>
+                  </a>
+              ]
             ) : null}
             <div className={classes.content_wrapper}>
               <Typography variant="h3">Категории</Typography>
@@ -300,6 +322,8 @@ export const pageQuery = graphql`
           ... on PrismicCategoryBodyHorizontalImg {
             id
             primary {
+              link
+              tumbler_link
               category_img {
                 alt
                 localFile {
@@ -383,6 +407,8 @@ export const pageQuery = graphql`
       edges {
         node {
           data {
+            link
+            tumbler_link
             image {
               localFile {
                 childImageSharp {

@@ -4,6 +4,7 @@ import Category from './category';
 import './catalog.css';
 import DefaultLink from '../header/link/default';
 import { Link, navigate } from 'gatsby';
+import { GatsbyImage } from "gatsby-plugin-image";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -226,9 +227,11 @@ export default function Catalog({ data, animation }) {
                                                 ?
                                                     null
                                                 :
-                                                    <div className={classes.brand_wrapper}>
-                                                        <img src={brand.child.document.data.body[0].primary.image.localFile?.childImageSharp?.gatsbyImageData.images.fallback.src} alt={brand.child.document.data.body[0].primary.image.alt} />
-                                                    </div>
+                                                    <Link to={`/products/?category="${category.category.document.data.name}/?Производитель=["${brand.child.document.data.name.replace("ё", "е")}"]`}>
+                                                        <div className={classes.brand_wrapper}>
+                                                            <img src={brand.child.document.data.body[0].primary.image.localFile?.childImageSharp?.gatsbyImageData.images.fallback.src} alt={brand.child.document.data.body[0].primary.image.alt} />
+                                                        </div>
+                                                    </Link>
                                             }
                                         </div>
                                     ))}
@@ -239,9 +242,17 @@ export default function Catalog({ data, animation }) {
                 </div>
                 
                 <div className={classes.promo}>
-                    {data.allPrismicCatalog.edges[0].node.data.categories.filter(atr => atr.category.document.data.name === hover)[0].category.document.data.body.filter(slice => slice.slice_type === 'vertical_img').map((promo, i) => (
-                        <img src={promo.primary?.catalog_img?.localFile?.childImageSharp.gatsbyImageData.images.fallback.src} alt={promo.primary?.catalog_img.alt} className={classes.img} key={`images_promo ${i}`} />
-                    ))}
+                    {data.allPrismicCatalog.edges[0].node.data.categories.filter(atr => atr.category.document.data.name === hover)[0].category.document.data.body.filter(slice => slice.slice_type === 'vertical_img').map((promo, i) => 
+                        (promo.primary?.tumbler_link === true ?
+                            <Link to={`${promo.primary?.link}`}>
+                                <GatsbyImage image={promo.primary?.catalog_img?.localFile?.childImageSharp.gatsbyImageData} alt={promo.primary?.catalog_img.alt} className={classes.img} key={`images_promo ${i}`} />
+                            </Link>
+                        : 
+                            <a href={`${promo.primary?.link}`} target="_blank" rel="noopener noreferrer">
+                                <GatsbyImage image={promo.primary?.catalog_img?.localFile?.childImageSharp.gatsbyImageData} alt={promo.primary?.catalog_img.alt} className={classes.img} key={`images_promo ${i}`} />
+                            </a>
+                        )
+                    )}
                 </div>
             </div>
         </div>

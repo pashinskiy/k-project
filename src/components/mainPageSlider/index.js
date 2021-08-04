@@ -18,7 +18,9 @@ const useStyle = makeStyles(theme => ({
       position: "absolute",
       left: 0,
       height: "100%",
-      background: `linear-gradient(90deg, ${theme.palette.background.main} 0%, rgba(255, 255, 255, 0) 100%)`,
+      '@media (min-width: 1024px)': {
+        background: `linear-gradient(90deg, ${theme.palette.background.main} 0%, rgba(255, 255, 255, 0) 100%)`,
+      },
       zIndex: 1,
       pointerEvents: "none",
 
@@ -56,11 +58,14 @@ const useStyle = makeStyles(theme => ({
     },
   },
   wrapperTrack: {
-    overflow: "scroll",
-    scrollbarWidth: "none",
-    "-ms-overflow-style": "none",
-    "&::-webkit-scrollbar": {
-      display: "none",
+    overflow: 'hidden',
+    '@media (max-width: 1024px)': {
+      overflow: "scroll",
+      scrollbarWidth: "none",
+      "-ms-overflow-style": "none",
+      "&::-webkit-scrollbar": {
+        display: "none",
+      },
     },
 
     "& *": {
