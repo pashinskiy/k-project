@@ -184,7 +184,7 @@ export default function Footer({ data }) {
     <footer id="footer" className={classes.root}>
       <nav className={classes.nav}>
         <div className={classes.menu}>
-          <Typography variant="h4">
+          <Typography variant="h4" component="h1">
             {data.allPrismicFooter.edges[0].node.data.menu_name.text}
           </Typography>
           <nav className={classes.links}>
@@ -198,7 +198,7 @@ export default function Footer({ data }) {
           </nav>
         </div>
         <div className={classes.menu}>
-          <Typography variant="h4">
+          <Typography variant="h4" component="h1">
             {data.allPrismicFooter.edges[0].node.data.about_name.text}
           </Typography>
           <nav className={classes.links}>
@@ -212,7 +212,7 @@ export default function Footer({ data }) {
           </nav>
         </div>
         <div className={classes.menu}>
-          <Typography variant="h4">
+          <Typography variant="h4" component="h1">
             {data.allPrismicFooter.edges[0].node.data.contact_name.text}
           </Typography>
           <nav className={classes.links}>
@@ -240,7 +240,7 @@ export default function Footer({ data }) {
           </nav>
         </div>
         <div className={classes.menu}>
-          <Typography variant="h4">
+          <Typography variant="h4" component="h1">
             {data.allPrismicFooter.edges[0].node.data.seen_name.text}
           </Typography>
           <div className={classes.seen}>
