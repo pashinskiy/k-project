@@ -1,58 +1,59 @@
-import * as React from "react";
-import { graphql } from "gatsby";
-import { makeStyles } from '@material-ui/core';
-import MainPageSlider from "../components/mainPageSlider";
-import Seo from "../components/seo";
-import Card from "../components/mainPage/dayProduct";
-import Categories from "../components/mainPage/categories";
-import News from "../components/mainPage/news";
-import Advantages from "../components/mainPage/advantages";
-import Sales from "../components/mainPage/sales";
-import Hot from "../components/mainPage/hot";
-import NewProducts from "../components/mainPage/newProducts";
-import Popular from "../components/mainPage/popular";
-import SocialNetworks from "../components/mainPage/social";
-import Layout from "../components/layout";
+import * as React from "react"
+import { graphql } from "gatsby"
+import { makeStyles } from "@material-ui/core"
+import MainPageSlider from "../components/mainPageSlider"
+import Seo from "../components/seo"
+import Card from "../components/mainPage/dayProduct"
+import Categories from "../components/mainPage/categories"
+import News from "../components/mainPage/news"
+import Advantages from "../components/mainPage/advantages"
+import Sales from "../components/mainPage/sales"
+import Hot from "../components/mainPage/hot"
+import NewProducts from "../components/mainPage/newProducts"
+import Popular from "../components/mainPage/popular"
+import SocialNetworks from "../components/mainPage/social"
+import Layout from "../components/layout"
 
 const useStyles = makeStyles(theme => ({
   day_news_categories: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 854px',
+    display: "grid",
+    gridTemplateColumns: "1fr 854px",
     gap: 40,
     rowGap: 0,
-    '& .index--day--product': {
-      gridRow: 'span 2',
+    "& .index--day--product": {
+      gridRow: "span 2",
     },
-    '@media (max-width: 1279px)': {
+    "@media (max-width: 1279px)": {
       gap: 22,
       rowGap: 40,
-      gridTemplateColumns: '1fr auto',
-      '& .index--day--product': {
+      gridTemplateColumns: "1fr auto",
+      "& .index--day--product": {
         gridRow: 2,
       },
     },
-    '@media (max-width: 767px)': {
-      '& .index--day--product': {
-        gridColumn: 'span 2',
+    "@media (max-width: 767px)": {
+      "& .index--day--product": {
+        gridColumn: "span 2",
       },
     },
   },
-}));
+}))
 
 const IndexPage = ({ data }) => {
-
   const classes = useStyles()
 
-  const allSales = data.allPrismicSales.edges.map(edge => edge.node);
+  const allSales = data.allPrismicSales.edges.map(edge => edge.node)
 
-  const allPromotionBanners = data.allPrismicPromotionBanner.edges.map(edge => edge.node);
+  const allPromotionBanners = data.allPrismicPromotionBanner.edges.map(
+    edge => edge.node
+  )
 
   return (
     <Layout>
       <Seo title="Krypton – интернет-маркетплейс, который вы так долго искали" />
-      <div style={{marginBottom: 28,}} />
+      <div style={{ marginBottom: 28 }} />
       <MainPageSlider array={allSales} variant={"sales"} />
-      <div style={{marginBottom: 40,}} />
+      <div style={{ marginBottom: 40 }} />
       <div className={classes.day_news_categories}>
         <Card data={data} />
         <News data={data.allPrismicStories} />
@@ -60,21 +61,21 @@ const IndexPage = ({ data }) => {
       </div>
       <Advantages data={data} />
       <Sales data={data} />
-      <div style={{marginBottom: 80,}} />
+      <div style={{ marginBottom: 80 }} />
       <Hot data={data} />
-      <div style={{marginBottom: 80,}} />
-      <MainPageSlider array={allPromotionBanners} variant={"promotionBanner"}/>
-      <div style={{marginBottom: 80,}} />
+      <div style={{ marginBottom: 80 }} />
+      <MainPageSlider array={allPromotionBanners} variant={"promotionBanner"} />
+      <div style={{ marginBottom: 80 }} />
       <NewProducts data={data} />
-      <div style={{marginBottom: 80,}} />
+      <div style={{ marginBottom: 80 }} />
       <Popular data={data} />
-      <div style={{marginBottom: 100,}} />
+      <div style={{ marginBottom: 100 }} />
       <SocialNetworks data={data} />
     </Layout>
-  );
-};
+  )
+}
 
-export default IndexPage;
+export default IndexPage
 
 export const query = graphql`
   query MainPage {
@@ -93,7 +94,7 @@ export const query = graphql`
                         image {
                           localFile {
                             childImageSharp {
-                              gatsbyImageData
+                              gatsbyImageData(height: 200)
                             }
                           }
                         }
@@ -116,7 +117,7 @@ export const query = graphql`
                         image {
                           localFile {
                             childImageSharp {
-                              gatsbyImageData
+                              gatsbyImageData(height: 200)
                             }
                           }
                         }
@@ -144,7 +145,11 @@ export const query = graphql`
                   image {
                     localFile {
                       childImageSharp {
-                        gatsbyImageData
+                        gatsbyImageData(
+                          height: 100
+                          width: 100
+                          transformOptions: { fit: CONTAIN }
+                        )
                       }
                     }
                   }
@@ -164,7 +169,10 @@ export const query = graphql`
               alt
               localFile {
                 childImageSharp {
-                  gatsbyImageData
+                  gatsbyImageData(
+                    width: 297
+                    transformOptions: { fit: CONTAIN }
+                  )
                 }
               }
             }
@@ -179,7 +187,7 @@ export const query = graphql`
         }
       }
     }
-    allPrismicAdvantage(sort: {fields: data___priority}) {
+    allPrismicAdvantage(sort: { fields: data___priority }) {
       edges {
         node {
           data {
@@ -187,7 +195,10 @@ export const query = graphql`
               alt
               localFile {
                 childImageSharp {
-                  gatsbyImageData
+                  gatsbyImageData(
+                    width: 194
+                    transformOptions: { fit: CONTAIN }
+                  )
                 }
               }
             }
@@ -209,7 +220,10 @@ export const query = graphql`
             previewimage {
               localFile {
                 childImageSharp {
-                  gatsbyImageData
+                  gatsbyImageData(
+                    width: 1144
+                    transformOptions: { fit: CONTAIN }
+                  )
                 }
               }
               alt
@@ -240,7 +254,10 @@ export const query = graphql`
             image {
               localFile {
                 childImageSharp {
-                  gatsbyImageData
+                  gatsbyImageData(
+                    width: 144
+                    transformOptions: { fit: CONTAIN }
+                  )
                 }
               }
             }
@@ -276,7 +293,10 @@ export const query = graphql`
             image {
               localFile {
                 childImageSharp {
-                  gatsbyImageData
+                  gatsbyImageData(
+                    width: 1144
+                    transformOptions: { fit: CONTAIN }
+                  )
                 }
               }
               alt
@@ -302,7 +322,10 @@ export const query = graphql`
                         alt
                         localFile {
                           childImageSharp {
-                            gatsbyImageData
+                            gatsbyImageData(
+                              height: 200
+                              transformOptions: { fit: CONTAIN }
+                            )
                           }
                         }
                       }
@@ -316,7 +339,7 @@ export const query = graphql`
         }
       }
     }
-    allPrismicCategory(sort: {fields: data___order}) {
+    allPrismicCategory(sort: { fields: data___order }) {
       edges {
         node {
           uid
@@ -325,7 +348,10 @@ export const query = graphql`
               alt
               localFile {
                 childImageSharp {
-                  gatsbyImageData
+                  gatsbyImageData(
+                    width: 235
+                    transformOptions: { fit: CONTAIN }
+                  )
                 }
               }
             }
@@ -355,4 +381,4 @@ export const query = graphql`
       }
     }
   }
-`;
+`

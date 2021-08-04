@@ -107,6 +107,8 @@ export default function Search({ data }) {
           }
           alt={data.allPrismicHeader.edges[0]?.node.data.find_img.alt}
           className={classes.img}
+          width={16}
+          height={16}
         />
         <input
           type="text"
