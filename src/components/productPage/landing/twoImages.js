@@ -154,7 +154,7 @@ export default function TwoImages({ slice, ...other }) {
         {img_1 ? (
           <GatsbyImage
             image={img_1}
-            alt={alt_1}
+            alt={alt_1 ?? "img"}
             className={classes.imgWrapper}
             style={{ width: "100%", height: "100%" }}
             imgStyle={{
@@ -187,7 +187,7 @@ export default function TwoImages({ slice, ...other }) {
         {img_2 ? (
           <GatsbyImage
             image={img_2}
-            alt={alt_2}
+            alt={alt_2 ?? "img"}
             className={classes.imgWrapper}
             style={{ width: "100%", height: "100%" }}
             imgStyle={{

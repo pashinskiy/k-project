@@ -149,6 +149,7 @@ export default function ButtonAddCart({ product, text, variant, dialog, iconPlus
       <Button
         disableRipple
         onClick={addToCart}
+        aria-label="добавить в корзину"
         className={classes.button + " " + classButton}
       >
         {iconPlus ? <IconButtonPlus className={classes.iconButtonPlus}/> : null}

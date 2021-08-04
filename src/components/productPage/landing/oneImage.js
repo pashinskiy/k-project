@@ -50,7 +50,7 @@ export default function OneImage({ slice, ...other }) {
     <Grid {...other} className={classes.wrapper}>
       <GatsbyImage
         image={img}
-        alt={alt}
+        alt={alt ?? "img"}
         className={classes.imgWrapper}
         style={{ width: "100%", height: "100%" }}
         imgStyle={{

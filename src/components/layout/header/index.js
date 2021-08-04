@@ -2,7 +2,7 @@ import React from "react"
 import { makeStyles } from "@material-ui/styles"
 import DefaultLink from "./link/default"
 import SaleButton from "./link/sale"
-import { Link } from "gatsby"
+import { navigate } from "gatsby"
 import CatalogButton from "./catalog"
 import ButtonWithIcon from "./buttonWithIcon"
 import Search from "./search"
@@ -40,6 +40,13 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "space-between",
   },
   logo: {
+    padding: 0,
+    border: "none",
+    background: "transparent",
+    minWidth: 0,
+    minHeight: 0,
+    cursor: "pointer",
+
     "@media (min-width: 1025px) and (max-width: 1279px)": {
       width: "17.8vw",
     },
@@ -138,15 +145,20 @@ export default function Header({
           ))}
         </nav>
         <nav className={classes.menu}>
-          <Link to={"/"} className={classes.logo}>
+          <button onClick={() => navigate("/")} className={classes.logo}>
             <img
               src={
                 data.allPrismicHeader.edges[0]?.node.data.logo_svg.localFile
                   .publicURL
               }
-              alt={data.allPrismicHeader.edges[0]?.node.data.logo_svg.alt}
+              alt={
+                data.allPrismicHeader.edges[0]?.node.data.logo_svg.alt ?? "logo"
+              }
+              height={158}
+              width={52}
+              style={{ width: "auto", height: "100%" }}
             />
-          </Link>
+          </button>
 
           <div className={classes.catafind}>
             <CatalogButton
@@ -167,7 +179,10 @@ export default function Header({
               data.allPrismicHeader.edges[0]?.node.data.favorites_img.localFile
                 .publicURL + "#outline"
             }
-            alt={data.allPrismicHeader.edges[0]?.node.data.favorites_img.alt}
+            alt={
+              data.allPrismicHeader.edges[0]?.node.data.favorites_img.alt ??
+              "favorites"
+            }
             count={state.favorites.length}
           />
 
@@ -178,7 +193,9 @@ export default function Header({
               data.allPrismicHeader.edges[0]?.node.data.cart_img.localFile
                 .publicURL + "#outline"
             }
-            alt={data.allPrismicHeader.edges[0]?.node.data.cart_img.alt}
+            alt={
+              data.allPrismicHeader.edges[0]?.node.data.cart_img.alt ?? "cart"
+            }
             count={state.cart.length}
           />
         </nav>

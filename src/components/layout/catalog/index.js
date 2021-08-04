@@ -177,7 +177,7 @@ export default function Catalog({ data, animation }) {
                                 <Category
                                     key={`category ${i}`}
                                     svg={category.category.document.data.category_icon.localFile?.publicURL + '#fill'}
-                                    alt={category.category.document.data.category_icon.alt}
+                                    alt={category.category.document.data.category_icon.alt ?? "img"}
                                     name={category.category.document.data.name}
                                     uid={category.category.document.uid}
                                     setHover={setHover} />
@@ -195,7 +195,7 @@ export default function Catalog({ data, animation }) {
                     {data.allPrismicCatalog.edges[0].node.data.categories.filter(atr => atr.category.document.data.name === hover).map((category, i) => (
                         <div className={classes.category} key={`category ${i}`}>
                             <Link to={`/category/${category.category.document.uid}`} className={classes.wrapper}>
-                                <img src={category.category.document.data.category_icon.localFile?.publicURL + '#gradient'} alt={''} />
+                                <img src={category.category.document.data.category_icon.localFile?.publicURL + '#gradient'} alt={category.category.document.data.category_icon ?? "img"} />
                                 <Typography variant="h3">{category.category.document.data.name}</Typography>
                             </Link>
                             <div className={classes.categories_brands}>
@@ -229,7 +229,7 @@ export default function Catalog({ data, animation }) {
                                                 :
                                                     <Link to={`/products/?category="${category.category.document.data.name}/?Производитель=["${brand.child.document.data.name.replace("ё", "е")}"]`}>
                                                         <div className={classes.brand_wrapper}>
-                                                            <img src={brand.child.document.data.body[0].primary.image.localFile?.childImageSharp?.gatsbyImageData.images.fallback.src} alt={brand.child.document.data.body[0].primary.image.alt} />
+                                                            <GatsbyImage image={brand.child.document.data.body[0].primary.image.localFile?.childImageSharp?.gatsbyImageData} alt={brand.child.document.data.body[0].primary.image.alt ?? "img"} />
                                                         </div>
                                                     </Link>
                                             }
@@ -245,11 +245,11 @@ export default function Catalog({ data, animation }) {
                     {data.allPrismicCatalog.edges[0].node.data.categories.filter(atr => atr.category.document.data.name === hover)[0].category.document.data.body.filter(slice => slice.slice_type === 'vertical_img').map((promo, i) => 
                         (promo.primary?.tumbler_link === true ?
                             <Link to={`${promo.primary?.link}`}>
-                                <GatsbyImage image={promo.primary?.catalog_img?.localFile?.childImageSharp.gatsbyImageData} alt={promo.primary?.catalog_img.alt} className={classes.img} key={`images_promo ${i}`} />
+                                <GatsbyImage image={promo.primary?.catalog_img?.localFile?.childImageSharp.gatsbyImageData} alt={promo.primary?.catalog_img.alt ?? "img"} className={classes.img} key={`images_promo ${i}`} />
                             </Link>
                         : 
                             <a href={`${promo.primary?.link}`} target="_blank" rel="noopener noreferrer">
-                                <GatsbyImage image={promo.primary?.catalog_img?.localFile?.childImageSharp.gatsbyImageData} alt={promo.primary?.catalog_img.alt} className={classes.img} key={`images_promo ${i}`} />
+                                <GatsbyImage image={promo.primary?.catalog_img?.localFile?.childImageSharp.gatsbyImageData} alt={promo.primary?.catalog_img.alt ?? "img"} className={classes.img} key={`images_promo ${i}`} />
                             </a>
                         )
                     )}

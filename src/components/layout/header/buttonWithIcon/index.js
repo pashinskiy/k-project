@@ -68,7 +68,7 @@ export default function ButtonWithIcon({ name, img, alt, link, count }) {
         {count ? <div className={classes.count}>{count}</div> : null}
         <img
           src={img}
-          alt={alt}
+          alt={alt ?? "img"}
           width="30"
           height="30"
           style={{ width: "100%", height: "100%" }}

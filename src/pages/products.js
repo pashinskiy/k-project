@@ -136,9 +136,13 @@ export default function Products({ data: { allPrismicProduct } }) {
   const titleUrl = url.searchParams.has("search")
     ? JSON.parse(url.searchParams.get("search"))
     : ""
+  const categoryUrl = url.searchParams.has("category")
+    ? JSON.parse(url.searchParams.get("category"))
+    : ""
 
   const [title, setTitle] = React.useState(null)
-  const [allProducts, setAllProduct] = React.useState([])
+  const [category, setCategory] = React.useState(null)
+  const [allProducts, setAllProduct] = React.useState(allPrismicProduct.edges.map(edge => edge.node))
   const [filterProducts, setFilterProducts] = React.useState([])
 
   if (title !== titleUrl) {
@@ -149,6 +153,17 @@ export default function Products({ data: { allPrismicProduct } }) {
       )
 
     setTitle(titleUrl)
+    setAllProduct(newAllProduct)
+    setFilterProducts(newAllProduct)
+  }
+
+  if (category !== categoryUrl && categoryUrl !== "") {
+    console.log(allProducts[0].data.main_category.document?.data.name)
+    const newAllProduct = allProducts.filter(
+      product => product.data.main_category.document?.data.name === categoryUrl
+    )
+
+    setCategory(categoryUrl)
     setAllProduct(newAllProduct)
     setFilterProducts(newAllProduct)
   }
@@ -231,6 +246,16 @@ export const query = graphql`
           id
           uid
           data {
+            main_category {
+              document {
+                ... on PrismicCategory {
+                  id
+                  data {
+                    name
+                  }
+                }
+              }
+            }
             brand {
               document {
                 ... on PrismicBrand {

@@ -302,7 +302,7 @@ export default function MobileCatalog({ data, animation }) {
                                         <Grid className={`${classes.wrapper_stories} wrapper--stories--catalog`} key={`stories ${i}`}>
                                             <CardWidget
                                                 variant={"stories"}
-                                                cardImage={stories.stories.document.data.image.localFile.childImageSharp.gatsbyImageData}
+                                                cardImage={stories.stories.document.data.image.localFile?.childImageSharp.gatsbyImageData}
                                                 cardTitle={stories.stories.document.data.text.text}
                                                 cardLink={""}  />
                                         </Grid>
@@ -312,7 +312,7 @@ export default function MobileCatalog({ data, animation }) {
                                         <Grid className={`${classes.wrapper_stories} wrapper--stories--catalog`} key={`stories ${i}`}>
                                             <CardWidget
                                                 variant={"stories"}
-                                                cardImage={stories.stories.document.data.image.localFile.childImageSharp.gatsbyImageData}
+                                                cardImage={stories.stories.document.data.image.localFile?.childImageSharp.gatsbyImageData}
                                                 cardTitle={stories.stories.document.data.text.text}
                                                 cardLink={""}  />
                                         </Grid>
@@ -335,7 +335,7 @@ export default function MobileCatalog({ data, animation }) {
                                 <CardWidget
                                     variant={"category"}
                                     key={`category ${i}`}
-                                    cardImage={category.category.document.data.image.localFile.childImageSharp.gatsbyImageData}
+                                    cardImage={category.category.document.data.image.localFile?.childImageSharp.gatsbyImageData}
                                     cardTitle={category.category.document.data.name}
                                     cardLink={`/category/${category.category.document.uid}`}  />
                             ))}
@@ -361,7 +361,7 @@ export default function MobileCatalog({ data, animation }) {
                         <div className={classes.social}>
                             {data.allPrismicFooter.edges[0].node.data.body2.filter(atr => atr.slice_type === 'social').map((link, i) => (
                                 <div className={classes.social_wrapper} key={`social ${i}`}>
-                                    <Social icon={link.primary.social_img_white.localFile.publicURL} alt={link.primary.social_img.alt} link={link.primary.link.url} />
+                                    <Social icon={link.primary.social_img_white.localFile?.publicURL} alt={link.primary.social_img.alt ?? "img"} link={link.primary.link.url} />
                                 </div>
                             ))}
                         </div>

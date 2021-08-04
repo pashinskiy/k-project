@@ -183,13 +183,13 @@ export default function ButtonPlusMinus({ product, variant }) {
       alignItems="center"
       className={classes.wrapper + " " + classes.unselect + " " + classButton}
     >
-      <button onClick={minus} className={classes.icon}>
+      <button aria-label="минус" onClick={minus} className={classes.icon}>
         <Minus className={classMinus} />
       </button>
 
       <Typography className={classes.amount}>{count}</Typography>
 
-      <button onClick={plus} className={classes.icon}>
+      <button aria-label="плюс" onClick={plus} className={classes.icon}>
         <Plus className={classPlus} />
       </button>
     </Grid>

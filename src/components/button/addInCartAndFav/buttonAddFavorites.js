@@ -97,6 +97,7 @@ export default function ButtonAddFavorites({ product, variant }) {
     <Button
       disableRipple
       onClick={changeToFavorites}
+      aria-label={isFavorite ? "убрать из избранного" : "добавить в избранное"}
       className={classes.button + " " + classButton + " " + background}
     >
       {isFavorite ? <Favorites /> : <NotFavorites />}

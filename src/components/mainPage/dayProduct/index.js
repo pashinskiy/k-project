@@ -25,23 +25,21 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         marginBottom: 28,
     },
-    title_count: {
-        '& h3': {
-            fontSize: 20,
-            fontWeight: 700,
-            color: theme.palette.color.accentSecondary,
-        },
-        '& h6': {
-            fontSize: 12,
-            fontWeight: 700,
-            lineHeight: '100%',
-            color: theme.palette.color.main,
-            backgroundColor: theme.palette.background.brandLight,
-            padding: '8px 12px 8px 12px',
-            borderRadius: 100,
-            marginTop: 10,
-            width: 'fit-content',
-        },
+    h3: {
+        fontSize: 20,
+        fontWeight: 700,
+        color: theme.palette.color.accentSecondary,
+    },
+    h6: {
+        fontSize: 12,
+        fontWeight: 700,
+        lineHeight: '100%',
+        color: theme.palette.color.main,
+        backgroundColor: theme.palette.background.brandLight,
+        padding: '8px 12px 8px 12px',
+        borderRadius: 100,
+        marginTop: 10,
+        width: 'fit-content',
     },
 }));
 
@@ -68,8 +66,8 @@ export default function DayProduct(props) {
         <div className={`${classes.root} index--day--product`}>
             <div className={classes.title}>
                 <div className={classes.title_count}>
-                    <Typography variant="h3">Товар дня</Typography>
-                    <Typography variant="h6">
+                    <Typography variant="h3" component="h1" className={classes.h3}>Товар дня</Typography>
+                    <Typography variant="h6" component="h1" className={classes.h6}>
                         <Count />
                     </Typography>
                 </div>

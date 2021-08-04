@@ -115,8 +115,8 @@ export default function SalesTextPanel({ sale, socials, products }) {
         {socials.map(icon => (
           <div className={classes.socialsItems}>
             <Social
-              icon={icon.primary.social_img.localFile.publicURL}
-              alt={icon.primary.social_img.alt}
+              icon={icon.primary.social_img.localFile?.publicURL}
+              alt={icon.primary.social_img.alt ?? "img"}
               link={icon.primary.link.url}
               key={icon.id}
             />

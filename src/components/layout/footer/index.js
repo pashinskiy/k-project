@@ -232,8 +232,8 @@ export default function Footer({ data }) {
               .map((link, i) => (
                 <Social
                   key={`social ${i}`}
-                  icon={link.primary.social_img.localFile.publicURL}
-                  alt={link.primary.social_img.alt}
+                  icon={link.primary.social_img.localFile?.publicURL}
+                  alt={link.primary.social_img.alt ?? "img"}
                   link={link.primary.link.url}
                 />
               ))}

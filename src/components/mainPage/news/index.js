@@ -46,7 +46,7 @@ export default function News(props) {
                             <CardWidget
                                 variant={"stories"}
                                 key={`stories ${i}`}
-                                cardImage={stories.node.data.image.localFile.childImageSharp.gatsbyImageData}
+                                cardImage={stories.node.data.image.localFile?.childImageSharp.gatsbyImageData}
                                 cardTitle={stories.node.data.text.text}
                                 cardLink={""}  />
                         </Grid>

@@ -96,7 +96,7 @@ export default function Categories(props) {
                         <CardWidget
                             variant={"category"}
                             key={`category ${i}`}
-                            cardImage={category.node.data.image.localFile.childImageSharp.gatsbyImageData}
+                            cardImage={category.node.data.image.localFile?.childImageSharp.gatsbyImageData}
                             cardTitle={category.node.data.name}
                             cardLink={`/category/${category.node.uid}/`}  />
                     </Grid>
