@@ -401,6 +401,7 @@ export default function Filter({ products, setFilterProducts }) {
     const group = url.searchParams.get("group") ?? false
     const search = url.searchParams.get("search") ?? false
     const subcategory = url.searchParams.get("subcategory") ?? false
+    const category = url.searchParams.get("category") ?? false
 
     // отфильтрованные товары
     const filterProducts = products.filter(product => {
@@ -468,6 +469,7 @@ export default function Filter({ products, setFilterProducts }) {
       if (group) url.searchParams.set("group", group)
       if (search) url.searchParams.set("search", search)
       if (subcategory) url.searchParams.set("subcategory", subcategory)
+      if (category) url.searchParams.set("category", category)
 
       setShow(false)
       setTop(false)
