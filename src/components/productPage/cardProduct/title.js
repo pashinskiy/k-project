@@ -99,6 +99,8 @@ export default function Title({ logo, text, stickersSlices }) {
             <img
               src={img}
               alt={alt ?? "img"}
+              height={35}
+              width={70}
               style={{ width: "auto", height: "100%" }}
             />
           </div>

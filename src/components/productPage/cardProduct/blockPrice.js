@@ -252,6 +252,7 @@ export default function BlockPrice({ product, allColors }) {
           return (
             <button
               onClick={() => navigate(`/${prod.uid}/`)}
+              aria-label={`${prod.data.color_group}`}
               key={prod.uid}
               className={classes.item + " " + active}
               style={{

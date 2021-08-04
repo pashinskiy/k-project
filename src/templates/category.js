@@ -344,7 +344,11 @@ export const pageQuery = graphql`
                         image {
                           localFile {
                             childImageSharp {
-                              gatsbyImageData
+                              gatsbyImageData(
+                                width: 100
+                                height: 100
+                                transformOptions: { fit: CONTAIN }
+                              )
                             }
                           }
                           alt
@@ -375,7 +379,10 @@ export const pageQuery = graphql`
                     alt
                     localFile {
                       childImageSharp {
-                        gatsbyImageData
+                        gatsbyImageData(
+                          width: 187
+                          transformOptions: { fit: CONTAIN }
+                        )
                       }
                     }
                   }
@@ -405,7 +412,7 @@ export const pageQuery = graphql`
             image {
               localFile {
                 childImageSharp {
-                  gatsbyImageData
+                  gatsbyImageData(height: 144)
                 }
               }
               alt

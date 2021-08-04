@@ -25,7 +25,7 @@ export default function AllProductsByCategory({ subcategory_product }) {
                 image {
                   localFile {
                     childImageSharp {
-                      gatsbyImageData
+                      gatsbyImageData(height: 200)
                     }
                   }
                   alt
