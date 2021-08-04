@@ -4,6 +4,7 @@ import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
 import { GlobalStateContext } from "../../../context/GlobalContextProvider"
 
 import GoRegistration from "../../button/goRegistration"
+import { navigate } from "gatsby"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -224,14 +225,29 @@ export default function PriceBlock({ products }) {
       return order + position
     }, "")
 
+
+    const prodDataArr = []
+    products.map(product => {
+      const name = product.data.name
+      const count = state.inCart(product.id)
+      const jsonData = {
+        product_name: name,
+        product_uid: product.uid,
+        quantity: count
+      }
+      prodDataArr.push(jsonData)
+    })
+
     localStorage.setItem(
       "order",
       JSON.stringify({
         positions,
         price: summPrice,
         sale: summPrice - summOldPrice,
+        allProductsJson: prodDataArr,
       })
     )
+
   }
 
   // варианты доставки

@@ -251,6 +251,10 @@ export default function PriceBlock({ products }) {
 
   const order = JSON.parse(localStorage.getItem("order"))
 
+  //DELETE LINE
+  // const prod = JSON.parse(order.allProductsJson)
+  console.log(order)
+
   function payOrder() {
     localStorage.removeItem("order")
   }
