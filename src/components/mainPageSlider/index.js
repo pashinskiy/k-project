@@ -431,6 +431,7 @@ export default function MainPageSlider({ array, variant }) {
         <Grid container className={classes.smallButtonContainer}>
           {contentArray.map((sale, i) => (
             <Button
+              aria-label={`slider ${i}`}
               className={
                 i === activeChild
                   ? classes.smallButton + " " + classes.activeSmallButton
