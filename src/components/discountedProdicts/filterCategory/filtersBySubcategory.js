@@ -29,7 +29,7 @@ const useStyle = makeStyles(theme => ({
 export default function FiltersBySubcategory({ products }) {
   const classes = useStyle()
 
-  // собираем тэги  отображаемых продуктов
+  // собираем категории отображаемых продуктов
   const categories = new Set()
   products.forEach(product => {
     if (product.data.category.document === null) return

@@ -233,7 +233,8 @@ export default function PriceBlock({ products }) {
       const jsonData = {
         product_name: name,
         product_uid: product.uid,
-        quantity: count
+        quantity: count,
+        price: product.data.price
       }
       prodDataArr.push(jsonData)
     })

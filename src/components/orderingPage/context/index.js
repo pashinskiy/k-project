@@ -67,7 +67,7 @@ const initOrderingState = {
   street: false,
   house: false,
   apartment: false,
-  variantPay: "online",
+  variantPay: "онлайн",
   name: false,
   phone: false,
   validationHouse() {

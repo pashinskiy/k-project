@@ -1,4 +1,5 @@
 import React from "react"
+import { Helmet } from "react-helmet"
 import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
 
 import Pay from "../../button/pay"
@@ -6,7 +7,7 @@ import Pay from "../../button/pay"
 import { OrderingStateContext } from "../context"
 
 import Star from "../../../../static/svg/star.svg"
-import axios from 'axios'
+import axios from "axios"
 import { navigate } from "gatsby"
 
 const useStyle = makeStyles(theme => ({
@@ -260,11 +261,11 @@ export default function PriceBlock({ products }) {
   function payOrder() {
     if (validData) {
       localStorage.removeItem("order")
-      const items = [] 
+      const items = []
       order.allProductsJson.map(product => {
         const item = {
-          "quantity": product.quantity,
-          "prismic_uid": product.product_uid
+          quantity: product.quantity,
+          prismic_uid: product.product_uid,
         }
         items.push(item)
       })
@@ -275,42 +276,110 @@ export default function PriceBlock({ products }) {
       Дата: ${orderingState.date}, Время: ${orderingState.time} \n
       Оплата: ${orderingState.variantPay}`
       const orderData = {
-        "name": customerName,
-        "phone": customerPhone,
-        "city": orderingState.city,
-        "street": orderingState.street,
-        "house": orderingState.house,
-        "apartment": orderingState.apartment,
-        "variantDelivery": orderingState.variantDelivery,
-        "date": orderingState.date,
-        "time": orderingState.time,
-        "variantPay": orderingState.variantPay,
-        "customerComment": customerComment,
-        "items": items,
+        name: customerName,
+        phone: customerPhone,
+        city: orderingState.city,
+        street: orderingState.street,
+        house: orderingState.house,
+        apartment: orderingState.apartment,
+        variantDelivery: orderingState.variantDelivery,
+        date: orderingState.date,
+        time: orderingState.time,
+        variantPay: orderingState.variantPay,
+        customerComment: customerComment,
+        items: items,
       }
 
-      localStorage.setItem("order_data", JSON.stringify(orderData))
-      console.log(orderData)
-      console.log("order_data")
-      console.log(JSON.parse(localStorage.getItem("order_data")))
-      sendPostRequest(orderData)
-      navigate('/order/')
+      if (orderingState.variantPay === "при получении") {
+        localStorage.setItem("order_data", JSON.stringify(orderData))
+        console.log(orderData)
+        console.log("order_data")
+        console.log(JSON.parse(localStorage.getItem("order_data")))
+        sendPostRequest(orderData)
+        navigate("/order/")
+      }
+
+      if (orderingState.variantPay === "онлайн") {
+        let div = document.createElement("div")
+        div.innerHTML = `
+          <form name="TinkoffPayForm" onsubmit="pay(this); return false;">
+            <input class="tinkoffPayRow" type="hidden" name="terminalkey" value="1626196249843DEMO">
+            <input class="tinkoffPayRow" type="hidden" name="frame" value="false">
+            <input class="tinkoffPayRow" type="hidden" name="language" value="ru">
+            <input class="tinkoffPayRow" type="hidden" placeholder="Сумма заказа" name="amount" value="${
+              order.price
+            }" required>
+            <input class="tinkoffPayRow" type="hidden" placeholder="Номер заказа" name="order">
+            <input class="tinkoffPayRow" type="hidden" placeholder="Описание заказа" name="description" value="${JSON.stringify(
+              items
+            )}">
+            <input class="tinkoffPayRow" type="hidden" placeholder="ФИО плательщика" name="name" value="${
+              orderingState.name
+            }">
+            <input class="tinkoffPayRow" type="hidden" placeholder="Контактный телефон" name="phone" value="${
+              orderingState.phone
+            }">
+          </form>
+        `
+        document.body.append(div)
+        let event = new Event("submit")
+        div.children[0].dispatchEvent(event)
+      }
+
+      if (orderingState.variantPay === "в кредит") {
+        let div = document.createElement("div")
+        let items = order.allProductsJson
+          .map(
+            product =>
+              `{ name: '${product.product_name}', price: ${product.price}, quantity: ${product.quantity}}`
+          )
+          .join(",")
+        div.innerHTML = `
+          <button
+            type="button"
+            id="tinkoff_button"
+            onclick="tinkoff.create(
+              {
+                sum: ${order.price},
+                items: [${items}],
+                demoFlow: 'sms',
+                promoCode: 'default',
+                shopId: '651d9e30-09d1-402c-b961-2734975199bc',
+                showcaseId: '7169899f-4577-4497-947f-b6374899636e',
+                values: {
+                  contact: {
+                    fio: {
+                      firstName: '${orderingState.name}',
+                      lastName: ' '
+                    },
+                    mobilePhone: '${orderingState.phone}'
+                  }
+                }
+              },
+              {view: 'newTab'}
+            )"
+            ></button>`
+        document.body.append(div)
+        let event = new Event("click")
+        div.children[0].dispatchEvent(event)
+      }
     }
   }
 
-  const apiURL = "http://88.212.253.187:8888/api/order/create/"
+  const apiURL = "http://admin.krypton.ru/api/order/create/"
   // const apiURL = "http://127.0.0.1:8000/api/order/create/"
 
-
-  function sendPostRequest(data){
-    axios.post(
-      apiURL,
-      { body: data },
-      { headers: { 'Content-Type': 'application/json' } }
-    ).then(response => {
-      localStorage.setItem("response_data", JSON.stringify(response))
-      return response
-    })
+  function sendPostRequest(data) {
+    axios
+      .post(
+        apiURL,
+        { body: data },
+        { headers: { "Content-Type": "application/json" } }
+      )
+      .then(response => {
+        localStorage.setItem("response_data", JSON.stringify(response))
+        return response
+      })
   }
 
   function swipeStart(e) {
@@ -419,6 +488,18 @@ export default function PriceBlock({ products }) {
       )}
 
       <div className={classes.goRegistration}>
+        {orderingState.variantPay === "онлайн" ? (
+          <Helmet>
+            <script src="https://securepay.tinkoff.ru/html/payForm/js/tinkoff_v2.js"></script>
+          </Helmet>
+        ) : null}
+
+        {orderingState.variantPay === "в кредит" ? (
+          <Helmet>
+            <script src="https://forma.tinkoff.ru/static/onlineScript.js" />
+          </Helmet>
+        ) : null}
+
         <Pay text="Оплатить заказ" products={products} onClick={payOrder} />
       </div>
 
