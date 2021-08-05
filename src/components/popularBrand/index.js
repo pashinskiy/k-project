@@ -47,7 +47,11 @@ export default function PopularBrand({ products }) {
                     image {
                       localFile {
                         childImageSharp {
-                          gatsbyImageData
+                          gatsbyImageData(
+                            width: 100
+                            height: 100
+                            transformOptions: { fit: CONTAIN }
+                          )
                         }
                       }
                     }
