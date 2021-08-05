@@ -110,7 +110,7 @@ export default function CardSimilarProduct({ product, afterChange, sale }) {
   const alt = product?.data.images[0]?.image.alt
   const title = product?.data.name
   const old_price = product?.data.price
-  const price = Math.ceil((product?.data.price * sale) / 100)
+  const price = Math.ceil((product?.data.price * (100 - sale)) / 100)
 
   const classes = useStyle()
   return (
