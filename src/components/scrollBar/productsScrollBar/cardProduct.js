@@ -73,28 +73,28 @@ const useStyle = makeStyles(theme => ({
     fontWeight: 400,
     lineHeight: 1.21,
 
-    height: "3.98vw",
+    height: "2.63vw",
     fontSize: "1.09vw",
     marginTop: "0.62vw",
     "@media(min-width: 1280px)": {
-      height: "51px",
+      height: "33.88px",
       fontSize: "14px",
       marginTop: "8px",
     },
     "@media(max-width: 1025px)": {
-      height: "6.11vw",
+      height: "4.04vw",
       fontSize: "1.67vw",
       marginTop: "0.95vw",
     },
     "@media(max-width: 414px)": {
-      height: "12.31vw",
+      height: "8.17vw",
       fontSize: "3.38vw",
       marginTop: "1.93vw",
     },
   },
 }))
 
-export default function CardProduct({ product, afterChange }) {
+export default function CardProduct({ product, afterChange, allTitle }) {
   const classes = useStyle()
 
   const img =
@@ -113,7 +113,11 @@ export default function CardProduct({ product, afterChange }) {
           imgStyle={{ objectFit: "contain" }}
         />
         <Typography className={classes.price}>{price} ₽</Typography>
-        <Typography variant="body2" className={classes.title}>
+        <Typography
+          variant="body2"
+          className={classes.title}
+          style={{ height: allTitle ? "auto" : "" }}
+        >
           {title}
         </Typography>
       </Link>

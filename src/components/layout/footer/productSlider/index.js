@@ -135,7 +135,7 @@ export default function ProductSlider() {
       <div className={classes.slider}>
         {last_products.map(product => (
           <div key={product.id} className={classes.product}>
-            <ProductCard product={product} />
+            <ProductCard product={product} allTitle/>
           </div>
         ))}
       </div>
