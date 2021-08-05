@@ -174,6 +174,8 @@ export default function BlockBoolean({
             <img
               src={img.localFile?.publicURL}
               alt={img.alt ?? "img"}
+              width={70}
+              height={35}
               style={{ width: "auto", height: "100%" }}
             />
             {/* <picture style={{ display: "flex", width: "100%", height: "100%" }}>

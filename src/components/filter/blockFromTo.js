@@ -197,10 +197,13 @@ export default function BlockFromTo({
 
   return valueMax !== valueMin ? (
     <Wrapper title={title} {...other}>
+      <label for="from"></label>
+      <label for="to"></label>
       <Grid container justify="space-between" id={id}>
         <Input
           value={value[0]}
           id={`${id}_from`}
+          name="from"
           onChange={changeValue}
           disableUnderline
           className={classes.input}
@@ -209,6 +212,7 @@ export default function BlockFromTo({
         <Input
           value={value[1]}
           id={`${id}_to`}
+          name="to"
           onChange={changeValue}
           disableUnderline
           className={classes.input}

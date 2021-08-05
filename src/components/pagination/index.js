@@ -247,7 +247,7 @@ export default function Pagination({ pageSize, components, message }) {
 
       {lastPage > 1 ? (
         <Grid container alignItems="center" className={classes.paginationBlock}>
-          <button onClick={() => goTo(page - 1)}>
+          <button aria-label="предыдущая" onClick={() => goTo(page - 1)}>
             <Arrow className={classes.mirror} />
           </button>
 
@@ -263,7 +263,7 @@ export default function Pagination({ pageSize, components, message }) {
               {pagination}
             </Grid>
           </Grid>
-          <button onClick={() => goTo(page + 1)}>
+          <button aria-label="следующая" onClick={() => goTo(page + 1)}>
             <Arrow />
           </button>
         </Grid>

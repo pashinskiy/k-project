@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Grid, makeStyles, Typography, useMediaQuery } from "@material-ui/core"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 
 import BlockPrice from "./blockPrice"
 import AddInCartAndFav from "../../button/addInCartAndFav"
@@ -247,6 +247,14 @@ const useStyles = makeStyles(theme => ({
       marginTop: "2.89vw",
     },
   },
+  buttonLink: {
+    padding: 0,
+    border: "none",
+    background: "transparent",
+    minWidth: 0,
+    minHeight: 0,
+    cursor: "pointer",
+  },
 }))
 
 export default function CardProduct({ product, afterChange, ...other }) {
@@ -267,6 +275,8 @@ export default function CardProduct({ product, afterChange, ...other }) {
             <img
               src={img}
               alt={alt ?? "img"}
+              width={70}
+              height={35}
               style={{ width: "auto", height: "100%" }}
             />
           </div>
@@ -315,7 +325,11 @@ export default function CardProduct({ product, afterChange, ...other }) {
             {stickersImgArr[0]}
           </Grid>
         ) : null}
-        <Link to={`/${product.uid}`} style={{ textDecoration: "none" }}>
+        <button
+          name={`${product.data.name}`}
+          onClick={() => navigate(`/${product.uid}`)}
+          className={classes.buttonLink}
+        >
           <GatsbyImage
             image={
               product.data.images[0]?.image.localFile?.childImageSharp
@@ -325,7 +339,7 @@ export default function CardProduct({ product, afterChange, ...other }) {
             className={classes.wrapperImg}
             imgStyle={{ objectFit: "contain" }}
           />
-        </Link>
+        </button>
       </Grid>
 
       <Grid

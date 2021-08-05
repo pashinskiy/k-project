@@ -88,7 +88,7 @@ export default function Categories(props) {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h6" component="h6" className={classes.h6}>
+      <Typography variant="h6" component="h1" className={classes.h6}>
         Категории
       </Typography>
       <nav className={classes.categories}>

@@ -7,16 +7,16 @@ const useStyles = makeStyles(theme => ({
     root: {
         marginTop: 80,
         overflowX: 'visible',
-        '& h3': {
-            fontSize: 36,
-            fontWeight: 700,
-            lineHeight: '100%',
-            '@media (max-width: 1025px)': {
-                fontSize: 28,
-            },
-            '@media (max-width: 767px)': {
-                fontSize: 20,
-            },
+    },
+    h3: {
+        fontSize: 36,
+        fontWeight: 700,
+        lineHeight: '100%',
+        '@media (max-width: 1025px)': {
+            fontSize: 28,
+        },
+        '@media (max-width: 767px)': {
+            fontSize: 20,
         },
     },
     title: {
@@ -52,7 +52,7 @@ export default function NewProducts(props) {
     return (
         <div className={classes.root}>
             <div className={classes.title}>
-                <Typography variant="h3">
+                <Typography variant="h3" component="h1" className={classes.h3}>
                     Новинки
                 </Typography>
             </div>

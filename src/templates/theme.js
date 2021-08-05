@@ -37,6 +37,9 @@ const theme = createMuiTheme({
   overrides: {
     MuiCssBaseline: {
       "@global": {
+        html: {
+          overflowX: "hidden",
+        },
         body: {
           margin: 0,
           background: "#ffffff",
