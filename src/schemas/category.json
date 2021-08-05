@@ -80,6 +80,22 @@
                   "thumbnails": [],
                   "label": "Вставьте вертикальный баннер для Каталога"
                 }
+              },
+              "link": {
+                "type": "Text",
+                "config": {
+                  "label": "Вставьте ссылку (текстом)",
+                  "placeholder": "Вставьте ссылку (текстом)"
+                }
+              },
+              "tumbler_link": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "Внешняя",
+                  "placeholder_true": "Локальная",
+                  "default_value": true,
+                  "label": "Выберете тип ссылки"
+                }
               }
             },
             "repeat": {}
@@ -97,6 +113,22 @@
                   "constraint": {},
                   "thumbnails": [],
                   "label": "Вставьте горизонтальный баннер для страницы Категории"
+                }
+              },
+              "link": {
+                "type": "Text",
+                "config": {
+                  "label": "Вставьте ссылку (текстом)",
+                  "placeholder": "Вставьте ссылку (текстом)"
+                }
+              },
+              "tumbler_link": {
+                "type": "Boolean",
+                "config": {
+                  "placeholder_false": "Внешняя",
+                  "placeholder_true": "Локальная",
+                  "default_value": true,
+                  "label": "Выберете тип ссылки"
                 }
               }
             },

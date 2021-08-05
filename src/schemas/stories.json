@@ -19,6 +19,22 @@
         "placeholder": "Выберите категорию"
       }
     },
+    "link": {
+      "type": "Text",
+      "config": {
+        "label": "Вставьте ссылку (текстом)",
+        "placeholder": "Вставьте ссылку (текстом)"
+      }
+    },
+    "tumbler_link": {
+      "type": "Boolean",
+      "config": {
+        "placeholder_false": "Внешняя",
+        "placeholder_true": "Локальная",
+        "default_value": true,
+        "label": "Выберете тип ссылки"
+      }
+    },
     "image": {
       "type": "Image",
       "config": {

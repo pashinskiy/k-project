@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, makeStyles, useMediaQuery, Typography } from '@material-ui/core';
 import CardWidget from '../../widgets/cardWidget';
 import ScrollBar from '../../scrollBar';
+import { Link } from 'gatsby';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -42,14 +43,28 @@ export default function News(props) {
             <div className={classes.categories}>
                 <ScrollBar buttonNext fullScreen={maxWidth1024}>
                     {props.data.edges.map((stories, i) => (
-                        <Grid className={classes.story}>
-                            <CardWidget
-                                variant={"stories"}
-                                key={`stories ${i}`}
-                                cardImage={stories.node.data.image.localFile?.childImageSharp.gatsbyImageData}
-                                cardTitle={stories.node.data.text.text}
-                                cardLink={""}  />
-                        </Grid>
+                        stories.node.data.tumbler_link === true ?
+                            <Link to={`${stories.node.data.link}`}>
+                                <Grid className={classes.story}>
+                                    <CardWidget
+                                        variant={"stories"}
+                                        key={`stories ${i}`}
+                                        cardImage={stories.node.data.image.localFile?.childImageSharp.gatsbyImageData}
+                                        cardTitle={stories.node.data.text.text}
+                                        cardLink={""}  />
+                                </Grid>
+                            </Link>
+                        :
+                            <a href={`${stories.node.data.link}`} target="_blank" rel="noopener noreferrer">
+                                <Grid className={classes.story}>
+                                    <CardWidget
+                                        variant={"stories"}
+                                        key={`stories ${i}`}
+                                        cardImage={stories.node.data.image.localFile?.childImageSharp.gatsbyImageData}
+                                        cardTitle={stories.node.data.text.text}
+                                        cardLink={""}  />
+                                </Grid>
+                            </a>
                     ))}
                 </ScrollBar>
             </div>

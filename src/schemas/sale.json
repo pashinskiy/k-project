@@ -22,11 +22,20 @@
         "placeholder": "Скидка"
       }
     },
-    "sale_link": {
-      "type": "Link",
+    "link": {
+      "type": "Text",
       "config": {
-        "label": "Ссылка на акционные товары",
-        "placeholder": "Ссылка на акционные товары"
+        "label": "Вставьте ссылку (текстом)",
+        "placeholder": "Вставьте ссылку (текстом)"
+      }
+    },
+    "tumbler_link": {
+      "type": "Boolean",
+      "config": {
+        "placeholder_false": "Внешняя",
+        "placeholder_true": "Локальная",
+        "default_value": true,
+        "label": "Выберете тип ссылки"
       }
     },
     "sale_img": {

@@ -180,9 +180,8 @@ export const query = graphql`
               raw
             }
             sale_value
-            sale_link {
-              url
-            }
+            link
+            tumbler_link
           }
         }
       }
@@ -248,6 +247,8 @@ export const query = graphql`
       edges {
         node {
           data {
+            link
+            tumbler_link
             text {
               text
             }
@@ -290,6 +291,8 @@ export const query = graphql`
       edges {
         node {
           data {
+            link
+            tumbler_link
             image {
               localFile {
                 childImageSharp {

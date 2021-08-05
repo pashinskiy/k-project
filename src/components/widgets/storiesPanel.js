@@ -2,6 +2,7 @@ import { Grid } from "@material-ui/core"
 import React from "react"
 import CardWidget from "./cardWidget"
 import { makeStyles } from "@material-ui/core/styles"
+import { Link } from 'gatsby'
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -51,13 +52,29 @@ export default function StoriesPanel({ stories }) {
   // }
 
   return stories.map(story => (
-    <Grid item className={classes.storiesCard}>
-      <CardWidget
-        cardImage={story.data.image?.localFile?.childImageSharp.gatsbyImageData}
-        cardTitle={story.data.text.text}
-        variant="stories"
-        cardLink=""
-      />
-    </Grid>
+    story.data.tumbler_link === true ?
+          <Link to={`${story.data.link}`}>
+            <Grid item className={classes.storiesCard}>
+              <CardWidget
+                cardImage={
+                      story.data.image?.localFile?.childImageSharp.gatsbyImageData
+                    }
+                    cardTitle={story.data.text.text}
+                    variant="stories"
+                  />
+            </Grid>
+          </Link>
+      :
+          <a href={`${story.data.link}`} target="_blank" rel="noopener noreferrer">
+              <Grid item className={classes.storiesCard}>
+                <CardWidget
+                  cardImage={
+                        story.data.image?.localFile?.childImageSharp.gatsbyImageData
+                      }
+                      cardTitle={story.data.text.text}
+                      variant="stories"
+                    />
+              </Grid>
+          </a>
   ))
 }
