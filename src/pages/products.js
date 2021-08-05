@@ -142,7 +142,9 @@ export default function Products({ data: { allPrismicProduct } }) {
 
   const [title, setTitle] = React.useState(null)
   const [category, setCategory] = React.useState(null)
-  const [allProducts, setAllProduct] = React.useState(allPrismicProduct.edges.map(edge => edge.node))
+  const [allProducts, setAllProduct] = React.useState(
+    allPrismicProduct.edges.map(edge => edge.node)
+  )
   const [filterProducts, setFilterProducts] = React.useState([])
 
   if (title !== titleUrl) {
@@ -277,7 +279,7 @@ export const query = graphql`
                 alt
                 localFile {
                   childImageSharp {
-                    gatsbyImageData
+                    gatsbyImageData(height: 200)
                   }
                 }
               }
