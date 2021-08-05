@@ -320,6 +320,7 @@ export const query = graphql`
                   data {
                     name
                     price
+                    old_price
                     images {
                       image {
                         alt
@@ -337,7 +338,6 @@ export const query = graphql`
                 }
               }
             }
-            sale
           }
         }
       }

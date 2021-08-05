@@ -104,13 +104,15 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-export default function CardSimilarProduct({ product, afterChange, sale }) {
+export default function CardSimilarProduct({ product, afterChange }) {
   const img =
     product?.data.images[0]?.image.localFile?.childImageSharp.gatsbyImageData
   const alt = product?.data.images[0]?.image.alt
   const title = product?.data.name
-  const old_price = product?.data.price
-  const price = Math.ceil((product?.data.price * (100 - sale)) / 100)
+  const old_price = product?.data.old_price
+  const price = product?.data.price
+
+  const sale = Math.trunc((price / old_price) * 100)
 
   const classes = useStyle()
   return (
