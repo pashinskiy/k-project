@@ -162,6 +162,8 @@ export default function Layout({ children }) {
                         text {
                           text
                         }
+                        link
+                        tumbler_link
                       }
                     }
                   }
@@ -171,8 +173,12 @@ export default function Layout({ children }) {
                 sales {
                   document {
                     ... on PrismicSales {
+                      uid
                       id
                       data {
+                        link {
+                          text
+                        }
                         title {
                           text
                         }
@@ -231,6 +237,8 @@ export default function Layout({ children }) {
                             slice_type
                             id
                             primary {
+                              link
+                              tumbler_link
                               catalog_img {
                                 alt
                                 localFile {

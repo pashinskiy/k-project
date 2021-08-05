@@ -35,6 +35,14 @@ const useStyles = makeStyles(theme => ({
     transform: props => `translateX(${props.arrow}px)`,
     transition: "0.3s ease all",
     marginRight: 12,
+    '& [class^="MuiTypography-root"]': {
+      '&:nth-child(3)': {
+        fontWeight: '400 !important',
+      },
+    },
+    '& [class^="MuiTypography-body1"]': {
+      fontWeight: 'bold !important',
+    },
     "@media(max-width: 1025px)": {
       marginRight: 12,
     },
