@@ -6,6 +6,8 @@ import Pay from "../../button/pay"
 import { OrderingStateContext } from "../context"
 
 import Star from "../../../../static/svg/star.svg"
+import axios from 'axios'
+import { navigate } from "gatsby"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -251,8 +253,64 @@ export default function PriceBlock({ products }) {
 
   const order = JSON.parse(localStorage.getItem("order"))
 
+  //DELETE LINE
+  // const prod = JSON.parse(order.allProductsJson)
+  // console.log(orderingState)
+
   function payOrder() {
-    localStorage.removeItem("order")
+    if (validData) {
+      localStorage.removeItem("order")
+      const items = [] 
+      order.allProductsJson.map(product => {
+        const item = {
+          "quantity": product.quantity,
+          "prismic_uid": product.product_uid
+        }
+        items.push(item)
+      })
+      const customerName = orderingState.name
+      const customerPhone = orderingState.phone
+      const customerComment = `Адрес: ${orderingState.city}, ${orderingState.street}, ${orderingState.house}, ${orderingState.apartment}\n
+      Вариант доставки: ${orderingState.variantDelivery} \n
+      Дата: ${orderingState.date}, Время: ${orderingState.time} \n
+      Оплата: ${orderingState.variantPay}`
+      const orderData = {
+        "name": customerName,
+        "phone": customerPhone,
+        "city": orderingState.city,
+        "street": orderingState.street,
+        "house": orderingState.house,
+        "apartment": orderingState.apartment,
+        "variantDelivery": orderingState.variantDelivery,
+        "date": orderingState.date,
+        "time": orderingState.time,
+        "variantPay": orderingState.variantPay,
+        "customerComment": customerComment,
+        "items": items,
+      }
+
+      localStorage.setItem("order_data", JSON.stringify(orderData))
+      console.log(orderData)
+      console.log("order_data")
+      console.log(JSON.parse(localStorage.getItem("order_data")))
+      sendPostRequest(orderData)
+      navigate('/order/')
+    }
+  }
+
+  const apiURL = "http://88.212.253.187:8888/api/order/create/"
+  // const apiURL = "http://127.0.0.1:8000/api/order/create/"
+
+
+  function sendPostRequest(data){
+    axios.post(
+      apiURL,
+      { body: data },
+      { headers: { 'Content-Type': 'application/json' } }
+    ).then(response => {
+      localStorage.setItem("response_data", JSON.stringify(response))
+      return response
+    })
   }
 
   function swipeStart(e) {

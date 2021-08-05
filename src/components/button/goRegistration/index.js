@@ -48,7 +48,7 @@ export default function GoRegistration({ text, onClick }) {
 
   function buttonClick() {
     onClick()
-    navigate("/cart/")
+    navigate("/ordering/")
   }
 
   return (
