@@ -1,7 +1,7 @@
 import React from "react"
 import { Button, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-
+import { Link } from 'gatsby'
 import Arrow from "../../../static/svg/arrowWhite.svg"
 import SaleCard from "../saleCardPanel/saleCard"
 import AdvertiseCard from "./advertiseCard"
@@ -214,9 +214,18 @@ export default function MainPageSlider({ array, variant }) {
       break
     case "promotionBanner":
       contentArray = contentArray.map((banner, i) => (
-        <Grid item className={classes.itemAll} key={banner.uid + "_" + i}>
-          <AdvertiseCard banner={banner} key={banner.uid} />
-        </Grid>
+        banner.data.tumbler_link === true ?
+            <Grid item className={classes.itemAll} key={banner.uid + "_" + i}>
+              <Link to={`${banner.data.link}`}>
+                <AdvertiseCard banner={banner} key={banner.uid} />
+              </Link>
+            </Grid>
+      :
+            <Grid item className={classes.itemAll} key={banner.uid + "_" + i}>
+              <a href={`${banner.data.link}`} target="_blank" rel="noopener noreferrer">
+              <AdvertiseCard banner={banner} key={banner.uid} />
+              </a>
+            </Grid>
       ))
       break
     default:

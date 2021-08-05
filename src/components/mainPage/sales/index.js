@@ -3,6 +3,7 @@ import { makeStyles, Typography } from "@material-ui/core"
 import { GatsbyImage } from "gatsby-plugin-image"
 import ScrollBar from "../../scrollBar"
 import SaleValue from "../dayProduct/saleValue"
+import { Link } from 'gatsby';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,6 +46,15 @@ const useStyles = makeStyles(theme => ({
   advantages: {
     display: "flex",
     overflowX: "visible",
+    '& a': {
+      textDecoration: 'none',
+      color: theme.palette.color.main,
+      "&:last-child": {
+        '& .card--sale--mainpage': {
+          marginRight: 0,
+        },
+      },
+    },
   },
   card: {
     width: 297,
@@ -58,9 +68,6 @@ const useStyles = makeStyles(theme => ({
     MozTransform: 'translate3d(0, 0, 0)',
     background: theme.palette.background.secondary,
     marginRight: 12,
-    "&:last-child": {
-      marginRight: 0,
-    },
   },
   h4: {
     fontSize: 17,
@@ -110,27 +117,54 @@ export default function Sales(props) {
       <div className={classes.advantages}>
         <ScrollBar buttonNext fullScreen>
           {props.data.allPrismicSale.edges.map((advantage, i) => (
-            <div className={classes.card}>
-              <div className={classes.info}>
-                <SaleValue value={advantage.node.data.sale_value} />
-                <Typography
-                  variant="h4"
-                  component="h1"
-                  className={classes.h4}
-                  dangerouslySetInnerHTML={{
-                    __html: advantage.node.data.sale_name.raw[0].text,
-                  }}
-                />
-              </div>
-              <GatsbyImage
-                image={
-                  advantage.node.data.sale_img.localFile?.childImageSharp
-                    .gatsbyImageData
-                }
-                alt={advantage.node.data.sale_img.alt ?? "img"}
-                className={classes.img}
-              />
-            </div>
+            advantage.node.data.tumbler_link === true ?
+              <Link to={`${advantage.node.data.link}`}>
+                <div className={`${classes.card} card--sale--mainpage`}>
+                  <div className={classes.info}>
+                    <SaleValue value={advantage.node.data.sale_value} />
+                    <Typography
+                      variant="h4"
+                      component="h1"
+                      className={classes.h4}
+                      dangerouslySetInnerHTML={{
+                        __html: advantage.node.data.sale_name.raw[0].text,
+                      }}
+                    />
+                  </div>
+                  <GatsbyImage
+                    image={
+                      advantage.node.data.sale_img.localFile?.childImageSharp
+                        .gatsbyImageData
+                    }
+                    alt={advantage.node.data.sale_img.alt ?? "img"}
+                    className={classes.img}
+                  />
+                </div>
+              </Link>
+            :
+              <a href={`${advantage.node.data.link}`} target="_blank" rel="noopener noreferrer">
+                <div className={`${classes.card} card--sale--mainpage`}>
+                  <div className={classes.info}>
+                    <SaleValue value={advantage.node.data.sale_value} />
+                    <Typography
+                      variant="h4"
+                      component="h1"
+                      className={classes.h4}
+                      dangerouslySetInnerHTML={{
+                        __html: advantage.node.data.sale_name.raw[0].text,
+                      }}
+                    />
+                  </div>
+                  <GatsbyImage
+                    image={
+                      advantage.node.data.sale_img.localFile?.childImageSharp
+                        .gatsbyImageData
+                    }
+                    alt={advantage.node.data.sale_img.alt ?? "img"}
+                    className={classes.img}
+                  />
+                </div>
+              </a>
           ))}
         </ScrollBar>
       </div>

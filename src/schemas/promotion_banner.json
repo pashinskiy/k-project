@@ -1,11 +1,27 @@
 {
-  "Main" : {
-    "image" : {
-      "type" : "Image",
-      "config" : {
-        "constraint" : { },
-        "thumbnails" : [ ],
-        "label" : "Изображение"
+  "Main": {
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Изображение"
+      }
+    },
+    "link": {
+      "type": "Text",
+      "config": {
+        "label": "Вставьте ссылку (текстом)",
+        "placeholder": "Вставьте ссылку (текстом)"
+      }
+    },
+    "tumbler_link": {
+      "type": "Boolean",
+      "config": {
+        "placeholder_false": "Внешняя",
+        "placeholder_true": "Локальная",
+        "default_value": true,
+        "label": "Выбьерете тип ссылки"
       }
     }
   }

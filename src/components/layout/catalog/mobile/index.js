@@ -302,7 +302,7 @@ export default function MobileCatalog({ data, animation }) {
                                         <Grid className={`${classes.wrapper_stories} wrapper--stories--catalog`} key={`stories ${i}`}>
                                             <CardWidget
                                                 variant={"stories"}
-                                                cardImage={stories.stories.document.data.image.localFile?.childImageSharp.gatsbyImageData}
+                                                cardImage={stories.stories.document.data.image.localFile?.childImageSharp?.gatsbyImageData}
                                                 cardTitle={stories.stories.document.data.text.text}
                                                 cardLink={""}  />
                                         </Grid>
@@ -312,7 +312,7 @@ export default function MobileCatalog({ data, animation }) {
                                         <Grid className={`${classes.wrapper_stories} wrapper--stories--catalog`} key={`stories ${i}`}>
                                             <CardWidget
                                                 variant={"stories"}
-                                                cardImage={stories.stories.document.data.image.localFile?.childImageSharp.gatsbyImageData}
+                                                cardImage={stories.stories.document.data.image.localFile?.childImageSharp?.gatsbyImageData}
                                                 cardTitle={stories.stories.document.data.text.text}
                                                 cardLink={""}  />
                                         </Grid>
