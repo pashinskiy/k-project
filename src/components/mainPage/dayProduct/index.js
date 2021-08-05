@@ -74,10 +74,14 @@ export default function DayProduct(props) {
     }
   }
 
-  const old_price = props.data.allPrismicDayProduct.edges[0]?.node.data.product.document?.data.old_price
-  const price = props.data.allPrismicDayProduct.edges[0]?.node.data.product.document?.data.price
+  const old_price =
+    props.data.allPrismicDayProduct.edges[0]?.node.data.product.document?.data
+      .old_price
+  const price =
+    props.data.allPrismicDayProduct.edges[0]?.node.data.product.document?.data
+      .price
 
-  const sale = Math.trunc((price / old_price) * 100)
+  const sale = Math.trunc((1 - price / old_price) * 100)
 
   return (
     <div className={`${classes.root} index--day--product`}>
@@ -90,9 +94,7 @@ export default function DayProduct(props) {
             <Count />
           </Typography>
         </div>
-        <SaleValue
-          value={sale}
-        />
+        <SaleValue value={sale} />
       </div>
       <ProductCard
         product={
