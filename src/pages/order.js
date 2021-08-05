@@ -1,12 +1,12 @@
 import React from "react"
 import { makeStyles, Grid, Typography, Divider } from "@material-ui/core"
 import { graphql } from "gatsby"
-import { GlobalStateContext } from "../context/GlobalContextProvider"
+import { GlobalStateContext, GlobalDispatchContext } from "../context/GlobalContextProvider"
 import Seo from "../components/seo"
 import OrderConfirmedIcon from "../../static/svg/orderConfirmedIcon.svg"
 import HeaderWithIcon from "../components/headers/headerWithIcon"
 import OrderCard from "../components/cart/orderCard"
-import Layout from '../components/layout'
+import Layout from "../components/layout"
 
 const useStyle = makeStyles(theme => ({
   disclaimer: {
@@ -60,15 +60,15 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: 24,
       lineHeight: "29.05px",
-      },
+    },
     "@media(max-width: 1025px)": {
       fontSize: "2.8776vw",
       lineHeight: "3.4832vw",
-      },
+    },
     "@media(max-width: 414px)": {
       fontSize: "3.38164vw",
       lineHeight: "4.0917vw",
-      },
+    },
   },
   titleOrderName: {
     color: theme.palette.color.main,
@@ -77,15 +77,15 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       width: "250px",
       marginRight: "60px",
-      },
+    },
     "@media(max-width: 1025px)": {
       width: "29.976vw",
       marginRight: "7.1942vw",
-      },
+    },
     "@media(max-width: 414px)": {
       width: "39.85507vw",
       marginRight: "1.93236vw",
-      },
+    },
   },
   titleOrderValue: {
     color: theme.palette.color.main,
@@ -93,13 +93,13 @@ const useStyle = makeStyles(theme => ({
     width: "29.2968vw",
     "@media(min-width: 1280px)": {
       width: "375px",
-      },
+    },
     "@media(max-width: 1025px)": {
       width: "44.964vw",
-      },
+    },
     "@media(max-width: 414px)": {
       width: "55.314vw",
-      },
+    },
   },
   orderDataWrapper: {
     display: "flex",
@@ -115,7 +115,7 @@ const useStyle = makeStyles(theme => ({
     },
     "&:nth-last-child(1)": {
       marginBottom: 0,
-    }
+    },
   },
   orderInfoContainer: {
     width: "62.5vw",
@@ -123,15 +123,15 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       width: "800px",
       margin: "28px 0",
-      },
+    },
     "@media(max-width: 1025px)": {
       width: "95.9232vw",
       margin: "3.3573vw 0",
-      },
+    },
     "@media(max-width: 414px)": {
       width: "100%",
       margin: "6.76328vw 0",
-      },
+    },
   },
   titleAllCost: {
     fontWeight: 700,
@@ -142,15 +142,15 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       width: "660px",
       marginTop: "16px",
-      },
+    },
     "@media(max-width: 1025px)": {
       width: "79.13669vw",
       marginTop: "1.9184vw",
-      },
+    },
     "@media(max-width: 414px)": {
       width: "100%",
       marginTop: "1.9323vw",
-      },
+    },
   },
   productContainer: {
     marginTop: "0.9375vw",
@@ -163,65 +163,92 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 414px)": {
       marginTop: "2.8985vw",
     },
-  }
+  },
 }))
 
 const IndexPage = ({ data }) => {
   const classes = useStyle()
 
   const state = React.useContext(GlobalStateContext)
+  const stateDispatch = React.useContext(GlobalDispatchContext)
   const productsInCart = data.allPrismicProduct.edges
     .filter(edge => !!state.inCart(edge.node.id))
     .map(edge => edge.node)
     .map(obj => ({ ...obj, count: state.inCart(obj.id) }))
 
-  let allCost = 0 
-  productsInCart.map(item => allCost += item.data.price)
+  let allCost = 0
+  productsInCart.map(item => (allCost += item.data.price))
+
+  const customerCredentials = JSON.parse(localStorage.getItem("response_data"))
+  const orderingState = JSON.parse(localStorage.getItem("order_data"))
+
+  React.useEffect(() => {
+    return () => {
+      localStorage.removeItem("order_data")
+      localStorage.removeItem("customer_credentials")
+      localStorage.removeItem("cart")
+      stateDispatch({type: "CLEAN_CART"})
+    }
+  })
+
+  let deliveryData = ""
+  switch (orderingState.variantDelivery) {
+    case "express":
+      deliveryData = orderingState.time
+      break
+    case "standart":
+      deliveryData = `${orderingState.date}, ${orderingState.time}`
+      break
+    default:
+      console.log("variantDelivery указан неверно")
+      break
+  }
 
   const orderData = [
     {
       name: "Номер заказа: ",
-      value: "#877 780",
+      value: customerCredentials.data.order.number,
     },
     {
       name: "Способ оплаты: ",
-      value: "при получении",
+      value: orderingState.variantPay,
     },
     {
       name: "Адрес доставки: ",
-      value: "г.Санкт-Петербург, проспект Барклая, д.8, кв. 101",
+      value: `г. ${orderingState.city}, ${orderingState.street}, д.${orderingState.house}, кв.${orderingState.apartment}`,
     },
     {
       name: "Дата и время доставки: ",
-      value: "Сегодня 18/05/1999, с 12:00 до 13:00",
+      value: deliveryData,
     },
     {
       name: "Имя получателя: ",
-      value: "Елизавета",
+      value: orderingState.name,
     },
     {
       name: "Телефон получателя: ",
-      value: "8-999-333-34-45",
+      value: orderingState.phone,
     },
   ]
 
   return (
     <Layout>
       <Seo title="Корзина" />
-      <HeaderWithIcon
-        title="Заказ подтверждён"
-        icon={<OrderConfirmedIcon />}
-      />
+      <HeaderWithIcon title="Заказ подтверждён" icon={<OrderConfirmedIcon />} />
       <Divider />
       {!!productsInCart.length ? (
         <>
           <div className={classes.orderInfoContainer}>
             {orderData.map(item => (
               <div className={classes.orderDataWrapper}>
-                <Typography className={classes.titleOrderName + " " + classes.title}>
+                <Typography
+                  className={classes.titleOrderName + " " + classes.title}
+                >
                   {item.name}
                 </Typography>
-                <Typography className={classes.titleOrderValue + " " + classes.title}>
+                <Typography
+                  className={classes.titleOrderValue + " " + classes.title}
+                >
                   {item.value}
                 </Typography>
               </div>

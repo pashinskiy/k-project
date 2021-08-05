@@ -4,7 +4,7 @@ import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
 import { GlobalStateContext } from "../../../context/GlobalContextProvider"
 
 import GoRegistration from "../../button/goRegistration"
-import { navigate } from "gatsby"
+
 
 const useStyle = makeStyles(theme => ({
   wrapper: {

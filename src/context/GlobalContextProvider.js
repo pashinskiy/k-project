@@ -34,6 +34,13 @@ function reducer(state, action) {
         }
       }
 
+    case "CLEAN_CART":
+      return {
+        ...state,
+        cart: [],
+      }
+
+
     case "INCREMENT_PRODUCT_COUNT":
       if (state.inCart(action.payload) === 99) return { ...state }
       else {
