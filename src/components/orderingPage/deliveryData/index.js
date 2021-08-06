@@ -1,7 +1,6 @@
 import React from "react"
 import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { useStaticQuery, graphql } from "gatsby"
 
 import HeaderWithIcon from "../headerWithIcon"
 import SmallHeaderWithIcon from "../smallHeaderWithIcon"
@@ -29,7 +28,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       width: "53.59vw",
     },
-    "@media(max-width: 767px)": {
+    "@media(max-width: 414px)": {
       width: "100%",
     },
   },
@@ -47,7 +46,7 @@ const useStyle = makeStyles(theme => ({
       width: "9.59vw",
       height: "4.79vw",
     },
-    "@media(max-width: 767px)": {
+    "@media(max-width: 414px)": {
       marginLeft: "1.93vw",
       width: "13.32vw",
       height: "9.66vw",
@@ -61,7 +60,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "1.43vw",
     },
-    "@media(max-width: 767px)": {
+    "@media(max-width: 414px)": {
       marginTop: "1.93",
     },
   },
@@ -73,7 +72,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "4.31vw",
     },
-    "@media(max-width: 767px)": {
+    "@media(max-width: 414px)": {
       marginTop: "2.65vw",
     },
   },
@@ -85,7 +84,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "4.31vw",
     },
-    "@media(max-width: 767px)": {
+    "@media(max-width: 414px)": {
       marginTop: "6.76vw",
     },
 
@@ -97,7 +96,7 @@ const useStyle = makeStyles(theme => ({
       "@media(max-width: 1025px)": {
         marginTop: "2.39vw",
       },
-      "@media(max-width: 767px)": {
+      "@media(max-width: 414px)": {
         marginTop: "3.86vw",
       },
     },
@@ -110,7 +109,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "4.31vw",
     },
-    "@media(max-width: 767px)": {
+    "@media(max-width: 414px)": {
       marginTop: "5.55vw",
     },
   },
@@ -128,7 +127,7 @@ const useStyle = makeStyles(theme => ({
       marginBottom: "0.95vw",
       fontSize: "1.91vw",
     },
-    "@media(max-width: 767px)": {
+    "@media(max-width: 414px)": {
       marginBottom: "1.93vw",
       fontSize: "3.86vw",
     },
@@ -143,7 +142,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "1.43vw",
     },
-    "@media(max-width: 767px)": {
+    "@media(max-width: 414px)": {
       marginTop: "2.89vw",
     },
 
@@ -168,7 +167,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "1.43vw",
     },
-    "@media(max-width: 767px)": {
+    "@media(max-width: 414px)": {
       fontSize: "2.89vw",
     },
   },
@@ -187,7 +186,7 @@ const useStyle = makeStyles(theme => ({
       marginTop: "0.59vw",
       fontSize: "1.43vw",
     },
-    "@media(max-width: 767px)": {
+    "@media(max-width: 414px)": {
       marginTop: "1.93vw",
       fontSize: "2.89vw",
     },
@@ -200,7 +199,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "2.87vw",
     },
-    "@media(max-width: 767px)": {
+    "@media(max-width: 414px)": {
       marginTop: "6.76vw",
     },
 
@@ -212,7 +211,7 @@ const useStyle = makeStyles(theme => ({
       "@media(max-width: 1025px)": {
         marginTop: "2.39vw",
       },
-      "@media(max-width: 767px)": {
+      "@media(max-width: 414px)": {
         marginTop: "3.86vw",
       },
     },
@@ -226,25 +225,9 @@ const useStyle = makeStyles(theme => ({
 
 export default function DeliveryData({ prismicCartAndOrder }) {
   const classes = useStyle()
-  const smartPhoneScreen = useMediaQuery("(max-width: 767px)")
-
-  const data = useStaticQuery(
-    graphql`
-      {
-        prismicDeliveryCities {
-          data {
-            cities {
-              city
-            }
-          }
-        }
-      }
-    `
-  )
+  const smartPhoneScreen = useMediaQuery("(max-width: 414px)")
 
   const stickerDelivery = prismicCartAndOrder.data.sticker ?? false
-
-  const cities = data.prismicDeliveryCities.data.cities.map(item => item.city)
 
   const dates = [
     `${getDate("+1")}, завтра`,
@@ -256,7 +239,6 @@ export default function DeliveryData({ prismicCartAndOrder }) {
   )
 
   React.useEffect(() => {
-    setCity(cities[0])
     setDate(dates[0])
     setTime(timeStandartDelivery[0])
   }, [])
@@ -352,7 +334,7 @@ export default function DeliveryData({ prismicCartAndOrder }) {
 
       <div className={classes.selectCityWrapper}>
         <WrapperWithTitle title="Город">
-          <SelectCity options={cities} afterChange={setCity} />
+          <SelectCity />
         </WrapperWithTitle>
       </div>
 

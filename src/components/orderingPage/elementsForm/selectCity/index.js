@@ -1,7 +1,7 @@
 import React from "react"
 import { makeStyles, Grid, Typography, Button } from "@material-ui/core"
 
-import Arrow from "../../../../../static/svg/arrow.svg"
+import { OrderingStateContext, OrderingDispatchContext } from "../../context"
 
 const useStyle = makeStyles(theme => ({
   select: {
@@ -57,6 +57,8 @@ const useStyle = makeStyles(theme => ({
     left: 0,
     width: "100%",
     zIndex: 2,
+    maxHeight: "200px",
+    overflow: "auto",
 
     padding: "1.17vw 0.93vw",
     borderRadius: "0.46vw",
@@ -93,39 +95,66 @@ const useStyle = makeStyles(theme => ({
       color: theme.palette.color.accentSecondary,
     },
   },
+  error: {
+    border: `1px solid #F1ADAD`,
+    "@media(max-width: 767px)": {
+      border: `1px solid ${theme.palette.color.accentSecondary}`,
+    },
+  },
 }))
 
-export default function SelectCity({ options, afterChange }) {
+export default function SelectCity() {
   const classes = useStyle()
   const [showOptions, setShowOptions] = React.useState(false)
-  const [value, setValue] = React.useState(options[0])
+  // const [value, setValue] = React.useState(options[0])
+  const orderingState = React.useContext(OrderingStateContext)
+  const orderingDispatch = React.useContext(OrderingDispatchContext)
 
-  function toggleShowOptions() {
-    setShowOptions(!showOptions)
+  const options = orderingState.city
+    ? orderingState.cities.filter(city =>
+        city.toLowerCase().includes(orderingState.city.toLowerCase())
+      )
+    : orderingState.cities
+
+  function setCity(value) {
+    orderingDispatch({ type: "SET_CITY", payload: value })
   }
 
-  function setGlobalValue(value) {
-    toggleShowOptions()
-    setValue(value)
-    afterChange(value)
+  function openOptions() {
+    setShowOptions(true)
   }
+
+  function setOption(value) {
+    setShowOptions(false)
+    setCity(value)
+  }
+
+  function setValue(e) {
+    setCity(e.target.value)
+  }
+
+  const error = orderingState.validationCity() ? "" : classes.error
 
   return (
     <div style={{ position: "relative" }}>
       <input
-        onFocus={() => setShowOptions(true)}
-        onBlur={() => setShowOptions(false)}
-        className={classes.select + " " + classes.text}
-        value={value}
+        onClick={openOptions}
+        onInput={setValue}
+        className={classes.select + " " + classes.text + " " + error}
+        value={orderingState.city}
+        autocomplete="new-password"
       />
-        {/* <Typography className={classes.text}>{value}</Typography> 
-       </input> */}
 
-      {showOptions ? (
-        <Grid container direction="column" className={classes.options}>
+      {showOptions && options.length ? (
+        <Grid
+          container
+          direction="column"
+          wrap="nowrap"
+          className={classes.options}
+        >
           {options.map(option => (
             <Button
-              onClick={() => setGlobalValue(option)}
+              onClick={() => setOption(option)}
               key={option}
               className={classes.option + " " + classes.text}
             >
