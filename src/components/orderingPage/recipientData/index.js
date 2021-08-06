@@ -18,19 +18,19 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "2.87vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginTop: "4.83vw",
     },
 
     "& > *:nth-child(2)": {
-      "@media(max-width: 414px)": {
+      "@media(max-width: 767px)": {
         marginTop: "4.83vw",
       },
     },
 
     "& > *": {
       width: "44.87%",
-      "@media(max-width: 414px)": {
+      "@media(max-width: 767px)": {
         width: "100%",
       },
     },

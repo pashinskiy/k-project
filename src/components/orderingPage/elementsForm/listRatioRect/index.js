@@ -16,7 +16,7 @@ const useStyle = makeStyles(theme => ({
       marginLeft: "-0.95vw",
       marginTop: "-0.95vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "calc(100% + 1.93vw)",
       marginLeft: "-1.93vw",
       marginTop: "-1.93vw",
@@ -42,7 +42,7 @@ const useStyle = makeStyles(theme => ({
       padding: "1.79vw 1.43vw",
       borderRadius: "0.71vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginLeft: "1.93vw",
       marginTop: "1.93vw",
       padding: "3.62vw 2.89vw",
@@ -64,7 +64,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "3.38vw",
     },
   },

@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
       padding: "0.959vw",
       marginBottom: "3.357vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       borderRadius: "4.83vw",
       padding: "1.932vw",
       marginBottom: "6.763vw",
@@ -59,7 +59,7 @@ const useStyles = makeStyles(theme => ({
       marginBottom: "3.357vw",
       height: "47.961vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       borderRadius: "2.898vw",
       marginBottom: "6.763vw",
       height: "96.618vw",
@@ -77,7 +77,7 @@ const useStyles = makeStyles(theme => ({
       paddingRight: "3.357vw",
       paddingLeft: "3.357vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       paddingRight: "6.763vw",
       paddingLeft: "6.763vw",
     },
@@ -96,7 +96,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "4.316vw",
       marginBottom: "1.438vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "8.695vw",
       marginBottom: "2.898vw",
     },
@@ -117,7 +117,7 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: "3.357vw",
       marginBottom: "3.357vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       paddingRight: "6.763vw",
       paddingLeft: "6.763vw",
       marginBottom: "6.763vw",
@@ -132,7 +132,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "1.678vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "3.381vw",
     },
   },
@@ -144,7 +144,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginRight: "9.592vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginRight: "19.323vw",
     },
   },
@@ -156,7 +156,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginLeft: "0.959vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginLeft: "1.932vw",
     },
   },
@@ -179,7 +179,7 @@ export default function SaleCardMain({ sale }) {
     month: "long",
     day: "numeric",
   }).replace(" г.", "")
-  const mobile = useMediaQuery("(max-width: 414px)")
+  const mobile = useMediaQuery("(max-width: 767px)")
   return (
     <Card className={classes.root}>
       <GatsbyImage

@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
         display: "inherit",
       },
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginLeft: "-6.76vw",
     },
   },

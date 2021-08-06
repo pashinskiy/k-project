@@ -21,14 +21,14 @@ const useStyles = makeStyles(theme => ({
       width: "76.7vw",
       maxWidth: "640px",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "88.4vw",
       maxWidth: "366px",
     },
   },
   cardText: {
     fontSize: 17,
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: 14,
     },
   },

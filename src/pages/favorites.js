@@ -29,14 +29,14 @@ const useStyles = makeStyles(theme => ({
       padding: "5.87vw 0 2.39vw",
       borderWidth: "0.11vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       padding: "11.83vw 0 6.76vw",
       borderWidth: "0.24vw",
     },
   },
   itemRoot: {
     margin: "40px 0",
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       margin: "0px",
     },
   },
@@ -49,7 +49,7 @@ const IndexPage = ({ data }) => {
   let favorites = localStorage.getItem("favorites")
   favorites = favorites === null || !favorites ? [] : JSON.parse(favorites)
 
-  const isMobile = useMediaQuery("(max-width: 414px)")
+  const isMobile = useMediaQuery("(max-width: 767px)")
 
   const [favoritesArray, setFavoritesArray] = useState(favorites)
   const dataProducts = data.allPrismicProduct.edges.map(edge => edge.node)

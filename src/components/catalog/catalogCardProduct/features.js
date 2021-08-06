@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       height: "4.07vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       height: "6.28vw",
     },
     "&::-webkit-scrollbar": {
@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
       marginRight: "0.95vw",
       border: "0.23vw solid transparent",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       padding: "0.96vw 2.89vw",
       borderRadius: "2.89vw",
       marginRight: "0.96vw",
@@ -89,7 +89,7 @@ const useStyles = makeStyles(theme => ({
       "@media(max-width: 1025px)": {
         margin: "-0.23vw",
       },
-      "@media(max-width: 414px)": {
+      "@media(max-width: 767px)": {
         margin: "-0.48vw",
       },
     },
@@ -103,7 +103,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginRight: "1.19vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginRight: "2.41vw",
     },
   },
@@ -119,7 +119,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "1.43vw",
       lineHeight: "1.7vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "2.89vw",
       lineHeight: "3.8vw",
     },

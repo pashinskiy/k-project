@@ -23,7 +23,7 @@ const useStyle = makeStyles(theme => ({
       marginLeft: "-3.35vw",
       marginTop: "1.91vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       height: "12.07vw",
       marginLeft: "-6.76vw",
       marginTop: "3.86vw",
@@ -54,7 +54,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       padding: "0 4.79vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       padding: "0 9.66vw",
       flexShrink: 0,
     },
@@ -66,7 +66,7 @@ const useStyle = makeStyles(theme => ({
       "@media(max-width: 1025px)": {
         borderRadius: "2.39vw 0 0 0",
       },
-      "@media(max-width: 414px)": {
+      "@media(max-width: 767px)": {
         borderRadius: "4.83vw 0 0 0",
       },
     },
@@ -78,7 +78,7 @@ const useStyle = makeStyles(theme => ({
       "@media(max-width: 1025px)": {
         borderRadius: "0 2.39vw 0 0",
       },
-      "@media(max-width: 414px)": {
+      "@media(max-width: 767px)": {
         borderRadius: "0 4.83vw 0 0",
       },
     },
@@ -97,7 +97,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "4.1vw",
     },
   },
@@ -115,7 +115,7 @@ export default function TabPanel({ links }) {
   const classes = useStyle()
   const [index, setIndex] = React.useState(0)
 
-  const mobile = useMediaQuery("(max-width: 414px)")
+  const mobile = useMediaQuery("(max-width: 767px)")
 
   function scrollAnchor(i) {
     window.scrollTo({

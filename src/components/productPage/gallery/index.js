@@ -20,7 +20,7 @@ const useStyle = makeStyles(theme => ({
       marginTop: "3.35vw",
       marginBottom: "3.35vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginTop: "6.76vw",
       marginBottom: "6.76vw",
     },

@@ -24,7 +24,7 @@ const useStyle = makeStyles(theme => ({
       borderRadius: "0.71vw",
       fontSize: "1.67vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       padding: "3.62vw 2.89vw",
       borderRadius: "1.44vw",
       fontSize: "3.38vw",
@@ -36,7 +36,7 @@ const useStyle = makeStyles(theme => ({
   },
   error: {
     border: `1px solid #F1ADAD`,
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       border: `1px solid ${theme.palette.color.accentSecondary}`,
     },
   },

@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
       // fontSize: "2.038vw",
       paddingTop: "4.79vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       // fontSize: "4.1vw",
       paddingTop: "9.66vw",
     },
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
       width: "23.325vw",
       height: "15.34vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       padding: "1.449vw 1.2vw",
       width: "43.24vw",
       height: "30.91vw",
@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function CategoryWidget(props) {
   const classes = useStyles()
-  // const mobile = useMediaQuery("(max-width: 414px)")
+  // const mobile = useMediaQuery("(max-width: 767px)")
   // const pad = useMediaQuery("(max-width: 1025px)")
   const data = props.props.allPrismicCatalog.edges[0].node.data.categories
 

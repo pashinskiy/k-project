@@ -29,7 +29,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       width: "53.59vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "100%",
     },
   },
@@ -47,7 +47,7 @@ const useStyle = makeStyles(theme => ({
       width: "9.59vw",
       height: "4.79vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginLeft: "1.93vw",
       width: "13.32vw",
       height: "9.66vw",
@@ -61,7 +61,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "1.43vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginTop: "1.93",
     },
   },
@@ -73,7 +73,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "4.31vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginTop: "2.65vw",
     },
   },
@@ -85,7 +85,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "4.31vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginTop: "6.76vw",
     },
 
@@ -97,7 +97,7 @@ const useStyle = makeStyles(theme => ({
       "@media(max-width: 1025px)": {
         marginTop: "2.39vw",
       },
-      "@media(max-width: 414px)": {
+      "@media(max-width: 767px)": {
         marginTop: "3.86vw",
       },
     },
@@ -110,7 +110,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "4.31vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginTop: "5.55vw",
     },
   },
@@ -128,7 +128,7 @@ const useStyle = makeStyles(theme => ({
       marginBottom: "0.95vw",
       fontSize: "1.91vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginBottom: "1.93vw",
       fontSize: "3.86vw",
     },
@@ -143,7 +143,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "1.43vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginTop: "2.89vw",
     },
 
@@ -168,7 +168,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "1.43vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "2.89vw",
     },
   },
@@ -187,7 +187,7 @@ const useStyle = makeStyles(theme => ({
       marginTop: "0.59vw",
       fontSize: "1.43vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginTop: "1.93vw",
       fontSize: "2.89vw",
     },
@@ -200,7 +200,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "2.87vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginTop: "6.76vw",
     },
 
@@ -212,7 +212,7 @@ const useStyle = makeStyles(theme => ({
       "@media(max-width: 1025px)": {
         marginTop: "2.39vw",
       },
-      "@media(max-width: 414px)": {
+      "@media(max-width: 767px)": {
         marginTop: "3.86vw",
       },
     },
@@ -226,7 +226,7 @@ const useStyle = makeStyles(theme => ({
 
 export default function DeliveryData({ prismicCartAndOrder }) {
   const classes = useStyle()
-  const smartPhoneScreen = useMediaQuery("(max-width: 414px)")
+  const smartPhoneScreen = useMediaQuery("(max-width: 767px)")
 
   const data = useStaticQuery(
     graphql`

@@ -31,7 +31,7 @@ const useStyle = makeStyles(theme => ({
       "@media(max-width: 1025px)": {
         width: "5.6vw",
       },
-      "@media(max-width: 414px)": {
+      "@media(max-width: 767px)": {
         width: "8.93vw",
       },
     },
@@ -52,7 +52,7 @@ const useStyle = makeStyles(theme => ({
       "@media(max-width: 1025px)": {
         width: "5.6vw",
       },
-      "@media(max-width: 414px)": {
+      "@media(max-width: 767px)": {
         width: "8.93vw",
       },
     },
@@ -96,7 +96,7 @@ const useStyle = makeStyles(theme => ({
       marginLeft: "-3.35vw",
       //   paddingLeft: "3.35vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginLeft: "-6.76vw",
       //   paddingLeft: "6.76vw",
     },
@@ -126,7 +126,7 @@ const useStyle = makeStyles(theme => ({
       width: "88.729vw",
       marginRight: "1.4388vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "82.125vw",
       marginRight: "2.898vw",
     },
@@ -140,7 +140,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       width: "88.729vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "82.125vw",
     },
   },

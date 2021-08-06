@@ -47,7 +47,7 @@ const useStyle = makeStyles(theme => ({
       marginLeft: "-3.35vw",
       paddingLeft: "3.35vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginLeft: "-6.76vw",
       paddingLeft: "6.76vw",
     },

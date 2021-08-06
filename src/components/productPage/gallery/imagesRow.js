@@ -9,7 +9,7 @@ const useStyle = makeStyles(theme => ({
       "@media(min-width: 414.1px)": {
         "& *": { marginBottom: 0 },
       },
-      "@media(max-width: 414px)": {
+      "@media(max-width: 767px)": {
         "&:last-child": { marginBottom: 0 },
       },
     },
@@ -33,20 +33,20 @@ const useStyle = makeStyles(theme => ({
       borderRadius: "1.43vw",
       //   marginBottom: "2.87vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       height: "96.61vw",
       borderRadius: "2.89vw",
       marginBottom: "5.79vw",
     },
     "&:first-child": {
       width: "65.52%",
-      "@media(max-width: 414px)": {
+      "@media(max-width: 767px)": {
         width: "100%",
       },
     },
     "&:last-child": {
       width: props => (props.oneEl ? "100%" : "32.67%"),
-      "@media(max-width: 414px)": {
+      "@media(max-width: 767px)": {
         width: props => "100%",
       },
     },
