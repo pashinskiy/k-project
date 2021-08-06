@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "3.35vw",
       borderRadius: "1.43vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       height: "96.61vw",
       marginTop: "6.76vw",
       borderRadius: "2.89vw",
@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       width: "48.2%",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "100%",
     },
   },
@@ -61,7 +61,7 @@ const useStyles = makeStyles(theme => ({
       width: "48.2%",
       padding: "1.43vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       height: "auto",
       width: "100%",
       padding: "2.89vw",
@@ -79,7 +79,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "4.31vw",
       marginTop: "3.35vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "8.69vw",
       marginTop: "6.76vw",
     },
@@ -97,7 +97,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "2.39vw",
       marginTop: "3.35vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "4.83vw",
       marginTop: "6.76vw",
     },
@@ -115,7 +115,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "2.03vw",
       marginTop: "3.35vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "4.1vw",
       marginTop: "6.76vw",
     },
@@ -133,7 +133,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "1.43vw",
       marginTop: "9.59vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "2.89vw",
       marginTop: "19.32vw",
     },
@@ -145,7 +145,7 @@ const useStyles = makeStyles(theme => ({
       "@media(max-width: 1025px)": {
         marginTop: "3.35vw",
       },
-      "@media(max-width: 414px)": {
+      "@media(max-width: 767px)": {
         marginTop: "6.76vw",
       },
     },

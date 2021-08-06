@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       borderRadius: "1.43vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       borderRadius: "2.89vw",
     },
     "&:hover": {
@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
       width: "calc(100% - 6.47vw)",
       height: "5.99vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "calc(100% - 13.04vw)",
       height: "12.07vw",
     },
@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
       width: "calc(100% - 5.27vw)",
       height: "4.79vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "calc(100% - 10.62vw)",
       height: "9.66vw",
     },
@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "2.03vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "4.1vw",
     },
   },
@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "3.38vw",
     },
   },
@@ -91,7 +91,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       height: "5.99vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       height: "9.6618vw",
     },
   },
@@ -109,7 +109,7 @@ const useStyles = makeStyles(theme => ({
       height: "2.398vw",
       marginRight: "1.199vw",
       },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "4.10628vw",
       height: "4.10628vw",
       marginRight: "3.8647vw",

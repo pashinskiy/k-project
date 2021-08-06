@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
             paddingTop: '1.918vw',
             paddingBottom: 'calc(3.35vw - 8px)',
         },
-        '@media(max-width: 414px)': {
+        '@media(max-width: 767px)': {
             padding: '5.797vw',
             paddingTop: '3.864vw',
             paddingBottom: 'calc(5.797vw - 8px)',
@@ -119,7 +119,7 @@ const useStyles = makeStyles(theme => ({
                     '@media(max-width: 1025px)': {
                         paddingRight: '3.35vw',
                     },
-                    '@media(max-width: 414px)': {
+                    '@media(max-width: 767px)': {
                         paddingRight: '5.797vw',
                     },
                 },
@@ -135,7 +135,7 @@ const useStyles = makeStyles(theme => ({
             marginRight: '-3.35vw',
             paddingLeft: '3.35vw',
         },
-        '@media(max-width: 414px)': {
+        '@media(max-width: 767px)': {
             marginLeft: '-5.797vw',
             marginRight: '-5.797vw',
             paddingLeft: '5.797vw',
@@ -192,7 +192,7 @@ const useStyles = makeStyles(theme => ({
             marginRight: '-3.35vw',
             paddingLeft: '3.35vw',
         },
-        '@media(max-width: 414px)': {
+        '@media(max-width: 767px)': {
             marginLeft: '-5.797vw',
             marginRight: '-5.797vw',
             paddingLeft: '5.797vw',
@@ -204,7 +204,7 @@ const useStyles = makeStyles(theme => ({
         '@media(max-width: 1025px)': {
             width: 'calc(100vw - 3.35vw * 2)',
         },
-        '@media(max-width: 414px)': {
+        '@media(max-width: 767px)': {
             width: 'calc(100vw - 5.797vw * 2)',
         },
         flexShrink: 0,
@@ -217,7 +217,7 @@ const useStyles = makeStyles(theme => ({
             '@media(max-width: 1025px)': {
                 marginRight: '3.35vw',
             },
-            '@media(max-width: 414px)': {
+            '@media(max-width: 767px)': {
                 marginRight: '5.797vw',
             },
         },
@@ -343,7 +343,7 @@ export default function MobileCatalog({ data, animation }) {
                     </div>
                     <div className={classes.all_sales}>
                         <div className={classes.title_sale}>
-                            <SaleButton name={data.allPrismicCatalog.edges[0].node.data.sales_name.text} link={''} />
+                            <SaleButton name={data.allPrismicCatalog.edges[0].node.data.sales_name.text} link={'/sales'} />
                             <Link to={'/sales'} className={classes.all_sales_link}>
                                 Все
                             </Link>

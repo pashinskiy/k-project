@@ -23,7 +23,7 @@ const useStyle = makeStyles(theme => ({
       padding: "1.79vw 1.43vw",
       borderRadius: "0.71vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       border: `1px solid ${theme.palette.color.accentSecondary}`,
       padding: "3.62vw 2.89vw",
       borderRadius: "1.44vw",
@@ -43,7 +43,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "3.38vw",
     },
   },
@@ -63,7 +63,7 @@ const useStyle = makeStyles(theme => ({
       width: "2.15vw",
       height: "2.51vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "4.34vw",
       height: "5.07vw",
     },
@@ -90,7 +90,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       padding: "1.79vw 1.43vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       padding: "3.62vw 2.89vw",
     },
   },
@@ -102,7 +102,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       padding: "0.59vw 0",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       padding: "1.2vw 0",
     },
 

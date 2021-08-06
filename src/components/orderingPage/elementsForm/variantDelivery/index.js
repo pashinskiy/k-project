@@ -8,7 +8,7 @@ const useStyle = makeStyles(theme => ({
   wrapper: {
     background: theme.palette.background.secondary,
 
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       padding: "0.96vw",
       borderRadius: "2.89vw",
     },
@@ -20,7 +20,7 @@ const useStyle = makeStyles(theme => ({
     border: "none",
     cursor: "pointer",
 
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       justifyContent: "center",
       alignItems: "center",
       padding: "2.89vw",
@@ -28,7 +28,7 @@ const useStyle = makeStyles(theme => ({
     },
   },
   activeItem: {
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       background: theme.palette.background.main,
       "&:hover": {
         background: theme.palette.background.main,
@@ -57,7 +57,7 @@ const useStyle = makeStyles(theme => ({
       marginTop: "0.35vw",
       marginRight: "2.27vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       display: "none",
     },
   },
@@ -84,7 +84,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "2.15vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       textAlign: "center",
       fontSize: "2.89vw",
     },
@@ -104,7 +104,7 @@ const useStyle = makeStyles(theme => ({
       marginTop: "0.95vw",
       fontSize: "1.67vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       color: theme.palette.color.secondary,
       textAlign: "center",
 
@@ -114,7 +114,7 @@ const useStyle = makeStyles(theme => ({
   },
   icon: {
     display: "none",
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       display: "block",
       width: "5.79vw",
       height: "5.79vw",

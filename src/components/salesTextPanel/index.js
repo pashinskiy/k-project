@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       padding: "1.438vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       padding: "2.898vw",
       paddingTop: 0,
       paddingBottom: "9.661vw",
@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: "2.877vw",
       },
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "100%",
       paddingBottom: "9.661vw",
       "& p": {
@@ -103,7 +103,7 @@ const useStyles = makeStyles(theme => ({
 export default function SalesTextPanel({ sale, socials, products }) {
   const classes = useStyles()
   // console.log(products)
-  const mobile = useMediaQuery("(max-width: 414px)")
+  const mobile = useMediaQuery("(max-width: 767px)")
   return (
     <Grid container justify="space-between">
       <Grid

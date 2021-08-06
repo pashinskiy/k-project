@@ -14,7 +14,7 @@ export default function DeliveryCards(prismicProduct) {
     prismicProduct.prismicProduct.data.delivery.document?.data.body[0].items ??
     []
 
-  const mobile = useMediaQuery("(max-width: 414px)")
+  const mobile = useMediaQuery("(max-width: 767px)")
 
   const classes = useStyle()
 

@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "2.16vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginTop: "4.29vw",
     },
   },
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       height: "4.19vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       height: "8.45vw",
     },
   },
@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
       width: "50%",
       fontSize: "3.75vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "100%",
       fontSize: "8.69vw",
     },
@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
       marginLeft: 0,
       marginRight: "1.19vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       height: "7.97vw",
       marginLeft: 0,
       marginRight: "2.41vw",
@@ -72,7 +72,7 @@ const useStyles = makeStyles(theme => ({
   stickerWrapperMobile: {
     width: "auto",
     marginTop: "1.91vw",
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginTop: "3.68vw",
     },
   },

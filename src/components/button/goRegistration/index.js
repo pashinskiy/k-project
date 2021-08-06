@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       borderRadius: "4.79vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       borderRadius: "4.83vw",
     },
     "&:hover": {
@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "2.03vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "4.1vw",
     },
   },

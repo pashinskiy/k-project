@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
       marginRight: "3.357vw",
       marginBottom: "3.597vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "88.405vw",
       borderRadius: "2.898vw",
       marginRight: "6.763vw",
@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       margin: "1.798vw 2.997vw 1.798vw 2.398vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       margin: "3.623vw 6.038vw 3.623vw 4.83vw",
     },
   },
@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
       marginBottom: "1.798vw",
       marginTop: "0.599vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "4.106vw",
       marginBottom: "3.623vw",
       marginTop: "1.2077vw",
@@ -87,7 +87,7 @@ const useStyles = makeStyles(theme => ({
       marginBottom: "1.798vw",
       marginTop: "0.599vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "4.83vw",
       marginBottom: "3.623vw",
       marginTop: "1.2077vw",
@@ -114,7 +114,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "0.599vw",
       marginLeft: "1.199vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "4.106vw",
       marginBottom: "3.623vw",
       marginTop: "1.2077vw",
@@ -131,7 +131,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "2.038vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "4.106vw",
     },
   },
@@ -151,7 +151,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "2.038vw",
       marginLeft: "1.199vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "4.106vw",
       marginLeft: "2.415vw",
     },
@@ -166,7 +166,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "2.038vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "4.106vw",
     },
   },

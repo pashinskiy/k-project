@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
       width: "4.796vw",
       height: "4.796vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       top: "5.7971vw",
       right: 0,
       width: "5.797vw",
@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
       position: "relative",
       paddingTop: "20.3836vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       position: "relative",
       marginTop: "0",
       paddingTop: "17.149vw",

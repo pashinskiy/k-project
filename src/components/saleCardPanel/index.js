@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
 }))
 export default function SaleCardPanel({sales}) {
     const classes = useStyles()
-  const isMobile = useMediaQuery("(max-width: 414px)")
+  const isMobile = useMediaQuery("(max-width: 767px)")
   return (
     <Grid container className={classes.wrapper}>
       {sales.map((sale, i) => (

@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
       height: "2.87vw",
       marginRight: "0.95vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "5.79vw",
       height: "5.79vw",
       marginRight: "1.93vw",
@@ -75,7 +75,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "3.38vw",
     },
   },
@@ -91,7 +91,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "3.39vw",
       marginBottom: "11.27vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginTop: "4.83vw",
       marginBottom: "22.7vw",
     },
@@ -118,7 +118,7 @@ const useStyles = makeStyles(theme => ({
       left: 0,
       transform: "none",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       padding: "1.93vw",
       bottom: "14.97vw",
     },
@@ -147,7 +147,7 @@ const useStyles = makeStyles(theme => ({
       padding: "1.67vw",
       position: "static",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "4.34vw",
       borderRadius: "4.83vw",
       padding: "3.38vw",
@@ -193,7 +193,7 @@ const useStyles = makeStyles(theme => ({
 
       padding: "3.35vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       paddingTop: "72px",
       paddingBottom: "62px",
 
@@ -207,7 +207,7 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "2.39vw",
       marginTop: "3.35vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       padding: "1.93vw 2.89vw",
       borderRadius: "4.83vw",
       marginTop: "6.76vw",
@@ -219,7 +219,7 @@ const useStyles = makeStyles(theme => ({
       height: "0.95vw",
       marginRight: "1.07vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "1.44vw",
       height: "2.17vw",
       marginRight: "1.93vw",
@@ -229,7 +229,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "2.39vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginTop: "4.83vw",
     },
   },
@@ -240,7 +240,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "3.35vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "6.67vw",
     },
   },

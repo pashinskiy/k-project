@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "8.39vw",
       marginLeft: "-3.35vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "calc(100% + 6.76vw * 2)",
       marginTop: "16.9vw",
       marginLeft: "-6.76vw",
@@ -206,7 +206,7 @@ export default function Footer({ data }) {
               <DefaultLink
                 key={`info_2 ${i}`}
                 name={link.primary.link_name.text}
-                link={link.primary.link.url}
+                link={`/documents/${link.primary.link.document.uid}`}
               />
             ))}
           </nav>

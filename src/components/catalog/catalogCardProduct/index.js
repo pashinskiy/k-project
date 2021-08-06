@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
       minHeight: "37.88vw",
       padding: "3.35vw 0",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       minHeight: "56.03vw",
       padding: "6.76vw 0",
     },
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       width: "23.98vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "33.81vw",
       minHeight: "43.96vw",
     },
@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       height: "23.98vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       height: "33.81vw",
     },
 
@@ -75,7 +75,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       width: "71.72%",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "57.54%",
     },
   },
@@ -85,7 +85,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       width: "61.22%",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "100%",
     },
   },
@@ -99,7 +99,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "2.03vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontWeight: 400,
       fontSize: "3.38vw",
     },
@@ -112,7 +112,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       marginTop: "1.43vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginTop: "2.89vw",
     },
   },
@@ -136,7 +136,7 @@ const useStyles = makeStyles(theme => ({
       width: "4.07vw",
       height: "4.07vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "6.28vw",
       height: "6.28vw",
     },
@@ -149,7 +149,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       width: "35.73vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "41.54vw",
     },
   },
@@ -161,7 +161,7 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       padding: "1.43vw 0",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       display: "none",
     },
   },
@@ -209,7 +209,7 @@ const useStyles = makeStyles(theme => ({
       height: "3.59vw",
       marginRight: "1.43vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       height: "7.24vw",
       marginRight: 0,
     },
@@ -235,14 +235,14 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       width: "31.89%",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "100%",
     },
   },
   link: {
     textDecoration: "none",
     display: "contents",
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       display: "block",
       marginTop: "2.89vw",
     },
@@ -259,7 +259,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function CardProduct({ product, afterChange, ...other }) {
   const classes = useStyles()
-  const mobile = useMediaQuery("(max-width: 414px)")
+  const mobile = useMediaQuery("(max-width: 767px)")
 
   // достаем стикеры из слайсов и готовим к распечатке
   const stickersSlices = product.data.body.filter(

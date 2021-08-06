@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
       marginBottom: "3.3573vw",
       marginRight: "3.3573vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "37.198vw",
       marginBottom: "6.7632vw",
       marginRight: "4.8309vw",
@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "1.4388vw",
       marginBottom: "2.9376vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       height: "37.198vw",
       padding: "1.2077vw",
       borderRadius: "2.8985vw",
@@ -80,7 +80,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "2.398vw",
       lineHeight: "2.8776vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       marginBottom: "1.9323vw",
       fontSize: "4.8309vw",
       lineHeight: "5.797vw",
@@ -97,7 +97,7 @@ const useStyles = makeStyles(theme => ({
       lineHeight: "2.0383vw",
       fontSize: "1.6786vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       lineHeight: "4.1062vw",
       fontSize: "3.3816vw",
     },
@@ -113,7 +113,7 @@ const useStyles = makeStyles(theme => ({
       width: "23.98vw",
       marginBottom: "2.9376vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "37.198vw",
       marginBottom: "2.898vw",
     },
@@ -133,7 +133,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "1.6786vw",
       borderRadius: "1.4388vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "99.6%",
       height: "9.6618vw",
       fontSize: "3.3816vw",
@@ -164,7 +164,7 @@ const useStyles = makeStyles(theme => ({
       "@media(max-width: 1025px)": {
         fontSize: "1.6786vw",
       },
-      "@media(max-width: 414px)": {
+      "@media(max-width: 767px)": {
         fontSize: "3.3816vw",
       },
     },
@@ -183,7 +183,7 @@ const useStyles = makeStyles(theme => ({
       height: "2.03836vw",
       marginRight: "1.199vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "4.1062vw",
       height: "4.1062vw",
       marginRight: "2.41545vw",

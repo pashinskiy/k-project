@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "0.71vw",
       boxShadow: `inset 0 0 0 0.11vw ${theme.palette.background.accentSecondary}`,
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       width: "7.72vw",
       height: "4.34vw",
       padding: "0.72vw",
@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
         height: "1.43vw",
         borderRadius: "0.47vw",
       },
-      "@media(max-width: 414px)": {
+      "@media(max-width: 767px)": {
         width: "2.89vw",
         height: "2.89vw",
         borderRadius: "0.96vw",
@@ -88,7 +88,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "2.03vw",
       marginLeft: "0.95vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "4.1vw",
       marginLeft: "1.93vw",
     },
@@ -104,7 +104,7 @@ const useStyles = makeStyles(theme => ({
       height: "4.07vw",
       marginLeft: "1.43vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       height: "8.21vw",
       marginLeft: "2.89vw",
     },
