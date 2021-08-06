@@ -303,7 +303,7 @@ export default function PriceBlock({ products }) {
         let div = document.createElement("div")
         div.innerHTML = `
           <form name="TinkoffPayForm" onsubmit="pay(this); return false;">
-            <input class="tinkoffPayRow" type="hidden" name="terminalkey" value="1626196249843DEMO">
+            <input class="tinkoffPayRow" type="hidden" name="terminalkey" value="1626196249843">
             <input class="tinkoffPayRow" type="hidden" name="frame" value="false">
             <input class="tinkoffPayRow" type="hidden" name="language" value="ru">
             <input class="tinkoffPayRow" type="hidden" placeholder="Сумма заказа" name="amount" value="${

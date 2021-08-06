@@ -1,4 +1,5 @@
 import React from "react"
+import { useStaticQuery, graphql } from "gatsby"
 export const OrderingStateContext = React.createContext()
 export const OrderingDispatchContext = React.createContext()
 
@@ -59,52 +60,78 @@ function reducer(state, action) {
   }
 }
 
-const initOrderingState = {
-  city: false,
-  variantDelivery: "standart",
-  date: false,
-  time: false,
-  street: false,
-  house: false,
-  apartment: false,
-  variantPay: "онлайн",
-  name: false,
-  phone: false,
-  validationHouse() {
-    if (!this.house) return false
-    return /^\s*[0-9]+\s*$/.test(this.house)
-  },
-  validationApartament() {
-    if (!this.apartment) return false
-    return /^\s*[0-9]+\s*$/.test(this.apartment)
-  },
-  validationName() {
-    if (!this.name) return false
-    return /^[a-zа-я\s]+$/i.test(this.name)
-  },
-  validationPhone() {
-    if (!this.phone) return false
-    return /^\s*(\+?[78]-?\(?\d{3}\)?-?)?\d{3}-?\d{2}-?\d{2}\s*$/.test(
-      this.phone
-    )
-  },
-  validationAll() {
-    return (
-      !Object.values(this).some(value => !value) &&
-      this.validationHouse() &&
-      this.validationApartament() &&
-      this.validationPhone() &&
-      this.validationPhone()
-    )
-  },
-}
-
 export default function OrderingContext({ children }) {
+  const data = useStaticQuery(
+    graphql`
+      {
+        prismicDeliveryCities {
+          data {
+            cities {
+              city
+            }
+          }
+        }
+      }
+    `
+  )
+
+  const cities = data.prismicDeliveryCities.data.cities.map(item => item.city)
+
+  const initOrderingState = {
+    cities: cities,
+    city: "",
+    variantDelivery: "standart",
+    date: false,
+    time: false,
+    street: false,
+    house: false,
+    apartment: false,
+    variantPay: "онлайн",
+    name: false,
+    phone: false,
+    validationCity() {
+      if (!this.city) return false
+      return this.cities.includes(this.city)
+    },
+    validationStreet() {
+      if (!this.street) return false
+      return /^[0-9a-zа-яё\s]+$/i.test(this.street)
+    },
+    validationHouse() {
+      if (!this.house) return false
+      return /^\s*[0-9]+\s*$/.test(this.house)
+    },
+    validationApartament() {
+      if (!this.apartment) return false
+      return /^\s*[0-9]+\s*$/.test(this.apartment)
+    },
+    validationName() {
+      if (!this.name) return false
+      return /^[a-zа-я\s]+$/i.test(this.name)
+    },
+    validationPhone() {
+      if (!this.phone) return false
+      return /^\s*(\+?[78]-?\(?\d{3}\)?-?)?\d{3}-?\d{2}-?\d{2}\s*$/.test(
+        this.phone
+      )
+    },
+    validationAll() {
+      return (
+        !Object.values(this).some(value => !value) &&
+        this.validationCity() &&
+        this.validationStreet() &&
+        this.validationHouse() &&
+        this.validationApartament() &&
+        this.validationPhone() &&
+        this.validationPhone()
+      )
+    },
+  }
+
   const [orderingState, orderingDispatch] = React.useReducer(
     reducer,
     initOrderingState
   )
-
   return (
     <OrderingStateContext.Provider value={orderingState}>
       <OrderingDispatchContext.Provider value={orderingDispatch}>
