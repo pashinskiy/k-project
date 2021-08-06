@@ -290,77 +290,13 @@ export default function PriceBlock({ products }) {
         items: items,
       }
 
-      if (orderingState.variantPay === "при получении") {
-        localStorage.setItem("order_data", JSON.stringify(orderData))
-        console.log(orderData)
-        console.log("order_data")
-        console.log(JSON.parse(localStorage.getItem("order_data")))
-        sendPostRequest(orderData)
-        navigate("/order/")
-      }
+      localStorage.setItem("order_data", JSON.stringify(orderData))
+      console.log(orderData)
+      console.log("order_data")
+      console.log(JSON.parse(localStorage.getItem("order_data")))
+      sendPostRequest(orderData)
 
-      if (orderingState.variantPay === "онлайн") {
-        let div = document.createElement("div")
-        let items = order.allProductsJson
-          .map(
-            product =>
-              `Название товара: '${product.product_name}', Цена: ${product.price}, Количество: ${product.quantity}; `
-          )
-          .join(",")
-        div.innerHTML = `
-          <form name="TinkoffPayForm" onsubmit="pay(this); return false;">
-            <input class="tinkoffPayRow" type="hidden" name="terminalkey" value="1626196249843">
-            <input class="tinkoffPayRow" type="hidden" name="frame" value="false">
-            <input class="tinkoffPayRow" type="hidden" name="language" value="ru">
-            <input class="tinkoffPayRow" type="hidden" placeholder="Сумма заказа" name="amount" value="${order.price}" required>
-            <input class="tinkoffPayRow" type="hidden" placeholder="Номер заказа" name="order">
-            <input class="tinkoffPayRow" type="hidden" placeholder="Описание заказа" name="description" value="${items}">
-            <input class="tinkoffPayRow" type="hidden" placeholder="ФИО плательщика" name="name" value="${orderingState.name}">
-            <input class="tinkoffPayRow" type="hidden" placeholder="Контактный телефон" name="phone" value="${orderingState.phone}">
-          </form>
-        `
-        document.body.append(div)
-        let event = new Event("submit")
-        div.children[0].dispatchEvent(event)
-      }
-
-      if (orderingState.variantPay === "в кредит") {
-        let div = document.createElement("div")
-        let items = order.allProductsJson
-          .map(
-            product =>
-              `{ name: '${product.product_name}', price: ${product.price}, quantity: ${product.quantity}}`
-          )
-          .join(",")
-        div.innerHTML = `
-          <button
-            type="button"
-            id="tinkoff_button"
-            onclick="tinkoff.create(
-              {
-                sum: ${order.price},
-                items: [${items}],
-                demoFlow: 'sms',
-                promoCode: 'default',
-                shopId: '651d9e30-09d1-402c-b961-2734975199bc',
-                showcaseId: '7169899f-4577-4497-947f-b6374899636e',
-                values: {
-                  contact: {
-                    fio: {
-                      firstName: '${orderingState.name}',
-                      lastName: ' '
-                    },
-                    mobilePhone: '${orderingState.phone}'
-                  }
-                }
-              },
-              {view: 'newTab'}
-            )"
-            ></button>`
-        document.body.append(div)
-        let event = new Event("click")
-        div.children[0].dispatchEvent(event)
-      }
+      
     }
   }
 
@@ -376,6 +312,72 @@ export default function PriceBlock({ products }) {
       )
       .then(response => {
         localStorage.setItem("response_data", JSON.stringify(response))
+        if (orderingState.variantPay === "при получении") {
+          navigate("/order/")
+        }
+
+        if (orderingState.variantPay === "онлайн") {
+          let div = document.createElement("div")
+          let items = order.allProductsJson
+            .map(
+              product =>
+                `Название товара: '${product.product_name}', Цена: ${product.price}, Количество: ${product.quantity}; `
+            )
+            .join(",")
+          div.innerHTML = `
+            <form name="TinkoffPayForm" onsubmit="pay(this); return false;">
+              <input class="tinkoffPayRow" type="hidden" name="terminalkey" value="1626196249843">
+              <input class="tinkoffPayRow" type="hidden" name="frame" value="false">
+              <input class="tinkoffPayRow" type="hidden" name="language" value="ru">
+              <input class="tinkoffPayRow" type="hidden" placeholder="Сумма заказа" name="amount" value="${order.price}" required>
+              <input class="tinkoffPayRow" type="hidden" placeholder="Номер заказа" name="order" value="${response.data.order.number}">
+              <input class="tinkoffPayRow" type="hidden" placeholder="Описание заказа" name="description" value="${items}">
+              <input class="tinkoffPayRow" type="hidden" placeholder="ФИО плательщика" name="name" value="${orderingState.name}">
+              <input class="tinkoffPayRow" type="hidden" placeholder="Контактный телефон" name="phone" value="${orderingState.phone}">
+            </form>
+          `
+          document.body.append(div)
+          let event = new Event("submit")
+          div.children[0].dispatchEvent(event)
+        }
+
+        if (orderingState.variantPay === "в кредит") {
+          let div = document.createElement("div")
+          let items = order.allProductsJson
+            .map(
+              product =>
+                `{ name: '${product.product_name}', price: ${product.price}, quantity: ${product.quantity}}`
+            )
+            .join(",")
+          div.innerHTML = `
+            <button
+              type="button"
+              id="tinkoff_button"
+              onclick="tinkoff.create(
+                {
+                  sum: ${order.price},
+                  items: [${items}],
+                  demoFlow: 'sms',
+                  promoCode: 'default',
+                  shopId: '651d9e30-09d1-402c-b961-2734975199bc',
+                  showcaseId: '7169899f-4577-4497-947f-b6374899636e',
+                  values: {
+                    contact: {
+                      fio: {
+                        firstName: '${orderingState.name}',
+                        lastName: ' '
+                      },
+                      mobilePhone: '${orderingState.phone}'
+                    }
+                  }
+                },
+                {view: 'newTab'}
+              )"
+              ></button>`
+          document.body.append(div)
+          let event = new Event("click")
+          div.children[0].dispatchEvent(event)
+        }
         return response
       })
   }
