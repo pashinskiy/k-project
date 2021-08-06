@@ -301,24 +301,22 @@ export default function PriceBlock({ products }) {
 
       if (orderingState.variantPay === "онлайн") {
         let div = document.createElement("div")
+        let items = order.allProductsJson
+          .map(
+            product =>
+              `Название товара: '${product.product_name}', Цена: ${product.price}, Количество: ${product.quantity}; `
+          )
+          .join(",")
         div.innerHTML = `
           <form name="TinkoffPayForm" onsubmit="pay(this); return false;">
             <input class="tinkoffPayRow" type="hidden" name="terminalkey" value="1626196249843">
             <input class="tinkoffPayRow" type="hidden" name="frame" value="false">
             <input class="tinkoffPayRow" type="hidden" name="language" value="ru">
-            <input class="tinkoffPayRow" type="hidden" placeholder="Сумма заказа" name="amount" value="${
-              order.price
-            }" required>
+            <input class="tinkoffPayRow" type="hidden" placeholder="Сумма заказа" name="amount" value="${order.price}" required>
             <input class="tinkoffPayRow" type="hidden" placeholder="Номер заказа" name="order">
-            <input class="tinkoffPayRow" type="hidden" placeholder="Описание заказа" name="description" value="${JSON.stringify(
-              items
-            )}">
-            <input class="tinkoffPayRow" type="hidden" placeholder="ФИО плательщика" name="name" value="${
-              orderingState.name
-            }">
-            <input class="tinkoffPayRow" type="hidden" placeholder="Контактный телефон" name="phone" value="${
-              orderingState.phone
-            }">
+            <input class="tinkoffPayRow" type="hidden" placeholder="Описание заказа" name="description" value="${items}">
+            <input class="tinkoffPayRow" type="hidden" placeholder="ФИО плательщика" name="name" value="${orderingState.name}">
+            <input class="tinkoffPayRow" type="hidden" placeholder="Контактный телефон" name="phone" value="${orderingState.phone}">
           </form>
         `
         document.body.append(div)
@@ -366,7 +364,7 @@ export default function PriceBlock({ products }) {
     }
   }
 
-  const apiURL = "http://admin.krypton.ru/api/order/create/"
+  const apiURL = "https://admin.krypton.ru/api/order/create/"
   // const apiURL = "http://127.0.0.1:8000/api/order/create/"
 
   function sendPostRequest(data) {
