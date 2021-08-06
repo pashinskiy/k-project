@@ -335,7 +335,7 @@ export default function MobileCatalog({ data, animation }) {
                                 <CardWidget
                                     variant={"category"}
                                     key={`category ${i}`}
-                                    cardImage={category.category.document.data.image.localFile?.childImageSharp.gatsbyImageData}
+                                    cardImage={category.category.document.data.image.localFile?.childImageSharp?.gatsbyImageData}
                                     cardTitle={category.category.document.data.name}
                                     cardLink={`/category/${category.category.document.uid}`}  />
                             ))}
