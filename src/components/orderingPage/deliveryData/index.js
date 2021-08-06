@@ -1,12 +1,14 @@
 import React from "react"
 import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
 import { GatsbyImage } from "gatsby-plugin-image"
+import { useStaticQuery, graphql } from "gatsby"
 
 import HeaderWithIcon from "../headerWithIcon"
 import SmallHeaderWithIcon from "../smallHeaderWithIcon"
 import SmallHeaderAccentWithIcon from "../smallHeaderAccentWithIcon"
 
 import WrapperWithTitle from "../elementsForm/wrapperWithTitle"
+import SelectCity from "../elementsForm/selectCity"
 import VariantDelivery from "../elementsForm/variantDelivery"
 import Select from "../elementsForm/select"
 import ListRatioRect from "../elementsForm/listRatioRect"
@@ -226,14 +228,24 @@ export default function DeliveryData({ prismicCartAndOrder }) {
   const classes = useStyle()
   const smartPhoneScreen = useMediaQuery("(max-width: 414px)")
 
+  const data = useStaticQuery(
+    graphql`
+      {
+        prismicDeliveryCities {
+          data {
+            cities {
+              city
+            }
+          }
+        }
+      }
+    `
+  )
+
   const stickerDelivery = prismicCartAndOrder.data.sticker ?? false
-  
-  const cities = ["Санкт-Петербург", "Москва", "Владивосток"]
-  const streets = [
-    "Проспект Барклая",
-    "Проспект Просвещения",
-    "Проспект Культуры",
-  ]
+
+  const cities = data.prismicDeliveryCities.data.cities.map(item => item.city)
+
   const dates = [
     `${getDate("+1")}, завтра`,
     `${getDate("+2")}, послезавтра`,
@@ -247,7 +259,6 @@ export default function DeliveryData({ prismicCartAndOrder }) {
     setCity(cities[0])
     setDate(dates[0])
     setTime(timeStandartDelivery[0])
-    setStreet(streets[0])
   }, [])
 
   const orderingState = React.useContext(OrderingStateContext)
@@ -341,7 +352,7 @@ export default function DeliveryData({ prismicCartAndOrder }) {
 
       <div className={classes.selectCityWrapper}>
         <WrapperWithTitle title="Город">
-          <Select options={cities} afterChange={setCity} />
+          <SelectCity options={cities} afterChange={setCity} />
         </WrapperWithTitle>
       </div>
 
@@ -441,7 +452,11 @@ export default function DeliveryData({ prismicCartAndOrder }) {
           title="Укажите адрес"
         />
         <WrapperWithTitle title="Улица">
-          <Select options={streets} afterChange={setStreet} />
+          {/* <Select options={streets} afterChange={setStreet} /> */}
+          <Input
+            afterChange={setStreet}
+            checkValue={() => orderingState.validationStreet()}
+          />
         </WrapperWithTitle>
 
         <Grid

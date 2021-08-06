@@ -81,6 +81,7 @@ module.exports = {
           group_question: require("./src/schemas/group_question.json"),
           doc: require("./src/schemas/doc.json"),
           docs: require("./src/schemas/docs.json"),
+          delivery_cities: require("./src/schemas/delivery_cities.json"),
         },
         shouldDownloadImage: () => true,
       },

@@ -70,6 +70,10 @@ const initOrderingState = {
   variantPay: "онлайн",
   name: false,
   phone: false,
+  validationStreet() {
+    if (!this.street) return false
+    return /^[0-9a-zа-я\s]+$/i.test(this.street)
+  },
   validationHouse() {
     if (!this.house) return false
     return /^\s*[0-9]+\s*$/.test(this.house)

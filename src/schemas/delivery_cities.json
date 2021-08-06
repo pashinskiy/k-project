@@ -1,0 +1,19 @@
+{
+  "Main": {
+    "cities": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "city": {
+            "type": "Text",
+            "config": {
+              "label": "Город",
+              "placeholder": "город"
+            }
+          }
+        },
+        "label": "Города"
+      }
+    }
+  }
+}
