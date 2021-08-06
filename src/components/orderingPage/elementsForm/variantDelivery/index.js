@@ -2,7 +2,7 @@ import React from "react"
 import { makeStyles, Grid, Typography } from "@material-ui/core"
 
 import Standart from "../../../../../static/svg/deliveryIcon.svg"
-import Express from "../../../../../static/svg/delivery.svg"
+import Express from "../../../../../static/svg/deliveryMobile.svg"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -19,7 +19,7 @@ const useStyle = makeStyles(theme => ({
     padding: 0,
     border: "none",
     cursor: "pointer",
-
+    background: 'none',
     "@media(max-width: 767px)": {
       justifyContent: "center",
       alignItems: "center",
