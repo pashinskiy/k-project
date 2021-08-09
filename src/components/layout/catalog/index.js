@@ -213,7 +213,7 @@ export default function Catalog({ data, animation }) {
                                                     null 
                                                 :
                                                     [sub_category.child.document.data.tags.map((tag, i) => (
-                                                        <DefaultLink name={tag.tag.document.data.name} link={`/subcategory/${sub_category.child.document.uid}/?group=${tag.tag.document.data.name}`} key={`tag ${i}`} />
+                                                        <DefaultLink name={tag.tag.document?.data === null || undefined ? tag.tag.document?.data?.name : null} link={`/subcategory/${sub_category.child.document.uid}/?group=${tag.tag.document?.data === null || undefined ? tag.tag.document?.data?.name : null}`} key={`tag ${i}`} />
                                                     ))]
                                             }
                                         </nav>
@@ -229,7 +229,7 @@ export default function Catalog({ data, animation }) {
                                                 :
                                                     <Link to={`/products/?category="${category.category.document.data.name}/?Производитель=["${brand.child.document.data.name.replace("ё", "е")}"]`}>
                                                         <div className={classes.brand_wrapper}>
-                                                            <GatsbyImage image={brand.child.document.data.body[0].primary.image.localFile?.childImageSharp?.gatsbyImageData} alt={brand.child.document.data.body[0].primary.image.alt ?? "img"} />
+                                                            <GatsbyImage image={brand.child.document.data.body[0]?.primary?.image.localFile?.childImageSharp?.gatsbyImageData} alt={brand.child.document.data.body[0]?.primary?.image.alt ?? "img"} />
                                                         </div>
                                                     </Link>
                                             }
