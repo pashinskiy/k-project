@@ -7,7 +7,6 @@ import Pay from "../../button/pay"
 import { OrderingStateContext } from "../context"
 
 import Star from "../../../../static/svg/star.svg"
-import axios from "axios"
 import { navigate } from "gatsby"
 
 const useStyle = makeStyles(theme => ({
@@ -260,126 +259,56 @@ export default function PriceBlock({ products }) {
 
   function payOrder() {
     if (validData) {
-      localStorage.removeItem("order")
-      const items = []
-      order.allProductsJson.map(product => {
-        const item = {
-          quantity: product.quantity,
-          prismic_uid: product.product_uid,
-        }
-        items.push(item)
-      })
-      const customerName = orderingState.name
-      const customerPhone = orderingState.phone
-      const customerComment = `Адрес: ${orderingState.city}, ${orderingState.street}, ${orderingState.house}, ${orderingState.apartment}\n
-      Вариант доставки: ${orderingState.variantDelivery} \n
-      Дата: ${orderingState.date}, Время: ${orderingState.time} \n
-      Оплата: ${orderingState.variantPay}`
-      const orderData = {
-        name: customerName,
-        phone: customerPhone,
+      const apiURL = "https://admin.krypton.ru/api/order/create/"
+
+      const headers = new Headers()
+      headers.append("Content-Type", "application/json")
+
+      const body = JSON.stringify({
+        name: orderingState.name,
+        phone: orderingState.phone,
         city: orderingState.city,
         street: orderingState.street,
         house: orderingState.house,
         apartment: orderingState.apartment,
         variantDelivery: orderingState.variantDelivery,
-        date: orderingState.date,
-        time: orderingState.time,
         variantPay: orderingState.variantPay,
-        customerComment: customerComment,
-        items: items,
+        date: orderingState.date.slice(0, 10).split("/").reverse().join("-"),
+        time_from: orderingState.time.slice(0, 5),
+        time_to: orderingState.time.slice(-5),
+
+        items: order.allProductsJson.map(product => ({
+          quantity: product.quantity,
+          prismic_uid: product.product_uid,
+        })),
+      })
+
+      const init = {
+        method: "POST",
+        headers,
+        body,
       }
 
-      localStorage.setItem("order_data", JSON.stringify(orderData))
-      console.log(orderData)
-      console.log("order_data")
-      console.log(JSON.parse(localStorage.getItem("order_data")))
-      sendPostRequest(orderData)
+      fetch(apiURL, init)
+        .then(res => res.json())
+        .then(res => {
+          localStorage.removeItem("order")
+          localStorage.setItem("order_number", JSON.stringify(res.order_number))
 
-      
+          if (orderingState.variantPay === "при получении") {
+            navigate("/order/")
+          }
+          if (orderingState.variantPay === "в рассрочку") {
+            navigate("/order/")
+          }
+          if (orderingState.variantPay === "онлайн") {
+            window.location.href = res.payment_data.url
+          }
+          if (orderingState.variantPay === "в кредит") {
+            window.location.href = res.payment_data.url
+          }
+        })
     }
-  }
-
-  const apiURL = "https://admin.krypton.ru/api/order/create/"
-  // const apiURL = "http://127.0.0.1:8000/api/order/create/"
-
-  function sendPostRequest(data) {
-    axios
-      .post(
-        apiURL,
-        { body: data },
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then(response => {
-        localStorage.setItem("response_data", JSON.stringify(response))
-        if (orderingState.variantPay === "при получении") {
-          navigate("/order/")
-        }
-
-        if (orderingState.variantPay === "онлайн") {
-          let div = document.createElement("div")
-          let items = order.allProductsJson
-            .map(
-              product =>
-                `Название товара: '${product.product_name}', Цена: ${product.price}, Количество: ${product.quantity}; `
-            )
-            .join(",")
-          div.innerHTML = `
-            <form name="TinkoffPayForm" onsubmit="pay(this); return false;">
-              <input class="tinkoffPayRow" type="hidden" name="terminalkey" value="1626196249843">
-              <input class="tinkoffPayRow" type="hidden" name="frame" value="false">
-              <input class="tinkoffPayRow" type="hidden" name="language" value="ru">
-              <input class="tinkoffPayRow" type="hidden" placeholder="Сумма заказа" name="amount" value="${order.price}" required>
-              <input class="tinkoffPayRow" type="hidden" placeholder="Номер заказа" name="order" value="${response.data.order.number}">
-              <input class="tinkoffPayRow" type="hidden" placeholder="Описание заказа" name="description" value="${items}">
-              <input class="tinkoffPayRow" type="hidden" placeholder="ФИО плательщика" name="name" value="${orderingState.name}">
-              <input class="tinkoffPayRow" type="hidden" placeholder="Контактный телефон" name="phone" value="${orderingState.phone}">
-            </form>
-          `
-          document.body.append(div)
-          let event = new Event("submit")
-          div.children[0].dispatchEvent(event)
-        }
-
-        if (orderingState.variantPay === "в кредит") {
-          let div = document.createElement("div")
-          let items = order.allProductsJson
-            .map(
-              product =>
-                `{ name: '${product.product_name}', price: ${product.price}, quantity: ${product.quantity}}`
-            )
-            .join(",")
-          div.innerHTML = `
-            <button
-              type="button"
-              id="tinkoff_button"
-              onclick="tinkoff.create(
-                {
-                  sum: ${order.price},
-                  items: [${items}],
-                  demoFlow: 'sms',
-                  promoCode: 'default',
-                  shopId: '651d9e30-09d1-402c-b961-2734975199bc',
-                  showcaseId: '7169899f-4577-4497-947f-b6374899636e',
-                  values: {
-                    contact: {
-                      fio: {
-                        firstName: '${orderingState.name}',
-                        lastName: ' '
-                      },
-                      mobilePhone: '${orderingState.phone}'
-                    }
-                  }
-                },
-                {view: 'newTab'}
-              )"
-              ></button>`
-          document.body.append(div)
-          let event = new Event("click")
-          div.children[0].dispatchEvent(event)
-        }
-        return response
-      })
   }
 
   function swipeStart(e) {

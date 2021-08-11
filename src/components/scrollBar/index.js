@@ -1,5 +1,5 @@
 import React from "react"
-import { makeStyles, Button, Grid } from "@material-ui/core"
+import { makeStyles, Button, Grid, useMediaQuery } from "@material-ui/core"
 
 import Arrow from "../../../static/svg/arrowWhite.svg"
 
@@ -31,6 +31,25 @@ const useStyle = makeStyles(theme => ({
       "user-select": "none",
     },
   },
+  track: {
+    width: "auto",
+    transition: ".3s transform",
+    position: "relative",
+    boxSizing: "border-box",
+
+    touchAction: "none",
+    "@media(max-width: 1024px)": {
+      width: "100%",
+      touchAction: "auto",
+      flexWrap: "nowrap",
+      overflowX: "scroll",
+      scrollbarWidth: "none",
+      "-ms-overflow-style": "none",
+      "&::-webkit-scrollbar": {
+        display: "none",
+      },
+    },
+  },
   fullScreen: {
     width: "100vw",
     maxWidth: "1280px",
@@ -50,14 +69,6 @@ const useStyle = makeStyles(theme => ({
       marginLeft: "-6.76vw",
       paddingLeft: "6.76vw",
     },
-  },
-  track: {
-    width: "auto",
-    transition: ".3s transform",
-    position: "relative",
-    boxSizing: "border-box",
-
-    touchAction: "none",
   },
   buttonPrevWrapper: {
     width: "20%",
@@ -161,6 +172,7 @@ const useStyle = makeStyles(theme => ({
 export default function ScrollBar({ children, fullScreen, buttonNext }) {
   // fullScreen (boolean) прокрутка с выходом за границы layuot
   // buttonNext нужно ли отображить кнопку при переполнении
+  const mobile = useMediaQuery("(max-width: 1025px)")
 
   const [cardPanel, setCardPanel] = React.useState(null)
 
@@ -302,8 +314,8 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
         <Grid
           container
           ref={setRef}
-          onPointerDown={setScrollBar}
-          className={classes.track}
+          onPointerDown={!mobile ? setScrollBar : null}
+          className={classes.track + " " + (mobile ? size : "")}
         >
           {children}
         </Grid>
@@ -311,7 +323,11 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
 
       {maxTranslateX < 0 && buttonNext && showPrev ? (
         <div className={classes.buttonPrevWrapper}>
-          <Button aria-label="назад" onClick={prev} className={classes.buttonPrev}>
+          <Button
+            aria-label="назад"
+            onClick={prev}
+            className={classes.buttonPrev}
+          >
             <Arrow className={classes.mirror} />
           </Button>
         </div>
@@ -319,7 +335,11 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
 
       {maxTranslateX < 0 && buttonNext && showNext ? (
         <div className={classes.buttonNextWrapper}>
-          <Button aria-label="вперед" onClick={next} className={classes.buttonNext}>
+          <Button
+            aria-label="вперед"
+            onClick={next}
+            className={classes.buttonNext}
+          >
             <Arrow />
           </Button>
         </div>

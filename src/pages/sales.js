@@ -65,6 +65,8 @@ export const query = graphql`
       edges {
         node {
           data {
+            link
+            tumbler_link
             text {
               text
             }

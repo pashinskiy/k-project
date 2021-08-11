@@ -1,7 +1,10 @@
 import React from "react"
 import { makeStyles, Grid, Typography, Divider } from "@material-ui/core"
 import { graphql } from "gatsby"
-import { GlobalStateContext, GlobalDispatchContext } from "../context/GlobalContextProvider"
+import {
+  GlobalStateContext,
+  GlobalDispatchContext,
+} from "../context/GlobalContextProvider"
 import Seo from "../components/seo"
 import OrderConfirmedIcon from "../../static/svg/orderConfirmedIcon.svg"
 import HeaderWithIcon from "../components/headers/headerWithIcon"
@@ -171,124 +174,144 @@ const IndexPage = ({ data }) => {
 
   const state = React.useContext(GlobalStateContext)
   const stateDispatch = React.useContext(GlobalDispatchContext)
+
+  const [orderData, setOrderData] = React.useState(null)
+
+  const order_number = JSON.parse(localStorage.getItem("order_number"))
+
   const productsInCart = data.allPrismicProduct.edges
     .filter(edge => !!state.inCart(edge.node.id))
     .map(edge => edge.node)
     .map(obj => ({ ...obj, count: state.inCart(obj.id) }))
 
-  let allCost = 0
-  productsInCart.map(item => (allCost += item.data.price))
-
-  const customerCredentials = JSON.parse(localStorage.getItem("response_data"))
-  const orderingState = JSON.parse(localStorage.getItem("order_data"))
-
-  React.useEffect(() => {
-    return () => {
-      localStorage.removeItem("order_data")
-      localStorage.removeItem("customer_credentials")
-      localStorage.removeItem("cart")
-      stateDispatch({type: "CLEAN_CART"})
+  // преобразуем цену
+  function priceMod(value) {
+    let price = value.slice(0, -3)
+    let length = price.length
+    for (let i = 1; i < length; i++) {
+      if (i % 3 === 0) {
+        price = price.slice(0, length - i) + " " + price.slice(length - i)
+      }
     }
-  })
-
-  let deliveryData = ""
-  switch (orderingState.variantDelivery) {
-    case "express":
-      deliveryData = orderingState.time
-      break
-    case "standart":
-      deliveryData = `${orderingState.date}, ${orderingState.time}`
-      break
-    default:
-      console.log("variantDelivery указан неверно")
-      break
+    return price
   }
 
-  const orderData = [
-    {
-      name: "Номер заказа: ",
-      value: customerCredentials.data.order.number,
-    },
-    {
-      name: "Способ оплаты: ",
-      value: orderingState.variantPay,
-    },
-    {
-      name: "Адрес доставки: ",
-      value: `г. ${orderingState.city}, ${orderingState.street}, д.${orderingState.house}, кв.${orderingState.apartment}`,
-    },
-    {
-      name: "Дата и время доставки: ",
-      value: deliveryData,
-    },
-    {
-      name: "Имя получателя: ",
-      value: orderingState.name,
-    },
-    {
-      name: "Телефон получателя: ",
-      value: orderingState.phone,
-    },
-  ]
+  React.useEffect(() => {
+    fetch(`https://admin.krypton.ru/api/order/?id=${order_number}`)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+        setOrderData(res)
+      })
 
-  return (
+    return () => {
+      // localStorage.removeItem("order_data")
+      // localStorage.removeItem("customer_credentials")
+      localStorage.removeItem("cart")
+      stateDispatch({ type: "CLEAN_CART" })
+    }
+  }, [])
+
+  const orderInfo = []
+
+  if (orderData !== null)
+    orderInfo.push(
+      {
+        name: "Статус заказа: ",
+        value: orderData.payment.status_comment,
+      },
+      {
+        name: "Способ оплаты: ",
+        value: orderData.payment.payment_type,
+      },
+      {
+        name: "Адрес доставки: ",
+        value: orderData.customer.address,
+      },
+      {
+        name: "Дата и время доставки: ",
+        value: `${orderData.order.delivery_date} с ${orderData.order.delivery_time_from} до ${orderData.order.delivery_time_to}`,
+      },
+      {
+        name: "Имя получателя: ",
+        value: orderData.customer.name,
+      },
+      {
+        name: "Телефон получателя: ",
+        value: orderData.customer.phone,
+      }
+    )
+
+  return orderData !== null ? (
     <Layout>
       <Seo title="Корзина" />
-      <HeaderWithIcon title="Заказ подтверждён" icon={<OrderConfirmedIcon />} />
+      <HeaderWithIcon
+        title={`Заказ №${order_number}`}
+        icon={<OrderConfirmedIcon />}
+      />
       <Divider />
-      {!!productsInCart.length ? (
-        <>
-          <div className={classes.orderInfoContainer}>
-            {orderData.map(item => (
-              <div className={classes.orderDataWrapper}>
-                <Typography
-                  className={classes.titleOrderName + " " + classes.title}
-                >
-                  {item.name}
-                </Typography>
-                <Typography
-                  className={classes.titleOrderValue + " " + classes.title}
-                >
-                  {item.value}
-                </Typography>
-              </div>
-            ))}
+      <div className={classes.orderInfoContainer}>
+        {orderInfo.map(item => (
+          <div className={classes.orderDataWrapper}>
+            <Typography
+              className={classes.titleOrderName + " " + classes.title}
+            >
+              {item.name}
+            </Typography>
+            <Typography
+              className={classes.titleOrderValue + " " + classes.title}
+            >
+              {item.value}
+            </Typography>
           </div>
-          <Divider />
+        ))}
+      </div>
+      <Divider />
 
-          <Grid container className={classes.productContainer}>
-            {productsInCart.map(item => (
-              <OrderCard product={item} />
-            ))}
-          </Grid>
+      {productsInCart.length ? (
+        <Grid container className={classes.productContainer}>
+          {productsInCart.map(item => (
+            <OrderCard product={item} />
+          ))}
+        </Grid>
+      ) : (
+        <Grid container className={classes.productContainer}>
+          {orderData.order.products.map(product => (
+            <OrderCard
+              product={{
+                count: product.quantity,
+                data: { name: product.name, price: product.price },
+              }}
+            />
+          ))}
+        </Grid>
+      )}
 
-          <Divider />
-          <Typography className={classes.titleAllCost + " " + classes.title}>
-            Итого: {allCost} &#8381;
-          </Typography>
+      <Divider />
+      <Typography className={classes.titleAllCost + " " + classes.title}>
+        Итого: {priceMod(orderData.order.totalSumm)} &#8381;
+      </Typography>
 
-          <div
-            className={classes.disclaimer}
-            dangerouslySetInnerHTML={{
-              __html: data.prismicCartAndOrder.data.disclaimer.text
-                .split("\n")
-                .join("<br>"),
-            }}
-          />
+      <div
+        className={classes.disclaimer}
+        dangerouslySetInnerHTML={{
+          __html: data.prismicCartAndOrder.data.disclaimer.text
+            .split("\n")
+            .join("<br>"),
+        }}
+      />
 
-          <Typography className={classes.supportText}>
-            {data.prismicCartAndOrder.data.title_support}
-          </Typography>
-          <a
-            href={`tel:${data.prismicCartAndOrder.data.phone_support}`}
-            className={classes.supportText}
-          >
-            {data.prismicCartAndOrder.data.phone_support}
-          </a>
-        </>
-      ) : null}
+      <Typography className={classes.supportText}>
+        {data.prismicCartAndOrder.data.title_support}
+      </Typography>
+      <a
+        href={`tel:${data.prismicCartAndOrder.data.phone_support}`}
+        className={classes.supportText}
+      >
+        {data.prismicCartAndOrder.data.phone_support}
+      </a>
     </Layout>
-  )
+  ) : null
 }
 export default IndexPage
 

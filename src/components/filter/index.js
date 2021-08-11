@@ -295,7 +295,7 @@ export default function Filter({ products, setFilterProducts }) {
       .filter(slice => slice.slice_type === "stickers")
       .forEach(slice => {
         slice.items.forEach(item =>
-          fieldsFilter.get("Стикеры").value.add(item.sticker.document.id)
+          fieldsFilter.get("Стикеры").value.add(item.sticker.document?.id)
         )
       })
   })
