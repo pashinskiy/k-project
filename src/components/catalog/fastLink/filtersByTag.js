@@ -26,7 +26,7 @@ export default function FiltersByTag({ products }) {
   products.forEach(product =>
     product.data.tags.forEach(tag => {
       if (tag.tag.document === null) return
-      tags.add(tag.tag.document.data.name)
+      tags.add(tag.tag.document?.data.name)
     })
   )
 

@@ -206,7 +206,7 @@ export default function Footer({ data }) {
               <DefaultLink
                 key={`info_2 ${i}`}
                 name={link.primary.link_name.text}
-                link={`/documents/${link.primary.link.document.uid}`}
+                link={`/documents/${link.primary.link.document?.uid}`}
               />
             ))}
           </nav>
@@ -253,9 +253,9 @@ export default function Footer({ data }) {
           <div className={classes.docs}>
             {docs_from_footer.map(doc => (
               <WhiteLink
-                key={doc.doc.document.id}
-                name={doc.doc.document.data.name}
-                link={`/documents/${doc.doc.document.uid}/`}
+                key={doc.doc.document?.id}
+                name={doc.doc.document?.data.name}
+                link={`/documents/${doc.doc.document?.uid}/`}
               />
             ))}
             <WhiteLink key="all_docs" name="Все документы" link="/documents/" />

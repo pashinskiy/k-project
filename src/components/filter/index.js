@@ -269,10 +269,10 @@ export default function Filter({ products, setFilterProducts }) {
       .forEach(slice => {
         slice.items.forEach(characteristic => {
           if (characteristic.characteristic.document === null) return
-          const type = characteristic.characteristic.document.data.variant
-          const name = characteristic.characteristic.document.data.name
+          const type = characteristic.characteristic.document?.data.variant
+          const name = characteristic.characteristic.document?.data.name
           const value = characteristic.value
-          const order = characteristic.characteristic.document.data.order
+          const order = characteristic.characteristic.document?.data.order
           if (type === "none") return
           if (fieldsFilter.has(name)) {
             fieldsFilter.get(name).value.add(value)
@@ -290,7 +290,7 @@ export default function Filter({ products, setFilterProducts }) {
     if (product.data.brand.document !== null)
       fieldsFilter
         .get("Производитель")
-        .value.add(product.data.brand.document.data.name.replace("ё", "е"))
+        .value.add(product.data.brand.document?.data.name.replace("ё", "е"))
     product.data.body
       .filter(slice => slice.slice_type === "stickers")
       .forEach(slice => {
@@ -439,7 +439,7 @@ export default function Filter({ products, setFilterProducts }) {
             .filter(slice => slice.slice_type === "stickers")
             .map(slice => slice.items)
             .flat()
-            .map(sticker => sticker.sticker.document.id)
+            .map(sticker => sticker.sticker.document?.id)
 
         switch (type) {
           case "from to":

@@ -60,7 +60,7 @@ export default function FiltersBySticker({ products, category }) {
       .forEach(slice =>
         slice.items.forEach(item => {
           if (item.sticker.document === null) return
-          stickersId.add(item.sticker.document.id)
+          stickersId.add(item.sticker.document?.id)
         })
       )
   )

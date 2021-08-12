@@ -55,6 +55,7 @@ export const query = graphql`
     allPrismicProduct {
       edges {
         node {
+          id
           data {
             name
             price            

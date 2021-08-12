@@ -297,23 +297,23 @@ export default function MobileCatalog({ data, animation }) {
                 <div className={classes.container}>
                     <div className={classes.stories}>
                         {data.allPrismicCatalog.edges[0].node.data.all_stories.map((stories, i) => (
-                            stories.stories.document.data.tumbler_link === true ?
-                                    <Link to={`${stories.stories.document.data.link}`}>
+                            stories.stories.document?.data.tumbler_link === true ?
+                                    <Link to={`${stories.stories.document?.data.link}`}>
                                         <Grid className={`${classes.wrapper_stories} wrapper--stories--catalog`} key={`stories ${i}`}>
                                             <CardWidget
                                                 variant={"stories"}
-                                                cardImage={stories.stories.document.data.image.localFile?.childImageSharp?.gatsbyImageData}
-                                                cardTitle={stories.stories.document.data.text.text}
+                                                cardImage={stories.stories.document?.data.image.localFile?.childImageSharp?.gatsbyImageData}
+                                                cardTitle={stories.stories.document?.data.text.text}
                                                 cardLink={""}  />
                                         </Grid>
                                     </Link>
                                 :
-                                    <a href={`${stories.stories.document.data.link}`} target="_blank" rel="noopener noreferrer">
+                                    <a href={`${stories.stories.document?.data.link}`} target="_blank" rel="noopener noreferrer">
                                         <Grid className={`${classes.wrapper_stories} wrapper--stories--catalog`} key={`stories ${i}`}>
                                             <CardWidget
                                                 variant={"stories"}
-                                                cardImage={stories.stories.document.data.image.localFile?.childImageSharp?.gatsbyImageData}
-                                                cardTitle={stories.stories.document.data.text.text}
+                                                cardImage={stories.stories.document?.data.image.localFile?.childImageSharp?.gatsbyImageData}
+                                                cardTitle={stories.stories.document?.data.text.text}
                                                 cardLink={""}  />
                                         </Grid>
                                     </a>
@@ -335,9 +335,9 @@ export default function MobileCatalog({ data, animation }) {
                                 <CardWidget
                                     variant={"category"}
                                     key={`category ${i}`}
-                                    cardImage={category.category.document.data.image.localFile?.childImageSharp?.gatsbyImageData}
-                                    cardTitle={category.category.document.data.name}
-                                    cardLink={`/category/${category.category.document.uid}`}  />
+                                    cardImage={category.category.document?.data.image.localFile?.childImageSharp?.gatsbyImageData}
+                                    cardTitle={category.category.document?.data.name}
+                                    cardLink={`/category/${category.category.document?.uid}`}  />
                             ))}
                         </nav>
                     </div>

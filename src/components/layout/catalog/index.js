@@ -162,7 +162,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Catalog({ data, animation }) {
     
-    const [hover, setHover] = React.useState(data.allPrismicCatalog.edges[0].node.data.categories[0].category.document.data.name);
+    const [hover, setHover] = React.useState(data.allPrismicCatalog.edges[0].node.data.categories[0].category.document?.data.name);
 
     const classes = useStyles({ animation });
 
@@ -176,10 +176,10 @@ export default function Catalog({ data, animation }) {
                             {data.allPrismicCatalog.edges[0].node.data.categories.map((category, i) => (
                                 <Category
                                     key={`category ${i}`}
-                                    svg={category.category.document.data.category_icon.localFile?.publicURL + '#fill'}
-                                    alt={category.category.document.data.category_icon.alt ?? "img"}
-                                    name={category.category.document.data.name}
-                                    uid={category.category.document.uid}
+                                    svg={category.category.document?.data.category_icon.localFile?.publicURL + '#fill'}
+                                    alt={category.category.document?.data.category_icon.alt ?? "img"}
+                                    name={category.category.document?.data.name}
+                                    uid={category.category.document?.uid}
                                     setHover={setHover} />
                             ))}
                             <button
@@ -192,19 +192,19 @@ export default function Catalog({ data, animation }) {
                         </nav>
                     </div>
                     <Divider orientation="vertical" className={classes.divider} />
-                    {data.allPrismicCatalog.edges[0].node.data.categories.filter(atr => atr.category.document.data.name === hover).map((category, i) => (
+                    {data.allPrismicCatalog.edges[0].node.data.categories.filter(atr => atr.category.document?.data.name === hover).map((category, i) => (
                         <div className={classes.category} key={`category ${i}`}>
-                            <Link to={`/category/${category.category.document.uid}`} className={classes.wrapper}>
-                                <img src={category.category.document.data.category_icon.localFile?.publicURL + '#gradient'} alt={category.category.document.data.category_icon ?? "img"} />
-                                <Typography variant="h3">{category.category.document.data.name}</Typography>
+                            <Link to={`/category/${category.category.document?.uid}`} className={classes.wrapper}>
+                                <img src={category.category.document?.data.category_icon.localFile?.publicURL + '#gradient'} alt={category.category.document?.data.category_icon ?? "img"} />
+                                <Typography variant="h3">{category.category.document?.data.name}</Typography>
                             </Link>
                             <div className={classes.categories_brands}>
                                 <div className={classes.sub_categories}>
-                                {category.category.document.data.children.map((sub_category, i) => (
+                                {category.category.document?.data.children.map((sub_category, i) => (
                                     <div className={classes.sub_category} key={`subcategory ${i}`}>
                                         <Link to={`/subcategory/${sub_category.child.document?.uid}`} className={classes.linkSubCategory}>
                                             <Typography variant="h4">
-                                                {(sub_category.child.document === null) ? null : sub_category.child.document.data.name}
+                                                {(sub_category.child.document === null) ? null : sub_category.child.document?.data.name}
                                             </Typography>
                                         </Link>
                                         <nav>
@@ -212,8 +212,8 @@ export default function Catalog({ data, animation }) {
                                                 ?
                                                     null 
                                                 :
-                                                    [sub_category.child.document.data.tags.map((tag, i) => (
-                                                        <DefaultLink name={tag.tag.document?.data === null || undefined ? tag.tag.document?.data?.name : null} link={`/subcategory/${sub_category.child.document.uid}/?group=${tag.tag.document?.data === null || undefined ? tag.tag.document?.data?.name : null}`} key={`tag ${i}`} />
+                                                    [sub_category.child.document?.data.tags.map((tag, i) => (
+                                                        <DefaultLink name={tag.tag.document?.data === null || undefined ? tag.tag.document?.data?.name : null} link={`/subcategory/${sub_category.child.document?.uid}/?group=${tag.tag.document?.data === null || undefined ? tag.tag.document?.data?.name : null}`} key={`tag ${i}`} />
                                                     ))]
                                             }
                                         </nav>
@@ -221,15 +221,15 @@ export default function Catalog({ data, animation }) {
                                 ))}
                                 </div>
                                 <nav className={classes.brands}>
-                                    {category.category.document.data.brands.map((brand, i) => (
+                                    {category.category.document?.data.brands.map((brand, i) => (
                                         <div className={classes.brand} key={`brand ${i}`}>
                                             {(brand.child.document === null)
                                                 ?
                                                     null
                                                 :
-                                                    <Link to={`/products/?category="${category.category.document.data.name}/?Производитель=["${brand.child.document.data.name.replace("ё", "е")}"]`}>
+                                                    <Link to={`/products/?category="${category.category.document?.data.name}"&Производитель=["${brand.child.document?.data.name.replace("ё", "е")}"]`}>
                                                         <div className={classes.brand_wrapper}>
-                                                            <GatsbyImage image={brand.child.document.data.body[0]?.primary?.image.localFile?.childImageSharp?.gatsbyImageData} alt={brand.child.document.data.body[0]?.primary?.image.alt ?? "img"} />
+                                                            <GatsbyImage image={brand.child.document?.data.body[0]?.primary?.image.localFile?.childImageSharp?.gatsbyImageData} alt={brand.child.document?.data.body[0]?.primary?.image.alt ?? "img"} />
                                                         </div>
                                                     </Link>
                                             }
@@ -242,7 +242,7 @@ export default function Catalog({ data, animation }) {
                 </div>
                 
                 <div className={classes.promo}>
-                    {data.allPrismicCatalog.edges[0].node.data.categories.filter(atr => atr.category.document.data.name === hover)[0].category.document.data.body.filter(slice => slice.slice_type === 'vertical_img').map((promo, i) => 
+                    {data.allPrismicCatalog.edges[0].node.data.categories.filter(atr => atr.category.document?.data.name === hover)[0].category.document?.data.body.filter(slice => slice.slice_type === 'vertical_img').map((promo, i) => 
                         (promo.primary?.tumbler_link === true ?
                             <Link to={`${promo.primary?.link}`}>
                                 <GatsbyImage image={promo.primary?.catalog_img?.localFile?.childImageSharp.gatsbyImageData} alt={promo.primary?.catalog_img.alt ?? "img"} className={classes.img} key={`images_promo ${i}`} />

@@ -268,8 +268,8 @@ export default function CardProduct({ product, afterChange, ...other }) {
   const stickersImgArr = stickersSlices.reduce((arr, stickersSlice) => {
     arr.push(
       ...stickersSlice.items.map((sticker, i) => {
-        const img = sticker.sticker.document.data.image.localFile?.publicURL
-        const alt = sticker.sticker.document.data.image.alt
+        const img = sticker.sticker.document?.data.image.localFile?.publicURL
+        const alt = sticker.sticker.document?.data.image.alt
         return (
           <div className={classes.sticker} key={i}>
             <img
@@ -292,11 +292,11 @@ export default function CardProduct({ product, afterChange, ...other }) {
     .map(item => (
       <Grid
         container
-        key={item.characteristic.document.data.name}
+        key={item.characteristic.document?.data.name}
         className={classes.characteristicRow}
       >
         <Typography className={classes.text + " " + classes.characteristic}>
-          {item.characteristic.document.data.name}:
+          {item.characteristic.document?.data.name}:
         </Typography>
         <Typography className={classes.text}>{item.value}</Typography>
       </Grid>

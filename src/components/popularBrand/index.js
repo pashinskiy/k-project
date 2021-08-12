@@ -69,9 +69,9 @@ export default function PopularBrand({ products }) {
   const popularBrandId = new Set()
   products.forEach(product => {
     if (product.data.brand.document === null) return
-    if (!product.data.brand.document.data.popular) return
-    if (product.data.brand.document.data.name === null) return
-    popularBrandId.add(product.data.brand.document.id)
+    if (!product.data.brand.document?.data.popular) return
+    if (product.data.brand.document?.data.name === null) return
+    popularBrandId.add(product.data.brand.document?.id)
   })
 
   const popularBrand = data.allPrismicBrand.edges

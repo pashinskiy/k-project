@@ -91,8 +91,8 @@ export default function Title({ logo, text, stickersSlices }) {
   const stickersImgArr = stickersSlices.reduce((arr, stickersSlice) => {
     arr.push(
       ...stickersSlice.items.map((sticker, i) => {
-        const img = sticker.sticker.document.data.image.localFile?.publicURL
-        const alt = sticker.sticker.document.data.image.alt ?? "sticker"
+        const img = sticker.sticker.document?.data.image.localFile?.publicURL
+        const alt = sticker.sticker.document?.data.image.alt ?? "sticker"
 
         return (
           <div className={classes.sticker} key={i}>

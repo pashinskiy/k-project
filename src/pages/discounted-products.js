@@ -117,7 +117,7 @@ const IndexPage = ({ data: { allPrismicProduct } }) => {
   const products = subcategoryUrl
     ? allProducts.filter(product => {
         if (product.data.category.document === null) return false
-        return product.data.category.document.data.name === subcategoryUrl
+        return product.data.category.document?.data.name === subcategoryUrl
       })
     : allProducts
 

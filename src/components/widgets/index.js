@@ -61,10 +61,10 @@ export default function CategoryWidget(props) {
               <Grid item key={i} className={classes.storiesCardItem}>
                 <CardWidget
                   cardImage={
-                    category.category.document.data.image?.localFile
+                    category.category.document?.data.image?.localFile
                       ?.childImageSharp.gatsbyImageData
                   }
-                  cardTitle={category.category.document.data.name}
+                  cardTitle={category.category.document?.data.name}
                   variant="category"
                 />
               </Grid>

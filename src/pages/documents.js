@@ -78,21 +78,21 @@ export default function Documents({ data }) {
       <Grid container direction="column" className={classes.wrapper}>
         {fromFooter.map(doc => (
           <Link
-            to={`/documents/${doc.doc.document.uid}/`}
-            key={doc.doc.document.id}
+            to={`/documents/${doc.doc.document?.uid}/`}
+            key={doc.doc.document?.id}
             className={classes.link}
           >
-            {doc.doc.document.data.name}
+            {doc.doc.document?.data.name}
           </Link>
         ))}
 
         {other.map(doc => (
           <Link
-            to={`/documents/${doc.doc.document.uid}/`}
-            key={doc.doc.document.id}
+            to={`/documents/${doc.doc.document?.uid}/`}
+            key={doc.doc.document?.id}
             className={classes.link}
           >
-            {doc.doc.document.data.name}
+            {doc.doc.document?.data.name}
           </Link>
         ))}
       </Grid>

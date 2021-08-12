@@ -189,8 +189,8 @@ const Category = ({
                 <nav className={classes.all_tags}>
                   {subcategory.child.document?.data.tags?.map((tag, i) => (
                     <DefaultLink
-                      name={tag.tag.document.data.name}
-                      link={`/subcategory/${subcategory.child.document.uid}/?group=${tag.tag.document.data.name}`}
+                      name={tag.tag.document?.data.name}
+                      link={`/subcategory/${subcategory.child.document?.uid}/?group=${tag.tag.document?.data.name}`}
                     />
                   ))}
                 </nav>
@@ -303,7 +303,7 @@ const Category = ({
                 allPrismicProduct.edges.find(
                   edge =>
                     edge.node.data.category.document?.id ===
-                    subcategory_product.child.document.id
+                    subcategory_product.child.document?.id
                 )
               )
                 return (
