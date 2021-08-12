@@ -336,10 +336,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function SaleCard({ sale, mainPage }) {
   const classes = useStyles()
-  const previewText = sale.data.previewtext.text
+  const previewText = sale?.data.previewtext.text
   const tooMuchText = previewText?.length > 72
   const mobile = useMediaQuery("(max-width: 767px)")
-  const mainPageLink = sale.data.link?.text 
+  const mainPageLink = sale?.data.link?.text 
 
   switch (mainPage) {
     case mainPage !== null:
@@ -347,9 +347,9 @@ export default function SaleCard({ sale, mainPage }) {
         <Card className={classes.wrapper + " " + classes.wrapperMainPage}>
           <GatsbyImage
             image={
-              sale.data.previewimage?.localFile?.childImageSharp?.gatsbyImageData
+              sale?.data.previewimage?.localFile?.childImageSharp?.gatsbyImageData
             }
-            alt={sale.data.previewimage.alt ?? "sales"}
+            alt={sale?.data.previewimage.alt ?? "sales"}
             className={classes.wrapperImgMainPage}
             imgStyle={{objectFit: "cover"}}
           />
@@ -358,7 +358,7 @@ export default function SaleCard({ sale, mainPage }) {
               variant="body2"
               className={classes.mainTextMainPage + " " + (tooMuchText ? classes.mainTextMainPageNoPrev : null)}
             >
-              {sale.data.title.text}
+              {sale?.data.title.text}
             </Typography>
             {tooMuchText ? null : (
               <Typography className={classes.previewTextMainPage}>
@@ -366,7 +366,7 @@ export default function SaleCard({ sale, mainPage }) {
               </Typography>
             )}
             <Button
-              href={mainPageLink ? mainPageLink : `/sale/${sale.uid}/`}
+              href={mainPageLink ? mainPageLink : `/sale/${sale?.uid}/`}
               className={
                 classes.button +
                 " " + (mobile ? classes.buttonMobile : 
@@ -387,19 +387,19 @@ export default function SaleCard({ sale, mainPage }) {
         <Card className={classes.wrapper}>
           <GatsbyImage
             image={
-              sale.data.previewimage?.localFile?.childImageSharp.gatsbyImageData
+              sale?.data.previewimage?.localFile?.childImageSharp.gatsbyImageData
             }
-            alt={sale.data.previewimage.alt ?? "sales"}
+            alt={sale?.data.previewimage.alt ?? "sales"}
             className={classes.wrapperImg}
           />
           <Typography className={classes.mainTitle + " " + classes.text}>
-            {sale.data.title.text}
+            {sale?.data.title.text}
           </Typography>
           <Typography className={classes.previewText + " " + classes.text}>
-            {sale.data.previewtext.text}
+            {sale?.data.previewtext.text}
           </Typography>
           <Button
-            href={`/sale/${sale.uid}/`}
+            href={`/sale/${sale?.uid}/`}
             className={classes.button + " " + classes.buttonSales}
           >
             <Typography variant="body2" className={classes.buttonText}>
