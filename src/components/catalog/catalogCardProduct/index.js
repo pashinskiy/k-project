@@ -330,7 +330,7 @@ export default function CardProduct({ product, afterChange, ...other }) {
           onClick={() => navigate(`/${product.uid}`)}
           className={classes.buttonLink}
         >
-          <GatsbyImage
+          <GatsbyImage loading="eager"
             image={
               product.data.images[0]?.image.localFile?.childImageSharp
                 .gatsbyImageData

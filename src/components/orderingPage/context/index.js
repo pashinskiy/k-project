@@ -9,6 +9,7 @@ function reducer(state, action) {
       return {
         ...state,
         city: action.payload,
+        variantDelivery: "standart"
       }
     case "SET_DATE":
       return {

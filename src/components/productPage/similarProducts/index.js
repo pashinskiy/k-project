@@ -13,6 +13,30 @@ export default function SimilarProducts({ category }) {
             id
             uid
             data {
+              all_product_accessories {
+                product_accessories {
+                  document {
+                    ... on PrismicProduct {
+                      uid
+                      id
+                      data {
+                        images {
+                          image {
+                            localFile {
+                              childImageSharp {
+                                gatsbyImageData
+                              }
+                            }
+                            alt
+                          }
+                        }
+                        price
+                        name
+                      }
+                    }
+                  }
+                }
+              }
               category {
                 document {
                   ... on PrismicSubcategory {

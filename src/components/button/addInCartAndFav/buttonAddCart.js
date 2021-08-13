@@ -123,7 +123,7 @@ export default function ButtonAddCart({ product, text, variant, dialog, iconPlus
   const dispatch = React.useContext(GlobalDispatchContext)
 
   function addToCart() {
-    if(dialog)
+    // if(dialog)
       setDialogOpen(true)
     dispatch({ type: "ADD_PRODUCT_IN_CART", payload: product.id })
   }

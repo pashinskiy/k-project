@@ -345,7 +345,7 @@ export default function SaleCard({ sale, mainPage }) {
     case mainPage !== null:
       return (
         <Card className={classes.wrapper + " " + classes.wrapperMainPage}>
-          <GatsbyImage
+          <GatsbyImage loading="eager"
             image={
               sale?.data.previewimage?.localFile?.childImageSharp?.gatsbyImageData
             }
@@ -385,7 +385,7 @@ export default function SaleCard({ sale, mainPage }) {
     default:
       return (
         <Card className={classes.wrapper}>
-          <GatsbyImage
+          <GatsbyImage loading="eager"
             image={
               sale?.data.previewimage?.localFile?.childImageSharp.gatsbyImageData
             }

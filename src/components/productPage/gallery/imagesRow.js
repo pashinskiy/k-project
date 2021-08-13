@@ -72,7 +72,7 @@ export default function ImagesRow({ images, reverse, ...other }) {
       {images.map((image, i) => {
         const img = image?.localFile?.childImageSharp?.gatsbyImageData ?? null
         return img ? (
-          <GatsbyImage
+          <GatsbyImage loading="eager"
             image={img}
             alt={image.alt ?? `image_${i}`}
             key={i}

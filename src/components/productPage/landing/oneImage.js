@@ -48,7 +48,7 @@ export default function OneImage({ slice, ...other }) {
 
   return img ? (
     <Grid {...other} className={classes.wrapper}>
-      <GatsbyImage
+      <GatsbyImage loading="eager"
         image={img}
         alt={alt ?? "img"}
         className={classes.imgWrapper}

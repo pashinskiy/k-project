@@ -340,7 +340,7 @@ export default function ProductAddedCard({ product, closeDialog }) {
           </Typography>
         </div>
         <div className={classes.productInfoWrapper}>
-          <GatsbyImage
+          <GatsbyImage loading="eager"
             image={image}
             alt="product-image"
             className={classes.productImageContainer}

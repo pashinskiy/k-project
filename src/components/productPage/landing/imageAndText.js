@@ -182,7 +182,7 @@ export default function TwoImages({ slice, ...other }) {
     >
       {img ? (
         <Grid className={classes.wrapperBlock + " " + classes.imageBlock}>
-          <GatsbyImage
+          <GatsbyImage loading="eager"
             image={img}
             alt={alt ?? "img"}
             className={classes.imgWrapper}

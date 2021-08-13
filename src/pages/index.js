@@ -90,6 +90,30 @@ export const query = graphql`
                     id
                     uid
                     data {
+                      all_product_accessories {
+                        product_accessories {
+                          document {
+                            ... on PrismicProduct {
+                              uid
+                              id
+                              data {
+                                images {
+                                  image {
+                                    localFile {
+                                      childImageSharp {
+                                        gatsbyImageData
+                                      }
+                                    }
+                                    alt
+                                  }
+                                }
+                                price
+                                name
+                              }
+                            }
+                          }
+                        }
+                      }
                       images {
                         image {
                           localFile {
@@ -113,6 +137,30 @@ export const query = graphql`
                     id
                     uid
                     data {
+                      all_product_accessories {
+                        product_accessories {
+                          document {
+                            ... on PrismicProduct {
+                              uid
+                              id
+                              data {
+                                images {
+                                  image {
+                                    localFile {
+                                      childImageSharp {
+                                        gatsbyImageData
+                                      }
+                                    }
+                                    alt
+                                  }
+                                }
+                                price
+                                name
+                              }
+                            }
+                          }
+                        }
+                      }
                       images {
                         image {
                           localFile {
@@ -271,6 +319,30 @@ export const query = graphql`
         node {
           uid
           data {
+            all_product_accessories {
+              product_accessories {
+                document {
+                  ... on PrismicProduct {
+                    uid
+                    id
+                    data {
+                      images {
+                        image {
+                          localFile {
+                            childImageSharp {
+                              gatsbyImageData
+                            }
+                          }
+                          alt
+                        }
+                      }
+                      price
+                      name
+                    }
+                  }
+                }
+              }
+            }
             name
             price
             images {
@@ -318,6 +390,30 @@ export const query = graphql`
                   id
                   uid
                   data {
+                    all_product_accessories {
+                      product_accessories {
+                        document {
+                          ... on PrismicProduct {
+                            uid
+                            id
+                            data {
+                              images {
+                                image {
+                                  localFile {
+                                    childImageSharp {
+                                      gatsbyImageData
+                                    }
+                                  }
+                                  alt
+                                }
+                              }
+                              price
+                              name
+                            }
+                          }
+                        }
+                      }
+                    }
                     name
                     price
                     old_price

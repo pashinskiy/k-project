@@ -206,7 +206,7 @@ export default function CardOfferProduct({ accessory }) {
         key={accessoryItem.uid}
         style={{ textDecoration: "none" }}
       >
-        <GatsbyImage
+        <GatsbyImage loading="eager"
           image={
             accessoryItem?.data.images[0].image.localFile?.childImageSharp
               .gatsbyImageData

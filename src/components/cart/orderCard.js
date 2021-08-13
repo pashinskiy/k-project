@@ -98,7 +98,7 @@ export default function OrderCard({ product }) {
   return (
     <Grid className={classes.root}>
       {image ? (
-        <GatsbyImage
+        <GatsbyImage loading="eager"
           image={image.localFile?.childImageSharp.gatsbyImageData}
           alt={image.alt ?? "product-image-" + product.uid}
           className={classes.img}

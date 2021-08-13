@@ -196,7 +196,7 @@ export default function BlockBoolean({
             </picture> */}
           </div>
         ) : (
-          // <GatsbyImage
+          // <GatsbyImage loading="eager"
           //   image={img?.localFile?.childImageSharp.gatsbyImageData}
           //   alt={img.alt ?? "sticker"}
           //   className={classes.image}

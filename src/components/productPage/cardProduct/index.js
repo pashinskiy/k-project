@@ -20,6 +20,30 @@ export default function CardProduct({ prismicProduct }) {
             id
             uid
             data {
+              all_product_accessories {
+                product_accessories {
+                  document {
+                    ... on PrismicProduct {
+                      uid
+                      id
+                      data {
+                        images {
+                          image {
+                            localFile {
+                              childImageSharp {
+                                gatsbyImageData
+                              }
+                            }
+                            alt
+                          }
+                        }
+                        price
+                        name
+                      }
+                    }
+                  }
+                }
+              }
               name
               color
               color_group

@@ -71,7 +71,7 @@ export default function AdvertiseCard({ banner }) {
   // console.log(banner)
   return (
     <Card className={classes.cardRoot}>
-      <GatsbyImage
+      <GatsbyImage loading="eager"
         image={banner.data.image?.localFile?.childImageSharp?.gatsbyImageData}
         alt={banner.data.image?.alt ?? "banner"}
         className={classes.wrapperImg}

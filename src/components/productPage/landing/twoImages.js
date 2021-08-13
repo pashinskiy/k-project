@@ -152,7 +152,7 @@ export default function TwoImages({ slice, ...other }) {
           {normal_text_1}
         </Typography>
         {img_1 ? (
-          <GatsbyImage
+          <GatsbyImage loading="eager"
             image={img_1}
             alt={alt_1 ?? "img"}
             className={classes.imgWrapper}
@@ -185,7 +185,7 @@ export default function TwoImages({ slice, ...other }) {
         </Typography>{" "}
         <Typography hidden={!normal_text_2}>{normal_text_1}</Typography>
         {img_2 ? (
-          <GatsbyImage
+          <GatsbyImage loading="eager"
             image={img_2}
             alt={alt_2 ?? "img"}
             className={classes.imgWrapper}

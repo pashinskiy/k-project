@@ -132,52 +132,71 @@ export default function Products({ data: { allPrismicProduct } }) {
   const mobile = useMediaQuery("(max-width: 1025px)")
   const search = useMediaQuery("(max-width: 1025px)")
 
-  const url = new URL(window.location.href)
-  const titleUrl = url.searchParams.has("search")
-    ? JSON.parse(url.searchParams.get("search"))
+  const newUrl = new URL(window.location)
+  const titleUrl = newUrl.searchParams.has("search")
+    ? JSON.parse(newUrl.searchParams.get("search"))
     : ""
-  const categoryUrl = url.searchParams.has("category")
-    ? JSON.parse(url.searchParams.get("category"))
+  const categoryUrl = newUrl.searchParams.has("category")
+    ? JSON.parse(newUrl.searchParams.get("category"))
     : ""
 
-  const [title, setTitle] = React.useState(null)
-  const [category, setCategory] = React.useState(null)
+  const [url, setUrl] = React.useState(null)
+  // const [title, setTitle] = React.useState(null)
+  // const [category, setCategory] = React.useState(null)
   const [allProducts, setAllProduct] = React.useState(
     allPrismicProduct.edges.map(edge => edge.node)
   )
   const [filterProducts, setFilterProducts] = React.useState([])
 
-  if (title !== titleUrl) {
+  if (newUrl.href !== url) {
     const newAllProduct = allPrismicProduct.edges
       .map(edge => edge.node)
-      .filter(product =>
-        product.data.name.toLowerCase().includes(titleUrl.toLowerCase())
+      .filter(
+        product =>
+          (product.data.name.toLowerCase().includes(titleUrl.toLowerCase()) ||
+            titleUrl === "") &&
+          (product.data.main_category.document?.data.name === categoryUrl ||
+            categoryUrl === "")
       )
 
-    setTitle(titleUrl)
+    setUrl(newUrl.href)
     setAllProduct(newAllProduct)
     setFilterProducts(newAllProduct)
   }
 
-  if (category !== categoryUrl && categoryUrl !== "") {
-    console.log(allProducts[0].data.main_category.document?.data.name)
-    const newAllProduct = allProducts.filter(
-      product => product.data.main_category.document?.data.name === categoryUrl
-    )
+  // if (title !== titleUrl) {
+  //   const newAllProduct = allPrismicProduct.edges
+  //     .map(edge => edge.node)
+  //     .filter(product =>
+  //       product.data.name.toLowerCase().includes(titleUrl.toLowerCase())
+  //     )
 
-    setCategory(categoryUrl)
-    setAllProduct(newAllProduct)
-    setFilterProducts(newAllProduct)
-  }
+  //   setTitle(titleUrl)
+  //   setAllProduct(newAllProduct)
+  //   setFilterProducts(newAllProduct)
+  // }
+
+  // if (category !== categoryUrl && categoryUrl !== "") {
+  //   const newAllProduct = allPrismicProduct.edges
+  //     .map(edge => edge.node)
+  //     .filter(
+  //       product =>
+  //         product.data.main_category.document?.data.name === categoryUrl
+  //     )
+
+  //   setCategory(categoryUrl)
+  //   setAllProduct(newAllProduct)
+  //   setFilterProducts(newAllProduct)
+  // }
 
   const arrayCards = filterProducts.map(product => (
     <CardProduct product={product} key={product.id} />
   ))
 
   function cleanFilter() {
-    const url = new URL(window.location)
-    url.search = ""
-    window.location = url.href
+    // const url = new URL(window.location)
+    newUrl.search = ""
+    window.location = newUrl.href
   }
 
   return (
@@ -186,10 +205,10 @@ export default function Products({ data: { allPrismicProduct } }) {
 
       {search ? <Search /> : null}
 
-      {/[^\s]/.test(title) ? (
+      {/[^\s]/.test(titleUrl) ? (
         <>
           <Typography className={classes.smallText}>Поиск по:</Typography>
-          <Typography className={classes.title}>{title}</Typography>
+          <Typography className={classes.title}>{titleUrl}</Typography>
         </>
       ) : null}
 
@@ -248,6 +267,30 @@ export const query = graphql`
           id
           uid
           data {
+            all_product_accessories {
+              product_accessories {
+                document {
+                  ... on PrismicProduct {
+                    uid
+                    id
+                    data {
+                      images {
+                        image {
+                          localFile {
+                            childImageSharp {
+                              gatsbyImageData
+                            }
+                          }
+                          alt
+                        }
+                      }
+                      price
+                      name
+                    }
+                  }
+                }
+              }
+            }
             main_category {
               document {
                 ... on PrismicCategory {

@@ -131,7 +131,7 @@ export default function Sales(props) {
                       }}
                     />
                   </div>
-                  <GatsbyImage
+                  <GatsbyImage loading="eager"
                     image={
                       advantage.node.data.sale_img.localFile?.childImageSharp
                         .gatsbyImageData
@@ -155,7 +155,7 @@ export default function Sales(props) {
                       }}
                     />
                   </div>
-                  <GatsbyImage
+                  <GatsbyImage loading="eager"
                     image={
                       advantage.node.data.sale_img.localFile?.childImageSharp
                         .gatsbyImageData

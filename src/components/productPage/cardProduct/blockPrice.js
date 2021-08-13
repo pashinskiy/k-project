@@ -244,6 +244,12 @@ export default function BlockPrice({ product, allColors }) {
         credit.months_1
       : null
 
+  const seller = product.data.body.find(
+    slice => slice.slice_type === "Seller" || slice.slice_type === "seller"
+  )
+  const name_seller = seller?.primary?.name_seller ?? false
+  const ogrn = seller?.primary?.ogrn ?? false
+
   return (
     <Grid container direction="column" className={classes.wrapper}>
       <Grid container className={classes.collorsPanel}>
@@ -337,27 +343,17 @@ export default function BlockPrice({ product, allColors }) {
           </>
         ) : null}
 
-        {product.data.body.find(
-          slice => slice.slice_type === "Seller" || "seller"
-        )?.primary?.name_seller !== undefined || null ? (
+        {name_seller ? (
           <>
             <Typography className={classes.title}>Продавец</Typography>
             <Typography hidden={!creditValue} className={classes.textSeller}>
-              {
-                product.data.body.find(
-                  slice => slice.slice_type === "Seller" || "seller"
-                )?.primary?.name_seller
-              }
+              {name_seller}
             </Typography>
             <Typography
               hidden={!credit.months_2}
               className={classes.textSeller}
             >
-              {
-                product.data.body.find(
-                  slice => slice.slice_type === "Seller" || "seller"
-                )?.primary?.ogrn
-              }
+              {ogrn}
             </Typography>
           </>
         ) : null}

@@ -366,7 +366,7 @@ export default function CardWidget({
             <CardActionArea className={classes.stretch}>
               {/* TODO: Добавить в поле с ссылкой на страницу категорию */}
               <Link to={cardLink} className={classes.stretch}>
-                <GatsbyImage
+                <GatsbyImage loading="eager"
                   image={cardImage}
                   alt={altImage ?? "img"}
                   className={`${classes.stretch} gatsby--image`}
@@ -388,7 +388,7 @@ export default function CardWidget({
               style={{ borderRadius: "12px" }}
             >
               <Link to={cardLink} className={`${classes.stretch} strech`}>
-                <GatsbyImage
+                <GatsbyImage loading="eager"
                   image={cardImage}
                   alt={altImage ?? "img"}
                   className={classes.storiesImageContainer}
@@ -451,7 +451,7 @@ export default function CardWidget({
                     />
                   </div>
                 ) : (
-                  <GatsbyImage
+                  <GatsbyImage loading="eager"
                     image={cardImage}
                     alt={altImage ?? "img"}
                     className={classes.brandElement}
@@ -480,7 +480,7 @@ export default function CardWidget({
                 style={{ background: "#EFEFF2", borderRadius: 100 }}
               >
                 <div className={classes.brandDummy} />
-                <GatsbyImage
+                <GatsbyImage loading="eager"
                   image={cardImage}
                   alt={altImage ?? "img"}
                   className={classes.brandElement}

@@ -82,6 +82,7 @@ export default function Search({ data }) {
   function submit(e) {
     e.preventDefault()
     const url = new URL(window.location)
+    url.search = ""
     url.searchParams.set("search", JSON.stringify(value))
     navigate(`/products/${url.search}`)
   }

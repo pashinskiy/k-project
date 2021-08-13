@@ -301,6 +301,7 @@ export default function Filter({ products, setFilterProducts }) {
   })
 
   // смотрим адресную строку
+  const [stateUrl, setStateUrl] = React.useState(null)
   const url = new URL(window.location.href)
 
   const filtersInUrl = [...url.searchParams]
@@ -312,6 +313,13 @@ export default function Filter({ products, setFilterProducts }) {
     })
 
   const [filters, setFilters] = React.useState(new Map([...filtersInUrl]))
+
+  if (stateUrl !== url.href) {
+    setFilters(new Map([...filtersInUrl]))
+    setStateUrl(url.href)
+    filtration(true)
+  }
+
   //счетчик фильтров
   const countFilter = [...filters].reduce((sum, filter) => {
     if (filter[1].type === "checkbox" || filter[1].type === "color")
@@ -403,6 +411,8 @@ export default function Filter({ products, setFilterProducts }) {
     const subcategory = url.searchParams.get("subcategory") ?? false
     const category = url.searchParams.get("category") ?? false
 
+    const trueFilters = firstRun ? new Map([...filtersInUrl]) : filters
+
     // отфильтрованные товары
     const filterProducts = products.filter(product => {
       if (group) {
@@ -410,7 +420,7 @@ export default function Filter({ products, setFilterProducts }) {
         if (!tags.includes(group)) return false
       }
 
-      return [...filters].every(filter => {
+      return [...trueFilters].every(filter => {
         const title = filter[0]
         const type = filter[1].type
         const value = filter[1].value
@@ -477,9 +487,10 @@ export default function Filter({ products, setFilterProducts }) {
     }
   }
   //фильтрация при первом рендере
-  React.useEffect(() => {
-    filtration(true)
-  }, [])
+  // React.useEffect(() => {
+  //   filtration(true)
+  // }, [])
+
   //очистка фильтра
   function cleanFilter() {
     filters.clear()

@@ -376,7 +376,7 @@ export default function Subgroup({ subgroup }) {
                       const alt = slice.primary.image.alt ?? "image"
 
                       return image ? (
-                        <GatsbyImage
+                        <GatsbyImage loading="eager"
                           image={image}
                           alt={alt ?? "img"}
                           className={classes.slice + " " + classes.sliceImage}

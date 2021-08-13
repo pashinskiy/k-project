@@ -182,7 +182,7 @@ export default function SaleCardMain({ sale }) {
   const mobile = useMediaQuery("(max-width: 767px)")
   return (
     <Card className={classes.root}>
-      <GatsbyImage
+      <GatsbyImage loading="eager"
         image={sale.data.previewimage?.localFile?.childImageSharp.gatsbyImageData}
         alt={sale.data.previewimage.alt ?? "sales"}
         className={classes.wrapperImg}

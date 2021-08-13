@@ -13,7 +13,7 @@ export default function OrderProductCard() {
   const classes = useStyles()
   return (
     <div>
-      <GatsbyImage className={classes.img} />
+      <GatsbyImage loading="eager" className={classes.img} />
       <div>
         <Typography></Typography>
         <Typography></Typography>

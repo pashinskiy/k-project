@@ -152,7 +152,7 @@ export default function Features({ featuresSlices }) {
         return (
           <Grid container wrap="nowrap" key={i} className={classes.item}>
             {feature.image.localFile ? (
-              <GatsbyImage
+              <GatsbyImage loading="eager"
                 image={feature.image?.localFile?.childImageSharp?.gatsbyImageData}
                 alt={feature.image.alt ?? "icon"}
                 className={classes.itemImg}

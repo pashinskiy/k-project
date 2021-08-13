@@ -323,7 +323,7 @@ export default function DeliveryData({ prismicCartAndOrder }) {
         />
 
         {stickerDelivery ? (
-          <GatsbyImage
+          <GatsbyImage loading="eager"
             image={stickerDelivery.localFile?.childImageSharp.gatsbyImageData}
             alt={stickerDelivery.alt ?? "sticker"}
             className={classes.deliveryImage}

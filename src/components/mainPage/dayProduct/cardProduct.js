@@ -118,7 +118,7 @@ export default function CardSimilarProduct({ product, afterChange }) {
   return (
     <Grid className={`${classes.wrapper} product--card`}>
       <Link to={`/${product?.uid}/`} className={classes.link}>
-        <GatsbyImage
+        <GatsbyImage loading="eager"
           image={img}
           alt={alt ?? `image product`}
           className={classes.imageWrapper}

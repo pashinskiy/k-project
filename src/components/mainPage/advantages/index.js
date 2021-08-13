@@ -95,7 +95,7 @@ export default function Advantages(props) {
                             <Typography variant="h4" dangerouslySetInnerHTML={{
                                 __html: advantage.node.data.adv_title.raw[0].text
                                 }} />
-                            <GatsbyImage
+                            <GatsbyImage loading="eager"
                                 image={advantage.node.data.adv_img.localFile?.childImageSharp.gatsbyImageData}
                                 alt={advantage.node.data.adv_img.alt ?? "img"}
                                 className={classes.img} />

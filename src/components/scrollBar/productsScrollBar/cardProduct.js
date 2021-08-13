@@ -106,7 +106,7 @@ export default function CardProduct({ product, afterChange, allTitle }) {
   return img ? (
     <Grid className={`${classes.wrapper} product--card`}>
       <Link to={`/${product.uid}/`} className={classes.link}>
-        <GatsbyImage
+        <GatsbyImage loading="eager"
           image={img}
           alt={alt ?? `image product`}
           className={classes.imageWrapper}

@@ -4,6 +4,8 @@ import { makeStyles, Grid, Typography } from "@material-ui/core"
 import Standart from "../../../../../static/svg/deliveryIcon.svg"
 import Express from "../../../../../static/svg/deliveryMobile.svg"
 
+import { OrderingStateContext } from "../../context"
+
 const useStyle = makeStyles(theme => ({
   wrapper: {
     background: theme.palette.background.secondary,
@@ -19,7 +21,7 @@ const useStyle = makeStyles(theme => ({
     padding: 0,
     border: "none",
     cursor: "pointer",
-    background: 'none',
+    background: "none",
     "@media(max-width: 767px)": {
       justifyContent: "center",
       alignItems: "center",
@@ -129,6 +131,7 @@ export default function VariantDelivery({
   prismicCartAndOrder,
 }) {
   const classes = useStyle()
+  const orderingState = React.useContext(OrderingStateContext)
 
   function setStandartDelivery() {
     setValue("standart")
@@ -138,7 +141,7 @@ export default function VariantDelivery({
     setValue("express")
   }
 
-  return (
+  return /^\s*санкт-петербург\s*$/i.test(orderingState.city) ? (
     <Grid container justify="space-between" className={classes.wrapper}>
       <button
         onClick={setStandartDelivery}
@@ -197,5 +200,5 @@ export default function VariantDelivery({
         </div>
       </button>
     </Grid>
-  )
+  ) : null
 }

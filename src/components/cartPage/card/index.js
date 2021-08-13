@@ -249,7 +249,7 @@ export default function Card({ product }) {
     <Grid container justify="space-between" className={classes.wrapper}>
       <Grid container alignItems="center" style={{ width: "auto" }}>
         <Link to={`/${product.uid}/`} style={{ textDecoration: "none" }}>
-          <GatsbyImage
+          <GatsbyImage loading="eager"
             image={img}
             alt={product.data.images[0]?.image.alt ?? "product"}
             className={classes.image + " " + classes.unselect}

@@ -225,6 +225,7 @@ export const pageQuery = graphql`
         body {
           ... on PrismicProductBodySeller {
             id
+            slice_type
             primary {
               name_seller
               ogrn

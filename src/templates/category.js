@@ -207,7 +207,7 @@ const Category = ({
               [prismicCategory.data.body[0]?.primary.tumbler_link === true ?
                   <Link to={`${prismicCategory.data.body[0]?.primary.link}`}>
                     <div className={classes.banner}>
-                      <GatsbyImage
+                      <GatsbyImage loading="eager"
                         image={
                           prismicCategory.data.body[0]?.primary.category_img.localFile
                             .childImageSharp.gatsbyImageData
@@ -223,7 +223,7 @@ const Category = ({
                 :
                   <a href={`${prismicCategory.data.body[0]?.primary.link}`} target="_blank" rel="noopener noreferrer">
                     <div className={classes.banner}>
-                      <GatsbyImage
+                      <GatsbyImage loading="eager"
                         image={
                           prismicCategory.data.body[0]?.primary.category_img.localFile
                             .childImageSharp.gatsbyImageData
