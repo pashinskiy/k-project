@@ -11,6 +11,8 @@ import Pagination from "../components/pagination"
 import CardProduct from "../components/catalog/catalogCardProduct"
 import Layout from '../components/layout'
 
+import { GlobalStateContext } from "../context/GlobalContextProvider"
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
@@ -44,6 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 const IndexPage = ({ data }) => {
   const classes = useStyles()
+  const state = React.useContext(GlobalStateContext)
 
   //считываем состояниe LocalStorage
   let favorites = localStorage.getItem("favorites")
@@ -52,7 +55,7 @@ const IndexPage = ({ data }) => {
   const isMobile = useMediaQuery("(max-width: 767px)")
 
   const [favoritesArray, setFavoritesArray] = useState(favorites)
-  const dataProducts = data.allPrismicProduct.edges.map(edge => edge.node)
+  const dataProducts = state.allPrismicProduct.edges.map(edge => edge.node)
   const dataCategory = data.allPrismicCategory.edges.map(edge => edge.node)
   const [filterProducts, setFilterProducts] = React.useState(dataProducts)
 
@@ -117,129 +120,6 @@ export default IndexPage
 
 export const query = graphql`
   query FavPage {
-    allPrismicProduct {
-      edges {
-        node {
-          id
-          uid
-          data {
-            all_product_accessories {
-              product_accessories {
-                document {
-                  ... on PrismicProduct {
-                    uid
-                    id
-                    data {
-                      images {
-                        image {
-                          localFile {
-                            childImageSharp {
-                              gatsbyImageData
-                            }
-                          }
-                          alt
-                        }
-                      }
-                      price
-                      name
-                    }
-                  }
-                }
-              }
-            }
-            brand {
-              document {
-                ... on PrismicBrand {
-                  id
-                  data {
-                    name
-                  }
-                }
-              }
-            }
-            name
-            price
-            old_price
-            color
-            images {
-              image {
-                alt
-                localFile {
-                  childImageSharp {
-                    gatsbyImageData
-                  }
-                }
-              }
-            }
-            body {
-              ... on PrismicProductBodyStickers {
-                slice_type
-                items {
-                  sticker {
-                    document {
-                      ... on PrismicSticker {
-                        id
-                        data {
-                          image {
-                            alt
-                            localFile {
-                              childImageSharp {
-                                fluid(maxHeight: 35) {
-                                  aspectRatio
-                                  src
-                                  srcSet
-                                  srcSetWebp
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              ... on PrismicProductBodyFeatures {
-                slice_type
-                items {
-                  feature
-                  image {
-                    alt
-                    localFile {
-                      childImageSharp {
-                        gatsbyImageData(height: 30)
-                      }
-                    }
-                  }
-                }
-              }
-            }
-            body1 {
-              ... on PrismicProductBody1Characteristics {
-                id
-                slice_type
-                items {
-                  characteristic {
-                    document {
-                      ... on PrismicCharacteristic {
-                        id
-                        data {
-                          name
-                          variant
-                          order
-                        }
-                      }
-                    }
-                  }
-                  value
-                }
-              }
-            }
-            color
-          }
-        }
-      }
-    }
     allPrismicCategory {
       edges {
         node {

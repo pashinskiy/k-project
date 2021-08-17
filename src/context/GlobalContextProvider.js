@@ -1,3 +1,4 @@
+import { useStaticQuery, graphql } from "gatsby"
 import React from "react"
 
 export const GlobalStateContext = React.createContext()
@@ -39,7 +40,6 @@ function reducer(state, action) {
         ...state,
         cart: [],
       }
-
 
     case "INCREMENT_PRODUCT_COUNT":
       if (state.inCart(action.payload) === 99) return { ...state }
@@ -105,6 +105,180 @@ function reducer(state, action) {
 }
 
 const GlobalContextProvider = ({ children }) => {
+  const data = useStaticQuery(graphql`
+    {
+      allPrismicProduct {
+        edges {
+          node {
+            id
+            uid
+            data {
+              all_product_accessories {
+                product_accessories {
+                  document {
+                    ... on PrismicProduct {
+                      uid
+                      id
+                      data {
+                        images {
+                          image {
+                            localFile {
+                              childImageSharp {
+                                gatsbyImageData
+                              }
+                            }
+                            alt
+                          }
+                        }
+                        price
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+              main_category {
+                document {
+                  ... on PrismicCategory {
+                    id
+                    data {
+                      name
+                    }
+                  }
+                }
+              }
+              brand {
+                document {
+                  ... on PrismicBrand {
+                    id
+                    data {
+                      name
+                      popular
+                    }
+                  }
+                }
+              }
+              name
+              price
+              old_price
+              color
+              color_group
+              images {
+                image {
+                  alt
+                  localFile {
+                    childImageSharp {
+                      gatsbyImageData(height: 200)
+                    }
+                  }
+                }
+              }
+              delivery {
+                document {
+                  ... on PrismicDelivery {
+                    data {
+                      body {
+                        ... on PrismicDeliveryBodyDeliveryToCities {
+                          id
+                          items {
+                            city_name
+                            cost
+                            delivery_description
+                            timing
+                          }
+                        }
+                      }
+                      variants {
+                        description
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+              credit {
+                document {
+                  ... on PrismicCredit {
+                    data {
+                      months_1
+                      months_2
+                      percent
+                    }
+                  }
+                }
+              }
+              body {
+                ... on PrismicProductBodyStickers {
+                  slice_type
+                  items {
+                    sticker {
+                      document {
+                        ... on PrismicSticker {
+                          id
+                          data {
+                            image {
+                              alt
+                              localFile {
+                                publicURL
+                                childImageSharp {
+                                  fluid(maxHeight: 35) {
+                                    aspectRatio
+                                    src
+                                    srcSet
+                                    srcSetWebp
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                ... on PrismicProductBodyFeatures {
+                  slice_type
+                  items {
+                    feature
+                    image {
+                      alt
+                      localFile {
+                        childImageSharp {
+                          gatsbyImageData(height: 30)
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              body1 {
+                ... on PrismicProductBody1Characteristics {
+                  id
+                  slice_type
+                  items {
+                    characteristic {
+                      document {
+                        ... on PrismicCharacteristic {
+                          id
+                          data {
+                            name
+                            variant
+                            order
+                          }
+                        }
+                      }
+                    }
+                    value
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+
   const initState = {
     favorites: JSON.parse(localStorage.getItem("favorites")) ?? [],
     cart: JSON.parse(localStorage.getItem("cart")) ?? [],
@@ -114,7 +288,8 @@ const GlobalContextProvider = ({ children }) => {
     inFavorites(id) {
       return this.favorites.includes(id)
     },
-    last_products: JSON.parse(localStorage.getItem("last_products")) ?? []
+    last_products: JSON.parse(localStorage.getItem("last_products")) ?? [],
+    allPrismicProduct: data.allPrismicProduct,
   }
 
   const [state, dispatch] = React.useReducer(reducer, initState)
