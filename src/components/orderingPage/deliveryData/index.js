@@ -245,6 +245,7 @@ export default function DeliveryData({ prismicCartAndOrder }) {
 
   const orderingState = React.useContext(OrderingStateContext)
   const orderingDispatch = React.useContext(OrderingDispatchContext)
+  console.log(orderingState)
 
   // получение строки с датой
   function getDate(value) {
@@ -290,7 +291,7 @@ export default function DeliveryData({ prismicCartAndOrder }) {
   function setVariantDelivery(value) {
     orderingDispatch({ type: "SET_VARIANT_DELIVERY", payload: value })
     if (value === "express") {
-      orderingDispatch({ type: "SET_TIME", payload: getTimesExpress()[0] })
+      setTime(getTimesExpress()[0])
     }
     if (value === "standart") {
       orderingDispatch({ type: "SET_TIME", payload: timeStandartDelivery[0] })
@@ -300,7 +301,21 @@ export default function DeliveryData({ prismicCartAndOrder }) {
     orderingDispatch({ type: "SET_DATE", payload: value })
   }
   function setTime(value) {
-    orderingDispatch({ type: "SET_TIME", payload: value })
+    if (value[0] === "С") {
+      setDate(getDate())
+      orderingDispatch({
+        type: "SET_TIME",
+        payload: value.slice(10).replace("до", "-"),
+      })
+    } else if (value[0] === "З") {
+      setDate(getDate("+1"))
+      orderingDispatch({
+        type: "SET_TIME",
+        payload: value.slice(9).replace("до", "-"),
+      })
+    } else {
+      orderingDispatch({ type: "SET_TIME", payload: value })
+    }
   }
   function setStreet(value) {
     orderingDispatch({ type: "SET_STREET", payload: value })
@@ -323,7 +338,8 @@ export default function DeliveryData({ prismicCartAndOrder }) {
         />
 
         {stickerDelivery ? (
-          <GatsbyImage loading="eager"
+          <GatsbyImage
+            loading="eager"
             image={stickerDelivery.localFile?.childImageSharp.gatsbyImageData}
             alt={stickerDelivery.alt ?? "sticker"}
             className={classes.deliveryImage}
@@ -381,7 +397,11 @@ export default function DeliveryData({ prismicCartAndOrder }) {
 
           <SmallHeaderAccentWithIcon
             icon={<Watch />}
-            title={orderingState.time}
+            title={
+              orderingState.date === getDate()
+                ? `Сегодня с ${orderingState.time.replace("-", "до")}`
+                : `Завтра с ${orderingState.time.replace("-", "до")}`
+            }
           />
 
           <div className={classes.timesExpressWrapper}>
