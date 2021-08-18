@@ -314,51 +314,6 @@ export const query = graphql`
         }
       }
     }
-    allPrismicProduct {
-      edges {
-        node {
-          uid
-          data {
-            all_product_accessories {
-              product_accessories {
-                document {
-                  ... on PrismicProduct {
-                    uid
-                    id
-                    data {
-                      images {
-                        image {
-                          localFile {
-                            childImageSharp {
-                              gatsbyImageData
-                            }
-                          }
-                          alt
-                        }
-                      }
-                      price
-                      name
-                    }
-                  }
-                }
-              }
-            }
-            name
-            price
-            images {
-              image {
-                localFile {
-                  childImageSharp {
-                    gatsbyImageData
-                  }
-                }
-                alt
-              }
-            }
-          }
-        }
-      }
-    }
     allPrismicPromotionBanner {
       edges {
         node {

@@ -9,58 +9,19 @@ import BlockPrice from "./blockPrice"
 import AddInCartAndFav from "../../button/addInCartAndFav"
 import Features from "./features"
 
+import { GlobalStateContext } from "../../../context/GlobalContextProvider"
+
 export default function CardProduct({ prismicProduct }) {
   const mobile = useMediaQuery("(max-width: 1025px)")
 
-  const data = useStaticQuery(graphql`
-    {
-      allPrismicProduct {
-        edges {
-          node {
-            id
-            uid
-            data {
-              all_product_accessories {
-                product_accessories {
-                  document {
-                    ... on PrismicProduct {
-                      uid
-                      id
-                      data {
-                        images {
-                          image {
-                            localFile {
-                              childImageSharp {
-                                gatsbyImageData
-                              }
-                            }
-                            alt
-                          }
-                        }
-                        price
-                        name
-                      }
-                    }
-                  }
-                }
-              }
-              name
-              color
-              color_group
-            }
-          }
-        }
-      }
-    }
-  `)
-
+  const state = React.useContext(GlobalStateContext)
   // массив фото
   const photos = prismicProduct.data.images.map(
     photo => photo.image.localFile?.childImageSharp.fluid
   )
 
   // все продукты данной модели
-  const allColors = data.allPrismicProduct.edges
+  const allColors = state.allPrismicProduct.edges
     .filter(node => node.node.data.name === prismicProduct.data.name)
     .map(node => node.node)
 

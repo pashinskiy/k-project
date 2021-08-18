@@ -2,16 +2,21 @@ import * as React from "react"
 import { graphql } from "gatsby"
 
 import Seo from "../components/seo"
-import Layout from '../components/layout'
+import Layout from "../components/layout"
 
-import SaleCardMain from '../components/saleCardPanel/saleCardMain.js'
+import SaleCardMain from "../components/saleCardPanel/saleCardMain.js"
 import SalesTextPanel from "../components/salesTextPanel"
 
+import { GlobalStateContext } from "../context/GlobalContextProvider"
 
 const Sale = ({ data }) => {
+  const state = React.useContext(GlobalStateContext)
+
   const sale = data.prismicSales
-  const socials = data.allPrismicFooter.edges[0].node.data.body2.filter(item => item.primary.social_img)
-  const products = data.allPrismicProduct.edges.map(edge => edge.node)
+  const socials = data.allPrismicFooter.edges[0].node.data.body2.filter(
+    item => item.primary.social_img
+  )
+  const products = state.allPrismicProduct.edges.map(edge => edge.node)
   // console.log(products)
 
   return (
@@ -52,59 +57,6 @@ export const query = graphql`
         }
       }
     }
-    allPrismicProduct {
-      edges {
-        node {
-          id
-          data {
-            all_product_accessories {
-              product_accessories {
-                document {
-                  ... on PrismicProduct {
-                    uid
-                    id
-                    data {
-                      images {
-                        image {
-                          localFile {
-                            childImageSharp {
-                              gatsbyImageData
-                            }
-                          }
-                          alt
-                        }
-                      }
-                      price
-                      name
-                    }
-                  }
-                }
-              }
-            }
-            name
-            price            
-            color
-            images {
-              image {
-                alt
-                localFile {
-                  childImageSharp {
-                    gatsbyImageData(
-                      width: 250
-                      transformOptions: { fit: CONTAIN }
-                      outputPixelDensities: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
-                      sizes: "(min-width: 1280px) 250px, (max-width: 767px) 49.51vw, (max-width: 1025px) 29.97vw, 19.53vw"
-                    )
-                  }
-                }
-              }
-            }
-          }
-          uid
-        }
-      }
-    }
-
     allPrismicFooter {
       edges {
         node {

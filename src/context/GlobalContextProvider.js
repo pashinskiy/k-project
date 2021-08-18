@@ -147,6 +147,14 @@ const GlobalContextProvider = ({ children }) => {
                   }
                 }
               }
+              category {
+                uid
+                document {
+                  ... on PrismicSubcategory {
+                    id
+                  }
+                }
+              }
               brand {
                 document {
                   ... on PrismicBrand {

@@ -244,7 +244,7 @@ export default function Footer({ data }) {
             {data.allPrismicFooter.edges[0].node.data.seen_name.text}
           </Typography>
           <div className={classes.seen}>
-            <ProductSlider data={data} />
+            <ProductSlider />
           </div>
         </div>
       </nav>
@@ -262,7 +262,9 @@ export default function Footer({ data }) {
           </div>
         </div>
         <div className={classes.copyright}>
-          <Typography variant="body1">{data.allPrismicFooter.edges[0].node.data.copyright.text}</Typography>
+          <Typography variant="body1">
+            {data.allPrismicFooter.edges[0].node.data.copyright.text}
+          </Typography>
         </div>
       </div>
     </footer>

@@ -1,5 +1,4 @@
 import * as React from "react"
-import { graphql } from "gatsby"
 import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
 import Layout from "../components/layout"
 
@@ -10,6 +9,8 @@ import Sort from "../components/sort"
 import Filter from "../components/filter"
 import Pagination from "../components/pagination"
 import Search from "../components/search"
+
+import { GlobalStateContext } from "../context/GlobalContextProvider"
 
 const useStyles = makeStyles(theme => ({
   smallText: {
@@ -127,8 +128,11 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function Products({ data: { allPrismicProduct } }) {
+export default function Products() {
   const classes = useStyles()
+
+  const state = React.useContext(GlobalStateContext)
+
   const mobile = useMediaQuery("(max-width: 1025px)")
   const search = useMediaQuery("(max-width: 1025px)")
 
@@ -144,12 +148,12 @@ export default function Products({ data: { allPrismicProduct } }) {
   // const [title, setTitle] = React.useState(null)
   // const [category, setCategory] = React.useState(null)
   const [allProducts, setAllProduct] = React.useState(
-    allPrismicProduct.edges.map(edge => edge.node)
+    state.allPrismicProduct.edges.map(edge => edge.node)
   )
   const [filterProducts, setFilterProducts] = React.useState([])
 
   if (newUrl.href !== url) {
-    const newAllProduct = allPrismicProduct.edges
+    const newAllProduct = state.allPrismicProduct.edges
       .map(edge => edge.node)
       .filter(
         product =>
@@ -165,7 +169,7 @@ export default function Products({ data: { allPrismicProduct } }) {
   }
 
   // if (title !== titleUrl) {
-  //   const newAllProduct = allPrismicProduct.edges
+  //   const newAllProduct = state.allPrismicProduct.edges
   //     .map(edge => edge.node)
   //     .filter(product =>
   //       product.data.name.toLowerCase().includes(titleUrl.toLowerCase())
@@ -177,7 +181,7 @@ export default function Products({ data: { allPrismicProduct } }) {
   // }
 
   // if (category !== categoryUrl && categoryUrl !== "") {
-  //   const newAllProduct = allPrismicProduct.edges
+  //   const newAllProduct = state.allPrismicProduct.edges
   //     .map(edge => edge.node)
   //     .filter(
   //       product =>
@@ -258,135 +262,3 @@ export default function Products({ data: { allPrismicProduct } }) {
     </Layout>
   )
 }
-
-export const query = graphql`
-  {
-    allPrismicProduct {
-      edges {
-        node {
-          id
-          uid
-          data {
-            all_product_accessories {
-              product_accessories {
-                document {
-                  ... on PrismicProduct {
-                    uid
-                    id
-                    data {
-                      images {
-                        image {
-                          localFile {
-                            childImageSharp {
-                              gatsbyImageData
-                            }
-                          }
-                          alt
-                        }
-                      }
-                      price
-                      name
-                    }
-                  }
-                }
-              }
-            }
-            main_category {
-              document {
-                ... on PrismicCategory {
-                  id
-                  data {
-                    name
-                  }
-                }
-              }
-            }
-            brand {
-              document {
-                ... on PrismicBrand {
-                  id
-                  data {
-                    name
-                    popular
-                  }
-                }
-              }
-            }
-            name
-            price
-            old_price
-            color
-            color_group
-            images {
-              image {
-                alt
-                localFile {
-                  childImageSharp {
-                    gatsbyImageData(height: 200)
-                  }
-                }
-              }
-            }
-            body {
-              ... on PrismicProductBodyStickers {
-                slice_type
-                items {
-                  sticker {
-                    document {
-                      ... on PrismicSticker {
-                        id
-                        data {
-                          image {
-                            alt
-                            localFile {
-                              publicURL
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              ... on PrismicProductBodyFeatures {
-                slice_type
-                items {
-                  feature
-                  image {
-                    alt
-                    localFile {
-                      childImageSharp {
-                        gatsbyImageData(height: 30)
-                      }
-                    }
-                  }
-                }
-              }
-            }
-            body1 {
-              ... on PrismicProductBody1Characteristics {
-                id
-                slice_type
-                items {
-                  characteristic {
-                    document {
-                      ... on PrismicCharacteristic {
-                        id
-                        data {
-                          name
-                          variant
-                          order
-                        }
-                      }
-                    }
-                  }
-                  value
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`

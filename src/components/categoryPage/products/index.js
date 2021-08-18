@@ -4,6 +4,8 @@ import { graphql, useStaticQuery } from "gatsby"
 import CardProduct from "../../scrollBar/productsScrollBar/cardProduct"
 import ScrollBar from "../scrollBar"
 
+import { GlobalStateContext } from "../../../context/GlobalContextProvider"
+
 const useStyles = makeStyles(theme => ({
   product: {
     marginRight: 12,
@@ -11,67 +13,16 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function AllProductsByCategory({ subcategory_product }) {
-  const data = useStaticQuery(graphql`
-    query AllProducts {
-      allPrismicProduct {
-        edges {
-          node {
-            id
-            uid
-            data {
-              all_product_accessories {
-                product_accessories {
-                  document {
-                    ... on PrismicProduct {
-                      uid
-                      id
-                      data {
-                        images {
-                          image {
-                            localFile {
-                              childImageSharp {
-                                gatsbyImageData
-                              }
-                            }
-                            alt
-                          }
-                        }
-                        price
-                        name
-                      }
-                    }
-                  }
-                }
-              }
-              name
-              price
-              images {
-                image {
-                  localFile {
-                    childImageSharp {
-                      gatsbyImageData(height: 200)
-                    }
-                  }
-                  alt
-                }
-              }
-              category {
-                uid
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
 
   const classes = useStyles()
+  
+  const state = React.useContext(GlobalStateContext)
 
   const maxWidth1024 = useMediaQuery("(max-width: 1025px)")
 
   return (
     <ScrollBar fullScreen={maxWidth1024} buttonNext>
-      {data.allPrismicProduct.edges
+      {state.allPrismicProduct.edges
         ?.filter(
           sub =>
             sub.node.data.category.uid ===

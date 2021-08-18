@@ -326,9 +326,9 @@ export default function ProductAddedCard({ product, closeDialog }) {
   const classes = useStyles()
   const image =
     product.data.images[0]?.image?.localFile?.childImageSharp.gatsbyImageData
-  const accessoriesArray = product.data.all_product_accessories.filter(
+  const accessoriesArray = product.data.all_product_accessories?.filter(
     item => item.product_accessories.document !== null
-  )
+  ) ?? []
 
   return (
     <>
