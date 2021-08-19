@@ -12,6 +12,7 @@ import { navigate } from "gatsby"
 const useStyle = makeStyles(theme => ({
   wrapper: {
     background: theme.palette.background.secondary,
+    touchAction: "none",
 
     padding: "3.12vw 2.03vw",
     borderRadius: "1.56vw 0 0 1.56vw",
@@ -35,7 +36,6 @@ const useStyle = makeStyles(theme => ({
     left: "50%",
     transform: "translateX(-50%)",
     background: theme.palette.background.secondaryLight,
-    touchAction: "none",
 
     "@media(max-width: 1025px)": {
       top: "1.43vw",
@@ -313,6 +313,7 @@ export default function PriceBlock({ products }) {
 
   function swipeStart(e) {
     const clientY = e.clientY
+    e.preventDefault()
 
     document.addEventListener("pointerup", swipeEnd)
 
@@ -348,10 +349,8 @@ export default function PriceBlock({ products }) {
   }
 
   return (
-    <div className={classes.wrapper}>
-      {mobile ? (
-        <div onPointerDown={swipeStart} className={classes.divider} />
-      ) : null}
+    <div onPointerDown={mobile ? swipeStart : null} className={classes.wrapper}>
+      {mobile ? <div className={classes.divider} /> : null}
 
       {showMoreInfo || !mobile ? (
         <>

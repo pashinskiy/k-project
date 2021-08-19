@@ -1,7 +1,7 @@
 import React from "react"
-import { Button, Grid } from "@material-ui/core"
+import { Button, Grid, useMediaQuery } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { Link } from 'gatsby'
+import { Link } from "gatsby"
 import Arrow from "../../../static/svg/arrowWhite.svg"
 import SaleCard from "../saleCardPanel/saleCard"
 import AdvertiseCard from "./advertiseCard"
@@ -11,6 +11,7 @@ const useStyle = makeStyles(theme => ({
     width: "100%",
     cursor: "pointer",
     position: "relative",
+    overflow: "hidden",
 
     "&:before": {
       content: "''",
@@ -18,7 +19,7 @@ const useStyle = makeStyles(theme => ({
       position: "absolute",
       left: 0,
       height: "100%",
-      '@media (min-width: 1024px)': {
+      "@media (min-width: 1024px)": {
         background: `linear-gradient(90deg, ${theme.palette.background.main} 0%, rgba(255, 255, 255, 0) 100%)`,
       },
       zIndex: 1,
@@ -58,14 +59,10 @@ const useStyle = makeStyles(theme => ({
     },
   },
   wrapperTrack: {
-    overflow: 'hidden',
-    '@media (max-width: 1024px)': {
-      overflow: "scroll",
-      scrollbarWidth: "none",
-      "-ms-overflow-style": "none",
-      "&::-webkit-scrollbar": {
-        display: "none",
-      },
+    scrollbarWidth: "none",
+    "-ms-overflow-style": "none",
+    "&::-webkit-scrollbar": {
+      display: "none",
     },
 
     "& *": {
@@ -108,6 +105,18 @@ const useStyle = makeStyles(theme => ({
     boxSizing: "border-box",
 
     touchAction: "none",
+    "@media(max-width: 1025px)": {
+      width: "100%",
+      position: "relative",
+      touchAction: "auto",
+      flexWrap: "nowrap",
+      overflowX: "scroll",
+      scrollbarWidth: "none",
+      "-ms-overflow-style": "none",
+      "&::-webkit-scrollbar": {
+        display: "none",
+      },
+    },
   },
   itemAll: {
     width: "90.625vw",
@@ -125,6 +134,9 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       width: "88.729vw",
       marginRight: "1.4388vw",
+      "&:last-child": {
+        marginRight: 0,
+      },
     },
     "@media(max-width: 767px)": {
       width: "82.125vw",
@@ -203,6 +215,8 @@ const useStyle = makeStyles(theme => ({
 export default function MainPageSlider({ array, variant }) {
   const classes = useStyle()
   const [activeChild, setActiveChild] = React.useState()
+  const mobile = useMediaQuery("(max-width: 1025px)")
+
   let contentArray = array
   switch (variant) {
     case "sales":
@@ -213,20 +227,25 @@ export default function MainPageSlider({ array, variant }) {
       ))
       break
     case "promotionBanner":
-      contentArray = contentArray.map((banner, i) => (
-        banner.data.tumbler_link === true ?
-            <Grid item className={classes.itemAll} key={banner.uid + "_" + i}>
-              <Link to={`${banner.data.link}`}>
-                <AdvertiseCard banner={banner} key={banner.uid} />
-              </Link>
-            </Grid>
-      :
-            <Grid item className={classes.itemAll} key={banner.uid + "_" + i}>
-              <a href={`${banner.data.link}`} target="_blank" rel="noopener noreferrer">
+      contentArray = contentArray.map((banner, i) =>
+        banner.data.tumbler_link === true ? (
+          <Grid item className={classes.itemAll} key={banner.uid + "_" + i}>
+            <Link to={`${banner.data.link}`}>
               <AdvertiseCard banner={banner} key={banner.uid} />
-              </a>
-            </Grid>
-      ))
+            </Link>
+          </Grid>
+        ) : (
+          <Grid item className={classes.itemAll} key={banner.uid + "_" + i}>
+            <a
+              href={`${banner.data.link}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <AdvertiseCard banner={banner} key={banner.uid} />
+            </a>
+          </Grid>
+        )
+      )
       break
     default:
       if (variant !== "sales" && variant !== "promotionBanner")
@@ -280,6 +299,21 @@ export default function MainPageSlider({ array, variant }) {
       setActiveChild(active)
       node.children[active].classList.add(classes.itemActive)
 
+      if (window.screen.width < 1025) {
+        node.style.padding = `
+          0 ${
+            (window.screen.width -
+              node.children[active].getBoundingClientRect().width) /
+            2
+          }px`
+
+        node.scroll({
+          left: node.children[active].offsetLeft - node.children[0].offsetLeft,
+          behavior: "smooth",
+        })
+        return
+      }
+
       //центрирование активной карточки
       node.style.transform = `translate(${getTransition(node, active)}px)`
     }
@@ -300,6 +334,7 @@ export default function MainPageSlider({ array, variant }) {
 
     const clientX = e.clientX
     const translateX = +cardPanel.style.transform.slice(10, -3)
+
     document.addEventListener("pointermove", scrollBar)
     document.addEventListener("pointerup", deleteScrollBar)
 
@@ -311,10 +346,13 @@ export default function MainPageSlider({ array, variant }) {
         cardPanel,
         getActiveChild(cardPanel)
       )}px)`
+
       setActiveChildStyle(cardPanel, getActiveChild(cardPanel))
       setActiveChild(getActiveChild(cardPanel))
+
       document.removeEventListener("pointermove", scrollBar)
       document.removeEventListener("pointerup", deleteScrollBar)
+
       setTimeout(
         () =>
           document.removeEventListener("click", noGoLink, {
@@ -326,15 +364,6 @@ export default function MainPageSlider({ array, variant }) {
     }
 
     function scrollBar(e) {
-      // if (eventScroll === null) {
-      //   eventScroll =
-      //     Math.abs(e.clientY - clientY) >= Math.abs(e.clientX - clientX)
-      // }
-      // if (eventScroll) {
-      //   window.scrollTo(0, scroll + clientY - e.clientY)
-      //   return
-      // }
-
       if (Math.abs(e.clientY - clientY) > 15 && eventScroll === null) {
         eventScroll = true
       }
@@ -374,6 +403,7 @@ export default function MainPageSlider({ array, variant }) {
         cardPanel,
         tempActive
       )}px)`
+
       setActiveChild(tempActive)
       setActiveChildStyle(cardPanel, tempActive)
     } else if (activeChild === cardPanel.children.length - 1) {
@@ -382,6 +412,7 @@ export default function MainPageSlider({ array, variant }) {
         cardPanel,
         tempActive
       )}px)`
+
       setActiveChild(tempActive)
       setActiveChildStyle(cardPanel, tempActive)
     }
@@ -394,6 +425,7 @@ export default function MainPageSlider({ array, variant }) {
         cardPanel,
         tempActive
       )}px)`
+
       setActiveChild(tempActive)
       setActiveChildStyle(cardPanel, tempActive)
     } else if (activeChild === 0) {
@@ -402,6 +434,7 @@ export default function MainPageSlider({ array, variant }) {
         cardPanel,
         tempActive
       )}px)`
+
       setActiveChild(tempActive)
       setActiveChildStyle(cardPanel, tempActive)
     }
@@ -413,8 +446,24 @@ export default function MainPageSlider({ array, variant }) {
       cardPanel,
       tempActive
     )}px)`
+
     setActiveChild(tempActive)
     setActiveChildStyle(cardPanel, tempActive)
+  }
+
+  function setCentralSliderInMobile(e) {
+    const elemWidth = cardPanel.children[0].getBoundingClientRect().width
+    const marginRight =
+      cardPanel.children[1].offsetLeft -
+      (cardPanel.children[0].offsetLeft + elemWidth)
+    const scrollLeft = cardPanel.scrollLeft
+
+    const newIndex = Math.round(scrollLeft / (elemWidth + marginRight))
+
+    if (newIndex !== activeChild) {
+      setActiveChildStyle(cardPanel, newIndex)
+      setActiveChild(newIndex)
+    }
   }
 
   return (
@@ -423,11 +472,13 @@ export default function MainPageSlider({ array, variant }) {
         <Grid
           container
           ref={setRef}
-          onPointerDown={setScrollBar}
+          onPointerDown={!mobile ? setScrollBar : null}
+          onScroll={mobile ? setCentralSliderInMobile : null}
           className={classes.track}
         >
           {contentArray}
         </Grid>
+
         <Button
           aria-label="вперед"
           className={classes.button + " " + classes.buttonRight}
@@ -435,6 +486,7 @@ export default function MainPageSlider({ array, variant }) {
         >
           <Arrow />
         </Button>
+
         <Button
           aria-label="назад"
           className={classes.button + " " + classes.buttonLeft}
@@ -442,6 +494,7 @@ export default function MainPageSlider({ array, variant }) {
         >
           <Arrow />
         </Button>
+
         <Grid container className={classes.smallButtonContainer}>
           {contentArray.map((sale, i) => (
             <Button

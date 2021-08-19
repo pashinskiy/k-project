@@ -38,7 +38,7 @@ const useStyle = makeStyles(theme => ({
     boxSizing: "border-box",
 
     touchAction: "none",
-    "@media(max-width: 1024px)": {
+    "@media(max-width: 1025px)": {
       width: "100%",
       touchAction: "auto",
       flexWrap: "nowrap",

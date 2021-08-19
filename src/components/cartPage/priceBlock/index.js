@@ -5,10 +5,10 @@ import { GlobalStateContext } from "../../../context/GlobalContextProvider"
 
 import GoRegistration from "../../button/goRegistration"
 
-
 const useStyle = makeStyles(theme => ({
   wrapper: {
     background: theme.palette.background.secondary,
+    touchAction: "none",
 
     padding: "3.12vw 2.03vw",
     borderRadius: "1.56vw 0 0 1.56vw",
@@ -32,7 +32,6 @@ const useStyle = makeStyles(theme => ({
     left: "50%",
     transform: "translateX(-50%)",
     background: theme.palette.background.secondaryLight,
-    touchAction: "none",
 
     "@media(max-width: 1025px)": {
       top: "1.43vw",
@@ -225,7 +224,6 @@ export default function PriceBlock({ products }) {
       return order + position
     }, "")
 
-
     const prodDataArr = []
     products.map(product => {
       const name = product.data.name
@@ -234,7 +232,7 @@ export default function PriceBlock({ products }) {
         product_name: name,
         product_uid: product.uid,
         quantity: count,
-        price: product.data.price
+        price: product.data.price,
       }
       prodDataArr.push(jsonData)
     })
@@ -248,7 +246,6 @@ export default function PriceBlock({ products }) {
         allProductsJson: prodDataArr,
       })
     )
-
   }
 
   // варианты доставки
@@ -276,10 +273,8 @@ export default function PriceBlock({ products }) {
   }
 
   return (
-    <div className={classes.wrapper}>
-      {mobile ? (
-        <div onPointerDown={swipeStart} className={classes.divider} />
-      ) : null}
+    <div onPointerDown={mobile ? swipeStart : null} className={classes.wrapper}>
+      {mobile ? <div className={classes.divider} /> : null}
 
       {showMoreInfo || !mobile ? (
         <>
