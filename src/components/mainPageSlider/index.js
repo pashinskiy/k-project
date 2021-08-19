@@ -505,7 +505,7 @@ export default function MainPageSlider({ array, variant }) {
                   : classes.smallButton
               }
               key={"small-button-" + i}
-              onClick={e => handleSmallButtonClick(i)}
+              onClick={mobile ? null : e => handleSmallButtonClick(i)}
             ></Button>
           ))}
         </Grid>
