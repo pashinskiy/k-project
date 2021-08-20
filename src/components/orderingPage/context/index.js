@@ -5,6 +5,11 @@ export const OrderingDispatchContext = React.createContext()
 
 function reducer(state, action) {
   switch (action.type) {
+    case "SET_FOCUSING_ON_FIELD":
+      return {
+        ...state,
+        focusingOnField: action.payload,
+      }
     case "SET_CITY":
       return {
         ...state,
@@ -79,6 +84,7 @@ export default function OrderingContext({ children }) {
   const cities = data.prismicDeliveryCities.data.cities.map(item => item.city)
 
   const initOrderingState = {
+    focusingOnField: false,
     cities: cities,
     city: "",
     variantDelivery: "standart",

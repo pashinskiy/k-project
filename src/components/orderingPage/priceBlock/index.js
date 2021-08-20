@@ -349,7 +349,7 @@ export default function PriceBlock({ products }) {
   }
 
   return (
-    <div onPointerDown={mobile ? swipeStart : null} className={classes.wrapper}>
+    <div hidden={mobile&&orderingState.focusingOnField} onPointerDown={mobile ? swipeStart : null} className={classes.wrapper}>
       {mobile ? <div className={classes.divider} /> : null}
 
       {showMoreInfo || !mobile ? (

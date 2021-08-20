@@ -24,7 +24,7 @@ const useStyle = makeStyles(theme => ({
       padding: "1.79vw 1.43vw",
       borderRadius: "0.71vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       border: `1px solid ${theme.palette.color.accentSecondary}`,
       padding: "3.62vw 2.89vw",
       borderRadius: "1.44vw",
@@ -45,7 +45,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       fontSize: "3.38vw",
     },
   },
@@ -69,7 +69,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       padding: "1.79vw 1.43vw",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       padding: "3.62vw 2.89vw",
     },
   },
@@ -81,7 +81,7 @@ const useStyle = makeStyles(theme => ({
     "@media(max-width: 1025px)": {
       padding: "0.59vw 0",
     },
-    "@media(max-width: 414px)": {
+    "@media(max-width: 767px)": {
       padding: "1.2vw 0",
     },
 
@@ -133,6 +133,14 @@ export default function SelectCity() {
     setCity(e.target.value)
   }
 
+  function focusing() {
+    orderingDispatch({ type: "SET_FOCUSING_ON_FIELD", payload: true })
+  }
+
+  function blurring() {
+    orderingDispatch({ type: "SET_FOCUSING_ON_FIELD", payload: false })
+  }
+
   const error = orderingState.validationCity() ? "" : classes.error
 
   return (
@@ -140,6 +148,8 @@ export default function SelectCity() {
       <input
         onClick={openOptions}
         onInput={setValue}
+        onFocus={focusing}
+        onBlur={blurring}
         className={classes.select + " " + classes.text + " " + error}
         value={orderingState.city}
         autocomplete="new-password"

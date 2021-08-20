@@ -207,18 +207,9 @@ export default function PayData({ prismicCartAndOrder }) {
             }
           />
 
-          <div>
-            <Typography align="left" className={classes.title}>
-              В кредит
-            </Typography>
-
-            <Typography align="left" className={classes.description}>
-              Список{" "}
-              <a href={prismicCartAndOrder.data.credit_partners.url}>
-                банков-партнеров
-              </a>
-            </Typography>
-          </div>
+          <Typography align="left" className={classes.title}>
+            В кредит
+          </Typography>
         </button>
 
         <button
@@ -233,18 +224,9 @@ export default function PayData({ prismicCartAndOrder }) {
             }
           />
 
-          <div>
-            <Typography align="left" className={classes.title}>
-              В рассрочку
-            </Typography>
-
-            <Typography align="left" className={classes.description}>
-              Список{" "}
-              <a href={prismicCartAndOrder.data.installment_plan_partners.url}>
-                банков-партнеров
-              </a>
-            </Typography>
-          </div>
+          <Typography align="left" className={classes.title}>
+            В рассрочку
+          </Typography>
         </button>
       </div>
     </>

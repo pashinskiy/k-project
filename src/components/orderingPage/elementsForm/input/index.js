@@ -1,6 +1,8 @@
 import React from "react"
 import { makeStyles } from "@material-ui/core"
 
+import { OrderingDispatchContext } from "../../context"
+
 const useStyle = makeStyles(theme => ({
   input: {
     width: "100%",
@@ -44,6 +46,8 @@ const useStyle = makeStyles(theme => ({
 
 export default function Input({ afterChange, checkValue, ...other }) {
   const classes = useStyle()
+  const orderingDispatch = React.useContext(OrderingDispatchContext)
+
   checkValue = checkValue ? checkValue : () => true
 
   const error = checkValue() ? "" : classes.error
@@ -53,9 +57,19 @@ export default function Input({ afterChange, checkValue, ...other }) {
     afterChange(newValue)
   }
 
+  function focusing() {
+    orderingDispatch({ type: "SET_FOCUSING_ON_FIELD", payload: true })
+  }
+
+  function blurring() {
+    orderingDispatch({ type: "SET_FOCUSING_ON_FIELD", payload: false })
+  }
+
   return (
     <input
       onInput={onInput}
+      onFocus={focusing}
+      onBlur={blurring}
       className={classes.input + " " + error}
       {...other}
     />
