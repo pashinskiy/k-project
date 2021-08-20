@@ -5,8 +5,9 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: `Krypton.ru`,
-    description: `Krypton`,
-    author: `@krypton`,
+    description: `Современный маркетплейс, в котором вы найдете по низним качественную технику, смартфоны, ноутбуки, гаджеты и многое другое.`,
+    author: `https://krypton.ru/`,
+    siteUrl: `https://krypton.ru/`,
   },
   plugins: [
     `gatsby-plugin-material-ui`,
@@ -41,13 +42,18 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Krypton.ru`,
-        short_name: `Krypton.ru`,
+        name: `krypton.ru`,
+        short_name: `krypton.ru`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#ffffff`,
         display: `minimal-ui`,
         icon: `src/images/favicon.png`, // This path is relative to the root of the site.
+        icon_options: {
+          // For all the options available,
+          // please see the section "Additional Resources" below.
+          purpose: `any maskable`,
+        },
       },
     },
     `gatsby-plugin-gatsby-cloud`,
@@ -100,6 +106,48 @@ module.exports = {
       options: {
         extensions: ["css", "html", "js", "svg", "json"],
       },
+    },
+    {
+      resolve: "gatsby-plugin-htaccess",
+      options: {
+        RewriteBase: "/custom/",
+        https: true,
+        www: false,
+        SymLinksIfOwnerMatch: false,
+        ErrorDocument: `
+          ErrorDocument 401 /401.html
+          ErrorDocument 404 /404.html
+          ErrorDocument 500 /error_pages/500.html
+        `,
+        redirect: [
+          "RewriteRule ^not-existing-url/?$ /existing-url [R=301,L,NE]",
+          {
+            from: "http://krypton.ru",
+            to: "https://krypton.ru",
+          },
+        ],
+        custom: `
+          <ifModule mod_gzip.c>
+          mod_gzip_on Yes
+          mod_gzip_dechunk Yes
+          mod_gzip_item_include file .(html?|txt|css|js|php|pl|json)$
+          mod_gzip_item_include handler ^cgi-script$
+          mod_gzip_item_include mime ^text/.*
+          mod_gzip_item_include mime ^application/x-javascript.*
+          mod_gzip_item_exclude mime ^image/.*
+          mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
+          </ifModule>
+        `,
+      },
+    },
+    `gatsby-plugin-advanced-sitemap`,
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://krypton.ru/',
+        sitemap: 'https://krypton.ru/sitemap.xml',
+        policy: [{ userAgent: '*', allow: '/' }]
+      }
     },
   ],
 }
