@@ -142,6 +142,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   features: {
+    overflow:"hidden",
+    
     width: "26.79vw",
     "@media(min-width: 1280px)": {
       width: "343px",

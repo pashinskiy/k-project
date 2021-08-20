@@ -99,6 +99,12 @@ function reducer(state, action) {
         last_products: [...action.payload],
       }
     }
+    case "SET_ALL_PRODUCTS": {
+      return {
+        ...state,
+        allPrismicProduct: action.payload,
+      }
+    }
     default:
       throw new Error("Error action")
   }
@@ -138,6 +144,7 @@ const GlobalContextProvider = ({ children }) => {
                 }
               }
               main_category {
+                uid
                 document {
                   ... on PrismicCategory {
                     id
@@ -152,6 +159,9 @@ const GlobalContextProvider = ({ children }) => {
                 document {
                   ... on PrismicSubcategory {
                     id
+                    data {
+                      name
+                    }
                   }
                 }
               }
@@ -171,6 +181,7 @@ const GlobalContextProvider = ({ children }) => {
               old_price
               color
               color_group
+              sale_product
               images {
                 image {
                   alt
@@ -211,6 +222,18 @@ const GlobalContextProvider = ({ children }) => {
                       months_1
                       months_2
                       percent
+                    }
+                  }
+                }
+              }
+              tags {
+                tag {
+                  document {
+                    ... on PrismicTag {
+                      id
+                      data {
+                        name
+                      }
                     }
                   }
                 }

@@ -12,6 +12,8 @@ import FiltersBySticker from "../components/catalog/fastLink/filtersBySticker"
 import AllProductsByCategory from "../components/categoryPage/products"
 import Layout from "../components/layout"
 
+import { GlobalStateContext } from "../context/GlobalContextProvider"
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: "28px 0px 68px 0px",
@@ -143,11 +145,18 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Category = ({
-  data: { prismicCategory, allPrismicStories, allPrismicProduct },
+  data: { prismicCategory, allPrismicStories },
+  pageContext: { uid },
 }) => {
   const classes = useStyles()
-
   const maxWidth1024 = useMediaQuery("(max-width: 1025px)")
+  const state = React.useContext(GlobalStateContext)
+
+  const allPrismicProduct = {
+    edges: state.allPrismicProduct.edges.filter(
+      edge => edge.node.data.main_category?.uid === uid
+    ),
+  }
 
   return (
     <Layout>
@@ -203,41 +212,50 @@ const Category = ({
                 stories={allPrismicStories.edges.map(edge => edge.node)}
               />
             </ScrollBar>
-            {prismicCategory.data.body[0]?.primary.category_img.localFile ? (
-              [prismicCategory.data.body[0]?.primary.tumbler_link === true ?
-                  <Link to={`${prismicCategory.data.body[0]?.primary.link}`}>
-                    <div className={classes.banner}>
-                      <GatsbyImage loading="eager"
-                        image={
-                          prismicCategory.data.body[0]?.primary.category_img.localFile
-                            .childImageSharp.gatsbyImageData
-                        }
-                        alt={
-                          prismicCategory.data.body[0]?.primary.category_img.alt ??
-                          "img"
-                        }
-                        className={classes.img}
-                      />
-                    </div>
-                  </Link>
-                :
-                  <a href={`${prismicCategory.data.body[0]?.primary.link}`} target="_blank" rel="noopener noreferrer">
-                    <div className={classes.banner}>
-                      <GatsbyImage loading="eager"
-                        image={
-                          prismicCategory.data.body[0]?.primary.category_img.localFile
-                            .childImageSharp.gatsbyImageData
-                        }
-                        alt={
-                          prismicCategory.data.body[0]?.primary.category_img.alt ??
-                          "img"
-                        }
-                        className={classes.img}
-                      />
-                    </div>
-                  </a>
-              ]
-            ) : null}
+            {prismicCategory.data.body[0]?.primary.category_img.localFile
+              ? [
+                  prismicCategory.data.body[0]?.primary.tumbler_link ===
+                  true ? (
+                    <Link to={`${prismicCategory.data.body[0]?.primary.link}`}>
+                      <div className={classes.banner}>
+                        <GatsbyImage
+                          loading="eager"
+                          image={
+                            prismicCategory.data.body[0]?.primary.category_img
+                              .localFile.childImageSharp.gatsbyImageData
+                          }
+                          alt={
+                            prismicCategory.data.body[0]?.primary.category_img
+                              .alt ?? "img"
+                          }
+                          className={classes.img}
+                        />
+                      </div>
+                    </Link>
+                  ) : (
+                    <a
+                      href={`${prismicCategory.data.body[0]?.primary.link}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div className={classes.banner}>
+                        <GatsbyImage
+                          loading="eager"
+                          image={
+                            prismicCategory.data.body[0]?.primary.category_img
+                              .localFile.childImageSharp.gatsbyImageData
+                          }
+                          alt={
+                            prismicCategory.data.body[0]?.primary.category_img
+                              .alt ?? "img"
+                          }
+                          className={classes.img}
+                        />
+                      </div>
+                    </a>
+                  ),
+                ]
+              : null}
             <div className={classes.content_wrapper}>
               <Typography variant="h3" component="h1" className={classes.h3}>
                 Категории
@@ -448,54 +466,6 @@ export const pageQuery = graphql`
             }
             text {
               text
-            }
-          }
-        }
-      }
-    }
-    allPrismicProduct(
-      filter: { data: { main_category: { uid: { eq: $uid } } } }
-    ) {
-      edges {
-        node {
-          id
-          uid
-          data {
-            category {
-              document {
-                ... on PrismicSubcategory {
-                  id
-                }
-              }
-            }
-            body {
-              ... on PrismicProductBodyStickers {
-                slice_type
-                items {
-                  sticker {
-                    document {
-                      ... on PrismicSticker {
-                        id
-                        data {
-                          image {
-                            alt
-                            localFile {
-                              childImageSharp {
-                                fluid(maxHeight: 35) {
-                                  aspectRatio
-                                  src
-                                  srcSet
-                                  srcSetWebp
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
             }
           }
         }

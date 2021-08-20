@@ -1,5 +1,4 @@
 import * as React from "react"
-import { graphql } from "gatsby"
 import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
 
 import Seo from "../components/seo"
@@ -14,6 +13,8 @@ import Pagination from "../components/pagination"
 import Layout from "../components/layout"
 import SalesIcon from "../../static/svg/salesIcon.svg"
 import { navigate } from "gatsby"
+
+import { GlobalStateContext } from "../context/GlobalContextProvider"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -105,11 +106,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const IndexPage = ({ data: { allPrismicProduct } }) => {
+const IndexPage = () => {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 1025px)")
+  const state = React.useContext(GlobalStateContext)
 
-  const allProducts = allPrismicProduct.edges.map(edge => edge.node)
+  const allProducts = state.allPrismicProduct.edges.map(edge => edge.node)
 
   const url = new URL(window.location)
   const subcategoryUrl = JSON.parse(url.searchParams.get("subcategory"))
@@ -199,112 +201,3 @@ const IndexPage = ({ data: { allPrismicProduct } }) => {
 }
 
 export default IndexPage
-
-export const query = graphql`
-  query discountedProducts {
-    allPrismicProduct(filter: { data: { sale_product: { eq: true } } }) {
-      edges {
-        node {
-          id
-          uid
-          data {
-            category {
-              document {
-                ... on PrismicSubcategory {
-                  id
-                  data {
-                    name
-                  }
-                }
-              }
-            }
-            brand {
-              document {
-                ... on PrismicBrand {
-                  id
-                  data {
-                    name
-                    popular
-                  }
-                }
-              }
-            }
-            name
-            price
-            old_price
-            color
-            color_group
-            images {
-              image {
-                alt
-                localFile {
-                  childImageSharp {
-                    gatsbyImageData
-                  }
-                }
-              }
-            }
-            body {
-              ... on PrismicProductBodyStickers {
-                slice_type
-                items {
-                  sticker {
-                    document {
-                      ... on PrismicSticker {
-                        id
-                        data {
-                          image {
-                            alt
-                            localFile {
-                              publicURL
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              ... on PrismicProductBodyFeatures {
-                slice_type
-                items {
-                  feature
-                  image {
-                    alt
-                    localFile {
-                      childImageSharp {
-                        gatsbyImageData(height: 30)
-                      }
-                    }
-                  }
-                }
-              }
-            }
-            body1 {
-              ... on PrismicProductBody1Characteristics {
-                id
-                slice_type
-                items {
-                  characteristic {
-                    document {
-                      ... on PrismicCharacteristic {
-                        id
-                        data {
-                          name
-                          variant
-                          order
-                        }
-                      }
-                    }
-                  }
-                  value
-                }
-              }
-            }
-            color
-          }
-        }
-      }
-    }
-  }
-`

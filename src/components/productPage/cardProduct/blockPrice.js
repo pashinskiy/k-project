@@ -1,10 +1,21 @@
 import React from "react"
-import { Grid, makeStyles, Typography, useMediaQuery } from "@material-ui/core"
+import {
+  Grid,
+  makeStyles,
+  Modal,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core"
 import { navigate } from "gatsby"
 import AddInCartAndFav from "../../button/addInCartAndFav"
 import Title from "./title"
 import Features from "./features"
 import colors from "../../../templates/colors.json"
+
+import Mokka from "../../../../static/svg/mokka.svg"
+import MokkaInfo from "../../../../static/svg/mokkaInfo.svg"
+import MokkaCross from "../../../../static/svg/mokkaCross.svg"
+import { right } from "fp-ts/lib/EitherT"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -149,10 +160,10 @@ const useStyles = makeStyles(theme => ({
   textCredit: {
     fontWeight: 400,
     lineHeight: 1.21,
-    fontSize: "1.09vw",
+    fontSize: "1.01vw",
     marginTop: "0.62vw",
     "@media(min-width: 1280px)": {
-      fontSize: "14px",
+      fontSize: "13px",
       marginTop: "8px",
     },
     "@media(max-width: 1025px)": {
@@ -160,7 +171,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "0.95vw",
     },
     "@media(max-width: 767px)": {
-      fontSize: "3.38vw",
+      fontSize: "3vw",
       marginTop: "1.93vw",
     },
     "& span": {
@@ -209,11 +220,106 @@ const useStyles = makeStyles(theme => ({
       marginTop: "1.93vw",
     },
   },
+  rassrochkaSpan: {
+    marginLeft: "0.625vw",
+    "@media(min-width: 1280px)": {
+      marginLeft: "8px",
+    },
+    "@media(max-width: 1025px)": {
+      marginLeft: "0.95vw",
+    },
+    "@media(max-width: 767px)": {
+      marginLeft: "1.93vw",
+    },
+  },
+  mokka: {
+    display: "inline-block",
+
+    margin: "0 0.625vw",
+    height: "1.32vw",
+    "@media(min-width: 1280px)": {
+      margin: "0 8px",
+      height: "17px",
+    },
+    "@media(max-width: 1025px)": {
+      margin: "0 0.95vw",
+      height: "2.03vw",
+    },
+    "@media(max-width: 767px)": {
+      margin: "0 1.93vw",
+      height: "3.62vw",
+    },
+  },
+  mokkaInfo: {
+    display: "inline-block",
+    cursor: "pointer",
+
+    marginLeft: "0.31vw",
+    height: "1.32vw",
+    width: "1.32vw",
+    "@media(min-width: 1280px)": {
+      marginLeft: "4px",
+      height: "17px",
+      width: "17px",
+    },
+    "@media(max-width: 1025px)": {
+      marginLeft: "0.47vw",
+      height: "2.03vw",
+      width: "2.03vw",
+    },
+    "@media(max-width: 767px)": {
+      marginLeft: "0.96vw",
+      height: "4.1vw",
+      width: "4.1vw",
+    },
+  },
+  modal: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  mokkaBaner: {
+    position: "relative",
+    background: "center / cover no-repeat url('/svg/mokkaBaner.png')",
+
+    width: "58.12vw",
+    height: "37.18vw",
+    "@media(min-width: 1280px)": {
+      width: 744,
+      height: 476,
+    },
+    "@media(max-width: 1025px)": {
+      width: "72.58vw",
+      height: "46.43vw",
+    },
+    "@media(max-width: 767px)": {
+      width: "97vw",
+      height: "62.05vw",
+    },
+  },
+  mokkaCross: {
+    padding: 0,
+    background: "transparent",
+    minHeight: 0,
+    minWidth: 0,
+    border: "none",
+    outline: "none",
+    cursor: "pointer",
+
+    position: "absolute",
+    top: "7.77%",
+    right: "3.76%",
+
+    width: "3.225%",
+    height: "5.042%",
+  },
 }))
 
 export default function BlockPrice({ product, allColors }) {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 1025px)")
+
+  const [showMokkaInfo, setShowMokkaInfo] = React.useState(false)
 
   // цвет продукта первый в массиве
   allColors.unshift(
@@ -318,15 +424,45 @@ export default function BlockPrice({ product, allColors }) {
             <Typography
               hidden={!credit.months_2}
               className={classes.textCredit}
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
             >
-              Рассрочка от{" "}
-              <span>
+              Рассрочка от
+              <span className={classes.rassrochkaSpan}>
                 {priceMod(Math.trunc(product.data.price / credit.months_2))}{" "}
                 ₽/мес
+              </span>
+              <span className={classes.mokka}>
+                <Mokka />
+              </span>
+              | оплата авансом
+              <span
+                role="button"
+                onClick={() => setShowMokkaInfo(!showMokkaInfo)}
+                className={classes.mokkaInfo}
+              >
+                <MokkaInfo />
               </span>
             </Typography>
           </>
         ) : null}
+
+        <Modal
+          open={showMokkaInfo}
+          onClose={() => setShowMokkaInfo(false)}
+          className={classes.modal}
+        >
+          <div className={classes.mokkaBaner}>
+            <button
+              onClick={() => setShowMokkaInfo(false)}
+              className={classes.mokkaCross}
+            >
+              <MokkaCross />
+            </button>
+          </div>
+        </Modal>
 
         {devilery.length ? (
           <>

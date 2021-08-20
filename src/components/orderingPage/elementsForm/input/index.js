@@ -70,6 +70,9 @@ export default function Input({ afterChange, checkValue, ...other }) {
       onInput={onInput}
       onFocus={focusing}
       onBlur={blurring}
+      onKeyPress={e => {
+        if (e.code === "Enter") blurring()
+      }}
       className={classes.input + " " + error}
       {...other}
     />

@@ -145,8 +145,7 @@ export default function Products() {
     : ""
 
   const [url, setUrl] = React.useState(null)
-  // const [title, setTitle] = React.useState(null)
-  // const [category, setCategory] = React.useState(null)
+  
   const [allProducts, setAllProduct] = React.useState(
     state.allPrismicProduct.edges.map(edge => edge.node)
   )
@@ -168,37 +167,11 @@ export default function Products() {
     setFilterProducts(newAllProduct)
   }
 
-  // if (title !== titleUrl) {
-  //   const newAllProduct = state.allPrismicProduct.edges
-  //     .map(edge => edge.node)
-  //     .filter(product =>
-  //       product.data.name.toLowerCase().includes(titleUrl.toLowerCase())
-  //     )
-
-  //   setTitle(titleUrl)
-  //   setAllProduct(newAllProduct)
-  //   setFilterProducts(newAllProduct)
-  // }
-
-  // if (category !== categoryUrl && categoryUrl !== "") {
-  //   const newAllProduct = state.allPrismicProduct.edges
-  //     .map(edge => edge.node)
-  //     .filter(
-  //       product =>
-  //         product.data.main_category.document?.data.name === categoryUrl
-  //     )
-
-  //   setCategory(categoryUrl)
-  //   setAllProduct(newAllProduct)
-  //   setFilterProducts(newAllProduct)
-  // }
-
   const arrayCards = filterProducts.map(product => (
     <CardProduct product={product} key={product.id} />
   ))
 
   function cleanFilter() {
-    // const url = new URL(window.location)
     newUrl.search = ""
     window.location = newUrl.href
   }

@@ -143,6 +143,7 @@ export default function Select({ options, afterChange }) {
     <div style={{ position: "relative" }}>
       <Button
         onClick={toggleShowOptions}
+        onBlur={() => setShowOptions(false)}
         className={classes.select + " " + active}
       >
         <Typography className={classes.text}>{value}</Typography>
@@ -155,7 +156,7 @@ export default function Select({ options, afterChange }) {
         <Grid container direction="column" className={classes.options}>
           {options.map(option => (
             <Button
-              onClick={() => setGlobalValue(option)}
+              onPointerDown={() => setGlobalValue(option)}
               key={option}
               className={classes.option + " " + classes.text}
             >

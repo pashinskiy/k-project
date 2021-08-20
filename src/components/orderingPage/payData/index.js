@@ -7,6 +7,8 @@ import BankCard from "../../../../static/svg/bankCard.svg"
 
 import { OrderingDispatchContext } from "../context"
 
+import Mokka from "../../../../static/svg/mokka.svg"
+
 const useStyle = makeStyles(theme => ({
   listWrapper: {
     marginTop: "2.34vw",
@@ -125,6 +127,24 @@ const useStyle = makeStyles(theme => ({
       borderBottom: `1px solid ${theme.palette.color.accentSecondary}`,
     },
   },
+  mokka: {
+    display: "inline-block",
+
+    marginLeft: "0.625vw",
+    height: "1.32vw",
+    "@media(min-width: 1280px)": {
+      marginLeft: "8px",
+      height: "17px",
+    },
+    "@media(max-width: 1025px)": {
+      marginLeft: "0.95vw",
+      height: "2.03vw",
+    },
+    "@media(max-width: 767px)": {
+      marginLeft: "1.93vw",
+      height: "3.62vw",
+    },
+  },
 }))
 
 export default function PayData({ prismicCartAndOrder }) {
@@ -224,9 +244,22 @@ export default function PayData({ prismicCartAndOrder }) {
             }
           />
 
-          <Typography align="left" className={classes.title}>
-            В рассрочку
-          </Typography>
+          <div>
+            <Typography align="left" className={classes.title}>
+              В рассрочку
+            </Typography>
+
+            <Typography
+              align="left"
+              className={classes.description}
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              Мокка — оплата авансом
+              <span className={classes.mokka}>
+                <Mokka />
+              </span>
+            </Typography>
+          </div>
         </button>
       </div>
     </>

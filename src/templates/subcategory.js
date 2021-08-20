@@ -13,6 +13,8 @@ import Filter from "../components/filter"
 import Pagination from "../components/pagination"
 import Layout from "../components/layout"
 
+import { GlobalStateContext } from "../context/GlobalContextProvider"
+
 const useStyles = makeStyles(theme => ({
   wrapper: {
     marginTop: "2.18vw",
@@ -103,11 +105,15 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const IndexPage = ({ data: { allPrismicProduct, prismicSubcategory } }) => {
+const IndexPage = ({ data: { prismicSubcategory }, pageContext: { uid } }) => {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 1025px)")
+  const state = React.useContext(GlobalStateContext)
 
-  const allProducts = allPrismicProduct.edges.map(edge => edge.node)
+  const allProducts = state.allPrismicProduct.edges
+    .filter(edge => edge.node.data.category?.uid === uid)
+    .map(edge => edge.node)
+
   const [filterProducts, setFilterProducts] = React.useState(allProducts)
 
   const arrayCards = filterProducts.map(product => (
@@ -122,66 +128,69 @@ const IndexPage = ({ data: { allPrismicProduct, prismicSubcategory } }) => {
 
   return (
     <Layout>
-    <div className={classes.wrapper}>
-      <Seo title="Home" />
-      <BreadCrumbs
-        links={[
-          {
-            title: "Каталог",
-            href: `/products/`,
-          },
-        ]}
-      />
-      <HeaderWithIcon
-        title={prismicSubcategory.data.name}
-        count={allProducts.length}
-        subcategory
-      />
-      <FastLink products={allProducts} />
-      <Grid
-        container
-        justify="space-between"
-        className={classes.blockSortAndFilter}
-      >
-        <Sort products={filterProducts} setSortProducts={setFilterProducts} />
-        {mobile ? (
-          <Filter
-            products={allProducts}
-            setFilterProducts={setFilterProducts}
-          />
-        ) : null}
-      </Grid>
-
-      <Grid container justify="space-between">
-        <Grid className={classes.blockPagination}>
-          <Pagination
-            pageSize={mobile ? 5 : 10}
-            components={arrayCards}
-            message={
-              <Grid container direction="column">
-                <Typography className={classes.title}>
-                  К сожалению, таких товаров нет в наличии.
-                </Typography>
-
-                <Typography className={classes.text}>
-                  Попробуйте изменить настройки фильтра. Или{" "}
-                  <button onClick={cleanFilter} className={classes.cleanFilter}>
-                    сбросить
-                  </button>
-                  .
-                </Typography>
-              </Grid>
-            }
-          />
+      <div className={classes.wrapper}>
+        <Seo title="Home" />
+        <BreadCrumbs
+          links={[
+            {
+              title: "Каталог",
+              href: `/products/`,
+            },
+          ]}
+        />
+        <HeaderWithIcon
+          title={prismicSubcategory.data.name}
+          count={allProducts.length}
+          subcategory
+        />
+        <FastLink products={allProducts} />
+        <Grid
+          container
+          justify="space-between"
+          className={classes.blockSortAndFilter}
+        >
+          <Sort products={filterProducts} setSortProducts={setFilterProducts} />
+          {mobile ? (
+            <Filter
+              products={allProducts}
+              setFilterProducts={setFilterProducts}
+            />
+          ) : null}
         </Grid>
-        {mobile ? null : (
-          <Filter
-            products={allProducts}
-            setFilterProducts={setFilterProducts}
-          />
-        )}
-      </Grid>
-    </div>
+
+        <Grid container justify="space-between">
+          <Grid className={classes.blockPagination}>
+            <Pagination
+              pageSize={mobile ? 5 : 10}
+              components={arrayCards}
+              message={
+                <Grid container direction="column">
+                  <Typography className={classes.title}>
+                    К сожалению, таких товаров нет в наличии.
+                  </Typography>
+
+                  <Typography className={classes.text}>
+                    Попробуйте изменить настройки фильтра. Или{" "}
+                    <button
+                      onClick={cleanFilter}
+                      className={classes.cleanFilter}
+                    >
+                      сбросить
+                    </button>
+                    .
+                  </Typography>
+                </Grid>
+              }
+            />
+          </Grid>
+          {mobile ? null : (
+            <Filter
+              products={allProducts}
+              setFilterProducts={setFilterProducts}
+            />
+          )}
+        </Grid>
+      </div>
     </Layout>
   )
 }
@@ -193,112 +202,6 @@ export const query = graphql`
     prismicSubcategory(uid: { eq: $uid }) {
       data {
         name
-      }
-    }
-    allPrismicProduct(filter: { data: { category: { uid: { eq: $uid } } } }) {
-      edges {
-        node {
-          id
-          uid
-          data {
-            tags {
-              tag {
-                document {
-                  ... on PrismicTag {
-                    id
-                    data {
-                      name
-                    }
-                  }
-                }
-              }
-            }
-            brand {
-              document {
-                ... on PrismicBrand {
-                  id
-                  data {
-                    name
-                    popular
-                  }
-                }
-              }
-            }
-            name
-            price
-            old_price
-            color
-            color_group
-            images {
-              image {
-                alt
-                localFile {
-                  childImageSharp {
-                    gatsbyImageData(height: 280)
-                  }
-                }
-              }
-            }
-            body {
-              ... on PrismicProductBodyStickers {
-                slice_type
-                items {
-                  sticker {
-                    document {
-                      ... on PrismicSticker {
-                        id
-                        data {
-                          image {
-                            alt
-                            localFile {
-                              publicURL
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              ... on PrismicProductBodyFeatures {
-                slice_type
-                items {
-                  feature
-                  image {
-                    alt
-                    localFile {
-                      childImageSharp {
-                        gatsbyImageData(height: 30)
-                      }
-                    }
-                  }
-                }
-              }
-            }
-            body1 {
-              ... on PrismicProductBody1Characteristics {
-                id
-                slice_type
-                items {
-                  characteristic {
-                    document {
-                      ... on PrismicCharacteristic {
-                        id
-                        data {
-                          name
-                          variant
-                          order
-                        }
-                      }
-                    }
-                  }
-                  value
-                }
-              }
-            }
-            color
-          }
-        }
       }
     }
   }

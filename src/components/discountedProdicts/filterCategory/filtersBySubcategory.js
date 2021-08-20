@@ -33,7 +33,7 @@ export default function FiltersBySubcategory({ products }) {
   const categories = new Set()
   products.forEach(product => {
     if (product.data.category.document === null) return
-    categories.add(product.data.category.document)
+    categories.add(product.data.category.document.data.name)
   })
 
   function filter(value) {
@@ -49,12 +49,12 @@ export default function FiltersBySubcategory({ products }) {
       {[...categories].map(category => {
         return (
           <button
-            onClick={() => filter(category.data.name)}
-            aria-label={category.data.name}
-            key={category.id}
+            onClick={() => filter(category)}
+            aria-label={category}
+            key={category}
             className={classes.wrapper}
           >
-            <CardWidget variant="small" cardTitle={category.data.name} />
+            <CardWidget variant="small" cardTitle={category} />
           </button>
         )
       })}
