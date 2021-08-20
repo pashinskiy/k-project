@@ -13,6 +13,7 @@ module.exports = {
     `gatsby-plugin-material-ui`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
+    `gatsby-plugin-offline`,
     {
       resolve: "gatsby-plugin-google-tagmanager",
       options: {
@@ -142,12 +143,12 @@ module.exports = {
     },
     `gatsby-plugin-advanced-sitemap`,
     {
-      resolve: 'gatsby-plugin-robots-txt',
+      resolve: "gatsby-plugin-robots-txt",
       options: {
-        host: 'https://krypton.ru/',
-        sitemap: 'https://krypton.ru/sitemap.xml',
-        policy: [{ userAgent: '*', allow: '/' }]
-      }
+        host: "https://krypton.ru/",
+        sitemap: "https://krypton.ru/sitemap.xml",
+        policy: [{ userAgent: "*", allow: "/" }],
+      },
     },
   ],
 }
