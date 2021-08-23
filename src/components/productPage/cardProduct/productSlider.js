@@ -1,5 +1,5 @@
 import React from "react"
-import { Grid, makeStyles, Typography } from "@material-ui/core"
+import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
 import Arrow from "../../../../static/svg/arrow.svg"
 
 const useStyles = makeStyles(theme => ({
@@ -32,10 +32,6 @@ const useStyles = makeStyles(theme => ({
     height: "100%",
     position: "absolute",
     transition: "left .3s",
-
-    // "& *": {
-    //   touchAction: "none",
-    // },
   },
   count: {
     height: "5%",
@@ -81,8 +77,6 @@ const useStyles = makeStyles(theme => ({
     "@media(max-width: 767px)": {
       left: "6.76vw",
     },
-
-    touchAction: "none",
   },
   item: {
     height: "100%",
@@ -128,6 +122,7 @@ const useStyles = makeStyles(theme => ({
 export default function SliderProduct({ photos }) {
   photos = photos.filter(photo => !!photo?.src)
   const classes = useStyles()
+  const mobile = useMediaQuery("(max-width: 1025px)")
 
   //индекс главного слайдера
   const [indexSlide, setIndexSlide] = React.useState(0)
@@ -199,7 +194,6 @@ export default function SliderProduct({ photos }) {
               maxWidth: "none",
               width: "auto",
               height: "100%",
-              touchAction: "none",
             }}
           />
         </picture>
@@ -223,10 +217,6 @@ export default function SliderProduct({ photos }) {
     //отмена перехвата браузера
     e.currentTarget.ondragstart = () => false
 
-    let eventScroll = null
-    const clientY = e.clientY
-    const scroll = window.pageYOffset
-
     document.addEventListener("pointermove", scrollBar)
     document.addEventListener("pointerup", deleteScrollBar)
 
@@ -239,19 +229,6 @@ export default function SliderProduct({ photos }) {
     }
 
     function scrollBar(e) {
-      if (Math.abs(e.clientY - clientY) > 15 && eventScroll === null) {
-        eventScroll = true
-      }
-      if (Math.abs(e.clientX - clientX) > 15 && eventScroll === null) {
-        eventScroll = false
-        e.preventDefault()
-      }
-      if (eventScroll === null) return
-      if (eventScroll === true) {
-        window.scrollTo(0, scroll + clientY - e.clientY)
-        return
-      }
-
       let newLeft = left + e.clientX - clientX
       newLeft = newLeft > 0 ? 0 : newLeft
       newLeft = newLeft < minLeft ? minLeft : newLeft
@@ -265,7 +242,7 @@ export default function SliderProduct({ photos }) {
     }
   }
 
-  function swipMobile(e) {
+  function swipeMobile(e) {
     const bar = e.currentTarget
     const transition = bar.style.transition
     bar.style.transition = "none"
@@ -280,55 +257,32 @@ export default function SliderProduct({ photos }) {
     //отмена перехвата браузера
     e.currentTarget.ondragstart = () => false
 
-    let eventScroll = null
+    let eventScrollX = false
     const clientY = e.clientY
-    const scroll = window.pageYOffset
 
-    document.addEventListener("touchmove", scrollBarmobile)
+    document.addEventListener("touchmove", scrollBar)
     document.addEventListener("touchend", deleteScrollBar)
 
-    function scrollBarmobile(e) {
-      if (Math.abs(e.changedTouches[0].clientX - clientX) > 15) {
-        let newLeft = left + e.changedTouches[0].clientX - clientX
-        newLeft = newLeft > 0 ? 0 : newLeft
-        newLeft = newLeft < minLeft ? minLeft : newLeft
-        bar.style.left = newLeft + "px"
-        if (newLeft - left > 10) {
-          nextIndex = indexSlide === 0 ? null : indexSlide - 1
-        } else if (left - newLeft > 10) {
-          nextIndex =
-            indexSlide === bar.children.length - 1 ? null : indexSlide + 1
-        } else nextIndex = null
-      }
-    }
-
     function deleteScrollBar() {
-      bar.style.cursor = "grab"
       bar.style.transition = transition
       if (nextIndex !== null) goToSlide(nextIndex)
-      document.removeEventListener("touchmove", scrollBarmobile)
+      document.removeEventListener("touchmove", scrollBar)
       document.removeEventListener("touchend", deleteScrollBar)
     }
 
     function scrollBar(e) {
-      if (
-        Math.abs(e.changedTouches[0].clientY - clientY) > 15 &&
-        eventScroll === null
-      ) {
-        eventScroll = true
-      }
-      if (
-        Math.abs(e.changedTouches[0].clientX - clientX) > 15 &&
-        eventScroll === null
-      ) {
-        eventScroll = false
-      }
-      if (eventScroll === null) return
-      if (eventScroll === true) {
+      const deltaY = Math.abs(e.changedTouches[0].clientY - clientY)
+      const deltaX = Math.abs(e.changedTouches[0].clientX - clientX)
+      if (deltaY > 15 && !eventScrollX) {
+        deleteScrollBar()
         return
       }
+      if (deltaX > 15 && !eventScrollX) {
+        eventScrollX = true
+      }
+      if (!eventScrollX) return
 
-      let newLeft = left + e.clientX - clientX
+      let newLeft = left + e.changedTouches[0].clientX - clientX
       newLeft = newLeft > 0 ? 0 : newLeft
       newLeft = newLeft < minLeft ? minLeft : newLeft
       bar.style.left = newLeft + "px"
@@ -342,10 +296,6 @@ export default function SliderProduct({ photos }) {
   }
 
   function setScrollBar(e) {
-    let eventScroll = null
-    const clientY = e.clientY
-    const scroll = window.pageYOffset
-
     const bar = slideBar.current
     const transition = bar.style.transition
     bar.style.transition = "none"
@@ -372,25 +322,62 @@ export default function SliderProduct({ photos }) {
     }
 
     function scrollBar(e) {
-      if (Math.abs(e.clientY - clientY) > 15 && eventScroll === null) {
-        eventScroll = true
-      }
-      if (Math.abs(e.clientX - clientX) > 15 && eventScroll === null) {
-        eventScroll = false
-        e.preventDefault()
-      }
-      if (eventScroll === null) return
-      if (eventScroll === true) {
-        window.scrollTo(0, scroll + clientY - e.clientY)
-        return
-      }
-
       let newLeft = left + e.clientX - clientX
       newLeft = newLeft > maxLeft ? maxLeft : newLeft
       newLeft = newLeft < minLeft ? minLeft : newLeft
       bar.style.left = newLeft + "px"
     }
   }
+  function setScrollBarMobile(e) {
+    const bar = slideBar.current
+    const transition = bar.style.transition
+    bar.style.transition = "none"
+
+    const clientX = e.clientX
+    const left = bar.getBoundingClientRect().left //+bar.style.left.slice(0, -2)
+    const minLeft =
+      bar.parentElement.offsetWidth >= bar.offsetWidth
+        ? 0
+        : bar.parentElement.offsetWidth - bar.offsetWidth - 1
+
+    if (minLeft === 0) return
+
+    const maxLeft = getComputedStyle(bar.parentElement).paddingLeft.slice(0, -2)
+
+    //отмена перехвата браузера
+    bar.ondragstart = () => false
+
+    let eventScrollX = false
+    const clientY = e.clientY
+
+    document.addEventListener("touchmove", scrollSmallBar)
+    document.addEventListener("touchend", deleteScrollBar)
+
+    function deleteScrollBar() {
+      bar.style.transition = transition
+      document.removeEventListener("touchmove", scrollSmallBar)
+      document.removeEventListener("touchend", deleteScrollBar)
+    }
+
+    function scrollSmallBar(e) {
+      const deltaY = Math.abs(e.changedTouches[0].clientY - clientY)
+      const deltaX = Math.abs(e.changedTouches[0].clientX - clientX)
+      if (deltaY > 15 && !eventScrollX) {
+        deleteScrollBar()
+        return
+      }
+      if (deltaX > 15 && !eventScrollX) {
+        eventScrollX = true
+      }
+      if (!eventScrollX) return
+
+      let newLeft = left + e.changedTouches[0].clientX - clientX
+      newLeft = newLeft > maxLeft ? maxLeft : newLeft
+      newLeft = newLeft < minLeft ? minLeft : newLeft
+      bar.style.left = newLeft + "px"
+    }
+  }
+
   function prevSlide() {
     const nextIndex = indexSlide === 0 ? 0 : indexSlide - 1
     const bar = slideBar.current
@@ -459,7 +446,7 @@ export default function SliderProduct({ photos }) {
         <Grid
           container
           wrap="nowrap"
-          onPointerDown={swipe}
+          onPointerDown={mobile ? swipeMobile : swipe}
           className={classes.mainPhotoBar}
           style={{ width: widthMainPhotoBar, left: leftMainPhotoBar }}
         >
@@ -476,7 +463,7 @@ export default function SliderProduct({ photos }) {
           container
           wrap="nowrap"
           ref={slideBar}
-          onPointerDown={setScrollBar}
+          onPointerDown={mobile ? setScrollBarMobile : setScrollBar}
           className={classes.bar}
         >
           {slides}

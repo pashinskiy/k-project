@@ -213,16 +213,15 @@ const IndexPage = ({ data }) => {
   }, [])
 
   const orderInfo = []
-
   if (orderData !== null)
     orderInfo.push(
       {
-        name: "Статус заказа: ",
-        value: orderData.payment.status_comment,
+        name: "Имя получателя: ",
+        value: orderData.customer.name,
       },
       {
-        name: "Способ оплаты: ",
-        value: orderData.payment.payment_type,
+        name: "Телефон получателя: ",
+        value: orderData.customer.phone,
       },
       {
         name: "Адрес доставки: ",
@@ -233,12 +232,12 @@ const IndexPage = ({ data }) => {
         value: `${orderData.order.delivery_date} с ${orderData.order.delivery_time_from} до ${orderData.order.delivery_time_to}`,
       },
       {
-        name: "Имя получателя: ",
-        value: orderData.customer.name,
+        name: "Статус заказа: ",
+        value: orderData.payment.status_comment,
       },
       {
-        name: "Телефон получателя: ",
-        value: orderData.customer.phone,
+        name: "Способ оплаты: ",
+        value: orderData.payment.payment_type,
       }
     )
 

@@ -428,7 +428,7 @@ export default function PriceBlock({ products }) {
           </Helmet>
         ) : null}
 
-        <Pay text="Оплатить заказ" products={products} onClick={payOrder} />
+        <Pay text="Подтвердить заказ" products={products} onClick={payOrder} />
       </div>
 
       {/* {credit && !mobile ? (
