@@ -33,7 +33,9 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     transition: "left .3s",
 
-    touchAction: "none",
+    // "& *": {
+    //   touchAction: "none",
+    // },
   },
   count: {
     height: "5%",
@@ -217,6 +219,7 @@ export default function SliderProduct({ photos }) {
         : +bar.style.left.slice(0, -2)
     const minLeft = bar.parentElement.offsetWidth - bar.offsetWidth
     let nextIndex = null
+
     //отмена перехвата браузера
     e.currentTarget.ondragstart = () => false
 
@@ -236,15 +239,6 @@ export default function SliderProduct({ photos }) {
     }
 
     function scrollBar(e) {
-      // if (eventScroll === null) {
-      //   eventScroll =
-      //     Math.abs(e.clientY - clientY) >= Math.abs(e.clientX - clientX)
-      // }
-      // if (eventScroll) {
-      //   window.scrollTo(0, scroll + clientY - e.clientY)
-      //   return
-      // }
-
       if (Math.abs(e.clientY - clientY) > 15 && eventScroll === null) {
         eventScroll = true
       }
@@ -255,6 +249,82 @@ export default function SliderProduct({ photos }) {
       if (eventScroll === null) return
       if (eventScroll === true) {
         window.scrollTo(0, scroll + clientY - e.clientY)
+        return
+      }
+
+      let newLeft = left + e.clientX - clientX
+      newLeft = newLeft > 0 ? 0 : newLeft
+      newLeft = newLeft < minLeft ? minLeft : newLeft
+      bar.style.left = newLeft + "px"
+      if (newLeft - left > 10) {
+        nextIndex = indexSlide === 0 ? null : indexSlide - 1
+      } else if (left - newLeft > 10) {
+        nextIndex =
+          indexSlide === bar.children.length - 1 ? null : indexSlide + 1
+      } else nextIndex = null
+    }
+  }
+
+  function swipMobile(e) {
+    const bar = e.currentTarget
+    const transition = bar.style.transition
+    bar.style.transition = "none"
+    const clientX = e.clientX
+    const left =
+      bar.style.left.slice(-1) === "%"
+        ? (+bar.style.left.slice(0, -1) / 100) * bar.parentElement.offsetWidth
+        : +bar.style.left.slice(0, -2)
+    const minLeft = bar.parentElement.offsetWidth - bar.offsetWidth
+    let nextIndex = null
+
+    //отмена перехвата браузера
+    e.currentTarget.ondragstart = () => false
+
+    let eventScroll = null
+    const clientY = e.clientY
+    const scroll = window.pageYOffset
+
+    document.addEventListener("touchmove", scrollBarmobile)
+    document.addEventListener("touchend", deleteScrollBar)
+
+    function scrollBarmobile(e) {
+      if (Math.abs(e.changedTouches[0].clientX - clientX) > 15) {
+        let newLeft = left + e.changedTouches[0].clientX - clientX
+        newLeft = newLeft > 0 ? 0 : newLeft
+        newLeft = newLeft < minLeft ? minLeft : newLeft
+        bar.style.left = newLeft + "px"
+        if (newLeft - left > 10) {
+          nextIndex = indexSlide === 0 ? null : indexSlide - 1
+        } else if (left - newLeft > 10) {
+          nextIndex =
+            indexSlide === bar.children.length - 1 ? null : indexSlide + 1
+        } else nextIndex = null
+      }
+    }
+
+    function deleteScrollBar() {
+      bar.style.cursor = "grab"
+      bar.style.transition = transition
+      if (nextIndex !== null) goToSlide(nextIndex)
+      document.removeEventListener("touchmove", scrollBarmobile)
+      document.removeEventListener("touchend", deleteScrollBar)
+    }
+
+    function scrollBar(e) {
+      if (
+        Math.abs(e.changedTouches[0].clientY - clientY) > 15 &&
+        eventScroll === null
+      ) {
+        eventScroll = true
+      }
+      if (
+        Math.abs(e.changedTouches[0].clientX - clientX) > 15 &&
+        eventScroll === null
+      ) {
+        eventScroll = false
+      }
+      if (eventScroll === null) return
+      if (eventScroll === true) {
         return
       }
 
@@ -302,14 +372,6 @@ export default function SliderProduct({ photos }) {
     }
 
     function scrollBar(e) {
-      // if (eventScroll === null) {
-      //   eventScroll = Math.abs(e.clientY - clientY) >= Math.abs(e.clientX - clientX)
-      // }
-      // if (eventScroll) {
-      //   window.scrollTo(0, scroll + clientY - e.clientY)
-      //   return
-      // }
-
       if (Math.abs(e.clientY - clientY) > 15 && eventScroll === null) {
         eventScroll = true
       }
@@ -404,9 +466,11 @@ export default function SliderProduct({ photos }) {
           {mainSlides}
         </Grid>
       </Grid>
+
       <Typography align="center" className={classes.count}>
         {indexSlide + 1} из {mainSlides.length}
       </Typography>
+
       <Grid className={classes.barWrapper}>
         <Grid
           container
