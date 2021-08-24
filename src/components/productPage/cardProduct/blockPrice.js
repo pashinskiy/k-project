@@ -413,7 +413,7 @@ export default function BlockPrice({ product, allColors }) {
         />
       ) : null}
       <Grid>
-        {credit ? (
+        {credit || product.data.price < 100000 ? (
           <>
             <Typography className={classes.title}>
               Рассрочка и кредит
@@ -421,31 +421,34 @@ export default function BlockPrice({ product, allColors }) {
             <Typography hidden={!creditValue} className={classes.textCredit}>
               Кредит от <span>{priceMod(Math.trunc(creditValue))} ₽/мес</span>
             </Typography>
-            <Typography
-              hidden={!credit.months_2}
-              className={classes.textCredit}
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              Рассрочка от
-              <span className={classes.rassrochkaSpan}>
-                {priceMod(Math.trunc(product.data.price / credit.months_2))}{" "}
-                ₽/мес
-              </span>
-              <span className={classes.mokka}>
-                <Mokka />
-              </span>
-              | оплата авансом
-              <span
-                role="button"
-                onClick={() => setShowMokkaInfo(!showMokkaInfo)}
-                className={classes.mokkaInfo}
+
+            {product.data.price < 100000 ? (
+              <Typography
+                hidden={!credit.months_2}
+                className={classes.textCredit}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
               >
-                <MokkaInfo />
-              </span>
-            </Typography>
+                Рассрочка от
+                <span className={classes.rassrochkaSpan}>
+                  {priceMod(Math.trunc(product.data.price / credit.months_2))}{" "}
+                  ₽/мес
+                </span>
+                <span className={classes.mokka}>
+                  <Mokka />
+                </span>
+                | оплата авансом
+                <span
+                  role="button"
+                  onClick={() => setShowMokkaInfo(!showMokkaInfo)}
+                  className={classes.mokkaInfo}
+                >
+                  <MokkaInfo />
+                </span>
+              </Typography>
+            ) : null}
           </>
         ) : null}
 

@@ -431,7 +431,7 @@ export default function PriceBlock({ products }) {
         <Pay text="Подтвердить заказ" products={products} onClick={payOrder} />
       </div>
 
-      {/* {credit && !mobile ? (
+      {credit && !mobile ? (
         <>
           <Typography className={classes.titleCreditAndDelivery}>
             Рассрочка и кредит
@@ -449,7 +449,7 @@ export default function PriceBlock({ products }) {
             </span>
           </Typography>
         </>
-      ) : null} */}
+      ) : null}
 
       {devilery.length && !mobile ? (
         <>
