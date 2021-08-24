@@ -151,6 +151,8 @@ export default function PayData({ prismicCartAndOrder }) {
   const classes = useStyle()
   const smartPhoneScreen = useMediaQuery("(max-width: 415px)")
 
+  const order = JSON.parse(localStorage.getItem("order"))
+
   const orderingDispatch = React.useContext(OrderingDispatchContext)
 
   const [value, setValue] = React.useState("онлайн")
@@ -232,35 +234,37 @@ export default function PayData({ prismicCartAndOrder }) {
           </Typography>
         </button>
 
-        <button
-          onClick={() => setVariantPay("в рассрочку")}
-          className={classes.item}
-        >
-          <div
-            className={
-              classes.ratio +
-              " " +
-              (value === "в рассрочку" ? classes.activeRatio : "")
-            }
-          />
+        {order.price < 100000 ? (
+          <button
+            onClick={() => setVariantPay("в рассрочку")}
+            className={classes.item}
+          >
+            <div
+              className={
+                classes.ratio +
+                " " +
+                (value === "в рассрочку" ? classes.activeRatio : "")
+              }
+            />
 
-          <div>
-            <Typography align="left" className={classes.title}>
-              В рассрочку
-            </Typography>
+            <div>
+              <Typography align="left" className={classes.title}>
+                В рассрочку
+              </Typography>
 
-            <Typography
-              align="left"
-              className={classes.description}
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              Мокка — оплата авансом
-              <span className={classes.mokka}>
-                <Mokka />
-              </span>
-            </Typography>
-          </div>
-        </button>
+              <Typography
+                align="left"
+                className={classes.description}
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                Мокка — оплата авансом
+                <span className={classes.mokka}>
+                  <Mokka />
+                </span>
+              </Typography>
+            </div>
+          </button>
+        ) : null}
       </div>
     </>
   )

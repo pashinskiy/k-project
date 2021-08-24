@@ -1,6 +1,12 @@
 import React from "react"
 import { Helmet } from "react-helmet"
-import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
+import {
+  makeStyles,
+  useMediaQuery,
+  Grid,
+  Typography,
+  Modal,
+} from "@material-ui/core"
 
 import Pay from "../../button/pay"
 
@@ -8,6 +14,10 @@ import { OrderingStateContext } from "../context"
 
 import Star from "../../../../static/svg/star.svg"
 import { navigate } from "gatsby"
+
+import Mokka from "../../../../static/svg/mokka.svg"
+import MokkaInfo from "../../../../static/svg/mokkaInfo.svg"
+import MokkaCross from "../../../../static/svg/mokkaCross.svg"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -199,10 +209,10 @@ const useStyle = makeStyles(theme => ({
   textCredit: {
     fontWeight: 400,
     lineHeight: 1.21,
-    fontSize: "1.09vw",
+    fontSize: "1.01vw",
     marginTop: "0.62vw",
     "@media(min-width: 1280px)": {
-      fontSize: "14px",
+      fontSize: "13px",
       marginTop: "8px",
     },
     "@media(max-width: 1025px)": {
@@ -210,7 +220,7 @@ const useStyle = makeStyles(theme => ({
       marginTop: "0.95vw",
     },
     "@media(max-width: 767px)": {
-      fontSize: "3.38vw",
+      fontSize: "3vw",
       marginTop: "1.93vw",
     },
     "& span": {
@@ -240,12 +250,107 @@ const useStyle = makeStyles(theme => ({
       "-webkit-text-fill-color": "#000000",
     },
   },
+  rassrochkaSpan: {
+    marginLeft: "0.625vw",
+    "@media(min-width: 1280px)": {
+      marginLeft: "8px",
+    },
+    "@media(max-width: 1025px)": {
+      marginLeft: "0.95vw",
+    },
+    "@media(max-width: 767px)": {
+      marginLeft: "1.93vw",
+    },
+  },
+  mokka: {
+    display: "inline-block",
+
+    margin: "0 0.625vw",
+    height: "1.32vw",
+    "@media(min-width: 1280px)": {
+      margin: "0 8px",
+      height: "17px",
+    },
+    "@media(max-width: 1025px)": {
+      margin: "0 0.95vw",
+      height: "2.03vw",
+    },
+    "@media(max-width: 767px)": {
+      margin: "0 1.93vw",
+      height: "3.62vw",
+    },
+  },
+  mokkaInfo: {
+    display: "inline-block",
+    cursor: "pointer",
+
+    marginLeft: "0.31vw",
+    height: "1.32vw",
+    width: "1.32vw",
+    "@media(min-width: 1280px)": {
+      marginLeft: "4px",
+      height: "17px",
+      width: "17px",
+    },
+    "@media(max-width: 1025px)": {
+      marginLeft: "0.47vw",
+      height: "2.03vw",
+      width: "2.03vw",
+    },
+    "@media(max-width: 767px)": {
+      marginLeft: "0.96vw",
+      height: "4.1vw",
+      width: "4.1vw",
+    },
+  },
+  modal: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  mokkaBaner: {
+    position: "relative",
+    background: "center / cover no-repeat url('/svg/mokkaBaner.png')",
+
+    width: "58.12vw",
+    height: "37.18vw",
+    "@media(min-width: 1280px)": {
+      width: 744,
+      height: 476,
+    },
+    "@media(max-width: 1025px)": {
+      width: "72.58vw",
+      height: "46.43vw",
+    },
+    "@media(max-width: 767px)": {
+      width: "97vw",
+      height: "62.05vw",
+    },
+  },
+  mokkaCross: {
+    padding: 0,
+    background: "transparent",
+    minHeight: 0,
+    minWidth: 0,
+    border: "none",
+    outline: "none",
+    cursor: "pointer",
+
+    position: "absolute",
+    top: "7.77%",
+    right: "3.76%",
+
+    width: "3.225%",
+    height: "5.042%",
+  },
 }))
 
 export default function PriceBlock({ products }) {
   const classes = useStyle()
   const [showMoreInfo, setShowMoreInfo] = React.useState(false)
   const mobile = useMediaQuery("(max-width: 1025px)")
+
+  const [showMokkaInfo, setShowMokkaInfo] = React.useState(false)
 
   const orderingState = React.useContext(OrderingStateContext)
 
@@ -295,6 +400,12 @@ export default function PriceBlock({ products }) {
           localStorage.removeItem("order")
           localStorage.setItem("order_number", JSON.stringify(res.order_number))
 
+          if (res.error) {
+            localStorage.setItem("order_number", JSON.stringify(res.order_number))
+            navigate("/order/", { state: { error: res.status } })
+            return
+          }
+
           if (orderingState.variantPay === "при получении") {
             navigate("/order/")
           }
@@ -329,11 +440,10 @@ export default function PriceBlock({ products }) {
   // данные по кредиту и рассрочке
   const credit = products[0].data.credit.document?.data ?? null
 
+  const ps = +credit?.percent.replace(",", ".") / 12 / 100
   const creditValue =
     credit?.percent && credit?.months_1
-      ? ((products[0].data.price / 100) *
-          (100 + +credit.percent.replace(",", "."))) /
-        credit.months_1
+      ? order.price * (ps / (1 - Math.pow(1 + ps, -credit?.months_1)))
       : null
 
   // преобразуем цену
@@ -349,7 +459,11 @@ export default function PriceBlock({ products }) {
   }
 
   return (
-    <div hidden={mobile&&orderingState.focusingOnField} onPointerDown={mobile ? swipeStart : null} className={classes.wrapper}>
+    <div
+      hidden={mobile && orderingState.focusingOnField}
+      onPointerDown={mobile ? swipeStart : null}
+      className={classes.wrapper}
+    >
       {mobile ? <div className={classes.divider} /> : null}
 
       {showMoreInfo || !mobile ? (
@@ -431,7 +545,7 @@ export default function PriceBlock({ products }) {
         <Pay text="Подтвердить заказ" products={products} onClick={payOrder} />
       </div>
 
-      {credit && !mobile ? (
+      {(credit && !mobile) || order.price < 100000 ? (
         <>
           <Typography className={classes.titleCreditAndDelivery}>
             Рассрочка и кредит
@@ -441,15 +555,49 @@ export default function PriceBlock({ products }) {
             Кредит от <span>{priceMod(Math.trunc(creditValue))} ₽/мес</span>
           </Typography>
 
-          <Typography hidden={!credit.months_2} className={classes.textCredit}>
-            Рассрочка от{" "}
-            <span>
-              {priceMod(Math.trunc(products[0].data.price / credit.months_2))}{" "}
-              ₽/мес
-            </span>
-          </Typography>
+          {order.price < 100000 ? (
+            <Typography
+              hidden={!credit.months_2}
+              className={classes.textCredit}
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              Рассрочка от
+              <span className={classes.rassrochkaSpan}>
+                {priceMod(Math.trunc(order.price / credit.months_2))} ₽/мес
+              </span>
+              <span className={classes.mokka}>
+                <Mokka />
+              </span>
+              | оплата авансом
+              <span
+                role="button"
+                onClick={() => setShowMokkaInfo(!showMokkaInfo)}
+                className={classes.mokkaInfo}
+              >
+                <MokkaInfo />
+              </span>
+            </Typography>
+          ) : null}
         </>
       ) : null}
+
+      <Modal
+        open={showMokkaInfo}
+        onClose={() => setShowMokkaInfo(false)}
+        className={classes.modal}
+      >
+        <div className={classes.mokkaBaner}>
+          <button
+            onClick={() => setShowMokkaInfo(false)}
+            className={classes.mokkaCross}
+          >
+            <MokkaCross />
+          </button>
+        </div>
+      </Modal>
 
       {devilery.length && !mobile ? (
         <>

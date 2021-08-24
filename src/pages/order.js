@@ -169,15 +169,19 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-const IndexPage = ({ data }) => {
+const IndexPage = ({ data, location }) => {
   const classes = useStyle()
+
+  const error = location.state.error
 
   const state = React.useContext(GlobalStateContext)
   const stateDispatch = React.useContext(GlobalDispatchContext)
 
   const [orderData, setOrderData] = React.useState(null)
 
-  const order_number = JSON.parse(localStorage.getItem("order_number"))
+  const order_number = error
+    ? ""
+    : JSON.parse(localStorage.getItem("order_number"))
 
   const productsInCart = state.allPrismicProduct.edges
     .filter(edge => !!state.inCart(edge.node.id))
@@ -197,16 +201,15 @@ const IndexPage = ({ data }) => {
   }
 
   React.useEffect(() => {
-    fetch(`https://admin.krypton.ru/api/order/?id=${order_number}`)
-      .then(res => res.json())
-      .then(res => {
-        console.log(res)
-        setOrderData(res)
-      })
+    if (!error) {
+      fetch(`https://admin.krypton.ru/api/order/?id=${order_number}`)
+        .then(res => res.json())
+        .then(res => {
+          setOrderData(res)
+        })
+    }
 
     return () => {
-      // localStorage.removeItem("order_data")
-      // localStorage.removeItem("customer_credentials")
       localStorage.removeItem("cart")
       stateDispatch({ type: "CLEAN_CART" })
     }
@@ -240,6 +243,21 @@ const IndexPage = ({ data }) => {
         value: orderData.payment.payment_type,
       }
     )
+
+  if (error) {
+    return (
+      <Layout>
+        <Seo title="Корзина" />
+        <Divider />
+        <Typography
+          className={classes.titleOrderName + " " + classes.title}
+          style={{ width: "100%" }}
+        >
+          {`Заказ не оформлен, код ошибки ${error}`}
+        </Typography>
+      </Layout>
+    )
+  }
 
   return orderData !== null ? (
     <Layout>

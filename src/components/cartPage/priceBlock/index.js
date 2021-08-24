@@ -1,5 +1,11 @@
 import React from "react"
-import { makeStyles, useMediaQuery, Grid, Typography, Modal } from "@material-ui/core"
+import {
+  makeStyles,
+  useMediaQuery,
+  Grid,
+  Typography,
+  Modal,
+} from "@material-ui/core"
 
 import { GlobalStateContext } from "../../../context/GlobalContextProvider"
 
@@ -352,11 +358,10 @@ export default function PriceBlock({ products }) {
   // данные по кредиту и рассрочке
   const credit = products[0].data.credit.document?.data ?? null
 
+  const ps = +credit?.percent.replace(",", ".") / 12 / 100
   const creditValue =
     credit?.percent && credit?.months_1
-      ? ((products[0].data.price / 100) *
-          (100 + +credit.percent.replace(",", "."))) /
-        credit.months_1
+      ? summPrice * (ps / (1 - Math.pow(1 + ps, -credit?.months_1)))
       : null
 
   // преобразуем цену

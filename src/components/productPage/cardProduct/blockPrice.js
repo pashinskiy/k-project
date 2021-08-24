@@ -15,7 +15,6 @@ import colors from "../../../templates/colors.json"
 import Mokka from "../../../../static/svg/mokka.svg"
 import MokkaInfo from "../../../../static/svg/mokkaInfo.svg"
 import MokkaCross from "../../../../static/svg/mokkaCross.svg"
-import { right } from "fp-ts/lib/EitherT"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -343,11 +342,10 @@ export default function BlockPrice({ product, allColors }) {
   // данные по кредиту и рассрочке
   const credit = product.data.credit.document?.data ?? null
 
+  const ps = +credit?.percent.replace(",", ".") / 12 / 100
   const creditValue =
     credit?.percent && credit?.months_1
-      ? ((product.data.price / 100) *
-          (100 + +credit.percent.replace(",", "."))) /
-        credit.months_1
+      ? product.data.price * (ps / (1 - Math.pow(1 + ps, -credit?.months_1)))
       : null
 
   const seller = product.data.body.find(
