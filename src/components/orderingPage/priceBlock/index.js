@@ -299,7 +299,7 @@ export default function PriceBlock({ products }) {
             navigate("/order/")
           }
           if (orderingState.variantPay === "в рассрочку") {
-            navigate("/order/")
+            window.location.href = res.payment_data.url
           }
           if (orderingState.variantPay === "онлайн") {
             window.location.href = res.payment_data.url

@@ -379,7 +379,10 @@ export default function ProductAddedCard({ product, closeDialog }) {
           {/* TODO: Добавить ссылку на страницу оформления */}
           <Button
             aria-label="Оформить"
-            onClick={() => navigate("/cart/")}
+            onClick={() => { 
+              closeDialog()
+              navigate("/cart/")
+            }}
             className={classes.buttonCheckout}
           >
             Оформить
