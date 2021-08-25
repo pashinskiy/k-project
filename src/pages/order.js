@@ -172,7 +172,7 @@ const useStyle = makeStyles(theme => ({
 const IndexPage = ({ data, location }) => {
   const classes = useStyle()
 
-  const error = location.state.error
+  const error = location.state?.error
 
   const state = React.useContext(GlobalStateContext)
   const stateDispatch = React.useContext(GlobalDispatchContext)

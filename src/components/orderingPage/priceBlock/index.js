@@ -397,6 +397,7 @@ export default function PriceBlock({ products }) {
       fetch(apiURL, init)
         .then(res => res.json())
         .then(res => {
+          console.log(res)
           localStorage.removeItem("order")
           localStorage.setItem("order_number", JSON.stringify(res.order_number))
 
