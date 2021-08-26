@@ -290,6 +290,12 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок с ценой продуктов на странице корзины
+ * @module components/cartPage/priceBlock
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.products - массив объектов продуктов полученых из prismic
+ */
 export default function PriceBlock({ products }) {
   const classes = useStyle()
   const state = React.useContext(GlobalStateContext)

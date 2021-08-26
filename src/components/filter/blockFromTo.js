@@ -139,6 +139,16 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок фильтра с выбором от и до
+ * @module components/filter/blockFromTo
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.title - название характеристики
+ * @param {Object[]} props.set - массив всех возможных вариантов характеристики
+ * @param {Object[]} props.span - массив вида [min, max] установленый в фильтр
+ * @param {function} props.setSpan - функция установки массива [min, max] в фильтр
+ * @param {boolean} [props.slider] - отображение ползунка
+ */
 export default function BlockFromTo({
   title,
   set,

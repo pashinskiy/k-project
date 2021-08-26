@@ -20,6 +20,12 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Скролл бар с фильтрами по подкатегориям
+ * @module components/discountedProdicts/filterCategory
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.products - массив объектов продуктов полученых из prismic
+ */
 export default function FilterCategory({ products }) {
   const classes = useStyle()
 

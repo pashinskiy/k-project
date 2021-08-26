@@ -8,7 +8,7 @@ import {
 import Seo from "../components/seo"
 import OrderConfirmedIcon from "../../static/svg/orderConfirmedIcon.svg"
 import HeaderWithIcon from "../components/headers/headerWithIcon"
-import OrderCard from "../components/cart/orderCard"
+import OrderCard from "../components/orderPage/orderCard"
 import Layout from "../components/layout"
 
 const useStyle = makeStyles(theme => ({
@@ -330,6 +330,14 @@ const IndexPage = ({ data, location }) => {
     </Layout>
   ) : null
 }
+
+/**
+ * Страница статуса заказа
+ * @module page/order
+ * @param {Object} - свойства:
+ * data - ответ на graphql запрос в данном модуле;
+ * location - объект с данными о местоположении (см. https://www.gatsbyjs.com/docs/location-data-from-props/);
+ */
 export default IndexPage
 
 export const query = graphql`

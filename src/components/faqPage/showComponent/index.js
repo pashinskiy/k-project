@@ -6,6 +6,10 @@ import Subgroup from "../subgroup"
 
 import { FaqStateContext } from "../context"
 
+/**
+ * Компонент с логикой отображения компонентов страницы технической поддержки
+ * @module components/faqPage/showComponent
+ */
 export default function ShowComponent() {
   const faqState = React.useContext(FaqStateContext)
 

@@ -18,6 +18,12 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Набор тэгов продуктов для блока быстрых ссылок на странице подкатегории
+ * @module components/catalog/filtersByTag
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.products - массив объектов продуктов полученый из prismic
+ */
 export default function FiltersByTag({ products }) {
   const classes = useStyle()
 

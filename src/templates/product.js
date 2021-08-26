@@ -86,6 +86,12 @@ const Product = ({ data: { prismicProduct } }) => {
   )
 }
 
+/**
+ * Шаблон страницы продукта
+ * @module templates/product
+ * @param {Object} - свойства:
+ * data - ответ на graphql запрос в данном модуле;
+ */
 export default Product
 
 export const pageQuery = graphql`

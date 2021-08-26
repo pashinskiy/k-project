@@ -11,4 +11,10 @@ const IndexPage = ({ pageContext: { doc } }) => {
   )
 }
 
+/**
+ * Шаблон страницы документа
+ * @module templates/document
+ * @param {Object} - свойства:
+ * pageContext - объект контекста, передаваемый при формировании страницы
+ */
 export default IndexPage

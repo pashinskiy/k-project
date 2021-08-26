@@ -1,6 +1,10 @@
 import React from "react"
 import Logo from '../static/svg/logo.svg';
 
+/**
+ * Компонент-обертка, позволяет отображать логотип до загрузки основного содержимого
+ * @module ./clientOnly
+ */
 export default function ClientOnly({ children, ...delegated }) {
   const [hasMounted, setHasMounted] = React.useState(false)
   React.useEffect(() => {

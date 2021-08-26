@@ -111,6 +111,15 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок фильтра да/нет
+ * @module components/filter/blockBoolean
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.title - название характеристики, если не указан stickerId
+ * @param {String} props.valueFilter - текущее значение "да"/"нет"
+ * @param {function} props.setFilter - функция установки значения в фильтр
+ * @param {String} props.stickerId - id стикера в prismic
+ */
 export default function BlockBoolean({
   title,
   valueFilter,
@@ -178,30 +187,8 @@ export default function BlockBoolean({
               height={35}
               style={{ width: "auto", height: "100%" }}
             />
-            {/* <picture style={{ display: "flex", width: "100%", height: "100%" }}>
-              <source
-                srcSet={img.localFile?.childImageSharp.fluid.srcSetWebp}
-                type="image/webp"
-                sizes=""
-              />
-              <img
-                src={img.localFile?.childImageSharp.fluid.src}
-                srcSet={img?.srcSet}
-                alt={img.alt}
-                sizes=""
-                width={img.localFile?.childImageSharp.fluid.aspectRatio}
-                height="1"
-                style={{ width: "auto", height: "100%" }}
-              />
-            </picture> */}
           </div>
         ) : (
-          // <GatsbyImage loading="eager"
-          //   image={img?.localFile?.childImageSharp.gatsbyImageData}
-          //   alt={img.alt ?? "sticker"}
-          //   className={classes.image}
-          //   imgStyle={{ objectFit: "contain" }}
-          // />
           <Typography className={classes.title}>{title}</Typography>
         )}
       </Button>

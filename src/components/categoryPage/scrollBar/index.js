@@ -170,9 +170,15 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Скролл бар для страницы категории
+ * @module components/catalog/scrollBar
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.children - дочерние компоненты
+ * @param {boolean} [props.fullScreen = false] - прокрутка с выходом за границы layuot
+ * @param {boolean} [props.buttonNext = false] - отображение кнопок при переполнении
+ */
 export default function ScrollBar({ children, fullScreen, buttonNext }) {
-  // fullScreen (boolean) прокрутка с выходом за границы layuot
-  // buttonNext нужно ли отображить кнопку при переполнении
 
   const mobile = useMediaQuery("(max-width: 1025px)")
 
@@ -225,15 +231,6 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
     }
 
     function scrollBar(e) {
-      // if (eventScroll === null) {
-      //   eventScroll =
-      //     Math.abs(e.clientY - clientY) >= Math.abs(e.clientX - clientX)
-      // }
-      // if (eventScroll) {
-      //   window.scrollTo(0, scroll + clientY - e.clientY)
-      //   return
-      // }
-
       if (Math.abs(e.clientY - clientY) > 15 && eventScroll === null) {
         eventScroll = true
       }

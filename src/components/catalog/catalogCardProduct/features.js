@@ -9,15 +9,6 @@ const useStyles = makeStyles(theme => ({
     boxSizing: "border-box",
     cursor: "pointer",
 
-    // overflow: "hidden",
-    // WebkitBackfaceVisibility: 'hidden',
-    // MozBackfaceVisibility: 'hidden',
-    // WebkitTransform: 'translate3d(0, 0, 0)',
-    // MozTransform: 'translate3d(0, 0, 0)',
-    // overflow: "scroll",
-    // scrollbarWidth: "none",
-    // "-ms-overflow-style": "none",
-
     height: "2.89vw",
     "@media(min-width: 1280px)": {
       height: "37px",
@@ -136,8 +127,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок значков особых характеристик
+ * @module components/catalog/features
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.featuresSlices - массив слайсов особых характеристик продукта полученый из prismic
+ */
 export default function Features({ featuresSlices }) {
-  // input data
   const classes = useStyles()
 
   const features = React.useRef()

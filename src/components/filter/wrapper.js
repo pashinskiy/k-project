@@ -47,6 +47,14 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Компонент-обертка для блоков фильтра 
+ * @module components/filter
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.children - объект дочерних компонентов
+ * @param {String} props.title - название хорактеристики
+ * @param {String} props.key - уникальный ключ среди соседних элементов
+ */
 export default function Wrapper({ children, title, key, ...other }) {
   const classes = useStyles()
 

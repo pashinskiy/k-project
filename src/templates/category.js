@@ -318,7 +318,7 @@ const Category = ({
             {prismicCategory.data.children.map((subcategory_product, i) => {
               if (subcategory_product.child.document === null) return null
               if (
-                allPrismicProduct.edges.find(
+                state.allPrismicProduct.edges.find(
                   edge =>
                     edge.node.data.category.document?.id ===
                     subcategory_product.child.document?.id
@@ -337,7 +337,7 @@ const Category = ({
                       {subcategory_product.child.document?.data?.name}
                     </Typography>
                     <AllProductsByCategory
-                      subcategory_product={subcategory_product}
+                      subcategory={subcategory_product.child.document}
                     />
                   </div>
                 )
@@ -350,6 +350,13 @@ const Category = ({
   )
 }
 
+/**
+ * Шаблон страницы категории
+ * @module templates/category
+ * @param {Object} - свойства:
+ * data - ответ на graphql запрос в данном модуле;
+ * pageContext - объект контекста, передаваемый при формировании страницы
+ */
 export default Category
 
 export const pageQuery = graphql`

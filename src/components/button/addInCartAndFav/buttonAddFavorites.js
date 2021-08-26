@@ -4,7 +4,10 @@ import { Button, makeStyles } from "@material-ui/core"
 import Favorites from "../../../../static/svg/favorites.svg"
 import NotFavorites from "../../../../static/svg/notFavorites.svg"
 
-import { GlobalStateContext, GlobalDispatchContext } from "../../../context/GlobalContextProvider"
+import {
+  GlobalStateContext,
+  GlobalDispatchContext,
+} from "../../../context/GlobalContextProvider"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -74,6 +77,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Кнопка добавления товара в корзину
+ * @module components/button/addInCartAndFav/buttonAddFavorites
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.product - объект продукта полученый из prismic
+ * @param {String} [props.variant = card] - вариант отбражения кнопки (page - для страницы продукта,card - для карточки товара)
+ */
 export default function ButtonAddFavorites({ product, variant }) {
   const classes = useStyles()
 
@@ -83,10 +93,10 @@ export default function ButtonAddFavorites({ product, variant }) {
   const isFavorite = state.inFavorites(product.id)
 
   function changeToFavorites() {
-    if(!isFavorite)
-    dispatch({ type: "ADD_PRODUCT_IN_FAVORITES", payload: product?.id })
+    if (!isFavorite)
+      dispatch({ type: "ADD_PRODUCT_IN_FAVORITES", payload: product?.id })
     else
-    dispatch({ type: "DELETE_PRODUCT_FROM_FAVORITES", payload: product?.id })
+      dispatch({ type: "DELETE_PRODUCT_FROM_FAVORITES", payload: product?.id })
   }
 
   const background = isFavorite ? classes.favorites : classes.notFavorites

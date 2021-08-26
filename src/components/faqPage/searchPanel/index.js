@@ -59,6 +59,10 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Панель результатов поиска страницы технической поддержки
+ * @module components/faqPage/searchPanel
+ */
 export default function SearchPanel() {
   const classes = useStyles()
 
@@ -80,8 +84,6 @@ export default function SearchPanel() {
         .toLowerCase()
         .includes(faqState.search.toLowerCase())
     })
-
-  console.log(subgroups)
 
   // сортируем подгруппы по алфавиту
   subgroups.sort((subgroup1, subgroup2) => {

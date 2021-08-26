@@ -136,7 +136,7 @@ const IndexPage = ({ data }) => {
 
   const state = React.useContext(GlobalStateContext)
 
-  const productsInCart = data.allPrismicProduct.edges
+  const productsInCart = state.allPrismicProduct.edges
     .filter(edge => !!state.inCart(edge.node.id))
     .map(edge => edge.node)
 
@@ -202,91 +202,17 @@ const IndexPage = ({ data }) => {
     </Layout>
   )
 }
+
+/**
+ * Страница оформления заказа
+ * @module page/ordering
+ * @param {Object} - свойства:
+ * data - ответ на graphql запрос в данном модуле;
+ */
 export default IndexPage
 
 export const query = graphql`
   {
-    allPrismicProduct {
-      edges {
-        node {
-          id
-          uid
-          data {
-            all_product_accessories {
-              product_accessories {
-                document {
-                  ... on PrismicProduct {
-                    uid
-                    id
-                    data {
-                      images {
-                        image {
-                          localFile {
-                            childImageSharp {
-                              gatsbyImageData
-                            }
-                          }
-                          alt
-                        }
-                      }
-                      price
-                      name
-                    }
-                  }
-                }
-              }
-            }
-            name
-            price
-            old_price
-            images {
-              image {
-                alt
-                localFile {
-                  childImageSharp {
-                    gatsbyImageData
-                  }
-                }
-              }
-            }
-            delivery {
-              document {
-                ... on PrismicDelivery {
-                  data {
-                    body {
-                      ... on PrismicDeliveryBodyDeliveryToCities {
-                        id
-                        items {
-                          city_name
-                          cost
-                          delivery_description
-                          timing
-                        }
-                      }
-                    }
-                    variants {
-                      description
-                      name
-                    }
-                  }
-                }
-              }
-            }
-            credit {
-              document {
-                ... on PrismicCredit {
-                  data {
-                    months_1
-                    months_2
-                    percent
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
     prismicCartAndOrder {
       data {
         title_support

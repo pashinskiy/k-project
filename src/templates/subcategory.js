@@ -195,6 +195,13 @@ const IndexPage = ({ data: { prismicSubcategory }, pageContext: { uid } }) => {
   )
 }
 
+/**
+ * Шаблон страницы подкатегории
+ * @module templates/subcategory
+ * @param {Object} - свойства:
+ * data - ответ на graphql запрос в данном модуле;
+ * pageContext - объект контекста, передаваемый при формировании страницы
+ */
 export default IndexPage
 
 export const query = graphql`

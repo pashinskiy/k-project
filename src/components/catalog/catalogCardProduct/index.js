@@ -142,8 +142,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   features: {
-    overflow:"hidden",
-    
+    overflow: "hidden",
+
     width: "26.79vw",
     "@media(min-width: 1280px)": {
       width: "343px",
@@ -259,7 +259,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function CardProduct({ product, afterChange, ...other }) {
+/**
+ * Карточка продукта на странице подкатегории и католога
+ * @module components/catalog/catalogCardProduct
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.product - объект продукта полученый из prismic
+ */
+export default function CardProduct({ product, ...other }) {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 767px)")
 
@@ -332,7 +338,8 @@ export default function CardProduct({ product, afterChange, ...other }) {
           onClick={() => navigate(`/${product.uid}`)}
           className={classes.buttonLink}
         >
-          <GatsbyImage loading="eager"
+          <GatsbyImage
+            loading="eager"
             image={
               product.data.images[0]?.image.localFile?.childImageSharp
                 .gatsbyImageData
@@ -417,7 +424,6 @@ export default function CardProduct({ product, afterChange, ...other }) {
               text="В корзину"
               product={product}
               variant="card"
-              afterChange={afterChange}
             />
           </Grid>
         )}

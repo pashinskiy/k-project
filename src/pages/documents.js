@@ -100,6 +100,12 @@ export default function Documents({ data }) {
   )
 }
 
+/**
+ * Страница документов
+ * @module page/documents
+ * @param {Object} - свойства:
+ * data - ответ на graphql запрос в данном модуле;
+ */
 export const query = graphql`
   {
     prismicDocs {

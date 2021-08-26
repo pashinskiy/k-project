@@ -116,6 +116,12 @@ const IndexPage = ({ data }) => {
   )
 }
 
+/**
+ * Страница избранного
+ * @module page/favorites
+ * @param {Object} - свойства:
+ * data - ответ на graphql запрос в данном модуле;
+ */
 export default IndexPage
 
 export const query = graphql`

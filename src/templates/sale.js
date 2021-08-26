@@ -28,6 +28,12 @@ const Sale = ({ data }) => {
   )
 }
 
+/**
+ * Шаблон страницы акции
+ * @module templates/sale
+ * @param {Object} - свойства:
+ * data - ответ на graphql запрос в данном модуле;
+ */
 export default Sale
 
 export const query = graphql`

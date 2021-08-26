@@ -88,7 +88,7 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-const IndexPage = ({ data }) => {
+const IndexPage = () => {
   const classes = useStyle()
 
   return (
@@ -111,4 +111,9 @@ const IndexPage = ({ data }) => {
     </Layout>
   )
 }
+
+/**
+ * Страница техподдержки
+ * @module page/faq
+ */
 export default IndexPage

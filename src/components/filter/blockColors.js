@@ -66,6 +66,15 @@ palette = Object.fromEntries(
   })
 )
 
+/**
+ * Блок фильтра с выбором цвета
+ * @module components/filter/blockColors
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.title - название характеристики
+ * @param {Object[]} props.allColors - массив всех возможных вариантов
+ * @param {Object[]} props.colors - массив установленых в фильтр вариантов
+ * @param {function} props.setColors - функция установки массива вариантов в фильтр
+ */
 export default function BlockColors({
   title,
   allColors,

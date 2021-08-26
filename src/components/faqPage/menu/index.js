@@ -175,6 +175,10 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Левое меню страницы технической поддержки
+ * @module components/faqPage/menu
+ */
 export default function Menu() {
   const classes = useStyles()
 

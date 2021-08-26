@@ -246,6 +246,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Фильтр продуктов 
+ * @module components/filter
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.products - массив объектов продуктов полученых из prismic
+ * @param {function} props.setFilterProducts - функция установки отфильтрованых продуктов
+ */
 export default function Filter({ products, setFilterProducts }) {
   const classes = useStyles()
 

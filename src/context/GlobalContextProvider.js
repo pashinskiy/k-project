@@ -144,6 +144,7 @@ const GlobalContextProvider = ({ children }) => {
                 }
               }
               main_category {
+                id
                 uid
                 document {
                   ... on PrismicCategory {
@@ -155,6 +156,7 @@ const GlobalContextProvider = ({ children }) => {
                 }
               }
               category {
+                id
                 uid
                 document {
                   ... on PrismicSubcategory {
@@ -334,4 +336,10 @@ const GlobalContextProvider = ({ children }) => {
   )
 }
 
+/**
+ * Компонент-обертка, содержит основное хранилище данных
+ * @module context/GlobalContextProvider
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.children - объект с дочерними компонентами
+ */
 export default GlobalContextProvider

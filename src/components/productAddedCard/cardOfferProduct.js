@@ -191,9 +191,15 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function CardOfferProduct({ accessory }) {
+/**
+ * Кнопка перехода к регистрации
+ * @module components/cart/cardOfferProduct
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.product - объект продукта полученый из prismic
+ */
+export default function CardOfferProduct({ product }) {
   const classes = useStyles()
-  const accessoryItem = accessory.product_accessories.document
+  const accessoryItem = product
 
   const state = React.useContext(GlobalStateContext)
   const inCart = !!state.inCart(accessoryItem?.id)
@@ -243,7 +249,6 @@ export default function CardOfferProduct({ accessory }) {
         <ButtonAddCart
           product={accessoryItem}
           text="Добавить"
-          iconPlus={true}
           variant="offerPage"
           className={classes.buttonAddCart}
         />

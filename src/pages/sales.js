@@ -28,6 +28,13 @@ const IndexPage = ({ data }) => {
     </Layout>
   )
 }
+
+/**
+ * Страница акций
+ * @module page/sales
+ * @param {Object} - свойства:
+ * data - ответ на graphql запрос в данном модуле;
+ */
 export default IndexPage
 
 export const query = graphql`

@@ -159,7 +159,16 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function BlockCheckbox({
+/**
+ * Блок фильтра с множественным выбором
+ * @module components/filter/blockRatio
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.title - название характеристики
+ * @param {Object[]} props.set - массив всех возможных вариантов характеристики
+ * @param {String} props.selected - текущее значение
+ * @param {function} props.setFilter - функция установки значения в фильтр
+ */
+export default function BlockRatio({
   title,
   set,
   selected,

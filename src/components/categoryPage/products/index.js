@@ -12,7 +12,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function AllProductsByCategory({ subcategory_product }) {
+/**
+ * Скролл бар с продуктами подкатегории для страницы категории
+ * @module components/catalog/allProductsByCategory
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.subcategory - объект подкатегории полученый из prismic
+ */
+export default function AllProductsByCategory({ subcategory }) {
 
   const classes = useStyles()
   
@@ -26,7 +32,7 @@ export default function AllProductsByCategory({ subcategory_product }) {
         ?.filter(
           sub =>
             sub.node.data.category.uid ===
-            subcategory_product.child.document?.uid
+            subcategory?.uid
         )
         .map((product, i) => {
           return product.node.data.images[0]?.image.localFile ? (

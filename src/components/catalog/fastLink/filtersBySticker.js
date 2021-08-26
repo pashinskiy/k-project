@@ -29,6 +29,13 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Фильтр по стикерам
+ * @module components/catalog/filtersBySticker
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.products - массив объектов продуктов полученый из prismic
+ * @param {String} [props.category] - название категории товаров для сортировки
+ */
 export default function FiltersBySticker({ products, category }) {
   const classes = useStyle()
 

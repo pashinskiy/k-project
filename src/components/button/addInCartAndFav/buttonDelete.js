@@ -61,6 +61,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Кнопка удаления товара из корзину
+ * @module components/button/addInCartAndFav/buttonDelete
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.product - объект продукта полученый из prismic
+ * @param {String} [props.variant = card] - вариант отбражения кнопки (page - для страницы продукта,card - для карточки товара)
+ */
 export default function ButtonDelete({ product, variant }) {
   const classes = useStyles()
   const dispatch = React.useContext(GlobalDispatchContext)

@@ -69,7 +69,6 @@ export default function CardProduct({ prismicProduct }) {
           text="В корзину"
           variant="page"
           fixed={true}
-          dialog
         />
       ) : null}
     </>

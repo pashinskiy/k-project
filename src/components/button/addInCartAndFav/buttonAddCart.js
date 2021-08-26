@@ -103,35 +103,48 @@ const useStyles = makeStyles(theme => ({
       width: "20px",
       height: "20px",
       marginRight: "10px",
-      },
+    },
     "@media(max-width: 1025px)": {
       width: "2.398vw",
       height: "2.398vw",
       marginRight: "1.199vw",
-      },
+    },
     "@media(max-width: 767px)": {
       width: "4.10628vw",
       height: "4.10628vw",
       marginRight: "3.8647vw",
-      },
-}
+    },
+  },
 }))
 
-export default function ButtonAddCart({ product, text, variant, dialog, iconPlus, setDialogOpen }) {
+/**
+ * Кнопка добавления товара в корзину
+ * @module components/button/addInCartAndFav/buttonAddCart
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.product - объект продукта полученый из prismic
+ * @param {String} props.text - текст для отображения на кнопке
+ * @param {String} [props.variant = card] - вариант отбражения кнопки (page - для страницы продукта, offerPage - для окна аксесуаров, card - для карточки товара)
+ * @param {function} props.setDialogOpen - функция установки состояния модального окна с аксессуарами
+ */
+export default function ButtonAddCart({
+  product,
+  text,
+  variant,
+  setDialogOpen,
+}) {
   const classes = useStyles()
 
   const dispatch = React.useContext(GlobalDispatchContext)
 
   function addToCart() {
-    // if(dialog)
-      setDialogOpen(true)
+    setDialogOpen(true)
     dispatch({ type: "ADD_PRODUCT_IN_CART", payload: product.id })
   }
 
   let classText
   let classButton
 
-  switch(variant){
+  switch (variant) {
     case "page":
       classText = classes.textPage
       classButton = classes.buttonPage
@@ -140,6 +153,7 @@ export default function ButtonAddCart({ product, text, variant, dialog, iconPlus
       classText = classes.textCard
       classButton = classes.buttonPageOffer
       break
+    case "card":
     default:
       classText = classes.textCard
       classButton = classes.buttonCard
@@ -148,11 +162,13 @@ export default function ButtonAddCart({ product, text, variant, dialog, iconPlus
     <>
       <Button
         disableRipple
-        onClick={addToCart}
+        onClick={variant !== "offerPage" ? addToCart : null}
         aria-label="добавить в корзину"
         className={classes.button + " " + classButton}
       >
-        {iconPlus ? <IconButtonPlus className={classes.iconButtonPlus}/> : null}
+        {variant === "offerPage" ? (
+          <IconButtonPlus className={classes.iconButtonPlus} />
+        ) : null}
         <Typography align="center" className={classText}>
           {text}
         </Typography>

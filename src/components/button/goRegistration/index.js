@@ -43,6 +43,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Кнопка перехода к регистрации
+ * @module components/button/goRegistration
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.text - текст для отображения на кнопке
+ * @param {function} props.onClick - функция вызываемая перед переходом
+ */
 export default function GoRegistration({ text, onClick }) {
   const classes = useStyles()
 

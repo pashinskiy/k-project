@@ -167,6 +167,15 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок фильтра с множественным выбором
+ * @module components/filter/blockCheckbox
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.title - название характеристики
+ * @param {Object[]} props.set - массив всех возможных вариантов характеристики
+ * @param {Object[]} props.selected - массив установленых в фильтр вариантов
+ * @param {function} props.setFilter - функция установки массива вариантов в фильтр
+ */
 export default function BlockCheckbox({
   title,
   set,

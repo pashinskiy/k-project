@@ -199,5 +199,8 @@ const IndexPage = () => {
     </Layout>
   )
 }
-
+/**
+ * Страница уцененных товаров
+ * @module page/discounted-products
+ */
 export default IndexPage

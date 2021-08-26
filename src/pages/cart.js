@@ -189,6 +189,13 @@ const IndexPage = ({ data }) => {
     </Layout>
   )
 }
+
+/**
+ * Страница корзины покупок
+ * @module page/cart
+ * @param {Object} - свойства:
+ * data - ответ на graphql запрос в данном модуле;
+ */
 export default IndexPage
 
 export const query = graphql`

@@ -7,7 +7,7 @@ import ButtonAddCart from "./buttonAddCart"
 import ButtonAddFavorites from "./buttonAddFavorites"
 import ButtonPlusMinus from "./buttonPlusMinus"
 import ButtonDelete from "./buttonDelete"
-import ProductAddedCard from "../../cart/productAddedCard"
+import ProductAddedCard from "../../productAddedCard"
 import IconCloseDialog from "../../../../static/svg/iconCloseDialog.svg"
 
 const useStyles = makeStyles(theme => ({
@@ -75,12 +75,20 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Компонент добавления, удаления товара в избранное и корзину и изменения количества товара в корзине
+ * @module components/button/addInCartAndFav
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.product - объект продукта полученый из prismic
+ * @param {String} props.text - текст для отображения на кнопке добавления в корзину
+ * @param {String} [props.variant = card] - вариант отбражения кнопок (page - для страницы продукта, offerPage - для окна аксесуаров, card - для карточки товара)
+ * @param {Boolean} props.fixed - фиксирование положение кнопки
+ */
 export default function AddInCartAndFav({
   product,
   text,
   variant,
   fixed,
-  dialog,
 }) {
   const classes = useStyles()
   fixed = fixed ? classes.fixed : ""
@@ -109,7 +117,6 @@ export default function AddInCartAndFav({
           product={product}
           text={text}
           variant={variant}
-          dialog={dialog}
           setDialogOpen={setDialogOpen}
         />
       )}

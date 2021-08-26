@@ -322,13 +322,21 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Панель при добавлении товара в корзину
+ * @module components/cart/productAddedCard
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.product - объект продукта полученый из prismic
+ * @param {function} props.closeDialog - функция закрытия панели
+ */
 export default function ProductAddedCard({ product, closeDialog }) {
   const classes = useStyles()
   const image =
     product.data.images[0]?.image?.localFile?.childImageSharp.gatsbyImageData
-  const accessoriesArray = product.data.all_product_accessories?.filter(
-    item => item.product_accessories.document !== null
-  ) ?? []
+  const accessoriesArray =
+    product.data.all_product_accessories?.filter(
+      item => item.product_accessories.document !== null
+    ) ?? []
 
   return (
     <>
@@ -340,7 +348,8 @@ export default function ProductAddedCard({ product, closeDialog }) {
           </Typography>
         </div>
         <div className={classes.productInfoWrapper}>
-          <GatsbyImage loading="eager"
+          <GatsbyImage
+            loading="eager"
             image={image}
             alt="product-image"
             className={classes.productImageContainer}
@@ -379,7 +388,7 @@ export default function ProductAddedCard({ product, closeDialog }) {
           {/* TODO: Добавить ссылку на страницу оформления */}
           <Button
             aria-label="Оформить"
-            onClick={() => { 
+            onClick={() => {
               closeDialog()
               navigate("/cart/")
             }}
@@ -395,14 +404,16 @@ export default function ProductAddedCard({ product, closeDialog }) {
             Добавьте аксессуар в комплект
           </Typography>
           <Grid container className={classes.accessoriesContainer}>
-            {accessoriesArray.map(accessory => (
-              <Grid item xs={6} className={classes.accessoriesRoot}>
-                <CardOfferProduct
-                  accessory={accessory}
-                  key={accessory.product_accessories.document?.uid + "-offer"}
-                />
-              </Grid>
-            ))}
+            {accessoriesArray.map(accessory =>
+              accessory.product_accessories.document !== null ? (
+                <Grid item xs={6} className={classes.accessoriesRoot}>
+                  <CardOfferProduct
+                    product={accessory.product_accessories.document}
+                    key={accessory.product_accessories.document?.uid + "-offer"}
+                  />
+                </Grid>
+              ) : null
+            )}
           </Grid>
         </Card>
       ) : null}
