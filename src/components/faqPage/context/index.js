@@ -23,7 +23,7 @@ function reducer(state, action) {
 
 /**
  * Компонент с хранилищем данных страницы faq
- * @module components/faqPage/context
+ * @module src/components/faqPage/context
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.children - объект с дочерними компонентами
  */

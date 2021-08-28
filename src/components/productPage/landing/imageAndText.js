@@ -158,7 +158,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function TwoImages({ slice, ...other }) {
+/**
+ * Компонент лэндинга отображающий изображение и текст
+ * @module src/components/productPage/landing/imageAndText
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.slice - слайс лндинга продукта полученый из prismic
+ */
+export default function ImageAndText({ slice, ...other }) {
   const img =
     slice.primary.image?.localFile?.childImageSharp?.gatsbyImageData ?? false
   const alt = slice.primary.image.alt ?? "image"

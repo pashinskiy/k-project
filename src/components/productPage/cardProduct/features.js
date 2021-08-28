@@ -142,6 +142,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Отличительные характеристики на главной карточке товара
+ * @module src/components/productPage/cardProduct/features
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.featuresSlices - массив слайсов с отличительными чертами полученный из prismic
+ */
 export default function Features({ featuresSlices }) {
   const classes = useStyles()
 

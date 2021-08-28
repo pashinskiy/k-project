@@ -77,7 +77,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Компонент добавления, удаления товара в избранное и корзину и изменения количества товара в корзине
- * @module components/button/addInCartAndFav
+ * @module src/components/button/addInCartAndFav
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.product - объект продукта полученый из prismic
  * @param {String} props.text - текст для отображения на кнопке добавления в корзину

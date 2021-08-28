@@ -172,6 +172,15 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Карточка доставки на странице продукта
+ * @module src/components/productPage/delivery/deliveryCard
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.deliveryCity - город (Title)
+ * @param {String} props.deliveryDescription - описание карточки
+ * @param {String} props.deliveryCost - стоимость доставки
+ * @param {String} props.deliveryTime - время доставки
+ */
 export default function DeliveryCard(props) {
   const classes = useStyles()
   return (

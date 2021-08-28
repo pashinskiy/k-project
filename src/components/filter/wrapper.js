@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Компонент-обертка для блоков фильтра 
- * @module components/filter
+ * @module src/components/filter
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.children - объект дочерних компонентов
  * @param {String} props.title - название хорактеристики

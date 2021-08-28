@@ -17,7 +17,6 @@ const Sale = ({ data }) => {
     item => item.primary.social_img
   )
   const products = state.allPrismicProduct.edges.map(edge => edge.node)
-  // console.log(products)
 
   return (
     <Layout>
@@ -30,9 +29,9 @@ const Sale = ({ data }) => {
 
 /**
  * Шаблон страницы акции
- * @module templates/sale
- * @param {Object} - свойства:
- * data - ответ на graphql запрос в данном модуле;
+ * @module src/templates/sale
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
  */
 export default Sale
 

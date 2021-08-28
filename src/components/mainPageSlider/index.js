@@ -212,6 +212,13 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Слайдер банеров на главной
+ * @module src/components/mainPageSlider
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.array - массив объектов акций или банеров полученый из prismic
+ * @param {String} props.variant - вариант отображения sales или promotionBanner
+ */
 export default function MainPageSlider({ array, variant }) {
   const classes = useStyle()
   const [activeChild, setActiveChild] = React.useState()

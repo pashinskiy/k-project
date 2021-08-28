@@ -104,7 +104,13 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-export default function CardSimilarProduct({ product, afterChange }) {
+/**
+ * Карточка товара дня
+ * @module src/components/mainPage/dayProduct/cardProduct
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.product - объект продукта полученый из prismic
+ */
+export default function CardProduct({ product }) {
   const img =
     product?.data.images[0]?.image.localFile?.childImageSharp.gatsbyImageData
   const alt = product?.data.images[0]?.image.alt
@@ -118,7 +124,8 @@ export default function CardSimilarProduct({ product, afterChange }) {
   return (
     <Grid className={`${classes.wrapper} product--card`}>
       <Link to={`/${product?.uid}/`} className={classes.link}>
-        <GatsbyImage loading="eager"
+        <GatsbyImage
+          loading="eager"
           image={img}
           alt={alt ?? `image product`}
           className={classes.imageWrapper}
@@ -132,11 +139,7 @@ export default function CardSimilarProduct({ product, afterChange }) {
           {title}
         </Typography>
       </Link>
-      <AddInCartAndFav
-        text="В корзину"
-        product={product}
-        afterChange={afterChange}
-      />
+      <AddInCartAndFav text="В корзину" product={product} />
     </Grid>
   )
 }

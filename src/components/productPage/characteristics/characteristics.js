@@ -148,10 +148,16 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function Characteristics(props) {
+/**
+ * Характеристики
+ * @module src/components/productPage/сharacteristics/сharacteristics
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.product - объект продукта полученый из prismic
+ */
+export default function Characteristics({product}) {
   const classes = useStyles()
-  const iconData = props.props.documents
-  const characteristicTitlesArray = props.props.body1.map(function (
+  const iconData = product.data.documents
+  const characteristicTitlesArray = product.data.body1.map(function (
     parentItems
   ) {
     const attribArr = parentItems.items.map(function (childTitles) {

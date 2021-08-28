@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Блок цены товара на карточке продукта в каталоге и подкатегории
- * @module components/catalog/blockPrice
+ * @module src/components/catalog/blockPrice
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.product - объект продукта полученый из prismic
  */

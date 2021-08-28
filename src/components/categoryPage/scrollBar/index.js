@@ -172,7 +172,7 @@ const useStyle = makeStyles(theme => ({
 
 /**
  * Скролл бар для страницы категории
- * @module components/catalog/scrollBar
+ * @module src/components/catalog/scrollBar
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.children - дочерние компоненты
  * @param {boolean} [props.fullScreen = false] - прокрутка с выходом за границы layuot

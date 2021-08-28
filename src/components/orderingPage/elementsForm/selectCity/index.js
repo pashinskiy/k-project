@@ -103,6 +103,10 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок ввода названия города с предложением вариантов 
+ * @module src/components/orderingPage/elementsForms/selectCity
+ */
 export default function SelectCity() {
   const classes = useStyle()
   const [showOptions, setShowOptions] = React.useState(false)

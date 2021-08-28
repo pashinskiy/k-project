@@ -38,9 +38,15 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function CharacteristicsBlock(props) {
+/**
+ * Блок характеристик на странице продукта
+ * @module src/components/productPage/сharacteristics
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.product - объект продукта полученый из prismic
+ */
+export default function CharacteristicsBlock({product}) {
   const classes = useStyles()
-  const description = props.props.data.description ?? null
+  const description = product.data.description ?? null
   
   return (
     <div>
@@ -60,7 +66,7 @@ export default function CharacteristicsBlock(props) {
               </CardContent>
             </Card>
           ) : null}
-          <Characteristics props={props.props.data} />
+          <Characteristics product={product} />
         </Grid>
       </Grid>
     </div>

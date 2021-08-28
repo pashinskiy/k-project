@@ -150,7 +150,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Кнопка изменения количества товара в корзине
- * @module components/button/addInCartAndFav/buttonPlusMinus
+ * @module src/components/button/addInCartAndFav/buttonPlusMinus
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.product - объект продукта полученый из prismic
  * @param {String} [props.variant = card] - вариант отбражения кнопки (page - для страницы продукта, full - на всю ширину и высоту, card - для карточки товара)

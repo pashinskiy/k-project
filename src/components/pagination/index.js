@@ -182,6 +182,14 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Пагинация
+ * @module src/components/pagination
+ * @param {Object} props - объект свойств компонента React
+ * @param {Number} props.pageSize - количество отображаемых компонентов на одной странице
+ * @param {Object[]} props.components - массив DOM-элементов для отображения
+ * @param {Object} props.message - элемент отображаемый в случае пустого components (объект React.Element)
+ */
 export default function Pagination({ pageSize, components, message }) {
   const classes = useStyles()
   const barItem = React.useRef()

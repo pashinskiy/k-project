@@ -333,10 +333,10 @@ const IndexPage = ({ data, location }) => {
 
 /**
  * Страница статуса заказа
- * @module page/order
- * @param {Object} - свойства:
- * data - ответ на graphql запрос в данном модуле;
- * location - объект с данными о местоположении (см. https://www.gatsbyjs.com/docs/location-data-from-props/);
+ * @module src/page/order
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
+ * @param {Object} props.location - объект с данными о местоположении
  */
 export default IndexPage
 

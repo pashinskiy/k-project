@@ -32,6 +32,12 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+/**
+ * Слайдер новости
+ * @module src/components/mainPage/news
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
+ */
 export default function News(props) {
     const maxWidth1024 = useMediaQuery("(max-width: 1025px)")
     

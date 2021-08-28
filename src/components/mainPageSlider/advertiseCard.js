@@ -66,9 +66,15 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Слайдер банеров на главной
+ * @module src/components/mainPageSlider/advertiseCard
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.banner - объект банера полученый из prismic
+ */
 export default function AdvertiseCard({ banner }) {
   const classes = useStyles()
-  // console.log(banner)
+  
   return (
     <Card className={classes.cardRoot}>
       <GatsbyImage loading="eager"

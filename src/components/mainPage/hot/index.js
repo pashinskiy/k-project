@@ -45,6 +45,12 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+/**
+ * Слайдер хиты продаж
+ * @module src/components/mainPage/hot
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
+ */
 export default function Hot(props) {
 
     const classes = useStyles();

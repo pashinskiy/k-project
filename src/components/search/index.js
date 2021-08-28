@@ -68,6 +68,10 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Компонент поиска
+ * @module src/components/search
+ */
 export default function Search() {
   const classes = useStyles()
   const data = useStaticQuery(graphql`

@@ -38,6 +38,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Компонент лэндинга отображающий одно изображение
+ * @module src/components/productPage/landing/oneImage
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.slice - слайс лндинга продукта полученый из prismic
+ */
 export default function OneImage({ slice, ...other }) {
   const img =
     slice.primary.image?.localFile?.childImageSharp?.gatsbyImageData ?? false

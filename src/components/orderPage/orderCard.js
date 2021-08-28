@@ -91,6 +91,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Карточка товара для страницы статуса заказа
+ * @module src/components/orderPage/orderCard
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.product - объект продукта полученный из prismic
+ */
 export default function OrderCard({ product }) {
   const classes = useStyles()
   const image = product.data.images ? product.data.images[0]?.image : false

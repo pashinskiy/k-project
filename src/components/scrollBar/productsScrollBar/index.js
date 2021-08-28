@@ -24,6 +24,15 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок слайдера продуктов
+ * @module src/components/scrollBar/productsScrollBar
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.products - массив объектов продуктов полученный из prismic
+ * @param {String} props.title - заголовок блока
+ * @param {Object} [props.icon] - иконка заголовка (объект React.Element)
+ * @param {boolean} props.divider - наличие черты под заголовком
+ */
 export default function ProductsScrollBar({ products, title, icon, divider }) {
   const classes = useStyle()
 

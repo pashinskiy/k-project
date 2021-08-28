@@ -43,6 +43,14 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Маленький заголовок с иконкой
+ * @module src/components/orderingPage/smallHeaderWithIcon
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.icon - иконка, если нет числа (объект React.Element)
+ * @param {Number|String} props.number - число, если нет иконки
+ * @param {String} props.title - текст заголовка
+ */
 export default function OrderingHeaderWithIcon({
   icon,
   number,

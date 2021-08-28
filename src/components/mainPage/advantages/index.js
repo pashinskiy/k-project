@@ -70,6 +70,12 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+/**
+ * Слайдер преимуществ
+ * @module src/components/mainPage/advantages
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
+ */
 export default function Advantages(props) {
 
     const classes = useStyles();

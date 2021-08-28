@@ -57,6 +57,13 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Строка галлереи на странице продукта
+ * @module src/components/productPage/gallery/imagesRow
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.images - массив объектов фотографий продукта полученый из prismic
+ * @param {boolean} [props.reverse = false] - отображение в обратном порядке
+ */
 export default function ImagesRow({ images, reverse, ...other }) {
   // опускаем в useStyle информацию о количестве images
   const classes = useStyle({ oneEl: images.length === 1 })

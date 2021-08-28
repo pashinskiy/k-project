@@ -261,7 +261,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Карточка продукта на странице подкатегории и католога
- * @module components/catalog/catalogCardProduct
+ * @module src/components/catalog/catalogCardProduct
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.product - объект продукта полученый из prismic
  */

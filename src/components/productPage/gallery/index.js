@@ -27,6 +27,12 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Галлерея на странице продукта
+ * @module src/components/productPage/gallery
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.imagesArr - массив объектов фотографий продукта полученый из prismic
+ */
 export default function Gallery({ imagesArr }) {
   const images = imagesArr ? imagesArr : []
   for (let i = 0; i < images.length; i++) {

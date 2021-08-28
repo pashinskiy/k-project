@@ -287,6 +287,13 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+/**
+ * Выпадающий каталог мобильная версия
+ * @module src/components/layout/catalog/mobile
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
+ * @param {boolean} props.animation - true - анимация открытия false - анимация закрытия
+ */
 export default function MobileCatalog({ data, animation }) {
 
     const classes = useStyles({ animation });

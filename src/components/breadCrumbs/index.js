@@ -61,7 +61,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Хлебные крошки
- * @module components/breadCrumbs
+ * @module src/components/breadCrumbs
  * @param {Object} props - объект свойств компонента React
  * @param {Object[]} props.links - массив объектов ссылок
  * @param {Object} props.links[].title - текст ссылки

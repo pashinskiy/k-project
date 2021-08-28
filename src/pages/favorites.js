@@ -76,7 +76,6 @@ const IndexPage = ({ data }) => {
       </Grid>
     ))
 
-    console.log(favorites)
   // обновление списка Favorites
   function setNewFavorites() {
     let favorites = localStorage.getItem("favorites")
@@ -118,9 +117,9 @@ const IndexPage = ({ data }) => {
 
 /**
  * Страница избранного
- * @module page/favorites
- * @param {Object} - свойства:
- * data - ответ на graphql запрос в данном модуле;
+ * @module src/page/favorites
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
  */
 export default IndexPage
 

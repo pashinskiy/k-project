@@ -105,6 +105,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Компонент сортировки товаров
+ * @module src/components/sort
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.products - массив объектов продуктов полученный из prismic
+ * @param {function} props.setSortProducts - функция срабатывающая после сортировки массива принимает аргументом новый массив
+ */
 export default function Sort({ products, setSortProducts }) {
   const classes = useStyles()
   const state = React.useContext(GlobalStateContext)

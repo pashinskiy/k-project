@@ -44,6 +44,13 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Элемент ввода текста
+ * @module src/components/orderingPage/elementsForms/input
+ * @param {Object} props - объект свойств компонента React
+ * @param {function} props.afterChange - функция установки нового значения
+ * @param {function} props.checkValue - функция проверки валидности введенного значения должна возвращать boolean
+ */
 export default function Input({ afterChange, checkValue, ...other }) {
   const classes = useStyle()
   const orderingDispatch = React.useContext(OrderingDispatchContext)

@@ -34,6 +34,16 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+/**
+ * Кнопка категории в каталоге 
+ * @module src/components/layout/catalog/category
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.svg - путь до иконки
+ * @param {String} props.alt - альтернативный текст
+ * @param {String} props.name - текст заголовка
+ * @param {function} props.setHover - функция вызываемая при наведении на кнопку и уходе с нее
+ * @param {String} props.uid - уникальный идентификатор категории полученый из prismic
+ */
 export default function Category({ svg, alt, name, setHover, uid }) {
 
     const classes = useStyles();

@@ -14,6 +14,13 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+/**
+ * Компонент ссылки на сторонний источник белым текстом
+ * @module src/components/layout/footer/link
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.name - текст ссылки
+ * @param {String} props.link - ссылка
+ */
 export default function WhiteLink({ name, link }) {
 
     const classes = useStyles();

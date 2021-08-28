@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Кнопка оплаты
- * @module components/button/pay
+ * @module src/components/button/pay
  * @param {Object} props - объект свойств компонента React
  * @param {String} props.text - текст для отображения на кнопке
  * @param {function} props.onClick - функция вызываемая при клике по кнопке

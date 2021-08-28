@@ -334,6 +334,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Карточка акции
+ * @module src/components/saleCardPanel/saleCard
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.sale - объект акции полученый из prismic
+ * @param {boolean} [props.mainPage] - отбразить вариант для главной страницы
+ */
 export default function SaleCard({ sale, mainPage }) {
   const classes = useStyles()
   const previewText = sale?.data.previewtext.text

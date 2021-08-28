@@ -113,7 +113,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Блок фильтра да/нет
- * @module components/filter/blockBoolean
+ * @module src/components/filter/blockBoolean
  * @param {Object} props - объект свойств компонента React
  * @param {String} props.title - название характеристики, если не указан stickerId
  * @param {String} props.valueFilter - текущее значение "да"/"нет"

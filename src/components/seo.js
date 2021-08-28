@@ -95,4 +95,13 @@ SEO.propTypes = {
   title: PropTypes.string.isRequired,
 }
 
+/**
+ * Компонент настройки параметров seo
+ * @module src/components/seo
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.description - описание сайта 
+ * @param {String} props.lang - язык 
+ * @param {Object[]} props.meta  - массив настроек meta 
+ * @param {String} props.title - заголовок страницы
+ */
 export default SEO

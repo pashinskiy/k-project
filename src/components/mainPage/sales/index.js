@@ -106,6 +106,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Слайдер выгодные акции
+ * @module src/components/mainPage/sales
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
+ */
 export default function Sales(props) {
   const classes = useStyles()
 

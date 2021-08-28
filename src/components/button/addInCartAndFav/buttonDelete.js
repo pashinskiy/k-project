@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Кнопка удаления товара из корзину
- * @module components/button/addInCartAndFav/buttonDelete
+ * @module src/components/button/addInCartAndFav/buttonDelete
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.product - объект продукта полученый из prismic
  * @param {String} [props.variant = card] - вариант отбражения кнопки (page - для страницы продукта,card - для карточки товара)

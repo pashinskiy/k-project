@@ -3,6 +3,7 @@ import React from "react"
 import CardWidget from "../widgets/cardWidget"
 import { makeStyles } from "@material-ui/core/styles"
 import FavoritesPlusIcon from "../../../static/svg/favoritesPlus.svg"
+import { navigate } from "gatsby"
 
 const useStyles = makeStyles(theme => ({
   containerRoot: {
@@ -52,7 +53,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function SmallCategoriesPanel(categories) {
+/**
+ * Панель категорий на странице избранного
+ * @module src/components/smallCategoriesPanel
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.categories - массив объектов категорий полученный из prismic
+ */
+export default function SmallCategoriesPanel({categories}) {
   const classes = useStyles()
   const isMobile = useMediaQuery("(max-width: 1025px)")
   const icon = (
@@ -62,7 +69,7 @@ export default function SmallCategoriesPanel(categories) {
   )
 
   function addCategory() {
-    console.log("adding some categories")
+    navigate("/products/")
   }
 
   function setScrollBar(e) {
@@ -115,7 +122,6 @@ export default function SmallCategoriesPanel(categories) {
       cardPanel.scrollLeft = newLeft
     }
   }
-  // console.log(categories)
 
   return (
     <Grid
@@ -125,7 +131,7 @@ export default function SmallCategoriesPanel(categories) {
       onPointerDown={setScrollBar}
     >
       {isMobile ? icon : null}
-      {categories.categories.map(item => (
+      {categories.map(item => (
         <Grid item className={classes.itemRoot} key={item.uid}>
           <CardWidget cardTitle={item.data.name} variant="small" />
         </Grid>

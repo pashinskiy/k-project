@@ -11,6 +11,6 @@ const NotFoundPage = () => (
 )
 /**
  * Страница 404
- * @module page/404
+ * @module src/page/404
  */
 export default NotFoundPage

@@ -114,6 +114,6 @@ const IndexPage = () => {
 
 /**
  * Страница техподдержки
- * @module page/faq
+ * @module src/page/faq
  */
 export default IndexPage

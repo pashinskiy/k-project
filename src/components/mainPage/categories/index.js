@@ -83,6 +83,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Панель навигации по категориям
+ * @module src/components/mainPage/categories
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
+ */
 export default function Categories(props) {
   const classes = useStyles()
 

@@ -68,7 +68,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Кнопка очистки фильтра 
- * @module components/filter/buttonClean
+ * @module src/components/filter/buttonClean
  * @param {Object} props - объект свойств компонента React
  * @param {Number|String} props.count - количество установленных фильтров
  * @param {function} props.clean - функция очистки фильтра

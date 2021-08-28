@@ -79,7 +79,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Кнопка добавления товара в корзину
- * @module components/button/addInCartAndFav/buttonAddFavorites
+ * @module src/components/button/addInCartAndFav/buttonAddFavorites
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.product - объект продукта полученый из prismic
  * @param {String} [props.variant = card] - вариант отбражения кнопки (page - для страницы продукта,card - для карточки товара)

@@ -21,6 +21,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Лэндинг на странице продукта
+ * @module src/components/productPage/landing
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.slices - массив слайсов лндинга продукта полученый из prismic
+ */
 export default function Landing({ slices }) {
   // разбивка слайсов по типам
   const onlyTextSlices = slices.filter(

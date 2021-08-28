@@ -130,7 +130,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Страница поиска продуктов
- * @module page/products
+ * @module src/page/products
  */
 export default function Products() {
   const classes = useStyles()

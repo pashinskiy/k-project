@@ -223,6 +223,12 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок данных о доставке
+ * @module src/components/orderingPage/deliveryData
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.prismicCartAndOrder - свойство prismicCartAndOrder объекта data полученного из prismic
+ */
 export default function DeliveryData({ prismicCartAndOrder }) {
   const classes = useStyle()
   const smartPhoneScreen = useMediaQuery("(max-width: 767px)")

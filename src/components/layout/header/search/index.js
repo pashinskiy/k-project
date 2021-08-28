@@ -73,6 +73,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Строка поиска
+ * @module src/components/layout/header/search
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
+ */
 export default function Search({ data }) {
   const classes = useStyles()
   const [value, setValue] = React.useState(

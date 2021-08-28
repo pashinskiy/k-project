@@ -314,6 +314,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок с ценой на главной карточке товара
+ * @module src/components/productPage/cardProduct/blockPrice
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.product - объект продукта полученный из prismic
+ * @param {Object[]} props.allColors - массив объектов всех продуктов с такими же названиями как product
+ */
 export default function BlockPrice({ product, allColors }) {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 1025px)")

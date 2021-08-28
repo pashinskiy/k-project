@@ -111,6 +111,14 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок навигации на странице товара
+ * @module src/components/productPage/tabPanel
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.links - массив объектов кнопок
+ * @param {String} props.links[].title - такст кнопки 
+ * @param {String} props.links[].href - html якорь для навигации
+ */
 export default function TabPanel({ links }) {
   const classes = useStyle()
   const [index, setIndex] = React.useState(0)

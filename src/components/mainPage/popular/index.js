@@ -32,6 +32,12 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+/**
+ * Слайдер популярные бренды
+ * @module src/components/mainPage/popular
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
+ */
 export default function Popular(props) {
 
     const classes = useStyles();

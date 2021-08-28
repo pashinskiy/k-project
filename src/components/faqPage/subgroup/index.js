@@ -322,7 +322,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Компонент отображения подгруппы вопросов на странице технической поддержки
- * @module components/faqPage/subgroup
+ * @module src/components/faqPage/subgroup
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.subgroup - объект подгруппы вопросов полученый из prismic
  */

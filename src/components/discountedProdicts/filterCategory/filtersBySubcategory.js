@@ -28,7 +28,7 @@ const useStyle = makeStyles(theme => ({
 
 /**
  * Набор фильтров по подкатегориям
- * @module components/discountedProdicts/filterCategory/filtersBySubcategory
+ * @module src/components/discountedProdicts/filterCategory/filtersBySubcategory
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.products - массив объектов продуктов полученых из prismic
  */

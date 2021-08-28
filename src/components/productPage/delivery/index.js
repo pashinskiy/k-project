@@ -9,9 +9,15 @@ const useStyle = makeStyles(theme => ({
   wrapper: { overflow: "hidden" },
 }))
 
-export default function DeliveryCards(prismicProduct) {
+/**
+ * Блок доставки на странице продукта
+ * @module src/components/productPage/delivery
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.prismicProduct - объект продукта полученый из prismic
+ */
+export default function DeliveryCards({prismicProduct}) {
   const delivery =
-    prismicProduct.prismicProduct.data.delivery.document?.data.body[0].items ??
+    prismicProduct.data.delivery.document?.data.body[0].items ??
     []
 
   const mobile = useMediaQuery("(max-width: 767px)")

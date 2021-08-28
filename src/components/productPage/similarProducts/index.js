@@ -6,6 +6,12 @@ import IconSimilarProduct from "../../../../static/svg/similarProducts.svg"
 
 import { GlobalStateContext } from "../../../context/GlobalContextProvider"
 
+/**
+ * Слайдер с похожими продуктами на странице товара
+ * @module src/components/productPage/similarProducts
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.category - объект категории полученый из prismic
+ */
 export default function SimilarProducts({ category }) {
   const state = React.useContext(GlobalStateContext)
 

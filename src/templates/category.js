@@ -352,10 +352,10 @@ const Category = ({
 
 /**
  * Шаблон страницы категории
- * @module templates/category
- * @param {Object} - свойства:
- * data - ответ на graphql запрос в данном модуле;
- * pageContext - объект контекста, передаваемый при формировании страницы
+ * @module src/templates/category
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
+ * @param {Object} props.pageContext - объект контекста, передаваемый при формировании страницы
  */
 export default Category
 

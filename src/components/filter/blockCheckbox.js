@@ -169,7 +169,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Блок фильтра с множественным выбором
- * @module components/filter/blockCheckbox
+ * @module src/components/filter/blockCheckbox
  * @param {Object} props - объект свойств компонента React
  * @param {String} props.title - название характеристики
  * @param {Object[]} props.set - массив всех возможных вариантов характеристики

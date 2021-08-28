@@ -66,6 +66,12 @@ function reducer(state, action) {
   }
 }
 
+/**
+ * Компонент-обертка, содержит хранилище данных страницы оформления заказа
+ * @module src/components/orderingPage/context
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.children - объект с дочерними компонентами
+ */
 export default function OrderingContext({ children }) {
   const data = useStaticQuery(
     graphql`

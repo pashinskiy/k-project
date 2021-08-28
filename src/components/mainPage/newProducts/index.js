@@ -45,6 +45,12 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+/**
+ * Слайдер новинки
+ * @module src/components/mainPage/newProducts
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
+ */
 export default function NewProducts(props) {
 
     const classes = useStyles();

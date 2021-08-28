@@ -11,6 +11,12 @@ import Features from "./features"
 
 import { GlobalStateContext } from "../../../context/GlobalContextProvider"
 
+/**
+ * Главная карточка продукта на странице продукта
+ * @module src/components/productPage/cardProduct
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.prismicProduct - объект продукта полученый из prismic
+ */
 export default function CardProduct({ prismicProduct }) {
   const mobile = useMediaQuery("(max-width: 1025px)")
 

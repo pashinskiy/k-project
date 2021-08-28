@@ -94,7 +94,14 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-export default function CardProduct({ product, afterChange, allTitle }) {
+/**
+ * Карточка товара в слайдер продуктов
+ * @module src/components/scrollBar/productsScrollBar/cardProduct
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.products - объект продукта полученный из prismic
+ * @param {boolean} props.allTitle - отмена ограничения по высоте в названии товара
+ */
+export default function CardProduct({ product, allTitle }) {
   const classes = useStyle()
 
   const img =
@@ -106,7 +113,8 @@ export default function CardProduct({ product, afterChange, allTitle }) {
   return img ? (
     <Grid className={`${classes.wrapper} product--card`}>
       <Link to={`/${product.uid}/`} className={classes.link}>
-        <GatsbyImage loading="eager"
+        <GatsbyImage
+          loading="eager"
           image={img}
           alt={alt ?? `image product`}
           className={classes.imageWrapper}
@@ -121,11 +129,7 @@ export default function CardProduct({ product, afterChange, allTitle }) {
           {title}
         </Typography>
       </Link>
-      <AddInCartAndFav
-        text="В корзину"
-        product={product}
-        afterChange={afterChange}
-      />
+      <AddInCartAndFav text="В корзину" product={product} />
     </Grid>
   ) : null
 }

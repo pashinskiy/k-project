@@ -102,9 +102,9 @@ export default function Documents({ data }) {
 
 /**
  * Страница документов
- * @module page/documents
- * @param {Object} - свойства:
- * data - ответ на graphql запрос в данном модуле;
+ * @module src/page/documents
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
  */
 export const query = graphql`
   {

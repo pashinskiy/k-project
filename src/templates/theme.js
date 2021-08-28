@@ -71,6 +71,6 @@ const theme = createMuiTheme({
 
 /**
  * Тема оформления (используется библиотекой material-ui)
- * @module templates/theme
+ * @module src/templates/theme
  */
 export default theme

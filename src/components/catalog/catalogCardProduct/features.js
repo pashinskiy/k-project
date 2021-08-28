@@ -129,7 +129,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Блок значков особых характеристик
- * @module components/catalog/features
+ * @module src/components/catalog/features
  * @param {Object} props - объект свойств компонента React
  * @param {Object[]} props.featuresSlices - массив слайсов особых характеристик продукта полученый из prismic
  */

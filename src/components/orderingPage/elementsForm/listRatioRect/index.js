@@ -70,6 +70,13 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок выбора одного элемента из списка 
+ * @module src/components/orderingPage/elementsForms/listRatioRect
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.list - массив всех значений
+ * @param {function} props.afterChange - функция установки нового значения
+ */
 export default function RatioList({ list, afterChange }) {
   const classes = useStyle()
   const [value, setValue] = React.useState(list[0])

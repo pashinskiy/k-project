@@ -58,6 +58,16 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Кнопка навигации с иконкой
+ * @module src/components/layout/header/buttonWithIcon
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.name - текст кнопки
+ * @param {String} props.img - путь до иконки
+ * @param {String} props.alt - альтернативный текст
+ * @param {String} props.link - ссылка (относительно домена)
+ * @param {Number} props.count - число отображаемое в правом углу кнопки
+ */
 export default function ButtonWithIcon({ name, img, alt, link, count }) {
   const classes = useStyles()
   if (count > 99) count = "99+"

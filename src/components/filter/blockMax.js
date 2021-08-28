@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Блок фильтра с выбором максимального значения
- * @module components/filter/blockMax
+ * @module src/components/filter/blockMax
  * @param {Object} props - объект свойств компонента React
  * @param {String} props.title - название характеристики
  * @param {Object[]} props.set - массив всех возможных вариантов характеристики

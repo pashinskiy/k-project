@@ -192,9 +192,9 @@ const IndexPage = ({ data }) => {
 
 /**
  * Страница корзины покупок
- * @module page/cart
- * @param {Object} - свойства:
- * data - ответ на graphql запрос в данном модуле;
+ * @module src/page/cart
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
  */
 export default IndexPage
 

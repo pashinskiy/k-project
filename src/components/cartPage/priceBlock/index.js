@@ -292,7 +292,7 @@ const useStyle = makeStyles(theme => ({
 
 /**
  * Блок с ценой продуктов на странице корзины
- * @module components/cartPage/priceBlock
+ * @module src/components/cartPage/priceBlock
  * @param {Object} props - объект свойств компонента React
  * @param {Object[]} props.products - массив объектов продуктов полученых из prismic
  */

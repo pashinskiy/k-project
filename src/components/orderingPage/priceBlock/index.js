@@ -345,6 +345,12 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок цены на странице оформления заказа
+ * @module src/components/orderingPage/priceBlock
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.products - массив объектов продуктов полученых из prismic
+ */
 export default function PriceBlock({ products }) {
   const classes = useStyle()
   const [showMoreInfo, setShowMoreInfo] = React.useState(false)
@@ -357,10 +363,6 @@ export default function PriceBlock({ products }) {
   const validData = orderingState.validationAll()
 
   const order = JSON.parse(localStorage.getItem("order"))
-
-  //DELETE LINE
-  // const prod = JSON.parse(order.allProductsJson)
-  // console.log(orderingState)
 
   function payOrder() {
     if (validData) {
@@ -402,7 +404,10 @@ export default function PriceBlock({ products }) {
           localStorage.setItem("order_number", JSON.stringify(res.order_number))
 
           if (res.error) {
-            localStorage.setItem("order_number", JSON.stringify(res.order_number))
+            localStorage.setItem(
+              "order_number",
+              JSON.stringify(res.order_number)
+            )
             navigate("/order/", { state: { error: res.status } })
             return
           }

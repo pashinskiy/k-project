@@ -29,6 +29,12 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Набор популярных брендов
+ * @module src/components/popularBrand
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.products - массив объектов продуктов полученый из prismic
+ */
 export default function PopularBrand({ products }) {
   const classes = useStyle()
 

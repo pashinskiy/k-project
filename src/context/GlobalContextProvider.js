@@ -338,7 +338,7 @@ const GlobalContextProvider = ({ children }) => {
 
 /**
  * Компонент-обертка, содержит основное хранилище данных
- * @module context/GlobalContextProvider
+ * @module src/context/GlobalContextProvider
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.children - объект с дочерними компонентами
  */

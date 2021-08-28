@@ -32,6 +32,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Меню для мобильных
+ * @module src/components/layout/mobileMenu
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
+ */
 export default function MobileMenu({ data }) {
   const classes = useStyles()
 

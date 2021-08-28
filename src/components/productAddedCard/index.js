@@ -324,7 +324,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Панель при добавлении товара в корзину
- * @module components/cart/productAddedCard
+ * @module src/components/productAddedCard
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.product - объект продукта полученый из prismic
  * @param {function} props.closeDialog - функция закрытия панели

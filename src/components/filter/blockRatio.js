@@ -161,7 +161,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Блок фильтра с множественным выбором
- * @module components/filter/blockRatio
+ * @module src/components/filter/blockRatio
  * @param {Object} props - объект свойств компонента React
  * @param {String} props.title - название характеристики
  * @param {Object[]} props.set - массив всех возможных вариантов характеристики

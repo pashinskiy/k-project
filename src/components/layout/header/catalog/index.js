@@ -45,6 +45,16 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+/**
+ * Кнопка открытия/закрытия каталога
+ * @module src/components/layout/header/catalog
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
+ * @param {boolean} props.catalog - состояние каталога, true = открыт
+ * @param {function} props.setCatalog - функция установки состояния каталога 
+ * @param {boolean} props.animation - true - анимация открытия, false - анимация закрытия
+ * @param {function} props.setAnimation - функция изменения анимации
+ */
 export default function CatalogButton({ data, setCatalog, catalog, setAnimation, animation }) {
 
     const classes = useStyles({ animation });

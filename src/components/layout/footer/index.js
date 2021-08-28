@@ -170,6 +170,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Подвал сайта
+ * @module src/components/layout/footer
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
+ */
 export default function Footer({ data }) {
   const classes = useStyles()
 

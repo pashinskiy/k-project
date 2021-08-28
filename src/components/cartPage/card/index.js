@@ -213,7 +213,7 @@ const useStyle = makeStyles(theme => ({
 
 /**
  * Карточка продукта на странице корзины
- * @module components/cartPage/cart
+ * @module src/components/cartPage/cart
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.product - объект продукта полученый из prismic
  */

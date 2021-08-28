@@ -121,6 +121,13 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок выбора одного элемента из выпадающего списка 
+ * @module src/components/orderingPage/elementsForms/select
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.options - массив всех значений
+ * @param {function} props.afterChange - функция установки нового значения
+ */
 export default function Select({ options, afterChange }) {
   const classes = useStyle()
   const [showOptions, setShowOptions] = React.useState(false)

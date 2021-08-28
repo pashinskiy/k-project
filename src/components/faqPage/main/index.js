@@ -137,7 +137,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Главный экран страницы технической поддержки
- * @module components/faqPage/main
+ * @module src/components/faqPage/main
  */
 export default function Main() {
   const classes = useStyles()

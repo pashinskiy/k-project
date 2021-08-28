@@ -119,6 +119,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Слайдер главной карточки продукта
+ * @module src/components/productPage/cardProduct/productSlider
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.photos - массив объектов фотографий полученный из prismic
+ */
 export default function SliderProduct({ photos }) {
   photos = photos.filter(photo => !!photo?.src)
   const classes = useStyles()

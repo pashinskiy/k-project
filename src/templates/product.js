@@ -79,7 +79,7 @@ const Product = ({ data: { prismicProduct } }) => {
         imagesArr={prismicProduct.data.photos.map(photo => photo.image)}
       />
       <div id="characteristics" />
-      <CharacteristicsBlock props={prismicProduct} />
+      <CharacteristicsBlock product={prismicProduct} />
       <div id="delivery" />
       <DeliveryCards prismicProduct={prismicProduct} />
     </Layout>
@@ -88,9 +88,9 @@ const Product = ({ data: { prismicProduct } }) => {
 
 /**
  * Шаблон страницы продукта
- * @module templates/product
- * @param {Object} - свойства:
- * data - ответ на graphql запрос в данном модуле;
+ * @module src/templates/product
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
  */
 export default Product
 

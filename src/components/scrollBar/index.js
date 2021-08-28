@@ -169,6 +169,14 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Слайдер универсальный
+ * @module src/components/scrollBar
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.children - дочерние компоненты
+ * @param {boolean} [props.fullScreen = false] - прокрутка с выходом за границы layuot
+ * @param {boolean} [props.buttonNext = false] - отображение кнопок при переполнении
+ */
 export default function ScrollBar({ children, fullScreen, buttonNext }) {
   // fullScreen (boolean) прокрутка с выходом за границы layuot
   // buttonNext нужно ли отображить кнопку при переполнении

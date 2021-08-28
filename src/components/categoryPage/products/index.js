@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Скролл бар с продуктами подкатегории для страницы категории
- * @module components/catalog/allProductsByCategory
+ * @module src/components/catalog/allProductsByCategory
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.subcategory - объект подкатегории полученый из prismic
  */

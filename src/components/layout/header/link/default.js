@@ -21,6 +21,13 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+/**
+ * Кнопка навигации
+ * @module src/components/layout/header/link/default
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.name - текст ссылки
+ * @param {String} props.link - ссылка
+ */
 export default function DefaultLink({ name, link }) {
 
     const classes = useStyles();

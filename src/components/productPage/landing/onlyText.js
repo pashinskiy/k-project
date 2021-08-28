@@ -88,6 +88,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Компонент лэндинга отображающий текст
+ * @module src/components/productPage/landing/onlyText
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.slice - слайс лндинга продукта полученый из prismic
+ */
 export default function OnlyText({ slice, ...other }) {
   const accent_text = slice.primary.accent_text ?? false
   const bold_text = slice.primary.bold_text ?? false

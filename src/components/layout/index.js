@@ -47,6 +47,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Общий макет страниц сайта
+ * @module src/components/layout
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.children - дочерние элементы
+ */
 export default function Layout({ children }) {
   const data = useStaticQuery(graphql`
     query Layout {
@@ -469,26 +475,6 @@ export default function Layout({ children }) {
             aria-label="Background Catalog"
             tabIndex={0}
             className={classes.background}
-            // onClick={() => {
-            //   if (catalog === true) {
-            //     setTimeout(() => {
-            //       setCatalog(!catalog)
-            //     }, 150)
-            //   } else {
-            //     setCatalog(!catalog)
-            //   }
-            //   setAnimation(!animation)
-            // }}
-            // onKeyDown={() => {
-            //   if (catalog === true) {
-            //     setTimeout(() => {
-            //       setCatalog(!catalog)
-            //     }, 150)
-            //   } else {
-            //     setCatalog(!catalog)
-            //   }
-            //   setAnimation(!animation)
-            // }}
           />
         )
 

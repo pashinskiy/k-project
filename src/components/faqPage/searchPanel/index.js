@@ -61,7 +61,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Панель результатов поиска страницы технической поддержки
- * @module components/faqPage/searchPanel
+ * @module src/components/faqPage/searchPanel
  */
 export default function SearchPanel() {
   const classes = useStyles()

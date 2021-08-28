@@ -11,6 +11,13 @@ const useStyles = makeStyles(theme => ({
         padding: "14px",
     },
 }))
+
+/**
+ * Панель всех акций на странице акций
+ * @module src/components/saleCardPanel
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.sales - массив объектов акций полученый из prismic
+ */
 export default function SaleCardPanel({sales}) {
     const classes = useStyles()
   const isMobile = useMediaQuery("(max-width: 767px)")

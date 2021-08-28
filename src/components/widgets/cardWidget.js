@@ -341,9 +341,17 @@ const useStyles = makeStyles(theme => ({
 
 //small - только текст
 
-//categoriesSingle - список категорий с подкатегориями на 1 карточке
-//передать список категорий
-
+/**
+ * Карточка виджета
+ * @module src/components/widgets/cardWidget
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.cardImage - объект gatsbyImageData, если не указан publicURL
+ * @param {String} props.publicURL - путь к изображению, если не указан cardImage
+ * @param {String} [props.cardTitle] - текст в под карточкой
+ * @param {String} props.cardLink - ссылка относительно домена
+ * @param {String} props.variant - тип необходимой карточки (category,stories,brand,brand_mainPage,small)
+ * @param {boolean} [props.gradientBack] - градиентный фон у типа карточки brand
+ */
 export default function CardWidget({
   cardImage,
   publicURL,
@@ -351,8 +359,6 @@ export default function CardWidget({
   cardLink,
   variant,
   gradientBack,
-  categoryTitle,
-  subCategoryTitle,
 }) {
   const classes = useStyles()
   const altImage = cardImage
@@ -508,19 +514,6 @@ export default function CardWidget({
               </Typography>
             </Card>
           </Link>
-        )
-      case "categoriesSingle":
-        return (
-          <Card className={classes.catSingleRoot}>
-            <div className={classes.catSingleContainer}>
-              <Typography className={classes.catSingleTitle} variant="body2">
-                {categoryTitle}
-              </Typography>
-              <Typography className={classes.catSingleSubTitle}>
-                {subCategoryTitle}
-              </Typography>
-            </div>
-          </Card>
         )
       default:
         return console.log(

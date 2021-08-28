@@ -125,6 +125,14 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок выбора варианта доставки
+ * @module src/components/orderingPage/elementsForms/variantDelivery
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.value - текущее значение
+ * @param {function} props.setValue - функция установки нового значения
+ * @param {Object} props.prismicCartAndOrder - свойство prismicCartAndOrder объекта data полученного из prismic
+ */
 export default function VariantDelivery({
   value,
   setValue,

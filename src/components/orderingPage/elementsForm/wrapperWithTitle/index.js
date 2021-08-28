@@ -56,6 +56,13 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Компонент-обертка для элементов формы
+ * @module src/components/orderingPage/elementsForms/wrapperWithTitle
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.title - заголовок блока
+ * @param {Object} props.children - дочерние компоненты
+ */
 export default function WrapperWithTitle({ title, children }) {
   const classes = useStyle()
 

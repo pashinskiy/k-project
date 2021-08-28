@@ -43,6 +43,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок товар дня
+ * @module src/components/mainPage/dayProduct
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
+ */
 export default function DayProduct(props) {
   const classes = useStyles()
 

@@ -63,6 +63,13 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+/**
+ * Кнопка навигации с анимацией
+ * @module src/components/layout/header/link/sale
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.name - текст ссылки
+ * @param {String} props.link - ссылка
+ */
 export default function SaleButton({ name, link }) {
 
     const classes = useStyles();

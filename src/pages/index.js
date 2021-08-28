@@ -77,9 +77,9 @@ const IndexPage = ({ data }) => {
 
 /**
  * Главная страница
- * @module page/index
- * @param {Object} - свойства:
- * data - ответ на graphql запрос в данном модуле;
+ * @module src/page/index
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.data - объект данных полученый из prismic
  */
 export default IndexPage
 

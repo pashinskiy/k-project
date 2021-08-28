@@ -193,7 +193,7 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * Кнопка перехода к регистрации
- * @module components/cart/cardOfferProduct
+ * @module src/components/productAddedCard/cardOfferProduct
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.product - объект продукта полученый из prismic
  */

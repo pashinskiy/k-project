@@ -94,6 +94,11 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+
+/**
+ * Слайдер недавно просмотреных товаров
+ * @module src/components/layout/footer/productSlider
+ */
 export default function ProductSlider() {
   const state = React.useContext(GlobalStateContext)
 

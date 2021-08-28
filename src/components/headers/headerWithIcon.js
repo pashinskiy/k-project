@@ -83,6 +83,16 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Заголовок с иконкой
+ * @module src/components/headers/headersWithIcon
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} [props.icon] - иконка (объект React.Element)
+ * @param {String} props.title - текст заголовка
+ * @param {boolean} [props.divider = false] - если true, то отображать полосу снизу
+ * @param {Number|String} [props.count] - число справа
+ * @param {boolean} [props.subcategory = false] - если true, то вариант для страницы подкатегории
+ */
 export default function HeaderWithIcon({
   icon,
   title,

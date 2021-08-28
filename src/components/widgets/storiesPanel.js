@@ -38,18 +38,15 @@ const useStyles = makeStyles(theme => ({
     },
   },
 }))
+
+/**
+ * Панель историй
+ * @module src/components/widgets/storiesPanel
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object[]} props.stories - массив объектов историй полученный из prismic
+ */
 export default function StoriesPanel({ stories }) {
   const classes = useStyles()
-  // console.log(stories)
-
-  // let duplicateStories = []
-
-  // for (var i = 0; i < stories.length; ++i) {
-  //   duplicateStories.push(stories[i])
-  //   duplicateStories.push(stories[i])
-  //   duplicateStories.push(stories[i])
-  //   duplicateStories.push(stories[i])
-  // }
 
   return stories.map(story =>
     story.data.tumbler_link === true ? (

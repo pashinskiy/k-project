@@ -37,6 +37,10 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок данных о клиенте
+ * @module src/components/orderingPage/recipientData
+ */
 export default function RecipientData() {
   const classes = useStyle()
   const smartPhoneScreen = useMediaQuery("(max-width: 415px)")

@@ -201,6 +201,6 @@ const IndexPage = () => {
 }
 /**
  * Страница уцененных товаров
- * @module page/discounted-products
+ * @module src/page/discounted-products
  */
 export default IndexPage

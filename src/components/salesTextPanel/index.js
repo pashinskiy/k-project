@@ -100,9 +100,16 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Блок контента на странице акции
+ * @module src/components/salesTextPanel
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.sale - объект акции полученый из prismic
+ * @param {Object[]} props.socials - массив слайсов соцсетей полученый из prismic
+ * @param {Object[]} props.products - массив объектов продуктов полученых из prismic
+ */
 export default function SalesTextPanel({ sale, socials, products }) {
   const classes = useStyles()
-  // console.log(products)
   const mobile = useMediaQuery("(max-width: 767px)")
   return (
     <Grid container justify="space-between">
@@ -137,7 +144,6 @@ export default function SalesTextPanel({ sale, socials, products }) {
         ) : 
           products.map(function(mapProduct, i) {
               if(i < 3){
-                  console.log(i)
                   return (<div className={classes.productItem}><CardSimilarProduct product={mapProduct} /></div>)
               }
               return null

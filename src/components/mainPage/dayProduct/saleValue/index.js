@@ -25,6 +25,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Скидка на товар дня
+ * @module src/components/mainPage/saleValue
+ * @param {Object} props - объект свойств компонента React
+ * @param {Number|String} props.value - значение скидки
+ */
 export default function SaleValue(props) {
   const classes = useStyles()
 

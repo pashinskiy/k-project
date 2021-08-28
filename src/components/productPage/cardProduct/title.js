@@ -78,6 +78,14 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Заголовок на главной карточке продукта
+ * @module src/components/productPage/cardProduct/title
+ * @param {Object} props - объект свойств компонента React
+ * @param {Object} props.logo - объект логотипа полученный из prismic
+ * @param {String} props.text - текст заголовка
+ * @param {Object[]} props.stickersSlices - массив слайсов со стикерами полученый из prismic
+ */
 export default function Title({ logo, text, stickersSlices }) {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 1025px)")

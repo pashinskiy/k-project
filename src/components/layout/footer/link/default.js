@@ -20,6 +20,13 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+/**
+ * Компонент ссылки на сторонний источник
+ * @module src/components/layout/footer/link/default
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.name - текст ссылки
+ * @param {String} props.link - ссылка
+ */
 export default function DefaultA({ name, link }) {
 
     const classes = useStyles();

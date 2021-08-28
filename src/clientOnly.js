@@ -3,7 +3,7 @@ import Logo from '../static/svg/logo.svg';
 
 /**
  * Компонент-обертка, позволяет отображать логотип до загрузки основного содержимого
- * @module ./clientOnly
+ * @module src/clientOnly
  */
 export default function ClientOnly({ children, ...delegated }) {
   const [hasMounted, setHasMounted] = React.useState(false)
