@@ -1,10 +1,11 @@
 import React from "react"
-import { Button, Grid, useMediaQuery } from "@material-ui/core"
+import { Button, Grid, useMediaQuery, Card } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { Link } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import Arrow from "../../../static/svg/arrowWhite.svg"
 import SaleCard from "../saleCardPanel/saleCard"
 import AdvertiseCard from "./advertiseCard"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -210,6 +211,58 @@ const useStyle = makeStyles(theme => ({
   activeSmallButton: {
     width: "28px",
   },
+  cardRoot: {
+    width: "100%",
+    height: "100%",
+    boxShadow: "none",
+    backgroundColor: theme.palette.background.secondary,
+    position: "relative",
+    borderRadius: "1.5625vw",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
+    padding: "0.625vw",
+    "@media(min-width: 1280px)": {
+      borderRadius: "20px",
+      padding: "8px",
+    },
+    "@media(max-width: 1025px)": {
+      borderRadius: "2.398vw",
+      padding: "0.959vw",
+    },
+    "@media(max-width: 767px)": {
+      borderRadius: "4.83vw",
+      padding: "1.932vw",
+    },
+    "&": {
+      lineHeight: 0,
+    },
+  },
+  wrapperImg: {
+    width: "100%",
+    height: "100%",
+    overflow: "hidden",
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
+
+    borderRadius: "0.9375vw",
+    "@media(min-width: 1280px)": {
+      borderRadius: "12px",
+    },
+    "@media(max-width: 1025px)": {
+      borderRadius: "1.438vw",
+    },
+    "@media(max-width: 767px)": {
+      borderRadius: "2.8985vw",
+    },
+    "&:img": {
+      borderRadius: "inherit",
+    },
+  },
 }))
 
 /**
@@ -224,6 +277,23 @@ export default function MainPageSlider({ array, variant }) {
   const [activeChild, setActiveChild] = React.useState()
   const mobile = useMediaQuery("(max-width: 1025px)")
 
+  const data = useStaticQuery(graphql`
+    {
+      prismicMainPage {
+        data {
+          image {
+            alt
+            localFile {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+
   let contentArray = array
   switch (variant) {
     case "sales":
@@ -232,6 +302,22 @@ export default function MainPageSlider({ array, variant }) {
           <SaleCard sale={sale} key={sale.uid} mainPage />
         </Grid>
       ))
+      if (data.prismicMainPage.data.image.localFile !== null)
+        contentArray.unshift(
+          <Grid item className={classes.itemAll} key="bannerMokka">
+            <Card className={classes.cardRoot}>
+              <GatsbyImage
+                image={
+                  data.prismicMainPage.data.image.localFile.childImageSharp
+                    .gatsbyImageData
+                }
+                alt="mokka"
+                className={classes.wrapperImg}
+                imgStyle={{ objectFit: "cover" }}
+              />
+            </Card>
+          </Grid>
+        )
       break
     case "promotionBanner":
       contentArray = contentArray.map((banner, i) =>

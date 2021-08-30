@@ -15,6 +15,7 @@ import colors from "../../../templates/colors.json"
 import Mokka from "../../../../static/svg/mokka.svg"
 import MokkaInfo from "../../../../static/svg/mokkaInfo.svg"
 import MokkaCross from "../../../../static/svg/mokkaCross.svg"
+import MokkaIframeRegistration from "../../mokkaIframeRegistration"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -157,6 +158,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   textCredit: {
+    cursor: "pointer",
+
     fontWeight: 400,
     lineHeight: 1.21,
     fontSize: "1.01vw",
@@ -326,6 +329,7 @@ export default function BlockPrice({ product, allColors }) {
   const mobile = useMediaQuery("(max-width: 1025px)")
 
   const [showMokkaInfo, setShowMokkaInfo] = React.useState(false)
+  const [showMokkaIframe, setShowMokkaIframe] = React.useState(false)
 
   // цвет продукта первый в массиве
   allColors.unshift(
@@ -360,6 +364,16 @@ export default function BlockPrice({ product, allColors }) {
   )
   const name_seller = seller?.primary?.name_seller ?? false
   const ogrn = seller?.primary?.ogrn ?? false
+
+  function switchShowMokkaInfo(e) {
+    e.preventDefault()
+    setShowMokkaInfo(!showMokkaInfo)
+  }
+
+  function switchShowMokkaIframe(e) {
+    if (e.defaultPrevented) return
+    setShowMokkaIframe(!showMokkaIframe)
+  }
 
   return (
     <Grid container direction="column" className={classes.wrapper}>
@@ -428,6 +442,8 @@ export default function BlockPrice({ product, allColors }) {
 
             {product.data.price < 100000 ? (
               <Typography
+                role="button"
+                onClick={switchShowMokkaIframe}
                 hidden={!credit.months_2}
                 className={classes.textCredit}
                 style={{
@@ -446,7 +462,7 @@ export default function BlockPrice({ product, allColors }) {
                 | оплата авансом
                 <span
                   role="button"
-                  onClick={() => setShowMokkaInfo(!showMokkaInfo)}
+                  onClick={switchShowMokkaInfo}
                   className={classes.mokkaInfo}
                 >
                   <MokkaInfo />
@@ -455,6 +471,14 @@ export default function BlockPrice({ product, allColors }) {
             ) : null}
           </>
         ) : null}
+
+        <Modal
+          open={showMokkaIframe}
+          onClose={() => setShowMokkaIframe(false)}
+          className={classes.modal}
+        >
+          <MokkaIframeRegistration onClose={() => setShowMokkaIframe(false)} />
+        </Modal>
 
         <Modal
           open={showMokkaInfo}

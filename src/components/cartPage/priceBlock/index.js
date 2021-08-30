@@ -14,6 +14,7 @@ import GoRegistration from "../../button/goRegistration"
 import Mokka from "../../../../static/svg/mokka.svg"
 import MokkaInfo from "../../../../static/svg/mokkaInfo.svg"
 import MokkaCross from "../../../../static/svg/mokkaCross.svg"
+import MokkaIframeRegistration from "../../mokkaIframeRegistration"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -152,6 +153,8 @@ const useStyle = makeStyles(theme => ({
     },
   },
   textCredit: {
+    cursor: "pointer",
+
     fontWeight: 400,
     lineHeight: 1.21,
     fontSize: "1.01vw",
@@ -303,6 +306,7 @@ export default function PriceBlock({ products }) {
   const mobile = useMediaQuery("(max-width: 1025px)")
 
   const [showMokkaInfo, setShowMokkaInfo] = React.useState(false)
+  const [showMokkaIframe, setShowMokkaIframe] = React.useState(false)
 
   function swipeStart(e) {
     const clientY = e.clientY
@@ -382,6 +386,16 @@ export default function PriceBlock({ products }) {
     return price
   }
 
+  function switchShowMokkaInfo(e) {
+    e.preventDefault()
+    setShowMokkaInfo(!showMokkaInfo)
+  }
+
+  function switchShowMokkaIframe(e) {
+    if (e.defaultPrevented) return
+    setShowMokkaIframe(!showMokkaIframe)
+  }
+
   return (
     <div onPointerDown={mobile ? swipeStart : null} className={classes.wrapper}>
       {mobile ? <div className={classes.divider} /> : null}
@@ -427,7 +441,7 @@ export default function PriceBlock({ products }) {
         <GoRegistration text="Перейти к оформлению" onClick={goRegistration} />
       </div>
 
-      {(credit && !mobile) || summPrice < 100000 ? (
+      {(credit && !mobile) || (summPrice < 100000 && summPrice >= 5000) ? (
         <>
           <Typography className={classes.titleCreditAndDelivery}>
             Рассрочка и кредит
@@ -437,8 +451,10 @@ export default function PriceBlock({ products }) {
             Кредит от <span>{priceMod(Math.trunc(creditValue))} ₽/мес</span>
           </Typography>
 
-          {summPrice < 100000 ? (
+          {summPrice < 100000 && summPrice >= 5000 ? (
             <Typography
+              role="button"
+              onClick={switchShowMokkaIframe}
               hidden={!credit.months_2}
               className={classes.textCredit}
               style={{
@@ -456,7 +472,7 @@ export default function PriceBlock({ products }) {
               | оплата авансом
               <span
                 role="button"
-                onClick={() => setShowMokkaInfo(!showMokkaInfo)}
+                onClick={switchShowMokkaInfo}
                 className={classes.mokkaInfo}
               >
                 <MokkaInfo />
@@ -465,6 +481,14 @@ export default function PriceBlock({ products }) {
           ) : null}
         </>
       ) : null}
+
+      <Modal
+        open={showMokkaIframe}
+        onClose={() => setShowMokkaIframe(false)}
+        className={classes.modal}
+      >
+        <MokkaIframeRegistration onClose={() => setShowMokkaIframe(false)} />
+      </Modal>
 
       <Modal
         open={showMokkaInfo}

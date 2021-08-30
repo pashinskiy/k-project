@@ -78,6 +78,7 @@ function SEO({ description, lang, meta, title }) {
         href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="preconnect"
       />
+      <script src="https://backend.demo.revoup.ru/javascripts/iframe/v2/revoiframe.js"></script>
     </Helmet>
   )
 }
