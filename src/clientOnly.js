@@ -10,6 +10,7 @@ export default function ClientOnly({ children, ...delegated }) {
   React.useEffect(() => {
     setHasMounted(true)
   }, [])
+  if (!hasMounted) return null
   if (!hasMounted) {
     return (
       <div
