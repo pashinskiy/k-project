@@ -170,6 +170,7 @@ const useStyle = makeStyles(theme => ({
 }))
 
 const IndexPage = ({ data, location }) => {
+  localStorage.removeItem("order")
   const classes = useStyle()
 
   const error = location.state?.error
@@ -240,7 +241,10 @@ const IndexPage = ({ data, location }) => {
       },
       {
         name: "Способ оплаты: ",
-        value: orderData.payment.payment_type,
+        value:
+          orderData.payment.payment_type === "в рассрочку"
+            ? "оплата авансом — Мокка"
+            : orderData.payment.payment_type,
       }
     )
 

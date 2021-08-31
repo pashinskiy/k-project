@@ -444,7 +444,7 @@ export default function PriceBlock({ products }) {
       {(credit && !mobile) || (summPrice < 100000 && summPrice >= 5000) ? (
         <>
           <Typography className={classes.titleCreditAndDelivery}>
-            Рассрочка и кредит
+            Оплата авансом и кредит
           </Typography>
 
           <Typography hidden={!creditValue} className={classes.textCredit}>
@@ -462,14 +462,15 @@ export default function PriceBlock({ products }) {
                 alignItems: "center",
               }}
             >
-              Рассрочка от
+              Оплата авансом
               <span className={classes.rassrochkaSpan}>
-                {priceMod(Math.trunc(summPrice / credit.months_2))} ₽/мес
+                от {priceMod(Math.trunc(summPrice / credit.months_2))}{" "}
+                ₽/мес
               </span>
               <span className={classes.mokka}>
                 <Mokka />
               </span>
-              | оплата авансом
+              |
               <span
                 role="button"
                 onClick={switchShowMokkaInfo}

@@ -240,7 +240,7 @@ export default function PayData({ prismicCartAndOrder }) {
           </Typography>
         </button>
 
-        {order.price < 100000 && order.price >= 5000 && false ? (
+        {order.price < 100000 && order.price >= 5000 ? (
           <button
             onClick={() => setVariantPay("в рассрочку")}
             className={classes.item}
@@ -255,7 +255,7 @@ export default function PayData({ prismicCartAndOrder }) {
 
             <div>
               <Typography align="left" className={classes.title}>
-                В рассрочку
+                Оплата авансом
               </Typography>
 
               <Typography

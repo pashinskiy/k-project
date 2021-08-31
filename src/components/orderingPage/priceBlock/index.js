@@ -19,6 +19,7 @@ import Mokka from "../../../../static/svg/mokka.svg"
 import MokkaInfo from "../../../../static/svg/mokkaInfo.svg"
 import MokkaCross from "../../../../static/svg/mokkaCross.svg"
 import MokkaIframeRegistration from "../../mokkaIframeRegistration"
+import MokkaIframePay from "../../mokkaIframePay"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -361,6 +362,8 @@ export default function PriceBlock({ products }) {
 
   const [showMokkaInfo, setShowMokkaInfo] = React.useState(false)
   const [showMokkaIframe, setShowMokkaIframe] = React.useState(false)
+  const [mokkaFormUrl, setMokkaFormUrl] = React.useState(false)
+  console.log(mokkaFormUrl)
 
   const orderingState = React.useContext(OrderingStateContext)
 
@@ -403,8 +406,6 @@ export default function PriceBlock({ products }) {
       fetch(apiURL, init)
         .then(res => res.json())
         .then(res => {
-          console.log(res)
-          localStorage.removeItem("order")
           localStorage.setItem("order_number", JSON.stringify(res.order_number))
 
           if (res.error) {
@@ -420,7 +421,8 @@ export default function PriceBlock({ products }) {
             navigate("/order/")
           }
           if (orderingState.variantPay === "в рассрочку") {
-            window.location.href = res.payment_data.url
+            console.log(res.payment_data.url)
+            setMokkaFormUrl(res.payment_data.url)
           }
           if (orderingState.variantPay === "онлайн") {
             window.location.href = res.payment_data.url
@@ -563,12 +565,16 @@ export default function PriceBlock({ products }) {
         ) : null}
 
         <Pay text="Подтвердить заказ" products={products} onClick={payOrder} />
+
+        <Modal open={mokkaFormUrl} className={classes.modal}>
+          <MokkaIframePay url={mokkaFormUrl}/>
+        </Modal>
       </div>
 
       {(credit && !mobile) || (order.price < 100000 && order.price >= 5000) ? (
         <>
           <Typography className={classes.titleCreditAndDelivery}>
-            Рассрочка и кредит
+            Оплата авансом и кредит
           </Typography>
 
           <Typography hidden={!creditValue} className={classes.textCredit}>
@@ -586,14 +592,14 @@ export default function PriceBlock({ products }) {
                 alignItems: "center",
               }}
             >
-              Рассрочка от
+              Оплата авансом
               <span className={classes.rassrochkaSpan}>
-                {priceMod(Math.trunc(order.price / credit.months_2))} ₽/мес
+                от {priceMod(Math.trunc(order.price / credit.months_2))} ₽/мес
               </span>
               <span className={classes.mokka}>
                 <Mokka />
               </span>
-              | оплата авансом
+              |
               <span
                 role="button"
                 onClick={switchShowMokkaInfo}

@@ -434,7 +434,7 @@ export default function BlockPrice({ product, allColors }) {
         {credit || product.data.price < 100000 ? (
           <>
             <Typography className={classes.title}>
-              Рассрочка и кредит
+              Оплата авансом и кредит
             </Typography>
             <Typography hidden={!creditValue} className={classes.textCredit}>
               Кредит от <span>{priceMod(Math.trunc(creditValue))} ₽/мес</span>
@@ -451,15 +451,16 @@ export default function BlockPrice({ product, allColors }) {
                   alignItems: "center",
                 }}
               >
-                Рассрочка от
+                Оплата авансом
                 <span className={classes.rassrochkaSpan}>
+                  от{" "}
                   {priceMod(Math.trunc(product.data.price / credit.months_2))}{" "}
                   ₽/мес
                 </span>
                 <span className={classes.mokka}>
                   <Mokka />
                 </span>
-                | оплата авансом
+                |
                 <span
                   role="button"
                   onClick={switchShowMokkaInfo}
