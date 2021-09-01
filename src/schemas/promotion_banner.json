@@ -8,6 +8,14 @@
         "label": "Изображение"
       }
     },
+    "image_mobile": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Изображение для мобильных"
+      }
+    },
     "link": {
       "type": "Text",
       "config": {

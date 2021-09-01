@@ -281,6 +281,17 @@ export const query = graphql`
               }
               alt
             }
+            image_mobile {
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(
+                    width: 1144
+                    transformOptions: { fit: CONTAIN }
+                  )
+                }
+              }
+              alt
+            }
             previewtext {
               text
             }
@@ -327,6 +338,17 @@ export const query = graphql`
             link
             tumbler_link
             image {
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(
+                    width: 1144
+                    transformOptions: { fit: CONTAIN }
+                  )
+                }
+              }
+              alt
+            }
+            image_mobile {
               localFile {
                 childImageSharp {
                   gatsbyImageData(

@@ -1,8 +1,5 @@
 import React from "react"
-import {
-  makeStyles,
-  Card,
-} from "@material-ui/core"
+import { makeStyles, Card, useMediaQuery } from "@material-ui/core"
 import { GatsbyImage } from "gatsby-plugin-image"
 
 const useStyles = makeStyles(theme => ({
@@ -18,10 +15,10 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     borderRadius: "1.5625vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     padding: "0.625vw",
     "@media(min-width: 1280px)": {
       borderRadius: "20px",
@@ -35,19 +32,19 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "4.83vw",
       padding: "1.932vw",
     },
-    "&":{
-        lineHeight: 0,
-    }
+    "&": {
+      lineHeight: 0,
+    },
   },
   wrapperImg: {
     width: "100%",
     height: "22.1875vw",
     borderRadius: "0.9375vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     "@media(min-width: 1280px)": {
       height: "284px",
       borderRadius: "12px",
@@ -60,7 +57,7 @@ const useStyles = makeStyles(theme => ({
       height: "131.4vw",
       borderRadius: "2.8985vw",
     },
-    "&:img":{
+    "&:img": {
       borderRadius: "inherit",
     },
   },
@@ -74,12 +71,20 @@ const useStyles = makeStyles(theme => ({
  */
 export default function AdvertiseCard({ banner }) {
   const classes = useStyles()
-  
+  const mobile = useMediaQuery("(max-width: 767px)")
+
+  const image = mobile
+    ? banner.data.image_mobile?.localFile?.childImageSharp?.gatsbyImageData
+    : banner.data.image?.localFile?.childImageSharp?.gatsbyImageData
+
+  const alt = mobile ? banner.data.image_mobile?.alt : banner.data.image?.alt
+
   return (
     <Card className={classes.cardRoot}>
-      <GatsbyImage loading="eager"
-        image={banner.data.image?.localFile?.childImageSharp?.gatsbyImageData}
-        alt={banner.data.image?.alt ?? "banner"}
+      <GatsbyImage
+        loading="eager"
+        image={image}
+        alt={alt ?? "banner"}
         className={classes.wrapperImg}
         imgStyle={{ objectFit: "cover" }}
       />

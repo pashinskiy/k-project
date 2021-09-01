@@ -1,5 +1,11 @@
 import React from "react"
-import { makeStyles, Typography, Button, Card, useMediaQuery } from "@material-ui/core"
+import {
+  makeStyles,
+  Typography,
+  Button,
+  Card,
+  useMediaQuery,
+} from "@material-ui/core"
 import { GatsbyImage } from "gatsby-plugin-image"
 
 const useStyles = makeStyles(theme => ({
@@ -11,10 +17,10 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     borderRadius: "1.5625vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     padding: "0.625vw",
     "@media(min-width: 1280px)": {
       borderRadius: "20px",
@@ -36,10 +42,10 @@ const useStyles = makeStyles(theme => ({
   cardAction: {
     borderRadius: "0.9375vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     "@media(min-width: 1280px)": {
       borderRadius: "12px",
     },
@@ -160,10 +166,10 @@ const useStyles = makeStyles(theme => ({
     height: "15.625vw",
     borderRadius: "0.9375vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     marginBottom: "2.1875vw",
     "@media(min-width: 1280px)": {
       height: "200px",
@@ -205,10 +211,10 @@ const useStyles = makeStyles(theme => ({
     height: "10px",
     borderRadius: "0.9375vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     marginBottom: "2.1875vw",
     "@media(min-width: 1280px)": {
       borderRadius: "12px",
@@ -222,7 +228,7 @@ const useStyles = makeStyles(theme => ({
       borderRadius: "2.898vw",
       marginBottom: "6.763vw",
     },
-    "&:img":{
+    "&:img": {
       borderRadius: "inherit",
     },
   },
@@ -346,24 +352,35 @@ export default function SaleCard({ sale, mainPage }) {
   const previewText = sale?.data.previewtext.text
   const tooMuchText = previewText?.length > 72
   const mobile = useMediaQuery("(max-width: 767px)")
-  const mainPageLink = sale?.data.link?.text 
+
+  const mainPageLink = sale?.data.link?.text
 
   switch (mainPage) {
-    case mainPage !== null:
+    case mainPage !== null: {
+      const image = mobile
+        ? sale?.data.image_mobile?.localFile?.childImageSharp?.gatsbyImageData
+        : sale?.data.previewimage?.localFile?.childImageSharp?.gatsbyImageData
+
+      const alt = mobile
+        ? sale?.data.image_mobile?.alt
+        : sale?.data.previewimage?.alt
       return (
         <Card className={classes.wrapper + " " + classes.wrapperMainPage}>
-          <GatsbyImage loading="eager"
-            image={
-              sale?.data.previewimage?.localFile?.childImageSharp?.gatsbyImageData
-            }
-            alt={sale?.data.previewimage.alt ?? "sales"}
+          <GatsbyImage
+            loading="eager"
+            image={image}
+            alt={alt ?? "sales"}
             className={classes.wrapperImgMainPage}
-            imgStyle={{objectFit: "cover"}}
+            imgStyle={{ objectFit: "cover" }}
           />
           <div className={classes.contentBox}>
             <Typography
               variant="body2"
-              className={classes.mainTextMainPage + " " + (tooMuchText ? classes.mainTextMainPageNoPrev : null)}
+              className={
+                classes.mainTextMainPage +
+                " " +
+                (tooMuchText ? classes.mainTextMainPageNoPrev : null)
+              }
             >
               {sale?.data.title.text}
             </Typography>
@@ -376,10 +393,12 @@ export default function SaleCard({ sale, mainPage }) {
               href={mainPageLink ? mainPageLink : `/sale/${sale?.uid}/`}
               className={
                 classes.button +
-                " " + (mobile ? classes.buttonMobile : 
-                classes.buttonMainPage +
                 " " +
-                (tooMuchText ? classes.buttonMainPageNoPrev : null))
+                (mobile
+                  ? classes.buttonMobile
+                  : classes.buttonMainPage +
+                    " " +
+                    (tooMuchText ? classes.buttonMainPageNoPrev : null))
               }
             >
               <Typography variant="body2" className={classes.buttonText}>
@@ -389,14 +408,21 @@ export default function SaleCard({ sale, mainPage }) {
           </div>
         </Card>
       )
-    default:
+    }
+    default: {
+      const image = mobile
+        ? sale?.data.image_mobile?.localFile?.childImageSharp?.gatsbyImageData
+        : sale?.data.previewimage?.localFile?.childImageSharp?.gatsbyImageData
+
+      const alt = mobile
+        ? sale?.data.image_mobile?.alt
+        : sale?.data.previewimage?.alt
       return (
         <Card className={classes.wrapper}>
-          <GatsbyImage loading="eager"
-            image={
-              sale?.data.previewimage?.localFile?.childImageSharp.gatsbyImageData
-            }
-            alt={sale?.data.previewimage.alt ?? "sales"}
+          <GatsbyImage
+            loading="eager"
+            image={image}
+            alt={alt ?? "sales"}
             className={classes.wrapperImg}
           />
           <Typography className={classes.mainTitle + " " + classes.text}>
@@ -415,5 +441,6 @@ export default function SaleCard({ sale, mainPage }) {
           </Button>
         </Card>
       )
+    }
   }
 }
