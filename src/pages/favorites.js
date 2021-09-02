@@ -9,7 +9,7 @@ import SmallCategoriesPanel from "../components/smallCategoriesPanel"
 import Sort from "../components/sort"
 import Pagination from "../components/pagination"
 import CardProduct from "../components/catalog/catalogCardProduct"
-import Layout from '../components/layout'
+import Layout from "../components/layout"
 
 import { GlobalStateContext } from "../context/GlobalContextProvider"
 
@@ -48,40 +48,56 @@ const IndexPage = ({ data }) => {
   const classes = useStyles()
   const state = React.useContext(GlobalStateContext)
 
-  //считываем состояниe LocalStorage
-  let favorites = localStorage.getItem("favorites")
-  favorites = favorites === null || !favorites ? [] : JSON.parse(favorites)
+  // //считываем состояниe LocalStorage
+  // let favorites = localStorage.getItem("favorites")
+  // favorites = favorites === null || !favorites ? [] : JSON.parse(favorites)
 
   const isMobile = useMediaQuery("(max-width: 767px)")
 
-  const [favoritesArray, setFavoritesArray] = useState(favorites)
-  const dataProducts = state.allPrismicProduct.edges.map(edge => edge.node)
+  // const [favoritesArray, setFavoritesArray] = useState(favorites)
+  // const dataProducts = state.allPrismicProduct.edges.map(edge => edge.node)
   const dataCategory = data.allPrismicCategory.edges.map(edge => edge.node)
-  const [filterProducts, setFilterProducts] = React.useState(dataProducts)
+  const [filterProducts, setFilterProducts] = React.useState(state.favorites)
 
-  const arrayCards = filterProducts
-    .filter(product => favorites.includes(product.id))
-    .map((product, i) => (
-      <Grid
-        item
-        xs={isMobile ? 12 : 4}
-        className={classes.itemRoot}
-        key={product.uid + "_" + i}
-      >
-        {isMobile ? (
-          <CardProduct product={product} afterChange={setNewFavorites} />
-        ) : (
-          <CardSimilarProduct product={product} afterChange={setNewFavorites} />
-        )}
-      </Grid>
-    ))
+  // const arrayCards = filterProducts
+  //   .filter(product => favorites.includes(product.id))
+  //   .map((product, i) => (
+  //     <Grid
+  //       item
+  //       xs={isMobile ? 12 : 4}
+  //       className={classes.itemRoot}
+  //       key={product.uid + "_" + i}
+  //     >
+  //       {isMobile ? (
+  //         <CardProduct product={product} afterChange={setNewFavorites} />
+  //       ) : (
+  //         <CardSimilarProduct product={product} afterChange={setNewFavorites} />
+  //       )}
+  //     </Grid>
+  //   ))
 
-  // обновление списка Favorites
-  function setNewFavorites() {
-    let favorites = localStorage.getItem("favorites")
-    favorites = favorites === null || !favorites ? [] : JSON.parse(favorites)
-    setFavoritesArray(favorites)
-  }
+  // // обновление списка Favorites
+  // function setNewFavorites() {
+  //   let favorites = localStorage.getItem("favorites")
+  //   favorites = favorites === null || !favorites ? [] : JSON.parse(favorites)
+  //   setFavoritesArray(favorites)
+  // }
+  console.log(state.favorites.length)
+
+  const arrayCards = state.favorites.map((product, i) => (
+    <Grid
+      item
+      xs={isMobile ? 12 : 4}
+      className={classes.itemRoot}
+      key={product.uid + "_" + i}
+    >
+      {isMobile ? (
+        <CardProduct product={product} />
+      ) : (
+        <CardSimilarProduct product={product} />
+      )}
+    </Grid>
+  ))
 
   return (
     <Layout>
@@ -90,7 +106,7 @@ const IndexPage = ({ data }) => {
         icon={<FavoritesIcon />}
         title="Избранное"
         divider={false}
-        count={favoritesArray.length ? favoritesArray.length : "0"}
+        count={state.favorites.length ? state.favorites.length : "0"}
         subcategory
       />
       <SmallCategoriesPanel categories={dataCategory} />

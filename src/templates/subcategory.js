@@ -13,8 +13,6 @@ import Filter from "../components/filter"
 import Pagination from "../components/pagination"
 import Layout from "../components/layout"
 
-import { GlobalStateContext } from "../context/GlobalContextProvider"
-
 const useStyles = makeStyles(theme => ({
   wrapper: {
     marginTop: "2.18vw",
@@ -105,14 +103,11 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const IndexPage = ({ data: { prismicSubcategory }, pageContext: { uid } }) => {
+const IndexPage = ({ data: { prismicSubcategory, allPrismicProduct } }) => {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 1025px)")
-  const state = React.useContext(GlobalStateContext)
 
-  const allProducts = state.allPrismicProduct.edges
-    .filter(edge => edge.node.data.category?.uid === uid)
-    .map(edge => edge.node)
+  const allProducts = allPrismicProduct.edges.map(edge => edge.node)
 
   const [filterProducts, setFilterProducts] = React.useState(allProducts)
 
@@ -209,6 +204,190 @@ export const query = graphql`
     prismicSubcategory(uid: { eq: $uid }) {
       data {
         name
+      }
+    }
+    allPrismicProduct(filter: { data: { category: { uid: { eq: $uid } } } }) {
+      edges {
+        node {
+          id
+          uid
+          data {
+            all_product_accessories {
+              product_accessories {
+                document {
+                  ... on PrismicProduct {
+                    uid
+                    id
+                    data {
+                      images {
+                        image {
+                          localFile {
+                            childImageSharp {
+                              gatsbyImageData
+                            }
+                          }
+                          alt
+                        }
+                      }
+                      price
+                      name
+                    }
+                  }
+                }
+              }
+            }
+            category {
+              id
+              uid
+              document {
+                ... on PrismicSubcategory {
+                  id
+                  data {
+                    name
+                  }
+                }
+              }
+            }
+            brand {
+              document {
+                ... on PrismicBrand {
+                  id
+                  data {
+                    name
+                    popular
+                  }
+                }
+              }
+            }
+            name
+            price
+            old_price
+            color
+            color_group
+            sale_product
+            images {
+              image {
+                alt
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData(height: 200)
+                  }
+                }
+              }
+            }
+            tags {
+              tag {
+                document {
+                  ... on PrismicTag {
+                    id
+                    data {
+                      name
+                    }
+                  }
+                }
+              }
+            }
+            delivery {
+              document {
+                ... on PrismicDelivery {
+                  data {
+                    body {
+                      ... on PrismicDeliveryBodyDeliveryToCities {
+                        id
+                        items {
+                          city_name
+                          cost
+                          delivery_description
+                          timing
+                        }
+                      }
+                    }
+                    variants {
+                      description
+                      name
+                    }
+                  }
+                }
+              }
+            }
+            credit {
+              document {
+                ... on PrismicCredit {
+                  data {
+                    months_1
+                    months_2
+                    percent
+                  }
+                }
+              }
+            }
+            body {
+              ... on PrismicProductBodyStickers {
+                slice_type
+                items {
+                  sticker {
+                    document {
+                      ... on PrismicSticker {
+                        id
+                        data {
+                          image {
+                            alt
+                            localFile {
+                              publicURL
+                              childImageSharp {
+                                fluid(maxHeight: 35) {
+                                  aspectRatio
+                                  src
+                                  srcSet
+                                  srcSetWebp
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              ... on PrismicProductBodyFeatures {
+                slice_type
+                items {
+                  feature
+                  image {
+                    alt
+                    localFile {
+                      childImageSharp {
+                        gatsbyImageData(height: 30)
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            body1 {
+              ... on PrismicProductBody1Characteristics {
+                id
+                slice_type
+                items {
+                  characteristic {
+                    document {
+                      ... on PrismicCharacteristic {
+                        id
+                        data {
+                          name
+                          variant
+                          order
+                        }
+                      }
+                    }
+                  }
+                  value
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

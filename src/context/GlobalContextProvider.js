@@ -10,7 +10,7 @@ function reducer(state, action) {
       if (state.inCart(action.payload) !== 0) return { ...state }
       else {
         const cart = [...state.cart]
-        cart.push({ id: action.payload, count: 1 })
+        cart.push({ product: action.payload, count: 1 })
 
         localStorage.setItem("cart", JSON.stringify(cart))
         return {
@@ -23,10 +23,8 @@ function reducer(state, action) {
       if (state.inCart(action.payload) === 0) return { ...state }
       else {
         const cart = [...state.cart]
-        const index = cart.findIndex(product => product.id === action.payload)
+        const index = cart.findIndex(item => item.product.id === action.payload.id)
         cart.splice(index, 1)
-
-        // console.log(state.cart)
 
         localStorage.setItem("cart", JSON.stringify(cart))
         return {
@@ -45,7 +43,7 @@ function reducer(state, action) {
       if (state.inCart(action.payload) === 99) return { ...state }
       else {
         const cart = [...state.cart]
-        cart.find(product => product.id === action.payload).count++
+        cart.find(item => item.product.id === action.payload.id).count++
 
         localStorage.setItem("cart", JSON.stringify(cart))
         return {
@@ -58,7 +56,7 @@ function reducer(state, action) {
       if (state.inCart(action.payload) === 1) return { ...state }
       else {
         const cart = [...state.cart]
-        cart.find(product => product.id === action.payload).count--
+        cart.find(item => item.product.id === action.payload.id).count--
 
         localStorage.setItem("cart", JSON.stringify(cart))
         return {
@@ -84,7 +82,7 @@ function reducer(state, action) {
       if (!state.inFavorites(action.payload)) return { ...state }
       else {
         const favorites = [...state.favorites]
-        const index = favorites.indexOf(action.payload)
+        const index = favorites.findIndex(item => item.id === action.payload.id)
         favorites.splice(index, 1)
 
         localStorage.setItem("favorites", JSON.stringify(favorites))
@@ -113,7 +111,7 @@ function reducer(state, action) {
 const GlobalContextProvider = ({ children }) => {
   const data = useStaticQuery(graphql`
     {
-      allPrismicProduct {
+      allPrismicProduct(limit:0) {
         edges {
           node {
             id
@@ -315,11 +313,11 @@ const GlobalContextProvider = ({ children }) => {
   const initState = {
     favorites: JSON.parse(localStorage.getItem("favorites")) ?? [],
     cart: JSON.parse(localStorage.getItem("cart")) ?? [],
-    inCart(id) {
-      return this.cart.find(product => product.id === id)?.count ?? 0
+    inCart(product) {
+      return this.cart.find(item => item.product.id === product.id)?.count ?? 0
     },
-    inFavorites(id) {
-      return this.favorites.includes(id)
+    inFavorites(product) {
+      return this.favorites.find(item => item.id === product.id)
     },
     last_products: JSON.parse(localStorage.getItem("last_products")) ?? [],
     allPrismicProduct: data.allPrismicProduct,

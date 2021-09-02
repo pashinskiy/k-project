@@ -96,7 +96,7 @@ export default function AddInCartAndFav({
   const [dialogOpen, setDialogOpen] = useState(false)
 
   const state = React.useContext(GlobalStateContext)
-  const inCart = state.inCart(product?.id)
+  const inCart = state.inCart(product)
 
   function closeDialog() {
     setDialogOpen(false)

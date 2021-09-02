@@ -119,7 +119,7 @@ const IndexPage = ({ data }) => {
   const classes = useStyle()
 
   const state = React.useContext(GlobalStateContext)
-  const countProducts = state.cart.length
+  const countProducts = state.cart.length ? state.cart.length : "0"
 
   const word = (() => {
     switch (countProducts) {
@@ -134,9 +134,7 @@ const IndexPage = ({ data }) => {
     }
   })()
 
-  const productsInCart = state.allPrismicProduct.edges
-    .filter(edge => !!state.inCart(edge.node.id))
-    .map(edge => edge.node)
+  const productsInCart = state.cart.map(item => item.product)
 
   return (
     <Layout>

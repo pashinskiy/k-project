@@ -90,13 +90,13 @@ export default function ButtonAddFavorites({ product, variant }) {
   const dispatch = React.useContext(GlobalDispatchContext)
   const state = React.useContext(GlobalStateContext)
 
-  const isFavorite = state.inFavorites(product.id)
+  const isFavorite = state.inFavorites(product)
 
   function changeToFavorites() {
     if (!isFavorite)
-      dispatch({ type: "ADD_PRODUCT_IN_FAVORITES", payload: product?.id })
+      dispatch({ type: "ADD_PRODUCT_IN_FAVORITES", payload: product })
     else
-      dispatch({ type: "DELETE_PRODUCT_FROM_FAVORITES", payload: product?.id })
+      dispatch({ type: "DELETE_PRODUCT_FROM_FAVORITES", payload: product })
   }
 
   const background = isFavorite ? classes.favorites : classes.notFavorites

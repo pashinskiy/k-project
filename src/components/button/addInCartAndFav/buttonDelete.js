@@ -73,7 +73,7 @@ export default function ButtonDelete({ product, variant }) {
   const dispatch = React.useContext(GlobalDispatchContext)
 
   function deleteInCart() {
-    dispatch({ type: "DELETE_PRODUCT_FROM_CART", payload: product.id })
+    dispatch({ type: "DELETE_PRODUCT_FROM_CART", payload: product })
   }
 
   const classButton =

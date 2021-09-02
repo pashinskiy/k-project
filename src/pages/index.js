@@ -115,6 +115,40 @@ export const query = graphql`
                                 }
                                 price
                                 name
+                                delivery {
+                                  document {
+                                    ... on PrismicDelivery {
+                                      data {
+                                        body {
+                                          ... on PrismicDeliveryBodyDeliveryToCities {
+                                            id
+                                            items {
+                                              city_name
+                                              cost
+                                              delivery_description
+                                              timing
+                                            }
+                                          }
+                                        }
+                                        variants {
+                                          description
+                                          name
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                                credit {
+                                  document {
+                                    ... on PrismicCredit {
+                                      data {
+                                        months_1
+                                        months_2
+                                        percent
+                                      }
+                                    }
+                                  }
+                                }
                               }
                             }
                           }

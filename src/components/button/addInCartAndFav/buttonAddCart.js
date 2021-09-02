@@ -138,7 +138,7 @@ export default function ButtonAddCart({
 
   function addToCart() {
     setDialogOpen(true)
-    dispatch({ type: "ADD_PRODUCT_IN_CART", payload: product.id })
+    dispatch({ type: "ADD_PRODUCT_IN_CART", payload: product })
   }
 
   let classText

@@ -223,16 +223,16 @@ export default function Card({ product }) {
   const state = React.useContext(GlobalStateContext)
   const dispatch = React.useContext(GlobalDispatchContext)
 
-  const favorites = state.inFavorites(product.id)
+  const favorites = state.inFavorites(product)
 
   function addInFavorites() {
-    dispatch({ type: "ADD_PRODUCT_IN_FAVORITES", payload: product.id })
+    dispatch({ type: "ADD_PRODUCT_IN_FAVORITES", payload: product })
   }
   function deleteFromFavorites() {
-    dispatch({ type: "DELETE_PRODUCT_FROM_FAVORITES", payload: product.id })
+    dispatch({ type: "DELETE_PRODUCT_FROM_FAVORITES", payload: product})
   }
   function deleteFromCart() {
-    dispatch({ type: "DELETE_PRODUCT_FROM_CART", payload: product.id })
+    dispatch({ type: "DELETE_PRODUCT_FROM_CART", payload: product})
   }
 
   // преобразуем цену

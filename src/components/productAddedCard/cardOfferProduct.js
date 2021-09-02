@@ -202,7 +202,7 @@ export default function CardOfferProduct({ product }) {
   const accessoryItem = product
 
   const state = React.useContext(GlobalStateContext)
-  const inCart = !!state.inCart(accessoryItem?.id)
+  const inCart = !!state.inCart(accessoryItem)
 
   return accessoryItem ? (
     // <Grid item className={classes.accessoriesRoot}>

@@ -172,13 +172,13 @@ export default function ButtonPlusMinus({ product, variant }) {
   const state = React.useContext(GlobalStateContext)
   const dispatch = React.useContext(GlobalDispatchContext)
 
-  const count = state.inCart(product.id)
+  const count = state.inCart(product)
 
   function plus() {
-    dispatch({ type: "INCREMENT_PRODUCT_COUNT", payload: product.id })
+    dispatch({ type: "INCREMENT_PRODUCT_COUNT", payload: product })
   }
   function minus() {
-    dispatch({ type: "DECREMENT_PRODUCT_COUNT", payload: product.id })
+    dispatch({ type: "DECREMENT_PRODUCT_COUNT", payload: product })
   }
 
   const classMinus = count > 1 ? "" : classes.disable

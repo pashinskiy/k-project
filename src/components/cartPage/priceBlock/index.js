@@ -321,12 +321,12 @@ export default function PriceBlock({ products }) {
   }
 
   const summPrice = products.reduce((summ, product) => {
-    return summ + product.data.price * state.inCart(product.id)
+    return summ + product.data.price * state.inCart(product)
   }, 0)
   const summOldPrice = products.reduce((summ, product) => {
     return (
       summ +
-      (product.data.old_price ?? product.data.price) * state.inCart(product.id)
+      (product.data.old_price ?? product.data.price) * state.inCart(product)
     )
   }, 0)
 
@@ -334,7 +334,7 @@ export default function PriceBlock({ products }) {
     const positions = products.reduce((order, product, i) => {
       const num = i + 1
       const name = product.data.name
-      const count = state.inCart(product.id)
+      const count = state.inCart(product)
       const position = `${num}. Товар: ${name}; Количество: ${count}. \n`
       return order + position
     }, "")
@@ -342,7 +342,7 @@ export default function PriceBlock({ products }) {
     const prodDataArr = []
     products.map(product => {
       const name = product.data.name
-      const count = state.inCart(product.id)
+      const count = state.inCart(product)
       const jsonData = {
         product_name: name,
         product_uid: product.uid,

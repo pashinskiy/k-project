@@ -12,8 +12,6 @@ import FiltersBySticker from "../components/catalog/fastLink/filtersBySticker"
 import AllProductsByCategory from "../components/categoryPage/products"
 import Layout from "../components/layout"
 
-import { GlobalStateContext } from "../context/GlobalContextProvider"
-
 const useStyles = makeStyles(theme => ({
   root: {
     padding: "28px 0px 68px 0px",
@@ -145,18 +143,12 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Category = ({
-  data: { prismicCategory, allPrismicStories },
-  pageContext: { uid },
+  data: { prismicCategory, allPrismicStories, allPrismicProduct },
 }) => {
   const classes = useStyles()
   const maxWidth1024 = useMediaQuery("(max-width: 1025px)")
-  const state = React.useContext(GlobalStateContext)
 
-  const allPrismicProduct = {
-    edges: state.allPrismicProduct.edges.filter(
-      edge => edge.node.data.main_category?.uid === uid
-    ),
-  }
+  console.log(allPrismicProduct)
 
   return (
     <Layout>
@@ -318,7 +310,7 @@ const Category = ({
             {prismicCategory.data.children.map((subcategory_product, i) => {
               if (subcategory_product.child.document === null) return null
               if (
-                state.allPrismicProduct.edges.find(
+                allPrismicProduct.edges.find(
                   edge =>
                     edge.node.data.category.document?.id ===
                     subcategory_product.child.document?.id
@@ -338,6 +330,11 @@ const Category = ({
                     </Typography>
                     <AllProductsByCategory
                       subcategory={subcategory_product.child.document}
+                      products={allPrismicProduct.edges.filter(
+                        edge =>
+                          edge.node.data.category.document?.id ===
+                          subcategory_product.child.document?.id
+                      )}
                     />
                   </div>
                 )
@@ -361,6 +358,141 @@ export default Category
 
 export const pageQuery = graphql`
   query Category($uid: String!) {
+    allPrismicProduct {
+      edges {
+        node {
+          id
+          uid
+          data {
+            main_category {
+              id
+              uid
+              document {
+                ... on PrismicCategory {
+                  id
+                  data {
+                    name
+                  }
+                }
+              }
+            }
+            category {
+              id
+              uid
+              document {
+                ... on PrismicSubcategory {
+                  id
+                  data {
+                    name
+                  }
+                }
+              }
+            }
+            name
+            price
+            old_price
+            images {
+              image {
+                alt
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData(height: 200)
+                  }
+                }
+              }
+            }
+            delivery {
+              document {
+                ... on PrismicDelivery {
+                  data {
+                    body {
+                      ... on PrismicDeliveryBodyDeliveryToCities {
+                        id
+                        items {
+                          city_name
+                          cost
+                          delivery_description
+                          timing
+                        }
+                      }
+                    }
+                    variants {
+                      description
+                      name
+                    }
+                  }
+                }
+              }
+            }
+            credit {
+              document {
+                ... on PrismicCredit {
+                  data {
+                    months_1
+                    months_2
+                    percent
+                  }
+                }
+              }
+            }
+            all_product_accessories {
+              product_accessories {
+                document {
+                  ... on PrismicProduct {
+                    uid
+                    id
+                    data {
+                      images {
+                        image {
+                          localFile {
+                            childImageSharp {
+                              gatsbyImageData
+                            }
+                          }
+                          alt
+                        }
+                      }
+                      price
+                      name
+                    }
+                  }
+                }
+              }
+            }
+            body {
+              ... on PrismicProductBodyStickers {
+                slice_type
+                items {
+                  sticker {
+                    document {
+                      ... on PrismicSticker {
+                        id
+                        data {
+                          image {
+                            alt
+                            localFile {
+                              publicURL
+                              childImageSharp {
+                                fluid(maxHeight: 35) {
+                                  aspectRatio
+                                  src
+                                  srcSet
+                                  srcSetWebp
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     prismicCategory(uid: { eq: $uid }) {
       uid
       data {
