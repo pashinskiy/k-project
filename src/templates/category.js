@@ -145,10 +145,9 @@ const useStyles = makeStyles(theme => ({
 const Category = ({
   data: { prismicCategory, allPrismicStories, allPrismicProduct },
 }) => {
+  console.log(allPrismicProduct)
   const classes = useStyles()
   const maxWidth1024 = useMediaQuery("(max-width: 1025px)")
-
-  console.log(allPrismicProduct)
 
   return (
     <Layout>
@@ -357,8 +356,10 @@ const Category = ({
 export default Category
 
 export const pageQuery = graphql`
-  query Category($uid: String!) {
-    allPrismicProduct {
+  query Category($uid: String!, $subcategories: [String!]!) {
+    allPrismicProduct(
+      filter: { data: { category: { uid: { in: $subcategories } } } }
+    ) {
       edges {
         node {
           id

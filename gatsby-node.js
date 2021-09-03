@@ -24,6 +24,17 @@ exports.createPages = async ({ graphql, actions }) => {
         edges {
           node {
             uid
+            data {
+              children {
+                child {
+                  document {
+                    ... on PrismicSubcategory {
+                      uid
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -73,6 +84,9 @@ exports.createPages = async ({ graphql, actions }) => {
       component: category,
       context: {
         uid: edge.node.uid,
+        subcategories: edge.node.data.children?.map(
+          item => item.child.document?.uid
+        ),
       },
     })
   })
