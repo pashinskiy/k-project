@@ -161,6 +161,7 @@ export default function ButtonAddCart({
   return (
     <>
       <Button
+        id="add-to-cart"
         disableRipple
         onClick={variant !== "offerPage" ? addToCart : null}
         aria-label="добавить в корзину"
