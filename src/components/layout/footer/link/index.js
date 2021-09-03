@@ -22,11 +22,20 @@ const useStyles = makeStyles(theme => ({
  * @param {String} props.link - ссылка
  */
 export default function WhiteLink({ name, link }) {
+    
+    function contactId(link){
+        if (link.includes("tel")){
+            return "phone"
+        }
+        if (link.includes("mailto")){
+            return "mail"
+        }
+    }
 
     const classes = useStyles();
 
     return (
-        <a href={`${link}`} target="_blank" rel="noopener noreferrer" className={classes.root}>
+        <a id={contactId(link)} href={`${link}`} target="_blank" rel="noopener noreferrer" className={classes.root}>
             {name}
         </a>
     );

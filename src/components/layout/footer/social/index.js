@@ -9,8 +9,25 @@ import React from "react"
  * @param {String} props.link - ссылка
  */
 export default function Social({ icon, alt, link }) {
+  function contactId(link){
+    if (link.includes("vk.com")){
+        return "vk"
+    }
+    if (link.includes("instagram.com")){
+      return "inst"
+    }
+    if (link.includes("facebook.com")){
+      return "facebook"
+    }
+    if (link.includes("t.me")){
+      return "telegram"
+    }
+    if (link.includes("wa.me")){
+      return "whatsapp"
+    }
+  }
   return (
-    <a href={`${link}`} target="_blank" rel="noopener noreferrer">
+    <a id={contactId(link)} href={`${link}`} target="_blank" rel="noopener noreferrer">
       <img src={icon} alt={alt ?? "icon"} width={36} height={36} />
     </a>
   )

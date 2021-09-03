@@ -85,6 +85,25 @@ const useStyles = makeStyles(theme => ({
  * @param {Object} props.data - объект данных полученый из prismic
  */
 export default function SocialNetworks(props) {
+  
+  function socialId(link){
+    if (link.includes("vk.com")){
+      return "vk"
+    }
+    if (link.includes("instagram.com")){
+      return "inst"
+    }
+    if (link.includes("facebook.com")){
+      return "facebook"
+    }
+    if (link.includes("t.me")){
+      return "telegram"
+    }
+    if (link.includes("wa.me")){
+      return "whatsapp"
+    }
+  }
+
   const classes = useStyles()
 
   return (
@@ -105,6 +124,7 @@ export default function SocialNetworks(props) {
         <ScrollBar buttonNext fullScreen>
           {props.data.allPrismicFooterBody2Social.edges.map((social, i) => (
             <a
+              id={socialId(social.node.primary.link.url)}
               href={social.node.primary.link.url}
               target="_blank"
               rel="noopener noreferrer"
