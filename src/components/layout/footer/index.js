@@ -188,12 +188,12 @@ export default function Footer({ data }) {
 
   return (
     <footer id="footer" className={classes.root}>
-      <nav className={classes.nav}>
+      <div className={classes.nav}>
         <div className={classes.menu}>
           <Typography variant="h4" component="h1">
             {data.allPrismicFooter.edges[0].node.data.menu_name.text}
           </Typography>
-          <nav className={classes.links}>
+          <div className={classes.links}>
             {menu_links.map((link, i) => (
               <DefaultLink
                 key={`menu ${i}`}
@@ -201,13 +201,13 @@ export default function Footer({ data }) {
                 link={link.primary.uid_link.text}
               />
             ))}
-          </nav>
+          </div>
         </div>
         <div className={classes.menu}>
           <Typography variant="h4" component="h1">
             {data.allPrismicFooter.edges[0].node.data.about_name.text}
           </Typography>
-          <nav className={classes.links}>
+          <div className={classes.links}>
             {about_links.map((link, i) => (
               <DefaultLink
                 key={`info_2 ${i}`}
@@ -215,13 +215,13 @@ export default function Footer({ data }) {
                 link={`/documents/${link.primary.link.document?.uid}`}
               />
             ))}
-          </nav>
+          </div>
         </div>
         <div className={classes.menu}>
           <Typography variant="h4" component="h1">
             {data.allPrismicFooter.edges[0].node.data.contact_name.text}
           </Typography>
-          <nav className={classes.links}>
+          <div className={classes.links}>
             {contact_links
               .filter(atr => atr.slice_type === "contact")
               .map((link, i) => (
@@ -231,8 +231,8 @@ export default function Footer({ data }) {
                   link={link.primary.contact_link.url}
                 />
               ))}
-          </nav>
-          <nav className={classes.social}>
+          </div>
+          <div className={classes.social}>
             {contact_links
               .filter(atr => atr.slice_type === "social")
               .map((link, i) => (
@@ -243,7 +243,7 @@ export default function Footer({ data }) {
                   link={link.primary.link.url}
                 />
               ))}
-          </nav>
+          </div>
         </div>
         <div className={classes.menu}>
           <Typography variant="h4" component="h1">
@@ -253,7 +253,7 @@ export default function Footer({ data }) {
             <ProductSlider />
           </div>
         </div>
-      </nav>
+      </div>
       <div className={classes.addition}>
         <div className={classes.docs_wrapper}>
           <div className={classes.docs}>

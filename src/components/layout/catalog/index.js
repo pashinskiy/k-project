@@ -251,7 +251,7 @@ export default function Catalog({ data, animation }) {
                                 : sub_category.child.document?.data.name}
                             </Typography>
                           </Link>
-                          <nav>
+                          <div>
                             {sub_category.child.document === null
                               ? null
                               : [
@@ -277,12 +277,12 @@ export default function Catalog({ data, animation }) {
                                     )
                                   ),
                                 ]}
-                          </nav>
+                          </div>
                         </div>
                       )
                     )}
                   </div>
-                  <nav className={classes.brands}>
+                  <div className={classes.brands}>
                     {category.category.document?.data.brands.map((brand, i) => (
                       <div className={classes.brand} key={`brand ${i}`}>
                         {brand.child.document === null ? null : (
@@ -312,7 +312,7 @@ export default function Catalog({ data, animation }) {
                         )}
                       </div>
                     ))}
-                  </nav>
+                  </div>
                 </div>
               </div>
             ))}

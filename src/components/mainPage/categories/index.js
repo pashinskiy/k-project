@@ -97,7 +97,7 @@ export default function Categories(props) {
       <Typography variant="h6" component="h1" className={classes.h6}>
         Категории
       </Typography>
-      <nav className={classes.categories}>
+      <div className={classes.categories}>
         {props.data.edges.map((category, i) => (
           <Grid className={classes.category}>
             <CardWidget
@@ -112,7 +112,7 @@ export default function Categories(props) {
             />
           </Grid>
         ))}
-      </nav>
+      </div>
     </div>
   )
 }
