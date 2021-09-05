@@ -302,16 +302,16 @@ export default function MainPageSlider({ array, variant }) {
           <SaleCard sale={sale} key={sale.uid} mainPage />
         </Grid>
       ))
-      if (data.prismicMainPage.data.image.localFile !== null)
+      const imageBaner = mobile
+        ? data.prismicMainPage.data.baner_mobile
+        : data.prismicMainPage.data.image
+      if (imageBaner?.localFile ?? false)
         contentArray.unshift(
           <Grid item className={classes.itemAll} key="bannerMokka">
             <Card className={classes.cardRoot}>
               <GatsbyImage
-                image={
-                  data.prismicMainPage.data.image.localFile.childImageSharp
-                    .gatsbyImageData
-                }
-                alt="mokka"
+                image={imageBaner.localFile.childImageSharp.gatsbyImageData}
+                alt={imageBaner.alt ?? "mokka"}
                 className={classes.wrapperImg}
                 imgStyle={{ objectFit: "cover" }}
               />
