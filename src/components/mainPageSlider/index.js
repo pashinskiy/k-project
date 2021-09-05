@@ -289,6 +289,14 @@ export default function MainPageSlider({ array, variant }) {
               }
             }
           }
+          baner_mobile {
+            alt
+            localFile {
+              childImageSharp {
+                gatsbyImageData(height: 200)
+              }
+            }
+          }
         }
       }
     }

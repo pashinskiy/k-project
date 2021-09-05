@@ -137,7 +137,7 @@ export default function ButtonAddCart({
   const dispatch = React.useContext(GlobalDispatchContext)
 
   function addToCart() {
-    setDialogOpen(true)
+    if (variant !== "offerPage") setDialogOpen(true)
     dispatch({ type: "ADD_PRODUCT_IN_CART", payload: product.id })
   }
 
@@ -163,7 +163,7 @@ export default function ButtonAddCart({
       <Button
         id="add-to-cart"
         disableRipple
-        onClick={variant !== "offerPage" ? addToCart : null}
+        onClick={addToCart}
         aria-label="добавить в корзину"
         className={classes.button + " " + classButton}
       >
