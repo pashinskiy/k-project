@@ -1,5 +1,4 @@
 import * as React from "react"
-import { graphql, useStaticQuery } from "gatsby"
 import { Grid, useMediaQuery } from "@material-ui/core"
 
 import ProductSlider from "./productSlider"
@@ -9,27 +8,23 @@ import BlockPrice from "./blockPrice"
 import AddInCartAndFav from "../../button/addInCartAndFav"
 import Features from "./features"
 
-import { GlobalStateContext } from "../../../context/GlobalContextProvider"
-
 /**
  * Главная карточка продукта на странице продукта
  * @module src/components/productPage/cardProduct
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.prismicProduct - объект продукта полученый из prismic
+ * @param {Object} props.allVariant - объект всех продуктов данной модели полученый из prismic
  */
-export default function CardProduct({ prismicProduct }) {
+export default function CardProduct({ prismicProduct, allVariant }) {
   const mobile = useMediaQuery("(max-width: 1025px)")
 
-  const state = React.useContext(GlobalStateContext)
   // массив фото
   const photos = prismicProduct.data.images.map(
     photo => photo.image.localFile?.childImageSharp.fluid
   )
 
-  // все продукты данной модели
-  const allColors = state.allPrismicProduct.edges
-    .filter(node => node.node.data.name === prismicProduct.data.name)
-    .map(node => node.node)
+  // массив всех продукты данной модели
+  const allColors = allVariant.map(edge => edge.node)
 
   return (
     <>

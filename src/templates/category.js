@@ -145,7 +145,6 @@ const useStyles = makeStyles(theme => ({
 const Category = ({
   data: { prismicCategory, allPrismicStories, allPrismicProduct },
 }) => {
-  console.log(allPrismicProduct)
   const classes = useStyles()
   const maxWidth1024 = useMediaQuery("(max-width: 1025px)")
 
@@ -186,14 +185,14 @@ const Category = ({
                 >
                   {subcategory.child.document?.data?.name}
                 </Link>
-                <nav className={classes.all_tags}>
+                <div className={classes.all_tags}>
                   {subcategory.child.document?.data.tags?.map((tag, i) => (
                     <DefaultLink
                       name={tag.tag.document?.data.name}
                       link={`/subcategory/${subcategory.child.document?.uid}/?group=${tag.tag.document?.data.name}`}
                     />
                   ))}
-                </nav>
+                </div>
               </div>
             ))}
           </div>
@@ -351,7 +350,6 @@ const Category = ({
  * @module src/templates/category
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.data - объект данных полученый из prismic
- * @param {Object} props.pageContext - объект контекста, передаваемый при формировании страницы
  */
 export default Category
 
@@ -440,9 +438,12 @@ export const pageQuery = graphql`
               product_accessories {
                 document {
                   ... on PrismicProduct {
-                    uid
                     id
+                    uid
                     data {
+                      name
+                      price
+                      old_price
                       images {
                         image {
                           localFile {
@@ -453,8 +454,40 @@ export const pageQuery = graphql`
                           alt
                         }
                       }
-                      price
-                      name
+                      delivery {
+                        document {
+                          ... on PrismicDelivery {
+                            data {
+                              body {
+                                ... on PrismicDeliveryBodyDeliveryToCities {
+                                  id
+                                  items {
+                                    city_name
+                                    cost
+                                    delivery_description
+                                    timing
+                                  }
+                                }
+                              }
+                              variants {
+                                description
+                                name
+                              }
+                            }
+                          }
+                        }
+                      }
+                      credit {
+                        document {
+                          ... on PrismicCredit {
+                            data {
+                              months_1
+                              months_2
+                              percent
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }

@@ -152,15 +152,15 @@ export default function Sort({ products, setSortProducts }) {
     const newAllProduct = [...products].sort(func)
     setSortProducts(newAllProduct)
 
-    dispatch({
-      type: "SET_ALL_PRODUCTS",
-      payload: {
-        edges: state.allPrismicProduct.edges
-          .map(edge => edge.node)
-          .sort(func)
-          .map(product => ({ node: product })),
-      },
-    })
+    // dispatch({
+    //   type: "SET_ALL_PRODUCTS",
+    //   payload: {
+    //     edges: state.allPrismicProduct.edges
+    //       .map(edge => edge.node)
+    //       .sort(func)
+    //       .map(product => ({ node: product })),
+    //   },
+    // })
 
     const url = new URL(window.location.href)
     url.searchParams.set("page", 1)

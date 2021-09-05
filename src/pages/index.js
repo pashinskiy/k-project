@@ -100,9 +100,12 @@ export const query = graphql`
                         product_accessories {
                           document {
                             ... on PrismicProduct {
-                              uid
                               id
+                              uid
                               data {
+                                name
+                                price
+                                old_price
                                 images {
                                   image {
                                     localFile {
@@ -113,8 +116,6 @@ export const query = graphql`
                                     alt
                                   }
                                 }
-                                price
-                                name
                                 delivery {
                                   document {
                                     ... on PrismicDelivery {
@@ -154,6 +155,9 @@ export const query = graphql`
                           }
                         }
                       }
+                      name
+                      price
+                      old_price
                       images {
                         image {
                           localFile {
@@ -163,8 +167,40 @@ export const query = graphql`
                           }
                         }
                       }
-                      price
-                      name
+                      delivery {
+                        document {
+                          ... on PrismicDelivery {
+                            data {
+                              body {
+                                ... on PrismicDeliveryBodyDeliveryToCities {
+                                  id
+                                  items {
+                                    city_name
+                                    cost
+                                    delivery_description
+                                    timing
+                                  }
+                                }
+                              }
+                              variants {
+                                description
+                                name
+                              }
+                            }
+                          }
+                        }
+                      }
+                      credit {
+                        document {
+                          ... on PrismicCredit {
+                            data {
+                              months_1
+                              months_2
+                              percent
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -181,9 +217,12 @@ export const query = graphql`
                         product_accessories {
                           document {
                             ... on PrismicProduct {
-                              uid
                               id
+                              uid
                               data {
+                                name
+                                price
+                                old_price
                                 images {
                                   image {
                                     localFile {
@@ -194,13 +233,48 @@ export const query = graphql`
                                     alt
                                   }
                                 }
-                                price
-                                name
+                                delivery {
+                                  document {
+                                    ... on PrismicDelivery {
+                                      data {
+                                        body {
+                                          ... on PrismicDeliveryBodyDeliveryToCities {
+                                            id
+                                            items {
+                                              city_name
+                                              cost
+                                              delivery_description
+                                              timing
+                                            }
+                                          }
+                                        }
+                                        variants {
+                                          description
+                                          name
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                                credit {
+                                  document {
+                                    ... on PrismicCredit {
+                                      data {
+                                        months_1
+                                        months_2
+                                        percent
+                                      }
+                                    }
+                                  }
+                                }
                               }
                             }
                           }
                         }
                       }
+                      name
+                      price
+                      old_price
                       images {
                         image {
                           localFile {
@@ -210,8 +284,40 @@ export const query = graphql`
                           }
                         }
                       }
-                      price
-                      name
+                      delivery {
+                        document {
+                          ... on PrismicDelivery {
+                            data {
+                              body {
+                                ... on PrismicDeliveryBodyDeliveryToCities {
+                                  id
+                                  items {
+                                    city_name
+                                    cost
+                                    delivery_description
+                                    timing
+                                  }
+                                }
+                              }
+                              variants {
+                                description
+                                name
+                              }
+                            }
+                          }
+                        }
+                      }
+                      credit {
+                        document {
+                          ... on PrismicCredit {
+                            data {
+                              months_1
+                              months_2
+                              percent
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -411,9 +517,12 @@ export const query = graphql`
                       product_accessories {
                         document {
                           ... on PrismicProduct {
-                            uid
                             id
+                            uid
                             data {
+                              name
+                              price
+                              old_price
                               images {
                                 image {
                                   localFile {
@@ -424,8 +533,40 @@ export const query = graphql`
                                   alt
                                 }
                               }
-                              price
-                              name
+                              delivery {
+                                document {
+                                  ... on PrismicDelivery {
+                                    data {
+                                      body {
+                                        ... on PrismicDeliveryBodyDeliveryToCities {
+                                          id
+                                          items {
+                                            city_name
+                                            cost
+                                            delivery_description
+                                            timing
+                                          }
+                                        }
+                                      }
+                                      variants {
+                                        description
+                                        name
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                              credit {
+                                document {
+                                  ... on PrismicCredit {
+                                    data {
+                                      months_1
+                                      months_2
+                                      percent
+                                    }
+                                  }
+                                }
+                              }
                             }
                           }
                         }
@@ -443,6 +584,40 @@ export const query = graphql`
                               height: 200
                               transformOptions: { fit: CONTAIN }
                             )
+                          }
+                        }
+                      }
+                    }
+                    delivery {
+                      document {
+                        ... on PrismicDelivery {
+                          data {
+                            body {
+                              ... on PrismicDeliveryBodyDeliveryToCities {
+                                id
+                                items {
+                                  city_name
+                                  cost
+                                  delivery_description
+                                  timing
+                                }
+                              }
+                            }
+                            variants {
+                              description
+                              name
+                            }
+                          }
+                        }
+                      }
+                    }
+                    credit {
+                      document {
+                        ... on PrismicCredit {
+                          data {
+                            months_1
+                            months_2
+                            percent
                           }
                         }
                       }

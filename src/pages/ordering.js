@@ -136,9 +136,7 @@ const IndexPage = ({ data }) => {
 
   const state = React.useContext(GlobalStateContext)
 
-  const productsInCart = state.allPrismicProduct.edges
-    .filter(edge => !!state.inCart(edge.node))
-    .map(edge => edge.node)
+  const productsInCart = state.cart.map(item => item.product)
 
   return (
     <Layout>

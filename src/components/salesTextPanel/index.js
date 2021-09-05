@@ -1,9 +1,6 @@
 import React from "react"
-import {
-  makeStyles,
-  Grid,
-  useMediaQuery,
-} from "@material-ui/core"
+import { useStaticQuery, graphql } from "gatsby"
+import { makeStyles, Grid, useMediaQuery } from "@material-ui/core"
 import Social from "../layout/footer/social"
 import SimilarProduct from "../scrollBar/productsScrollBar"
 import CardSimilarProduct from "../scrollBar/productsScrollBar/cardProduct"
@@ -106,11 +103,136 @@ const useStyles = makeStyles(theme => ({
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.sale - объект акции полученый из prismic
  * @param {Object[]} props.socials - массив слайсов соцсетей полученый из prismic
- * @param {Object[]} props.products - массив объектов продуктов полученых из prismic
  */
-export default function SalesTextPanel({ sale, socials, products }) {
+export default function SalesTextPanel({ sale, socials }) {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 767px)")
+
+  const data = useStaticQuery(graphql`
+    {
+      allPrismicProduct(limit: 10) {
+        edges {
+          node {
+            id
+            uid
+            data {
+              all_product_accessories {
+                product_accessories {
+                  document {
+                    ... on PrismicProduct {
+                      id
+                      uid
+                      data {
+                        name
+                        price
+                        old_price
+                        images {
+                          image {
+                            localFile {
+                              childImageSharp {
+                                gatsbyImageData
+                              }
+                            }
+                            alt
+                          }
+                        }
+                        delivery {
+                          document {
+                            ... on PrismicDelivery {
+                              data {
+                                body {
+                                  ... on PrismicDeliveryBodyDeliveryToCities {
+                                    id
+                                    items {
+                                      city_name
+                                      cost
+                                      delivery_description
+                                      timing
+                                    }
+                                  }
+                                }
+                                variants {
+                                  description
+                                  name
+                                }
+                              }
+                            }
+                          }
+                        }
+                        credit {
+                          document {
+                            ... on PrismicCredit {
+                              data {
+                                months_1
+                                months_2
+                                percent
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              name
+              price
+              old_price
+              color
+              color_group
+              sale_product
+              images {
+                image {
+                  alt
+                  localFile {
+                    childImageSharp {
+                      gatsbyImageData(height: 200)
+                    }
+                  }
+                }
+              }
+              delivery {
+                document {
+                  ... on PrismicDelivery {
+                    data {
+                      body {
+                        ... on PrismicDeliveryBodyDeliveryToCities {
+                          id
+                          items {
+                            city_name
+                            cost
+                            delivery_description
+                            timing
+                          }
+                        }
+                      }
+                      variants {
+                        description
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+              credit {
+                document {
+                  ... on PrismicCredit {
+                    data {
+                      months_1
+                      months_2
+                      percent
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+  const products = data.allPrismicProduct.edges.map(edge => edge.node)
+
   return (
     <Grid container justify="space-between">
       <Grid
@@ -137,18 +259,21 @@ export default function SalesTextPanel({ sale, socials, products }) {
       </Grid>
       <Grid item>
         {mobile ? (
-            <div className={classes.productItemMobile}>
-
-          <SimilarProduct products={products} withoutHeader={true} />
-            </div>
-        ) : 
-          products.map(function(mapProduct, i) {
-              if(i < 3){
-                  return (<div className={classes.productItem}><CardSimilarProduct product={mapProduct} /></div>)
-              }
-              return null
+          <div className={classes.productItemMobile}>
+            <SimilarProduct products={products} withoutHeader={true} />
+          </div>
+        ) : (
+          products.map(function (mapProduct, i) {
+            if (i < 3) {
+              return (
+                <div className={classes.productItem}>
+                  <CardSimilarProduct product={mapProduct} />
+                </div>
+              )
+            }
+            return null
           })
-        }
+        )}
       </Grid>
     </Grid>
   )

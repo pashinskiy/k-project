@@ -184,10 +184,10 @@ const IndexPage = ({ data, location }) => {
     ? ""
     : JSON.parse(localStorage.getItem("order_number"))
 
-  const productsInCart = state.allPrismicProduct.edges
-    .filter(edge => !!state.inCart(edge.node))
-    .map(edge => edge.node)
-    .map(obj => ({ ...obj, count: state.inCart(obj) }))
+  const productsInCart = state.cart.map(item => ({
+    ...item.product,
+    count: item.count,
+  }))
 
   // преобразуем цену
   function priceMod(value) {

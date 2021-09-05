@@ -200,6 +200,7 @@ const IndexPage = ({ data: { allPrismicProduct } }) => {
 /**
  * Страница уцененных товаров
  * @module src/page/discounted-products
+ * @param {Object} props.data - объект данных полученый из prismic
  */
 export default IndexPage
 
@@ -215,9 +216,12 @@ export const query = graphql`
               product_accessories {
                 document {
                   ... on PrismicProduct {
-                    uid
                     id
+                    uid
                     data {
+                      name
+                      price
+                      old_price
                       images {
                         image {
                           localFile {
@@ -228,8 +232,40 @@ export const query = graphql`
                           alt
                         }
                       }
-                      price
-                      name
+                      delivery {
+                        document {
+                          ... on PrismicDelivery {
+                            data {
+                              body {
+                                ... on PrismicDeliveryBodyDeliveryToCities {
+                                  id
+                                  items {
+                                    city_name
+                                    cost
+                                    delivery_description
+                                    timing
+                                  }
+                                }
+                              }
+                              variants {
+                                description
+                                name
+                              }
+                            }
+                          }
+                        }
+                      }
+                      credit {
+                        document {
+                          ... on PrismicCredit {
+                            data {
+                              months_1
+                              months_2
+                              percent
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }

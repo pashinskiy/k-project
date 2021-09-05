@@ -1,6 +1,6 @@
 import React from "react"
-import { makeStyles } from "@material-ui/styles"
 import { Link, navigate } from "gatsby"
+import { makeStyles, useMediaQuery } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -85,6 +85,8 @@ export default function Search({ data }) {
     data.allPrismicHeader.edges[0]?.node.data.field_example.text
   )
 
+  const mobile = useMediaQuery("(max-width: 1025px)")
+
   function submit(e) {
     e.preventDefault()
     const url = new URL(window.location)
@@ -95,16 +97,20 @@ export default function Search({ data }) {
 
   return (
     <div className={classes.root}>
-      <Link to={`/products/`} className={classes.button}>
-        <img
-          src={
-            data.allPrismicHeader.edges[0]?.node.data.find_img.localFile
-              .publicURL
-          }
-          alt={data.allPrismicHeader.edges[0]?.node.data.find_img.alt ?? "img"}
-          className={classes.img}
-        />
-      </Link>
+      {mobile ? (
+        <Link to={`/products/`} className={classes.button}>
+          <img
+            src={
+              data.allPrismicHeader.edges[0]?.node.data.find_img.localFile
+                .publicURL
+            }
+            alt={
+              data.allPrismicHeader.edges[0]?.node.data.find_img.alt ?? "img"
+            }
+            className={classes.img}
+          />
+        </Link>
+      ) : null}
 
       <form onSubmit={submit} className={classes.form}>
         <img

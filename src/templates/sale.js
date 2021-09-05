@@ -7,22 +7,17 @@ import Layout from "../components/layout"
 import SaleCardMain from "../components/saleCardPanel/saleCardMain.js"
 import SalesTextPanel from "../components/salesTextPanel"
 
-import { GlobalStateContext } from "../context/GlobalContextProvider"
-
 const Sale = ({ data }) => {
-  const state = React.useContext(GlobalStateContext)
-
   const sale = data.prismicSales
   const socials = data.allPrismicFooter.edges[0].node.data.body2.filter(
     item => item.primary.social_img
   )
-  const products = state.allPrismicProduct.edges.map(edge => edge.node)
 
   return (
     <Layout>
       <Seo title="Sale" />
       <SaleCardMain sale={sale} />
-      <SalesTextPanel sale={sale} socials={socials} products={products} />
+      <SalesTextPanel sale={sale} socials={socials} />
     </Layout>
   )
 }

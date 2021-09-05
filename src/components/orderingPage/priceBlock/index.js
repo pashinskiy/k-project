@@ -363,7 +363,6 @@ export default function PriceBlock({ products }) {
   const [showMokkaInfo, setShowMokkaInfo] = React.useState(false)
   const [showMokkaIframe, setShowMokkaIframe] = React.useState(false)
   const [mokkaFormUrl, setMokkaFormUrl] = React.useState(false)
-  console.log(mokkaFormUrl)
 
   const orderingState = React.useContext(OrderingStateContext)
 

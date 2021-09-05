@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/styles"
 import ButtonWithIcon from "../header/buttonWithIcon"
 
 import { GlobalStateContext } from "../../../context/GlobalContextProvider"
+import { useMediaQuery } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,10 +41,11 @@ const useStyles = makeStyles(theme => ({
  */
 export default function MobileMenu({ data }) {
   const classes = useStyles()
+  const mobile = useMediaQuery("(max-width: 1025px)")
 
   const state = React.useContext(GlobalStateContext)
 
-  return (
+  return mobile ? (
     <nav className={classes.root}>
       <div className={classes.menu_point}>
         <ButtonWithIcon
@@ -64,7 +66,10 @@ export default function MobileMenu({ data }) {
             data.allPrismicHeader.edges[0]?.node.data.catalog_mobile_img
               .localFile?.publicURL + "#outline"
           }
-          alt={data.allPrismicHeader.edges[0]?.node.data.catalog_mobile_img.alt ?? "img"}
+          alt={
+            data.allPrismicHeader.edges[0]?.node.data.catalog_mobile_img.alt ??
+            "img"
+          }
         />
       </div>
       <div className={classes.menu_point}>
@@ -75,7 +80,9 @@ export default function MobileMenu({ data }) {
             data.allPrismicHeader.edges[0]?.node.data.favorites_img.localFile
               .publicURL + "#outline"
           }
-          alt={data.allPrismicHeader.edges[0]?.node.data.favorites_img.alt ?? "img"}
+          alt={
+            data.allPrismicHeader.edges[0]?.node.data.favorites_img.alt ?? "img"
+          }
           count={state.favorites.length}
         />
       </div>
@@ -92,5 +99,5 @@ export default function MobileMenu({ data }) {
         />
       </div>
     </nav>
-  )
+  ) : null
 }

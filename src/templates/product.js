@@ -14,7 +14,10 @@ import SimilarProducts from "../components/productPage/similarProducts"
 
 import { GlobalDispatchContext } from "../context/GlobalContextProvider"
 
-const Product = ({ data: { prismicProduct } }) => {
+const Product = ({
+  data: { prismicProduct, allPrismicProduct },
+  pageContext: { allVariant },
+}) => {
   const dispatch = React.useContext(GlobalDispatchContext)
 
   React.useEffect(() => {
@@ -70,8 +73,10 @@ const Product = ({ data: { prismicProduct } }) => {
         ]}
       />
       <div id="about_product" />
-      <CardProduct prismicProduct={prismicProduct} />
-      <SimilarProducts category={prismicProduct.data.category.document}/>
+      <CardProduct prismicProduct={prismicProduct} allVariant={allVariant} />
+      <SimilarProducts
+        products={allPrismicProduct.edges.map(edge => edge.node)}
+      />
       <div id="description" />
       <Landing slices={prismicProduct.data.body2} />
       <div id="photo" />
@@ -91,11 +96,134 @@ const Product = ({ data: { prismicProduct } }) => {
  * @module src/templates/product
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.data - объект данных полученый из prismic
+ * @param {Object} props.pageContext - объект контекста, передаваемый при формировании страницы
  */
 export default Product
 
 export const pageQuery = graphql`
-  query ProductBySlug($uid: String!) {
+  query ProductBySlug($uid: String!, $subcategory: String!) {
+    allPrismicProduct(
+      filter: { data: { category: { uid: { eq: $subcategory } } } }
+      limit: 30
+    ) {
+      edges {
+        node {
+          id
+          uid
+          data {
+            all_product_accessories {
+              product_accessories {
+                document {
+                  ... on PrismicProduct {
+                    id
+                    uid
+                    data {
+                      name
+                      price
+                      old_price
+                      images {
+                        image {
+                          localFile {
+                            childImageSharp {
+                              gatsbyImageData
+                            }
+                          }
+                          alt
+                        }
+                      }
+                      delivery {
+                        document {
+                          ... on PrismicDelivery {
+                            data {
+                              body {
+                                ... on PrismicDeliveryBodyDeliveryToCities {
+                                  id
+                                  items {
+                                    city_name
+                                    cost
+                                    delivery_description
+                                    timing
+                                  }
+                                }
+                              }
+                              variants {
+                                description
+                                name
+                              }
+                            }
+                          }
+                        }
+                      }
+                      credit {
+                        document {
+                          ... on PrismicCredit {
+                            data {
+                              months_1
+                              months_2
+                              percent
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            name
+            price
+            old_price
+            color
+            color_group
+            sale_product
+            images {
+              image {
+                alt
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData(height: 200)
+                  }
+                }
+              }
+            }
+            delivery {
+              document {
+                ... on PrismicDelivery {
+                  data {
+                    body {
+                      ... on PrismicDeliveryBodyDeliveryToCities {
+                        id
+                        items {
+                          city_name
+                          cost
+                          delivery_description
+                          timing
+                        }
+                      }
+                    }
+                    variants {
+                      description
+                      name
+                    }
+                  }
+                }
+              }
+            }
+            credit {
+              document {
+                ... on PrismicCredit {
+                  data {
+                    months_1
+                    months_2
+                    percent
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     prismicProduct(uid: { eq: $uid }) {
       id
       uid
@@ -446,9 +574,12 @@ export const pageQuery = graphql`
           product_accessories {
             document {
               ... on PrismicProduct {
-                uid
                 id
+                uid
                 data {
+                  name
+                  price
+                  old_price
                   images {
                     image {
                       localFile {
@@ -459,8 +590,40 @@ export const pageQuery = graphql`
                       alt
                     }
                   }
-                  price
-                  name
+                  delivery {
+                    document {
+                      ... on PrismicDelivery {
+                        data {
+                          body {
+                            ... on PrismicDeliveryBodyDeliveryToCities {
+                              id
+                              items {
+                                city_name
+                                cost
+                                delivery_description
+                                timing
+                              }
+                            }
+                          }
+                          variants {
+                            description
+                            name
+                          }
+                        }
+                      }
+                    }
+                  }
+                  credit {
+                    document {
+                      ... on PrismicCredit {
+                        data {
+                          months_1
+                          months_2
+                          percent
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }

@@ -105,10 +105,10 @@ export default function CardProduct({ product, allTitle }) {
   const classes = useStyle()
 
   const img =
-    product.data.images[0]?.image.localFile?.childImageSharp.gatsbyImageData
-  const alt = product.data.images[0]?.image.alt
-  const title = product.data.name
-  const price = product.data.price
+    product?.data.images[0]?.image.localFile?.childImageSharp.gatsbyImageData
+  const alt = product?.data.images[0]?.image.alt
+  const title = product?.data.name
+  const price = product?.data.price
 
   return img ? (
     <Grid className={`${classes.wrapper} product--card`}>

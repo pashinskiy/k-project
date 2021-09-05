@@ -130,6 +130,7 @@ const useStyles = makeStyles(theme => ({
 /**
  * Страница поиска продуктов
  * @module src/page/products
+ * @param {Object} props.data - объект данных полученый из prismic
  */
 export default function Products({ data: { allPrismicProduct } }) {
   const classes = useStyles()
@@ -249,9 +250,12 @@ export const query = graphql`
               product_accessories {
                 document {
                   ... on PrismicProduct {
-                    uid
                     id
+                    uid
                     data {
+                      name
+                      price
+                      old_price
                       images {
                         image {
                           localFile {
@@ -262,8 +266,40 @@ export const query = graphql`
                           alt
                         }
                       }
-                      price
-                      name
+                      delivery {
+                        document {
+                          ... on PrismicDelivery {
+                            data {
+                              body {
+                                ... on PrismicDeliveryBodyDeliveryToCities {
+                                  id
+                                  items {
+                                    city_name
+                                    cost
+                                    delivery_description
+                                    timing
+                                  }
+                                }
+                              }
+                              variants {
+                                description
+                                name
+                              }
+                            }
+                          }
+                        }
+                      }
+                      credit {
+                        document {
+                          ... on PrismicCredit {
+                            data {
+                              months_1
+                              months_2
+                              percent
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }

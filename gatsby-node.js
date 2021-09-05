@@ -10,6 +10,14 @@ exports.createPages = async ({ graphql, actions }) => {
         edges {
           node {
             uid
+            data {
+              name
+              color
+              color_group
+              category {
+                uid
+              }
+            }
           }
         }
       }
@@ -71,6 +79,10 @@ exports.createPages = async ({ graphql, actions }) => {
       component: product,
       context: {
         uid: edge.node.uid,
+        allVariant: pages.data.allPrismicProduct.edges.filter(
+          item => item.node.data.name === edge.node.data.name
+        ),
+        subcategory: edge.node.data.category.uid ?? "",
       },
     })
   })
