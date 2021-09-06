@@ -137,13 +137,8 @@ export default function ButtonAddCart({
   const dispatch = React.useContext(GlobalDispatchContext)
 
   function addToCart() {
-<<<<<<< HEAD
-    setDialogOpen(true)
-    dispatch({ type: "ADD_PRODUCT_IN_CART", payload: product })
-=======
     if (variant !== "offerPage") setDialogOpen(true)
     dispatch({ type: "ADD_PRODUCT_IN_CART", payload: product.id })
->>>>>>> master
   }
 
   let classText
