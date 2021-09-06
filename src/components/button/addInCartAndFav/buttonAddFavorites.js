@@ -111,7 +111,7 @@ export default function ButtonAddFavorites({ product, variant }) {
       aria-label={isFavorite ? "убрать из избранного" : "добавить в избранное"}
       className={classes.button + " " + classButton + " " + background}
     >
-      {isFavorite ? <Favorites /> : <NotFavorites />}
+      {isFavorite ? <Favorites /> : <NotFavorites id="add-to-wishlist" />}
     </Button>
   )
 }
