@@ -21,7 +21,7 @@ const build = {
 }
 
 app.post("/build", (req, res) => {
-  fetch("http://admin.krypton.ru/api/products/add")
+  // fetch("http://admin.krypton.ru/api/products/add")
   if (build.status === "В ожидании сборки.") {
     build.status = "Собирается."
     res.sendStatus(200)

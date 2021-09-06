@@ -1,5 +1,6 @@
 import React from "react"
-import Logo from '../static/svg/logo.svg';
+import { Helmet } from "react-helmet"
+import Logo from "../static/svg/logo.svg"
 
 /**
  * Компонент-обертка, позволяет отображать логотип до загрузки основного содержимого
@@ -29,5 +30,20 @@ export default function ClientOnly({ children, ...delegated }) {
       </div>
     )
   }
-  return <div {...delegated}>{children}</div>
+  return (
+    <div {...delegated}>
+      <Helmet>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="preconnect"
+        />
+        <script src="https://backend.demo.revoup.ru/javascripts/iframe/v2/revoiframe.js"></script>
+      </Helmet>
+      {children}
+    </div>
+  )
 }

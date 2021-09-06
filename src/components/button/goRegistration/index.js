@@ -59,7 +59,7 @@ export default function GoRegistration({ text, onClick }) {
   }
 
   return (
-    <Button disableRipple onClick={buttonClick} className={classes.button}>
+    <Button id="checkout" disableRipple onClick={buttonClick} className={classes.button}>
       <Typography align="center" className={classes.text}>
         {text}
       </Typography>
