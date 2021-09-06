@@ -168,9 +168,9 @@ export default function ButtonAddCart({
         className={classes.button + " " + classButton}
       >
         {variant === "offerPage" ? (
-          <IconButtonPlus className={classes.iconButtonPlus} />
+          <IconButtonPlus id="add-to-cart" className={classes.iconButtonPlus} />
         ) : null}
-        <Typography align="center" className={classText}>
+        <Typography id="add-to-cart" align="center" className={classText}>
           {text}
         </Typography>
       </Button>
