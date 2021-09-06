@@ -104,7 +104,7 @@ export const pageQuery = graphql`
   query ProductBySlug($uid: String!, $subcategory: String!) {
     allPrismicProduct(
       filter: { data: { category: { uid: { eq: $subcategory } } } }
-      limit: 30
+      limit: 7
     ) {
       edges {
         node {
