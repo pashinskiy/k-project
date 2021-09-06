@@ -132,13 +132,15 @@ export default function SocialNetworks(props) {
               className={classes.card}
             >
               <Typography
+                id={socialId(social.node.primary.link.url)}
                 variant="h4"
                 dangerouslySetInnerHTML={{
                   __html: social.node.primary.social_name.raw[0].text,
                 }}
               />
-              <div className={classes.icon}>
+              <div id={socialId(social.node.primary.link.url)} className={classes.icon}>
                 <img
+                  id={socialId(social.node.primary.link.url)}
                   src={
                     social.node.primary.social_img_white.localFile?.publicURL
                   }
