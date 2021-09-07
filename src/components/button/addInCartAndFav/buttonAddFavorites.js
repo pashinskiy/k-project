@@ -105,13 +105,13 @@ export default function ButtonAddFavorites({ product, variant }) {
     variant === "page" ? classes.buttonPage : classes.buttonCard
   return (
     <Button
-      id="add-to-wishlist"
+      id={`add-to-wishlist-${product.uid}`}
       disableRipple
       onClick={changeToFavorites}
       aria-label={isFavorite ? "убрать из избранного" : "добавить в избранное"}
       className={classes.button + " " + classButton + " " + background}
     >
-      {isFavorite ? <Favorites /> : <NotFavorites id="add-to-wishlist" />}
+      {isFavorite ? <Favorites /> : <NotFavorites id={`add-to-wishlist-${product.uid}`} />}
     </Button>
   )
 }
