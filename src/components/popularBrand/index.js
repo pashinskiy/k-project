@@ -101,7 +101,7 @@ export default function PopularBrand({ products }) {
                 )[0].primary.image?.localFile?.childImageSharp.gatsbyImageData
               }
               cardTitle={title}
-              cardLink={url.href}
+              cardLink={url.search}
             />
           </div>
         )

@@ -45,7 +45,7 @@ export default function FiltersByTag({ products }) {
         url.searchParams.set("group", tag)
         return (
           <div key={tag} className={classes.wrapper}>
-            <CardWidget variant="small" cardTitle={title} cardLink={url.href} />
+            <CardWidget variant="small" cardTitle={title} cardLink={url.search} />
           </div>
         )
       })}

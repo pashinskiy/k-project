@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql } from "gatsby"
+import { graphql, navigate } from "gatsby"
 import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
 
 import Seo from "../components/seo"
@@ -107,18 +107,22 @@ const IndexPage = ({ data: { prismicSubcategory, allPrismicProduct } }) => {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 1025px)")
 
-  const allProducts = allPrismicProduct.edges.map(edge => edge.node)
+  const [allProducts, setAllProducts] = React.useState(
+    allPrismicProduct.edges.map(edge => edge.node)
+  )
+  const [filterProducts, setFilterProducts] = React.useState([])
 
-  const [filterProducts, setFilterProducts] = React.useState(allProducts)
+  function sortingProducts(newValue){
+    setAllProducts(newValue)
+    setFilterProducts(newValue)
+  }
 
   const arrayCards = filterProducts.map(product => (
     <CardProduct product={product} key={product.id} />
   ))
 
   function cleanFilter() {
-    const url = new URL(window.location)
-    url.search = ""
-    window.location = url.href
+    navigate(`${window.location.pathname}`)
   }
 
   return (
@@ -144,7 +148,7 @@ const IndexPage = ({ data: { prismicSubcategory, allPrismicProduct } }) => {
           justify="space-between"
           className={classes.blockSortAndFilter}
         >
-          <Sort products={filterProducts} setSortProducts={setFilterProducts} />
+          <Sort products={allProducts} setSortProducts={sortingProducts} />
           {mobile ? (
             <Filter
               products={allProducts}

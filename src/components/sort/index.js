@@ -4,11 +4,6 @@ import { navigate } from "gatsby"
 
 import IconSort from "../../../static/svg/sort.svg"
 
-import {
-  GlobalStateContext,
-  GlobalDispatchContext,
-} from "../../context/GlobalContextProvider"
-
 const useStyles = makeStyles(theme => ({
   button: {
     padding: 0,
@@ -114,8 +109,6 @@ const useStyles = makeStyles(theme => ({
  */
 export default function Sort({ products, setSortProducts }) {
   const classes = useStyles()
-  const state = React.useContext(GlobalStateContext)
-  const dispatch = React.useContext(GlobalDispatchContext)
 
   const variantsSort = [
     { name: "Сначала дешевые", func: sortByPrice },
@@ -151,16 +144,6 @@ export default function Sort({ products, setSortProducts }) {
     setValue(name)
     const newAllProduct = [...products].sort(func)
     setSortProducts(newAllProduct)
-
-    // dispatch({
-    //   type: "SET_ALL_PRODUCTS",
-    //   payload: {
-    //     edges: state.allPrismicProduct.edges
-    //       .map(edge => edge.node)
-    //       .sort(func)
-    //       .map(product => ({ node: product })),
-    //   },
-    // })
 
     const url = new URL(window.location.href)
     url.searchParams.set("page", 1)

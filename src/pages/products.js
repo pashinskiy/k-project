@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql } from "gatsby"
+import { graphql, navigate } from "gatsby"
 import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
 import Layout from "../components/layout"
 
@@ -138,6 +138,9 @@ export default function Products({ data: { allPrismicProduct } }) {
   const mobile = useMediaQuery("(max-width: 1025px)")
   const search = useMediaQuery("(max-width: 1025px)")
 
+  const [title, setTitle] = React.useState("")
+  const [category, setCategory] = React.useState("")
+
   const newUrl = new URL(window.location)
   const titleUrl = newUrl.searchParams.has("search")
     ? JSON.parse(newUrl.searchParams.get("search"))
@@ -146,25 +149,24 @@ export default function Products({ data: { allPrismicProduct } }) {
     ? JSON.parse(newUrl.searchParams.get("category"))
     : ""
 
-  const [url, setUrl] = React.useState(null)
-
   const [allProducts, setAllProduct] = React.useState(
     allPrismicProduct.edges.map(edge => edge.node)
   )
   const [filterProducts, setFilterProducts] = React.useState([])
 
-  if (newUrl.href !== url) {
+  if (titleUrl !== title || categoryUrl !== category) {
     const newAllProduct = allPrismicProduct.edges
-      .map(edge => edge.node)
       .filter(
-        product =>
-          (product.data.name.toLowerCase().includes(titleUrl.toLowerCase()) ||
+        edge =>
+          (edge.node.data.name.toLowerCase().includes(titleUrl.toLowerCase()) ||
             titleUrl === "") &&
-          (product.data.main_category.document?.data.name === categoryUrl ||
+          (edge.node.data.main_category.document?.data.name === categoryUrl ||
             categoryUrl === "")
       )
+      .map(edge => edge.node)
 
-    setUrl(newUrl.href)
+    setTitle(titleUrl)
+    setCategory(categoryUrl)
     setAllProduct(newAllProduct)
     setFilterProducts(newAllProduct)
   }
@@ -174,8 +176,12 @@ export default function Products({ data: { allPrismicProduct } }) {
   ))
 
   function cleanFilter() {
-    newUrl.search = ""
-    window.location = newUrl.href
+    navigate(`${window.location.pathname}`)
+  }
+
+  function sortingProducts(newValue) {
+    setAllProduct(newValue)
+    setFilterProducts(newValue)
   }
 
   return (
@@ -196,7 +202,7 @@ export default function Products({ data: { allPrismicProduct } }) {
         justify="space-between"
         className={classes.blockSortAndFilter}
       >
-        <Sort products={filterProducts} setSortProducts={setFilterProducts} />
+        <Sort products={allProducts} setSortProducts={sortingProducts} />
         {mobile ? (
           <Filter
             products={allProducts}
