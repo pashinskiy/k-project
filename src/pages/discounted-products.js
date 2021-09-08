@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql } from "gatsby"
+import { graphql, navigate } from "gatsby"
 import { makeStyles, useMediaQuery, Grid, Typography } from "@material-ui/core"
 
 import Seo from "../components/seo"
@@ -13,7 +13,6 @@ import Filter from "../components/filter"
 import Pagination from "../components/pagination"
 import Layout from "../components/layout"
 import SalesIcon from "../../static/svg/salesIcon.svg"
-import { navigate } from "gatsby"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -109,29 +108,44 @@ const IndexPage = ({ data: { allPrismicProduct } }) => {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 1025px)")
 
-  const allProducts = allPrismicProduct.edges.map(edge => edge.node)
+  const [allProducts, setAllProduct] = React.useState(
+    allPrismicProduct.edges.map(edge => edge.node)
+  )
+  const [filterProducts, setFilterProducts] = React.useState([])
+  const [subcategory, setSubcategory] = React.useState("")
 
   const url = new URL(window.location)
-  const subcategoryUrl = JSON.parse(url.searchParams.get("subcategory"))
+  const subcategoryUrl = url.searchParams.has("subcategory")
+    ? JSON.parse(url.searchParams.get("subcategory"))
+    : ""
 
-  const products = subcategoryUrl
-    ? allProducts.filter(product => {
-        if (product.data.category.document === null) return false
-        return product.data.category.document?.data.name === subcategoryUrl
+  if (subcategoryUrl !== subcategory) {
+    const newAllProducts = allPrismicProduct.edges
+      .filter(edge => {
+        if (edge.node.data.category.document === null) return false
+        return (
+          edge.node.data.category.document?.data.name === subcategoryUrl ||
+          subcategoryUrl === ""
+        )
       })
-    : allProducts
+      .map(edge => edge.node)
 
-  const [filterProducts, setFilterProducts] = React.useState(products)
+    setSubcategory(subcategoryUrl)
+    setAllProduct(newAllProducts)
+    setFilterProducts(newAllProducts)
+  }
 
   const arrayCards = filterProducts.map(product => (
     <CardProduct product={product} key={product.id} />
   ))
 
   function cleanFilter() {
-    const url = new URL(window.location)
-    url.search = ""
-    window.location = url.href
     navigate(`${window.location.pathname}`)
+  }
+
+  function sortingProducts(newValue) {
+    setAllProduct(newValue)
+    setFilterProducts(newValue)
   }
 
   return (
@@ -152,15 +166,20 @@ const IndexPage = ({ data: { allPrismicProduct } }) => {
           count={allProducts.length}
           subcategory
         />
-        <FilterCategory products={allProducts} />
+        <FilterCategory
+          products={allPrismicProduct.edges.map(edge => edge.node)}
+        />
         <Grid
           container
           justify="space-between"
           className={classes.blockSortAndFilter}
         >
-          <Sort products={filterProducts} setSortProducts={setFilterProducts} />
+          <Sort products={allProducts} setSortProducts={sortingProducts} />
           {mobile ? (
-            <Filter products={products} setFilterProducts={setFilterProducts} />
+            <Filter
+              products={allProducts}
+              setFilterProducts={setFilterProducts}
+            />
           ) : null}
         </Grid>
 
@@ -190,7 +209,10 @@ const IndexPage = ({ data: { allPrismicProduct } }) => {
             />
           </Grid>
           {mobile ? null : (
-            <Filter products={products} setFilterProducts={setFilterProducts} />
+            <Filter
+              products={allProducts}
+              setFilterProducts={setFilterProducts}
+            />
           )}
         </Grid>
       </div>
@@ -206,7 +228,7 @@ export default IndexPage
 
 export const query = graphql`
   query discountedPage {
-    allPrismicProduct {
+    allPrismicProduct(filter: { data: { sale_product: { eq: true } } }) {
       edges {
         node {
           id

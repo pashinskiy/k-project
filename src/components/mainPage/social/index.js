@@ -138,9 +138,9 @@ export default function SocialNetworks(props) {
                   __html: social.node.primary.social_name.raw[0].text,
                 }}
               />
-              <div id={socialId(social.node.primary.link.url)} className={classes.icon}>
+              <div id={`${socialId(social.node.primary.link.url)}-link`} className={classes.icon}>
                 <img
-                  id={socialId(social.node.primary.link.url)}
+                  id={`${socialId(social.node.primary.link.url)}-img`}
                   src={
                     social.node.primary.social_img_white.localFile?.publicURL
                   }

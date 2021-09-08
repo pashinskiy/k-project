@@ -46,7 +46,7 @@ export default function FiltersBySubcategory({ products }) {
     const url = new URL(window.location)
     url.search = ""
     url.searchParams.set("subcategory", JSON.stringify(value))
-    window.location = url.href
+    // window.location = url.href
     navigate(`${window.location.pathname}${url.search}`)
   }
 

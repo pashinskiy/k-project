@@ -138,7 +138,7 @@ export default function ButtonAddCart({
 
   function addToCart() {
     if (variant !== "offerPage") setDialogOpen(true)
-    dispatch({ type: "ADD_PRODUCT_IN_CART", payload: product.id })
+    dispatch({ type: "ADD_PRODUCT_IN_CART", payload: product })
   }
 
   let classText
@@ -161,7 +161,7 @@ export default function ButtonAddCart({
   return (
     <>
       <Button
-        id="add-to-cart"
+        id={`add-to-cart-${product.uid}`}
         disableRipple
         onClick={addToCart}
         aria-label="добавить в корзину"

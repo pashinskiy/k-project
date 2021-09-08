@@ -466,7 +466,7 @@ export default function BlockPrice({ product, allColors }) {
                   onClick={switchShowMokkaInfo}
                   className={classes.mokkaInfo}
                 >
-                  <MokkaInfo />
+                  <MokkaInfo aria-label="mokka info"/>
                 </span>
               </Typography>
             ) : null}

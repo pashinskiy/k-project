@@ -27,8 +27,8 @@ export default function Social({ icon, alt, link }) {
     }
   }
   return (
-    <a id={contactId(link)} href={`${link}`} target="_blank" rel="noopener noreferrer">
-      <img id={contactId(link)} src={icon} alt={alt ?? "icon"} width={36} height={36} />
+    <a id={`${contactId(link)}-link`} href={`${link}`} target="_blank" rel="noopener noreferrer">
+      <img id={`${contactId(link)}-img`} src={icon} alt={alt ?? "icon"} width={36} height={36} />
     </a>
   )
 }
