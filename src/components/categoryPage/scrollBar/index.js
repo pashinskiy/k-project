@@ -44,6 +44,7 @@ const useStyle = makeStyles(theme => ({
       touchAction: "auto",
       flexWrap: "nowrap",
       overflowX: "scroll",
+      overflowY: "hidden",
       scrollbarWidth: "none",
       "-ms-overflow-style": "none",
       "&::-webkit-scrollbar": {
