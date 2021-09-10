@@ -68,18 +68,13 @@ function SEO({ description, lang, meta, title }) {
           name: `twitter:description`,
           content: metaDescription,
         },
+        {
+          name: "viewport",
+          content:
+            "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
+        },
       ].concat(meta)}
-    >
-      {/* <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="preconnect"
-      />
-      <script src="https://backend.demo.revoup.ru/javascripts/iframe/v2/revoiframe.js"></script> */}
-    </Helmet>
+    ></Helmet>
   )
 }
 
@@ -100,9 +95,9 @@ SEO.propTypes = {
  * Компонент настройки параметров seo
  * @module src/components/seo
  * @param {Object} props - объект свойств компонента React
- * @param {String} props.description - описание сайта 
- * @param {String} props.lang - язык 
- * @param {Object[]} props.meta  - массив настроек meta 
+ * @param {String} props.description - описание сайта
+ * @param {String} props.lang - язык
+ * @param {Object[]} props.meta  - массив настроек meta
  * @param {String} props.title - заголовок страницы
  */
 export default SEO
