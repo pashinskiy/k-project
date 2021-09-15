@@ -5,7 +5,7 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: `Krypton.ru`,
-    description: `Современный маркетплейс, в котором вы найдете по низним качественную технику, смартфоны, ноутбуки, гаджеты и многое другое.`,
+    description: `Современный маркетплейс, в котором вы найдете качественную технику, смартфоны, ноутбуки, гаджеты и многое другое по низким ценам`,
     author: `https://krypton.ru/`,
     siteUrl: `https://krypton.ru/`,
   },
