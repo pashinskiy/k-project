@@ -441,7 +441,7 @@ export default function PriceBlock({ products }) {
         <GoRegistration text="Перейти к оформлению" onClick={goRegistration} />
       </div>
 
-      {(credit && !mobile) || (summPrice < 100000 && summPrice >= 5000) ? (
+      {(credit || (summPrice < 100000 && summPrice >= 5000)) && !mobile ? (
         <>
           <Typography className={classes.titleCreditAndDelivery}>
             Оплата авансом и кредит
@@ -464,8 +464,7 @@ export default function PriceBlock({ products }) {
             >
               Оплата авансом
               <span className={classes.rassrochkaSpan}>
-                от {priceMod(Math.trunc(summPrice / credit.months_2))}{" "}
-                ₽/мес
+                от {priceMod(Math.trunc(summPrice / credit.months_2))} ₽/мес
               </span>
               <span className={classes.mokka}>
                 <Mokka />
@@ -476,7 +475,7 @@ export default function PriceBlock({ products }) {
                 onClick={switchShowMokkaInfo}
                 className={classes.mokkaInfo}
               >
-                <MokkaInfo aria-label="mokka info"/>
+                <MokkaInfo aria-label="mokka info" />
               </span>
             </Typography>
           ) : null}

@@ -274,7 +274,7 @@ export default function DeliveryData({ prismicCartAndOrder }) {
     showTimesExpressDelivery,
     setShowTimesExpressDelivery,
   ] = React.useState(false)
-  
+
   function getTimesExpress() {
     const date = new Date()
 
@@ -459,11 +459,11 @@ export default function DeliveryData({ prismicCartAndOrder }) {
           }
           title="Укажите адрес"
         />
-        <WrapperWithTitle title="Улица">
+        <WrapperWithTitle title="Улица" necessarily={false}>
           {/* <Select options={streets} afterChange={setStreet} /> */}
           <Input
             afterChange={setStreet}
-            checkValue={() => orderingState.validationStreet()}
+            // checkValue={() => orderingState.validationStreet()}
           />
         </WrapperWithTitle>
 
@@ -472,17 +472,17 @@ export default function DeliveryData({ prismicCartAndOrder }) {
           justify="space-between"
           className={classes.twoInputWrapper}
         >
-          <WrapperWithTitle title="Дом">
+          <WrapperWithTitle title="Дом" necessarily={false}>
             <Input
               afterChange={setHouse}
-              checkValue={() => orderingState.validationHouse()}
+              // checkValue={() => orderingState.validationHouse()}
             />
           </WrapperWithTitle>
 
-          <WrapperWithTitle title="Квартира">
+          <WrapperWithTitle title="Квартира" necessarily={false}>
             <Input
               afterChange={setApartment}
-              checkValue={() => orderingState.validationApartament()}
+              // checkValue={() => orderingState.validationApartament()}
             />
           </WrapperWithTitle>
         </Grid>

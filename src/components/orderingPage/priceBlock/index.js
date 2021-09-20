@@ -566,11 +566,11 @@ export default function PriceBlock({ products }) {
         <Pay text="Подтвердить заказ" products={products} onClick={payOrder} />
 
         <Modal open={mokkaFormUrl} className={classes.modal}>
-          <MokkaIframePay url={mokkaFormUrl}/>
+          <MokkaIframePay url={mokkaFormUrl} />
         </Modal>
       </div>
 
-      {(credit && !mobile) || (order.price < 100000 && order.price >= 5000) ? (
+      {(credit || (order.price < 100000 && order.price >= 5000)) && !mobile ? (
         <>
           <Typography className={classes.titleCreditAndDelivery}>
             Оплата авансом и кредит
@@ -604,7 +604,7 @@ export default function PriceBlock({ products }) {
                 onClick={switchShowMokkaInfo}
                 className={classes.mokkaInfo}
               >
-                <MokkaInfo aria-label="mokka info"/>
+                <MokkaInfo aria-label="mokka info" />
               </span>
             </Typography>
           ) : null}

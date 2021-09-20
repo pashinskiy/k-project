@@ -101,23 +101,23 @@ export default function OrderingContext({ children }) {
     apartment: false,
     variantPay: "онлайн",
     name: false,
-    phone: false,
+    phone: "+7",
     validationCity() {
       if (!this.city) return false
       return this.cities.includes(this.city)
     },
-    validationStreet() {
-      if (!this.street) return false
-      return /^[0-9a-zа-яё\s]+$/i.test(this.street)
-    },
-    validationHouse() {
-      if (!this.house) return false
-      return /^\s*[0-9]+\s*$/.test(this.house)
-    },
-    validationApartament() {
-      if (!this.apartment) return false
-      return /^\s*[0-9]+\s*$/.test(this.apartment)
-    },
+    // validationStreet() {
+    //   if (!this.street) return false
+    //   return /^[0-9a-zа-яё\s]+$/i.test(this.street)
+    // },
+    // validationHouse() {
+    //   if (!this.house) return false
+    //   return /^\s*[0-9]+\s*$/.test(this.house)
+    // },
+    // validationApartament() {
+    //   if (!this.apartment) return false
+    //   return /^\s*[0-9]+\s*$/.test(this.apartment)
+    // },
     validationName() {
       if (!this.name) return false
       return /^[a-zа-я\s]+$/i.test(this.name)
@@ -134,10 +134,10 @@ export default function OrderingContext({ children }) {
           key => !this[key] && key !== "focusingOnField"
         ) &&
         this.validationCity() &&
-        this.validationStreet() &&
-        this.validationHouse() &&
-        this.validationApartament() &&
-        this.validationPhone() &&
+        // this.validationStreet() &&
+        // this.validationHouse() &&
+        // this.validationApartament() &&
+        this.validationName() &&
         this.validationPhone()
       )
     },

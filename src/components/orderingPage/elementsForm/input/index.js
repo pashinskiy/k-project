@@ -1,5 +1,5 @@
 import React from "react"
-import { makeStyles } from "@material-ui/core"
+import { makeStyles, useMediaQuery } from "@material-ui/core"
 
 import { OrderingDispatchContext } from "../../context"
 
@@ -55,9 +55,11 @@ export default function Input({ afterChange, checkValue, ...other }) {
   const classes = useStyle()
   const orderingDispatch = React.useContext(OrderingDispatchContext)
 
+  const smartPhoneScreen = useMediaQuery("(max-width: 767px)")
+
   checkValue = checkValue ? checkValue : () => true
 
-  const error = checkValue() ? "" : classes.error
+  const error = checkValue() && !smartPhoneScreen ? "" : classes.error
 
   function onInput(e) {
     const newValue = e.currentTarget.value

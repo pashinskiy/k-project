@@ -52,6 +52,7 @@ export default function RecipientData() {
     orderingDispatch({ type: "SET_NAME", payload: value })
   }
   function setPhone(value) {
+    if (value.slice(0, 2) !== "+7") value = "+7"
     orderingDispatch({ type: "SET_PHONE", payload: value })
   }
 
@@ -79,6 +80,7 @@ export default function RecipientData() {
           <Input
             afterChange={setPhone}
             checkValue={() => orderingState.validationPhone()}
+            value={orderingState.phone}
           />
         </WrapperWithTitle>
       </Grid>
