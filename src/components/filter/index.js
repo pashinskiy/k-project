@@ -258,7 +258,7 @@ export default function Filter({ products, setFilterProducts }) {
 
   const desktop = useMediaQuery("(min-width: 835px)")
   const second_variant = useMediaQuery(
-    "(min-width: 415px) and (max-width: 1025px)"
+    "(min-width: 767px) and (max-width: 1025px)"
   )
   const [show, setShow] = React.useState(false)
 

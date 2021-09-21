@@ -43,7 +43,7 @@ const useStyle = makeStyles(theme => ({
  */
 export default function RecipientData() {
   const classes = useStyle()
-  const smartPhoneScreen = useMediaQuery("(max-width: 415px)")
+  const smartPhoneScreen = useMediaQuery("(max-width: 767px)")
 
   const orderingState = React.useContext(OrderingStateContext)
   const orderingDispatch = React.useContext(OrderingDispatchContext)

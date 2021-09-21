@@ -130,9 +130,9 @@ export default function OrderingContext({ children }) {
     },
     validationAll() {
       return (
-        !Object.keys(this).some(
-          key => !this[key] && key !== "focusingOnField"
-        ) &&
+        // !Object.keys(this).some(
+        //   key => !this[key] && key !== "focusingOnField"
+        // ) &&
         this.validationCity() &&
         // this.validationStreet() &&
         // this.validationHouse() &&

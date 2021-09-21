@@ -155,7 +155,7 @@ const useStyle = makeStyles(theme => ({
  */
 export default function PayData({ prismicCartAndOrder }) {
   const classes = useStyle()
-  const smartPhoneScreen = useMediaQuery("(max-width: 415px)")
+  const smartPhoneScreen = useMediaQuery("(max-width: 767px)")
 
   const order = JSON.parse(localStorage.getItem("order"))
 
