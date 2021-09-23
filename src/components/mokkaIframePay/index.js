@@ -1,5 +1,6 @@
 import React from "react"
 import { makeStyles } from "@material-ui/core"
+import { navigate } from "gatsby"
 
 const useStyle = makeStyles(theme => ({
   iframe: {
@@ -28,6 +29,7 @@ export default function MokkaIframePay({ url }) {
 
   React.useEffect(() => {
     window.REVO.Form.show(url, "#mokka_pay")
+    window.REVO.Form.onClose(() => navigate("/order/"))
   }, [])
 
   return <div id="mokka_pay" className={classes.iframe}></div>

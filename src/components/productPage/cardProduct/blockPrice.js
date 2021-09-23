@@ -437,7 +437,7 @@ export default function BlockPrice({ product, allColors }) {
               Оплата авансом и кредит
             </Typography>
             <Typography hidden={!creditValue} className={classes.textCredit}>
-              Кредит от <span>{priceMod(Math.trunc(creditValue))} ₽/мес</span>
+              Кредит в Тинькофф от <span>{priceMod(Math.trunc(creditValue))} ₽/мес</span>
             </Typography>
 
             {product.data.price < 100000 ? (

@@ -448,7 +448,8 @@ export default function PriceBlock({ products }) {
           </Typography>
 
           <Typography hidden={!creditValue} className={classes.textCredit}>
-            Кредит от <span>{priceMod(Math.trunc(creditValue))} ₽/мес</span>
+            Кредит в Тинькофф от{" "}
+            <span>{priceMod(Math.trunc(creditValue))} ₽/мес</span>
           </Typography>
 
           {summPrice < 100000 && summPrice >= 5000 ? (

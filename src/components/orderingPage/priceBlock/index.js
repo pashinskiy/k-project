@@ -370,8 +370,12 @@ export default function PriceBlock({ products }) {
 
   const order = JSON.parse(localStorage.getItem("order"))
 
+  const [sendQuery, setSendQuery] = React.useState(false)
   function payOrder() {
+    if (sendQuery) return
+
     if (validData) {
+      setSendQuery(true)
       const apiURL = "https://admin.krypton.ru/api/order/create/"
 
       const headers = new Headers()
@@ -429,6 +433,10 @@ export default function PriceBlock({ products }) {
           if (orderingState.variantPay === "в кредит") {
             window.location.href = res.payment_data.url
           }
+        })
+        .catch(error => {
+          setSendQuery(false)
+          console.log(error)
         })
     }
   }
@@ -577,7 +585,8 @@ export default function PriceBlock({ products }) {
           </Typography>
 
           <Typography hidden={!creditValue} className={classes.textCredit}>
-            Кредит от <span>{priceMod(Math.trunc(creditValue))} ₽/мес</span>
+            Кредит в Тинькофф от{" "}
+            <span>{priceMod(Math.trunc(creditValue))} ₽/мес</span>
           </Typography>
 
           {order.price < 100000 && order.price >= 5000 ? (

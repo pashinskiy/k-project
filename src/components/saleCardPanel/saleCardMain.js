@@ -1,10 +1,5 @@
 import React from "react"
-import {
-  makeStyles,
-  Typography,
-  Card,
-  useMediaQuery,
-} from "@material-ui/core"
+import { makeStyles, Typography, Card, useMediaQuery } from "@material-ui/core"
 import { GatsbyImage } from "gatsby-plugin-image"
 
 const useStyles = makeStyles(theme => ({
@@ -14,14 +9,14 @@ const useStyles = makeStyles(theme => ({
     boxShadow: "none",
     backgroundColor: theme.palette.background.secondary,
     position: "relative",
-    
+
     marginBottom: "2.1875vw",
     borderRadius: "1.5625vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     padding: "0.625vw",
     "@media(min-width: 1280px)": {
       borderRadius: "20px",
@@ -44,10 +39,10 @@ const useStyles = makeStyles(theme => ({
     height: "31.25vw",
     borderRadius: "0.9375vw",
     overflow: "hidden",
-    WebkitBackfaceVisibility: 'hidden',
-    MozBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translate3d(0, 0, 0)',
-    MozTransform: 'translate3d(0, 0, 0)',
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     marginBottom: "2.1875vw",
     "@media(min-width: 1280px)": {
       borderRadius: "12px",
@@ -170,26 +165,40 @@ const useStyles = makeStyles(theme => ({
  */
 export default function SaleCardMain({ sale }) {
   const classes = useStyles()
-  const creationDate = new Date(sale.data.creationdate).toLocaleString("ru", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).replace(" г.", "")
-  const startDate = new Date(sale.data.startdate).toLocaleString("ru", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).replace(" г.", "")
-  const endDate = new Date(sale.data.enddate).toLocaleString("ru", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).replace(" г.", "")
+
+  const creationDate = new Date(sale.data.creationdate)
+    .toLocaleString("ru", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+    .replace(" г.", "")
+
+  const startDate = new Date(sale.data.startdate)
+    .toLocaleString("ru", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+    .replace(" г.", "")
+
+  const endDate = new Date(sale.data.enddate)
+    .toLocaleString("ru", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+    .replace(" г.", "")
+
   const mobile = useMediaQuery("(max-width: 767px)")
+
   return (
     <Card className={classes.root}>
-      <GatsbyImage loading="eager"
-        image={sale.data.previewimage?.localFile?.childImageSharp.gatsbyImageData}
+      <GatsbyImage
+        loading="eager"
+        image={
+          sale.data.previewimage?.localFile?.childImageSharp.gatsbyImageData
+        }
         alt={sale.data.previewimage.alt ?? "sales"}
         className={classes.wrapperImg}
       />
@@ -208,7 +217,12 @@ export default function SaleCardMain({ sale }) {
         <Typography className={classes.dateConst + " " + classes.textDate}>
           Сроки{mobile ? ":" : " проведения:"}
         </Typography>
-        <Typography variant="body2" className={classes.dateSection + " " + classes.textDate}>{startDate + " – " + endDate}</Typography>
+        <Typography
+          variant="body2"
+          className={classes.dateSection + " " + classes.textDate}
+        >
+          {startDate + " – " + endDate}
+        </Typography>
       </div>
     </Card>
   )

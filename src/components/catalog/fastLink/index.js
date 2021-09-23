@@ -33,7 +33,7 @@ export default function FastLink({ products }) {
 
   return (
     <Grid container direction="column" className={classes.wrapperBlock}>
-      <ScrollBar fullScreen>
+      <ScrollBar fullScreen buttonNext>
         <FiltersByTag products={products} />
       </ScrollBar>
 
