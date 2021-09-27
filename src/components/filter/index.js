@@ -490,7 +490,7 @@ export default function Filter({ products, setFilterProducts }) {
 
       setShow(false)
       setTop(false)
-      (url.search !== "" ? url.search : url.pathname)
+      navigate(url.search !== "" ? url.search : url.pathname)
     }
   }
   //фильтрация при первом рендере

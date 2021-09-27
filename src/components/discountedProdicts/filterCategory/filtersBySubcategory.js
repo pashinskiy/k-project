@@ -44,8 +44,18 @@ export default function FiltersBySubcategory({ products }) {
 
   function filter(value) {
     const url = new URL(window.location)
+
+    const group = url.searchParams.get("group") ?? false
+    const search = url.searchParams.get("search") ?? false
+    const category = url.searchParams.get("category") ?? false
+
     url.search = ""
     url.searchParams.set("subcategory", JSON.stringify(value))
+    
+    if (group) url.searchParams.set("group", group)
+    if (search) url.searchParams.set("search", search)
+    if (category) url.searchParams.set("category", category)
+    
     // window.location = url.href
     navigate(`${window.location.pathname}${url.search}`)
   }

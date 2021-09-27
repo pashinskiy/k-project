@@ -31,7 +31,7 @@ export default function FilterCategory({ products }) {
 
   return (
     <Grid container direction="column" className={classes.wrapperBlock}>
-      <ScrollBar fullScreen>
+      <ScrollBar fullScreen buttonNext>
         <FiltersBySubcategory products={products} />
       </ScrollBar>
     </Grid>

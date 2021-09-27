@@ -6,6 +6,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 import CardProduct from "../components/catalog/catalogCardProduct"
+import FilterCategory from "../components/discountedProdicts/filterCategory"
 import Sort from "../components/sort"
 import Filter from "../components/filter"
 import Pagination from "../components/pagination"
@@ -140,6 +141,7 @@ export default function Products({ data: { allPrismicProduct } }) {
 
   const [title, setTitle] = React.useState("")
   const [category, setCategory] = React.useState("")
+  const [subcategory, setSubcategory] = React.useState("")
 
   const newUrl = new URL(window.location)
   const titleUrl = newUrl.searchParams.has("search")
@@ -148,25 +150,61 @@ export default function Products({ data: { allPrismicProduct } }) {
   const categoryUrl = newUrl.searchParams.has("category")
     ? JSON.parse(newUrl.searchParams.get("category"))
     : ""
+  const subcategoryUrl = newUrl.searchParams.has("subcategory")
+    ? JSON.parse(newUrl.searchParams.get("subcategory"))
+    : ""
 
   const [allProducts, setAllProduct] = React.useState(
     allPrismicProduct.edges.map(edge => edge.node)
   )
   const [filterProducts, setFilterProducts] = React.useState([])
 
-  if (titleUrl !== title || categoryUrl !== category) {
+  function searchByTitle(edge) {
+    console.log(edge)
+    if (
+      edge.node.data.name.toLowerCase().includes(titleUrl.toLowerCase()) ||
+      titleUrl === ""
+    )
+      return true
+
+    return edge.node.data.tags.some(item =>
+      item.tag?.document?.data.name
+        .toLowerCase()
+        .includes(titleUrl.toLowerCase())
+    )
+  }
+
+  function searchByCategory(edge) {
+    return (
+      edge.node.data.main_category.document?.data.name === categoryUrl ||
+      categoryUrl === ""
+    )
+  }
+
+  function searchBySubcategory(edge) {
+    return (
+      edge.node.data.category.document?.data.name === subcategoryUrl ||
+      subcategoryUrl === ""
+    )
+  }
+
+  if (
+    titleUrl !== title ||
+    categoryUrl !== category ||
+    subcategoryUrl !== subcategory
+  ) {
     const newAllProduct = allPrismicProduct.edges
       .filter(
         edge =>
-          (edge.node.data.name.toLowerCase().includes(titleUrl.toLowerCase()) ||
-            titleUrl === "") &&
-          (edge.node.data.main_category.document?.data.name === categoryUrl ||
-            categoryUrl === "")
+          searchByTitle(edge) &&
+          searchByCategory(edge) &&
+          searchBySubcategory(edge)
       )
       .map(edge => edge.node)
 
     setTitle(titleUrl)
     setCategory(categoryUrl)
+    setSubcategory(subcategoryUrl)
     setAllProduct(newAllProduct)
     setFilterProducts(newAllProduct)
   }
@@ -196,6 +234,21 @@ export default function Products({ data: { allPrismicProduct } }) {
           <Typography className={classes.title}>{titleUrl}</Typography>
         </>
       ) : null}
+
+      <FilterCategory
+        products={allPrismicProduct.edges
+          .filter(
+            edge =>
+              (edge.node.data.name
+                .toLowerCase()
+                .includes(titleUrl.toLowerCase()) ||
+                titleUrl === "") &&
+              (edge.node.data.main_category.document?.data.name ===
+                categoryUrl ||
+                categoryUrl === "")
+          )
+          .map(edge => edge.node)}
+      />
 
       <Grid
         container
