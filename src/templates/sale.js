@@ -6,18 +6,52 @@ import Layout from "../components/layout"
 
 import SaleCardMain from "../components/saleCardPanel/saleCardMain.js"
 import SalesTextPanel from "../components/salesTextPanel"
+import { makeStyles } from "@material-ui/core"
+
+import BreadCrumbs from "../components/breadCrumbs"
+
+const useStyles = makeStyles(theme => ({
+  wrapper: {
+    marginTop: "2.18vw",
+    "@media(min-width: 1280px)": {
+      marginTop: "28px",
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "3.35vw",
+    },
+    "@media(max-width: 767px)": {
+      marginTop: "6.76vw",
+    },
+  },
+}))
+
 
 const Sale = ({ data }) => {
+  const classes = useStyles()
   const sale = data.prismicSales
   const socials = data.allPrismicFooter.edges[0].node.data.body2.filter(
     item => item.primary.social_img
   )
-
+  
   return (
     <Layout>
       <Seo title="Sale" />
-      <SaleCardMain sale={sale} />
-      <SalesTextPanel sale={sale} socials={socials} />
+      <div className={classes.wrapper}>
+        <BreadCrumbs
+          links={[
+            {
+              title: "Акции и предложения",
+              href: `/sales/`,
+            },
+            {
+              title: sale.data.title.text,
+              href: `/sales/${sale.uid}/`,
+            },
+          ]}
+          />
+        <SaleCardMain sale={sale} />
+        <SalesTextPanel sale={sale} socials={socials} />
+      </div>
     </Layout>
   )
 }
@@ -32,7 +66,7 @@ export default Sale
 
 export const query = graphql`
   query SaleBySlug($uid: String!) {
-    prismicSales(uid: { eq: $uid }) {
+    prismicSales(uid: {eq: $uid}, data: {salestext: {text: {ne: ""}}}) {
       uid
       data {
         creationdate
@@ -54,6 +88,33 @@ export const query = graphql`
         salestext {
           raw
           html
+        }
+        link {
+          text
+        }
+        sales_order
+        sales_products {
+          product_doc {
+            document {
+              ... on PrismicProduct {
+                data {
+                  price
+                  images {
+                    image {
+                      localFile {
+                        childImageSharp {
+                          gatsbyImageData
+                        }
+                      }
+                      alt
+                    }
+                  }
+                  name
+                }
+                uid
+              }
+            }
+          }
         }
       }
     }

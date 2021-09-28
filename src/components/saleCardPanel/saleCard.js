@@ -208,7 +208,7 @@ const useStyles = makeStyles(theme => ({
     alignSelf: "stretch",
     flexGrow: "1",
     //необходимо задать
-    height: "10px",
+    // height: "10px",
     borderRadius: "0.9375vw",
     overflow: "hidden",
     WebkitBackfaceVisibility: "hidden",
@@ -237,16 +237,17 @@ const useStyles = makeStyles(theme => ({
     flexWrap: "wrap",
     flexDirection: "column",
     width: "100%",
-    height: "42.89vw",
-    "@media(min-width: 1280px)": {
-      height: "549px",
-    },
-    "@media(max-width: 1025px)": {
-      height: "65.827vw",
-    },
-    "@media(max-width: 767px)": {
-      height: "144.927vw",
-    },
+    height: "inherit",
+    // height: "42.89vw",
+    // "@media(min-width: 1280px)": {
+    //   height: "549px",
+    // },
+    // "@media(max-width: 1025px)": {
+    //   height: "65.827vw",
+    // },
+    // "@media(max-width: 767px)": {
+    //   height: "144.927vw",
+    // },
   },
   contentBox: {
     position: "relative",
@@ -353,7 +354,7 @@ export default function SaleCard({ sale, mainPage }) {
   const tooMuchText = previewText?.length > 72
   const mobile = useMediaQuery("(max-width: 767px)")
 
-  const mainPageLink = sale?.data.link?.text
+  const mainPageLink = sale.data.link.text
 
   switch (mainPage) {
     case mainPage !== null: {
@@ -417,6 +418,7 @@ export default function SaleCard({ sale, mainPage }) {
       const alt = mobile
         ? sale?.data.image_mobile?.alt
         : sale?.data.previewimage?.alt
+      console.log(sale.data)
       return (
         <Card className={classes.wrapper}>
           <GatsbyImage
@@ -432,7 +434,7 @@ export default function SaleCard({ sale, mainPage }) {
             {sale?.data.previewtext.text}
           </Typography>
           <Button
-            href={`/sale/${sale?.uid}/`}
+            href={mainPageLink ? mainPageLink : `/sale/${sale?.uid}/`}
             className={classes.button + " " + classes.buttonSales}
           >
             <Typography variant="body2" className={classes.buttonText}>

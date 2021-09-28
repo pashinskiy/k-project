@@ -46,7 +46,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-      allPrismicSales {
+      allPrismicSales(filter: {data: {link: {text: {eq: ""}}}}) {
         edges {
           node {
             uid
