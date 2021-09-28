@@ -34,52 +34,6 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
   },
 
-  textWrapper: {
-    width: "53.125vw",
-    paddingBottom: "5.3125vw",
-    "& p": {
-      fontSize: "1.328vw",
-    },
-    "& strong": {
-      fontSize: "1.875vw",
-    },
-    "@media(min-width: 1280px)": {
-      width: "680px",
-      paddingBottom: "68px",
-      "& p": {
-        fontSize: 17,
-      },
-      "& strong": {
-        fontSize: 24,
-      },
-    },
-    "@media(max-width: 1025px)": {
-      width: "49.4vw",
-      paddingBottom: "8.153vw",
-      "& p": {
-        fontSize: "2.038vw",
-      },
-      "& strong": {
-        fontSize: "2.877vw",
-      },
-    },
-    "@media(max-width: 767px)": {
-      width: "100%",
-      paddingBottom: "9.661vw",
-      "& p": {
-        fontSize: "4.1vw",
-      },
-      "& strong": {
-        fontSize: "5.797vw",
-      },
-    },
-    "& p:nth-of-type(1)": {
-      marginBlockStart: 0,
-    },
-    "& img": {
-      width: "100%",
-    },
-  },
   productItem: {
     paddingBottom: "3.125vw",
     "@media(min-width: 1280px)": {
@@ -95,6 +49,90 @@ const useStyles = makeStyles(theme => ({
   productItemMobile: {
     paddingBottom: "16.425vw",
   },
+  salesText: {
+    lineHeight: "1.8",
+    width: "53.125vw",
+    paddingBottom: "5.3125vw",
+    "& > *": {
+      fontSize: "1.328vw",
+    },
+    "& p": {
+      marginBlockEnd: "3.125vw",
+      marginBlockStart: 0,
+    },
+    "& strong": {
+      fontSize: "1.875vw",
+    },
+    "& ul": {
+      paddingInlineStart: "1.56vw",
+    },
+    "@media(min-width: 1280px)": {
+      width: "680px",
+      paddingBottom: "68px",
+      "& > *": {
+        fontSize: 17,
+      },
+      "& p": {
+      marginBlockEnd: "40px",
+      },
+      "& strong": {
+        fontSize: 24,
+      },
+      "& ul": {
+        paddingInlineStart: "20px",
+      },
+    },
+    "@media(max-width: 1025px)": {
+      width: "49.4vw",
+      paddingBottom: "8.153vw",
+      "& > *": {
+        fontSize: "2.038vw",
+      },
+      "& p": {
+      marginBlockEnd: "3.9vw",
+      },
+      "& strong": {
+        fontSize: "2.877vw",
+      },
+      "& ul": {
+        paddingInlineStart: "1.95vw",
+      },
+    },
+    "@media(max-width: 767px)": {
+      width: "100%",
+      paddingBottom: "9.661vw",
+      "& > *": {
+        fontSize: "4.1vw",
+      },
+      "& p": {
+      marginBlockEnd: "5.2vw",
+      },
+      "& strong": {
+        fontSize: "5.797vw",
+      },
+      "& ul": {
+        paddingInlineStart: "3.9vw",
+      },
+    },
+    "& :nth-of-type(1)": {
+      marginBlockStart: 0,
+    },
+    "& img": {
+      width: "100%",
+    },
+  },
+  strongText: {
+    marginBottom: "1.17vw",
+    "@media(min-width: 1280px)": {
+      marginBottom: "15px",
+    },
+    "@media(max-width: 1025px)": {
+      marginBottom: "1.46vw",
+    },
+    "@media(max-width: 767px)": {
+      marginBottom: "1.95vw"
+    },
+  },
 }))
 
 /**
@@ -107,6 +145,8 @@ const useStyles = makeStyles(theme => ({
 export default function SalesTextPanel({ sale, socials }) {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 767px)")
+  const pad = useMediaQuery("(max-width: 1025px)")
+  const desktop = useMediaQuery("(min-width: 1280px)")
 
   const data = useStaticQuery(graphql`
     {
@@ -231,7 +271,28 @@ export default function SalesTextPanel({ sale, socials }) {
       }
     }
   `)
-  const products = data.allPrismicProduct.edges.map(edge => edge.node)
+  const saleProducts = sale.data.sales_products[0].product_doc.document
+    ? sale.data.sales_products.map(product => product.product_doc.document)
+    : data.allPrismicProduct.edges.slice(0, 3).map(edge => edge.node)
+
+    const setRef = React.useCallback(node => {
+      if (node !== null) {
+        const strongColl = node.getElementsByTagName("strong")
+        for(let i=0; i<strongColl.length; i++){
+          if (mobile){
+            strongColl[i].parentElement.style.marginBlockEnd = "1.95vw"
+          }
+          else if (pad){
+            strongColl[i].parentElement.style.marginBlockEnd = "1.46vw"
+          }else if(desktop){
+            strongColl[i].parentElement.style.marginBlockEnd = "15px"
+          }
+          else {
+            strongColl[i].parentElement.style.marginBlockEnd = "1.17vw"
+          }
+        }
+      }
+    })
 
   return (
     <Grid container justify="space-between">
@@ -252,26 +313,28 @@ export default function SalesTextPanel({ sale, socials }) {
           </div>
         ))}
       </Grid>
-      <Grid item className={classes.textWrapper}>
+      <Grid item>
         <div
+          ref={setRef}
+          className={classes.salesText}
           dangerouslySetInnerHTML={{ __html: sale.data.salestext.html }}
         ></div>
       </Grid>
       <Grid item>
         {mobile ? (
           <div className={classes.productItemMobile}>
-            <SimilarProduct products={products} withoutHeader={true} />
+            <SimilarProduct products={saleProducts} withoutHeader={true} />
           </div>
         ) : (
-          products.map(function (mapProduct, i) {
-            if (i < 3) {
-              return (
-                <div className={classes.productItem}>
-                  <CardSimilarProduct product={mapProduct} />
-                </div>
-              )
-            }
-            return null
+          saleProducts.map(function (mapProduct, i) {
+            return (
+              <div
+                className={classes.productItem}
+                key={"product-" + mapProduct.uid + "-" + i}
+              >
+                <CardSimilarProduct product={mapProduct} />
+              </div>
+            )
           })
         )}
       </Grid>
