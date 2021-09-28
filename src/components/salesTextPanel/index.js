@@ -273,7 +273,7 @@ export default function SalesTextPanel({ sale, socials }) {
   `)
   const saleProducts = sale.data.sales_products[0].product_doc.document
     ? sale.data.sales_products.map(product => product.product_doc.document)
-    : data.allPrismicProduct.edges.map(edge => edge.node)
+    : data.allPrismicProduct.edges.slice(0, 3).map(edge => edge.node)
 
     const setRef = React.useCallback(node => {
       if (node !== null) {
