@@ -448,8 +448,10 @@ export default function MainPageSlider({ array, variant }) {
         getActiveChild(cardPanel)
       )}px)`
 
+      
       setActiveChildStyle(cardPanel, getActiveChild(cardPanel))
       setActiveChild(getActiveChild(cardPanel))
+      // console.log(cardPanel.style.transform)
 
       document.removeEventListener("pointermove", scrollBar)
       document.removeEventListener("pointerup", deleteScrollBar)
@@ -489,6 +491,7 @@ export default function MainPageSlider({ array, variant }) {
       newTranslateX =
         newTranslateX < maxTranslateX ? maxTranslateX : newTranslateX
       cardPanel.style.transform = `translate(${newTranslateX}px)`
+
     }
 
     function noGoLink(e) {
@@ -575,6 +578,7 @@ export default function MainPageSlider({ array, variant }) {
           ref={setRef}
           onPointerDown={!mobile ? setScrollBar : null}
           onScroll={mobile ? setCentralSliderInMobile : null}
+          onScrollEnd={mobile ? console.log("123") : null}
           className={classes.track}
         >
           {contentArray}

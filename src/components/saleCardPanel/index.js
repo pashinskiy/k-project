@@ -3,13 +3,13 @@ import React from "react"
 import SaleCard from "./saleCard"
 
 const useStyles = makeStyles(theme => ({
-    wrapper: {
-      width: "calc(100% + 28px)",
-      margin: "0 -14px",
-    },
-    cardItem:{
-        padding: "14px",
-    },
+  wrapper: {
+    width: "calc(100% + 28px)",
+    margin: "0 -14px",
+  },
+  cardItem: {
+    padding: "14px",
+  },
 }))
 
 /**
@@ -18,13 +18,34 @@ const useStyles = makeStyles(theme => ({
  * @param {Object} props - объект свойств компонента React
  * @param {Object[]} props.sales - массив объектов акций полученый из prismic
  */
-export default function SaleCardPanel({sales}) {
-    const classes = useStyles()
+export default function SaleCardPanel({ sales }) {
+  const classes = useStyles()
+  
+  //сортировка по sales_order
+  sales.sort(compare)
+
+  function compare(a, b) {
+    if (a.data.sales_order === b.data.sales_order) {
+      return 0
+    }
+    else if (a.data.sales_order === null) {
+      return 1
+    } else if (b.data.sales_order === null) {
+      return -1
+    }
+    return a.data.sales_order < b.data.sales_order ? -1 : 1
+  }
+
   const isMobile = useMediaQuery("(max-width: 767px)")
   return (
-    <Grid container className={classes.wrapper}>
+    <Grid container className={classes.wrapper}>  
       {sales.map((sale, i) => (
-        <Grid item xs={isMobile ? 12 : 6} className={classes.cardItem} key={sale.uid + "_" + i}>
+        <Grid
+          item
+          xs={isMobile ? 12 : 6}
+          className={classes.cardItem}
+          key={sale.uid + "_" + i}
+        >
           <SaleCard sale={sale} key={sale.uid} />
         </Grid>
       ))}

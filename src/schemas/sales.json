@@ -6,6 +6,13 @@
         "label": "uid"
       }
     },
+    "sales_order": {
+      "type": "Number",
+      "config": {
+        "label": "Порядок ации",
+        "placeholder": "Введите порядковый номер акции"
+      }
+    },
     "title": {
       "type": "StructuredText",
       "config": {
@@ -71,6 +78,25 @@
         "constraint": {},
         "thumbnails": [],
         "label": "Изображение для мобильных"
+      }
+    },
+    "sales_products": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "product_doc": {
+            "type": "Link",
+            "config": {
+              "select": "document",
+              "customtypes": [
+                "product"
+              ],
+              "label": "Документ товара",
+              "placeholder": "Выберите акционный товар"
+            }
+          }
+        },
+        "label": "Товары акции"
       }
     }
   }

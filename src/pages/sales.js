@@ -44,10 +44,19 @@ export const query = graphql`
         node {
           uid
           data {
+            sales_order
             creationdate
             enddate
             startdate
             previewimage {
+              localFile {
+                childImageSharp {
+                  gatsbyImageData
+                }
+              }
+              alt
+            }
+            image_mobile {
               localFile {
                 childImageSharp {
                   gatsbyImageData
@@ -63,6 +72,9 @@ export const query = graphql`
             }
             salestext {
               html
+            }
+            link {
+              text
             }
           }
         }
