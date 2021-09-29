@@ -100,6 +100,8 @@ const useStyle = makeStyles(theme => ({
     },
   },
   track: {
+    height: "42.89vw",
+
     width: "auto",
     transition: "0.6s transform",
     position: "relative",
@@ -107,9 +109,11 @@ const useStyle = makeStyles(theme => ({
 
     touchAction: "none",
     "@media(max-width: 1025px)": {
+      height: "53.56vw",
+
       width: "100%",
       position: "relative",
-      touchAction: "auto",
+      touchAction: "auto",  
       flexWrap: "nowrap",
       overflowX: "scroll",
       scrollbarWidth: "none",
@@ -118,14 +122,17 @@ const useStyle = makeStyles(theme => ({
         display: "none",
       },
     },
+    "@media(max-width: 767px)": {
+      height: "66.96vh",
+    },
   },
   itemAll: {
     width: "90.625vw",
     maxWidth: "1160px",
-    height: "100%",
+    height: "91%",
     alignSelf: "center",
-    transform: "scaleY(0.9)",
-    transition: "transform .6s",
+    // transform: "scaleY(0.9)",
+    transition: "height .6s",
 
     marginRight: "0.9375vw",
     "@media(min-width: 1280px)": {
@@ -141,6 +148,7 @@ const useStyle = makeStyles(theme => ({
     },
     "@media(max-width: 767px)": {
       width: "82.125vw",
+      height: "83.33%",
       marginRight: "2.898vw",
     },
   },
@@ -148,8 +156,8 @@ const useStyle = makeStyles(theme => ({
     width: "90.625vw",
     maxWidth: "1160px",
     height: "100%",
-    transform: "scaleY(1)",
-    transition: "transform .6s",
+    // transform: "scaleY(1)",
+    transition: "height .6s",
     "@media(max-width: 1025px)": {
       width: "88.729vw",
     },
