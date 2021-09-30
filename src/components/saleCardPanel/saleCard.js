@@ -241,17 +241,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: "wrap",
     flexDirection: "column",
     width: "100%",
-    height: "inherit",
-    // height: "42.89vw",
-    // "@media(min-width: 1280px)": {
-    //   height: "549px",
-    // },
-    // "@media(max-width: 1025px)": {
-    //   height: "65.827vw",
-    // },
-    // "@media(max-width: 767px)": {
-    //   height: "144.927vw",
-    // },
+    height: "100%",
   },
   contentBoxContainer: {
     display: "flex",

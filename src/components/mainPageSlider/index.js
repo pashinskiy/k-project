@@ -101,6 +101,7 @@ const useStyle = makeStyles(theme => ({
   },
   track: {
     height: "42.89vw",
+    maxHeight: "549px",
 
     width: "auto",
     transition: "0.6s transform",
@@ -124,6 +125,7 @@ const useStyle = makeStyles(theme => ({
     },
     "@media(max-width: 767px)": {
       height: "66.96vh",
+      maxHeight: "600px",
     },
   },
   itemAll: {
@@ -131,7 +133,6 @@ const useStyle = makeStyles(theme => ({
     maxWidth: "1160px",
     height: "91%",
     alignSelf: "center",
-    // transform: "scaleY(0.9)",
     transition: "height .6s",
 
     marginRight: "0.9375vw",
