@@ -98,6 +98,7 @@ module.exports = {
           doc: require("./src/schemas/doc.json"),
           docs: require("./src/schemas/docs.json"),
           delivery_cities: require("./src/schemas/delivery_cities.json"),
+          repair: require("./src/schemas/repair.json"),
         },
         shouldDownloadImage: () => true,
       },

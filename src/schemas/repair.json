@@ -1,0 +1,33 @@
+{
+  "Main": {
+    "category": {
+      "type": "Text",
+      "config": {
+        "label": "Категория ремонта",
+        "placeholder": "товар или группа товаров"
+      }
+    },
+    "services": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "name": {
+            "type": "Text",
+            "config": {
+              "label": "Название услуги",
+              "placeholder": "Название услуги"
+            }
+          },
+          "price": {
+            "type": "Number",
+            "config": {
+              "label": "Цена услуги (₽)",
+              "placeholder": "Цена услуги"
+            }
+          }
+        },
+        "label": "Услуги"
+      }
+    }
+  }
+}
