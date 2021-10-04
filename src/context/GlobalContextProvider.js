@@ -22,7 +22,9 @@ function reducer(state, action) {
       if (state.inCart(action.payload) === 0) return { ...state }
       else {
         const cart = [...state.cart]
-        const index = cart.findIndex(item => item.product.id === action.payload.id)
+        const index = cart.findIndex(
+          item => item.product.id === action.payload.id
+        )
         cart.splice(index, 1)
 
         localStorage.setItem("cart", JSON.stringify(cart))
@@ -112,6 +114,9 @@ const GlobalContextProvider = ({ children }) => {
       return this.favorites.find(item => item.id === product.id)
     },
     last_products: JSON.parse(localStorage.getItem("last_products")) ?? [],
+    servicesAvailable() {
+      return this.cart.some(item => item.product.repair)
+    },
   }
 
   const [state, dispatch] = React.useReducer(reducer, initState)

@@ -92,7 +92,7 @@ export default function CardRequest({ product }) {
     <Grid container justify="space-between" className={classes.wrapper}>
       <div>
         <Typography>Ремонт техники</Typography>
-        <Typography>Категория: {product.data.name}</Typography>
+        <Typography>Категория: {product.data.category}</Typography>
       </div>
 
       <div>

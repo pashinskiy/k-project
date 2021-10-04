@@ -1,11 +1,11 @@
 import React from "react"
 import HeaderWithIcon from "../components/headers/headerWithIcon"
 import { makeStyles, Typography } from "@material-ui/core"
-import { graphql } from "gatsby"
+import { graphql, navigate } from "gatsby"
 import Seo from "../components/seo"
 import Layout from "../components/layout"
 
-import { GlobalStateContext } from "../context/GlobalContextProvider"
+import { GlobalDispatchContext } from "../context/GlobalContextProvider"
 import Select from "../components/repairPage/select"
 import WrapperWithTitle from "../components/repairPage/wrapperWithTitle"
 import CheckboxList from "../components/repairPage/checkboxList"
@@ -19,15 +19,56 @@ const useStyles = makeStyles(theme => ({
 
 const IndexPage = ({ data }) => {
   const classes = useStyles()
-  const state = React.useContext(GlobalStateContext)
+  const dispatch = React.useContext(GlobalDispatchContext)
 
   const repairDocs = data.allPrismicRepair.edges.map(edge => edge.node)
   const [activeDoc, setActiveDoc] = React.useState(repairDocs[0])
+  const [services, setServices] = React.useState([])
+
+  const total = services.reduce((sum, service) => sum + service.price, 0)
 
   function setCategory(value) {
     setActiveDoc(
       repairDocs.find(repairDoc => repairDoc.data.category === value)
     )
+  }
+
+  function setService(value) {
+    const newServisec = [...services]
+    const index = services.findIndex(service => service.name === value.name)
+
+    if (index === -1) newServisec.push(value)
+    else newServisec.splice(index, 1)
+
+    setServices(newServisec)
+  }
+
+  // преобразуем цену
+  function priceMod(value) {
+    let price = "" + value
+    let length = price.length
+    for (let i = 1; i < length; i++) {
+      if (i % 3 === 0) {
+        price = price.slice(0, length - i) + " " + price.slice(length - i)
+      }
+    }
+    return price
+  }
+
+  function addCart() {
+    dispatch({
+      type: "ADD_PRODUCT_IN_CART",
+      payload: {
+        id: activeDoc.id + "_" + Date.now(),
+        repair: true,
+        data: {
+          category: activeDoc.data.category,
+          price: total,
+          services: services,
+        },
+      },
+    })
+    navigate("/cart")
   }
 
   return (
@@ -48,8 +89,18 @@ const IndexPage = ({ data }) => {
             name: service.name,
             price: service.price,
           }))}
+          selectServices={services}
+          afterChange={setService}
         />
       </WrapperWithTitle>
+
+      <Typography>
+        Итого: <b>{priceMod(total) + " ₽"}</b>
+      </Typography>
+
+      <button onClick={addCart}>
+        <Typography>Добавить</Typography>
+      </button>
     </Layout>
   )
 }

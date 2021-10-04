@@ -364,9 +364,9 @@ export default function PriceBlock({ products }) {
   }
 
   // варианты доставки
-  const devilery = products[0].data.delivery.document?.data.variants ?? []
+  const devilery = products[0].data.delivery?.document?.data.variants ?? []
   // данные по кредиту и рассрочке
-  const credit = products[0].data.credit.document?.data ?? null
+  const credit = products[0].data.credit?.document?.data ?? null
 
   const ps = +credit?.percent.replace(",", ".") / 12 / 100
   const creditValue =
@@ -441,7 +441,10 @@ export default function PriceBlock({ products }) {
         <GoRegistration text="Перейти к оформлению" onClick={goRegistration} />
       </div>
 
-      {(credit || (summPrice < 100000 && summPrice >= 5000)) && !mobile ? (
+      {(credit || devilery.length) &&
+      summPrice < 100000 &&
+      summPrice >= 5000 &&
+      !mobile ? (
         <>
           <Typography className={classes.titleCreditAndDelivery}>
             Оплата авансом и кредит

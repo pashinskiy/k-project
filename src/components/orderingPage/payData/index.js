@@ -5,6 +5,7 @@ import HeaderWithIcon from "../headerWithIcon"
 
 import BankCard from "../../../../static/svg/bankCard.svg"
 
+import { GlobalStateContext } from "../../../context/GlobalContextProvider"
 import { OrderingDispatchContext } from "../context"
 
 import Mokka from "../../../../static/svg/mokka.svg"
@@ -156,6 +157,7 @@ const useStyle = makeStyles(theme => ({
 export default function PayData({ prismicCartAndOrder }) {
   const classes = useStyle()
   const smartPhoneScreen = useMediaQuery("(max-width: 767px)")
+  const state = React.useContext(GlobalStateContext)
 
   const order = JSON.parse(localStorage.getItem("order"))
 
@@ -223,24 +225,28 @@ export default function PayData({ prismicCartAndOrder }) {
           </div>
         </button>
 
-        <button
-          onClick={() => setVariantPay("в кредит")}
-          className={classes.item}
-        >
-          <div
-            className={
-              classes.ratio +
-              " " +
-              (value === "в кредит" ? classes.activeRatio : "")
-            }
-          />
+        {state.servicesAvailable() ? null : (
+          <button
+            onClick={() => setVariantPay("в кредит")}
+            className={classes.item}
+          >
+            <div
+              className={
+                classes.ratio +
+                " " +
+                (value === "в кредит" ? classes.activeRatio : "")
+              }
+            />
 
-          <Typography align="left" className={classes.title}>
-            В кредит
-          </Typography>
-        </button>
+            <Typography align="left" className={classes.title}>
+              В кредит
+            </Typography>
+          </button>
+        )}
 
-        {order.price < 100000 && order.price >= 5000 ? (
+        {!state.servicesAvailable() &&
+        order.price < 100000 &&
+        order.price >= 5000 ? (
           <button
             onClick={() => setVariantPay("в рассрочку")}
             className={classes.item}

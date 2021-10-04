@@ -10,6 +10,7 @@ import HeaderWithIcon from "../components/headers/headerWithIcon"
 import CartIcon from "../../static/svg/cart.svg"
 import PriceBlock from "../components/cartPage/priceBlock"
 import Card from "../components/cartPage/card"
+import CardRequest from "../components/cartPage/cardRequest"
 
 const useStyle = makeStyles(theme => ({
   mainBlockWrapper: {
@@ -152,11 +153,17 @@ const IndexPage = ({ data }) => {
             className={classes.mainBlockWrapper}
           >
             <Grid container direction="column" className={classes.cardsWrapper}>
-              {productsInCart.map(product => (
-                <div key={product.id} className={classes.cardWrapper}>
-                  <Card product={product} />
-                </div>
-              ))}
+              {productsInCart.map(product =>
+                product.repair ? (
+                  <div key={product.id} className={classes.cardWrapper}>
+                    <CardRequest product={product} />
+                  </div>
+                ) : (
+                  <div key={product.id} className={classes.cardWrapper}>
+                    <Card product={product} />
+                  </div>
+                )
+              )}
             </Grid>
 
             <div className={classes.priceBlockWrapper}>

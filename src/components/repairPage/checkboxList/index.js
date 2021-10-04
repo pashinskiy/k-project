@@ -90,19 +90,18 @@ const useStyle = makeStyles(theme => ({
 }))
 
 /**
- * Блок выбора одного элемента из списка
- * @module src/components/orderingPage/elementsForms/listRatioRect
+ * Блок выбора услуг из списка
+ * @module src/components/repairPage/checkboxlist
  * @param {Object} props - объект свойств компонента React
- * @param {Object[]} props.list - массив всех значений
- * @param {function} props.afterChange - функция установки нового значения
+ * @param {Object[]} props.list - массив всех услуг
+ * @param {Object[]} props.selectServices - массив выбранных услуг
+ * @param {function} props.afterChange - функция установки новой услуги
  */
-export default function CheckboxList({ list, afterChange }) {
+export default function CheckboxList({ list, selectServices, afterChange }) {
   const classes = useStyle()
-  const [value, setValue] = React.useState(list[0].name)
 
-  function setGlobalValue(value) {
-    setValue(value)
-    afterChange(value)
+  function checkItem(name) {
+    return !!selectServices.find(service => service.name === name)
   }
 
   // преобразуем цену
@@ -120,11 +119,11 @@ export default function CheckboxList({ list, afterChange }) {
   return (
     <div className={classes.wrapper}>
       {list.map(item => {
-        const active = item.name === value ? classes.active : ""
+        const active = checkItem(item.name) ? classes.active : ""
 
         return (
           <button
-            onClick={() => setGlobalValue(item)}
+            onClick={() => afterChange(item)}
             key={item}
             className={classes.item}
           >
@@ -136,7 +135,7 @@ export default function CheckboxList({ list, afterChange }) {
               </Typography>
 
               <Typography className={classes.item_content_price}>
-                {priceMod(item.price) + "₽"}
+                {priceMod(item.price) + " ₽"}
               </Typography>
             </div>
           </button>
