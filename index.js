@@ -2,6 +2,7 @@ const express = require("./node_modules/express")
 const { exec, execSync } = require("child_process")
 const fs = require("fs")
 const app = express()
+const fetch = require("./node_modules/node-fetch")
 
 app.listen(3999, () => console.log("site deployed to port 3999"))
 
