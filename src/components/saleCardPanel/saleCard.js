@@ -94,23 +94,23 @@ const useStyles = makeStyles(theme => ({
   previewText: {
     color: theme.palette.color.secondary,
     fontSize: "1.09375vw",
-    paddingBottom: "2.1875vw",
+    paddingBottom: "6.328vw",
     "@media(min-width: 1280px)": {
-      paddingBottom: "28px",
+      paddingBottom: "81px",
       fontSize: 14,
     },
     "@media(max-width: 1025px)": {
-      paddingBottom: "2.73vw",
+      paddingBottom: "9.336vw",
       fontSize: "1.678vw",
     },
     "@media(max-width: 767px)": {
-      paddingBottom: "6.76vw",
+      paddingBottom: "17.87vw",
       fontSize: "3.381vw",
     },
   },
 
   button: {
-    alignSelf: "flex-end",
+    position: "absolute",
     backgroundColor: "#D2D0E9",
     width: "11.40625vw",
     height: "3.59375vw",
@@ -132,25 +132,21 @@ const useStyles = makeStyles(theme => ({
     },
   },
   buttonMobile: {
-    marginLeft: "2.8125vw",
+    position: "unset",
     marginTop: "0.9375vw",
-    alignSelf: "flex-start",
     "@media(min-width: 1280px)": {
       marginTop: "12px",
-      marginLeft: "36px",
     },
     "@media(max-width: 1025px)": {
       marginTop: "1.438vw",
-      marginLeft: "2.53vw",
     },
     "@media(max-width: 767px)": {
       marginTop: "2.898vw",
-      marginLeft: "6.76vw",
-      marginBottom: "6.76vw",
     },
   },
   buttonSales: {
-    alignSelf: "flex-start",
+    bottom: 0,
+    left: 0,
     marginLeft: "0.9375vw",
     marginBottom: "0.9375vw",
     "@media(min-width: 1280px)": {
@@ -209,10 +205,10 @@ const useStyles = makeStyles(theme => ({
   },
 
   wrapperImgMainPage: {
-    // alignSelf: "stretch",
+    alignSelf: "stretch",
     flexGrow: "1",
     //необходимо задать
-    height: "100px",
+    // height: "10px",
     borderRadius: "0.9375vw",
     overflow: "hidden",
     WebkitBackfaceVisibility: "hidden",
@@ -241,15 +237,17 @@ const useStyles = makeStyles(theme => ({
     flexWrap: "wrap",
     flexDirection: "column",
     width: "100%",
-    height: "100%",
-  },
-  contentBoxContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-    flexDirection: "row",
-    "@media(max-width: 767px)": {
-      flexDirection: "column",
-    },
+    height: "inherit",
+    // height: "42.89vw",
+    // "@media(min-width: 1280px)": {
+    //   height: "549px",
+    // },
+    // "@media(max-width: 1025px)": {
+    //   height: "65.827vw",
+    // },
+    // "@media(max-width: 767px)": {
+    //   height: "144.927vw",
+    // },
   },
   contentBox: {
     position: "relative",
@@ -261,7 +259,7 @@ const useStyles = makeStyles(theme => ({
       padding: "0 3.357vw 3.357vw 3.357vw",
     },
     "@media(max-width: 767px)": {
-      padding: "0 6.763vw",
+      padding: "0 6.763vw 6.763vw 6.763vw",
     },
   },
   buttonMainPage: {
@@ -295,7 +293,6 @@ const useStyles = makeStyles(theme => ({
   },
 
   mainTextMainPage: {
-    lineHeight: "121%",
     fontWeight: 700,
     color: theme.palette.color.main,
     width: "53.125vw",
@@ -342,16 +339,6 @@ const useStyles = makeStyles(theme => ({
       fontSize: "2.898vw",
     },
   },
-  salesContentBoxContainer: {
-    display: "flex",
-    flexDirection: "column",
-    flexGrow: 1,
-    justifyContent: "space-between"
-  },
-  salesContentBox: {
-    flexDirection: "column",
-    display: "flex",
-  },
 }))
 
 /**
@@ -387,7 +374,6 @@ export default function SaleCard({ sale, mainPage }) {
             className={classes.wrapperImgMainPage}
             imgStyle={{ objectFit: "cover" }}
           />
-          <div className={classes.contentBoxContainer}>
           <div className={classes.contentBox}>
             <Typography
               variant="body2"
@@ -404,7 +390,6 @@ export default function SaleCard({ sale, mainPage }) {
                 {previewText}
               </Typography>
             )}
-          </div>
             <Button
               href={mainPageLink ? mainPageLink : `/sale/${sale?.uid}/`}
               className={
@@ -435,32 +420,14 @@ export default function SaleCard({ sale, mainPage }) {
         : sale?.data.previewimage?.alt
       console.log(sale.data)
       return (
-        <Card className={classes.wrapper} style={{display: "flex", flexDirection: "column"}}>
+        <Card className={classes.wrapper}>
           <GatsbyImage
             loading="eager"
             image={image}
             alt={alt ?? "sales"}
             className={classes.wrapperImg}
           />
-          <div className={classes.salesContentBoxContainer}>
-            <div className={classes.salesContentBox}>
-            <Typography className={classes.mainTitle + " " + classes.text}>
-            {sale?.data.title.text}
-          </Typography>
-          <Typography className={classes.previewText + " " + classes.text}>
-            {sale?.data.previewtext.text}
-          </Typography>
-            </div>
-            <Button
-            href={mainPageLink ? mainPageLink : `/sale/${sale?.uid}/`}
-            className={classes.button + " " + classes.buttonSales}
-          >
-            <Typography variant="body2" className={classes.buttonText}>
-              Перейти
-            </Typography>
-          </Button>
-          </div>
-          {/* <Typography className={classes.mainTitle + " " + classes.text}>
+          <Typography className={classes.mainTitle + " " + classes.text}>
             {sale?.data.title.text}
           </Typography>
           <Typography className={classes.previewText + " " + classes.text}>
@@ -473,7 +440,7 @@ export default function SaleCard({ sale, mainPage }) {
             <Typography variant="body2" className={classes.buttonText}>
               Перейти
             </Typography>
-          </Button> */}
+          </Button>
         </Card>
       )
     }
