@@ -59,6 +59,7 @@ typings/
 .cache/
 public
 public-finish
+package-lock.json
 
 # Mac files
 .DS_Store
