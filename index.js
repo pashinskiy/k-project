@@ -21,43 +21,46 @@ const build = {
 }
 
 app.post("/build", (req, res) => {
-  fetch("http://admin.krypton.ru/api/products/add")
-  if (build.status === "В ожидании сборки.") {
-    build.status = "Собирается."
-    res.sendStatus(200)
+  fetch("http://admin.krypton.ru/api/products/add").finally(() => {
+    if (build.status === "В ожидании сборки.") {
+      build.status = "Собирается."
+      res.sendStatus(200)
 
-    execSync("git reset --hard")
-    execSync("git pull")
-    execSync("npm install")
-    execSync("npm run clean")
+      execSync("git reset --hard")
+      execSync("git pull")
+      execSync("npm install")
+      execSync("npm run clean")
 
-    exec("npm run build", err => {
-      const date = new Date()
-      date.setHours(date.getHours() + 2)
+      exec("npm run build", err => {
+        const date = new Date()
+        date.setHours(date.getHours() + 2)
 
-      const day = date.getDate()
-      const month =
-        date.getMonth() < 9 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1
-      const hour = date.getHours()
-      const min = date.getMinutes()
+        const day = date.getDate()
+        const month =
+          date.getMonth() < 9
+            ? "0" + (date.getMonth() + 1)
+            : date.getMonth() + 1
+        const hour = date.getHours()
+        const min = date.getMinutes()
 
-      if (err) {
-        build.status = "В ожидании сборки."
-        build.last_action = `Обновление сайта ${day}.${month} в ${hour}:${min}.`
-        build.result = `Ошибка (code:${err.code}, message: ${err.message}).`
-      } else {
-        fs.renameSync("./public-finish", "./oldVersion")
-        fs.renameSync("./public", "./public-finish")
-        fs.rmSync("./oldVersion", { recursive: true, force: true })
+        if (err) {
+          build.status = "В ожидании сборки."
+          build.last_action = `Обновление сайта ${day}.${month} в ${hour}:${min}.`
+          build.result = `Ошибка (code:${err.code}, message: ${err.message}).`
+        } else {
+          fs.renameSync("./public-finish", "./oldVersion")
+          fs.renameSync("./public", "./public-finish")
+          fs.rmSync("./oldVersion", { recursive: true, force: true })
 
-        build.status = "В ожидании сборки."
-        build.last_action = `Обновление сайта ${day}.${month} в ${hour}:${min}.`
-        build.result = `Успешно.`
-      }
-    })
-  } else {
-    res.sendStatus(409)
-  }
+          build.status = "В ожидании сборки."
+          build.last_action = `Обновление сайта ${day}.${month} в ${hour}:${min}.`
+          build.result = `Успешно.`
+        }
+      })
+    } else {
+      res.sendStatus(409)
+    }
+  })
 })
 
 app.get("/status", (req, res) => {
