@@ -33,13 +33,15 @@ export default function ClientOnly({ children, ...delegated }) {
   return (
     <div {...delegated}>
       <Helmet>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
           rel="stylesheet"
         />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-          rel="preconnect"
+          rel="stylesheet"
         />
         <script src="https://backend.demo.revoup.ru/javascripts/iframe/v2/revoiframe.js"></script>
       </Helmet>

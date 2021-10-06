@@ -53,18 +53,6 @@ const useStyles = makeStyles(theme => ({
       maxWidth: "90%",
     },
   },
-  buttonsMemoryPanel:{
-    marginTop: "2.5vw",
-    "@media(max-width: 1025px)": {
-      marginTop: "2.87vw",
-      minHeight: "3.12vw",
-    },
-    "@media(max-width: 767px)": {
-      marginTop: "5.79vw",
-      minHeight: "4.68vw",
-      maxWidth: "90%",
-    },
-  },
   buttonColor: {
     padding: 0,
     border: "none",
@@ -103,6 +91,18 @@ const useStyles = makeStyles(theme => ({
   active: {
     boxShadow: `0px 0px 0px 2px ${theme.palette.background.secondary}, 0px 0px 0px 4px #681DE1`,
   },
+  buttonsMemoryPanel: {
+    marginTop: "2.5vw",
+    "@media(max-width: 1025px)": {
+      marginTop: "2.87vw",
+      minHeight: "3.12vw",
+    },
+    "@media(max-width: 767px)": {
+      marginTop: "5.79vw",
+      minHeight: "4.68vw",
+      maxWidth: "90%",
+    },
+  },
   buttonMemory: {
     padding: 0,
     border: "none",
@@ -114,28 +114,36 @@ const useStyles = makeStyles(theme => ({
     overflow: "hidden",
     boxSizing: "border-box",
     background: theme.palette.background.main,
+    display: "flex",
+    fontFamily: "Roboto",
+    fontWeight: 400,
+    lineHeight: 1.17,
 
     borderRadius: "0.78vw",
     marginRight: "0.78vw",
     marginBottom: "0.78vw",
     padding: "0.93vw",
+    fontSize: "1.09vw",
     "@media(min-width: 1280px)": {
       borderRadius: "10px",
       marginRight: "10px",
       marginBottom: "10px",
       padding: "12px",
+      fontSize: "14px",
     },
     "@media(max-width: 1025px)": {
       borderRadius: "1.19vw",
       marginRight: "1.19vw",
       marginBottom: "1.19vw",
       padding: "1.43vw",
+      fontSize: "1.67vw",
     },
     "@media(max-width: 767px)": {
       borderRadius: "2.41vw",
       marginRight: "2.41vw",
       marginBottom: "2.41vw",
       padding: "2.89vw",
+      fontSize: "3.38vw",
     },
   },
   activeButtonMemory: {
@@ -403,7 +411,11 @@ export default function BlockPrice({ product, allVariants }) {
   })
   // цвет продукта первый в массиве
   allColors.unshift(
-    ...allColors.splice(allColors.findIndex(prod => prod.data.color_group === product.data.color_group))
+    ...allColors.splice(
+      allColors.findIndex(
+        prod => prod.data.color_group === product.data.color_group
+      )
+    )
   )
 
   // преобразуем цену
