@@ -73,7 +73,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: 17,
       },
       "& p": {
-      marginBlockEnd: "40px",
+        marginBlockEnd: "40px",
       },
       "& strong": {
         fontSize: 24,
@@ -89,7 +89,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: "2.038vw",
       },
       "& p": {
-      marginBlockEnd: "3.9vw",
+        marginBlockEnd: "3.9vw",
       },
       "& strong": {
         fontSize: "2.877vw",
@@ -105,7 +105,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: "4.1vw",
       },
       "& p": {
-      marginBlockEnd: "5.2vw",
+        marginBlockEnd: "5.2vw",
       },
       "& strong": {
         fontSize: "5.797vw",
@@ -130,7 +130,7 @@ const useStyles = makeStyles(theme => ({
       marginBottom: "1.46vw",
     },
     "@media(max-width: 767px)": {
-      marginBottom: "1.95vw"
+      marginBottom: "1.95vw",
     },
   },
 }))
@@ -218,7 +218,6 @@ export default function SalesTextPanel({ sale, socials }) {
               name
               price
               old_price
-              color
               color_group
               sale_product
               images {
@@ -275,24 +274,22 @@ export default function SalesTextPanel({ sale, socials }) {
     ? sale.data.sales_products.map(product => product.product_doc.document)
     : data.allPrismicProduct.edges.slice(0, 3).map(edge => edge.node)
 
-    const setRef = React.useCallback(node => {
-      if (node !== null) {
-        const strongColl = node.getElementsByTagName("strong")
-        for(let i=0; i<strongColl.length; i++){
-          if (mobile){
-            strongColl[i].parentElement.style.marginBlockEnd = "1.95vw"
-          }
-          else if (pad){
-            strongColl[i].parentElement.style.marginBlockEnd = "1.46vw"
-          }else if(desktop){
-            strongColl[i].parentElement.style.marginBlockEnd = "15px"
-          }
-          else {
-            strongColl[i].parentElement.style.marginBlockEnd = "1.17vw"
-          }
+  const setRef = React.useCallback(node => {
+    if (node !== null) {
+      const strongColl = node.getElementsByTagName("strong")
+      for (let i = 0; i < strongColl.length; i++) {
+        if (mobile) {
+          strongColl[i].parentElement.style.marginBlockEnd = "1.95vw"
+        } else if (pad) {
+          strongColl[i].parentElement.style.marginBlockEnd = "1.46vw"
+        } else if (desktop) {
+          strongColl[i].parentElement.style.marginBlockEnd = "15px"
+        } else {
+          strongColl[i].parentElement.style.marginBlockEnd = "1.17vw"
         }
       }
-    })
+    }
+  })
 
   return (
     <Grid container justify="space-between">

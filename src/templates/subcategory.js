@@ -300,7 +300,6 @@ export const query = graphql`
             name
             price
             old_price
-            color
             color_group
             sale_product
             images {

@@ -161,9 +161,15 @@ export default function Products({ data: { allPrismicProduct } }) {
 
   function searchByTitle(edge) {
     console.log(edge)
+    if (titleUrl === "") return true
+
+    if (edge.node.data.name.toLowerCase().includes(titleUrl.toLowerCase()))
+      return true
+
     if (
-      edge.node.data.name.toLowerCase().includes(titleUrl.toLowerCase()) ||
-      titleUrl === ""
+      edge.node.data.search_phrases
+        ?.toLowerCase()
+        .includes(titleUrl.toLowerCase())
     )
       return true
 
@@ -402,9 +408,10 @@ export const query = graphql`
             name
             price
             old_price
-            color
             color_group
+            memory
             sale_product
+            search_phrases
             images {
               image {
                 alt

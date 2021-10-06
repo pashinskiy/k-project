@@ -14,10 +14,7 @@ import SimilarProducts from "../components/productPage/similarProducts"
 
 import { GlobalDispatchContext } from "../context/GlobalContextProvider"
 
-const Product = ({
-  data: { prismicProduct, allPrismicProduct },
-  pageContext: { allVariant },
-}) => {
+const Product = ({ data: { prismicProduct, allPrismicProduct, variants } }) => {
   const dispatch = React.useContext(GlobalDispatchContext)
 
   React.useEffect(() => {
@@ -73,7 +70,10 @@ const Product = ({
         ]}
       />
       <div id="about_product" />
-      <CardProduct prismicProduct={prismicProduct} allVariant={allVariant} />
+      <CardProduct
+        prismicProduct={prismicProduct}
+        allVariant={variants.edges}
+      />
       <SimilarProducts
         products={allPrismicProduct.edges.map(edge => edge.node)}
       />
@@ -101,7 +101,11 @@ const Product = ({
 export default Product
 
 export const pageQuery = graphql`
-  query ProductBySlug($uid: String!, $subcategory: String!) {
+  query ProductBySlug(
+    $uid: String!
+    $subcategory: String!
+    $code_model: String!
+  ) {
     allPrismicProduct(
       filter: { data: { category: { uid: { eq: $subcategory } } } }
       limit: 7
@@ -173,7 +177,6 @@ export const pageQuery = graphql`
             name
             price
             old_price
-            color
             color_group
             sale_product
             images {
@@ -268,7 +271,8 @@ export const pageQuery = graphql`
           }
         }
         name
-        color
+        memory
+        color_group
         old_price
         price
         images {
@@ -620,6 +624,37 @@ export const pageQuery = graphql`
                           months_1
                           months_2
                           percent
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    variants: allPrismicProduct(
+      filter: { data: { code_model: { eq: $code_model } } }
+    ) {
+      edges {
+        node {
+          uid
+          data {
+            memory
+            color_group
+            body1 {
+              ... on PrismicProductBody1Characteristics {
+                id
+                slice_type
+                items {
+                  characteristic {
+                    document {
+                      ... on PrismicCharacteristic {
+                        id
+                        data {
+                          name
                         }
                       }
                     }

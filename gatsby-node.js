@@ -11,9 +11,7 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             uid
             data {
-              name
-              color
-              color_group
+              code_model
               category {
                 uid
               }
@@ -46,7 +44,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-      allPrismicSales(filter: {data: {link: {text: {eq: ""}}}}) {
+      allPrismicSales(filter: { data: { link: { text: { eq: "" } } } }) {
         edges {
           node {
             uid
@@ -79,9 +77,7 @@ exports.createPages = async ({ graphql, actions }) => {
       component: product,
       context: {
         uid: edge.node.uid,
-        allVariant: pages.data.allPrismicProduct.edges.filter(
-          item => item.node.data.name === edge.node.data.name
-        ),
+        code_model: edge.node.data.code_model ?? "",
         subcategory: edge.node.data.category.uid ?? "",
       },
     })

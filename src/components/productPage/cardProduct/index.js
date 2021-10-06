@@ -24,7 +24,9 @@ export default function CardProduct({ prismicProduct, allVariant }) {
   )
 
   // массив всех продукты данной модели
-  const allColors = allVariant.map(edge => edge.node)
+  allVariant = allVariant.length
+    ? allVariant.map(edge => edge.node)
+    : [prismicProduct]
 
   return (
     <>
@@ -53,7 +55,7 @@ export default function CardProduct({ prismicProduct, allVariant }) {
 
       <Grid container justify="space-between">
         <ProductSlider photos={photos} />
-        <BlockPrice product={prismicProduct} allColors={allColors} />
+        <BlockPrice product={prismicProduct} allVariants={allVariant} />
       </Grid>
 
       {mobile ? null : (

@@ -42,16 +42,30 @@ const useStyles = makeStyles(theme => ({
       marginTop: "2.41vw",
     },
   },
-  collorsPanel: {
+  buttonsColorsPanel: {
     "@media(max-width: 1025px)": {
+      marginTop: "2.56vw",
       minHeight: "3.12vw",
     },
     "@media(max-width: 767px)": {
+      marginTop: "5.16vw",
       minHeight: "4.68vw",
       maxWidth: "90%",
     },
   },
-  item: {
+  buttonsMemoryPanel:{
+    marginTop: "2.5vw",
+    "@media(max-width: 1025px)": {
+      marginTop: "2.87vw",
+      minHeight: "3.12vw",
+    },
+    "@media(max-width: 767px)": {
+      marginTop: "5.79vw",
+      minHeight: "4.68vw",
+      maxWidth: "90%",
+    },
+  },
+  buttonColor: {
     padding: 0,
     border: "none",
     background: "transparent",
@@ -59,15 +73,14 @@ const useStyles = makeStyles(theme => ({
     minHeight: 0,
     cursor: "pointer",
 
+    overflow: "hidden",
+    boxSizing: "border-box",
+    borderRadius: "100px",
+
     width: "3.12vw",
     height: "3.12vw",
-    borderRadius: "100%",
     marginRight: "0.78vw",
     marginBottom: "0.78vw",
-    overflow: "hidden",
-    border: "1px solid #BCBCBC",
-    boxShadow: "inset 0px 2px 4px rgba(0, 0, 0, 0.25)",
-    boxSizing: "border-box",
     "@media(min-width: 1280px)": {
       width: "40px",
       height: "40px",
@@ -88,8 +101,45 @@ const useStyles = makeStyles(theme => ({
     },
   },
   active: {
-    border: "2px solid #EFEFF2",
-    boxShadow: "0px 0px 0 2px #681DE1",
+    boxShadow: `0px 0px 0px 2px ${theme.palette.background.secondary}, 0px 0px 0px 4px #681DE1`,
+  },
+  buttonMemory: {
+    padding: 0,
+    border: "none",
+    background: "transparent",
+    minWidth: 0,
+    minHeight: 0,
+    cursor: "pointer",
+
+    overflow: "hidden",
+    boxSizing: "border-box",
+    background: theme.palette.background.main,
+
+    borderRadius: "0.78vw",
+    marginRight: "0.78vw",
+    marginBottom: "0.78vw",
+    padding: "0.93vw",
+    "@media(min-width: 1280px)": {
+      borderRadius: "10px",
+      marginRight: "10px",
+      marginBottom: "10px",
+      padding: "12px",
+    },
+    "@media(max-width: 1025px)": {
+      borderRadius: "1.19vw",
+      marginRight: "1.19vw",
+      marginBottom: "1.19vw",
+      padding: "1.43vw",
+    },
+    "@media(max-width: 767px)": {
+      borderRadius: "2.41vw",
+      marginRight: "2.41vw",
+      marginBottom: "2.41vw",
+      padding: "2.89vw",
+    },
+  },
+  activeButtonMemory: {
+    boxShadow: `0px 0px 0px 2px ${theme.palette.background.secondary}, 0px 0px 0px 4px #681DE1`,
   },
   priceWrapper: {
     marginTop: "1.72vw",
@@ -322,18 +372,38 @@ const useStyles = makeStyles(theme => ({
  * @module src/components/productPage/cardProduct/blockPrice
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.product - объект продукта полученный из prismic
- * @param {Object[]} props.allColors - массив объектов всех продуктов с такими же названиями как product
+ * @param {Object[]} props.allVariants - массив объектов всех продуктов этой же модели
  */
-export default function BlockPrice({ product, allColors }) {
+export default function BlockPrice({ product, allVariants }) {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 1025px)")
 
   const [showMokkaInfo, setShowMokkaInfo] = React.useState(false)
   const [showMokkaIframe, setShowMokkaIframe] = React.useState(false)
 
+  const allColors = []
+  const allMemory = []
+  allVariants.forEach(variant => {
+    // добавляем товар если товара с таким цветом нет
+    if (
+      !allColors.find(
+        prod => prod.data.color_group === variant.data.color_group
+      )
+    ) {
+      allColors.push(variant)
+    }
+
+    // если цвет товара не такой же как у главного на странице выходим
+    if (variant.data.color_group !== product.data.color_group) return
+
+    // добавляем товар если товара с такой памятью нет
+    if (!allMemory.find(prod => prod.data.memory === variant.data.memory)) {
+      allMemory.push(variant)
+    }
+  })
   // цвет продукта первый в массиве
   allColors.unshift(
-    ...allColors.splice(allColors.findIndex(prod => prod.uid === product.uid))
+    ...allColors.splice(allColors.findIndex(prod => prod.data.color_group === product.data.color_group))
   )
 
   // преобразуем цену
@@ -377,22 +447,6 @@ export default function BlockPrice({ product, allColors }) {
 
   return (
     <Grid container direction="column" className={classes.wrapper}>
-      <Grid container className={classes.collorsPanel}>
-        {allColors.map(prod => {
-          const active = product.uid === prod.uid ? classes.active : ""
-          return (
-            <button
-              onClick={() => navigate(`/${prod.uid}/`)}
-              aria-label={`${prod.data.color_group}`}
-              key={prod.uid}
-              className={classes.item + " " + active}
-              style={{
-                background: prod.data.color ?? colors[prod.data.color_group],
-              }}
-            ></button>
-          )
-        })}
-      </Grid>
       {mobile ? (
         <Title
           text={product.data.name}
@@ -406,6 +460,46 @@ export default function BlockPrice({ product, allColors }) {
           }
         />
       ) : null}
+
+      <Grid container className={classes.buttonsColorsPanel}>
+        {allColors.map(prod => {
+          const active =
+            product.data.color_group === prod.data.color_group
+              ? classes.active
+              : ""
+          return (
+            <button
+              onClick={() => navigate(`/${prod.uid}/`)}
+              aria-label={`${prod.data.color_group}`}
+              key={prod.uid}
+              className={classes.buttonColor + " " + active}
+              style={{
+                background: prod.data.color ?? colors[prod.data.color_group],
+              }}
+            ></button>
+          )
+        })}
+      </Grid>
+
+      <Grid container className={classes.buttonsMemoryPanel}>
+        {allMemory.map(prod => {
+          const active =
+            product.data.memory === prod.data.memory
+              ? classes.activeButtonMemory
+              : ""
+          return (
+            <button
+              onClick={() => navigate(`/${prod.uid}/`)}
+              aria-label={`${prod.data.memory}`}
+              key={prod.uid}
+              className={classes.buttonMemory + " " + active}
+            >
+              {prod.data.memory}
+            </button>
+          )
+        })}
+      </Grid>
+
       <Grid container alignItems="flex-end" className={classes.priceWrapper}>
         <Typography className={classes.price}>
           {priceMod(product.data.price)} &#8381;{" "}
@@ -416,6 +510,7 @@ export default function BlockPrice({ product, allColors }) {
           ) : null}
         </Typography>
       </Grid>
+
       {mobile ? null : (
         <AddInCartAndFav
           text="Добавить в корзину"
@@ -423,6 +518,7 @@ export default function BlockPrice({ product, allColors }) {
           variant="page"
         />
       )}
+
       {mobile ? (
         <Features
           featuresSlices={product.data.body.filter(
@@ -430,6 +526,7 @@ export default function BlockPrice({ product, allColors }) {
           )}
         />
       ) : null}
+
       <Grid>
         {credit || product.data.price < 100000 ? (
           <>
@@ -437,7 +534,8 @@ export default function BlockPrice({ product, allColors }) {
               Оплата авансом и кредит
             </Typography>
             <Typography hidden={!creditValue} className={classes.textCredit}>
-              Кредит в Тинькофф от <span>{priceMod(Math.trunc(creditValue))} ₽/мес</span>
+              Кредит в Тинькофф от{" "}
+              <span>{priceMod(Math.trunc(creditValue))} ₽/мес</span>
             </Typography>
 
             {product.data.price < 100000 ? (
@@ -466,7 +564,7 @@ export default function BlockPrice({ product, allColors }) {
                   onClick={switchShowMokkaInfo}
                   className={classes.mokkaInfo}
                 >
-                  <MokkaInfo aria-label="mokka info"/>
+                  <MokkaInfo aria-label="mokka info" />
                 </span>
               </Typography>
             ) : null}
