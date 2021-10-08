@@ -239,7 +239,7 @@ export default function PayData({ prismicCartAndOrder }) {
             />
 
             <Typography align="left" className={classes.title}>
-              В кредит
+              Кредит в Тинькофф
             </Typography>
           </button>
         )}

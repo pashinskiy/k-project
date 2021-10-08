@@ -587,7 +587,11 @@ export default function PriceBlock({ products }) {
             Оплата авансом и кредит
           </Typography>
 
-          <Typography hidden={!creditValue} className={classes.textCredit}>
+          <Typography
+            hidden={!creditValue}
+            className={classes.textCredit}
+            style={{ cursor: "inherit" }}
+          >
             Кредит в Тинькофф от{" "}
             <span>{priceMod(Math.trunc(creditValue))} ₽/мес</span>
           </Typography>
