@@ -7,26 +7,63 @@
         "placeholder": "товар или группа товаров"
       }
     },
-    "services": {
-      "type": "Group",
+    "image": {
+      "type": "Image",
       "config": {
-        "fields": {
-          "name": {
-            "type": "Text",
-            "config": {
-              "label": "Название услуги",
-              "placeholder": "Название услуги"
-            }
-          },
-          "price": {
-            "type": "Number",
-            "config": {
-              "label": "Цена услуги (₽)",
-              "placeholder": "Цена услуги"
-            }
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Изображение"
+      }
+    },
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": null,
+        "choices": {
+          "service": {
+            "type": "Slice",
+            "fieldset": "service",
+            "description": "услуга",
+            "icon": "format_list_bulleted",
+            "display": "list",
+            "non-repeat": {
+              "name": {
+                "type": "Text",
+                "config": {
+                  "label": "Название услуги",
+                  "placeholder": "Название услуги"
+                }
+              },
+              "price": {
+                "type": "Number",
+                "config": {
+                  "label": "Цена услуги (₽)",
+                  "placeholder": "Цена услуги"
+                }
+              },
+              "old_price": {
+                "type": "Number",
+                "config": {
+                  "label": "Старая цена услуги (₽)",
+                  "placeholder": "Старая цена услуги"
+                }
+              },
+              "popular": {
+                "type": "Select",
+                "config": {
+                  "options": [
+                    "нет",
+                    "да"
+                  ],
+                  "default_value": "нет",
+                  "label": "Отображать в популярных"
+                }
+              }
+            },
+            "repeat": {}
           }
-        },
-        "label": "Услуги"
+        }
       }
     }
   }

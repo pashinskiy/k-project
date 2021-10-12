@@ -1,12 +1,13 @@
 import React from "react"
+import { Link } from "gatsby"
 import { makeStyles, Grid, Typography } from "@material-ui/core"
+import { GatsbyImage } from "gatsby-plugin-image"
+
+import ButtonPlusMinus from "../../button/addInCartAndFav/buttonPlusMinus"
 
 import Trash from "../../../../static/svg/trash.svg"
 
-import {
-  GlobalStateContext,
-  GlobalDispatchContext,
-} from "../../../context/GlobalContextProvider"
+import { GlobalDispatchContext } from "../../../context/GlobalContextProvider"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -15,7 +16,10 @@ const useStyle = makeStyles(theme => ({
     padding: "1.87vw",
     borderRadius: "0.93vw",
     overflow: "hidden",
-
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
     "@media(min-width: 1280px)": {
       padding: "24px",
       borderRadius: "12px",
@@ -29,6 +33,209 @@ const useStyle = makeStyles(theme => ({
       borderRadius: "2.89vw",
     },
   },
+  image: {
+    background: theme.palette.background.main,
+
+    width: "15.62vw",
+    height: "12.5vw",
+    borderRadius: "0.93vw",
+    "@media(min-width: 1280px)": {
+      width: "200px",
+      height: "160px",
+      borderRadius: "12px",
+    },
+    "@media(max-width: 1025px)": {
+      width: "23.98vw",
+      height: "19.18vw",
+      borderRadius: "1.43vw",
+    },
+    "@media(max-width: 767px)": {
+      width: "24.87vw",
+      height: "24.87vw",
+      borderRadius: "2.89vw",
+    },
+  },
+  centralBlockWrapper: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+
+    marginLeft: "1.25vw",
+    width: "22.89vw",
+    "@media(min-width: 1280px)": {
+      marginLeft: "16px",
+      width: "293px",
+    },
+    "@media(max-width: 1025px)": {
+      marginLeft: "1.91vw",
+      width: "35.13vw",
+    },
+    "@media(max-width: 767px)": {
+      marginLeft: "2.89vw",
+      width: "43.47vw",
+    },
+  },
+  wrapper_services: {
+    display: "flex",
+    justifyContent: "flex-start",
+    flexWrap: "wrap",
+
+    marginLeft: "-0.31vw",
+    "@media(min-width: 1280px)": {
+      marginLeft: -4,
+    },
+    "@media(max-width: 1025px)": {
+      marginLeft: "-0.47vw",
+    },
+    "@media(max-width: 767px)": {
+      marginLeft: "-0.96vw",
+    },
+
+    "& > *": {
+      marginTop: "0.31vw",
+      marginLeft: "0.31vw",
+      "@media(min-width: 1280px)": {
+        marginTop: 4,
+        marginLeft: 4,
+      },
+      "@media(max-width: 1025px)": {
+        marginTop: "0.47vw",
+        marginLeft: "0.47vw",
+      },
+      "@media(max-width: 767px)": {
+        marginTop: "0.96vw",
+        marginLeft: "0.96vw",
+      },
+    },
+  },
+  badge_wrapper: {
+    background: theme.palette.background.brandLight,
+
+    borderRadius: "0.93vw",
+    padding: "0.54vw 0.78vw",
+    "@media(min-width: 1280px)": {
+      borderRadius: 12,
+      padding: "7px 10px",
+    },
+    "@media(max-width: 1025px)": {
+      borderRadius: "1.43vw",
+      padding: "0.83vw 1.19vw",
+    },
+    "@media(max-width: 767px)": {
+      borderRadius: "2.89vw",
+      padding: "1.69vw 2.41vw",
+    },
+  },
+  badge_text: {
+    ...theme.typography.body2,
+    fontWeight: 400,
+    lineHeight: 1.5,
+
+    fontSize: "0.93vw",
+    "@media(min-width: 1280px)": {
+      fontSize: 12,
+    },
+    "@media(max-width: 1025px)": {
+      fontSize: "1.43vw",
+    },
+    "@media(max-width: 767px)": {
+      fontSize: "2.89vw",
+    },
+  },
+  badge_wrapper_title: {
+    fontWeight: 600,
+    lineHeight: 1.21,
+
+    marginTop: "0.62vw",
+    fontSize: "0.93vw",
+    "@media(min-width: 1280px)": {
+      marginTop: 8,
+      fontSize: 12,
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "0.95vw",
+      fontSize: "1.43vw",
+    },
+    "@media(max-width: 767px)": {
+      marginTop: "1.93vw",
+      fontSize: "2.89vw",
+    },
+  },
+  priceWrapper: {
+    marginTop: "1.56vw",
+    "@media(min-width: 1280px)": {
+      marginTop: 20,
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "2.39vw",
+    },
+    "@media(max-width: 767px)": {
+      marginTop: "4.83vw",
+    },
+  },
+  price: {
+    fontWeight: 700,
+    lineHeight: 1.21,
+
+    fontSize: "1.4vw",
+    "@media(min-width: 1280px)": {
+      fontSize: "18px",
+    },
+    "@media(max-width: 1025px)": {
+      fontSize: "2.15vw",
+    },
+    "@media(max-width: 767px)": {
+      fontSize: "3.38vw",
+    },
+  },
+  oldPrice: {
+    fontWeight: 400,
+    lineHeight: 1.21,
+    textDecoration: "line-through",
+    color: theme.palette.color.secondaryLight,
+
+    marginLeft: "0.62vw",
+    fontSize: "1.09vw",
+    "@media(min-width: 1280px)": {
+      marginLeft: "8px",
+      fontSize: "14px",
+    },
+    "@media(max-width: 1025px)": {
+      marginLeft: "0.95vw",
+      fontSize: "1.67vw",
+    },
+    "@media(max-width: 767px)": {
+      marginLeft: "1.93vw",
+      fontSize: "2.41vw",
+    },
+  },
+  buttonPlusMinusWrapper: {
+    position: "relative",
+    zIndex: 0,
+
+    marginTop: "3.12vw",
+    width: "10.07vw",
+    height: "3.12vw",
+    "@media(min-width: 1280px)": {
+      marginTop: "40px",
+      width: "129px",
+      height: "40px",
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "4.79vw",
+      width: "15.46vw",
+      height: "4.79vw",
+    },
+    "@media(max-width: 767px)": {
+      marginTop: "4.83vw",
+      width: "31.15vw",
+      height: "7.24vw",
+    },
+  },
+  iconWrapper: {
+    width: "auto",
+    alignSelf: "flex-end",
+  },
   icon: {
     minWidth: 0,
     minHeight: 0,
@@ -36,7 +243,6 @@ const useStyle = makeStyles(theme => ({
     border: "none",
     background: "transparent",
     cursor: "pointer",
-    alignSelf: "center",
 
     width: "3.12vw",
     height: "3.12vw",
@@ -58,22 +264,31 @@ const useStyle = makeStyles(theme => ({
       fill: theme.palette.color.secondaryLight,
     },
   },
+  unselect: {
+    "& *": {
+      "-webkit-touch-callout": "none" /* iOS Safari */,
+      "-webkit-user-select": "none" /* Chrome/Safari/Opera */,
+      "-khtml-user-select": "none" /* Konqueror */,
+      "-moz-user-select": "none" /* Firefox */,
+      "-ms-user-select": "none" /* Internet Explorer/Edge */,
+      "user-select": "none",
+    },
+  },
 }))
 
 /**
- * Карточка услуги на странице корзины
- * @module src/components/cartPage/cardRequest
+ * Карточка ремонта на странице корзины
+ * @module src/components/cartPage/cartRequest
  * @param {Object} props - объект свойств компонента React
- * @param {Object} props.product - объект услуги
+ * @param {Object} props.repair - объект ремонта
  */
-export default function CardRequest({ product }) {
+export default function CardRequest({ repair }) {
   const classes = useStyle()
 
-  const state = React.useContext(GlobalStateContext)
   const dispatch = React.useContext(GlobalDispatchContext)
 
   function deleteFromCart() {
-    dispatch({ type: "DELETE_PRODUCT_FROM_CART", payload: product })
+    dispatch({ type: "DELETE_PRODUCT_FROM_CART", payload: repair })
   }
 
   // преобразуем цену
@@ -88,22 +303,71 @@ export default function CardRequest({ product }) {
     return price
   }
 
-  return (
+  const img =
+    repair.data.image.localFile?.childImageSharp.gatsbyImageData ?? false
+
+  return img ? (
     <Grid container justify="space-between" className={classes.wrapper}>
-      <div>
-        <Typography>Ремонт техники</Typography>
-        <Typography>Категория: {product.data.category}</Typography>
-      </div>
+      <Grid container alignItems="center" style={{ width: "auto" }}>
+        <Link to={`/repair`} style={{ textDecoration: "none" }}>
+          <GatsbyImage
+            loading="eager"
+            image={img}
+            alt={repair.data.image.alt ?? "repair"}
+            className={classes.image + " " + classes.unselect}
+            imgStyle={{ objectFit: "contain" }}
+          />
+        </Link>
 
-      <div>
-        {product.data.services.map(service => (
-          <Typography>- {service.name}</Typography>
-        ))}
-      </div>
+        <div className={classes.centralBlockWrapper}>
+          <div className={classes.badge_wrapper}>
+            <Typography className={classes.badge_text}>
+              {repair.data.category}
+            </Typography>
+          </div>
 
-      <button className={classes.icon}>
-        <Trash className={classes.darkGrayColor} onClick={deleteFromCart} />
-      </button>
+          <Typography className={classes.badge_wrapper_title}>
+            Услуги:
+          </Typography>
+
+          <div className={classes.wrapper_services}>
+            {repair.data.services.map(service => (
+              <div className={classes.badge_wrapper}>
+                <Typography className={classes.badge_text}>
+                  {service.primary.name}
+                </Typography>
+              </div>
+            ))}
+          </div>
+
+          <Grid container alignItems="center" className={classes.priceWrapper}>
+            <Typography className={classes.price}>
+              {`${priceMod(repair.data.price)} ₽`}
+            </Typography>
+
+            {repair.data.old_price ? (
+              <Typography className={classes.oldPrice}>
+                {`${priceMod(repair.data.old_price)} ₽`}
+              </Typography>
+            ) : null}
+          </Grid>
+
+          <div className={classes.buttonPlusMinusWrapper}>
+            <ButtonPlusMinus variant="full" product={repair} />
+          </div>
+        </div>
+      </Grid>
+
+      <Grid
+        container
+        direction="column"
+        justify="space-between"
+        className={classes.iconWrapper}
+      >
+        <button className={classes.icon}>
+          <Trash className={classes.darkGrayColor} onClick={deleteFromCart} />
+        </button>
+      </Grid>
     </Grid>
-  )
+  ) : null
 }

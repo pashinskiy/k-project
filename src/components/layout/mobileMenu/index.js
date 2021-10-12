@@ -20,12 +20,15 @@ const useStyles = makeStyles(theme => ({
       justifyContent: "space-between",
       alignItems: "center",
       marginLeft: "-3.35vw",
+      boxShadow: `inset 0 0 0 0.05vw #D6D5DF`,
+
       "& a": {
         display: "inherit",
       },
     },
     "@media(max-width: 767px)": {
       marginLeft: "-6.76vw",
+      boxShadow: `inset 0 0 0 0.12vw #D6D5DF`,
     },
   },
   menu_point: {
