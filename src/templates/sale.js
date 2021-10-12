@@ -72,7 +72,16 @@ export const query = graphql`
         creationdate
         enddate
         startdate
+        image_mobile {
+          alt
+          localFile {
+            childImageSharp {
+              gatsbyImageData(width: 342)
+            }
+          }
+        }
         previewimage {
+          alt
           localFile {
             childImageSharp {
               gatsbyImageData(width: 1280)

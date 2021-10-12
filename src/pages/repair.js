@@ -1,113 +1,137 @@
 import React from "react"
-import HeaderWithIcon from "../components/headers/headerWithIcon"
 import { makeStyles, Typography } from "@material-ui/core"
-import { graphql, navigate } from "gatsby"
+import { graphql } from "gatsby"
+
 import Seo from "../components/seo"
 import Layout from "../components/layout"
 
-import { GlobalDispatchContext } from "../context/GlobalContextProvider"
-import Select from "../components/repairPage/select"
-import WrapperWithTitle from "../components/repairPage/wrapperWithTitle"
-import CheckboxList from "../components/repairPage/checkboxList"
+import HeaderWithIcon from "../components/headers/headerWithIcon"
+import Calculator from "../components/repairPage/calculator"
+
+import Hammer from "../../static/svg/hammer.svg"
+import PopularRepair from "../components/repairPage/popularRepair"
 
 const useStyles = makeStyles(theme => ({
-  root: {
+  grayPanel: {
+    overflow: "hidden",
+    WebkitBackfaceVisibility: "hidden",
+    MozBackfaceVisibility: "hidden",
+    WebkitTransform: "translate3d(0, 0, 0)",
+    MozTransform: "translate3d(0, 0, 0)",
+
     width: "100%",
-    height: "100%",
+    background: theme.palette.background.secondary,
+
+    borderRadius: "1.56vw",
+    padding: "0.78vw",
+    "@media(min-width: 1280px)": {
+      borderRadius: 20,
+      padding: 10,
+    },
+    "@media(max-width: 1025px)": {
+      borderRadius: "2.39vw",
+      padding: "1.19vw",
+    },
+    "@media(max-width: 767px)": {
+      overflow: "visible",
+      borderRadius: 0,
+      padding: 0,
+      background: theme.palette.background.main,
+    },
+  },
+  grayPanel_title: {
+    fontWeight: 700,
+    lineHeight: 1.21,
+
+    marginTop: "2.18vw",
+    padding: "0.78vw",
+    fontSize: "2.18vw",
+    "@media(min-width: 1280px)": {
+      marginTop: 28,
+      padding: 10,
+      fontSize: 28,
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "3.35vw",
+      padding: "1.19vw",
+      fontSize: "3.35vw",
+    },
+    "@media(max-width: 767px)": {
+      marginTop: "10.62vw",
+      padding: 0,
+      fontSize: "5.31vw",
+    },
   },
 }))
 
 const IndexPage = ({ data }) => {
   const classes = useStyles()
-  const dispatch = React.useContext(GlobalDispatchContext)
 
-  const repairDocs = data.allPrismicRepair.edges.map(edge => edge.node)
-  const [activeDoc, setActiveDoc] = React.useState(repairDocs[0])
-  const [services, setServices] = React.useState([])
-
-  const total = services.reduce((sum, service) => sum + service.price, 0)
-
-  function setCategory(value) {
-    setActiveDoc(
-      repairDocs.find(repairDoc => repairDoc.data.category === value)
+  const popularRepair = React.useMemo(() => {
+    const popularRepair = []
+    data.allPrismicRepair.edges.forEach(edge =>
+      edge.node.data.body.forEach(slice => {
+        if (
+          slice.slice_type !== "service" ||
+          slice?.primary?.popular !== "да"
+        ) {
+          return
+        }
+        popularRepair.push({
+          id: slice.id,
+          repair: true,
+          data: {
+            image: edge.node.data.image,
+            imageForPopular: edge.node.data.imageForPopular,
+            category: edge.node.data.category,
+            price: slice?.primary?.price,
+            old_price: slice?.primary?.old_price,
+            services: [slice],
+          },
+        })
+      })
     )
-  }
+    return popularRepair
+  }, [])
 
-  function setService(value) {
-    const newServisec = [...services]
-    const index = services.findIndex(service => service.name === value.name)
+  const [show, setShow] = React.useState(false)
 
-    if (index === -1) newServisec.push(value)
-    else newServisec.splice(index, 1)
-
-    setServices(newServisec)
-  }
-
-  // преобразуем цену
-  function priceMod(value) {
-    let price = "" + value
-    let length = price.length
-    for (let i = 1; i < length; i++) {
-      if (i % 3 === 0) {
-        price = price.slice(0, length - i) + " " + price.slice(length - i)
-      }
-    }
-    return price
-  }
-
-  function addCart() {
-    dispatch({
-      type: "ADD_PRODUCT_IN_CART",
-      payload: {
-        id: activeDoc.id + "_" + Date.now(),
-        repair: true,
-        data: {
-          category: activeDoc.data.category,
-          price: total,
-          services: services,
-        },
-      },
-    })
-    navigate("/cart")
+  function open(e) {
+    e.preventDefault()
+    setShow(e.nativeEvent.ctrlKey)
   }
 
   return (
     <Layout>
       <Seo title="Favorites" />
-      <HeaderWithIcon title="Ремонт" divider={false} />
+      <HeaderWithIcon
+        icon={<Hammer />}
+        title="Ремонт устройств"
+        divider={false}
+      />
 
-      <WrapperWithTitle title="Выберите категорию">
-        <Select
-          options={repairDocs.map(repairDoc => repairDoc.data.category)}
-          afterChange={setCategory}
-        />
-      </WrapperWithTitle>
+      {show ? (
+        <div className={classes.grayPanel}>
+          <PopularRepair repairs={popularRepair} />
 
-      <WrapperWithTitle title="Выберите услуги">
-        <CheckboxList
-          list={activeDoc.data.services.map(service => ({
-            name: service.name,
-            price: service.price,
-          }))}
-          selectServices={services}
-          afterChange={setService}
-        />
-      </WrapperWithTitle>
+          <Typography className={classes.grayPanel_title}>
+            У вас что-то сломалось?
+          </Typography>
 
-      <Typography>
-        Итого: <b>{priceMod(total) + " ₽"}</b>
-      </Typography>
-
-      <button onClick={addCart}>
-        <Typography>Добавить</Typography>
-      </button>
+          <Calculator
+            repairDocs={data.allPrismicRepair.edges.map(edge => edge.node)}
+          />
+        </div>
+      ) : (
+        <Typography onClick={open}>Страница в разработке</Typography>
+      )}
     </Layout>
   )
 }
 
 /**
- * Страница избранного
- * @module src/page/favorites
+ * Страница ремонта
+ * @module src/page/repair
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.data - объект данных полученый из prismic
  */
@@ -118,12 +142,39 @@ export const query = graphql`
     allPrismicRepair {
       edges {
         node {
-          id
           data {
             category
-            services {
-              name
-              price
+            image {
+              alt
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(width: 100)
+                }
+              }
+            }
+            imageForPopular: image {
+              alt
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(
+                    width: 211
+                    height: 129
+                    transformOptions: { cropFocus: NORTHEAST }
+                  )
+                }
+              }
+            }
+            body {
+              ... on PrismicRepairBodyService {
+                id
+                slice_type
+                primary {
+                  name
+                  old_price
+                  popular
+                  price
+                }
+              }
             }
           }
         }

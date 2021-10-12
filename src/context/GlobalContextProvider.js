@@ -18,6 +18,23 @@ function reducer(state, action) {
         }
       }
 
+    case "ADD_REPAIR_IN_CART":
+      if (action.payload.length === 0) return { ...state }
+
+      const cart = [...state.cart]
+      action.payload.forEach(repair => {
+        if (state.inCart(repair) !== 0) return
+        else {
+          cart.push({ product: repair, count: 1 })
+        }
+      })
+
+      localStorage.setItem("cart", JSON.stringify(cart))
+      return {
+        ...state,
+        cart: cart,
+      }
+
     case "DELETE_PRODUCT_FROM_CART":
       if (state.inCart(action.payload) === 0) return { ...state }
       else {

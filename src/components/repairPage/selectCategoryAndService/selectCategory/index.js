@@ -1,9 +1,23 @@
 import React from "react"
 import { makeStyles, Grid, Typography, Button } from "@material-ui/core"
 
-import Arrow from "../../../../static/svg/arrow.svg"
+import Arrow from "../../../../../static/svg/arrow.svg"
 
 const useStyle = makeStyles(theme => ({
+  wrapper: {
+    position: "relative",
+
+    marginTop: "1.09vw",
+    "@media(min-width: 1280px)": {
+      marginTop: 14,
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "1.67vw",
+    },
+    "@media(max-width: 767px)": {
+      marginTop: "3.38vw",
+    },
+  },
   select: {
     display: "flex",
     justifyContent: "space-between",
@@ -11,21 +25,20 @@ const useStyle = makeStyles(theme => ({
 
     width: "100%",
     background: theme.palette.background.main,
-    border: `1px solid ${theme.palette.color.accentSecondary}`,
+    border: `1px solid ${theme.palette.color.secondaryLight}`,
 
-    padding: "1.17vw 0.93vw",
+    padding: "0.85vw 0.93vw",
     borderRadius: "0.46vw",
     "@media(min-width: 1280px)": {
-      padding: "15px 12px",
+      padding: "11px 12px",
       borderRadius: "6px",
     },
     "@media(max-width: 1025px)": {
-      padding: "1.79vw 1.43vw",
+      padding: "1.31vw 1.43vw",
       borderRadius: "0.71vw",
     },
     "@media(max-width: 767px)": {
-      border: `1px solid ${theme.palette.color.accentSecondary}`,
-      padding: "3.62vw 2.89vw",
+      padding: "2.65vw 2.89vw",
       borderRadius: "1.44vw",
     },
   },
@@ -37,6 +50,9 @@ const useStyle = makeStyles(theme => ({
     "@media(min-width: 1280px)": {
       fontSize: "14px",
     },
+    "@media(max-width: 1025px)": {
+      fontSize: "1.67vw",
+    },
     "@media(max-width: 767px)": {
       fontSize: "3.38vw",
     },
@@ -47,19 +63,19 @@ const useStyle = makeStyles(theme => ({
     transform: "rotate(90deg)",
     transition: "transform .3s",
 
-    width: "1.4vw",
-    height: "1.64vw",
+    height: "1.4vw",
+    width: "1.64vw",
     "@media(min-width: 1280px)": {
-      width: "18px",
-      height: "21px",
+      height: "18px",
+      width: "21px",
     },
     "@media(max-width: 1025px)": {
-      width: "2.15vw",
-      height: "2.51vw",
+      height: "2.15vw",
+      width: "2.51vw",
     },
     "@media(max-width: 767px)": {
-      width: "4.34vw",
-      height: "5.07vw",
+      height: "4.34vw",
+      width: "5.07vw",
     },
 
     "& path": {
@@ -68,7 +84,7 @@ const useStyle = makeStyles(theme => ({
   },
   options: {
     background: theme.palette.background.main,
-    boxShadow: `0 0 1px #333`,
+    border: `1px solid ${theme.palette.color.secondaryLight}`,
     position: "absolute",
     top: "110%",
     left: 0,
@@ -116,16 +132,15 @@ const useStyle = makeStyles(theme => ({
 }))
 
 /**
- * Блок выбора одного элемента из выпадающего списка 
- * @module src/components/repairPage/select
+ * Блок выбора категории из выпадающего списка
+ * @module src/components/repairPage/selectCategory
  * @param {Object} props - объект свойств компонента React
  * @param {Object[]} props.options - массив всех значений
  * @param {function} props.afterChange - функция установки нового значения
  */
-export default function Select({ options, afterChange }) {
+export default function SelectCategory({ options, selectOption, afterChange }) {
   const classes = useStyle()
   const [showOptions, setShowOptions] = React.useState(false)
-  const [value, setValue] = React.useState(options[0])
 
   const rotate = showOptions ? classes.rotate180 : ""
 
@@ -135,18 +150,18 @@ export default function Select({ options, afterChange }) {
 
   function setGlobalValue(value) {
     toggleShowOptions()
-    setValue(value)
     afterChange(value)
   }
 
   return (
-    <div style={{ position: "relative" }}>
+    <div className={classes.wrapper}>
       <Button
         onClick={toggleShowOptions}
         onBlur={() => setShowOptions(false)}
         className={classes.select}
       >
-        <Typography className={classes.text}>{value}</Typography>
+        <Typography className={classes.text}>{selectOption}</Typography>
+
         <div className={classes.icon + " " + rotate}>
           <Arrow />
         </div>

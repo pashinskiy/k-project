@@ -156,7 +156,7 @@ const IndexPage = ({ data }) => {
               {productsInCart.map(product =>
                 product.repair ? (
                   <div key={product.id} className={classes.cardWrapper}>
-                    <CardRequest product={product} />
+                    <CardRequest repair={product} />
                   </div>
                 ) : (
                   <div key={product.id} className={classes.cardWrapper}>
