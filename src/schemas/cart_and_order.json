@@ -1,97 +1,125 @@
 {
-  "Main": {
-    "disclaimer": {
-      "type": "StructuredText",
-      "config": {
-        "multi": "preformatted",
-        "label": "Отказ от ответственности"
+  "Main" : {
+    "disclaimer" : {
+      "type" : "StructuredText",
+      "config" : {
+        "multi" : "preformatted",
+        "label" : "Отказ от ответственности"
       }
     },
-    "title_support": {
-      "type": "Text",
-      "config": {
-        "label": "Заголовок номера техподдержки",
-        "placeholder": "заголовок"
+    "title_support" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Заголовок номера техподдержки",
+        "placeholder" : "заголовок"
       }
     },
-    "phone_support": {
-      "type": "Text",
-      "config": {
-        "label": "Телефон техподдержки",
-        "placeholder": "телефон"
+    "phone_support" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Телефон техподдержки",
+        "placeholder" : "телефон"
       }
     }
   },
-  "Оформление заказа": {
-    "description_standart": {
-      "type": "Text",
-      "config": {
-        "label": "Описание стандартной доставки",
-        "placeholder": "описание"
+  "Оформление заказа" : {
+    "description_standart" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Описание стандартной доставки",
+        "placeholder" : "описание"
       }
     },
-    "description_express": {
-      "type": "Text",
-      "config": {
-        "label": "Описание экспресс доставки",
-        "placeholder": "описание"
+    "description_express" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Описание экспресс доставки",
+        "placeholder" : "описание"
       }
     },
-    "time_standart": {
-      "type": "Group",
-      "config": {
-        "fields": {
-          "range": {
-            "type": "Text",
-            "config": {
-              "label": "Диапазон времени",
-              "placeholder": "введите значение"
+    "description_courier" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Описание доставки ремонта курьером",
+        "placeholder" : "описание"
+      }
+    },
+    "description_in_shop" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Описание доставки ремонта в магазин",
+        "placeholder" : "описание"
+      }
+    },
+    "time_work" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Режим работы магазина",
+        "placeholder" : "текст"
+      }
+    },
+    "address" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Адрес магазина",
+        "placeholder" : "текст"
+      }
+    },
+    "time_standart" : {
+      "type" : "Group",
+      "config" : {
+        "fields" : {
+          "range" : {
+            "type" : "Text",
+            "config" : {
+              "label" : "Диапазон времени",
+              "placeholder" : "введите значение"
             }
           }
         },
-        "label": "Время стандартной доставки"
+        "label" : "Время стандартной доставки"
       }
     }
   },
-  "Стикер доставки": {
-    "sticker": {
-      "type": "Image",
-      "config": {
-        "constraint": {},
-        "thumbnails": [],
-        "label": "Стикер"
+  "Стикер доставки" : {
+    "sticker" : {
+      "type" : "Image",
+      "config" : {
+        "constraint" : { },
+        "thumbnails" : [ ],
+        "label" : "Стикер"
       }
     }
   },
-  "Оплата": {
-    "description_card": {
-      "type": "Text",
-      "config": {
-        "label": "Описание оплаты картой",
-        "placeholder": "описание"
+  "Оплата" : {
+    "description_card" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Описание оплаты картой",
+        "placeholder" : "описание"
       }
     },
-    "description_getting": {
-      "type": "Text",
-      "config": {
-        "label": "Описание оплаты при получении",
-        "placeholder": "описание"
+    "description_getting" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Описание оплаты при получении",
+        "placeholder" : "описание"
       }
     },
-    "credit_partners": {
-      "type": "Link",
-      "config": {
-        "select": "media",
-        "label": "Банки партнеры (кредит)",
-        "placeholder": "документ"
+    "credit_partners" : {
+      "type" : "Link",
+      "config" : {
+        "select" : "media",
+        "label" : "Банки партнеры (кредит)",
+        "placeholder" : "документ"
       }
     },
-    "installment_plan_partners": {
-      "type": "Link",
-      "config": {
-        "select": "media",
-        "label": "Банки партнеры (рассрочка)",
-        "placeholder": "документ"
+    "installment_plan_partners" : {
+      "type" : "Link",
+      "config" : {
+        "select" : "media",
+        "label" : "Банки партнеры (рассрочка)",
+        "placeholder" : "документ"
       }
     }
   }

@@ -14,6 +14,7 @@ import PayData from "../components/orderingPage/payData"
 import RecipientData from "../components/orderingPage/recipientData"
 
 import { GlobalStateContext } from "../context/GlobalContextProvider"
+import RepairData from "../components/orderingPage/repairData"
 
 const useStyle = makeStyles(theme => ({
   mainBlockWrapper: {
@@ -158,9 +159,19 @@ const IndexPage = ({ data }) => {
             className={classes.mainBlockWrapper}
           >
             <div className={classes.orderingFormWrapper}>
-              <div className={classes.orderingFieldWrapper}>
-                <DeliveryData prismicCartAndOrder={data.prismicCartAndOrder} />
-              </div>
+              {state.productAvailable() ? (
+                <div className={classes.orderingFieldWrapper}>
+                  <DeliveryData
+                    prismicCartAndOrder={data.prismicCartAndOrder}
+                  />
+                </div>
+              ) : null}
+
+              {state.servicesAvailable() ? (
+                <div className={classes.orderingFieldWrapper}>
+                  <RepairData prismicCartAndOrder={data.prismicCartAndOrder} />
+                </div>
+              ) : null}
 
               <div className={classes.orderingFieldWrapper}>
                 <PayData prismicCartAndOrder={data.prismicCartAndOrder} />
@@ -228,6 +239,10 @@ export const query = graphql`
         }
         description_standart
         description_express
+        description_courier
+        description_in_shop
+        time_work
+        address
         time_standart {
           range
         }

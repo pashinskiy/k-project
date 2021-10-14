@@ -1,5 +1,5 @@
 import React from "react"
-import { makeStyles, Grid, Button } from "@material-ui/core"
+import { makeStyles, Grid, Button, Typography } from "@material-ui/core"
 
 import { OrderingStateContext, OrderingDispatchContext } from "../../context"
 
@@ -101,27 +101,43 @@ const useStyle = makeStyles(theme => ({
       border: `1px solid ${theme.palette.color.accentSecondary}`,
     },
   },
+  textError: {
+    fontWeight: 400,
+    lineHeight: 1.21,
+    color: "#FF5B5B",
+
+    fontSize: "0.93vw",
+    "@media(min-width: 1280px)": {
+      fontSize: "12px",
+    },
+    "@media(max-width: 1025px)": {
+      fontSize: "1.43vw",
+    },
+    "@media(max-width: 767px)": {
+      fontSize: "2.89vw",
+    },
+  },
 }))
 
 /**
- * Блок ввода названия города с предложением вариантов 
- * @module src/components/orderingPage/elementsForms/selectCity
+ * Блок ввода названия города с предложением вариантов
+ * @module src/components/orderingPage/elementsForms/selectCityRepair
  */
-export default function SelectCity() {
+export default function SelectCityRepair() {
   const classes = useStyle()
   const [showOptions, setShowOptions] = React.useState(false)
-  
+
   const orderingState = React.useContext(OrderingStateContext)
   const orderingDispatch = React.useContext(OrderingDispatchContext)
 
-  const options = orderingState.city
-    ? orderingState.cities.filter(city =>
-        city.toLowerCase().includes(orderingState.city.toLowerCase())
+  const options = orderingState.repairCity
+    ? orderingState.repairCities.filter(city =>
+        city.toLowerCase().includes(orderingState.repairCity.toLowerCase())
       )
-    : orderingState.cities
+    : orderingState.repairCities
 
   function setCity(value) {
-    orderingDispatch({ type: "SET_CITY", payload: value })
+    orderingDispatch({ type: "SET_REPAIR_CITY", payload: value })
   }
 
   function openOptions() {
@@ -139,15 +155,15 @@ export default function SelectCity() {
   }
 
   function focusing() {
-    orderingDispatch({ type: "SET_FOCUSING_ON_FIELD", payload: true })
+    orderingDispatch({ type: "SET_REPAIR_FOCUSING_ON_FIELD", payload: true })
   }
 
   function blurring() {
     setShowOptions(false)
-    orderingDispatch({ type: "SET_FOCUSING_ON_FIELD", payload: false })
+    orderingDispatch({ type: "SET_REPAIR_FOCUSING_ON_FIELD", payload: false })
   }
 
-  const error = orderingState.validationCity() ? "" : classes.error
+  const error = orderingState.validationRepairCity() ? "" : classes.error
 
   return (
     <div style={{ position: "relative" }}>
@@ -160,7 +176,7 @@ export default function SelectCity() {
           if (e.code === "Enter") blurring()
         }}
         className={classes.select + " " + classes.text + " " + error}
-        value={orderingState.city}
+        value={orderingState.repairCity}
         autocomplete="new-password"
       />
 
@@ -182,6 +198,13 @@ export default function SelectCity() {
           ))}
         </Grid>
       ) : null}
+
+      {/* {error ? (
+        <Typography className={classes.textError}>
+          В данный момент ремонт устройств не осуществляется на территории
+          выбранного города.
+        </Typography>
+      ) : null} */}
     </div>
   )
 }

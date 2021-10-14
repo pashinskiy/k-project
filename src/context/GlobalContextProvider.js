@@ -131,6 +131,9 @@ const GlobalContextProvider = ({ children }) => {
       return this.favorites.find(item => item.id === product.id)
     },
     last_products: JSON.parse(localStorage.getItem("last_products")) ?? [],
+    productAvailable() {
+      return this.cart.some(item => !item.product.repair)
+    },
     servicesAvailable() {
       return this.cart.some(item => item.product.repair)
     },

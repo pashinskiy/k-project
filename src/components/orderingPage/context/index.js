@@ -5,10 +5,20 @@ export const OrderingDispatchContext = React.createContext()
 
 function reducer(state, action) {
   switch (action.type) {
+    case "TOGGLE_USE_DATA_DELIVERY":
+      return {
+        ...state,
+        useDataDelivery: !state.useDataDelivery,
+      }
     case "SET_FOCUSING_ON_FIELD":
       return {
         ...state,
         focusingOnField: action.payload,
+      }
+    case "SET_REPAIR_FOCUSING_ON_FIELD":
+      return {
+        ...state,
+        repairFocusingOnField: action.payload,
       }
     case "SET_CITY":
       return {
@@ -16,35 +26,71 @@ function reducer(state, action) {
         city: action.payload,
         variantDelivery: "standart",
       }
+    case "SET_REPAIR_CITY":
+      return {
+        ...state,
+        repairCity: action.payload,
+        repairVariantDelivery: "inShop",
+      }
     case "SET_DATE":
       return {
         ...state,
         date: action.payload,
+      }
+    case "SET_REPAIR_DATE":
+      return {
+        ...state,
+        repairDate: action.payload,
       }
     case "SET_VARIANT_DELIVERY":
       return {
         ...state,
         variantDelivery: action.payload,
       }
+    case "SET_REPAIR_VARIANT_DELIVERY":
+      return {
+        ...state,
+        repairVariantDelivery: action.payload,
+      }
     case "SET_TIME":
       return {
         ...state,
         time: action.payload,
+      }
+    case "SET_REPAIR_TIME":
+      return {
+        ...state,
+        repairTime: action.payload,
       }
     case "SET_STREET":
       return {
         ...state,
         street: action.payload,
       }
+    case "SET_REPAIR_STREET":
+      return {
+        ...state,
+        repairStreet: action.payload,
+      }
     case "SET_HOUSE":
       return {
         ...state,
         house: action.payload,
       }
+    case "SET_REPAIR_HOUSE":
+      return {
+        ...state,
+        repairHouse: action.payload,
+      }
     case "SET_APARTAMENT":
       return {
         ...state,
         apartment: action.payload,
+      }
+    case "SET_REPAIR_APARTAMENT":
+      return {
+        ...state,
+        repairApartment: action.payload,
       }
     case "SET_VARIANT_PAY":
       return {
@@ -83,41 +129,64 @@ export default function OrderingContext({ children }) {
             }
           }
         }
+        prismicRepairCities {
+          data {
+            cities {
+              city
+            }
+          }
+        }
       }
     `
   )
 
   const cities = data.prismicDeliveryCities.data.cities.map(item => item.city)
+  const repairCities = data.prismicRepairCities.data.cities.map(
+    item => item.city
+  )
 
   const initOrderingState = {
+    useDataDelivery: false,
+
     focusingOnField: false,
+    repairFocusingOnField: false,
+
     cities: cities,
+    repairCities: repairCities,
+
     city: "",
+    repairCity: "",
+
     variantDelivery: "standart",
+    repairVariantDelivery: "inShop",
+
     date: false,
+    repairDate: false,
+
     time: false,
+    repairTime: false,
+
     street: false,
+    repairStreet: false,
+
     house: false,
+    repairHouse: false,
+
     apartment: false,
+    repairApartment: false,
+
     variantPay: "онлайн",
     name: false,
     phone: "+7",
+
     validationCity() {
       if (!this.city) return false
       return this.cities.includes(this.city)
     },
-    // validationStreet() {
-    //   if (!this.street) return false
-    //   return /^[0-9a-zа-яё\s]+$/i.test(this.street)
-    // },
-    // validationHouse() {
-    //   if (!this.house) return false
-    //   return /^\s*[0-9]+\s*$/.test(this.house)
-    // },
-    // validationApartament() {
-    //   if (!this.apartment) return false
-    //   return /^\s*[0-9]+\s*$/.test(this.apartment)
-    // },
+    validationRepairCity() {
+      if (!this.repairCity) return false
+      return this.repairCities.includes(this.repairCity)
+    },
     validationName() {
       if (!this.name) return false
       return /^[a-zа-я\s]+$/i.test(this.name)
@@ -130,15 +199,7 @@ export default function OrderingContext({ children }) {
     },
     validationAll() {
       return (
-        // !Object.keys(this).some(
-        //   key => !this[key] && key !== "focusingOnField"
-        // ) &&
-        this.validationCity() &&
-        // this.validationStreet() &&
-        // this.validationHouse() &&
-        // this.validationApartament() &&
-        this.validationName() &&
-        this.validationPhone()
+        this.validationCity() && this.validationName() && this.validationPhone()
       )
     },
   }

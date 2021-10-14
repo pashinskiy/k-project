@@ -17,6 +17,7 @@ import Delivery from "../../../../static/svg/delivery.svg"
 import Watch from "../../../../static/svg/watch.svg"
 import Geo from "../../../../static/svg/geo.svg"
 
+import { GlobalStateContext } from "../../../context/GlobalContextProvider"
 import { OrderingStateContext, OrderingDispatchContext } from "../context"
 
 const useStyle = makeStyles(theme => ({
@@ -233,6 +234,8 @@ export default function DeliveryData({ prismicCartAndOrder }) {
   const classes = useStyle()
   const smartPhoneScreen = useMediaQuery("(max-width: 767px)")
 
+  const state = React.useContext(GlobalStateContext)
+
   const stickerDelivery = prismicCartAndOrder.data.sticker ?? false
 
   const dates = [
@@ -291,9 +294,6 @@ export default function DeliveryData({ prismicCartAndOrder }) {
   }
 
   // функции для компонентов
-  function setCity(value) {
-    orderingDispatch({ type: "SET_CITY", payload: value })
-  }
   function setVariantDelivery(value) {
     orderingDispatch({ type: "SET_VARIANT_DELIVERY", payload: value })
     if (value === "express") {
@@ -333,12 +333,14 @@ export default function DeliveryData({ prismicCartAndOrder }) {
     orderingDispatch({ type: "SET_APARTAMENT", payload: value })
   }
 
+  const number = state.servicesAvailable() ? "1.1" : 1
+
   return (
     <div className={classes.wrapper}>
       <Grid container alignItems="center">
         <HeaderWithIcon
           icon={smartPhoneScreen ? null : <Delivery />}
-          number={smartPhoneScreen ? 1 : null}
+          number={smartPhoneScreen ? number : null}
           title="Доставка"
           style={{ width: "auto" }}
         />

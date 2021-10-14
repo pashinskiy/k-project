@@ -99,6 +99,7 @@ module.exports = {
           docs: require("./src/schemas/docs.json"),
           delivery_cities: require("./src/schemas/delivery_cities.json"),
           repair: require("./src/schemas/repair.json"),
+          repair_cities: require("./src/schemas/repair_cities.json"),
         },
         shouldDownloadImage: () => true,
       },

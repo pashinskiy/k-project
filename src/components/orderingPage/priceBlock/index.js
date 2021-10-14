@@ -371,6 +371,7 @@ export default function PriceBlock({ products }) {
   const order = JSON.parse(localStorage.getItem("order"))
 
   const [sendQuery, setSendQuery] = React.useState(false)
+
   function payOrder() {
     if (sendQuery) return
 
