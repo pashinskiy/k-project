@@ -106,14 +106,18 @@ const useStyle = makeStyles(theme => ({
     lineHeight: 1.21,
     color: "#FF5B5B",
 
+    marginTop: "0.93vw",
     fontSize: "0.93vw",
     "@media(min-width: 1280px)": {
+      marginTop: "12px",
       fontSize: "12px",
     },
     "@media(max-width: 1025px)": {
+      marginTop: "1.43vw",
       fontSize: "1.43vw",
     },
     "@media(max-width: 767px)": {
+      marginTop: "2.89vw",
       fontSize: "2.89vw",
     },
   },
@@ -166,45 +170,47 @@ export default function SelectCityRepair() {
   const error = orderingState.validationRepairCity() ? "" : classes.error
 
   return (
-    <div style={{ position: "relative" }}>
-      <input
-        onClick={openOptions}
-        onInput={setValue}
-        onFocus={focusing}
-        onBlur={blurring}
-        onKeyPress={e => {
-          if (e.code === "Enter") blurring()
-        }}
-        className={classes.select + " " + classes.text + " " + error}
-        value={orderingState.repairCity}
-        autocomplete="new-password"
-      />
+    <>
+      <div style={{ position: "relative" }}>
+        <input
+          onClick={openOptions}
+          onInput={setValue}
+          onFocus={focusing}
+          onBlur={blurring}
+          onKeyPress={e => {
+            if (e.code === "Enter") blurring()
+          }}
+          className={classes.select + " " + classes.text + " " + error}
+          value={orderingState.repairCity}
+          autocomplete="new-password"
+        />
 
-      {showOptions && options.length ? (
-        <Grid
-          container
-          direction="column"
-          wrap="nowrap"
-          className={classes.options}
-        >
-          {options.map(option => (
-            <Button
-              onPointerDown={() => setOption(option)}
-              key={option}
-              className={classes.option + " " + classes.text}
-            >
-              {option}
-            </Button>
-          ))}
-        </Grid>
-      ) : null}
+        {showOptions && options.length ? (
+          <Grid
+            container
+            direction="column"
+            wrap="nowrap"
+            className={classes.options}
+          >
+            {options.map(option => (
+              <Button
+                onPointerDown={() => setOption(option)}
+                key={option}
+                className={classes.option + " " + classes.text}
+              >
+                {option}
+              </Button>
+            ))}
+          </Grid>
+        ) : null}
+      </div>
 
-      {/* {error ? (
+      {error && orderingState.repairCity && !orderingState.repairFocusingOnField ? (
         <Typography className={classes.textError}>
           В данный момент ремонт устройств не осуществляется на территории
           выбранного города.
         </Typography>
-      ) : null} */}
-    </div>
+      ) : null}
+    </>
   )
 }
