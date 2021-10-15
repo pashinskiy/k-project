@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
     zIndex: 1000,
     width: "100%",
     "@media(max-width: 1025px)": {
+      paddingTop: 5,
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",

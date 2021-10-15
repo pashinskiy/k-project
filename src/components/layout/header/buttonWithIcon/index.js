@@ -42,18 +42,21 @@ const useStyles = makeStyles(theme => ({
     left: "100%",
     transform: "translate(-50%, -50%)",
 
+    boxSizing: "border-box",
     width: "auto",
     padding: "2px 4px",
     background: "#DF3434",
     borderRadius: "1000px",
+    border: `3px solid ${theme.palette.background.main}`,
 
     fontWeight: 500,
     fontSize: 10,
-    lineHeight: "12px",
+    lineHeight: 1.2,
     color: theme.palette.color.mainContrast,
 
     "@media(max-width: 1025px)": {
       transform: "translate(-50%, -37%)",
+      border: `3px solid ${theme.palette.background.secondary}`,
     },
   },
 }))
