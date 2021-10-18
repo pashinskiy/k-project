@@ -16,6 +16,7 @@ import Mokka from "../../../../static/svg/mokka.svg"
 import MokkaInfo from "../../../../static/svg/mokkaInfo.svg"
 import MokkaCross from "../../../../static/svg/mokkaCross.svg"
 import MokkaIframeRegistration from "../../mokkaIframeRegistration"
+import Tinkoff from "../../button/tinkoff"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -195,6 +196,20 @@ const useStyles = makeStyles(theme => ({
     },
     "@media(max-width: 767px)": {
       fontSize: "4.83vw",
+    },
+  },
+  wrapperTinkoffButton: {
+    width: "100%",
+
+    marginTop: "0.78vw",
+    "@media(min-width: 1280px)": {
+      marginTop: 10,
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "1.91vw",
+    },
+    "@media(max-width: 767px)": {
+      marginTop: "3.86vw",
     },
   },
   title: {
@@ -391,6 +406,7 @@ export default function BlockPrice({ product, allVariants }) {
 
   const allColors = []
   const allMemory = []
+
   allVariants.forEach(variant => {
     // добавляем товар если товара с таким цветом нет
     if (
@@ -406,9 +422,10 @@ export default function BlockPrice({ product, allVariants }) {
 
     // добавляем товар если товара с такой памятью нет
     if (!allMemory.find(prod => prod.data.memory === variant.data.memory)) {
-      allMemory.push(variant)
+      if (variant.data.memory) allMemory.push(variant)
     }
   })
+
   // цвет продукта первый в массиве
   allColors.unshift(
     ...allColors.splice(
@@ -446,6 +463,10 @@ export default function BlockPrice({ product, allVariants }) {
   )
   const name_seller = seller?.primary?.name_seller ?? false
   const ogrn = seller?.primary?.ogrn ?? false
+
+  const featuresSlices = product.data.body.filter(
+    slice => slice.slice_type === "features"
+  )
 
   function switchShowMokkaInfo(e) {
     e.preventDefault()
@@ -493,24 +514,26 @@ export default function BlockPrice({ product, allVariants }) {
         })}
       </Grid>
 
-      <Grid container className={classes.buttonsMemoryPanel}>
-        {allMemory.map(prod => {
-          const active =
-            product.data.memory === prod.data.memory
-              ? classes.activeButtonMemory
-              : ""
-          return (
-            <button
-              onClick={() => navigate(`/${prod.uid}/`)}
-              aria-label={`${prod.data.memory}`}
-              key={prod.uid}
-              className={classes.buttonMemory + " " + active}
-            >
-              {prod.data.memory}
-            </button>
-          )
-        })}
-      </Grid>
+      {allMemory.length ? (
+        <Grid container className={classes.buttonsMemoryPanel}>
+          {allMemory.map(prod => {
+            const active =
+              product.data.memory === prod.data.memory
+                ? classes.activeButtonMemory
+                : ""
+            return (
+              <button
+                onClick={() => navigate(`/${prod.uid}/`)}
+                aria-label={`${prod.data.memory}`}
+                key={prod.uid}
+                className={classes.buttonMemory + " " + active}
+              >
+                {prod.data.memory}
+              </button>
+            )
+          })}
+        </Grid>
+      ) : null}
 
       <Grid container alignItems="flex-end" className={classes.priceWrapper}>
         <Typography className={classes.price}>
@@ -524,19 +547,29 @@ export default function BlockPrice({ product, allVariants }) {
       </Grid>
 
       {mobile ? null : (
-        <AddInCartAndFav
-          text="Добавить в корзину"
-          product={product}
-          variant="page"
-        />
+        <>
+          <AddInCartAndFav
+            text="Добавить в корзину"
+            product={product}
+            variant="page"
+          />
+
+          <div className={classes.wrapperTinkoffButton}>
+            <Tinkoff items={[{ product: product, count: 1 }]} />
+          </div>
+        </>
       )}
 
       {mobile ? (
-        <Features
-          featuresSlices={product.data.body.filter(
-            slice => slice.slice_type === "features"
-          )}
-        />
+        <>
+          {featuresSlices.length ? (
+            <Features featuresSlices={featuresSlices} />
+          ) : null}
+
+          <div className={classes.wrapperTinkoffButton}>
+            <Tinkoff />
+          </div>
+        </>
       ) : null}
 
       <Grid>
