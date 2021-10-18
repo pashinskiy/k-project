@@ -39,9 +39,12 @@ const theme = createMuiTheme({
       "@global": {
         html: {
           overflowX: "hidden",
+          "& *": {
+            margin: 0,
+            padding: 0,
+          },
         },
         body: {
-          margin: 0,
           background: "#ffffff",
           "-webkit-background-clip": "border-box",
           backgroundClip: "border-box",
