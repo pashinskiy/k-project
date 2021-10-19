@@ -1,161 +1,165 @@
 {
-    "Main": {
-      "title": {
-        "type": "Text",
-        "config": {
-          "label": "Заголовок страницы",
-          "placeholder": "Заголовок страницы"
-        }
-      },
-      "image_first_block": {
-        "type": "Image",
-        "config": {
-          "constraint": {},
-          "thumbnails": [],
-          "label": "Изображение первого блока"
-        }
-      },
-      "title_second_block": {
-        "type": "StructuredText",
-        "config": {
-          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
-          "label": "Заголовок второго блока"
-        }
-      },
-      "subtitle_second_block": {
-        "type": "Text",
-        "config": {
-          "label": "Подзаголовок второго блока",
-          "placeholder": "Подзаголовок"
-        }
-      },
-      "title_third_block": {
-        "type": "Text",
-        "config": {
-          "label": "Заголовок третьего блока",
-          "placeholder": "Заголовок"
-        }
-      },
-      "subtitle_third_block": {
-        "type": "Text",
-        "config": {
-          "label": "Подзаголовок третьего блока",
-          "placeholder": "Подзаголовок"
-        }
-      },
-      "image_third_block": {
-        "type": "Image",
-        "config": {
-          "constraint": {},
-          "thumbnails": [],
-          "label": "Изображение третьего блока"
-        }
-      },
-      "body": {
-        "type": "Slices",
-        "fieldset": "Slice zone",
-        "config": {
-          "labels": {},
-          "choices": {
-            "paragraph": {
-              "type": "Slice",
-              "fieldset": "paragraph",
-              "description": "пунк",
-              "icon": "format_list_bulleted",
-              "display": "list",
-              "non-repeat": {
-                "title_paragraph": {
-                  "type": "StructuredText",
-                  "config": {
-                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
-                    "label": "Заголовок",
-                    "placeholder": "Заголовок"
-                  }
-                },
-                "subtitle_paragraph": {
-                  "type": "Text",
-                  "config": {
-                    "label": "Подзаголовок",
-                    "placeholder": "Подзаголовок"
-                  }
-                },
-                "text_paragraph": {
-                  "type": "Text",
-                  "config": {
-                    "label": "Текст под заголовком",
-                    "placeholder": "Текст"
-                  }
+  "Main": {
+    "title": {
+      "type": "Text",
+      "config": {
+        "label": "Заголовок страницы",
+        "placeholder": "Заголовок страницы"
+      }
+    },
+    "image_first_block": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Изображение первого блока"
+      }
+    },
+    "title_second_block": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+        "label": "Заголовок второго блока"
+      }
+    },
+    "subtitle_second_block": {
+      "type": "Text",
+      "config": {
+        "label": "Подзаголовок второго блока",
+        "placeholder": "Подзаголовок"
+      }
+    },
+    "title_third_block": {
+      "type": "Text",
+      "config": {
+        "label": "Заголовок третьего блока",
+        "placeholder": "Заголовок"
+      }
+    },
+    "subtitle_third_block": {
+      "type": "Text",
+      "config": {
+        "label": "Подзаголовок третьего блока",
+        "placeholder": "Подзаголовок"
+      }
+    },
+    "image_third_block": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Изображение третьего блока"
+      }
+    },
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": {},
+        "choices": {
+          "paragraph": {
+            "type": "Slice",
+            "fieldset": "paragraph",
+            "description": "пунк",
+            "icon": "format_list_bulleted",
+            "non-repeat": {
+              "title_paragraph": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+                  "label": "Заголовок",
+                  "placeholder": "Заголовок"
                 }
               },
-              "repeat": {}
+              "subtitle_paragraph": {
+                "type": "Text",
+                "config": {
+                  "label": "Подзаголовок",
+                  "placeholder": "Подзаголовок"
+                }
+              },
+              "text_paragraph": {
+                "type": "Text",
+                "config": {
+                  "label": "Текст под заголовком",
+                  "placeholder": "Текст"
+                }
+              }
             },
-            "paragraph_with_ref": {
-              "type": "Slice",
-              "fieldset": "paragraph_with_ref",
-              "description": "пункт со ссылкой",
-              "icon": "format_list_bulleted",
-              "display": "list",
-              "non-repeat": {
-                "title_paragraph": {
-                  "type": "StructuredText",
-                  "config": {
-                    "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
-                    "label": "Заголовок",
-                    "placeholder": "Заголовок"
-                  }
-                },
-                "subtitle_paragraph": {
-                  "type": "Text",
-                  "config": {
-                    "label": "Подзаголовок",
-                    "placeholder": "Подзаголовок"
-                  }
-                },
-                "reference_paragraph": {
-                  "type": "Text",
-                  "config": {
-                    "label": "Ссылка",
-                    "placeholder": "Ссылка"
-                  }
+            "repeat": {}
+          },
+          "paragraph_with_ref": {
+            "type": "Slice",
+            "fieldset": "paragraph_with_ref",
+            "description": "пункт со ссылкой",
+            "icon": "format_list_bulleted",
+            "non-repeat": {
+              "title_paragraph": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+                  "label": "Заголовок",
+                  "placeholder": "Заголовок"
                 }
               },
-              "repeat": {}
+              "subtitle_paragraph": {
+                "type": "Text",
+                "config": {
+                  "label": "Подзаголовок",
+                  "placeholder": "Подзаголовок"
+                }
+              },
+              "reference_paragraph": {
+                "type": "Text",
+                "config": {
+                  "label": "Ссылка",
+                  "placeholder": "Ссылка"
+                }
+              },
+              "reference_text_paragraph": {
+                "type": "Text",
+                "config": {
+                  "label": "Текст ссылки",
+                  "placeholder": "Текст ссылки"
+                }
+              }
             },
-            "paragraph_with_svg": {
-              "type": "Slice",
-              "fieldset": "paragraph_with_svg",
-              "description": "пункт с svg",
-              "icon": "format_list_bulleted",
-              "display": "list",
-              "non-repeat": {
-                "title_paragraph": {
-                  "type": "StructuredText",
-                  "config": {
-                    "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
-                    "label": "Заголовок",
-                    "placeholder": "Заголовок"
-                  }
-                },
-                "subtitle_paragraph": {
-                  "type": "Text",
-                  "config": {
-                    "label": "Подзаголовок",
-                    "placeholder": "Подзаголовок"
-                  }
-                },
-                "svg_paragraph": {
-                  "type": "Image",
-                  "config": {
-                    "constraint": {},
-                    "thumbnails": [],
-                    "label": "Изображение (svg)"
-                  }
+            "repeat": {}
+          },
+          "paragraph_with_svg": {
+            "type": "Slice",
+            "fieldset": "paragraph_with_svg",
+            "description": "пункт с svg",
+            "icon": "format_list_bulleted",
+            "non-repeat": {
+              "title_paragraph": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+                  "label": "Заголовок",
+                  "placeholder": "Заголовок"
                 }
               },
-              "repeat": {}
-            }
+              "subtitle_paragraph": {
+                "type": "Text",
+                "config": {
+                  "label": "Подзаголовок",
+                  "placeholder": "Подзаголовок"
+                }
+              },
+              "svg_paragraph": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Изображение (svg)"
+                }
+              }
+            },
+            "repeat": {}
           }
         }
       }
     }
   }
+}
