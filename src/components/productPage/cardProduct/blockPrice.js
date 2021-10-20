@@ -65,6 +65,8 @@ const useStyles = makeStyles(theme => ({
     overflow: "hidden",
     boxSizing: "border-box",
     borderRadius: "100px",
+    boxShadow: "inset 0px 2px 4px rgba(0, 0, 0, 0.25)",
+
 
     width: "3.12vw",
     height: "3.12vw",
