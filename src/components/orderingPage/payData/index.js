@@ -6,7 +6,7 @@ import HeaderWithIcon from "../headerWithIcon"
 import BankCard from "../../../../static/svg/bankCard.svg"
 
 import { GlobalStateContext } from "../../../context/GlobalContextProvider"
-import { OrderingDispatchContext } from "../context"
+import { OrderingDispatchContext, OrderingStateContext } from "../context"
 
 import Mokka from "../../../../static/svg/mokka.svg"
 
@@ -154,20 +154,22 @@ const useStyle = makeStyles(theme => ({
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.prismicCartAndOrder - свойство prismicCartAndOrder объекта data полученного из prismic
  */
-export default function PayData({ prismicCartAndOrder }) {
+export default function PayData({ prismicCartAndOrder, initVariant }) {
   const classes = useStyle()
   const smartPhoneScreen = useMediaQuery("(max-width: 767px)")
   const state = React.useContext(GlobalStateContext)
 
   const order = JSON.parse(localStorage.getItem("order"))
 
+  const orderingState = React.useContext(OrderingStateContext)
   const orderingDispatch = React.useContext(OrderingDispatchContext)
 
-  const [value, setValue] = React.useState("онлайн")
-
   function setVariantPay(newValue) {
-    setValue(newValue)
     orderingDispatch({ type: "SET_VARIANT_PAY", payload: newValue })
+  }
+
+  if (initVariant && initVariant !== orderingState.variantPay) {
+    setVariantPay(initVariant)
   }
 
   return (
@@ -187,7 +189,7 @@ export default function PayData({ prismicCartAndOrder }) {
             className={
               classes.ratio +
               " " +
-              (value === "онлайн" ? classes.activeRatio : "")
+              (orderingState.variantPay === "онлайн" ? classes.activeRatio : "")
             }
           />
 
@@ -210,7 +212,9 @@ export default function PayData({ prismicCartAndOrder }) {
             className={
               classes.ratio +
               " " +
-              (value === "при получении" ? classes.activeRatio : "")
+              (orderingState.variantPay === "при получении"
+                ? classes.activeRatio
+                : "")
             }
           />
 
@@ -234,7 +238,9 @@ export default function PayData({ prismicCartAndOrder }) {
               className={
                 classes.ratio +
                 " " +
-                (value === "в кредит" ? classes.activeRatio : "")
+                (orderingState.variantPay === "в кредит"
+                  ? classes.activeRatio
+                  : "")
               }
             />
 
@@ -255,7 +261,9 @@ export default function PayData({ prismicCartAndOrder }) {
               className={
                 classes.ratio +
                 " " +
-                (value === "в рассрочку" ? classes.activeRatio : "")
+                (orderingState.variantPay === "в рассрочку"
+                  ? classes.activeRatio
+                  : "")
               }
             />
 

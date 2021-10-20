@@ -6,13 +6,13 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import HeaderWithIcon from "../components/headers/headerWithIcon"
 import BreadCrumbs from "../components/breadCrumbs"
-import OrderingContext from "../components/orderingPage/context"
 import CartIcon from "../../static/svg/cart.svg"
 import PriceBlock from "../components/orderingPage/priceBlock"
 import DeliveryData from "../components/orderingPage/deliveryData"
 import PayData from "../components/orderingPage/payData"
 import RecipientData from "../components/orderingPage/recipientData"
 
+import OrderingContext from "../components/orderingPage/context"
 import { GlobalStateContext } from "../context/GlobalContextProvider"
 import RepairData from "../components/orderingPage/repairData"
 
@@ -131,7 +131,7 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-const IndexPage = ({ data }) => {
+const IndexPage = ({ data, location }) => {
   const classes = useStyle()
   const order = JSON.parse(localStorage.getItem("order"))
 
@@ -174,7 +174,10 @@ const IndexPage = ({ data }) => {
               ) : null}
 
               <div className={classes.orderingFieldWrapper}>
-                <PayData prismicCartAndOrder={data.prismicCartAndOrder} />
+                <PayData
+                  prismicCartAndOrder={data.prismicCartAndOrder}
+                  initVariant={location.state?.variantPay}
+                />
               </div>
 
               <div className={classes.orderingFieldWrapper}>

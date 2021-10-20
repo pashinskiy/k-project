@@ -1,4 +1,5 @@
 import React from "react"
+import { navigate } from "gatsby"
 import {
   makeStyles,
   useMediaQuery,
@@ -443,7 +444,7 @@ export default function PriceBlock({ products }) {
 
       {state.servicesAvailable() ? null : (
         <div className={classes.wrapperTinkoffButton}>
-          <Tinkoff items={state.cart} />
+          <Tinkoff items={state.cart} onClick={goRegistration} />
         </div>
       )}
 

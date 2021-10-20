@@ -78,11 +78,12 @@ const useStyles = makeStyles(theme => ({
  * @param {String} props.text - текст для отображения на кнопке
  * @param {function} props.onClick - функция вызываемая перед переходом
  */
-export default function Tinkoff({ items }) {
+export default function Tinkoff({ items, onClick }) {
   const classes = useStyles()
 
   function buttonClick() {
-      console.log(items)
+    onClick()
+    navigate("/ordering", { state: { variantPay: "в кредит" } })
   }
 
   return (

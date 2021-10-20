@@ -478,6 +478,28 @@ export default function BlockPrice({ product, allVariants }) {
     setShowMokkaIframe(!showMokkaIframe)
   }
 
+  function goRegistration() {
+    const name = product.data.name
+    const price = product.data.price
+
+    localStorage.setItem(
+      "order",
+      JSON.stringify({
+        positions: `1. Товар: ${name}; Количество: 1.`,
+        price: price,
+        sale: product.data.old_price ? product.data.old_price - price : 0,
+        allProductsJson: [
+          {
+            product_name: name,
+            product_uid: product.uid,
+            quantity: 1,
+            price: price,
+          },
+        ],
+      })
+    )
+  }
+
   return (
     <Grid container direction="column" className={classes.wrapper}>
       {mobile ? (
@@ -555,7 +577,10 @@ export default function BlockPrice({ product, allVariants }) {
           />
 
           <div className={classes.wrapperTinkoffButton}>
-            <Tinkoff items={[{ product: product, count: 1 }]} />
+            <Tinkoff
+              items={[{ product: product, count: 1 }]}
+              onClick={goRegistration}
+            />
           </div>
         </>
       )}
@@ -567,7 +592,10 @@ export default function BlockPrice({ product, allVariants }) {
           ) : null}
 
           <div className={classes.wrapperTinkoffButton}>
-            <Tinkoff />
+            <Tinkoff
+              items={[{ product: product, count: 1 }]}
+              onClick={goRegistration}
+            />
           </div>
         </>
       ) : null}
