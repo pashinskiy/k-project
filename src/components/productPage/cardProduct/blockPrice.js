@@ -18,6 +18,8 @@ import MokkaCross from "../../../../static/svg/mokkaCross.svg"
 import MokkaIframeRegistration from "../../mokkaIframeRegistration"
 import Tinkoff from "../../button/tinkoff"
 
+import { GlobalDispatchContext } from "../../../context/GlobalContextProvider"
+
 const useStyles = makeStyles(theme => ({
   wrapper: {
     width: "35.31vw",
@@ -66,7 +68,6 @@ const useStyles = makeStyles(theme => ({
     boxSizing: "border-box",
     borderRadius: "100px",
     boxShadow: "inset 0px 2px 4px rgba(0, 0, 0, 0.25)",
-
 
     width: "3.12vw",
     height: "3.12vw",
@@ -403,6 +404,8 @@ export default function BlockPrice({ product, allVariants }) {
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 1025px)")
 
+  const dispatch = React.useContext(GlobalDispatchContext)
+
   const [showMokkaInfo, setShowMokkaInfo] = React.useState(false)
   const [showMokkaIframe, setShowMokkaIframe] = React.useState(false)
 
@@ -481,6 +484,8 @@ export default function BlockPrice({ product, allVariants }) {
   }
 
   function goRegistration() {
+    dispatch({ type: "ADD_PRODUCT_IN_CART", payload: product })
+
     const name = product.data.name
     const price = product.data.price
 
