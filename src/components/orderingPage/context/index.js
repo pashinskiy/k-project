@@ -193,9 +193,8 @@ export default function OrderingContext({ children }) {
     },
     validationPhone() {
       if (!this.phone) return false
-      return /^\s*(\+?[78]-?\(?\d{3}\)?-?)?\d{3}-?\d{2}-?\d{2}\s*$/.test(
-        this.phone
-      )
+      // /^\s*(\+?[78]-?\(?\d{3}\)?-?)?\d{3}-?\d{2}-?\d{2}\s*$/.test(this.phone)
+      return this.phone !== ""
     },
     validationAll() {
       return (
