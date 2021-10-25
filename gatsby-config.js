@@ -101,6 +101,7 @@ module.exports = {
           repair: require("./src/schemas/repair.json"),
           repair_cities: require("./src/schemas/repair_cities.json"),
           trade_in: require("./src/schemas/trade_in.json"),
+          sell: require("./src/schemas/sell.json"),
         },
         shouldDownloadImage: () => true,
       },

@@ -1,7 +1,10 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { makeStyles, Typography, useMediaQuery } from "@material-ui/core"
+import { makeStyles, Modal, Typography, useMediaQuery } from "@material-ui/core"
 import { GatsbyImage } from "gatsby-plugin-image"
+
+import PanelSelectProduct from "../panelSelectProduct"
+import SelectCategory from "../selectCategory"
 
 import TradeInDevice from "../../../../static/svg/trade_in_device.svg"
 import Arrow from "../../../../static/svg/arrow.svg"
@@ -163,7 +166,7 @@ const useStyles = makeStyles(theme => ({
       border: `1px solid #D6D5DF`,
     },
   },
-  button: {
+  tab_panel__button: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -212,7 +215,7 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
-  button__active: {
+  tab_panel__button__active: {
     "-webkit-background-clip": "border-box",
     backgroundClip: "border-box",
     "-webkit-text-fill-color": theme.palette.color.mainContrast,
@@ -530,6 +533,101 @@ const useStyles = makeStyles(theme => ({
       height: "1.93vw",
     },
   },
+  modal: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  you_sale_block__text: {
+    fontWeight: 400,
+    lineHeight: 1.21,
+
+    fontSize: "1.32vw",
+    "@media(max-width: 1025px)": {
+      fontSize: 17,
+    },
+    "@media(max-width: 1025px)": {
+      fontSize: "2.03vw",
+    },
+    "@media(max-width: 767px)": {
+      fontSize: "4.1vw",
+    },
+  },
+  you_sale_block__accent_text: {
+    fontWeight: 700,
+    lineHeight: 1.21,
+
+    marginTop: "0.62vw",
+    fontSize: "2.18vw",
+    "@media(max-width: 1025px)": {
+      marginTop: 8,
+      fontSize: 28,
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "0.95vw",
+      fontSize: "3.35vw",
+    },
+    "@media(max-width: 767px)": {
+      marginTop: "1.93vw",
+      fontSize: "6.76vw",
+    },
+
+    "& big": {
+      fontSize: "3.43vw",
+      "@media(max-width: 1025px)": {
+        fontSize: 44,
+      },
+      "@media(max-width: 1025px)": {
+        fontSize: "5.27vw",
+      },
+      "@media(max-width: 767px)": {
+        fontSize: "10.62vw",
+      },
+    },
+  },
+  button_send: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+
+    width: "100%",
+    background: theme.palette.background.accent,
+
+    marginTop: "1.56vw",
+    borderRadius: "0.93vw",
+    height: "3.12vw",
+    "@media(min-width: 1280px)": {
+      marginTop: 20,
+      borderRadius: 12,
+      height: 40,
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "2.39vw",
+      borderRadius: "1.43vw",
+      height: "4.79vw",
+    },
+    "@media(max-width: 767px)": {
+      marginTop: "4.83vw",
+      borderRadius: "2.89vw",
+      height: "9.66vw",
+    },
+  },
+  button_send__text: {
+    fontWeight: 700,
+    lineHeight: 1.21,
+    color: theme.palette.color.mainContrast,
+
+    fontSize: "1.09vw",
+    "@media(min-width: 1280px)": {
+      fontSize: 14,
+    },
+    "@media(max-width: 1025px)": {
+      fontSize: "1.67vw",
+    },
+    "@media(max-width: 767px)": {
+      fontSize: "3.38vw",
+    },
+  },
 }))
 
 /**
@@ -580,14 +678,35 @@ export default function Calculator() {
                   }
                 }
               }
+              tags {
+                tag {
+                  document {
+                    ... on PrismicTag {
+                      id
+                      data {
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      allPrismicSubcategory {
+        edges {
+          node {
+            id
+            uid
+            data {
+              name
             }
           }
         }
       }
     }
   `)
-
-  console.log(data)
 
   const products = React.useMemo(
     () => data.allPrismicProduct.edges.map(edge => edge.node),
@@ -599,6 +718,11 @@ export default function Calculator() {
   const [turnInCategory, setTurnInCategory] = React.useState(
     variantsTurnInCategory[0]
   )
+
+  const [
+    showPanelSelectTurnInProducts,
+    setShowPanelSelectTurnInProducts,
+  ] = React.useState(false)
 
   const [turnInProduct, setTurnInProduct] = React.useState(null)
   const variantsTurnInProduct = React.useMemo(() => {
@@ -731,13 +855,39 @@ export default function Calculator() {
 
   // данные и функции блока желаемого товара
   const [category, setCategory] = React.useState(null)
-  const variantProducts = React.useMemo(() => {
+
+  const [showPanelSelectProducts, setShowPanelSelectProducts] = React.useState(
+    false
+  )
+
+  const [product, setProduct] = React.useState(null)
+  const variantsProduct = React.useMemo(() => {
     if (!category) return products
+
+    setProduct(null)
 
     return products.filter(
       product => product.data.category.document?.uid === category.uid
     )
   }, [category])
+
+  const sale = turnInProduct ? Math.trunc(turnInProduct.data.price * 0.02) : 0
+
+  // преобразуем цену
+  function priceMod(value) {
+    let price = "" + value
+    let length = price.length
+    for (let i = 1; i < length; i++) {
+      if (i % 3 === 0) {
+        price = price.slice(0, length - i) + " " + price.slice(length - i)
+      }
+    }
+    return price
+  }
+
+  function send() {
+    console.log("send")
+  }
 
   return (
     <div className={classes.wrapper}>
@@ -772,7 +922,9 @@ export default function Calculator() {
               <button
                 onClick={() => setTurnInCategory(variant)}
                 className={
-                  classes.button + " " + (active ? classes.button__active : "")
+                  classes.tab_panel__button +
+                  " " +
+                  (active ? classes.tab_panel__button__active : "")
                 }
                 style={{ width: 100 / variantsTurnInCategory.length + "%" }}
               >
@@ -782,7 +934,10 @@ export default function Calculator() {
           })}
         </div>
 
-        <button className={classes.select}>
+        <button
+          onClick={() => setShowPanelSelectTurnInProducts(true)}
+          className={classes.select}
+        >
           <div style={{ display: "flex", alignItems: "center" }}>
             <p className={classes.select__wrapper_img}>
               {turnInProduct ? (
@@ -870,12 +1025,112 @@ export default function Calculator() {
             ))}
           </div>
         ) : null}
+
+        <Modal
+          open={showPanelSelectTurnInProducts}
+          onClose={() => setShowPanelSelectTurnInProducts(false)}
+          className={classes.modal}
+          BackdropProps={{
+            style: { backgroundColor: "rgba(32, 29, 29, 0.9)" },
+          }}
+        >
+          <PanelSelectProduct
+            products={variantsTurnInProduct}
+            selectProduct={turnInProduct}
+            setProduct={setTurnInProduct}
+            close={() => setShowPanelSelectTurnInProducts(false)}
+          />
+        </Modal>
       </div>
 
       <div className={classes.device_selection_block}>
         <Typography className={classes.subtitle}>
           На какое устройство вы хотите обменять?
         </Typography>
+
+        <div className={classes.wrapper_select_category}>
+          <SelectCategory
+            options={data.allPrismicSubcategory.edges}
+            afterChange={setCategory}
+            selectValue={category}
+          />
+        </div>
+
+        <button
+          onClick={() => setShowPanelSelectProducts(true)}
+          className={classes.select}
+        >
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <p className={classes.select__wrapper_img}>
+              {product ? (
+                <GatsbyImage
+                  image={
+                    product.data.images[0].image.localFile.childImageSharp
+                      .gatsbyImageData
+                  }
+                  alt={product.data.images[0].image.alt ?? "photo"}
+                  style={{ width: "100%", height: "100%" }}
+                  imgStyle={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                  }}
+                />
+              ) : (
+                <TradeInDevice />
+              )}
+            </p>
+
+            <Typography
+              variant="body2"
+              align="left"
+              className={classes.name_product}
+            >
+              {product ? product.data.name : "Выберете устройство"}
+            </Typography>
+          </div>
+
+          <p className={classes.select__icon}>
+            <Arrow />
+          </p>
+        </button>
+
+        <Modal
+          open={showPanelSelectProducts}
+          onClose={() => setShowPanelSelectProducts(false)}
+          className={classes.modal}
+          BackdropProps={{
+            style: { backgroundColor: "rgba(32, 29, 29, 0.9)" },
+          }}
+        >
+          <PanelSelectProduct
+            products={variantsProduct}
+            selectProduct={product}
+            setProduct={setProduct}
+            close={() => setShowPanelSelectProducts(false)}
+          />
+        </Modal>
+      </div>
+
+      <div className={classes.you_sale_block}>
+        <Typography align="center" className={classes.you_sale_block__text}>
+          Ваша скидка:
+        </Typography>
+
+        <Typography
+          align="center"
+          variant="body2"
+          className={classes.you_sale_block__accent_text}
+        >
+          до
+          <big>{` ${priceMod(sale)} ₽`}</big>
+        </Typography>
+
+        <button onClick={send} className={classes.button_send}>
+          <Typography className={classes.button_send__text}>
+            Отправить заявку
+          </Typography>
+        </button>
       </div>
     </div>
   )

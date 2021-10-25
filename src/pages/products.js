@@ -160,7 +160,6 @@ export default function Products({ data: { allPrismicProduct } }) {
   const [filterProducts, setFilterProducts] = React.useState([])
 
   function searchByTitle(edge) {
-    console.log(edge)
     if (titleUrl === "") return true
 
     if (edge.node.data.name.toLowerCase().includes(titleUrl.toLowerCase()))
