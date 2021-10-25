@@ -97,9 +97,9 @@ const useStyle = makeStyles(theme => ({
   },
   error: {
     border: `1px solid #F1ADAD`,
-    "@media(max-width: 767px)": {
-      border: `1px solid ${theme.palette.color.accentSecondary}`,
-    },
+    // "@media(max-width: 767px)": {
+    //   border: `1px solid ${theme.palette.color.accentSecondary}`,
+    // },
   },
 }))
 

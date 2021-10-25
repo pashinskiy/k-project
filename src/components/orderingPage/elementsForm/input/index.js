@@ -28,6 +28,7 @@ const useStyle = makeStyles(theme => ({
       padding: "3.62vw 2.89vw",
       borderRadius: "1.44vw",
       fontSize: "3.38vw",
+      border: `1px solid ${theme.palette.color.accentSecondary}`,
     },
 
     "&:focus": {
@@ -36,9 +37,9 @@ const useStyle = makeStyles(theme => ({
   },
   error: {
     border: `1px solid #F1ADAD`,
-    "@media(max-width: 767px)": {
-      border: `1px solid ${theme.palette.color.accentSecondary}`,
-    },
+    // "@media(max-width: 767px)": {
+    //   border: `1px solid ${theme.palette.color.accentSecondary}`,
+    // },
   },
 }))
 
@@ -56,7 +57,7 @@ export default function Input({ afterChange, checkValue, ...other }) {
 
   checkValue = checkValue ? checkValue : () => true
 
-  const error = checkValue() && !smartPhoneScreen ? "" : classes.error
+  const error = checkValue() ? "" : classes.error
 
   function onInput(e) {
     const newValue = e.currentTarget.value

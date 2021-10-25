@@ -89,6 +89,7 @@ const useStyle = makeStyles(theme => ({
   title: {
     fontWeight: 700,
     lineHeight: 1.21,
+    color: theme.palette.color.main,
 
     fontSize: "1.4vw",
     "@media(min-width: 1280px)": {
