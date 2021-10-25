@@ -148,6 +148,7 @@ const useStyles = makeStyles(theme => ({
       marginBottom: "2.41vw",
       padding: "2.89vw",
       fontSize: "3.38vw",
+      boxShadow: `0px 0px 0px 2px ${theme.palette.background.secondary}`,
     },
   },
   activeButtonMemory: {
@@ -409,36 +410,50 @@ export default function BlockPrice({ product, allVariants }) {
   const [showMokkaInfo, setShowMokkaInfo] = React.useState(false)
   const [showMokkaIframe, setShowMokkaIframe] = React.useState(false)
 
-  const allColors = []
-  const allMemory = []
+  const [allColors, setAllColors] = React.useState([])
+  const [allMemory, setAllMemory] = React.useState([])
 
-  allVariants.forEach(variant => {
-    // добавляем товар если товара с таким цветом нет
-    if (
-      !allColors.find(
-        prod => prod.data.color_group === variant.data.color_group
-      )
-    ) {
-      allColors.push(variant)
-    }
+  React.useEffect(() => {
+    const allColors = []
+    const allMemory = []
 
-    // если цвет товара не такой же как у главного на странице выходим
-    if (variant.data.color_group !== product.data.color_group) return
+    allVariants.forEach(variant => {
+      // добавляем товар если товара с таким цветом нет
+      if (
+        !allColors.find(
+          prod => prod.data.color_group === variant.data.color_group
+        )
+      ) {
+        allColors.push(variant)
+      }
 
-    // добавляем товар если товара с такой памятью нет
-    if (!allMemory.find(prod => prod.data.memory === variant.data.memory)) {
-      if (variant.data.memory) allMemory.push(variant)
-    }
-  })
+      // если цвет товара не такой же как у главного на странице выходим
+      if (variant.data.color_group !== product.data.color_group) return
 
-  // цвет продукта первый в массиве
-  allColors.unshift(
-    ...allColors.splice(
-      allColors.findIndex(
-        prod => prod.data.color_group === product.data.color_group
+      // добавляем товар если товара с такой памятью нет
+      if (!allMemory.find(prod => prod.data.memory === variant.data.memory)) {
+        if (variant.data.memory) allMemory.push(variant)
+      }
+    })
+
+    // цвет продукта первый в массиве
+    allColors.unshift(
+      ...allColors.splice(
+        allColors.findIndex(
+          prod => prod.data.color_group === product.data.color_group
+        )
       )
     )
-  )
+    // сортируем по памяти
+    allMemory.sort((product_1, product_2) => {
+      const price_1 = parseInt(product_1.data.memory.match(/\d+/))
+      const price_2 = parseInt(product_2.data.memory.match(/\d+/))
+      return price_1 - price_2
+    })
+
+    setAllColors(allColors)
+    setAllMemory(allMemory)
+  }, [])
 
   // преобразуем цену
   function priceMod(value) {
@@ -552,6 +567,7 @@ export default function BlockPrice({ product, allVariants }) {
                 : ""
             return (
               <button
+                id={`${prod.data.memory}`}
                 onClick={() => navigate(`/${prod.uid}/`)}
                 aria-label={`${prod.data.memory}`}
                 key={prod.uid}
