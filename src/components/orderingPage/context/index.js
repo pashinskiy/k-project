@@ -10,16 +10,6 @@ function reducer(state, action) {
         ...state,
         useDataDelivery: !state.useDataDelivery,
       }
-    case "SET_FOCUSING_ON_FIELD":
-      return {
-        ...state,
-        focusingOnField: action.payload,
-      }
-    case "SET_REPAIR_FOCUSING_ON_FIELD":
-      return {
-        ...state,
-        repairFocusingOnField: action.payload,
-      }
     case "SET_CITY":
       return {
         ...state,
@@ -147,9 +137,6 @@ export default function OrderingContext({ children }) {
 
   const initOrderingState = {
     useDataDelivery: false,
-
-    focusingOnField: false,
-    repairFocusingOnField: false,
 
     cities: cities,
     repairCities: repairCities,

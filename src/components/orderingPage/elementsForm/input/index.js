@@ -1,8 +1,6 @@
 import React from "react"
 import { makeStyles, useMediaQuery } from "@material-ui/core"
 
-import { OrderingDispatchContext } from "../../context"
-
 const useStyle = makeStyles(theme => ({
   input: {
     width: "100%",
@@ -53,7 +51,6 @@ const useStyle = makeStyles(theme => ({
  */
 export default function Input({ afterChange, checkValue, ...other }) {
   const classes = useStyle()
-  const orderingDispatch = React.useContext(OrderingDispatchContext)
 
   const smartPhoneScreen = useMediaQuery("(max-width: 767px)")
 
@@ -66,22 +63,9 @@ export default function Input({ afterChange, checkValue, ...other }) {
     afterChange(newValue)
   }
 
-  function focusing() {
-    orderingDispatch({ type: "SET_FOCUSING_ON_FIELD", payload: true })
-  }
-
-  function blurring() {
-    orderingDispatch({ type: "SET_FOCUSING_ON_FIELD", payload: false })
-  }
-
   return (
     <input
       onInput={onInput}
-      onFocus={focusing}
-      onBlur={blurring}
-      onKeyPress={e => {
-        if (e.code === "Enter") blurring()
-      }}
       className={classes.input + " " + error}
       {...other}
     />

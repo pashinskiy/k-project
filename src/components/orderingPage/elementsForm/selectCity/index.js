@@ -131,20 +131,10 @@ export default function SelectCity() {
   function setOption(value) {
     setShowOptions(false)
     setCity(value)
-    blurring()
   }
 
   function setValue(e) {
     setCity(e.target.value)
-  }
-
-  function focusing() {
-    orderingDispatch({ type: "SET_FOCUSING_ON_FIELD", payload: true })
-  }
-
-  function blurring() {
-    setShowOptions(false)
-    orderingDispatch({ type: "SET_FOCUSING_ON_FIELD", payload: false })
   }
 
   const error = orderingState.validationCity() ? "" : classes.error
@@ -154,11 +144,6 @@ export default function SelectCity() {
       <input
         onClick={openOptions}
         onInput={setValue}
-        onFocus={focusing}
-        onBlur={blurring}
-        onKeyPress={e => {
-          if (e.code === "Enter") blurring()
-        }}
         className={classes.select + " " + classes.text + " " + error}
         value={orderingState.city}
         autocomplete="new-password"

@@ -151,20 +151,10 @@ export default function SelectCityRepair() {
   function setOption(value) {
     setShowOptions(false)
     setCity(value)
-    blurring()
   }
 
   function setValue(e) {
     setCity(e.target.value)
-  }
-
-  function focusing() {
-    orderingDispatch({ type: "SET_REPAIR_FOCUSING_ON_FIELD", payload: true })
-  }
-
-  function blurring() {
-    setShowOptions(false)
-    orderingDispatch({ type: "SET_REPAIR_FOCUSING_ON_FIELD", payload: false })
   }
 
   const error = orderingState.validationRepairCity() ? "" : classes.error
@@ -175,11 +165,6 @@ export default function SelectCityRepair() {
         <input
           onClick={openOptions}
           onInput={setValue}
-          onFocus={focusing}
-          onBlur={blurring}
-          onKeyPress={e => {
-            if (e.code === "Enter") blurring()
-          }}
           className={classes.select + " " + classes.text + " " + error}
           value={orderingState.repairCity}
           autocomplete="new-password"
