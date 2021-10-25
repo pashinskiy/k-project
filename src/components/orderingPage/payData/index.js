@@ -169,9 +169,11 @@ export default function PayData({ prismicCartAndOrder, initVariant }) {
     orderingDispatch({ type: "SET_VARIANT_PAY", payload: newValue })
   }
 
-  if (initVariant && initVariant !== orderingState.variantPay) {
-    setVariantPay(initVariant)
-  }
+  React.useEffect(() => {
+    if (initVariant) {
+      setVariantPay(initVariant)
+    }
+  }, [])
 
   return (
     <>
