@@ -163,6 +163,7 @@ export default function SelectCityRepair() {
     <>
       <div style={{ position: "relative" }}>
         <input
+          id="select_city_repair"
           onClick={openOptions}
           onInput={setValue}
           className={classes.select + " " + classes.text + " " + error}
@@ -190,7 +191,9 @@ export default function SelectCityRepair() {
         ) : null}
       </div>
 
-      {error && orderingState.repairCity && !orderingState.repairFocusingOnField ? (
+      {error &&
+      orderingState.repairCity &&
+      !orderingState.repairFocusingOnField ? (
         <Typography className={classes.textError}>
           В данный момент ремонт устройств не осуществляется на территории
           выбранного города.

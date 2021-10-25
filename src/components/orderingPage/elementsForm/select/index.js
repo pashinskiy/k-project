@@ -122,13 +122,13 @@ const useStyle = makeStyles(theme => ({
 }))
 
 /**
- * Блок выбора одного элемента из выпадающего списка 
+ * Блок выбора одного элемента из выпадающего списка
  * @module src/components/orderingPage/elementsForms/select
  * @param {Object} props - объект свойств компонента React
  * @param {Object[]} props.options - массив всех значений
  * @param {function} props.afterChange - функция установки нового значения
  */
-export default function Select({ options, afterChange }) {
+export default function Select({ options, afterChange, id }) {
   const classes = useStyle()
   const [showOptions, setShowOptions] = React.useState(false)
   const [value, setValue] = React.useState(options[0])
@@ -149,6 +149,8 @@ export default function Select({ options, afterChange }) {
   return (
     <div style={{ position: "relative" }}>
       <Button
+        id={id}
+        aria-label={id}
         onClick={toggleShowOptions}
         onBlur={() => setShowOptions(false)}
         className={classes.select + " " + active}

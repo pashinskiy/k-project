@@ -104,13 +104,13 @@ const useStyle = makeStyles(theme => ({
 }))
 
 /**
- * Блок ввода названия города с предложением вариантов 
+ * Блок ввода названия города с предложением вариантов
  * @module src/components/orderingPage/elementsForms/selectCity
  */
 export default function SelectCity() {
   const classes = useStyle()
   const [showOptions, setShowOptions] = React.useState(false)
-  
+
   const orderingState = React.useContext(OrderingStateContext)
   const orderingDispatch = React.useContext(OrderingDispatchContext)
 
@@ -142,6 +142,7 @@ export default function SelectCity() {
   return (
     <div style={{ position: "relative" }}>
       <input
+        id="select_city"
         onClick={openOptions}
         onInput={setValue}
         className={classes.select + " " + classes.text + " " + error}

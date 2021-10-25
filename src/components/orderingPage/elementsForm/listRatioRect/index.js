@@ -71,7 +71,7 @@ const useStyle = makeStyles(theme => ({
 }))
 
 /**
- * Блок выбора одного элемента из списка 
+ * Блок выбора одного элемента из списка
  * @module src/components/orderingPage/elementsForms/listRatioRect
  * @param {Object} props - объект свойств компонента React
  * @param {Object[]} props.list - массив всех значений
@@ -92,6 +92,8 @@ export default function RatioList({ list, afterChange }) {
         const active = item === value ? classes.active : ""
         return (
           <Button
+            id={`${item}`}
+            aria-label={`${item}`}
             onClick={() => setGlobalValue(item)}
             key={item}
             className={classes.item + " " + active}

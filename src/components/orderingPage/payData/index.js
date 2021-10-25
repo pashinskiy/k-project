@@ -182,6 +182,8 @@ export default function PayData({ prismicCartAndOrder, initVariant }) {
 
       <div className={classes.listWrapper}>
         <button
+          id="online_pay"
+          aria-label="online pay"
           onClick={() => setVariantPay("онлайн")}
           className={classes.item}
         >
@@ -205,6 +207,8 @@ export default function PayData({ prismicCartAndOrder, initVariant }) {
         </button>
 
         <button
+          id="upon_receipt_pay"
+          aria-label="upon receipt pay"
           onClick={() => setVariantPay("при получении")}
           className={classes.item}
         >
@@ -231,6 +235,8 @@ export default function PayData({ prismicCartAndOrder, initVariant }) {
 
         {state.servicesAvailable() ? null : (
           <button
+            id="on_credit_pay"
+            aria-label="on credit pay"
             onClick={() => setVariantPay("в кредит")}
             className={classes.item}
           >
@@ -254,6 +260,8 @@ export default function PayData({ prismicCartAndOrder, initVariant }) {
         order.price < 100000 &&
         order.price >= 5000 ? (
           <button
+            id="by_installments_pay"
+            aria-label="by installments pay"
             onClick={() => setVariantPay("в рассрочку")}
             className={classes.item}
           >

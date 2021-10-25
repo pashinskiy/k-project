@@ -71,6 +71,7 @@ export default function RecipientData() {
       >
         <WrapperWithTitle title="Имя">
           <Input
+            id="name"
             afterChange={setName}
             checkValue={() => orderingState.validationName()}
           />
@@ -78,6 +79,7 @@ export default function RecipientData() {
 
         <WrapperWithTitle title="Телефон">
           <Input
+            id="phone"
             afterChange={setPhone}
             checkValue={() => orderingState.validationPhone()}
             value={orderingState.phone}
