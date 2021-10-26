@@ -1,5 +1,4 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
 import { makeStyles, Modal, Typography, useMediaQuery } from "@material-ui/core"
 import { GatsbyImage } from "gatsby-plugin-image"
 
@@ -633,80 +632,13 @@ const useStyles = makeStyles(theme => ({
 /**
  * Калькулятор trade-in
  * @module src/components/tradeInPage/calculator
+ * @param {Object} props - объект свойств компонента React
+ * @param {String} props.variant - вариант отображения
+ * @param {Object} props.data - объект данных полученый из prismic
  */
-export default function Calculator() {
+export default function Calculator({ variant, data }) {
   const classes = useStyles()
   const smartphone = useMediaQuery("(max-width: 767px)")
-
-  const data = useStaticQuery(graphql`
-    {
-      allPrismicProduct {
-        edges {
-          node {
-            id
-            uid
-            data {
-              category {
-                document {
-                  ... on PrismicSubcategory {
-                    id
-                    uid
-                  }
-                }
-              }
-              name
-              price
-              old_price
-              search_phrases
-              brand {
-                document {
-                  ... on PrismicBrand {
-                    id
-                    data {
-                      name
-                    }
-                  }
-                }
-              }
-              images {
-                image {
-                  alt
-                  localFile {
-                    childImageSharp {
-                      gatsbyImageData
-                    }
-                  }
-                }
-              }
-              tags {
-                tag {
-                  document {
-                    ... on PrismicTag {
-                      id
-                      data {
-                        name
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      allPrismicSubcategory {
-        edges {
-          node {
-            id
-            uid
-            data {
-              name
-            }
-          }
-        }
-      }
-    }
-  `)
 
   const products = React.useMemo(
     () => data.allPrismicProduct.edges.map(edge => edge.node),
@@ -890,7 +822,7 @@ export default function Calculator() {
   }
 
   return (
-    <div className={classes.wrapper}>
+    <div id="calculator" className={classes.wrapper}>
       <Typography className={classes.title}>
         Узнайте <strong>стоимость</strong>
       </Typography>
@@ -1043,88 +975,94 @@ export default function Calculator() {
         </Modal>
       </div>
 
-      <div className={classes.device_selection_block}>
-        <Typography className={classes.subtitle}>
-          На какое устройство вы хотите обменять?
-        </Typography>
+      {variant === "trade-in" ? (
+        <div className={classes.device_selection_block}>
+          <Typography className={classes.subtitle}>
+            На какое устройство вы хотите обменять?
+          </Typography>
 
-        <div className={classes.wrapper_select_category}>
-          <SelectCategory
-            options={data.allPrismicSubcategory.edges}
-            afterChange={setCategory}
-            selectValue={category}
-          />
-        </div>
-
-        <button
-          onClick={() => setShowPanelSelectProducts(true)}
-          className={classes.select}
-        >
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <p className={classes.select__wrapper_img}>
-              {product ? (
-                <GatsbyImage
-                  image={
-                    product.data.images[0].image.localFile.childImageSharp
-                      .gatsbyImageData
-                  }
-                  alt={product.data.images[0].image.alt ?? "photo"}
-                  style={{ width: "100%", height: "100%" }}
-                  imgStyle={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                  }}
-                />
-              ) : (
-                <TradeInDevice />
-              )}
-            </p>
-
-            <Typography
-              variant="body2"
-              align="left"
-              className={classes.name_product}
-            >
-              {product ? product.data.name : "Выберете устройство"}
-            </Typography>
+          <div className={classes.wrapper_select_category}>
+            <SelectCategory
+              options={data.allPrismicSubcategory.edges}
+              afterChange={setCategory}
+              selectValue={category}
+            />
           </div>
 
-          <p className={classes.select__icon}>
-            <Arrow />
-          </p>
-        </button>
+          <button
+            onClick={() => setShowPanelSelectProducts(true)}
+            className={classes.select}
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <p className={classes.select__wrapper_img}>
+                {product ? (
+                  <GatsbyImage
+                    image={
+                      product.data.images[0].image.localFile.childImageSharp
+                        .gatsbyImageData
+                    }
+                    alt={product.data.images[0].image.alt ?? "photo"}
+                    style={{ width: "100%", height: "100%" }}
+                    imgStyle={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                    }}
+                  />
+                ) : (
+                  <TradeInDevice />
+                )}
+              </p>
 
-        <Modal
-          open={showPanelSelectProducts}
-          onClose={() => setShowPanelSelectProducts(false)}
-          className={classes.modal}
-          BackdropProps={{
-            style: { backgroundColor: "rgba(32, 29, 29, 0.9)" },
-          }}
-        >
-          <PanelSelectProduct
-            products={variantsProduct}
-            selectProduct={product}
-            setProduct={setProduct}
-            close={() => setShowPanelSelectProducts(false)}
-          />
-        </Modal>
-      </div>
+              <Typography
+                variant="body2"
+                align="left"
+                className={classes.name_product}
+              >
+                {product ? product.data.name : "Выберете устройство"}
+              </Typography>
+            </div>
+
+            <p className={classes.select__icon}>
+              <Arrow />
+            </p>
+          </button>
+
+          <Modal
+            open={showPanelSelectProducts}
+            onClose={() => setShowPanelSelectProducts(false)}
+            className={classes.modal}
+            BackdropProps={{
+              style: { backgroundColor: "rgba(32, 29, 29, 0.9)" },
+            }}
+          >
+            <PanelSelectProduct
+              products={variantsProduct}
+              selectProduct={product}
+              setProduct={setProduct}
+              close={() => setShowPanelSelectProducts(false)}
+            />
+          </Modal>
+        </div>
+      ) : null}
 
       <div className={classes.you_sale_block}>
-        <Typography align="center" className={classes.you_sale_block__text}>
-          Ваша скидка:
-        </Typography>
+        {variant === "trade-in" ? (
+          <>
+            <Typography align="center" className={classes.you_sale_block__text}>
+              Ваша скидка:
+            </Typography>
 
-        <Typography
-          align="center"
-          variant="body2"
-          className={classes.you_sale_block__accent_text}
-        >
-          до
-          <big>{` ${priceMod(sale)} ₽`}</big>
-        </Typography>
+            <Typography
+              align="center"
+              variant="body2"
+              className={classes.you_sale_block__accent_text}
+            >
+              до
+              <big>{` ${priceMod(sale)} ₽`}</big>
+            </Typography>
+          </>
+        ) : null}
 
         <button onClick={send} className={classes.button_send}>
           <Typography className={classes.button_send__text}>
