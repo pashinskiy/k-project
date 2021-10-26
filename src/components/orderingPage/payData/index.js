@@ -155,7 +155,7 @@ const useStyle = makeStyles(theme => ({
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.prismicCartAndOrder - свойство prismicCartAndOrder объекта data полученного из prismic
  */
-export default function PayData({ prismicCartAndOrder, initVariant }) {
+export default function PayData({ prismicCartAndOrder }) {
   const classes = useStyle()
   const smartPhoneScreen = useMediaQuery("(max-width: 767px)")
   const state = React.useContext(GlobalStateContext)
@@ -168,12 +168,6 @@ export default function PayData({ prismicCartAndOrder, initVariant }) {
   function setVariantPay(newValue) {
     orderingDispatch({ type: "SET_VARIANT_PAY", payload: newValue })
   }
-
-  React.useEffect(() => {
-    if (initVariant) {
-      setVariantPay(initVariant)
-    }
-  }, [])
 
   return (
     <>

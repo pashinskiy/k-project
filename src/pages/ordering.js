@@ -128,7 +128,7 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-const IndexPage = ({ data, location }) => {
+const IndexPage = ({ data }) => {
   const classes = useStyle()
   const order = JSON.parse(localStorage.getItem("order"))
 
@@ -171,10 +171,7 @@ const IndexPage = ({ data, location }) => {
               ) : null}
 
               <div className={classes.orderingFieldWrapper}>
-                <PayData
-                  prismicCartAndOrder={data.prismicCartAndOrder}
-                  initVariant={location.state?.variantPay}
-                />
+                <PayData prismicCartAndOrder={data.prismicCartAndOrder} />
               </div>
 
               <div className={classes.orderingFieldWrapper}>

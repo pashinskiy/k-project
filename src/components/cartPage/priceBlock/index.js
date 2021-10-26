@@ -443,7 +443,7 @@ export default function PriceBlock({ products }) {
 
       {state.servicesAvailable() ? null : (
         <div className={classes.wrapperTinkoffButton}>
-          <Tinkoff items={state.cart} onClick={goRegistration} />
+          <Tinkoff items={state.cart} />
         </div>
       )}
 

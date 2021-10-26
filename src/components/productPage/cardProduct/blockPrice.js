@@ -600,10 +600,7 @@ export default function BlockPrice({ product, allVariants }) {
           />
 
           <div className={classes.wrapperTinkoffButton}>
-            <Tinkoff
-              items={[{ product: product, count: 1 }]}
-              onClick={goRegistration}
-            />
+            <Tinkoff items={[{ product: product, count: 1 }]} />
           </div>
         </>
       )}
@@ -615,10 +612,7 @@ export default function BlockPrice({ product, allVariants }) {
           ) : null}
 
           <div className={classes.wrapperTinkoffButton}>
-            <Tinkoff
-              items={[{ product: product, count: 1 }]}
-              onClick={goRegistration}
-            />
+            <Tinkoff items={[{ product: product, count: 1 }]} />
           </div>
         </>
       ) : null}
