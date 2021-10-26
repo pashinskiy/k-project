@@ -8,7 +8,7 @@ import Layout from "../components/layout"
 
 import HeaderWithIcon from "../components/headers/headerWithIcon"
 
-import Sell from "../../static/svg/sell.svg"
+import Resell from "../../static/svg/resell.svg"
 import RenderElement from "../components/tradeInPage/renderElement"
 import Calculator from "../components/tradeInPage/calculator"
 
@@ -426,11 +426,11 @@ const IndexPage = ({ data }) => {
   const desktop = useMediaQuery("(min-width: 1025px)")
   const pad = useMediaQuery("(max-width: 1025px) and (min-width: 768px)")
 
-  const image_first_block = data.prismicSell.data.image_first_block
+  const image_first_block = data.prismicResell.data.image_first_block
 
   const paragraphs = React.useMemo(
     () =>
-      data.prismicSell.data.body.filter(
+      data.prismicResell.data.body.filter(
         slice =>
           slice.slice_type === "paragraph" ||
           slice.slice_type === "paragraph_with_ref" ||
@@ -441,21 +441,21 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
-      <Seo title="Sell" />
+      <Seo title="Resell" />
       <HeaderWithIcon
-        icon={<Sell />}
-        title={data.prismicSell.data.title}
+        icon={<Resell />}
+        title={data.prismicResell.data.title}
         divider={false}
       />
 
       <div className={classes.first_block}>
         <div className={classes.first_block__content_wrapper}>
           <Typography className={classes.first_block__title}>
-            {data.prismicSell.data.title_first_block}
+            {data.prismicResell.data.title_first_block}
           </Typography>
 
           <Typography className={classes.first_block__subtitle}>
-            {data.prismicSell.data.subtitle_first_block}
+            {data.prismicResell.data.subtitle_first_block}
           </Typography>
         </div>
 
@@ -533,23 +533,23 @@ const IndexPage = ({ data }) => {
           </div>
         ) : null}
 
-        <Calculator variant="sell" data={data} />
+        <Calculator variant="resell" data={data} />
       </div>
     </Layout>
   )
 }
 
 /**
- * Страница sell
- * @module src/page/sell
+ * Страница resell
+ * @module src/page/resell
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.data - объект данных полученый из prismic
  */
 export default IndexPage
 
 export const query = graphql`
-  query Sell {
-    prismicSell {
+  query Resell {
+    prismicResell {
       data {
         title
         title_first_block
@@ -563,7 +563,7 @@ export const query = graphql`
           }
         }
         body {
-          ... on PrismicSellBodyParagraph {
+          ... on PrismicResellBodyParagraph {
             id
             slice_type
             primary {
@@ -576,7 +576,7 @@ export const query = graphql`
               text_paragraph
             }
           }
-          ... on PrismicSellBodyParagraphWithRef {
+          ... on PrismicResellBodyParagraphWithRef {
             id
             slice_type
             primary {
@@ -590,7 +590,7 @@ export const query = graphql`
               reference_text_paragraph
             }
           }
-          ... on PrismicSellBodyParagraphWithSvg {
+          ... on PrismicResellBodyParagraphWithSvg {
             id
             slice_type
             primary {

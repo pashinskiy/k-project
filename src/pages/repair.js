@@ -92,7 +92,7 @@ const IndexPage = ({ data }) => {
       })
     )
     return popularRepair
-  }, [])
+  }, [data])
 
   const [show, setShow] = React.useState(false)
 

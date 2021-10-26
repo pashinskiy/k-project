@@ -187,7 +187,7 @@ const useStyles = makeStyles(theme => ({
 
       marginTop: "3.86vw",
       borderRadius: "4.83vw",
-      padding: "9.66vw 7.24vw 7.24vw",
+      padding: "9.66vw 7.24vw 2.41vw",
     },
   },
   third_block__content_wrapper: {
@@ -570,12 +570,12 @@ const IndexPage = ({ data }) => {
           slice.slice_type === "paragraph_with_ref" ||
           slice.slice_type === "paragraph_with_svg"
       ),
-    []
+    [data]
   )
 
   return (
     <Layout>
-      <Seo title="Favorites" />
+      <Seo title="Trade-in" />
       <HeaderWithIcon
         icon={<TradeIn />}
         title={data.prismicTradeIn.data.title}
@@ -681,24 +681,24 @@ const IndexPage = ({ data }) => {
             </Typography>
 
             <img
-              src="image/trade-in-phone.png"
+              src="/image/trade-in-phone.png"
               alt="trade-in-phone"
               className={classes.calculator_block__img_phone}
             />
             <img
-              src="image/trade-in-pad.png"
+              src="/image/trade-in-pad.png"
               alt="trade-in-pad"
               className={classes.calculator_block__img_pad}
             />
             <img
-              src="image/trade-in-watch.png"
+              src="/image/trade-in-watch.png"
               alt="trade-in-watch"
               className={classes.calculator_block__img_watch}
             />
           </div>
         ) : null}
 
-        <Calculator />
+        <Calculator variant="trade-in" data={data} />
       </div>
     </Layout>
   )
@@ -786,6 +786,71 @@ export const query = graphql`
                 }
               }
             }
+          }
+        }
+      }
+    }
+    allPrismicProduct {
+      edges {
+        node {
+          id
+          uid
+          data {
+            category {
+              document {
+                ... on PrismicSubcategory {
+                  id
+                  uid
+                }
+              }
+            }
+            name
+            price
+            old_price
+            search_phrases
+            brand {
+              document {
+                ... on PrismicBrand {
+                  id
+                  data {
+                    name
+                  }
+                }
+              }
+            }
+            images {
+              image {
+                alt
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData
+                  }
+                }
+              }
+            }
+            tags {
+              tag {
+                document {
+                  ... on PrismicTag {
+                    id
+                    data {
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    allPrismicSubcategory {
+      edges {
+        node {
+          id
+          uid
+          data {
+            name
           }
         }
       }
