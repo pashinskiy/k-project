@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
       background: theme.palette.background.accent,
     },
   },
+  active: {
+    boxShadow: "inset 0 0 2px 2px black",
+  },
   text: {
     fontWeight: 700,
     lineHeight: 1.21,
@@ -53,13 +56,22 @@ const useStyles = makeStyles(theme => ({
 export default function GoRegistration({ text, onClick }) {
   const classes = useStyles()
 
+  const [active, setActive] = React.useState("")
+
   function buttonClick() {
     onClick()
     navigate("/ordering")
   }
 
   return (
-    <Button id="checkout" disableRipple onClick={buttonClick} className={classes.button}>
+    <Button
+      id="checkout"
+      disableRipple
+      onClick={buttonClick}
+      onPointerDown={() => setActive(classes.active)}
+      onPointerUp={() => setTimeout(() => setActive(""), 300)}
+      className={classes.button + " " + classes.active}
+    >
       <Typography id="checkout" align="center" className={classes.text}>
         {text}
       </Typography>
