@@ -365,7 +365,14 @@ export const pageQuery = graphql`
             id
             slice_type
             primary {
-              name_seller
+              seller_logo {
+                alt
+                localFile {
+                  publicURL
+                }
+              }
+              seller_name
+              seller_entity
               ogrn
             }
           }
