@@ -8,22 +8,24 @@ const useStyle = makeStyles(theme => ({
     top: 0,
     zIndex: 99,
 
-    width: "100vw",
+    width: "calc(100% + 4.36vw)",
     height: "3.9vw",
     marginLeft: "-2.18vw",
     marginTop: "2.81vw",
     "@media(min-width: 1280px)": {
-      width: "1280px",
+      width: "calc(100% + 56px)",
       height: "50px",
       marginLeft: "-28px",
       marginTop: "36px",
     },
     "@media(max-width: 1025px)": {
+      width: "calc(100% + 6.7vw)",
       height: "4.79vw",
       marginLeft: "-3.35vw",
       marginTop: "1.91vw",
     },
     "@media(max-width: 767px)": {
+      width: "100vw",
       height: "12.07vw",
       marginLeft: "-6.76vw",
       marginTop: "3.86vw",
@@ -59,27 +61,27 @@ const useStyle = makeStyles(theme => ({
       flexShrink: 0,
     },
     "&:first-child": {
-      borderRadius: "1.56vw 0 0 0",
+      borderRadius: "1.56vw 0 0 1.56vw",
       "@media(min-width: 1280px)": {
-        borderRadius: "20px 0 0 0",
+        borderRadius: "20px 0 0 20px",
       },
       "@media(max-width: 1025px)": {
-        borderRadius: "2.39vw 0 0 0",
+        borderRadius: "2.39vw 0 0 2.39vw",
       },
       "@media(max-width: 767px)": {
-        borderRadius: "4.83vw 0 0 0",
+        borderRadius: "4.83vw 0 0 4.83vw",
       },
     },
     "&:last-child": {
-      borderRadius: "0 1.56vw 0 0",
+      borderRadius: "0 1.56vw 1.56vw 0",
       "@media(min-width: 1280px)": {
-        borderRadius: "0 20px 0 0",
+        borderRadius: "0 20px 20px 0",
       },
       "@media(max-width: 1025px)": {
-        borderRadius: "0 2.39vw 0 0",
+        borderRadius: "0 2.39vw 2.39vw 0",
       },
       "@media(max-width: 767px)": {
-        borderRadius: "0 4.83vw 0 0",
+        borderRadius: "0 4.83vw 4.83vw 0",
       },
     },
     "&:hover": {
@@ -116,7 +118,7 @@ const useStyle = makeStyles(theme => ({
  * @module src/components/productPage/tabPanel
  * @param {Object} props - объект свойств компонента React
  * @param {Object[]} props.links - массив объектов кнопок
- * @param {String} props.links[].title - такст кнопки 
+ * @param {String} props.links[].title - такст кнопки
  * @param {String} props.links[].href - html якорь для навигации
  */
 export default function TabPanel({ links }) {
