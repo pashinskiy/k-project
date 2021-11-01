@@ -23,10 +23,11 @@ const useStyles = makeStyles(theme => ({
     },
     "&:hover": {
       background: theme.palette.background.accent,
+      boxShadow: "0px 0px 0px 4px #D2D0E9",
     },
   },
   active: {
-    boxShadow: "inset 0 0 2px 2px black",
+    border: "2px solid #FFFFFF",
   },
   text: {
     fontWeight: 700,
@@ -70,7 +71,7 @@ export default function GoRegistration({ text, onClick }) {
       onClick={buttonClick}
       onPointerDown={() => setActive(classes.active)}
       onPointerUp={() => setTimeout(() => setActive(""), 300)}
-      className={classes.button + " " + classes.active}
+      className={classes.button + " " + active}
     >
       <Typography id="checkout" align="center" className={classes.text}>
         {text}

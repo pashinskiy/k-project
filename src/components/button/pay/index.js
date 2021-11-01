@@ -22,10 +22,11 @@ const useStyles = makeStyles(theme => ({
     },
     "&:hover": {
       background: theme.palette.background.accent,
+      boxShadow: "0px 0px 0px 4px #D2D0E9",
     },
   },
   active: {
-    boxShadow: "inset 0 0 10px .5px #555",
+    border: "2px solid #FFFFFF",
   },
   text: {
     fontWeight: 700,
