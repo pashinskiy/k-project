@@ -541,6 +541,13 @@ export default function BlockPrice({ product, allVariants }) {
     const allColors = []
     const allMemory = []
 
+    // сортируем по памяти
+    allVariants.sort((product_1, product_2) => {
+      const price_1 = parseInt(product_1.data.memory.match(/\d+/))
+      const price_2 = parseInt(product_2.data.memory.match(/\d+/))
+      return price_1 - price_2
+    })
+
     allVariants.forEach(variant => {
       // добавляем товар если товара с таким цветом нет
       if (
@@ -568,12 +575,7 @@ export default function BlockPrice({ product, allVariants }) {
         )
       )
     )
-    // сортируем по памяти
-    allMemory.sort((product_1, product_2) => {
-      const price_1 = parseInt(product_1.data.memory.match(/\d+/))
-      const price_2 = parseInt(product_2.data.memory.match(/\d+/))
-      return price_1 - price_2
-    })
+    
 
     setAllColors(allColors)
     setAllMemory(allMemory)
