@@ -369,6 +369,7 @@ export default function PriceBlock({ products }) {
       const body = JSON.stringify({
         name: orderingState.name,
         phone: orderingState.phone,
+        email: orderingState.email,
         city: orderingState.city,
         street: orderingState.street,
         house: orderingState.house,

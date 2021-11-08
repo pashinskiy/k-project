@@ -33,6 +33,20 @@ const useStyle = makeStyles(theme => ({
       "@media(max-width: 767px)": {
         width: "100%",
       },
+
+      "&:last-child": {
+        width: "100%",
+        marginTop: "1.87vw",
+        "@media(min-width: 1280px)": {
+          marginTop: "24px",
+        },
+        "@media(max-width: 1025px)": {
+          marginTop: "2.87vw",
+        },
+        "@media(max-width: 767px)": {
+          marginTop: "4.83vw",
+        },
+      },
     },
   },
 }))
@@ -54,6 +68,9 @@ export default function RecipientData() {
   function setPhone(value) {
     if (value.slice(0, 2) !== "+7") value = "+7"
     orderingDispatch({ type: "SET_PHONE", payload: value })
+  }
+  function setEmail(value) {
+    orderingDispatch({ type: "SET_EMAIL", payload: value })
   }
 
   return (
@@ -83,6 +100,14 @@ export default function RecipientData() {
             afterChange={setPhone}
             checkValue={() => orderingState.validationPhone()}
             value={orderingState.phone}
+          />
+        </WrapperWithTitle>
+
+        <WrapperWithTitle title="E-mail" necessarily={false}>
+          <Input
+            id="email"
+            afterChange={setEmail}
+            checkValue={() => orderingState.validationEmail()}
           />
         </WrapperWithTitle>
       </Grid>

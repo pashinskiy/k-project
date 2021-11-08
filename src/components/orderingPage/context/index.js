@@ -97,6 +97,11 @@ function reducer(state, action) {
         ...state,
         phone: action.payload,
       }
+    case "SET_EMAIL":
+      return {
+        ...state,
+        email: action.payload,
+      }
     default:
       throw new Error("Error action")
   }
@@ -165,6 +170,7 @@ export default function OrderingContext({ children }) {
     variantPay: "онлайн",
     name: false,
     phone: "+7",
+    email: false,
 
     validationCity() {
       if (!this.city) return false
@@ -180,6 +186,10 @@ export default function OrderingContext({ children }) {
     },
     validationPhone() {
       if (!this.phone) return false
+      return true
+    },
+    validationEmail() {
+      // if (!this.email) return false
       return true
     },
     validationAll() {
