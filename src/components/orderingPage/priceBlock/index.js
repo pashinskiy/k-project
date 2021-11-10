@@ -410,7 +410,7 @@ export default function PriceBlock({ products }) {
             navigate("/order/")
           }
           if (orderingState.variantPay === "в рассрочку") {
-            console.log(res.payment_data.url)
+            // console.log(res.payment_data.url)
             setMokkaFormUrl(res.payment_data.url)
           }
           if (orderingState.variantPay === "онлайн") {

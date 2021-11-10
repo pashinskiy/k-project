@@ -264,7 +264,6 @@ export default function ScrollBar({ children, fullScreen, buttonNext }) {
     }
 
     function noGoLink(e) {
-      console.log("222")
       e.preventDefault()
     }
   }

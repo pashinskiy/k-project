@@ -154,7 +154,7 @@ const useStyles = makeStyles(theme => ({
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.product - объект продукта полученый из prismic
  */
-export default function Characteristics({product}) {
+export default function Characteristics({ product }) {
   const classes = useStyles()
   const iconData = product.data.documents
   const characteristicTitlesArray = product.data.body1.map(function (
@@ -165,7 +165,7 @@ export default function Characteristics({product}) {
         <Grid container key={childTitles.characteristic.document?.data.name}>
           <Grid item className={classes.wrapperChild}>
             <Typography className={classes.childTitle}>
-              {childTitles.characteristic.document?.data.name}  
+              {childTitles.characteristic.document?.data.name}
             </Typography>
           </Grid>
           <Grid item className={classes.wrapperAttrib}>
@@ -177,7 +177,11 @@ export default function Characteristics({product}) {
       )
     })
     return (
-      <Grid container className={classes.wrapper} key={parentItems.primary.title}>
+      <Grid
+        container
+        className={classes.wrapper}
+        key={parentItems.primary.title}
+      >
         <Typography className={classes.characteristicTitle}>
           {parentItems.primary.title}
         </Typography>
@@ -194,36 +198,45 @@ export default function Characteristics({product}) {
 
         <Grid item style={{ paddingTop: "1.8vw" }}>
           {iconData.length
-            ? iconData.map(variant => (
-                <Grid
-                  container
-                  spacing={2}
-                  key={variant.doc_title.text}
-                  className={classes.documentContainer}
-                >
-                  <Grid item style={{ padding: "0" }}>
-                    <DocumentIcon />
-                  </Grid>
+            ? iconData.map(variant => {
+                const show =
+                  variant.doc_title.text || variant.doc_description.text
+
+                return !show ? null : (
                   <Grid
-                    item
-                    style={{
-                      padding: "0 0 0 10px",
-                      position: "relative",
-                      maxHeight: "70px",
-                    }}
+                    container
+                    spacing={2}
+                    key={variant.doc_title.text}
+                    className={classes.documentContainer}
                   >
-                    <Typography className={classes.documentTitle}>
-                      {variant.doc_title.text}
-                    </Typography>
-                    <Typography className={classes.documentDescrition}>
-                      {variant.doc_description.text}
-                    </Typography>
-                    <Link href={variant.file.url} className={classes.documentLink}>
-                      Скачать
-                    </Link>
+                    <Grid item style={{ padding: "0" }}>
+                      <DocumentIcon />
+                    </Grid>
+
+                    <Grid
+                      item
+                      style={{
+                        padding: "0 0 0 10px",
+                        position: "relative",
+                        maxHeight: "70px",
+                      }}
+                    >
+                      <Typography className={classes.documentTitle}>
+                        {variant.doc_title.text}
+                      </Typography>
+                      <Typography className={classes.documentDescrition}>
+                        {variant.doc_description.text}
+                      </Typography>
+                      <Link
+                        href={variant.file.url}
+                        className={classes.documentLink}
+                      >
+                        Скачать
+                      </Link>
+                    </Grid>
                   </Grid>
-                </Grid>
-              ))
+                )
+              })
             : null}
         </Grid>
       </Grid>

@@ -578,7 +578,7 @@ export default function MainPageSlider({ array, variant }) {
           ref={setRef}
           onPointerDown={!mobile ? setScrollBar : null}
           onScroll={mobile ? setCentralSliderInMobile : null}
-          onScrollEnd={mobile ? console.log("123") : null}
+          // onScrollEnd={mobile ? console.log("123") : null}
           className={classes.track}
         >
           {contentArray}

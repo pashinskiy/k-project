@@ -568,13 +568,13 @@ export default function BlockPrice({ product, allVariants }) {
     })
 
     // цвет продукта первый в массиве
-    allColors.unshift(
-      ...allColors.splice(
-        allColors.findIndex(
-          prod => prod.data.color_group === product.data.color_group
-        )
-      )
-    )
+    // allColors.unshift(
+    //   ...allColors.splice(
+    //     allColors.findIndex(
+    //       prod => prod.data.color_group === product.data.color_group
+    //     )
+    //   )
+    // )
     
 
     setAllColors(allColors)
