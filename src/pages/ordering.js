@@ -128,13 +128,15 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-const IndexPage = ({ data }) => {
+const IndexPage = ({ data, location }) => {
   const classes = useStyle()
   const order = JSON.parse(localStorage.getItem("order"))
 
   const state = React.useContext(GlobalStateContext)
 
   const productsInCart = state.cart.map(item => item.product)
+
+  const legalEntities = !!location.state.legalEntities
 
   return (
     <Layout>
@@ -171,11 +173,17 @@ const IndexPage = ({ data }) => {
               ) : null}
 
               <div className={classes.orderingFieldWrapper}>
-                <PayData prismicCartAndOrder={data.prismicCartAndOrder} />
+                <PayData
+                  prismicCartAndOrder={data.prismicCartAndOrder}
+                  legalEntities={legalEntities}
+                />
               </div>
 
               <div className={classes.orderingFieldWrapper}>
-                <RecipientData prismicCartAndOrder={data.prismicCartAndOrder} />
+                <RecipientData
+                  prismicCartAndOrder={data.prismicCartAndOrder}
+                  legalEntities={legalEntities}
+                />
               </div>
             </div>
 

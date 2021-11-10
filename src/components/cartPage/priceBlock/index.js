@@ -6,6 +6,7 @@ import {
   Grid,
   Typography,
   Modal,
+  Button,
 } from "@material-ui/core"
 
 import { GlobalStateContext } from "../../../context/GlobalContextProvider"
@@ -148,6 +149,39 @@ const useStyle = makeStyles(theme => ({
     },
     "@media(max-width: 767px)": {
       margin: "6.76vw 0",
+    },
+  },
+  textByeLegalEntities: {
+    width: "100%",
+    padding: 0,
+
+    marginTop: "1.25vw",
+    "@media(min-width: 1280px)": {
+      marginTop: 16,
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "1.91vw",
+    },
+    "@media(max-width: 767px)": {
+      marginTop: "3.86vw",
+    },
+    "& span": {
+      ...theme.typography.body2,
+
+      fontWeight: 400,
+      lineHeight: 1.21,
+      textTransform: "none",
+
+      fontSize: "1.25vw",
+      "@media(min-width: 1280px)": {
+        fontSize: 16,
+      },
+      "@media(max-width: 1025px)": {
+        fontSize: "1.91vw",
+      },
+      "@media(max-width: 767px)": {
+        fontSize: "3.86vw",
+      },
     },
   },
   titleCreditAndDelivery: {
@@ -334,7 +368,7 @@ export default function PriceBlock({ products }) {
     )
   }, 0)
 
-  function goRegistration() {
+  function goRegistration(LegalEntities) {
     const positions = products.reduce((order, product, i) => {
       const num = i + 1
       const name = product.data.name
@@ -365,6 +399,10 @@ export default function PriceBlock({ products }) {
         allProductsJson: prodDataArr,
       })
     )
+
+    if (LegalEntities) {
+      navigate("/ordering", { state: { legalEntities: true } })
+    }
   }
 
   // варианты доставки
@@ -446,6 +484,14 @@ export default function PriceBlock({ products }) {
           <Tinkoff items={state.cart} />
         </div>
       )}
+
+      <Button
+        variant="body2"
+        onClick={() => goRegistration(true)}
+        className={classes.textByeLegalEntities}
+      >
+        Оформление для юридических лиц
+      </Button>
 
       {(credit || devilery.length) &&
       summPrice < 100000 &&

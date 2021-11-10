@@ -102,6 +102,11 @@ function reducer(state, action) {
         ...state,
         email: action.payload,
       }
+    case "SET_INN":
+      return {
+        ...state,
+        inn: action.payload,
+      }
     default:
       throw new Error("Error action")
   }
@@ -171,6 +176,7 @@ export default function OrderingContext({ children }) {
     name: false,
     phone: "+7",
     email: false,
+    inn: false,
 
     validationCity() {
       if (!this.city) return false
@@ -189,8 +195,11 @@ export default function OrderingContext({ children }) {
       return true
     },
     validationEmail() {
-      // if (!this.email) return false
+      if (!this.email) return false
       return true
+    },
+    validationInn() {
+      return /^\d{10}$/i.test(this.inn)
     },
     validationAll() {
       return (

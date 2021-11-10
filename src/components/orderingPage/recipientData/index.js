@@ -22,31 +22,28 @@ const useStyle = makeStyles(theme => ({
       marginTop: "4.83vw",
     },
 
-    "& > *:nth-child(2)": {
+    "& > *": {
+      width: "100%",
+      marginTop: "1.87vw",
+      "@media(min-width: 1280px)": {
+        marginTop: "24px",
+      },
+      "@media(max-width: 1025px)": {
+        marginTop: "2.87vw",
+      },
       "@media(max-width: 767px)": {
-        marginTop: "4.83vw",
+        marginTop: "4.83vw !important",
+      },
+
+      "&:first-child": {
+        marginTop: 0,
       },
     },
-
-    "& > *": {
-      width: "44.87%",
-      "@media(max-width: 767px)": {
-        width: "100%",
-      },
-
-      "&:last-child": {
-        width: "100%",
-        marginTop: "1.87vw",
-        "@media(min-width: 1280px)": {
-          marginTop: "24px",
-        },
-        "@media(max-width: 1025px)": {
-          marginTop: "2.87vw",
-        },
-        "@media(max-width: 767px)": {
-          marginTop: "4.83vw",
-        },
-      },
+  },
+  shortInput: {
+    width: "44.87%",
+    "@media(max-width: 767px)": {
+      width: "100%",
     },
   },
 }))
@@ -55,7 +52,7 @@ const useStyle = makeStyles(theme => ({
  * Блок данных о клиенте
  * @module src/components/orderingPage/recipientData
  */
-export default function RecipientData() {
+export default function RecipientData({ legalEntities }) {
   const classes = useStyle()
   const smartPhoneScreen = useMediaQuery("(max-width: 767px)")
 
@@ -72,6 +69,9 @@ export default function RecipientData() {
   function setEmail(value) {
     orderingDispatch({ type: "SET_EMAIL", payload: value })
   }
+  function setInn(value) {
+    orderingDispatch({ type: "SET_INN", payload: value })
+  }
 
   return (
     <>
@@ -86,7 +86,17 @@ export default function RecipientData() {
         justify="space-between"
         className={classes.twoInputWrapper}
       >
-        <WrapperWithTitle title="Имя">
+        {legalEntities ? (
+          <WrapperWithTitle title="ИНН" necessarily={!!legalEntities}>
+            <Input
+              id="inn"
+              afterChange={setInn}
+              checkValue={() => orderingState.validationInn()}
+            />
+          </WrapperWithTitle>
+        ) : null}
+
+        <WrapperWithTitle title="Имя" className={classes.shortInput}>
           <Input
             id="name"
             afterChange={setName}
@@ -94,7 +104,11 @@ export default function RecipientData() {
           />
         </WrapperWithTitle>
 
-        <WrapperWithTitle title="Телефон">
+        <WrapperWithTitle
+          title="Телефон"
+          className={classes.shortInput}
+          style={{ marginTop: legalEntities ? "" : 0 }}
+        >
           <Input
             id="phone"
             afterChange={setPhone}
@@ -103,11 +117,13 @@ export default function RecipientData() {
           />
         </WrapperWithTitle>
 
-        <WrapperWithTitle title="E-mail" necessarily={false}>
+        <WrapperWithTitle title="E-mail" necessarily={!!legalEntities}>
           <Input
             id="email"
             afterChange={setEmail}
-            checkValue={() => orderingState.validationEmail()}
+            checkValue={() =>
+              legalEntities ? orderingState.validationEmail() : true
+            }
           />
         </WrapperWithTitle>
       </Grid>
