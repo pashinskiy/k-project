@@ -185,9 +185,10 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 900,
     lineHeight: 0.8,
 
-    "-webkit-text-stroke": `1px ${theme.palette.color.accentSecondary}`,
-    "-webkit-text-fill-color": "transparent",
-    color: theme.palette.color.accentSecondary,
+    background: theme.palette.background.accent,
+    WebkitBackgroundClip: `text`,
+    WebkitTextStroke: `2px transparent`,
+    color: theme.palette.background.secondary,
 
     width: "7.96vw",
     fontSize: "7.81vw",
