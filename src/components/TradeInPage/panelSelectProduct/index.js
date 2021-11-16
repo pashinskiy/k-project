@@ -178,29 +178,9 @@ export default function PanelSelectProduct({
   selectProduct,
   setProduct,
   close,
+  data,
 }) {
   const classes = useStyles()
-  const data = useStaticQuery(graphql`
-    {
-      allPrismicHeader {
-        edges {
-          node {
-            data {
-              find_img {
-                localFile {
-                  publicURL
-                }
-                alt
-              }
-              field_example {
-                text
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
 
   const [search, setSearch] = React.useState("")
 

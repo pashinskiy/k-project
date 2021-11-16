@@ -821,12 +821,12 @@ export default function Calculator({ variant, data }) {
   }
 
   function send() {
-    if (!turnInProduct || !product) return
+    if (!turnInProduct || (!product && variant === "trade-in")) return
 
     const request = {
       name,
       phone,
-      type: "trade-in-request",
+      type: `${variant}-request`,
 
       "trade-in": {
         name: turnInProduct.data.name,
@@ -834,12 +834,15 @@ export default function Calculator({ variant, data }) {
         quantity: 1,
         images: photos,
       },
-      "trade-up": {
+    }
+    if (variant === "trade-in") {
+      request["trade-up"] = {
         name: product.data.name,
         prismic_uid: product.uid,
         quantity: 1,
-      },
+      }
     }
+
     console.log(request)
   }
 
@@ -1001,6 +1004,7 @@ export default function Calculator({ variant, data }) {
             selectProduct={turnInProduct}
             setProduct={setTurnInProduct}
             close={() => setShowPanelSelectTurnInProducts(false)}
+            data={data}
           />
         </Modal>
       </div>
@@ -1071,6 +1075,7 @@ export default function Calculator({ variant, data }) {
               selectProduct={product}
               setProduct={setProduct}
               close={() => setShowPanelSelectProducts(false)}
+              data={data}
             />
           </Modal>
         </div>

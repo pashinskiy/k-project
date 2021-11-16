@@ -677,5 +677,22 @@ export const query = graphql`
         }
       }
     }
+    allPrismicHeader {
+      edges {
+        node {
+          data {
+            find_img {
+              localFile {
+                publicURL
+              }
+              alt
+            }
+            field_example {
+              text
+            }
+          }
+        }
+      }
+    }
   }
 `

@@ -586,7 +586,7 @@ const IndexPage = ({ data }) => {
       <div className={classes.wrapperFirstAndSecondBlock}>
         <div className={classes.first_block}>
           <GatsbyImage
-            image={image_first_block.localFile.childImageSharp.gatsbyImageData}
+            image={image_first_block.localFile.childImageSharp?.gatsbyImageData}
             alt={image_first_block.alt ?? "image_first_block"}
             imgStyle={{ width: "100%", height: "100%", objectFit: "contain" }}
           />
@@ -623,7 +623,7 @@ const IndexPage = ({ data }) => {
 
         <div className={classes.third_block__image_wrapper}>
           <GatsbyImage
-            image={image_third_block.localFile.childImageSharp.gatsbyImageData}
+            image={image_third_block.localFile.childImageSharp?.gatsbyImageData}
             alt={image_third_block.alt ?? "image_third_block"}
             className={classes.third_block__image}
             imgStyle={{ width: "auto", height: "100%" }}
@@ -852,6 +852,23 @@ export const query = graphql`
           uid
           data {
             name
+          }
+        }
+      }
+    }
+    allPrismicHeader {
+      edges {
+        node {
+          data {
+            find_img {
+              localFile {
+                publicURL
+              }
+              alt
+            }
+            field_example {
+              text
+            }
           }
         }
       }
