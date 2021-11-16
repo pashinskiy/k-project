@@ -22,8 +22,14 @@ const build = {
 }
 
 app.post("/build", (req, res) => {
-  fetch("http://admin.krypton.ru/api/products/add").finally(() => {
-    if (build.status === "В ожидании сборки.") {
+  if (build.status !== "В ожидании сборки.") res.sendStatus(409)
+  else {
+    try {
+      fetch("http://admin.krypton.ru/api/products/add")
+      build.last_action = "Отправлен сигнал в админку"
+    } catch {
+      build.last_action = "Сигнал в админку отправить не удалось"
+    } finally {
       build.status = "Собирается."
       res.sendStatus(200)
 
@@ -58,10 +64,8 @@ app.post("/build", (req, res) => {
           build.result = `Успешно.`
         }
       })
-    } else {
-      res.sendStatus(409)
     }
-  })
+  }
 })
 
 app.get("/status", (req, res) => {

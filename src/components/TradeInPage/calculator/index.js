@@ -640,6 +640,9 @@ export default function Calculator({ variant, data }) {
   const classes = useStyles()
   const smartphone = useMediaQuery("(max-width: 767px)")
 
+  const [name, setName] = React.useState("")
+  const [phone, setPhone] = React.useState("+7")
+
   const products = React.useMemo(
     () => data.allPrismicProduct.edges.map(edge => edge.node),
     [data]
@@ -818,7 +821,26 @@ export default function Calculator({ variant, data }) {
   }
 
   function send() {
-    console.log("send")
+    if (!turnInProduct || !product) return
+
+    const request = {
+      name,
+      phone,
+      type: "trade-in-request",
+
+      "trade-in": {
+        name: turnInProduct.data.name,
+        prismic_uid: turnInProduct.uid,
+        quantity: 1,
+        images: photos,
+      },
+      "trade-up": {
+        name: product.data.name,
+        prismic_uid: product.uid,
+        quantity: 1,
+      },
+    }
+    console.log(request)
   }
 
   return (
@@ -831,13 +853,21 @@ export default function Calculator({ variant, data }) {
         <label className={classes.recipient_data__label}>
           <Typography className={classes.subtitle}>Имя</Typography>
 
-          <input className={classes.input} />
+          <input
+            value={name}
+            onInput={e => setName(e.target.value)}
+            className={classes.input}
+          />
         </label>
 
         <label className={classes.recipient_data__label}>
           <Typography className={classes.subtitle}>Телефон</Typography>
 
-          <input className={classes.input} />
+          <input
+            value={phone}
+            onInput={e => setPhone(e.target.value)}
+            className={classes.input}
+          />
         </label>
       </div>
 
