@@ -1,8 +1,6 @@
 import React from "react"
 import { makeStyles, useMediaQuery } from "@material-ui/core"
 
-import { OrderingDispatchContext } from "../../context"
-
 const useStyle = makeStyles(theme => ({
   input: {
     width: "100%",
@@ -30,6 +28,7 @@ const useStyle = makeStyles(theme => ({
       padding: "3.62vw 2.89vw",
       borderRadius: "1.44vw",
       fontSize: "3.38vw",
+      border: `1px solid ${theme.palette.color.accentSecondary}`,
     },
 
     "&:focus": {
@@ -38,9 +37,9 @@ const useStyle = makeStyles(theme => ({
   },
   error: {
     border: `1px solid #F1ADAD`,
-    "@media(max-width: 767px)": {
-      border: `1px solid ${theme.palette.color.accentSecondary}`,
-    },
+    // "@media(max-width: 767px)": {
+    //   border: `1px solid ${theme.palette.color.accentSecondary}`,
+    // },
   },
 }))
 
@@ -53,35 +52,21 @@ const useStyle = makeStyles(theme => ({
  */
 export default function Input({ afterChange, checkValue, ...other }) {
   const classes = useStyle()
-  const orderingDispatch = React.useContext(OrderingDispatchContext)
 
   const smartPhoneScreen = useMediaQuery("(max-width: 767px)")
 
   checkValue = checkValue ? checkValue : () => true
 
-  const error = checkValue() && !smartPhoneScreen ? "" : classes.error
+  const error = checkValue() ? "" : classes.error
 
   function onInput(e) {
     const newValue = e.currentTarget.value
     afterChange(newValue)
   }
 
-  function focusing() {
-    orderingDispatch({ type: "SET_FOCUSING_ON_FIELD", payload: true })
-  }
-
-  function blurring() {
-    orderingDispatch({ type: "SET_FOCUSING_ON_FIELD", payload: false })
-  }
-
   return (
     <input
       onInput={onInput}
-      onFocus={focusing}
-      onBlur={blurring}
-      onKeyPress={e => {
-        if (e.code === "Enter") blurring()
-      }}
       className={classes.input + " " + error}
       {...other}
     />

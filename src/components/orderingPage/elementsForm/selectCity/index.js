@@ -97,20 +97,20 @@ const useStyle = makeStyles(theme => ({
   },
   error: {
     border: `1px solid #F1ADAD`,
-    "@media(max-width: 767px)": {
-      border: `1px solid ${theme.palette.color.accentSecondary}`,
-    },
+    // "@media(max-width: 767px)": {
+    //   border: `1px solid ${theme.palette.color.accentSecondary}`,
+    // },
   },
 }))
 
 /**
- * Блок ввода названия города с предложением вариантов 
+ * Блок ввода названия города с предложением вариантов
  * @module src/components/orderingPage/elementsForms/selectCity
  */
 export default function SelectCity() {
   const classes = useStyle()
   const [showOptions, setShowOptions] = React.useState(false)
-  
+
   const orderingState = React.useContext(OrderingStateContext)
   const orderingDispatch = React.useContext(OrderingDispatchContext)
 
@@ -131,20 +131,10 @@ export default function SelectCity() {
   function setOption(value) {
     setShowOptions(false)
     setCity(value)
-    blurring()
   }
 
   function setValue(e) {
     setCity(e.target.value)
-  }
-
-  function focusing() {
-    orderingDispatch({ type: "SET_FOCUSING_ON_FIELD", payload: true })
-  }
-
-  function blurring() {
-    setShowOptions(false)
-    orderingDispatch({ type: "SET_FOCUSING_ON_FIELD", payload: false })
   }
 
   const error = orderingState.validationCity() ? "" : classes.error
@@ -152,13 +142,9 @@ export default function SelectCity() {
   return (
     <div style={{ position: "relative" }}>
       <input
+        id="select_city"
         onClick={openOptions}
         onInput={setValue}
-        onFocus={focusing}
-        onBlur={blurring}
-        onKeyPress={e => {
-          if (e.code === "Enter") blurring()
-        }}
         className={classes.select + " " + classes.text + " " + error}
         value={orderingState.city}
         autocomplete="new-password"

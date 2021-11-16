@@ -16,6 +16,7 @@ import Mokka from "../../../../static/svg/mokka.svg"
 import MokkaInfo from "../../../../static/svg/mokkaInfo.svg"
 import MokkaCross from "../../../../static/svg/mokkaCross.svg"
 import MokkaIframeRegistration from "../../mokkaIframeRegistration"
+import Tinkoff from "../../button/tinkoff"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -64,6 +65,7 @@ const useStyles = makeStyles(theme => ({
     overflow: "hidden",
     boxSizing: "border-box",
     borderRadius: "100px",
+    boxShadow: "inset 0px 2px 4px rgba(0, 0, 0, 0.25)",
 
     width: "3.12vw",
     height: "3.12vw",
@@ -144,6 +146,7 @@ const useStyles = makeStyles(theme => ({
       marginBottom: "2.41vw",
       padding: "2.89vw",
       fontSize: "3.38vw",
+      boxShadow: `0px 0px 0px 2px ${theme.palette.background.secondary}`,
     },
   },
   activeButtonMemory: {
@@ -195,6 +198,20 @@ const useStyles = makeStyles(theme => ({
     },
     "@media(max-width: 767px)": {
       fontSize: "4.83vw",
+    },
+  },
+  wrapperTinkoffButton: {
+    width: "100%",
+
+    marginTop: "0.78vw",
+    "@media(min-width: 1280px)": {
+      marginTop: 10,
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "1.91vw",
+    },
+    "@media(max-width: 767px)": {
+      marginTop: "3.86vw",
     },
   },
   title: {
@@ -261,23 +278,151 @@ const useStyles = makeStyles(theme => ({
       "-webkit-text-fill-color": "#000000",
     },
   },
-  textSeller: {
-    fontWeight: 700,
-    fontSize: "1.09vw",
-    lineHeight: 1.21,
-    marginTop: "0.62vw",
-    color: "#681DE1",
+  seller: {
+    display: "flex",
+    alignItems: "center",
+
+    marginTop: "3.12vw",
     "@media(min-width: 1280px)": {
-      fontSize: "14px",
-      marginTop: "8px",
+      marginTop: "40px",
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "4.79vw",
+    },
+    "@media(max-width: 767px)": {
+      marginTop: "9.66vw",
+    },
+  },
+  seller__logo: {
+    width: "auto",
+
+    marginRight: "0.62vw",
+    height: "1.56vw",
+    "@media(min-width: 1280px)": {
+      marginRight: 8,
+      height: 20,
+    },
+    "@media(max-width: 1025px)": {
+      marginRight: "0.95vw",
+      height: "2.39vw",
+    },
+    "@media(max-width: 767px)": {
+      marginRight: "1.93vw",
+      height: "4.83vw",
+    },
+  },
+  seller__name: {
+    fontWeight: 700,
+    lineHeight: 1.21,
+    color: "#681DE1",
+
+    fontSize: "1.09vw",
+    "@media(min-width: 1280px)": {
+      fontSize: 14,
     },
     "@media(max-width: 1025px)": {
       fontSize: "1.67vw",
-      marginTop: "0.95vw",
     },
     "@media(max-width: 767px)": {
       fontSize: "3.38vw",
-      marginTop: "1.93vw",
+    },
+  },
+  seller__info: {
+    position: "relative",
+
+    padding: 0,
+    border: "none",
+    background: "transparent",
+    cursor: "pointer",
+
+    marginLeft: "0.31vw",
+    height: "1.32vw",
+    width: "1.32vw",
+    "@media(min-width: 1280px)": {
+      marginLeft: "4px",
+      height: "17px",
+      width: "17px",
+    },
+    "@media(max-width: 1025px)": {
+      marginLeft: "0.47vw",
+      height: "2.03vw",
+      width: "2.03vw",
+    },
+    "@media(max-width: 767px)": {
+      marginLeft: "0.96vw",
+      height: "4.1vw",
+      width: "4.1vw",
+    },
+  },
+  saller__pop_up: {
+    position: "absolute",
+    left: "50%",
+    transform: "translateX(-50%)",
+
+    background: theme.palette.color.main,
+
+    bottom: "calc(100% + 1.01vw)",
+    borderRadius: "1.56vw",
+    padding: "0.93vw",
+    "@media(min-width: 1280px)": {
+      bottom: "calc(100% + 13px)",
+      borderRadius: 20,
+      padding: 12,
+    },
+    "@media(max-width: 1025px)": {
+      bottom: "calc(100% + 1.55vw)",
+      borderRadius: "2.39vw",
+      padding: "1.43vw",
+    },
+    "@media(max-width: 767px)": {
+      bottom: "calc(100% + 3.14vw)",
+      borderRadius: "4.83vw",
+      padding: "2.89vw",
+    },
+  },
+  pop_up__text: {
+    position: "relative",
+
+    fontWeight: 500,
+    lineHeight: 1.5,
+    color: theme.palette.color.mainContrast,
+    whiteSpace: "nowrap",
+    textAlign: "left",
+
+    fontSize: "0.93vw",
+    "@media(min-width: 1280px)": {
+      fontSize: 12,
+    },
+    "@media(max-width: 1025px)": {
+      fontSize: "1.43vw",
+    },
+    "@media(max-width: 767px)": {
+      fontSize: "2.89vw",
+    },
+  },
+  pop_up__rect: {
+    position: "absolute",
+    left: "50%",
+    transform: "translateX(-50%) rotate(45deg)",
+    background: "inherit",
+
+    bottom: "-0.39vw",
+    height: "3.09vw",
+    width: "3.09vw",
+    "@media(min-width: 1280px)": {
+      bottom: -5,
+      height: 39.59,
+      width: 39.59,
+    },
+    "@media(max-width: 1025px)": {
+      bottom: "-0.59vw",
+      height: "4.74vw",
+      width: "4.74vw",
+    },
+    "@media(max-width: 767px)": {
+      bottom: "-1.2vw",
+      height: "9.56vw",
+      width: "9.56vw",
     },
   },
   rassrochkaSpan: {
@@ -389,34 +534,52 @@ export default function BlockPrice({ product, allVariants }) {
   const [showMokkaInfo, setShowMokkaInfo] = React.useState(false)
   const [showMokkaIframe, setShowMokkaIframe] = React.useState(false)
 
-  const allColors = []
-  const allMemory = []
-  allVariants.forEach(variant => {
-    // добавляем товар если товара с таким цветом нет
-    if (
-      !allColors.find(
-        prod => prod.data.color_group === variant.data.color_group
-      )
-    ) {
-      allColors.push(variant)
-    }
+  const [allColors, setAllColors] = React.useState([])
+  const [allMemory, setAllMemory] = React.useState([])
 
-    // если цвет товара не такой же как у главного на странице выходим
-    if (variant.data.color_group !== product.data.color_group) return
+  React.useEffect(() => {
+    const allColors = []
+    const allMemory = []
 
-    // добавляем товар если товара с такой памятью нет
-    if (!allMemory.find(prod => prod.data.memory === variant.data.memory)) {
-      allMemory.push(variant)
-    }
-  })
-  // цвет продукта первый в массиве
-  allColors.unshift(
-    ...allColors.splice(
-      allColors.findIndex(
-        prod => prod.data.color_group === product.data.color_group
-      )
-    )
-  )
+    // сортируем по памяти
+    allVariants.sort((product_1, product_2) => {
+      const price_1 = parseInt(product_1.data.memory.match(/\d+/))
+      const price_2 = parseInt(product_2.data.memory.match(/\d+/))
+      return price_1 - price_2
+    })
+
+    allVariants.forEach(variant => {
+      // добавляем товар если товара с таким цветом нет
+      if (
+        !allColors.find(
+          prod => prod.data.color_group === variant.data.color_group
+        )
+      ) {
+        allColors.push(variant)
+      }
+
+      // если цвет товара не такой же как у главного на странице выходим
+      if (variant.data.color_group !== product.data.color_group) return
+
+      // добавляем товар если товара с такой памятью нет
+      if (!allMemory.find(prod => prod.data.memory === variant.data.memory)) {
+        if (variant.data.memory) allMemory.push(variant)
+      }
+    })
+
+    // цвет продукта первый в массиве
+    // allColors.unshift(
+    //   ...allColors.splice(
+    //     allColors.findIndex(
+    //       prod => prod.data.color_group === product.data.color_group
+    //     )
+    //   )
+    // )
+    
+
+    setAllColors(allColors)
+    setAllMemory(allMemory)
+  }, [])
 
   // преобразуем цену
   function priceMod(value) {
@@ -444,8 +607,14 @@ export default function BlockPrice({ product, allVariants }) {
   const seller = product.data.body.find(
     slice => slice.slice_type === "Seller" || slice.slice_type === "seller"
   )
-  const name_seller = seller?.primary?.name_seller ?? false
+  const seller_logo = seller?.primary?.seller_logo ?? false
+  const seller_name = seller?.primary?.seller_name ?? false
+  const seller_entity = seller?.primary?.seller_entity ?? false
   const ogrn = seller?.primary?.ogrn ?? false
+
+  const featuresSlices = product.data.body.filter(
+    slice => slice.slice_type === "features"
+  )
 
   function switchShowMokkaInfo(e) {
     e.preventDefault()
@@ -456,6 +625,8 @@ export default function BlockPrice({ product, allVariants }) {
     if (e.defaultPrevented) return
     setShowMokkaIframe(!showMokkaIframe)
   }
+
+  const [showSellerInfo, setShowSellerInfo] = React.useState(false)
 
   return (
     <Grid container direction="column" className={classes.wrapper}>
@@ -493,24 +664,27 @@ export default function BlockPrice({ product, allVariants }) {
         })}
       </Grid>
 
-      <Grid container className={classes.buttonsMemoryPanel}>
-        {allMemory.map(prod => {
-          const active =
-            product.data.memory === prod.data.memory
-              ? classes.activeButtonMemory
-              : ""
-          return (
-            <button
-              onClick={() => navigate(`/${prod.uid}/`)}
-              aria-label={`${prod.data.memory}`}
-              key={prod.uid}
-              className={classes.buttonMemory + " " + active}
-            >
-              {prod.data.memory}
-            </button>
-          )
-        })}
-      </Grid>
+      {allMemory.length ? (
+        <Grid container className={classes.buttonsMemoryPanel}>
+          {allMemory.map(prod => {
+            const active =
+              product.data.memory === prod.data.memory
+                ? classes.activeButtonMemory
+                : ""
+            return (
+              <button
+                id={`${prod.data.memory}`}
+                onClick={() => navigate(`/${prod.uid}/`)}
+                aria-label={`${prod.data.memory}`}
+                key={prod.uid}
+                className={classes.buttonMemory + " " + active}
+              >
+                {prod.data.memory}
+              </button>
+            )
+          })}
+        </Grid>
+      ) : null}
 
       <Grid container alignItems="flex-end" className={classes.priceWrapper}>
         <Typography className={classes.price}>
@@ -524,19 +698,29 @@ export default function BlockPrice({ product, allVariants }) {
       </Grid>
 
       {mobile ? null : (
-        <AddInCartAndFav
-          text="Добавить в корзину"
-          product={product}
-          variant="page"
-        />
+        <>
+          <AddInCartAndFav
+            text="Добавить в корзину"
+            product={product}
+            variant="page"
+          />
+
+          <div className={classes.wrapperTinkoffButton}>
+            <Tinkoff items={[{ product: product, count: 1 }]} />
+          </div>
+        </>
       )}
 
       {mobile ? (
-        <Features
-          featuresSlices={product.data.body.filter(
-            slice => slice.slice_type === "features"
-          )}
-        />
+        <>
+          {featuresSlices.length ? (
+            <Features featuresSlices={featuresSlices} />
+          ) : null}
+
+          <div className={classes.wrapperTinkoffButton}>
+            <Tinkoff items={[{ product: product, count: 1 }]} />
+          </div>
+        </>
       ) : null}
 
       <Grid>
@@ -625,19 +809,46 @@ export default function BlockPrice({ product, allVariants }) {
           </>
         ) : null}
 
-        {name_seller ? (
-          <>
-            <Typography className={classes.title}>Продавец</Typography>
-            <Typography hidden={!creditValue} className={classes.textSeller}>
-              {name_seller}
+        {seller_name ? (
+          <div className={classes.seller}>
+            {seller_logo.localFile ? (
+              <img
+                src={seller_logo.localFile.publicURL}
+                alt={seller_logo.alt ?? "logo"}
+                width={20}
+                height={20}
+                className={classes.seller__logo}
+              />
+            ) : null}
+
+            <Typography className={classes.seller__name}>
+              {seller_name}
             </Typography>
-            <Typography
-              hidden={!credit.months_2}
-              className={classes.textSeller}
+
+            <button
+              aria-label="seller info"
+              onClick={() => setShowSellerInfo(!showSellerInfo)}
+              onMouseEnter={() => setShowSellerInfo(true)}
+              onMouseLeave={() => setShowSellerInfo(false)}
+              className={classes.seller__info}
             >
-              {ogrn}
-            </Typography>
-          </>
+              <MokkaInfo />
+
+              {showSellerInfo ? (
+                <div className={classes.saller__pop_up}>
+                  <div className={classes.pop_up__rect} />
+
+                  <Typography className={classes.pop_up__text}>
+                    {seller_entity}
+                  </Typography>
+
+                  <Typography className={classes.pop_up__text}>
+                    ОГРН: {ogrn}
+                  </Typography>
+                </div>
+              ) : null}
+            </button>
+          </div>
         ) : null}
       </Grid>
     </Grid>

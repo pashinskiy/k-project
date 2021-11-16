@@ -23,7 +23,11 @@ const useStyles = makeStyles(theme => ({
     },
     "&:hover": {
       background: theme.palette.background.accent,
+      boxShadow: "0px 0px 0px 4px #D2D0E9",
     },
+  },
+  active: {
+    border: "2px solid #FFFFFF",
   },
   text: {
     fontWeight: 700,
@@ -53,13 +57,22 @@ const useStyles = makeStyles(theme => ({
 export default function GoRegistration({ text, onClick }) {
   const classes = useStyles()
 
+  const [active, setActive] = React.useState("")
+
   function buttonClick() {
     onClick()
-    navigate("/ordering/")
+    navigate("/ordering")
   }
 
   return (
-    <Button id="checkout" disableRipple onClick={buttonClick} className={classes.button}>
+    <Button
+      id="checkout"
+      disableRipple
+      onClick={buttonClick}
+      onPointerDown={() => setActive(classes.active)}
+      onPointerUp={() => setTimeout(() => setActive(""), 300)}
+      className={classes.button + " " + active}
+    >
       <Typography id="checkout" align="center" className={classes.text}>
         {text}
       </Typography>

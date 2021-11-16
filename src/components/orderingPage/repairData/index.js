@@ -441,6 +441,8 @@ export default function RepairData({ prismicCartAndOrder }) {
         <>
           {showButton ? (
             <Button
+              id="use_data_delivery"
+              aria-label="use data delivery"
               onClick={toggleUseDataDelivery}
               className={classes.buttonWrapper}
             >
@@ -467,7 +469,11 @@ export default function RepairData({ prismicCartAndOrder }) {
               />
 
               <WrapperWithTitle title="Дата">
-                <Select options={dates} afterChange={setDate} />
+                <Select
+                  options={dates}
+                  afterChange={setDate}
+                  id="select_date_repair"
+                />
               </WrapperWithTitle>
 
               <WrapperWithTitle title="Время">
@@ -475,6 +481,7 @@ export default function RepairData({ prismicCartAndOrder }) {
                   <Select
                     options={timeStandartDelivery}
                     afterChange={setTime}
+                    id="select_time_repair"
                   />
                 ) : (
                   <ListRatioRect
@@ -491,7 +498,7 @@ export default function RepairData({ prismicCartAndOrder }) {
               />
 
               <WrapperWithTitle title="Улица" necessarily={false}>
-                <Input afterChange={setStreet} />
+                <Input afterChange={setStreet} id="street_repair" />
               </WrapperWithTitle>
 
               <Grid
@@ -500,11 +507,11 @@ export default function RepairData({ prismicCartAndOrder }) {
                 className={classes.twoInputWrapper}
               >
                 <WrapperWithTitle title="Дом" necessarily={false}>
-                  <Input afterChange={setHouse} />
+                  <Input afterChange={setHouse} id="street_house" />
                 </WrapperWithTitle>
 
                 <WrapperWithTitle title="Квартира" necessarily={false}>
-                  <Input afterChange={setApartment} />
+                  <Input afterChange={setApartment} id="street_apartment" />
                 </WrapperWithTitle>
               </Grid>
             </div>

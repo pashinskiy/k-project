@@ -1,10 +1,12 @@
 import React from "react"
+import { navigate } from "gatsby"
 import {
   makeStyles,
   useMediaQuery,
   Grid,
   Typography,
   Modal,
+  Button,
 } from "@material-ui/core"
 
 import { GlobalStateContext } from "../../../context/GlobalContextProvider"
@@ -15,6 +17,7 @@ import Mokka from "../../../../static/svg/mokka.svg"
 import MokkaInfo from "../../../../static/svg/mokkaInfo.svg"
 import MokkaCross from "../../../../static/svg/mokkaCross.svg"
 import MokkaIframeRegistration from "../../mokkaIframeRegistration"
+import Tinkoff from "../../button/tinkoff"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -28,14 +31,10 @@ const useStyle = makeStyles(theme => ({
       borderRadius: "20px 0 0 20px",
     },
     "@media(max-width: 1025px)": {
-      padding: "5.03vw 2.87vw 0.95vw",
-      borderRadius: "2.39vw 2.39vw 0 0 ",
-      boxShadow: "0px 0px 2.39vw rgba(0, 0, 0, 0.25)",
-    },
-    "@media(max-width: 767px)": {
-      padding: "10.14vw 5.79vw 2.41vw",
-      borderRadius: "4.83vw 4.83vw 0 0 ",
-      boxShadow: "0px 0px 4.83vw rgba(0, 0, 0, 0.25)",
+      background: "transparent",
+
+      padding: 0,
+      borderRadius: 0,
     },
   },
   divider: {
@@ -76,9 +75,11 @@ const useStyle = makeStyles(theme => ({
     },
     "@media(max-width: 1025px)": {
       marginTop: "2.99vw",
+      marginBottom: "3.35vw",
     },
     "@media(max-width: 767px)": {
       marginTop: "6.03vw",
+      marginBottom: "6.76vw",
     },
   },
   normalText: {
@@ -122,16 +123,65 @@ const useStyle = makeStyles(theme => ({
       height: "50px",
     },
     "@media(max-width: 1025px)": {
+      position: "fixed",
+      left: "50%",
+      transform: "translateX(-50%)",
+      bottom: 70,
+      zIndex: 99,
+
       width: "98.08vw",
-      marginTop: "1.91vw",
-      marginLeft: "-1.91vw",
       height: "5.99vw",
     },
     "@media(max-width: 767px)": {
       width: "97.58vw",
-      marginTop: "4.83vw",
-      marginLeft: "-4.58vw",
       height: "12.07vw",
+    },
+  },
+  wrapperTinkoffButton: {
+    width: "100%",
+
+    marginTop: "0.78vw",
+    "@media(min-width: 1280px)": {
+      marginTop: 10,
+    },
+    "@media(max-width: 1025px)": {
+      margin: "3.35vw 0",
+    },
+    "@media(max-width: 767px)": {
+      margin: "6.76vw 0",
+    },
+  },
+  textByeLegalEntities: {
+    width: "100%",
+    padding: 0,
+
+    marginTop: "1.25vw",
+    "@media(min-width: 1280px)": {
+      marginTop: 16,
+    },
+    "@media(max-width: 1025px)": {
+      marginTop: "1.91vw",
+    },
+    "@media(max-width: 767px)": {
+      marginTop: "3.86vw",
+    },
+    "& span": {
+      ...theme.typography.body2,
+
+      fontWeight: 400,
+      lineHeight: 1.21,
+      textTransform: "none",
+
+      fontSize: "1.25vw",
+      "@media(min-width: 1280px)": {
+        fontSize: 16,
+      },
+      "@media(max-width: 1025px)": {
+        fontSize: "1.91vw",
+      },
+      "@media(max-width: 767px)": {
+        fontSize: "3.86vw",
+      },
     },
   },
   titleCreditAndDelivery: {
@@ -302,23 +352,11 @@ const useStyle = makeStyles(theme => ({
 export default function PriceBlock({ products }) {
   const classes = useStyle()
   const state = React.useContext(GlobalStateContext)
-  const [showMoreInfo, setShowMoreInfo] = React.useState(false)
+
   const mobile = useMediaQuery("(max-width: 1025px)")
 
   const [showMokkaInfo, setShowMokkaInfo] = React.useState(false)
   const [showMokkaIframe, setShowMokkaIframe] = React.useState(false)
-
-  function swipeStart(e) {
-    const clientY = e.clientY
-
-    document.addEventListener("pointerup", swipeEnd)
-
-    function swipeEnd(e) {
-      if (clientY - e.clientY > 50) setShowMoreInfo(true)
-      if (e.clientY - clientY > 50) setShowMoreInfo(false)
-      document.removeEventListener("pointerup", swipeEnd)
-    }
-  }
 
   const summPrice = products.reduce((summ, product) => {
     return summ + product.data.price * state.inCart(product)
@@ -330,7 +368,7 @@ export default function PriceBlock({ products }) {
     )
   }, 0)
 
-  function goRegistration() {
+  function goRegistration(LegalEntities) {
     const positions = products.reduce((order, product, i) => {
       const num = i + 1
       const name = product.data.name
@@ -361,6 +399,10 @@ export default function PriceBlock({ products }) {
         allProductsJson: prodDataArr,
       })
     )
+
+    if (LegalEntities) {
+      navigate("/ordering", { state: { legalEntities: true } })
+    }
   }
 
   // варианты доставки
@@ -397,33 +439,29 @@ export default function PriceBlock({ products }) {
   }
 
   return (
-    <div onPointerDown={mobile ? swipeStart : null} className={classes.wrapper}>
+    <div className={classes.wrapper}>
       {mobile ? <div className={classes.divider} /> : null}
 
-      {showMoreInfo || !mobile ? (
-        <>
-          <Grid container justify="space-between">
-            <Typography className={classes.normalText}>Стоимость</Typography>
+      <Grid container justify="space-between">
+        <Typography className={classes.normalText}>Стоимость</Typography>
 
-            <Typography className={classes.normalText}>{`${priceMod(
-              summOldPrice
-            )} ₽`}</Typography>
-          </Grid>
+        <Typography className={classes.normalText}>{`${priceMod(
+          summOldPrice
+        )} ₽`}</Typography>
+      </Grid>
 
-          <Grid
-            container
-            justify="space-between"
-            className={classes.discountWrapper}
-          >
-            <Typography className={classes.normalText}>Скидка</Typography>
+      <Grid
+        container
+        justify="space-between"
+        className={classes.discountWrapper}
+      >
+        <Typography className={classes.normalText}>Скидка</Typography>
 
-            <Typography
-              className={classes.normalText}
-              style={{ color: "#FF5B5B" }}
-            >{`${priceMod(summPrice - summOldPrice)} ₽`}</Typography>
-          </Grid>
-        </>
-      ) : null}
+        <Typography
+          className={classes.normalText}
+          style={{ color: "#FF5B5B" }}
+        >{`${priceMod(summPrice - summOldPrice)} ₽`}</Typography>
+      </Grid>
 
       <Grid
         container
@@ -440,6 +478,20 @@ export default function PriceBlock({ products }) {
       <div className={classes.goRegistration}>
         <GoRegistration text="Перейти к оформлению" onClick={goRegistration} />
       </div>
+
+      {state.servicesAvailable() ? null : (
+        <div className={classes.wrapperTinkoffButton}>
+          <Tinkoff items={state.cart} />
+        </div>
+      )}
+
+      <Button
+        variant="body2"
+        onClick={() => goRegistration(true)}
+        className={classes.textByeLegalEntities}
+      >
+        Оформление для юридических лиц
+      </Button>
 
       {(credit || devilery.length) &&
       summPrice < 100000 &&

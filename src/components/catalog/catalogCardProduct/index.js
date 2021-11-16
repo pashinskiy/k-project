@@ -342,7 +342,7 @@ export default function CardProduct({ product, ...other }) {
             loading="eager"
             image={
               product.data.images[0]?.image.localFile?.childImageSharp
-                .gatsbyImageData
+                ?.gatsbyImageData
             }
             alt={product.data.images[0]?.image.alt ?? "product"}
             className={classes.wrapperImg}

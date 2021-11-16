@@ -380,12 +380,16 @@ export default function DeliveryData({ prismicCartAndOrder }) {
           />
 
           <WrapperWithTitle title="Дата">
-            <Select options={dates} afterChange={setDate} />
+            <Select options={dates} afterChange={setDate} id="select_date" />
           </WrapperWithTitle>
 
           <WrapperWithTitle title="Время">
             {smartPhoneScreen ? (
-              <Select options={timeStandartDelivery} afterChange={setTime} />
+              <Select
+                options={timeStandartDelivery}
+                afterChange={setTime}
+                id="select_time"
+              />
             ) : (
               <ListRatioRect
                 list={timeStandartDelivery}
@@ -414,6 +418,8 @@ export default function DeliveryData({ prismicCartAndOrder }) {
 
           <div className={classes.timesExpressWrapper}>
             <button
+              id="change_time_delivery"
+              aria-label="change time delivery"
               onClick={() =>
                 setShowTimesExpressDelivery(!showTimesExpressDelivery)
               }
@@ -427,6 +433,8 @@ export default function DeliveryData({ prismicCartAndOrder }) {
               <Grid container direction="column">
                 {getTimesExpress().map(time => (
                   <button
+                    id={time}
+                    aria-label={time}
                     key={time}
                     onClick={() => {
                       setTime(time)
@@ -465,6 +473,7 @@ export default function DeliveryData({ prismicCartAndOrder }) {
           {/* <Select options={streets} afterChange={setStreet} /> */}
           <Input
             afterChange={setStreet}
+            id="street"
             // checkValue={() => orderingState.validationStreet()}
           />
         </WrapperWithTitle>
@@ -477,6 +486,7 @@ export default function DeliveryData({ prismicCartAndOrder }) {
           <WrapperWithTitle title="Дом" necessarily={false}>
             <Input
               afterChange={setHouse}
+              id="house"
               // checkValue={() => orderingState.validationHouse()}
             />
           </WrapperWithTitle>
@@ -484,6 +494,7 @@ export default function DeliveryData({ prismicCartAndOrder }) {
           <WrapperWithTitle title="Квартира" necessarily={false}>
             <Input
               afterChange={setApartment}
+              id="apartment"
               // checkValue={() => orderingState.validationApartament()}
             />
           </WrapperWithTitle>

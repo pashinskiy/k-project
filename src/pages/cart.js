@@ -62,11 +62,13 @@ const useStyle = makeStyles(theme => ({
       width: "452px",
     },
     "@media(max-width: 1025px)": {
-      position: "fixed",
-      left: 0,
-      bottom: 62,
-      width: "100vw",
-      zIndex: 99,
+      width: "100%",
+      order: -1,
+      // position: "fixed",
+      // left: 0,
+      // bottom: 62,
+      // width: "100vw",
+      // zIndex: 99,
     },
   },
   disclaimer: {

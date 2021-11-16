@@ -6,7 +6,7 @@ import HeaderWithIcon from "../headerWithIcon"
 import BankCard from "../../../../static/svg/bankCard.svg"
 
 import { GlobalStateContext } from "../../../context/GlobalContextProvider"
-import { OrderingDispatchContext } from "../context"
+import { OrderingDispatchContext, OrderingStateContext } from "../context"
 
 import Mokka from "../../../../static/svg/mokka.svg"
 
@@ -89,6 +89,7 @@ const useStyle = makeStyles(theme => ({
   title: {
     fontWeight: 700,
     lineHeight: 1.21,
+    color: theme.palette.color.main,
 
     fontSize: "1.4vw",
     "@media(min-width: 1280px)": {
@@ -154,21 +155,23 @@ const useStyle = makeStyles(theme => ({
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.prismicCartAndOrder - свойство prismicCartAndOrder объекта data полученного из prismic
  */
-export default function PayData({ prismicCartAndOrder }) {
+export default function PayData({ prismicCartAndOrder, legalEntities }) {
   const classes = useStyle()
   const smartPhoneScreen = useMediaQuery("(max-width: 767px)")
   const state = React.useContext(GlobalStateContext)
 
   const order = JSON.parse(localStorage.getItem("order"))
 
+  const orderingState = React.useContext(OrderingStateContext)
   const orderingDispatch = React.useContext(OrderingDispatchContext)
 
-  const [value, setValue] = React.useState("онлайн")
-
   function setVariantPay(newValue) {
-    setValue(newValue)
     orderingDispatch({ type: "SET_VARIANT_PAY", payload: newValue })
   }
+
+  React.useEffect(() => {
+    if (legalEntities) setVariantPay("перевод")
+  }, [legalEntities])
 
   return (
     <>
@@ -179,104 +182,150 @@ export default function PayData({ prismicCartAndOrder }) {
       />
 
       <div className={classes.listWrapper}>
-        <button
-          onClick={() => setVariantPay("онлайн")}
-          className={classes.item}
-        >
-          <div
-            className={
-              classes.ratio +
-              " " +
-              (value === "онлайн" ? classes.activeRatio : "")
-            }
-          />
-
-          <div>
-            <Typography align="left" className={classes.title}>
-              Онлайн
-            </Typography>
-
-            <Typography align="left" className={classes.description}>
-              {prismicCartAndOrder.data.description_card}
-            </Typography>
-          </div>
-        </button>
-
-        <button
-          onClick={() => setVariantPay("при получении")}
-          className={classes.item}
-        >
-          <div
-            className={
-              classes.ratio +
-              " " +
-              (value === "при получении" ? classes.activeRatio : "")
-            }
-          />
-
-          <div>
-            <Typography align="left" className={classes.title}>
-              При получении
-            </Typography>
-
-            <Typography align="left" className={classes.description}>
-              {prismicCartAndOrder.data.description_getting}
-            </Typography>
-          </div>
-        </button>
-
-        {state.servicesAvailable() ? null : (
+        {legalEntities ? (
           <button
-            onClick={() => setVariantPay("в кредит")}
+            id="legal_entities"
+            aria-label="legal_entities"
             className={classes.item}
           >
             <div
               className={
                 classes.ratio +
                 " " +
-                (value === "в кредит" ? classes.activeRatio : "")
-              }
-            />
-
-            <Typography align="left" className={classes.title}>
-              Кредит в Тинькофф
-            </Typography>
-          </button>
-        )}
-
-        {!state.servicesAvailable() &&
-        order.price < 100000 &&
-        order.price >= 5000 ? (
-          <button
-            onClick={() => setVariantPay("в рассрочку")}
-            className={classes.item}
-          >
-            <div
-              className={
-                classes.ratio +
-                " " +
-                (value === "в рассрочку" ? classes.activeRatio : "")
+                (orderingState.variantPay === "перевод"
+                  ? classes.activeRatio
+                  : "")
               }
             />
 
             <div>
               <Typography align="left" className={classes.title}>
-                Оплата авансом
+                Банковский перевод для юридических лиц
               </Typography>
 
-              <Typography
-                align="left"
-                className={classes.description}
-                style={{ display: "flex", alignItems: "center" }}
-              >
-                Мокка — оплата авансом
-                <span className={classes.mokka}>
-                  <Mokka />
-                </span>
+              <Typography align="left" className={classes.description}>
+                Карта Visa, MasterCard, Мир
               </Typography>
             </div>
           </button>
-        ) : null}
+        ) : (
+          <>
+            <button
+              id="online_pay"
+              aria-label="online pay"
+              onClick={() => setVariantPay("онлайн")}
+              className={classes.item}
+            >
+              <div
+                className={
+                  classes.ratio +
+                  " " +
+                  (orderingState.variantPay === "онлайн"
+                    ? classes.activeRatio
+                    : "")
+                }
+              />
+
+              <div>
+                <Typography align="left" className={classes.title}>
+                  Онлайн
+                </Typography>
+
+                <Typography align="left" className={classes.description}>
+                  {prismicCartAndOrder.data.description_card}
+                </Typography>
+              </div>
+            </button>
+
+            <button
+              id="upon_receipt_pay"
+              aria-label="upon receipt pay"
+              onClick={() => setVariantPay("при получении")}
+              className={classes.item}
+            >
+              <div
+                className={
+                  classes.ratio +
+                  " " +
+                  (orderingState.variantPay === "при получении"
+                    ? classes.activeRatio
+                    : "")
+                }
+              />
+
+              <div>
+                <Typography align="left" className={classes.title}>
+                  При получении
+                </Typography>
+
+                <Typography align="left" className={classes.description}>
+                  {prismicCartAndOrder.data.description_getting}
+                </Typography>
+              </div>
+            </button>
+
+            {state.servicesAvailable() ? null : (
+              <button
+                id="on_credit_pay"
+                aria-label="on credit pay"
+                onClick={() => setVariantPay("в кредит")}
+                className={classes.item}
+              >
+                <div
+                  className={
+                    classes.ratio +
+                    " " +
+                    (orderingState.variantPay === "в кредит"
+                      ? classes.activeRatio
+                      : "")
+                  }
+                />
+
+                <Typography align="left" className={classes.title}>
+                  Кредит в Тинькофф
+                </Typography>
+              </button>
+            )}
+
+            {!state.servicesAvailable() &&
+            order.price < 100000 &&
+            order.price >= 5000 ? (
+              <button
+                id="by_installments_pay"
+                aria-label="by installments pay"
+                onClick={() => setVariantPay("в рассрочку")}
+                className={classes.item}
+              >
+                <div
+                  className={
+                    classes.ratio +
+                    " " +
+                    (orderingState.variantPay === "в рассрочку"
+                      ? classes.activeRatio
+                      : "")
+                  }
+                />
+
+                <div>
+                  <Typography align="left" className={classes.title}>
+                    Оплата авансом
+                  </Typography>
+
+                  <Typography
+                    align="left"
+                    className={classes.description}
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
+                    Мокка — оплата авансом
+                    <span className={classes.mokka}>
+                      <Mokka />
+                    </span>
+                  </Typography>
+                </div>
+              </button>
+            ) : null}
+          </>
+        )}
       </div>
     </>
   )

@@ -22,7 +22,11 @@ const useStyles = makeStyles(theme => ({
     },
     "&:hover": {
       background: theme.palette.background.accent,
+      boxShadow: "0px 0px 0px 4px #D2D0E9",
     },
+  },
+  active: {
+    border: "2px solid #FFFFFF",
   },
   text: {
     fontWeight: 700,
@@ -52,8 +56,16 @@ const useStyles = makeStyles(theme => ({
 export default function Pay({ text, onClick }) {
   const classes = useStyles()
 
+  const [active, setActive] = React.useState("")
+
   return (
-    <Button disableRipple onClick={onClick} className={classes.button}>
+    <Button
+      disableRipple
+      onClick={onClick}
+      onPointerDown={() => setActive(classes.active)}
+      onPointerUp={() => setTimeout(() => setActive(""), 300)}
+      className={classes.button + " " + active}
+    >
       <Typography align="center" className={classes.text}>
         {text}
       </Typography>

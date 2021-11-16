@@ -10,16 +10,6 @@ function reducer(state, action) {
         ...state,
         useDataDelivery: !state.useDataDelivery,
       }
-    case "SET_FOCUSING_ON_FIELD":
-      return {
-        ...state,
-        focusingOnField: action.payload,
-      }
-    case "SET_REPAIR_FOCUSING_ON_FIELD":
-      return {
-        ...state,
-        repairFocusingOnField: action.payload,
-      }
     case "SET_CITY":
       return {
         ...state,
@@ -107,6 +97,16 @@ function reducer(state, action) {
         ...state,
         phone: action.payload,
       }
+    case "SET_EMAIL":
+      return {
+        ...state,
+        email: action.payload,
+      }
+    case "SET_INN":
+      return {
+        ...state,
+        inn: action.payload,
+      }
     default:
       throw new Error("Error action")
   }
@@ -148,9 +148,6 @@ export default function OrderingContext({ children }) {
   const initOrderingState = {
     useDataDelivery: false,
 
-    focusingOnField: false,
-    repairFocusingOnField: false,
-
     cities: cities,
     repairCities: repairCities,
 
@@ -178,6 +175,8 @@ export default function OrderingContext({ children }) {
     variantPay: "онлайн",
     name: false,
     phone: "+7",
+    email: false,
+    inn: false,
 
     validationCity() {
       if (!this.city) return false
@@ -193,8 +192,14 @@ export default function OrderingContext({ children }) {
     },
     validationPhone() {
       if (!this.phone) return false
-      // /^\s*(\+?[78]-?\(?\d{3}\)?-?)?\d{3}-?\d{2}-?\d{2}\s*$/.test(this.phone)
-      return this.phone !== ""
+      return true
+    },
+    validationEmail() {
+      if (!this.email) return false
+      return true
+    },
+    validationInn() {
+      return /^\d{10}$/i.test(this.inn)
     },
     validationAll() {
       return (

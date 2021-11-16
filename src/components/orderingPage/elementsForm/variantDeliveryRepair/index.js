@@ -149,6 +149,8 @@ export default function VariantDeliveryRepair({
   return (
     <Grid container justify="space-between" className={classes.wrapper}>
       <button
+        id="variant_delivery_courier"
+        aria-label="variant delivery courier"
         onClick={setDeliveryСourier}
         className={
           classes.itemWrapper +
@@ -174,6 +176,8 @@ export default function VariantDeliveryRepair({
       </button>
 
       <button
+        id="variant_delivery_in_shop"
+        aria-label="variant delivery in shop"
         onClick={setDeliveryInShop}
         className={
           classes.itemWrapper +

@@ -418,7 +418,7 @@ export default function SaleCard({ sale, mainPage }) {
       const alt = mobile
         ? sale?.data.image_mobile?.alt
         : sale?.data.previewimage?.alt
-      console.log(sale.data)
+
       return (
         <Card className={classes.wrapper}>
           <GatsbyImage

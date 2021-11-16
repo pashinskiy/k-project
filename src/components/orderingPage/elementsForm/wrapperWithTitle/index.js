@@ -63,12 +63,17 @@ const useStyle = makeStyles(theme => ({
  * @param {String} props.title - заголовок блока
  * @param {Object} props.children - дочерние компоненты
  */
-export default function WrapperWithTitle({ title, children, necessarily }) {
+export default function WrapperWithTitle({
+  title,
+  children,
+  necessarily,
+  ...other
+}) {
   necessarily = necessarily ?? true
   const classes = useStyle()
 
   return (
-    <div>
+    <div {...other}>
       <Typography className={classes.title}>
         {title}
 

@@ -31,7 +31,11 @@ const useStyles = makeStyles(theme => ({
   mainPhotoBar: {
     height: "100%",
     position: "absolute",
-    transition: "left .3s",
+
+    transition: "left .3s linear",
+    "-webkit-transition": "left .3s linear",
+    "-moz-transition": "left .3s linear",
+    "-o-transition": "left .3s linear",
   },
   count: {
     height: "5%",
@@ -68,7 +72,11 @@ const useStyles = makeStyles(theme => ({
     width: "auto",
     position: "absolute",
     overflow: "visible",
-    transition: "left .3s",
+    
+    transition: "left .3s linear",
+    "-webkit-transition": "left .3s linear",
+    "-moz-transition": "left .3s linear",
+    "-o-transition": "left .3s linear",
 
     left: 0,
     "@media(max-width: 1025px)": {

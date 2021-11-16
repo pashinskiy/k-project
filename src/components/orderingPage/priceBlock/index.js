@@ -37,29 +37,11 @@ const useStyle = makeStyles(theme => ({
       borderRadius: "2.39vw 2.39vw 0 0 ",
       boxShadow: "0px 0px 2.39vw rgba(0, 0, 0, 0.25)",
     },
-    "@media(max-width: 767px)": {
-      padding: "10.14vw 5.79vw 2.41vw",
-      borderRadius: "4.83vw 4.83vw 0 0 ",
-      boxShadow: "0px 0px 4.83vw rgba(0, 0, 0, 0.25)",
-    },
-  },
-  divider: {
-    position: "absolute",
-    left: "50%",
-    transform: "translateX(-50%)",
-    background: theme.palette.background.secondaryLight,
-
     "@media(max-width: 1025px)": {
-      top: "1.43vw",
-      width: "11.87vw",
-      height: "0.59vw",
-      borderRadius: "0.59vw",
-    },
-    "@media(max-width: 767px)": {
-      top: "2.89vw",
-      width: "23.91vw",
-      height: "1.2vw",
-      borderRadius: "1.2vw",
+      background: "transparent",
+
+      padding: 0,
+      borderRadius: 0,
     },
   },
   discountWrapper: {
@@ -84,6 +66,7 @@ const useStyle = makeStyles(theme => ({
     },
     "@media(max-width: 767px)": {
       marginTop: "6.03vw",
+      marginBottom: "6.03vw",
     },
   },
   normalText: {
@@ -178,15 +161,17 @@ const useStyle = makeStyles(theme => ({
       height: "50px",
     },
     "@media(max-width: 1025px)": {
+      position: "fixed",
+      left: "50%",
+      transform: "translateX(-50%)",
+      bottom: 70,
+      zIndex: 99,
+
       width: "98.08vw",
-      marginTop: "1.91vw",
-      marginLeft: "-1.91vw",
       height: "5.99vw",
     },
     "@media(max-width: 767px)": {
       width: "97.58vw",
-      marginTop: "4.83vw",
-      marginLeft: "-4.58vw",
       height: "12.07vw",
     },
   },
@@ -357,7 +342,6 @@ const useStyle = makeStyles(theme => ({
  */
 export default function PriceBlock({ products }) {
   const classes = useStyle()
-  const [showMoreInfo, setShowMoreInfo] = React.useState(false)
   const mobile = useMediaQuery("(max-width: 1025px)")
 
   const [showMokkaInfo, setShowMokkaInfo] = React.useState(false)
@@ -385,6 +369,7 @@ export default function PriceBlock({ products }) {
       const body = JSON.stringify({
         name: orderingState.name,
         phone: orderingState.phone,
+        email: orderingState.email,
         city: orderingState.city,
         street: orderingState.street,
         house: orderingState.house,
@@ -425,7 +410,7 @@ export default function PriceBlock({ products }) {
             navigate("/order/")
           }
           if (orderingState.variantPay === "в рассрочку") {
-            console.log(res.payment_data.url)
+            // console.log(res.payment_data.url)
             setMokkaFormUrl(res.payment_data.url)
           }
           if (orderingState.variantPay === "онлайн") {
@@ -442,23 +427,10 @@ export default function PriceBlock({ products }) {
     }
   }
 
-  function swipeStart(e) {
-    const clientY = e.clientY
-    e.preventDefault()
-
-    document.addEventListener("pointerup", swipeEnd)
-
-    function swipeEnd(e) {
-      if (clientY - e.clientY > 50) setShowMoreInfo(true)
-      if (e.clientY - clientY > 50) setShowMoreInfo(false)
-      document.removeEventListener("pointerup", swipeEnd)
-    }
-  }
-
   // варианты доставки
-  const devilery = products[0].data.delivery?.document?.data.variants ?? []
+  const devilery = products[0]?.data.delivery?.document?.data.variants ?? []
   // данные по кредиту и рассрочке
-  const credit = products[0].data.credit?.document?.data ?? null
+  const credit = products[0]?.data.credit?.document?.data ?? null
 
   const ps = +credit?.percent.replace(",", ".") / 12 / 100
   const creditValue =
@@ -489,52 +461,39 @@ export default function PriceBlock({ products }) {
   }
 
   return (
-    <div
-      hidden={mobile && orderingState.focusingOnField}
-      onPointerDown={mobile ? swipeStart : null}
-      className={classes.wrapper}
-    >
-      {mobile ? <div className={classes.divider} /> : null}
+    <div className={classes.wrapper}>
+      <Grid container justify="space-between">
+        <Typography className={classes.normalText}>Стоимость</Typography>
 
-      {showMoreInfo || !mobile ? (
-        <>
-          <Grid container justify="space-between">
-            <Typography className={classes.normalText}>Стоимость</Typography>
+        <Typography className={classes.normalText}>{`${priceMod(
+          order.price - order.sale
+        )} ₽`}</Typography>
+      </Grid>
 
-            <Typography className={classes.normalText}>{`${priceMod(
-              order.price - order.sale
-            )} ₽`}</Typography>
-          </Grid>
+      <Grid
+        container
+        justify="space-between"
+        className={classes.discountWrapper}
+      >
+        <Typography className={classes.normalText}>Скидка</Typography>
 
-          <Grid
-            container
-            justify="space-between"
-            className={classes.discountWrapper}
-          >
-            <Typography className={classes.normalText}>Скидка</Typography>
+        <Typography
+          className={classes.normalText}
+          style={{ color: "#FF5B5B" }}
+        >{`${priceMod(order.sale)} ₽`}</Typography>
+      </Grid>
 
-            <Typography
-              className={classes.normalText}
-              style={{ color: "#FF5B5B" }}
-            >{`${priceMod(order.sale)} ₽`}</Typography>
-          </Grid>
+      <Grid
+        container
+        justify="space-between"
+        className={classes.discountWrapper}
+      >
+        <Typography className={classes.normalText}>Доставка</Typography>
 
-          <Grid
-            container
-            justify="space-between"
-            className={classes.discountWrapper}
-          >
-            <Typography className={classes.normalText}>Доставка</Typography>
-
-            <Typography
-              className={classes.normalText}
-              style={{ color: "#20CA1D" }}
-            >
-              Бесплатно
-            </Typography>
-          </Grid>
-        </>
-      ) : null}
+        <Typography className={classes.normalText} style={{ color: "#20CA1D" }}>
+          Бесплатно
+        </Typography>
+      </Grid>
 
       <Grid
         container
@@ -548,7 +507,7 @@ export default function PriceBlock({ products }) {
         )} ₽`}</Typography>
       </Grid>
 
-      {validData ? null : (
+      {validData || mobile ? null : (
         <div className={classes.errorWrapper}>
           <Typography className={classes.error}>
             <i className={classes.icon}>

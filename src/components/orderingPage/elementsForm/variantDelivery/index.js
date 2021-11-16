@@ -152,6 +152,8 @@ export default function VariantDelivery({
   return /^\s*санкт-петербург\s*$/i.test(orderingState.city) ? (
     <Grid container justify="space-between" className={classes.wrapper}>
       <button
+        id="variant_delivery_standart"
+        aria-label="variant delivery standart"
         onClick={setStandartDelivery}
         className={
           classes.itemWrapper +
@@ -181,6 +183,8 @@ export default function VariantDelivery({
       </button>
 
       <button
+        id="variant_delivery_express"
+        aria-label="variant delivery express"
         onClick={setExpressDelivery}
         className={
           classes.itemWrapper +

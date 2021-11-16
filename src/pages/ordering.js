@@ -6,13 +6,13 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import HeaderWithIcon from "../components/headers/headerWithIcon"
 import BreadCrumbs from "../components/breadCrumbs"
-import OrderingContext from "../components/orderingPage/context"
 import CartIcon from "../../static/svg/cart.svg"
 import PriceBlock from "../components/orderingPage/priceBlock"
 import DeliveryData from "../components/orderingPage/deliveryData"
 import PayData from "../components/orderingPage/payData"
 import RecipientData from "../components/orderingPage/recipientData"
 
+import OrderingContext from "../components/orderingPage/context"
 import { GlobalStateContext } from "../context/GlobalContextProvider"
 import RepairData from "../components/orderingPage/repairData"
 
@@ -77,11 +77,8 @@ const useStyle = makeStyles(theme => ({
       width: "452px",
     },
     "@media(max-width: 1025px)": {
-      position: "fixed",
-      left: 0,
-      bottom: 62,
-      width: "100vw",
-      zIndex: 99,
+      width: "100%",
+      order: -1,
     },
   },
   disclaimer: {
@@ -131,13 +128,15 @@ const useStyle = makeStyles(theme => ({
   },
 }))
 
-const IndexPage = ({ data }) => {
+const IndexPage = ({ data, location }) => {
   const classes = useStyle()
   const order = JSON.parse(localStorage.getItem("order"))
 
   const state = React.useContext(GlobalStateContext)
 
   const productsInCart = state.cart.map(item => item.product)
+
+  const legalEntities = !!location.state.legalEntities
 
   return (
     <Layout>
@@ -174,11 +173,17 @@ const IndexPage = ({ data }) => {
               ) : null}
 
               <div className={classes.orderingFieldWrapper}>
-                <PayData prismicCartAndOrder={data.prismicCartAndOrder} />
+                <PayData
+                  prismicCartAndOrder={data.prismicCartAndOrder}
+                  legalEntities={legalEntities}
+                />
               </div>
 
               <div className={classes.orderingFieldWrapper}>
-                <RecipientData prismicCartAndOrder={data.prismicCartAndOrder} />
+                <RecipientData
+                  prismicCartAndOrder={data.prismicCartAndOrder}
+                  legalEntities={legalEntities}
+                />
               </div>
             </div>
 
