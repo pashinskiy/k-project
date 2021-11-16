@@ -356,7 +356,7 @@ export default Category
 export const pageQuery = graphql`
   query Category($uid: String!, $subcategories: [String!]!) {
     allPrismicProduct(
-      filter: { data: { category: { uid: { in: $subcategories } } } }
+      filter: { data: { category: { uid: { in: $subcategories } }, sale_product: { eq: false } } }
     ) {
       edges {
         node {

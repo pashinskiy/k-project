@@ -209,7 +209,7 @@ export const query = graphql`
         name
       }
     }
-    allPrismicProduct(filter: { data: { category: { uid: { eq: $uid } } } }) {
+    allPrismicProduct(filter: { data: { category: { uid: { eq: $uid } }, sale_product: { eq: false } } }) {
       edges {
         node {
           id
