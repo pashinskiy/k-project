@@ -368,6 +368,7 @@ export default function PriceBlock({ products }) {
     )
   }, 0)
 
+  console.log(products)
   function goRegistration(LegalEntities) {
     const positions = products.reduce((order, product, i) => {
       const num = i + 1
@@ -386,6 +387,11 @@ export default function PriceBlock({ products }) {
         product_uid: product.uid,
         quantity: count,
         price: product.data.price,
+        repair: product.repair,
+        repair_category: product.repair ? product.data.category : undefined,
+        repair_services: product.data.services?.map(
+          service => service.primary.name
+        ),
       }
       prodDataArr.push(jsonData)
     })

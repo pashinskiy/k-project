@@ -366,24 +366,54 @@ export default function PriceBlock({ products }) {
       const headers = new Headers()
       headers.append("Content-Type", "application/json")
 
+      console.log("order.allProductsJson", order.allProductsJson)
+
       const body = JSON.stringify({
         name: orderingState.name,
         phone: orderingState.phone,
         email: orderingState.email,
-        city: orderingState.city,
-        street: orderingState.street,
-        house: orderingState.house,
-        apartment: orderingState.apartment,
-        variantDelivery: orderingState.variantDelivery,
         variantPay: orderingState.variantPay,
-        date: orderingState.date.slice(0, 10).split("/").reverse().join("-"),
-        time_from: orderingState.time.slice(0, 5),
-        time_to: orderingState.time.slice(-5),
 
-        items: order.allProductsJson.map(product => ({
-          quantity: product.quantity,
-          prismic_uid: product.product_uid,
-        })),
+        order: {
+          city: orderingState.city,
+          street: orderingState.street,
+          house: orderingState.house,
+          apartment: orderingState.apartment,
+          variantDelivery: orderingState.variantDelivery,
+          date: orderingState.date.slice(0, 10).split("/").reverse().join("-"),
+          time_from: orderingState.time.slice(0, 5),
+          time_to: orderingState.time.slice(-5),
+
+          items: order.allProductsJson
+            .filter(product => !product.repair)
+            .map(product => ({
+              quantity: product.quantity,
+              prismic_uid: product.product_uid,
+            })),
+        },
+
+        repair: {
+          city: orderingState.repairCity,
+          street: orderingState.repairStreet,
+          house: orderingState.repairHouse,
+          apartment: orderingState.repairApartment,
+          variantDelivery: orderingState.repairVariantDelivery,
+          date: orderingState.repairDate
+            .slice(0, 10)
+            .split("/")
+            .reverse()
+            .join("-"),
+          time_from: orderingState.repairTime.slice(0, 5),
+          time_to: orderingState.repairTime.slice(-5),
+
+          items: order.allProductsJson
+            .filter(product => product.repair)
+            .map(product => ({
+              repair_category: product.repair_category,
+              services: product.repair_services,
+              quantity: product.quantity,
+            })),
+        },
       })
 
       const init = {

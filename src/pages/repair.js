@@ -94,13 +94,6 @@ const IndexPage = ({ data }) => {
     return popularRepair
   }, [data])
 
-  const [show, setShow] = React.useState(false)
-
-  function open(e) {
-    e.preventDefault()
-    setShow(e.nativeEvent.ctrlKey)
-  }
-
   return (
     <Layout>
       <Seo title="Favorites" />
@@ -110,21 +103,17 @@ const IndexPage = ({ data }) => {
         divider={false}
       />
 
-      {show ? (
-        <div className={classes.grayPanel}>
-          <PopularRepair repairs={popularRepair} />
+      <div className={classes.grayPanel}>
+        <PopularRepair repairs={popularRepair} />
 
-          <Typography className={classes.grayPanel_title}>
-            У вас что-то сломалось?
-          </Typography>
+        <Typography className={classes.grayPanel_title}>
+          У вас что-то сломалось?
+        </Typography>
 
-          <Calculator
-            repairDocs={data.allPrismicRepair.edges.map(edge => edge.node)}
-          />
-        </div>
-      ) : (
-        <Typography onClick={open}>Страница в разработке</Typography>
-      )}
+        <Calculator
+          repairDocs={data.allPrismicRepair.edges.map(edge => edge.node)}
+        />
+      </div>
     </Layout>
   )
 }
