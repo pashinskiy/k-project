@@ -827,6 +827,7 @@ export default function Calculator({ variant, data }) {
       name,
       phone,
       type: `${variant}-request`,
+      sale,
 
       "trade-in": {
         name: turnInProduct.data.name,
@@ -844,6 +845,20 @@ export default function Calculator({ variant, data }) {
     }
 
     console.log(request)
+    const apiURL = "https://admin.krypton.ru/api/trade-in"
+
+    const headers = new Headers()
+    headers.append("Content-Type", "application/json")
+    const body = JSON.stringify(request)
+    const init = {
+      method: "POST",
+      headers,
+      body,
+    }
+
+    fetch(apiURL, init)
+      .then(res => res.json())
+      .then(res => console.log(res))
   }
 
   return (
