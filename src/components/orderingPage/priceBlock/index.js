@@ -421,8 +421,6 @@ export default function PriceBlock({ products, legalEntities }) {
         body,
       }
 
-      console.log(JSON.parse(body))
-
       fetch(apiURL, init)
         .then(res => res.json())
         .then(res => {
