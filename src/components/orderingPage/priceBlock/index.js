@@ -340,7 +340,7 @@ const useStyle = makeStyles(theme => ({
  * @param {Object} props - объект свойств компонента React
  * @param {Object[]} props.products - массив объектов продуктов полученых из prismic
  */
-export default function PriceBlock({ products }) {
+export default function PriceBlock({ products, legalEntities }) {
   const classes = useStyle()
   const mobile = useMediaQuery("(max-width: 1025px)")
 
@@ -350,7 +350,7 @@ export default function PriceBlock({ products }) {
 
   const orderingState = React.useContext(OrderingStateContext)
 
-  const validData = orderingState.validationAll()
+  const validData = orderingState.validationAll(legalEntities)
 
   const order = JSON.parse(localStorage.getItem("order"))
 
@@ -366,13 +366,12 @@ export default function PriceBlock({ products }) {
       const headers = new Headers()
       headers.append("Content-Type", "application/json")
 
-      console.log("order.allProductsJson", order.allProductsJson)
-
       const body = JSON.stringify({
         name: orderingState.name,
         phone: orderingState.phone,
         email: orderingState.email,
         variantPay: orderingState.variantPay,
+        inn: legalEntities ? orderingState.inn : "",
 
         order: {
           city: orderingState.city,
@@ -421,6 +420,8 @@ export default function PriceBlock({ products }) {
         headers,
         body,
       }
+
+      console.log(JSON.parse(body))
 
       fetch(apiURL, init)
         .then(res => res.json())

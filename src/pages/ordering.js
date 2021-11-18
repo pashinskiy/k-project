@@ -188,7 +188,11 @@ const IndexPage = ({ data, location }) => {
             </div>
 
             <div className={classes.priceBlockWrapper}>
-              <PriceBlock orderingPage products={productsInCart} />
+              <PriceBlock
+                orderingPage
+                products={productsInCart}
+                legalEntities={legalEntities}
+              />
             </div>
           </Grid>
 

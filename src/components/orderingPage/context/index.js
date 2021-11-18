@@ -201,7 +201,9 @@ export default function OrderingContext({ children }) {
     validationInn() {
       return /^\d{10}$/i.test(this.inn)
     },
-    validationAll() {
+    validationAll(legalEntities) {
+      if (legalEntities && !this.validationInn()) return false
+
       return (
         this.validationCity() && this.validationName() && this.validationPhone()
       )
