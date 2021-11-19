@@ -388,7 +388,7 @@ export default function RepairData({ prismicCartAndOrder }) {
   function setVariantDelivery(value) {
     orderingDispatch({ type: "SET_REPAIR_VARIANT_DELIVERY", payload: value })
     if (value === "pickup") {
-      setTime(false)
+      setTime("")
     }
     if (value === "courier") {
       setTime(timeStandartDelivery[0])

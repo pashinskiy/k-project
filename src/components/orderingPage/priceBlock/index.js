@@ -350,6 +350,7 @@ export default function PriceBlock({ products, legalEntities }) {
   const [mokkaFormUrl, setMokkaFormUrl] = React.useState(false)
 
   const orderingState = React.useContext(OrderingStateContext)
+  console.log(orderingState.repairTime)
 
   const validData = orderingState.validationAll(legalEntities)
 
@@ -370,6 +371,23 @@ export default function PriceBlock({ products, legalEntities }) {
       const headers = new Headers()
       headers.append("Content-Type", "application/json")
 
+      const orderItems = []
+      const repairItems = []
+      order.allProductsJson.forEach(product => {
+        if (product.repair) {
+          repairItems.push({
+            repair_category: product.repair_category,
+            services: product.repair_services,
+            quantity: product.quantity,
+          })
+        } else {
+          orderItems.push({
+            quantity: product.quantity,
+            prismic_uid: product.product_uid,
+          })
+        }
+      })
+
       const body = JSON.stringify({
         name: orderingState.name,
         phone: orderingState.phone,
@@ -377,47 +395,46 @@ export default function PriceBlock({ products, legalEntities }) {
         variantPay: orderingState.variantPay,
         inn: legalEntities ? orderingState.inn : "",
 
-        order: {
-          city: orderingState.city,
-          street: orderingState.street,
-          house: orderingState.house,
-          apartment: orderingState.apartment,
-          variantDelivery: orderingState.variantDelivery,
-          date: orderingState.date.slice(0, 10).split("/").reverse().join("-"),
-          time_from: orderingState.time.slice(0, 5),
-          time_to: orderingState.time.slice(-5),
+        order: orderItems.length
+          ? {
+              city: orderingState.city,
+              street: orderingState.street,
+              house: orderingState.house,
+              apartment: orderingState.apartment,
+              variantDelivery: orderingState.variantDelivery,
+              date: orderingState.date
+                .slice(0, 10)
+                .split("/")
+                .reverse()
+                .join("-"),
+              time_from: orderingState.time.slice(0, 5),
+              time_to: orderingState.time.slice(-5),
 
-          items: order.allProductsJson
-            .filter(product => !product.repair)
-            .map(product => ({
-              quantity: product.quantity,
-              prismic_uid: product.product_uid,
-            })),
-        },
+              items: orderItems,
+            }
+          : null,
 
-        repair: {
-          city: orderingState.repairCity,
-          street: orderingState.repairStreet,
-          house: orderingState.repairHouse,
-          apartment: orderingState.repairApartment,
-          variantDelivery: orderingState.repairVariantDelivery,
-          date: orderingState.repairDate
-            .slice(0, 10)
-            .split("/")
-            .reverse()
-            .join("-"),
-          time_from: orderingState.repairTime.slice(0, 5),
-          time_to: orderingState.repairTime.slice(-5),
+        repair: repairItems.length
+          ? {
+              city: orderingState.repairCity,
+              street: orderingState.repairStreet,
+              house: orderingState.repairHouse,
+              apartment: orderingState.repairApartment,
+              variantDelivery: orderingState.repairVariantDelivery,
+              date: orderingState.repairDate
+                .slice(0, 10)
+                .split("/")
+                .reverse()
+                .join("-"),
+              time_from: orderingState.repairTime.slice(0, 5),
+              time_to: orderingState.repairTime.slice(-5),
 
-          items: order.allProductsJson
-            .filter(product => product.repair)
-            .map(product => ({
-              repair_category: product.repair_category,
-              services: product.repair_services,
-              quantity: product.quantity,
-            })),
-        },
+              items: repairItems,
+            }
+          : null,
       })
+
+      console.log(JSON.parse(body))
 
       const init = {
         method: "POST",
