@@ -4,6 +4,7 @@ import { navigate } from "gatsby"
 
 import TinkoffIcon from "../../../../static/svg/tinkoff.svg"
 import Cross from "../../../../static/svg/cross.svg"
+import LoadingModal from "../../loadingModal/loadingModal"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -316,6 +317,10 @@ export default function Tinkoff({ items }) {
   const [messageOpen, setMessageOpen] = React.useState(false)
   const [message, setMessage] = React.useState(null)
 
+  const [sendQuery, setSendQuery] = React.useState(false)
+
+  const [loadingOpen, setLoadingOpen] = React.useState(false)
+
   // валидация формы
   function validForm() {
     const errors = []
@@ -332,6 +337,8 @@ export default function Tinkoff({ items }) {
   }
 
   function send() {
+    if (sendQuery) return
+
     if (validForm().length) {
       setMessage([
         <Typography align="center" className={classes.modal__сontent_text}>
@@ -345,6 +352,8 @@ export default function Tinkoff({ items }) {
       ])
       openModal()
     } else {
+      setSendQuery(true)
+      setLoadingOpen(!loadingOpen)
       const apiURL = "https://admin.krypton.ru/api/order/create/"
 
       const headers = new Headers()
@@ -384,6 +393,7 @@ export default function Tinkoff({ items }) {
           window.location.href = res.payment_data.url
         })
         .catch(error => {
+          setSendQuery(false)
           console.log(error)
         })
     }
@@ -471,6 +481,7 @@ export default function Tinkoff({ items }) {
               Отправить заявку
             </Typography>
           </button>
+        <LoadingModal isModalOpen={loadingOpen} title="Уже создаем заявку..."/>
         </div>
       </Modal>
 

@@ -20,6 +20,7 @@ import MokkaInfo from "../../../../static/svg/mokkaInfo.svg"
 import MokkaCross from "../../../../static/svg/mokkaCross.svg"
 import MokkaIframeRegistration from "../../mokkaIframeRegistration"
 import MokkaIframePay from "../../mokkaIframePay"
+import LoadingModal from "../../loadingModal/loadingModal"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -356,11 +357,14 @@ export default function PriceBlock({ products, legalEntities }) {
 
   const [sendQuery, setSendQuery] = React.useState(false)
 
+  const [loadingOpen, setLoadingOpen] = React.useState(false)
+
   function payOrder() {
     if (sendQuery) return
 
     if (validData) {
       setSendQuery(true)
+      setLoadingOpen(!loadingOpen)
       const apiURL = "https://admin.krypton.ru/api/order/create/"
 
       const headers = new Headers()
@@ -561,6 +565,7 @@ export default function PriceBlock({ products, legalEntities }) {
         ) : null}
 
         <Pay text="Подтвердить заказ" products={products} onClick={payOrder} />
+        <LoadingModal isModalOpen={loadingOpen} />
 
         <Modal open={mokkaFormUrl} className={classes.modal}>
           <MokkaIframePay url={mokkaFormUrl} />

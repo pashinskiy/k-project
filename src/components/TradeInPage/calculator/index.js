@@ -9,6 +9,7 @@ import TradeInDevice from "../../../../static/svg/trade_in_device.svg"
 import Arrow from "../../../../static/svg/arrow.svg"
 import TradeInAddPhoto from "../../../../static/svg/trade_in_add_photo.svg"
 import IconCloseDialog from "../../../../static/svg/iconCloseDialog.svg"
+import LoadingModal from "../../loadingModal/loadingModal"
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
@@ -643,6 +644,8 @@ export default function Calculator({ variant, data }) {
   const [name, setName] = React.useState("")
   const [phone, setPhone] = React.useState("+7")
 
+  const [loadingOpen, setLoadingOpen] = React.useState(false)
+
   const products = React.useMemo(
     () => data.allPrismicProduct.edges.map(edge => edge.node),
     [data]
@@ -823,6 +826,7 @@ export default function Calculator({ variant, data }) {
   function send() {
     if (!turnInProduct || (!product && variant === "trade-in")) return
 
+    setLoadingOpen(!loadingOpen)
     const request = {
       name,
       phone,
@@ -1119,6 +1123,7 @@ export default function Calculator({ variant, data }) {
             Отправить заявку
           </Typography>
         </button>
+        <LoadingModal isModalOpen={loadingOpen} title="Уже создаем заявку..." />
       </div>
     </div>
   )
