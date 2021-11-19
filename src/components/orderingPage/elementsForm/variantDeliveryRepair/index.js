@@ -142,8 +142,8 @@ export default function VariantDeliveryRepair({
     setValue("courier")
   }
 
-  function setDeliveryInShop() {
-    setValue("inShop")
+  function setDeliveryPickup() {
+    setValue("pickup")
   }
 
   return (
@@ -178,18 +178,18 @@ export default function VariantDeliveryRepair({
       <button
         id="variant_delivery_in_shop"
         aria-label="variant delivery in shop"
-        onClick={setDeliveryInShop}
+        onClick={setDeliveryPickup}
         className={
           classes.itemWrapper +
           " " +
-          (value === "inShop" ? classes.activeItem : "")
+          (value === "pickup" ? classes.activeItem : "")
         }
       >
         <div
           className={
             classes.ratio +
             " " +
-            (value === "inShop" ? classes.activeRatio : "")
+            (value === "pickup" ? classes.activeRatio : "")
           }
         />
         <div>
