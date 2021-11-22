@@ -368,7 +368,6 @@ export default function PriceBlock({ products }) {
     )
   }, 0)
 
-  console.log(products)
   function goRegistration(LegalEntities) {
     const positions = products.reduce((order, product, i) => {
       const num = i + 1
@@ -491,13 +490,13 @@ export default function PriceBlock({ products }) {
         </div>
       )}
 
-      <Button
+      {/* <Button
         variant="body2"
         onClick={() => goRegistration(true)}
         className={classes.textByeLegalEntities}
       >
         Оформление для юридических лиц
-      </Button>
+      </Button> */}
 
       {(credit || devilery.length) &&
       summPrice < 100000 &&
