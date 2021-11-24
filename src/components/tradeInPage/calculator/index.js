@@ -628,6 +628,39 @@ const useStyles = makeStyles(theme => ({
       fontSize: "3.38vw",
     },
   },
+  modal__message_wrapper: {
+    background: theme.palette.background.main,
+
+    width: "27.96vw",
+    padding: "2.34vw",
+    borderRadius: "1.5625vw",
+    "@media(min-width: 1280px)": {
+      width: "358px",
+      padding: "30px",
+      borderRadius: "20px",
+    },
+    "@media(max-width: 767px)": {
+      width: "86.47vw",
+      padding: "7.24vw",
+      borderRadius: "4.83vw",
+    },
+  },
+  modal__message: {
+    ...theme.typography.body2,
+    fontWeight: 600,
+    textAlign: "center",
+
+    fontSize: "1.875vw",
+    lineHeight: "1.875vw",
+    "@media(min-width: 1280px)": {
+      fontSize: 24,
+      lineHeight: 24,
+    },
+    "@media(max-width: 767px)": {
+      fontSize: "5.79vw",
+      lineHeight: "5.79vw",
+    },
+  },
 }))
 
 /**
@@ -823,10 +856,29 @@ export default function Calculator({ variant, data }) {
     return price
   }
 
+  const [stateModal, setStateModal] = React.useState({})
+  function openAndClose(message, delay) {
+    delay = delay ?? 5000
+    if (stateModal.timeoutId) clearTimeout(stateModal.timeoutId)
+
+    const timeoutId = setTimeout(setStateModal, delay, {
+      show: false,
+      timeoutId: false,
+      message: null,
+    })
+
+    setStateModal({
+      show: true,
+      timeoutId,
+      message,
+    })
+  }
+
   function send() {
     if (!turnInProduct || (!product && variant === "trade-in")) return
 
     setLoadingOpen(!loadingOpen)
+
     const request = {
       name,
       phone,
@@ -848,7 +900,6 @@ export default function Calculator({ variant, data }) {
       }
     }
 
-    console.log(request)
     const apiURL = "https://admin.krypton.ru/api/trade-in"
 
     const headers = new Headers()
@@ -860,9 +911,30 @@ export default function Calculator({ variant, data }) {
       body,
     }
 
+    openAndClose("aaaa")
+
     fetch(apiURL, init)
       .then(res => res.json())
-      .then(res => console.log(res))
+      .then(res => {
+        if (res.success) {
+          setName("")
+          setPhone("+7")
+          setTurnInCategory(variantsTurnInCategory[0])
+          setPhotos([])
+          setCategory(null)
+          setProduct(null)
+
+          openAndClose("Заявка отправлена")
+        } else {
+          openAndClose(res.message)
+        }
+      })
+      .catch(err =>
+        openAndClose(
+          "Возникла непредвиденная ошибка, обратитесь в техподдержку"
+        )
+      )
+      .finally(setLoadingOpen(false))
   }
 
   return (
@@ -1125,6 +1197,18 @@ export default function Calculator({ variant, data }) {
         </button>
         <LoadingModal isModalOpen={loadingOpen} title="Уже создаем заявку..." />
       </div>
+
+      <Modal
+        open={stateModal.show}
+        onClose={() => setStateModal({})}
+        className={classes.modal}
+      >
+        <div className={classes.modal__message_wrapper}>
+          <Typography className={classes.modal__message}>
+            {stateModal.message}
+          </Typography>
+        </div>
+      </Modal>
     </div>
   )
 }
