@@ -654,7 +654,7 @@ const useStyles = makeStyles(theme => ({
     lineHeight: "1.875vw",
     "@media(min-width: 1280px)": {
       fontSize: 24,
-      lineHeight: 24,
+      lineHeight: 1,
     },
     "@media(max-width: 767px)": {
       fontSize: "5.79vw",
@@ -861,15 +861,15 @@ export default function Calculator({ variant, data }) {
     delay = delay ?? 5000
     if (stateModal.timeoutId) clearTimeout(stateModal.timeoutId)
 
-    const timeoutId = setTimeout(setStateModal, delay, {
-      show: false,
-      timeoutId: false,
-      message: null,
-    })
+    // const timeoutId = setTimeout(setStateModal, delay, {
+    //   show: false,
+    //   timeoutId: false,
+    //   message: null,
+    // })
 
     setStateModal({
       show: true,
-      timeoutId,
+      // timeoutId,
       message,
     })
   }
@@ -910,8 +910,6 @@ export default function Calculator({ variant, data }) {
       headers,
       body,
     }
-
-    openAndClose("aaaa")
 
     fetch(apiURL, init)
       .then(res => res.json())
