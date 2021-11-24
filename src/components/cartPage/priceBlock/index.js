@@ -386,6 +386,11 @@ export default function PriceBlock({ products }) {
         product_uid: product.uid,
         quantity: count,
         price: product.data.price,
+        repair: product.repair,
+        repair_category: product.repair ? product.data.category : undefined,
+        repair_services: product.data.services?.map(
+          service => service.primary.name
+        ),
       }
       prodDataArr.push(jsonData)
     })
@@ -485,13 +490,13 @@ export default function PriceBlock({ products }) {
         </div>
       )}
 
-      <Button
+      {/* <Button
         variant="body2"
         onClick={() => goRegistration(true)}
         className={classes.textByeLegalEntities}
       >
         Оформление для юридических лиц
-      </Button>
+      </Button> */}
 
       {(credit || devilery.length) &&
       summPrice < 100000 &&

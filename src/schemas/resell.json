@@ -1,0 +1,143 @@
+{
+  "Main" : {
+    "title" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Заголовок страницы",
+        "placeholder" : "Заголовок страницы"
+      }
+    },
+    "title_first_block" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Заголовок первого блока",
+        "placeholder" : "Заголовок"
+      }
+    },
+    "subtitle_first_block" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Подзаголовок первого блока",
+        "placeholder" : "Подзаголовок"
+      }
+    },
+    "image_first_block" : {
+      "type" : "Image",
+      "config" : {
+        "constraint" : { },
+        "thumbnails" : [ ],
+        "label" : "Изображение первого блока"
+      }
+    },
+    "body" : {
+      "type" : "Slices",
+      "fieldset" : "Slice zone",
+      "config" : {
+        "labels" : { },
+        "choices" : {
+          "paragraph" : {
+            "type" : "Slice",
+            "fieldset" : "paragraph",
+            "description" : "пунк",
+            "icon" : "format_list_bulleted",
+            "non-repeat" : {
+              "title_paragraph" : {
+                "type" : "StructuredText",
+                "config" : {
+                  "multi" : "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+                  "label" : "Заголовок",
+                  "placeholder" : "Заголовок"
+                }
+              },
+              "subtitle_paragraph" : {
+                "type" : "Text",
+                "config" : {
+                  "label" : "Подзаголовок",
+                  "placeholder" : "Подзаголовок"
+                }
+              },
+              "text_paragraph" : {
+                "type" : "Text",
+                "config" : {
+                  "label" : "Текст под заголовком",
+                  "placeholder" : "Текст"
+                }
+              }
+            },
+            "repeat" : { }
+          },
+          "paragraph_with_ref" : {
+            "type" : "Slice",
+            "fieldset" : "paragraph_with_ref",
+            "description" : "пункт со ссылкой",
+            "icon" : "format_list_bulleted",
+            "non-repeat" : {
+              "title_paragraph" : {
+                "type" : "StructuredText",
+                "config" : {
+                  "multi" : "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+                  "label" : "Заголовок",
+                  "placeholder" : "Заголовок"
+                }
+              },
+              "subtitle_paragraph" : {
+                "type" : "Text",
+                "config" : {
+                  "label" : "Подзаголовок",
+                  "placeholder" : "Подзаголовок"
+                }
+              },
+              "reference_paragraph" : {
+                "type" : "Text",
+                "config" : {
+                  "label" : "Ссылка",
+                  "placeholder" : "Ссылка"
+                }
+              },
+              "reference_text_paragraph" : {
+                "type" : "Text",
+                "config" : {
+                  "label" : "Текст ссылки",
+                  "placeholder" : "Текст ссылки"
+                }
+              }
+            },
+            "repeat" : { }
+          },
+          "paragraph_with_svg" : {
+            "type" : "Slice",
+            "fieldset" : "paragraph_with_svg",
+            "description" : "пункт с svg",
+            "icon" : "format_list_bulleted",
+            "non-repeat" : {
+              "title_paragraph" : {
+                "type" : "StructuredText",
+                "config" : {
+                  "multi" : "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+                  "label" : "Заголовок",
+                  "placeholder" : "Заголовок"
+                }
+              },
+              "subtitle_paragraph" : {
+                "type" : "Text",
+                "config" : {
+                  "label" : "Подзаголовок",
+                  "placeholder" : "Подзаголовок"
+                }
+              },
+              "svg_paragraph" : {
+                "type" : "Image",
+                "config" : {
+                  "constraint" : { },
+                  "thumbnails" : [ ],
+                  "label" : "Изображение (svg)"
+                }
+              }
+            },
+            "repeat" : { }
+          }
+        }
+      }
+    }
+  }
+}

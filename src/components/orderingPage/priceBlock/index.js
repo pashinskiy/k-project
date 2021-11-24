@@ -20,6 +20,7 @@ import MokkaInfo from "../../../../static/svg/mokkaInfo.svg"
 import MokkaCross from "../../../../static/svg/mokkaCross.svg"
 import MokkaIframeRegistration from "../../mokkaIframeRegistration"
 import MokkaIframePay from "../../mokkaIframePay"
+import LoadingModal from "../../loadingModal/loadingModal"
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -340,7 +341,7 @@ const useStyle = makeStyles(theme => ({
  * @param {Object} props - объект свойств компонента React
  * @param {Object[]} props.products - массив объектов продуктов полученых из prismic
  */
-export default function PriceBlock({ products }) {
+export default function PriceBlock({ products, legalEntities }) {
   const classes = useStyle()
   const mobile = useMediaQuery("(max-width: 1025px)")
 
@@ -349,42 +350,91 @@ export default function PriceBlock({ products }) {
   const [mokkaFormUrl, setMokkaFormUrl] = React.useState(false)
 
   const orderingState = React.useContext(OrderingStateContext)
+  console.log(orderingState.repairTime)
 
-  const validData = orderingState.validationAll()
+  const validData = orderingState.validationAll(legalEntities)
 
   const order = JSON.parse(localStorage.getItem("order"))
 
   const [sendQuery, setSendQuery] = React.useState(false)
+
+  const [loadingOpen, setLoadingOpen] = React.useState(false)
 
   function payOrder() {
     if (sendQuery) return
 
     if (validData) {
       setSendQuery(true)
+      setLoadingOpen(!loadingOpen)
       const apiURL = "https://admin.krypton.ru/api/order/create/"
 
       const headers = new Headers()
       headers.append("Content-Type", "application/json")
 
+      const orderItems = []
+      const repairItems = []
+      order.allProductsJson.forEach(product => {
+        if (product.repair) {
+          repairItems.push({
+            repair_category: product.repair_category,
+            services: product.repair_services,
+            quantity: product.quantity,
+          })
+        } else {
+          orderItems.push({
+            quantity: product.quantity,
+            prismic_uid: product.product_uid,
+          })
+        }
+      })
+
       const body = JSON.stringify({
         name: orderingState.name,
         phone: orderingState.phone,
         email: orderingState.email,
-        city: orderingState.city,
-        street: orderingState.street,
-        house: orderingState.house,
-        apartment: orderingState.apartment,
-        variantDelivery: orderingState.variantDelivery,
         variantPay: orderingState.variantPay,
-        date: orderingState.date.slice(0, 10).split("/").reverse().join("-"),
-        time_from: orderingState.time.slice(0, 5),
-        time_to: orderingState.time.slice(-5),
+        inn: legalEntities ? orderingState.inn : "",
 
-        items: order.allProductsJson.map(product => ({
-          quantity: product.quantity,
-          prismic_uid: product.product_uid,
-        })),
+        order: orderItems.length
+          ? {
+              city: orderingState.city,
+              street: orderingState.street,
+              house: orderingState.house,
+              apartment: orderingState.apartment,
+              variantDelivery: orderingState.variantDelivery,
+              date: orderingState.date
+                .slice(0, 10)
+                .split("/")
+                .reverse()
+                .join("-"),
+              time_from: orderingState.time.slice(0, 5),
+              time_to: orderingState.time.slice(-5),
+
+              items: orderItems,
+            }
+          : null,
+
+        repair: repairItems.length
+          ? {
+              city: orderingState.repairCity,
+              street: orderingState.repairStreet,
+              house: orderingState.repairHouse,
+              apartment: orderingState.repairApartment,
+              variantDelivery: orderingState.repairVariantDelivery,
+              date: orderingState.repairDate
+                .slice(0, 10)
+                .split("/")
+                .reverse()
+                .join("-"),
+              time_from: orderingState.repairTime.slice(0, 5),
+              time_to: orderingState.repairTime.slice(-5),
+
+              items: repairItems,
+            }
+          : null,
       })
+
+      console.log(JSON.parse(body))
 
       const init = {
         method: "POST",
@@ -532,6 +582,7 @@ export default function PriceBlock({ products }) {
         ) : null}
 
         <Pay text="Подтвердить заказ" products={products} onClick={payOrder} />
+        <LoadingModal isModalOpen={loadingOpen} />
 
         <Modal open={mokkaFormUrl} className={classes.modal}>
           <MokkaIframePay url={mokkaFormUrl} />

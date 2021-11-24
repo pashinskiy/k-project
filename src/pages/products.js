@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
       width: "100%",
     },
   },
-  title: {
+  title_search: {
     fontWeight: 700,
     lineHeight: 1.5,
 
@@ -276,7 +276,7 @@ export default function Products({ data: { allPrismicProduct } }) {
             components={arrayCards}
             message={
               <Grid container direction="column">
-                <Typography className={classes.title}>
+                <Typography className={classes.title_search}>
                   К сожалению, таких товаров нет в наличии.
                 </Typography>
 

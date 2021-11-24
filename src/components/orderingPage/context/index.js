@@ -20,7 +20,7 @@ function reducer(state, action) {
       return {
         ...state,
         repairCity: action.payload,
-        repairVariantDelivery: "inShop",
+        repairVariantDelivery: "courier",
       }
     case "SET_DATE":
       return {
@@ -155,13 +155,13 @@ export default function OrderingContext({ children }) {
     repairCity: "",
 
     variantDelivery: "standart",
-    repairVariantDelivery: "inShop",
+    repairVariantDelivery: "courier",
 
-    date: false,
-    repairDate: false,
+    date: "",
+    repairDate: "",
 
-    time: false,
-    repairTime: false,
+    time: "",
+    repairTime: "",
 
     street: false,
     repairStreet: false,
@@ -201,9 +201,13 @@ export default function OrderingContext({ children }) {
     validationInn() {
       return /^\d{10}$/i.test(this.inn)
     },
-    validationAll() {
+    validationAll(legalEntities) {
+      if (legalEntities && !this.validationInn()) return false
+
       return (
-        this.validationCity() && this.validationName() && this.validationPhone()
+        (this.validationCity() || this.validationRepairCity()) &&
+        this.validationName() &&
+        this.validationPhone()
       )
     },
   }
