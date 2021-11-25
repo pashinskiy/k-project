@@ -861,15 +861,15 @@ export default function Calculator({ variant, data }) {
     delay = delay ?? 5000
     if (stateModal.timeoutId) clearTimeout(stateModal.timeoutId)
 
-    // const timeoutId = setTimeout(setStateModal, delay, {
-    //   show: false,
-    //   timeoutId: false,
-    //   message: null,
-    // })
+    const timeoutId = setTimeout(setStateModal, delay, {
+      show: false,
+      timeoutId: false,
+      message: null,
+    })
 
     setStateModal({
       show: true,
-      // timeoutId,
+      timeoutId,
       message,
     })
   }
@@ -877,7 +877,7 @@ export default function Calculator({ variant, data }) {
   function send() {
     if (!turnInProduct || (!product && variant === "trade-in")) return
 
-    setLoadingOpen(!loadingOpen)
+    setLoadingOpen(true)
 
     const request = {
       name,
@@ -932,7 +932,7 @@ export default function Calculator({ variant, data }) {
           "Возникла непредвиденная ошибка, обратитесь в техподдержку"
         )
       )
-      .finally(setLoadingOpen(false))
+      .finally(() => setLoadingOpen(false))
   }
 
   return (
