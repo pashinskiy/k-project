@@ -1,12 +1,38 @@
 import * as React from "react"
+import { makeStyles } from "@material-ui/core"
+
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
+const useStyles = makeStyles(theme => ({
+  wrapper: {
+    lineHeight: 1.5,
+
+    "& *": {
+      marginTop: ".5em",
+    },
+
+    "& ul": {
+      paddingLeft: "1.5em",
+    },
+
+    "& h1,h2,h3,h4,h5,h6": {
+      marginTop: "1em",
+    },
+  },
+}))
+
 const IndexPage = ({ pageContext: { doc } }) => {
+  const classes = useStyles()
+
   return (
     <Layout>
       <SEO title={doc.data.name} />
-      <div dangerouslySetInnerHTML={{ __html: doc.data.content.text }} />
+
+      <div
+        className={classes.wrapper}
+        dangerouslySetInnerHTML={{ __html: doc.data.content.text }}
+      />
     </Layout>
   )
 }
