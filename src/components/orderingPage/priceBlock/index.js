@@ -456,7 +456,7 @@ export default function PriceBlock({ products, legalEntities }) {
             return
           }
 
-          if (orderingState.variantPay === "при получении") {
+          if (orderingState.variantPay === "при получении" || orderingState.variantPay === "перевод") {
             navigate("/order/")
           }
           if (orderingState.variantPay === "в рассрочку") {
