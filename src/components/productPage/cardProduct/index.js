@@ -19,9 +19,9 @@ export default function CardProduct({ prismicProduct, allVariant }) {
   const mobile = useMediaQuery("(max-width: 1025px)")
 
   // массив фото
-  const photos = prismicProduct.data.images.map(
-    photo => photo.image.localFile?.childImageSharp.fluid
-  )
+  const photos = prismicProduct.data.images
+    .map(photo => photo.image.localFile?.childImageSharp.fluid)
+    .filter(photo => !!photo?.src)
 
   // массив всех продукты данной модели
   allVariant = allVariant.length
@@ -53,9 +53,9 @@ export default function CardProduct({ prismicProduct, allVariant }) {
         ]}
       />
 
-      <Grid container justify="space-between">
-        <ProductSlider photos={photos} />
-        <BlockPrice product={prismicProduct} allVariants={allVariant} />
+      <Grid container justify={photos.length ? "space-between" : "center"}>
+        {photos.length ? <ProductSlider photos={photos} /> : null}
+        <BlockPrice product={prismicProduct} allVariants={allVariant} radiusAllCorners={!photos.length}/>
       </Grid>
 
       {mobile ? null : (

@@ -22,13 +22,14 @@ const useStyles = makeStyles(theme => ({
   wrapper: {
     width: "35.31vw",
     height: "fit-content",
-    borderRadius: "1.56vw 0 0 1.56vw",
+    borderRadius: props =>
+      props.radiusAllCorners ? "1.56vw" : "1.56vw 0 0 1.56vw",
     background: "#EFEFF2",
     padding: "3.12vw 2.03vw",
     zIndex: 0,
     "@media(min-width: 1280px)": {
       width: "452px",
-      borderRadius: "20px 0 0 20px",
+      borderRadius: props => (props.radiusAllCorners ? 20 : "20px 0 0 20px"),
       padding: "40px 26px",
     },
     "@media(max-width: 1025px)": {
@@ -527,8 +528,9 @@ const useStyles = makeStyles(theme => ({
  * @param {Object} props.product - объект продукта полученный из prismic
  * @param {Object[]} props.allVariants - массив объектов всех продуктов этой же модели
  */
-export default function BlockPrice({ product, allVariants }) {
-  const classes = useStyles()
+export default function BlockPrice({ product, allVariants, radiusAllCorners }) {
+  console.log(radiusAllCorners)
+  const classes = useStyles({ radiusAllCorners })
   const mobile = useMediaQuery("(max-width: 1025px)")
 
   const [showMokkaInfo, setShowMokkaInfo] = React.useState(false)
@@ -545,7 +547,7 @@ export default function BlockPrice({ product, allVariants }) {
     allVariants.sort((product_1, product_2) => {
       const price_1 = parseInt(product_1.data.memory?.match(/\d+/))
       const price_2 = parseInt(product_2.data.memory?.match(/\d+/))
-      
+
       if (price_1 === undefined) return 1
       if (price_2 === undefined) return -1
 
@@ -579,7 +581,6 @@ export default function BlockPrice({ product, allVariants }) {
     //     )
     //   )
     // )
-    
 
     setAllColors(allColors)
     setAllMemory(allMemory)

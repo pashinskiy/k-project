@@ -134,7 +134,6 @@ const useStyles = makeStyles(theme => ({
  * @param {Object[]} props.photos - массив объектов фотографий полученный из prismic
  */
 export default function SliderProduct({ photos }) {
-  photos = photos.filter(photo => !!photo?.src)
   const classes = useStyles()
   const mobile = useMediaQuery("(max-width: 1025px)")
 

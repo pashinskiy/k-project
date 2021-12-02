@@ -182,17 +182,95 @@ export default function PayData({ prismicCartAndOrder, legalEntities }) {
       />
 
       <div className={classes.listWrapper}>
-        {legalEntities ? (
+        <button
+          id="online_pay"
+          aria-label="online pay"
+          onClick={() => setVariantPay("онлайн")}
+          className={classes.item}
+        >
+          <div
+            className={
+              classes.ratio +
+              " " +
+              (orderingState.variantPay === "онлайн" ? classes.activeRatio : "")
+            }
+          />
+
+          <div>
+            <Typography align="left" className={classes.title}>
+              Онлайн
+            </Typography>
+
+            <Typography align="left" className={classes.description}>
+              {prismicCartAndOrder.data.description_card}
+            </Typography>
+          </div>
+        </button>
+
+        <button
+          id="upon_receipt_pay"
+          aria-label="upon receipt pay"
+          onClick={() => setVariantPay("при получении")}
+          className={classes.item}
+        >
+          <div
+            className={
+              classes.ratio +
+              " " +
+              (orderingState.variantPay === "при получении"
+                ? classes.activeRatio
+                : "")
+            }
+          />
+
+          <div>
+            <Typography align="left" className={classes.title}>
+              При получении
+            </Typography>
+
+            <Typography align="left" className={classes.description}>
+              {prismicCartAndOrder.data.description_getting}
+            </Typography>
+          </div>
+        </button>
+
+        {state.servicesAvailable() ? null : (
           <button
-            id="legal_entities"
-            aria-label="legal_entities"
+            id="on_credit_pay"
+            aria-label="on credit pay"
+            onClick={() => setVariantPay("в кредит")}
             className={classes.item}
           >
             <div
               className={
                 classes.ratio +
                 " " +
-                (orderingState.variantPay === "перевод"
+                (orderingState.variantPay === "в кредит"
+                  ? classes.activeRatio
+                  : "")
+              }
+            />
+
+            <Typography align="left" className={classes.title}>
+              Кредит в Тинькофф
+            </Typography>
+          </button>
+        )}
+
+        {!state.servicesAvailable() &&
+        order.price < 100000 &&
+        order.price >= 5000 ? (
+          <button
+            id="by_installments_pay"
+            aria-label="by installments pay"
+            onClick={() => setVariantPay("в рассрочку")}
+            className={classes.item}
+          >
+            <div
+              className={
+                classes.ratio +
+                " " +
+                (orderingState.variantPay === "в рассрочку"
                   ? classes.activeRatio
                   : "")
               }
@@ -200,132 +278,49 @@ export default function PayData({ prismicCartAndOrder, legalEntities }) {
 
             <div>
               <Typography align="left" className={classes.title}>
-                Банковский перевод для юридических лиц
+                Оплата авансом
               </Typography>
 
-              <Typography align="left" className={classes.description}>
-                Карта Visa, MasterCard, Мир
+              <Typography
+                align="left"
+                className={classes.description}
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                Мокка — оплата авансом
+                <span className={classes.mokka}>
+                  <Mokka />
+                </span>
               </Typography>
             </div>
           </button>
-        ) : (
-          <>
-            <button
-              id="online_pay"
-              aria-label="online pay"
-              onClick={() => setVariantPay("онлайн")}
-              className={classes.item}
-            >
-              <div
-                className={
-                  classes.ratio +
-                  " " +
-                  (orderingState.variantPay === "онлайн"
-                    ? classes.activeRatio
-                    : "")
-                }
-              />
+        ) : null}
 
-              <div>
-                <Typography align="left" className={classes.title}>
-                  Онлайн
-                </Typography>
+        <button
+          id="legal_entities"
+          aria-label="legal_entities"
+          className={classes.item}
+          onClick={() => setVariantPay("перевод")}
+        >
+          <div
+            className={
+              classes.ratio +
+              " " +
+              (orderingState.variantPay === "перевод"
+                ? classes.activeRatio
+                : "")
+            }
+          />
 
-                <Typography align="left" className={classes.description}>
-                  {prismicCartAndOrder.data.description_card}
-                </Typography>
-              </div>
-            </button>
+          <div>
+            <Typography align="left" className={classes.title}>
+              Банковский перевод для юридических лиц
+            </Typography>
 
-            <button
-              id="upon_receipt_pay"
-              aria-label="upon receipt pay"
-              onClick={() => setVariantPay("при получении")}
-              className={classes.item}
-            >
-              <div
-                className={
-                  classes.ratio +
-                  " " +
-                  (orderingState.variantPay === "при получении"
-                    ? classes.activeRatio
-                    : "")
-                }
-              />
-
-              <div>
-                <Typography align="left" className={classes.title}>
-                  При получении
-                </Typography>
-
-                <Typography align="left" className={classes.description}>
-                  {prismicCartAndOrder.data.description_getting}
-                </Typography>
-              </div>
-            </button>
-
-            {state.servicesAvailable() ? null : (
-              <button
-                id="on_credit_pay"
-                aria-label="on credit pay"
-                onClick={() => setVariantPay("в кредит")}
-                className={classes.item}
-              >
-                <div
-                  className={
-                    classes.ratio +
-                    " " +
-                    (orderingState.variantPay === "в кредит"
-                      ? classes.activeRatio
-                      : "")
-                  }
-                />
-
-                <Typography align="left" className={classes.title}>
-                  Кредит в Тинькофф
-                </Typography>
-              </button>
-            )}
-
-            {!state.servicesAvailable() &&
-            order.price < 100000 &&
-            order.price >= 5000 ? (
-              <button
-                id="by_installments_pay"
-                aria-label="by installments pay"
-                onClick={() => setVariantPay("в рассрочку")}
-                className={classes.item}
-              >
-                <div
-                  className={
-                    classes.ratio +
-                    " " +
-                    (orderingState.variantPay === "в рассрочку"
-                      ? classes.activeRatio
-                      : "")
-                  }
-                />
-
-                <div>
-                  <Typography align="left" className={classes.title}>
-                    Оплата авансом
-                  </Typography>
-
-                  <Typography
-                    align="left"
-                    className={classes.description}
-                    style={{ display: "flex", alignItems: "center" }}
-                  >
-                    Мокка — оплата авансом
-                    <span className={classes.mokka}>
-                      <Mokka />
-                    </span>
-                  </Typography>
-                </div>
-              </button>
-            ) : null}
-          </>
-        )}
+            <Typography align="left" className={classes.description}>
+              Карта Visa, MasterCard, Мир
+            </Typography>
+          </div>
+        </button>
       </div>
     </>
   )

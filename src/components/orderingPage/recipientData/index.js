@@ -52,7 +52,7 @@ const useStyle = makeStyles(theme => ({
  * Блок данных о клиенте
  * @module src/components/orderingPage/recipientData
  */
-export default function RecipientData({ legalEntities }) {
+export default function RecipientData() {
   const classes = useStyle()
   const smartPhoneScreen = useMediaQuery("(max-width: 767px)")
 
@@ -86,8 +86,11 @@ export default function RecipientData({ legalEntities }) {
         justify="space-between"
         className={classes.twoInputWrapper}
       >
-        {legalEntities ? (
-          <WrapperWithTitle title="ИНН" necessarily={!!legalEntities}>
+        {orderingState.variantPay === "перевод" ? (
+          <WrapperWithTitle
+            title="ИНН"
+            necessarily={orderingState.variantPay === "перевод"}
+          >
             <Input
               id="inn"
               afterChange={setInn}
@@ -107,7 +110,7 @@ export default function RecipientData({ legalEntities }) {
         <WrapperWithTitle
           title="Телефон"
           className={classes.shortInput}
-          style={{ marginTop: legalEntities ? "" : 0 }}
+          style={{ marginTop: orderingState.variantPay === "перевод" ? "" : 0 }}
         >
           <Input
             id="phone"
@@ -117,12 +120,17 @@ export default function RecipientData({ legalEntities }) {
           />
         </WrapperWithTitle>
 
-        <WrapperWithTitle title="E-mail" necessarily={!!legalEntities}>
+        <WrapperWithTitle
+          title="E-mail"
+          necessarily={orderingState.variantPay === "перевод"}
+        >
           <Input
             id="email"
             afterChange={setEmail}
             checkValue={() =>
-              legalEntities ? orderingState.validationEmail() : true
+              orderingState.variantPay === "перевод"
+                ? orderingState.validationEmail()
+                : true
             }
           />
         </WrapperWithTitle>

@@ -490,13 +490,13 @@ export default function PriceBlock({ products }) {
         </div>
       )}
 
-      <Button
+      {/* <Button
         variant="body2"
         onClick={() => goRegistration(true)}
         className={classes.textByeLegalEntities}
       >
         Оформление для юридических лиц
-      </Button>
+      </Button> */}
 
       {(credit || devilery.length) &&
       summPrice < 100000 &&

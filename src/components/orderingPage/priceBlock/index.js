@@ -341,7 +341,7 @@ const useStyle = makeStyles(theme => ({
  * @param {Object} props - объект свойств компонента React
  * @param {Object[]} props.products - массив объектов продуктов полученых из prismic
  */
-export default function PriceBlock({ products, legalEntities }) {
+export default function PriceBlock({ products }) {
   const classes = useStyle()
   const mobile = useMediaQuery("(max-width: 1025px)")
 
@@ -352,7 +352,9 @@ export default function PriceBlock({ products, legalEntities }) {
   const orderingState = React.useContext(OrderingStateContext)
   console.log(orderingState.repairTime)
 
-  const validData = orderingState.validationAll(legalEntities)
+  const validData = orderingState.validationAll(
+    orderingState.variantPay === "перевод"
+  )
 
   const order = JSON.parse(localStorage.getItem("order"))
 
@@ -393,7 +395,7 @@ export default function PriceBlock({ products, legalEntities }) {
         phone: orderingState.phone,
         email: orderingState.email,
         variantPay: orderingState.variantPay,
-        inn: legalEntities ? orderingState.inn : "",
+        inn: orderingState.variantPay === "перевод" ? orderingState.inn : "",
 
         order: orderItems.length
           ? {
@@ -456,7 +458,10 @@ export default function PriceBlock({ products, legalEntities }) {
             return
           }
 
-          if (orderingState.variantPay === "при получении" || orderingState.variantPay === "перевод") {
+          if (
+            orderingState.variantPay === "при получении" ||
+            orderingState.variantPay === "перевод"
+          ) {
             navigate("/order/")
           }
           if (orderingState.variantPay === "в рассрочку") {

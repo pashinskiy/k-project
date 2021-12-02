@@ -15,16 +15,14 @@ const useStyle = makeStyles(theme => ({
  * @param {Object} props - объект свойств компонента React
  * @param {Object} props.prismicProduct - объект продукта полученый из prismic
  */
-export default function DeliveryCards({prismicProduct}) {
-  const delivery =
-    prismicProduct.data.delivery.document?.data.body[0].items ??
-    []
+export default function DeliveryCards({ prismicProduct }) {
+  const delivery = prismicProduct.data.delivery.document?.data.body[0]?.items
 
   const mobile = useMediaQuery("(max-width: 767px)")
 
   const classes = useStyle()
 
-  return (
+  return !delivery ? null : (
     <>
       <HeaderWithIcon
         icon={<IconDelivery />}
