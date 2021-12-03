@@ -70,14 +70,7 @@ export default function Layout({ children }) {
                 ... on PrismicHeaderBodyLink {
                   id
                   primary {
-                    link {
-                      document {
-                        ... on PrismicDoc {
-                          id
-                          uid
-                        }
-                      }
-                    }
+                    link
                     link_name {
                       text
                     }

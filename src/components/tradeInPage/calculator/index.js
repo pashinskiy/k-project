@@ -815,12 +815,12 @@ export default function Calculator({ variant, data }) {
 
     return () => {
       canceledEvents.forEach(event =>
-        inputFile.current.removeEventListener(event, prevent)
+        inputFile.current?.removeEventListener(event, prevent)
       )
-      inputFile.current.removeEventListener("dragover", addClass)
-      inputFile.current.removeEventListener("dragenter", addClass)
-      inputFile.current.removeEventListener("dragleave", removeClass)
-      inputFile.current.removeEventListener("drop", addFiles)
+      inputFile.current?.removeEventListener("dragover", addClass)
+      inputFile.current?.removeEventListener("dragenter", addClass)
+      inputFile.current?.removeEventListener("dragleave", removeClass)
+      inputFile.current?.removeEventListener("drop", addFiles)
     }
   }, [inputFile])
 
