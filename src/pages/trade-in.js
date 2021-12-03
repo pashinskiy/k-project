@@ -410,7 +410,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     "& strong": {
-      ...theme.typography.body2,
+      color: theme.palette.color.accentSecondary,
       fontWeight: "inherit",
       lineHeight: "inherit",
       fontSize: "inherit",

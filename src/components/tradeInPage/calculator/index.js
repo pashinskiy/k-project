@@ -171,7 +171,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     alignItems: "center",
 
-    ...theme.typography.body2,
+    color: theme.palette.color.accentSecondary,
     fontWeight: 400,
     lineHeight: 1.21,
 
@@ -216,10 +216,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   tab_panel__button__active: {
-    "-webkit-background-clip": "border-box",
-    backgroundClip: "border-box",
-    "-webkit-text-fill-color": theme.palette.color.mainContrast,
     color: theme.palette.color.mainContrast,
+    background: theme.palette.background.accent,
   },
   select: {
     display: "flex",
