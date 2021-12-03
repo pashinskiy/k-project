@@ -128,7 +128,7 @@ const IndexPage = ({ data: { prismicSubcategory, allPrismicProduct } }) => {
   return (
     <Layout>
       <div className={classes.wrapper}>
-        <Seo title="Home" />
+        <Seo title={`Купить ${prismicSubcategory.data.name} в Krypton`} />
         <BreadCrumbs
           links={[
             {

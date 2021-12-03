@@ -44,7 +44,7 @@ const Product = ({ data: { prismicProduct, allPrismicProduct, variants } }) => {
 
   return (
     <Layout>
-      <Seo title="Home" />
+      <Seo title={prismicProduct.name} />
       <TabPanel
         links={[
           {
