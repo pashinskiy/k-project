@@ -150,7 +150,7 @@ export default function SelectCategory({ options, afterChange, selectValue }) {
         <Typography className={classes.text}>
           {selectValue
             ? selectValue.data.name
-            : "Выберете категорию устройства"}
+            : "Выберите категорию устройства"}
         </Typography>
 
         <div className={classes.icon + " " + rotate}>

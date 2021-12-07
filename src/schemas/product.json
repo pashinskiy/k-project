@@ -63,6 +63,13 @@
         "placeholder": "Код модели"
       }
     },
+    "property": {
+      "type": "Text",
+      "config": {
+        "label": "Свойство экземпляра модели",
+        "placeholder": "отличие от других экземпляров"
+      }
+    },
     "gtin": {
       "type": "StructuredText",
       "config": {

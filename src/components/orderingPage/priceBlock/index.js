@@ -350,7 +350,6 @@ export default function PriceBlock({ products }) {
   const [mokkaFormUrl, setMokkaFormUrl] = React.useState(false)
 
   const orderingState = React.useContext(OrderingStateContext)
-  console.log(orderingState.repairTime)
 
   const validData = orderingState.validationAll(
     orderingState.variantPay === "перевод"

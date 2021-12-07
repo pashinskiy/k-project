@@ -649,6 +649,7 @@ export const pageQuery = graphql`
         node {
           uid
           data {
+            property
             memory
             color_group
             body1 {

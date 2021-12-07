@@ -94,7 +94,7 @@
                   "placeholder_false": "Внешняя",
                   "placeholder_true": "Локальная",
                   "default_value": true,
-                  "label": "Выберете тип ссылки"
+                  "label": "Выберите тип ссылки"
                 }
               }
             },
@@ -128,7 +128,7 @@
                   "placeholder_false": "Внешняя",
                   "placeholder_true": "Локальная",
                   "default_value": true,
-                  "label": "Выберете тип ссылки"
+                  "label": "Выберите тип ссылки"
                 }
               }
             },

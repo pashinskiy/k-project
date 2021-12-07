@@ -683,47 +683,47 @@ export default function Calculator({ variant, data }) {
   )
 
   // данные и функции блока сдаваемого товара
-  const variantsTurnInCategory = ["iPhone", "Watch", "iPad", "Mac"]
-  const [turnInCategory, setTurnInCategory] = React.useState(
-    variantsTurnInCategory[0]
-  )
+  // const variantsTurnInCategory = ["iPhone", "Watch", "iPad", "Mac"]
+  // const [turnInCategory, setTurnInCategory] = React.useState(
+  //   variantsTurnInCategory[0]
+  // )
 
-  const [
-    showPanelSelectTurnInProducts,
-    setShowPanelSelectTurnInProducts,
-  ] = React.useState(false)
+  // const [
+  //   showPanelSelectTurnInProducts,
+  //   setShowPanelSelectTurnInProducts,
+  // ] = React.useState(false)
 
-  const [turnInProduct, setTurnInProduct] = React.useState(null)
-  const variantsTurnInProduct = React.useMemo(() => {
-    const newVariantsTurnInProduct = products.filter(product => {
-      switch (turnInCategory) {
-        case "iPhone":
-          return (
-            product.data.brand.document?.data.name.toLowerCase() === "apple" &&
-            product.data.category.document?.uid === "smartphone"
-          )
-        case "Watch":
-          return (
-            product.data.brand.document?.data.name.toLowerCase() === "apple" &&
-            product.data.category.document?.uid === "smart-watches"
-          )
-        case "iPad":
-          return (
-            product.data.brand.document?.data.name.toLowerCase() === "apple" &&
-            product.data.category.document?.uid === "pads"
-          )
-        case "Mac":
-          return (
-            product.data.brand.document?.data.name.toLowerCase() === "apple" &&
-            product.data.category.document?.uid === "laptops"
-          )
-      }
-    })
+  const [turnInProduct, setTurnInProduct] = React.useState("")
+  // const variantsTurnInProduct = React.useMemo(() => {
+  //   const newVariantsTurnInProduct = products.filter(product => {
+  //     switch (turnInCategory) {
+  //       case "iPhone":
+  //         return (
+  //           product.data.brand.document?.data.name.toLowerCase() === "apple" &&
+  //           product.data.category.document?.uid === "smartphone"
+  //         )
+  //       case "Watch":
+  //         return (
+  //           product.data.brand.document?.data.name.toLowerCase() === "apple" &&
+  //           product.data.category.document?.uid === "smart-watches"
+  //         )
+  //       case "iPad":
+  //         return (
+  //           product.data.brand.document?.data.name.toLowerCase() === "apple" &&
+  //           product.data.category.document?.uid === "pads"
+  //         )
+  //       case "Mac":
+  //         return (
+  //           product.data.brand.document?.data.name.toLowerCase() === "apple" &&
+  //           product.data.category.document?.uid === "laptops"
+  //         )
+  //     }
+  //   })
 
-    setTurnInProduct(null)
+  //   setTurnInProduct(null)
 
-    return newVariantsTurnInProduct
-  }, [turnInCategory])
+  //   return newVariantsTurnInProduct
+  // }, [turnInCategory])
 
   const [photos, setPhotos] = React.useState([])
   const validExtensions = React.useMemo(() => ({
@@ -840,7 +840,7 @@ export default function Calculator({ variant, data }) {
     )
   }, [category])
 
-  const sale = turnInProduct ? Math.trunc(turnInProduct.data.price * 0.02) : 0
+  // const sale = turnInProduct ? Math.trunc(turnInProduct.data.price * 0.02) : 0
 
   // преобразуем цену
   function priceMod(value) {
@@ -873,7 +873,7 @@ export default function Calculator({ variant, data }) {
   }
 
   function send() {
-    if (!turnInProduct || (!product && variant === "trade-in")) return
+    // if (!turnInProduct || (!product && variant === "trade-in")) return
 
     setLoadingOpen(true)
 
@@ -881,16 +881,16 @@ export default function Calculator({ variant, data }) {
       name,
       phone,
       type: `${variant}-request`,
-      sale,
+      // sale,
 
       "trade-in": {
-        name: turnInProduct.data.name,
-        prismic_uid: turnInProduct.uid,
+        name: turnInProduct, //turnInProduct.data.name,
+        // prismic_uid: turnInProduct.uid,
         quantity: 1,
         images: photos,
       },
     }
-    if (variant === "trade-in") {
+    if (variant === "trade-in" && product) {
       request["trade-up"] = {
         name: product.data.name,
         prismic_uid: product.uid,
@@ -915,7 +915,7 @@ export default function Calculator({ variant, data }) {
         if (res.success) {
           setName("")
           setPhone("+7")
-          setTurnInCategory(variantsTurnInCategory[0])
+          // setTurnInCategory(variantsTurnInCategory[0])
           setPhotos([])
           setCategory(null)
           setProduct(null)
@@ -966,7 +966,7 @@ export default function Calculator({ variant, data }) {
           Какое устройство хотите сдать?
         </Typography>
 
-        <div style={{ display: "flex" }}>
+        {/* <div style={{ display: "flex" }}>
           {variantsTurnInCategory.map(variant => {
             const active = variant === turnInCategory
 
@@ -984,9 +984,9 @@ export default function Calculator({ variant, data }) {
               </button>
             )
           })}
-        </div>
+        </div> */}
 
-        <button
+        {/* <button
           onClick={() => setShowPanelSelectTurnInProducts(true)}
           className={classes.select}
         >
@@ -1016,14 +1016,20 @@ export default function Calculator({ variant, data }) {
               align="left"
               className={classes.name_product}
             >
-              {turnInProduct ? turnInProduct.data.name : "Выберете устройство"}
+              {turnInProduct ? turnInProduct.data.name : "Выберите устройство"}
             </Typography>
           </div>
 
           <p className={classes.select__icon}>
             <Arrow />
           </p>
-        </button>
+        </button> */}
+
+        <input
+          value={turnInProduct}
+          onInput={e => setTurnInProduct(e.target.value)}
+          className={classes.input}
+        />
 
         <label
           ref={inputFile}
@@ -1078,7 +1084,7 @@ export default function Calculator({ variant, data }) {
           </div>
         ) : null}
 
-        <Modal
+        {/* <Modal
           open={showPanelSelectTurnInProducts}
           onClose={() => setShowPanelSelectTurnInProducts(false)}
           className={classes.modal}
@@ -1093,7 +1099,7 @@ export default function Calculator({ variant, data }) {
             close={() => setShowPanelSelectTurnInProducts(false)}
             data={data}
           />
-        </Modal>
+        </Modal> */}
       </div>
 
       {variant === "trade-in" ? (
@@ -1140,7 +1146,7 @@ export default function Calculator({ variant, data }) {
                 align="left"
                 className={classes.name_product}
               >
-                {product ? product.data.name : "Выберете устройство"}
+                {product ? product.data.name : "Выберите устройство"}
               </Typography>
             </div>
 
@@ -1169,7 +1175,7 @@ export default function Calculator({ variant, data }) {
       ) : null}
 
       <div className={classes.you_sale_block}>
-        {variant === "trade-in" ? (
+        {/* {variant === "trade-in" ? (
           <>
             <Typography align="center" className={classes.you_sale_block__text}>
               Ваша скидка:
@@ -1184,7 +1190,7 @@ export default function Calculator({ variant, data }) {
               <big>{` ${priceMod(sale)} ₽`}</big>
             </Typography>
           </>
-        ) : null}
+        ) : null} */}
 
         <button onClick={send} className={classes.button_send}>
           <Typography className={classes.button_send__text}>

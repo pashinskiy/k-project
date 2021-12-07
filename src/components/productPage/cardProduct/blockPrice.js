@@ -529,7 +529,6 @@ const useStyles = makeStyles(theme => ({
  * @param {Object[]} props.allVariants - массив объектов всех продуктов этой же модели
  */
 export default function BlockPrice({ product, allVariants, radiusAllCorners }) {
-  console.log(radiusAllCorners)
   const classes = useStyles({ radiusAllCorners })
   const mobile = useMediaQuery("(max-width: 1025px)")
 
@@ -538,16 +537,19 @@ export default function BlockPrice({ product, allVariants, radiusAllCorners }) {
 
   const [allColors, setAllColors] = React.useState([])
   const [allMemory, setAllMemory] = React.useState([])
+  const [allProperty, setAllProperty] = React.useState([])
 
   React.useEffect(() => {
     const allColors = []
     const allMemory = []
+    const allProperty = []
 
     // сортируем по памяти
     allVariants.sort((product_1, product_2) => {
       const price_1 = parseInt(product_1.data.memory?.match(/\d+/))
       const price_2 = parseInt(product_2.data.memory?.match(/\d+/))
 
+      if (price_1 === price_2) return 0
       if (price_1 === undefined) return 1
       if (price_2 === undefined) return -1
 
@@ -571,6 +573,13 @@ export default function BlockPrice({ product, allVariants, radiusAllCorners }) {
       if (!allMemory.find(prod => prod.data.memory === variant.data.memory)) {
         if (variant.data.memory) allMemory.push(variant)
       }
+
+      // добавляем  товар если товара с таким свойством нет
+      if (
+        !allProperty.find(prod => prod.data.property === variant.data.property)
+      ) {
+        if (variant.data.property) allProperty.push(variant)
+      }
     })
 
     // цвет продукта первый в массиве
@@ -584,6 +593,7 @@ export default function BlockPrice({ product, allVariants, radiusAllCorners }) {
 
     setAllColors(allColors)
     setAllMemory(allMemory)
+    setAllProperty(allProperty)
   }, [])
 
   // преобразуем цену
@@ -685,6 +695,28 @@ export default function BlockPrice({ product, allVariants, radiusAllCorners }) {
                 className={classes.buttonMemory + " " + active}
               >
                 {prod.data.memory}
+              </button>
+            )
+          })}
+        </Grid>
+      ) : null}
+
+      {allProperty.length ? (
+        <Grid container className={classes.buttonsMemoryPanel}>
+          {allProperty.map(prod => {
+            const active =
+              product.data.property === prod.data.property
+                ? classes.activeButtonMemory
+                : ""
+            return (
+              <button
+                id={`${prod.data.property}`}
+                onClick={() => navigate(`/${prod.uid}/`)}
+                aria-label={`${prod.data.property}`}
+                key={prod.uid}
+                className={classes.buttonMemory + " " + active}
+              >
+                {prod.data.property}
               </button>
             )
           })}

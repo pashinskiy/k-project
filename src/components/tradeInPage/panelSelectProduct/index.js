@@ -210,7 +210,7 @@ export default function PanelSelectProduct({
     <div className={classes.wrapper}>
       <div className={classes.wrapper_first_block}>
         <Typography className={classes.title}>
-          Выберете <font>устройство</font>
+          Выберите <font>устройство</font>
         </Typography>
 
         <button
