@@ -370,13 +370,15 @@ export default function CardProduct({ product, ...other }) {
             justify="space-between"
             className={classes.wrapperRow}
           >
-            <div
-              className={classes.color}
-              style={{
-                background:
-                  product.data.color ?? palette[product.data.color_group],
-              }}
-            />
+            {palette[product.data.color_group] ? (
+              <div
+                className={classes.color}
+                style={{
+                  background:
+                    product.data.color ?? palette[product.data.color_group],
+                }}
+              />
+            ) : null}
             <Grid className={classes.features}>
               <Features
                 featuresSlices={product.data.body.filter(

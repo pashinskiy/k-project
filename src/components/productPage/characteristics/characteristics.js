@@ -205,6 +205,7 @@ export default function Characteristics({ product }) {
                 return !show ? null : (
                   <Grid
                     container
+                    wrap="nowrap"
                     spacing={2}
                     key={variant.doc_title.text}
                     className={classes.documentContainer}

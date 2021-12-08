@@ -247,7 +247,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 /**
- * Фильтр продуктов 
+ * Фильтр продуктов
  * @module src/components/filter
  * @param {Object} props - объект свойств компонента React
  * @param {Object[]} props.products - массив объектов продуктов полученых из prismic
@@ -290,7 +290,10 @@ export default function Filter({ products, setFilterProducts }) {
       })
     if (product.data.price !== null)
       fieldsFilter.get("Цена").value.add(product.data.price)
-    if (product.data.color_group !== null)
+    if (
+      product.data.color_group !== null &&
+      product.data.color_group !== "none"
+    )
       fieldsFilter
         .get("Цвет")
         .value.add(product.data.color_group.replace("ё", "е").toLowerCase())
@@ -534,7 +537,7 @@ export default function Filter({ products, setFilterProducts }) {
           />
         )
       case "color":
-        return (
+        return [...value].length ? (
           <BlockColors
             key={title}
             style={{ order }}
@@ -543,7 +546,7 @@ export default function Filter({ products, setFilterProducts }) {
             colors={filters.get(title)?.value ?? []}
             setColors={setFilterColor}
           />
-        )
+        ) : null
       case "checkbox":
         return (
           <BlockCheckbox

@@ -561,7 +561,8 @@ export default function BlockPrice({ product, allVariants, radiusAllCorners }) {
       if (
         !allColors.find(
           prod => prod.data.color_group === variant.data.color_group
-        )
+        ) &&
+        variant.data.color_group !== "none"
       ) {
         allColors.push(variant)
       }
@@ -659,25 +660,27 @@ export default function BlockPrice({ product, allVariants, radiusAllCorners }) {
         />
       ) : null}
 
-      <Grid container className={classes.buttonsColorsPanel}>
-        {allColors.map(prod => {
-          const active =
-            product.data.color_group === prod.data.color_group
-              ? classes.active
-              : ""
-          return (
-            <button
-              onClick={() => navigate(`/${prod.uid}/`)}
-              aria-label={`${prod.data.color_group}`}
-              key={prod.uid}
-              className={classes.buttonColor + " " + active}
-              style={{
-                background: prod.data.color ?? colors[prod.data.color_group],
-              }}
-            ></button>
-          )
-        })}
-      </Grid>
+      {allColors.length ? (
+        <Grid container className={classes.buttonsColorsPanel}>
+          {allColors.map(prod => {
+            const active =
+              product.data.color_group === prod.data.color_group
+                ? classes.active
+                : ""
+            return (
+              <button
+                onClick={() => navigate(`/${prod.uid}/`)}
+                aria-label={`${prod.data.color_group}`}
+                key={prod.uid}
+                className={classes.buttonColor + " " + active}
+                style={{
+                  background: prod.data.color ?? colors[prod.data.color_group],
+                }}
+              ></button>
+            )
+          })}
+        </Grid>
+      ) : null}
 
       {allMemory.length ? (
         <Grid container className={classes.buttonsMemoryPanel}>
