@@ -115,6 +115,18 @@ function reducer(state, action) {
         last_products: [...action.payload],
       }
     }
+    case "UPD_CART": {
+      return {
+        ...state,
+        cart: action.payload,
+      }
+    }
+    case "UPD_FAVORITES": {
+      return {
+        ...state,
+        favorites: action.payload,
+      }
+    }
     default:
       throw new Error("Error action")
   }
@@ -140,35 +152,6 @@ const GlobalContextProvider = ({ children }) => {
   }
 
   const [state, dispatch] = React.useReducer(reducer, initState)
-
-  // React.useEffect(() => {
-  //   const urlCheckPrice = "https://admin.krypton.ru/api/product/get-price"
-  //   const headers = new Headers()
-  //   headers.append("Content-Type", "application/json")
-
-  //   const body = JSON.stringify({
-  //     products: [
-  //       ...new Set([
-  //         ...initState.favorites.map(item => item.product.uid),
-  //         ...initState.cart.map(item => item.product.uid),
-  //       ]),
-  //     ],
-  //   })
-
-  //   const init = {
-  //     method: "GET",
-  //     headers,
-  //     body,
-  //   }
-
-  //   fetch(urlCheckPrice, init)
-  //     .then(res => res.json())
-  //     .then(res => console.log(res))
-
-  //   if (initState.favorites.length) {
-  //     // initState.favorites
-  //   }
-  // }, [])
 
   return (
     <GlobalStateContext.Provider value={state}>

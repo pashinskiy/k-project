@@ -3,7 +3,10 @@ import { graphql } from "gatsby"
 import { makeStyles, Grid, Typography } from "@material-ui/core"
 import Layout from "../components/layout"
 
-import { GlobalStateContext } from "../context/GlobalContextProvider"
+import {
+  GlobalStateContext,
+  GlobalDispatchContext,
+} from "../context/GlobalContextProvider"
 
 import Seo from "../components/seo"
 import HeaderWithIcon from "../components/headers/headerWithIcon"
@@ -122,7 +125,44 @@ const IndexPage = ({ data }) => {
   const classes = useStyle()
 
   const state = React.useContext(GlobalStateContext)
+  const dispatch = React.useContext(GlobalDispatchContext)
   const countProducts = state.cart.length ? state.cart.length : "0"
+
+  React.useEffect(() => {
+    if (!state.cart.length) return
+
+    const urlCheckPrice = "https://admin.krypton.ru/api/product/get-price"
+    const headers = new Headers()
+    headers.append("Content-Type", "application/json")
+
+    const body = JSON.stringify({
+      products: state.cart.map(item => item.product.uid),
+    })
+
+    const init = {
+      method: "POST",
+      headers,
+      body,
+    }
+
+    fetch(urlCheckPrice, init)
+      .then(res => res.json())
+      .then(res => {
+        state.cart
+          .filter(
+            item =>
+              res.products[item.product.uid] !== null || item.product.repair
+          )
+          .forEach(item => {
+            if (item.product.repair) return
+            item.product.data.price = res.products[item.product.uid]
+          })
+
+        console.log(state.cart)
+
+        dispatch({ type: "UPD_CART", payload: state.cart })
+      })
+  }, [])
 
   const word = (() => {
     switch (countProducts) {

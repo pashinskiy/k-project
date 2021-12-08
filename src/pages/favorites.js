@@ -11,7 +11,10 @@ import Pagination from "../components/pagination"
 import CardProduct from "../components/catalog/catalogCardProduct"
 import Layout from "../components/layout"
 
-import { GlobalStateContext } from "../context/GlobalContextProvider"
+import {
+  GlobalStateContext,
+  GlobalDispatchContext,
+} from "../context/GlobalContextProvider"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,7 +50,36 @@ const useStyles = makeStyles(theme => ({
 const IndexPage = ({ data }) => {
   const classes = useStyles()
   const state = React.useContext(GlobalStateContext)
+  const dispatch = React.useContext(GlobalDispatchContext)
   const isMobile = useMediaQuery("(max-width: 767px)")
+
+  React.useEffect(() => {
+    if (!state.cart.length) return
+
+    const urlCheckPrice = "https://admin.krypton.ru/api/product/get-price"
+    const headers = new Headers()
+    headers.append("Content-Type", "application/json")
+
+    const body = JSON.stringify({
+      products: state.favorites.map(product => product.uid),
+    })
+
+    const init = {
+      method: "POST",
+      headers,
+      body,
+    }
+
+    fetch(urlCheckPrice, init)
+      .then(res => res.json())
+      .then(res => {
+        state.favorites
+          .filter(product => res.products[product.uid] !== null)
+          .forEach(product => (product.data.price = res.products[product.uid]))
+
+        dispatch({ type: "UPD_FAVORITES", payload: state.favorites })
+      })
+  }, [])
 
   const dataCategory = data.allPrismicCategory.edges.map(edge => edge.node)
   const [filterProducts, setFilterProducts] = React.useState(state.favorites)
