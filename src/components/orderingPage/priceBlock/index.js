@@ -467,10 +467,11 @@ export default function PriceBlock({ products }) {
             // console.log(res.payment_data.url)
             setMokkaFormUrl(res.payment_data.url)
           }
-          if (orderingState.variantPay === "онлайн") {
-            window.location.href = res.payment_data.url
-          }
-          if (orderingState.variantPay === "в кредит") {
+          if (
+            orderingState.variantPay === "онлайн" ||
+            orderingState.variantPay === "в кредит" ||
+            orderingState.variantPay === "всегда да"
+          ) {
             window.location.href = res.payment_data.url
           }
         })

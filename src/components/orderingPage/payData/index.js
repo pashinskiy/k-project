@@ -257,6 +257,29 @@ export default function PayData({ prismicCartAndOrder, legalEntities }) {
           </button>
         )}
 
+        {state.servicesAvailable() ? null : (
+          <button
+            id="on_credit_all_yes_pay"
+            aria-label="on credit all yes pay"
+            onClick={() => setVariantPay("всегда да")}
+            className={classes.item}
+          >
+            <div
+              className={
+                classes.ratio +
+                " " +
+                (orderingState.variantPay === "всегда да"
+                  ? classes.activeRatio
+                  : "")
+              }
+            />
+
+            <Typography align="left" className={classes.title}>
+              Кредит в Всегда.Да
+            </Typography>
+          </button>
+        )}
+
         {!state.servicesAvailable() &&
         order.price < 100000 &&
         order.price >= 5000 ? (
