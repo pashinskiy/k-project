@@ -364,11 +364,15 @@ export default function Tinkoff({ items }) {
         phone: phone,
         variantPay: "в кредит",
 
-        items: items.map(item => ({
-          quantity: item.count,
-          prismic_uid: item.product.uid,
-        })),
+        order: {
+          items: items.map(item => ({
+            quantity: item.count,
+            prismic_uid: item.product.uid,
+          })),
+        },
       })
+
+      console.log(body)
 
       const init = {
         method: "POST",
@@ -481,7 +485,10 @@ export default function Tinkoff({ items }) {
               Отправить заявку
             </Typography>
           </button>
-        <LoadingModal isModalOpen={loadingOpen} title="Уже создаем заявку..."/>
+          <LoadingModal
+            isModalOpen={loadingOpen}
+            title="Уже создаем заявку..."
+          />
         </div>
       </Modal>
 

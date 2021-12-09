@@ -105,6 +105,10 @@ const useStyles = makeStyles(theme => ({
       minHeight: "4.68vw",
       maxWidth: "90%",
     },
+
+    "&:first-child": {
+      marginTop: 0,
+    },
   },
   buttonMemory: {
     padding: 0,

@@ -272,6 +272,7 @@ export const pageQuery = graphql`
         }
         name
         memory
+        property
         color_group
         old_price
         price
