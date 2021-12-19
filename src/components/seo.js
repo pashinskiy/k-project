@@ -74,7 +74,9 @@ function SEO({ description, lang, meta, title }) {
             "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
         },
       ].concat(meta)}
-    ></Helmet>
+    >
+      <meta name="google-site-verification" content="h0sZRVPsiT5-wQb4UL76oaSs9AEb9g_fyBrT1XYKnn8" />
+    </Helmet>
   )
 }
 
