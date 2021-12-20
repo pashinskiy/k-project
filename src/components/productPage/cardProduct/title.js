@@ -92,7 +92,7 @@ export default function Title({ logo, text, stickersSlices }) {
   // формируем объект для отображения логотипа брэнда при наличии
   const logoImg =
     logo !== null && logo
-      ? { ...logo.localFile?.childImageSharp.fluid, alt: logo.alt }
+      ? { ...logo.localFile?.childImageSharp?.fluid, alt: logo.alt }
       : null
 
   // достаем стикеры из слайсов и готовим к распечатке
