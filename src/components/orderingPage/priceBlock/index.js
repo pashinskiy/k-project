@@ -394,6 +394,7 @@ export default function PriceBlock({ products }) {
         phone: orderingState.phone,
         email: orderingState.email,
         variantPay: orderingState.variantPay,
+        vsegdaCreditCode: orderingState.vsegdaCode,
         inn: orderingState.variantPay === "перевод" ? orderingState.inn : "",
 
         order: orderItems.length
