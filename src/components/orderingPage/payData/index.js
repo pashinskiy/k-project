@@ -158,8 +158,20 @@ const useStyle = makeStyles(theme => ({
   },
   sliderWrapper: {
     display: "flex",
-    width: 400,
-    marginLeft: 40,
+    width: "31.25vw",
+    marginLeft: "3.125vw",
+    "@media(min-width: 1280px)": {
+      width: 400,
+      marginLeft: 40,
+    },
+    "@media(max-width: 1025px)": {
+      width: "40vw",
+      marginLeft: "4vw",
+    },
+    "@media(max-width: 767px)": {
+      width: "85%",
+      marginLeft: "6.25vw",
+    },
   }
 }))
 
@@ -178,13 +190,13 @@ export default function PayData({ prismicCartAndOrder, legalEntities }) {
 
   const orderingState = React.useContext(OrderingStateContext)
   const orderingDispatch = React.useContext(OrderingDispatchContext)
-  
   const [sliderValue, setSliderValue] = React.useState(0)
+  
+  orderingState.vsegdaCode = sliderValue
 
   const handleChangeSlider = (event, newValue) => {
     setSliderValue(newValue)
     orderingState.vsegdaCode = sliderValue
-    console.log(orderingState.vsegdaCode)
   }
   const marksSlider = [
     {
@@ -345,7 +357,7 @@ export default function PayData({ prismicCartAndOrder, legalEntities }) {
                   aria-label="vsegda-credit-slider"
                   min={0}
                   max={3}
-                  value={sliderValue}
+                  value={orderingState.vsegdaCode}
                   onChange={handleChangeSlider}
                   getAriaValueText={valueTextSlider}
                   step={1}

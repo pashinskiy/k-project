@@ -436,7 +436,7 @@ export default function PriceBlock({ products }) {
           : null,
       })
 
-      console.log(JSON.parse(body))
+      // console.log(JSON.parse(body))
 
       const init = {
         method: "POST",

@@ -372,7 +372,7 @@ export default function Tinkoff({ items }) {
         },
       })
 
-      console.log(body)
+      // console.log(body)
 
       const init = {
         method: "POST",

@@ -158,7 +158,7 @@ const IndexPage = ({ data }) => {
             item.product.data.price = res.products[item.product.uid]
           })
 
-        console.log(state.cart)
+        // console.log(state.cart)
 
         dispatch({ type: "UPD_CART", payload: state.cart })
       })
