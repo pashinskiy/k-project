@@ -394,6 +394,7 @@ export default function PriceBlock({ products }) {
         phone: orderingState.phone,
         email: orderingState.email,
         variantPay: orderingState.variantPay,
+        vsegdaCreditCode: orderingState.vsegdaCode,
         inn: orderingState.variantPay === "перевод" ? orderingState.inn : "",
 
         order: orderItems.length
@@ -435,7 +436,7 @@ export default function PriceBlock({ products }) {
           : null,
       })
 
-      console.log(JSON.parse(body))
+      // console.log(JSON.parse(body))
 
       const init = {
         method: "POST",
@@ -467,10 +468,11 @@ export default function PriceBlock({ products }) {
             // console.log(res.payment_data.url)
             setMokkaFormUrl(res.payment_data.url)
           }
-          if (orderingState.variantPay === "онлайн") {
-            window.location.href = res.payment_data.url
-          }
-          if (orderingState.variantPay === "в кредит") {
+          if (
+            orderingState.variantPay === "онлайн" ||
+            orderingState.variantPay === "в кредит" ||
+            orderingState.variantPay === "всегда да"
+          ) {
             window.location.href = res.payment_data.url
           }
         })
