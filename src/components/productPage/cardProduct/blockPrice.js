@@ -550,14 +550,14 @@ export default function BlockPrice({ product, allVariants, radiusAllCorners }) {
 
     // сортируем по памяти
     allVariants.sort((product_1, product_2) => {
-      const price_1 = parseInt(product_1.data.memory?.match(/\d+/))
-      const price_2 = parseInt(product_2.data.memory?.match(/\d+/))
+      const memory_1 = parseInt(product_1.data.memory?.match(/\d+/))
+      const memory_2 = parseInt(product_2.data.memory?.match(/\d+/))
 
-      if (price_1 === price_2) return 0
-      if (price_1 === undefined) return 1
-      if (price_2 === undefined) return -1
+      if (memory_1 === memory_2) return 0
+      if (memory_1 === undefined) return 1
+      if (memory_2 === undefined) return -1
 
-      return price_1 - price_2
+      return memory_1 - memory_2
     })
 
     allVariants.forEach(variant => {
@@ -595,6 +595,17 @@ export default function BlockPrice({ product, allVariants, radiusAllCorners }) {
     //     )
     //   )
     // )
+
+    allProperty.sort((product_1, product_2) => {
+      const property_1 = parseInt(product_1.data.property?.match(/\d+/))
+      const property_2 = parseInt(product_2.data.property?.match(/\d+/))
+
+      if (property_1 === property_2) return 0
+      if (property_1 === undefined) return 1
+      if (property_2 === undefined) return -1
+
+      return property_1 - property_2
+    })
 
     setAllColors(allColors)
     setAllMemory(allMemory)
