@@ -220,9 +220,11 @@ export default function Card({ repair }) {
       <div className={classes.wrapper_bages}>
         {mobile ? (
           <div className={classes.wrapper_price}>
-            <Typography className={classes.price_text_through}>
-              {priceMod(totalOldPrice)} ₽
-            </Typography>
+            {totalOldPrice ? (
+              <Typography className={classes.price_text_through}>
+                {priceMod(totalOldPrice)} ₽
+              </Typography>
+            ) : null}
 
             <Typography className={classes.price_text_accent}>
               {priceMod(totalPrice)} ₽
@@ -249,9 +251,11 @@ export default function Card({ repair }) {
 
       {mobile ? null : (
         <div className={classes.wrapper_price}>
-          <Typography className={classes.price_text_through}>
-            {priceMod(totalOldPrice)} ₽
-          </Typography>
+          {totalOldPrice ? (
+            <Typography className={classes.price_text_through}>
+              {priceMod(totalOldPrice)} ₽
+            </Typography>
+          ) : null}
 
           <Typography className={classes.price_text_accent}>
             {priceMod(totalPrice)} ₽

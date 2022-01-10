@@ -6,7 +6,7 @@ import ButtonAddInCart from "./buttonAddInCart"
 const useStyle = makeStyles(theme => ({
   wrapper: {
     position: "relative",
-    
+
     overflow: "hidden",
     WebkitBackfaceVisibility: "hidden",
     MozBackfaceVisibility: "hidden",
@@ -192,9 +192,11 @@ export default function Card({ repair }) {
           {priceMod(price)}
         </Typography>
 
-        <Typography className={classes.price_text_through}>
-          {priceMod(oldPrice)}
-        </Typography>
+        {oldPrice ? (
+          <Typography className={classes.price_text_through}>
+            {priceMod(oldPrice)}
+          </Typography>
+        ) : null}
       </div>
 
       <div className={classes.wrapper_services}>

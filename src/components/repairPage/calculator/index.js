@@ -520,9 +520,11 @@ export default function Calculator({ repairDocs }) {
               {priceMod(totalPrice)} ₽
             </Typography>
 
-            <Typography className={classes.price_text_through}>
-              {priceMod(totalOldPrice)} ₽
-            </Typography>
+            {totalOldPrice ? (
+              <Typography className={classes.price_text_through}>
+                {priceMod(totalOldPrice)} ₽
+              </Typography>
+            ) : null}
           </div>
         </div>
 
