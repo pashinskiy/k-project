@@ -217,7 +217,7 @@ const IndexPage = ({ data, location }) => {
   }, [])
 
   const orderInfo = []
-  if (orderData !== null)
+  if (orderData !== null){
     orderInfo.push(
       {
         name: "Имя получателя: ",
@@ -247,6 +247,13 @@ const IndexPage = ({ data, location }) => {
             : orderData.payment.payment_type,
       }
     )
+    window.dataLayer = window.dataLayer || []
+    window.dataLayer.push({
+      event: 'order',
+      order_id: order_number,
+      price: orderData.order.totalSumm
+    })
+  }
 
   if (error) {
     return (
