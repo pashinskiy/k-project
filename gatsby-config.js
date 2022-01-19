@@ -103,6 +103,7 @@ module.exports = {
           trade_in: require("./src/schemas/trade_in.json"),
           sell: require("./src/schemas/sell.json"),
           resell: require("./src/schemas/resell.json"),
+          seo: require("./src/schemas/seo.json"),
         },
         shouldDownloadImage: () => true,
       },

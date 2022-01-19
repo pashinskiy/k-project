@@ -82,6 +82,7 @@
       "type": "Select",
       "config": {
         "options": [
+          "none",
           "чёрный",
           "морская волна",
           "синий",
@@ -102,7 +103,7 @@
           "золотой",
           "розовый"
         ],
-        "default_value": "чёрный",
+        "default_value": "none",
         "label": "Цветовая группа (для фильтра)"
       }
     },
@@ -669,6 +670,20 @@
       "config": {
         "label": "Фразы для поиска",
         "placeholder": "Фразы для поиска"
+      }
+    }
+  },
+  "Seo": {
+    "seo_title": {
+      "type": "Text",
+      "config": {
+        "label": "title"
+      }
+    },
+    "seo_description": {
+      "type": "Text",
+      "config": {
+        "label": "description"
       }
     }
   }

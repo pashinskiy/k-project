@@ -10,8 +10,8 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({ description, lang, meta, title }) {
-  const { site } = useStaticQuery(
+function SEO({ title, description, lang, meta }) {
+  const { site, prismicSeo } = useStaticQuery(
     graphql`
       query {
         site {
@@ -21,12 +21,63 @@ function SEO({ description, lang, meta, title }) {
             author
           }
         }
+        prismicSeo {
+          data {
+            title
+            description
+          }
+        }
       }
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+  const metaDescription =
+    description || prismicSeo.data.description || site.siteMetadata.description
+  const defaultTitle = prismicSeo.data.title || site.siteMetadata?.title
+
+  meta = [
+    {
+      name: `description`,
+      content: metaDescription,
+    },
+    {
+      property: `og:title`,
+      content: title,
+    },
+    {
+      property: `og:description`,
+      content: metaDescription,
+    },
+    {
+      property: `og:type`,
+      content: `website`,
+    },
+    {
+      name: `twitter:card`,
+      content: `summary`,
+    },
+    {
+      name: `twitter:creator`,
+      content: site.siteMetadata?.author || ``,
+    },
+    {
+      name: `twitter:title`,
+      content: title,
+    },
+    {
+      name: `twitter:description`,
+      content: metaDescription,
+    },
+    {
+      name: "viewport",
+      content:
+        "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
+    },
+    {
+      name: "google-site-verification",
+      content: "h0sZRVPsiT5-wQb4UL76oaSs9AEb9g_fyBrT1XYKnn8",
+    },
+  ].concat(meta)
 
   return (
     <Helmet
@@ -35,47 +86,22 @@ function SEO({ description, lang, meta, title }) {
       }}
       title={title}
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata?.author || ``,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-        {
-          name: "viewport",
-          content:
-            "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
-        },
-      ].concat(meta)}
     >
-      <meta name="google-site-verification" content="h0sZRVPsiT5-wQb4UL76oaSs9AEb9g_fyBrT1XYKnn8" />
+      {meta.map(item => (
+        <meta name={item.name} content={item.content} />
+      ))}
+
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+      />
+      <script src="https://backend.demo.revoup.ru/javascripts/iframe/v2/revoiframe.js"></script>
     </Helmet>
   )
 }

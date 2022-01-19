@@ -44,7 +44,10 @@ const Product = ({ data: { prismicProduct, allPrismicProduct, variants } }) => {
 
   return (
     <Layout>
-      <Seo title={prismicProduct.name} />
+      <Seo
+        title={prismicProduct.data.seo_title ?? prismicProduct.data.name}
+        description={prismicProduct.data.seo_description}
+      />
       <TabPanel
         links={[
           {
@@ -361,6 +364,8 @@ export const pageQuery = graphql`
             }
           }
         }
+        seo_title
+        seo_description
         body {
           ... on PrismicProductBodySeller {
             id

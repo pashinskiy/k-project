@@ -51,5 +51,10 @@
 
 18. **`README.md`**: Текстовый файл, содержащий полезную справочную информацию о вашем проекте.
 
-Документация составлена при помощи плагина jsdoc (www.npmjs.com/package/jsdoc) и темы clean-jsdoc-theme (https://www.npmjs.com/package/clean-jsdoc-theme)
+19. Документация составлена при помощи плагина jsdoc (www.npmjs.com/package/jsdoc) и темы clean-jsdoc-theme (https://www.npmjs.com/package/clean-jsdoc-theme) 
+
+!!! для использования плагин должен быть установлен глобально !!! 
+
+команда для составления документации (jsdoc ./src -r -t ./node_modules/clean-jsdoc-theme -d doc -R ./README.md) - из корня проекта
+
 
